@@ -8,6 +8,9 @@ using ..PairPotentials: AbstractPairPotential, EnergyOnly, EnergyForcesVirial
 using ..NeighbourList: Workspace
 using ..Execution: evaluate!
 
+# Defined in ParameterEnergy after this boundary module is loaded.
+function parameter_energy end
+
 AC.energy_unit(::AbstractPairPotential)=u"eV"
 AC.length_unit(::AbstractPairPotential)=u"Å"
 
@@ -40,7 +43,9 @@ function select_workspace(sys, neighbourlist, width, precision)
 end
 
 function compute(sys,p,request; neighbourlist=nothing,width=nothing,precision=nothing,
-                 parallel=false,kwargs...)
+                 parallel=false,parameters=nothing,kwargs...)
+    (isnothing(parameters) || parameters===NamedTuple()) ||
+        throw(ArgumentError("explicit parameters require calculate(Energy(), ...; parameters)"))
     # Unknown keywords are accepted for AtomsCalculators composition/conformance.
     w=select_workspace(sys,neighbourlist,width,precision)
     evaluate!(w,sys,p;request,parallel)
@@ -100,13 +105,16 @@ property_result(::AC.Forces,r)=(;forces=force_vectors(r.forces))
 property_result(::AC.Virial,r)=(;virial=static_virial(r.virial))
 const SingleProperty=Union{AC.Energy,AC.Forces,AC.Virial}
 function calculate(properties,sys,p,parameters,state;kwargs...)
-    # This is a bundled-parameter, stateless calculator. Do not silently ignore
-    # numerical parameter overrides or pretend to implement model training.
-    (isnothing(parameters) || parameters===NamedTuple()) ||
-        throw(ArgumentError("pair parameters are bundled in the potential; pass an updated potential instead"))
     props=properties isa Tuple ? properties : (properties,)
     all(prop -> prop isa Union{AC.Energy,AC.Forces,AC.Virial},props) ||
         throw(ArgumentError("supported properties are Energy(), Forces() and Virial()"))
+    if !(isnothing(parameters) || parameters===NamedTuple())
+        parameters isa NamedTuple || throw(ArgumentError("explicit parameters must be a NamedTuple"))
+        !isempty(props) && all(prop -> prop isa AC.Energy,props) ||
+            throw(ArgumentError("explicit parameters currently support energy-only requests"))
+        energy=parameter_energy(sys,p,parameters;kwargs...)*u"eV"
+        return (;energy,state)
+    end
     isempty(props) && return (;state)
     request=all(prop -> prop isa AC.Energy,props) ? EnergyOnly() : EnergyForcesVirial()
     r=compute(sys,p,request;kwargs...)

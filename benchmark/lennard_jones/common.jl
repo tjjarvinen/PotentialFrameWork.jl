@@ -18,9 +18,16 @@ struct ArgonLJ{T} <: AbstractPairPotential
     dfcut::T
 end
 function ArgonLJ(epsilon,rmin,radius)
+    epsilon,rmin,radius=promote(epsilon,rmin,radius)
     all(x -> isfinite(x) && x>0,(epsilon,rmin,radius)) || throw(ArgumentError("positive finite LJ parameters required"))
     sc=rmin/radius
     ArgonLJ(epsilon,rmin,radius,sc^12-2sc^6,12*(sc^11-sc^5))
+end
+# Explicit, fixed-cutoff parameters also make this benchmark model an AD example.
+AC.get_parameters(p::ArgonLJ)=(;epsilon=p.epsilon,rmin=p.rmin)
+function PotentialFrameWork.with_parameters(p::ArgonLJ,parameters::NamedTuple)
+    keys(parameters)==(:epsilon,:rmin) || throw(ArgumentError("ArgonLJ parameters are epsilon and rmin; cutoff is fixed"))
+    ArgonLJ(parameters.epsilon,parameters.rmin,p.radius)
 end
 PotentialFrameWork.cutoff(p::ArgonLJ)=p.radius
 function PotentialFrameWork.bind_species(p::ArgonLJ,labels)

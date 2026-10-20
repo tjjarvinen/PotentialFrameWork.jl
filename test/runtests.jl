@@ -251,4 +251,5 @@ end
 end
 include("calculators.jl")
 include("lennard_jones.jl")
+include("parameter_ad.jl")
 println("Validation process: Julia ",VERSION,", threads=",Threads.nthreads())

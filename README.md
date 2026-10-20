@@ -57,11 +57,55 @@ uses one shared sorted force array. The existing `evaluate` API keeps its matrix
 output. Compatible extra keywords are accepted and ignored.
 
 `calculate` accepts individual properties or tuples, with `parameters` and `state`
-as keywords or positional arguments. Parameters remain bundled in the potential:
-`nothing` or an empty parameter NamedTuple uses those values; nonempty overrides
-raise an error. State is returned unchanged because the calculator is stateless.
+as keywords or positional arguments. `nothing` or an empty parameter NamedTuple
+uses the values bundled in the potential. Explicit parameters currently support
+energy-only requests. State is returned unchanged because the calculator is stateless.
 Custom full-block potentials can subtype `AbstractPairPotential` to inherit this
 interface, as shown in [the callback example](examples/custom_callback.jl).
+
+Energy parameter derivatives support ForwardDiff and ChainRules-compatible reverse
+mode (for example Zygote). Install these packages in your application environment;
+they are optional dependencies. For a `SmoothPair` potential `p`:
+
+```julia
+using ForwardDiff, Zygote, Unitful
+parameters = AC.get_parameters(p)
+energy(theta) = ustrip(u"eV", AC.calculate(AC.Energy(), sys, p;
+    parameters=(amplitudes=theta,)).energy)
+g_forward = ForwardDiff.gradient(energy, parameters.amplitudes)
+g_reverse = Zygote.gradient(energy, parameters.amplitudes)[1]
+```
+
+`SmoothPair` exposes the independent upper-triangle amplitudes in column order
+(`A11, A12, A22, A13, A23, A33, …`), so an off-diagonal amplitude controls both
+symmetric entries. Parameter values use numeric eV/Å conventions; the example
+returns derivatives of numeric energy in eV. `calculate` itself still returns
+unitful energy. See the [runnable example](examples/parameter_ad.jl).
+
+For custom potentials, implement `AC.get_parameters(p)` and
+`with_parameters(p, parameters::NamedTuple)` returning a new potential. The initial
+parameter interface accepts a flat NamedTuple of real scalar/vector fields.
+Keep the physical cutoff fixed. The reconstructed energy callback must support
+scalar blocks containing parameter-promoted numbers, including ForwardDiff duals.
+The [benchmark LJ model](benchmark/lennard_jones/common.jl) demonstrates trainable
+`epsilon` and `rmin` with its cutoff held fixed, including derivatives of its
+precomputed cutoff coefficients. No implicit derivative through species, cell
+construction, sorting or ownership is taken.
+
+This parameter path uses the existing NeighbourList geometry and ownership, with
+scalar energy callbacks at every workspace width. It supports `neighbourlist`,
+`width`, `precision` and phased `parallel` execution, rebuilding each call; it does
+not yet offer SIMD parameter derivatives. The ordinary SIMD force path is unchanged.
+The numeric-eV primitive `parameter_energy(sys,p,parameters)` carries the ChainRules
+`rrule`. Its gradient hook `energy_parameter_gradient` can be specialised with an
+analytic implementation; loading ForwardDiff provides a generic fallback.
+`SmoothPair` has an exact linear-amplitude implementation independent of
+ForwardDiff, using one basis evaluation per coefficient. Reverse-mode gradients
+for generic models currently use ForwardDiff locally, so their cost grows with
+parameter count. Pullbacks capture gradients when the rule runs and can be reused
+after workspace mutation. This is first-order reverse-mode support; higher-order
+reverse-mode, parameter derivatives of forces/virials, cutoff derivatives and
+system derivatives remain follow-up work. ForwardDiff energy Hessians are tested.
 
 Start Julia with `julia --threads=4 --project` to use four threads. `parallel=false`
 is the default. `evaluate(sys,p; width=4, precision=Float64, ...)` creates its own

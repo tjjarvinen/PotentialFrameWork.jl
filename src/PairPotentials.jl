@@ -4,6 +4,15 @@ using AtomsBase: ChemicalSpecies
 using ..NeighbourList: PairBlock, pack
 export AbstractPairPotential, EnergyOnly, EnergyForcesVirial, SmoothPair, RadialPotential, cutoff, bind_species
 
+"""`with_parameters(potential, parameters::NamedTuple)` returns a new callback.
+Extend together with `AtomsCalculators.get_parameters` for parameterised models.
+Parameters are numeric (eV/Å conventions); the physical cutoff must stay fixed.
+The reconstructed callback must accept scalar parameter-promoted PairBlocks.
+"""
+function with_parameters(p, parameters)
+    throw(ArgumentError("$(typeof(p)) does not implement with_parameters for $(typeof(parameters))"))
+end
+
 """Subtype to give a concrete pair-block callback the AtomsCalculators interface.
 Implement `cutoff` and `(potential)(block, request)`; optionally `bind_species`.
 Parameters are bundled in the potential; callbacks use numeric Å and eV.
@@ -24,11 +33,11 @@ bind_species(p, species_map) = p
 `labels` are AtomsBase species values; symmetric amplitudes in eV, cutoff in Å.
 No implicit mixing rule. Values and species are runtime data.
 """
-struct SmoothPair{T} <: AbstractPairPotential
+struct SmoothPair{T,R} <: AbstractPairPotential
     labels::Vector{ChemicalSpecies}
     amplitudes::Matrix{T}
-    radius::T
-    SmoothPair{T}(labels, amplitudes, radius) where T = new{T}(labels, amplitudes, radius)
+    radius::R
+    SmoothPair{T}(labels, amplitudes, radius::R) where {T,R} = new{T,R}(labels, amplitudes, radius)
 end
 function SmoothPair(labels, amplitudes::AbstractMatrix{T}, radius::Real) where {T<:AbstractFloat}
     labels=ChemicalSpecies.(labels)
@@ -41,9 +50,9 @@ function SmoothPair(labels, amplitudes::AbstractMatrix{T}, radius::Real) where {
     SmoothPair{T}(collect(labels),Matrix(amplitudes),T(radius))
 end
 cutoff(p::SmoothPair)=p.radius
-struct BoundSmooth{T}
+struct BoundSmooth{T,R}
     amplitudes::Matrix{T}
-    radius::T
+    radius::R
     indices::Dict{ChemicalSpecies,Int}
 end
 function bind_species(p::SmoothPair, labels)
