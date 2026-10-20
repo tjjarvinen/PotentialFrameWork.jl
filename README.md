@@ -5,7 +5,7 @@
 
 Finite-cutoff pair potentials for AtomsBase-compatible 3D systems, with explicit
 CPU SIMD blocks and phase-scheduled cell tasks writing into one sorted force
-array. Julia 1.10.10 or later is required.
+array. Julia 1.10.10 or later and AtomsBase 0.5.3 or later are required.
 
 ```julia
 using PotentialFrameWork, AtomsBase, Unitful
@@ -21,6 +21,47 @@ result.forces             # 3 × N, original input atom order, eV/Å
 result.virial             # 3 × 3, eV
 energy = evaluate!(workspace, sys, potential; request=EnergyOnly()).energy
 ```
+
+The pair potentials also implement the [AtomsCalculators interface](https://github.com/JuliaMolSim/AtomsCalculators.jl):
+
+```julia
+import AtomsCalculators as AC
+E = AC.potential_energy(sys, potential)
+F = AC.forces(sys, potential)                 # Vector{SVector{3,...}}, eV/Å
+V = AC.virial(sys, potential)                 # SMatrix{3,3,...}, eV
+r = AC.energy_forces_virial(sys, potential; neighbourlist=workspace, parallel=true)
+f = AC.zero_forces(sys, potential)
+AC.forces!(f, sys, potential; neighbourlist=workspace)  # ADDS into f
+r = AC.calculate((AC.Energy(), AC.Forces(), AC.Virial()), sys, potential;
+                 neighbourlist=workspace, parallel=true)
+```
+
+Omit `neighbourlist` to create a `NeighbourList.Workspace` during the call. Pass
+one to reuse its storage; geometry, species, cutoff, topology and schedule are
+refreshed on every call. Workspace ownership and geometry limits are the same as
+for `evaluate!`. `width` and `precision` select a newly created workspace; if
+specified with an existing workspace, they must match it. Default width is 4.
+AtomsCalculators calls default to Float32 for Float32 system coordinates and
+Float64 otherwise, including empty systems. An explicit workspace or `precision`
+can override this; `zero_forces`/`zero_energy`/`zero_virial` describe the default
+precision. Their units are always eV and Å.
+
+`energy_forces`, `energy_forces_virial` and tuple `calculate` requests each use one
+traversal. Energy-only calls skip force evaluation; force/virial calls use the
+existing combined executor. `forces!`, `energy_forces!` and
+`energy_forces_virial!` add into the caller's vector, following AtomsCalculators'
+contract; clear it first when replacement is wanted. They still allocate internal
+construction and boundary outputs. At this boundary forces are converted from the
+existing original-order matrix into a vector of static vectors; the executor still
+uses one shared sorted force array. The existing `evaluate` API keeps its matrix
+output. Compatible extra keywords are accepted and ignored.
+
+`calculate` accepts individual properties or tuples, with `parameters` and `state`
+as keywords or positional arguments. Parameters remain bundled in the potential:
+`nothing` or an empty parameter NamedTuple uses those values; nonempty overrides
+raise an error. State is returned unchanged because the calculator is stateless.
+Custom full-block potentials can subtype `AbstractPairPotential` to inherit this
+interface, as shown in [the callback example](examples/custom_callback.jl).
 
 Start Julia with `julia --threads=4 --project` to use four threads. `parallel=false`
 is the default. `evaluate(sys,p; width=4, precision=Float64, ...)` creates its own
@@ -49,18 +90,23 @@ scalar arithmetic, widths 2/4/8/16 use `SIMD.Vec`. Implement both requests to av
 calculating forces on energy-only calls. Return values must have the geometry
 precision; convert runtime parameters if needed for Float32.
 
-`PairBlock` provides `central_species::Int`, `neighbour_species::NTuple{W,Int}`,
-`dx/dy/dz`, `structural` and `active` masks. Species IDs index
-`workspace.species_map`; extend `bind_species(p, species_map)` to prepare a concrete
-parameter lookup once per evaluation. The default returns `p`. The callback must
-handle all lanes; inactive geometry is replaced with `(1,0,0)` BEFORE evaluation,
+`PairBlock` provides `central_species::ChemicalSpecies`,
+`neighbour_species::NTuple{W,ChemicalSpecies}`,
+`dx/dy/dz`, `structural` and `active` masks. Species values are preserved,
+including isotope and atom-name fields. `workspace.species_map` lists the distinct
+species present; extend `bind_species(p, species_map)` to prepare a concrete
+parameter lookup once per evaluation. The default binding returns `p`.
+`SmoothPair` uses strict `isequal` identity
+for lookup (including isotope/name), rather than AtomsBase wildcard `==` matching.
+Symbols passed as potential labels are converted to `ChemicalSpecies`.
+The callback must handle all lanes; inactive geometry is replaced with `(1,0,0)` BEFORE evaluation,
 and all inactive callback results are masked out by the executor. A model with a
 more restricted arithmetic domain should use the masks to select suitable inputs
 before division/logarithms. No invalid indices or sentinel dereferences are used.
 The executor applies cutoff/ownership masks; a model's analytic taper belongs in
 the potential and must be applied once. `RadialPotential(radial,cutoff)` adapts a
-callable `(r, central_id, neighbour_ids, request)` returning `energy` and, for the
-combined request, `derivative=dU/dr`. The adapter uses `F_i = (dU/dr) r_ij/r`.
+callable `(r, central_species, neighbour_species, request)` returning `energy`
+and, for the combined request, `derivative=dU/dr`. The adapter uses `F_i = (dU/dr) r_ij/r`.
 
 Cell vectors are COLUMNS of H; `r_ij = x_j + H*s_ij - x_i`. Each unordered physical
 pair occurs once, with equal/opposite endpoint forces. Virial is
@@ -93,8 +139,9 @@ Run `julia --project -e 'using Pkg; Pkg.test()'`. See
 [implementation status and measured limitations](docs/implementation/STATUS.md).
 The independent all-pairs oracle, derivatives, pair ownership, actual write
 footprints, widths/precisions and repeated threaded evaluations are tested.
-AtomsCalculators integration is follow-up work: its current API was inspected,
-but this initial API returns a force matrix rather than its vector of static
-vectors. A future adapter can convert at the boundary. ACE site preparation,
-MACE layer stages, few-buffer/NUMA domains, GPU execution, MPI, training and
-long-range forces remain separate extensions.
+ACE site preparation, MACE layer stages, few-buffer/NUMA domains, GPU execution,
+MPI, training and long-range forces remain separate extensions.
+
+For an external reference comparison, see the [Argon Lennard-Jones benchmark](benchmark/lennard_jones/README.md).
+It matches EmpiricalPotentials' cutoff formula, checks energy/forces/virial, and
+measures multiple system sizes and thread counts using AtomsSystems fixtures.

@@ -5,8 +5,8 @@ export Workspace, prepare!, validate_schedule, PairBlock, pack
 
 """A 1×W callback view. Displacements are neighbour minus central; inactive geometry is (1,0,0)."""
 struct PairBlock{W,V,M}
-    central_species::Int
-    neighbour_species::NTuple{W,Int}
+    central_species::ChemicalSpecies
+    neighbour_species::NTuple{W,ChemicalSpecies}
     dx::V
     dy::V
     dz::V
@@ -28,8 +28,8 @@ mutable struct Workspace{W,T<:Union{Float32,Float64}}
     x::Vector{T}
     y::Vector{T}
     z::Vector{T}
-    species::Vector{Int}
-    species_map::Vector{Any}
+    species::Vector{ChemicalSpecies}
+    species_map::Vector{ChemicalSpecies}
     p::Vector{Int}
     inverse::Vector{Int}
     ranges::Vector{UnitRange{Int}}
@@ -53,7 +53,7 @@ function Workspace(; width=4, precision=Float64)
     _workspace(Val(width), precision)
 end
 function _workspace(::Val{W}, ::Type{T}) where {W,T}
-    Workspace{W,T}(T[], T[], T[], Int[], Any[], Int[], Int[], UnitRange{Int}[],
+    Workspace{W,T}(T[], T[], T[], ChemicalSpecies[], ChemicalSpecies[], Int[], Int[], UnitRange{Int}[],
         NTuple{3,Int}[], Vector{Int}[], Vector{Int}[], Vector{Int}[],
         (one(T),one(T),one(T)), (false,false,false), zero(T), zeros(T,3,0),
         T[], zeros(T,9,0), UInt(0), UInt(0), Dict{Symbol,Float64}())
@@ -84,7 +84,7 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
     n = length(sys)
     # Extraction is outside all callback and accumulation loops.
     coords = ntuple(_ -> Vector{T}(undef,n),3)
-    ids = Vector{Int}(undef,n)
+    species = Vector{ChemicalSpecies}(undef,n)
     empty!(w.species_map)
     for i=1:n
         r = AtomsBase.position(sys,i)
@@ -93,13 +93,9 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
             isfinite(v) || throw(ArgumentError("positions must be finite"))
             coords[a][i] = pb[a] ? mod(v,L[a]) : v
         end
-        sp = AtomsBase.species(sys,i)
-        id = findfirst(isequal(sp), w.species_map)
-        if isnothing(id)
-            push!(w.species_map,sp)
-            id = length(w.species_map)
-        end
-        ids[i] = id
+        sp = ChemicalSpecies(AtomsBase.species(sys,i))
+        any(s -> isequal(s,sp),w.species_map) || push!(w.species_map,sp)
+        species[i] = sp
     end
     w.lengths=L; w.periodic=pb; w.cutoff=c
     w.timings[:extraction] = (time_ns()-start)*1e-9
@@ -116,7 +112,7 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
     empty!(w.keys); empty!(w.ranges)
     for k=1:n
         i=w.p[k]; w.inverse[i]=k
-        w.x[k]=coords[1][i]; w.y[k]=coords[2][i]; w.z[k]=coords[3][i]; w.species[k]=ids[i]
+        w.x[k]=coords[1][i]; w.y[k]=coords[2][i]; w.z[k]=coords[3][i]; w.species[k]=species[i]
         key=atomkeys[i]
         if isempty(w.keys) || key != w.keys[end]
             push!(w.keys,key); push!(w.ranges,k:k)

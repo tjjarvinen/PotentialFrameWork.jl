@@ -32,3 +32,7 @@ Profile/@allocated on `Execution.execute!` to investigate regressions.
 
 The recorded run is summarised in [SUMMARY.md](SUMMARY.md); raw output is retained
 for [one thread](results-1thread.txt) and [four threads](results-4threads.txt).
+
+A separate [Argon Lennard-Jones comparison](lennard_jones/README.md) benchmarks
+EmpiricalPotentials against this framework across system sizes and thread counts,
+with energy/force/virial agreement checks and independent Julia worker processes.

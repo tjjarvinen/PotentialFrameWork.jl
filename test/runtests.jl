@@ -26,6 +26,43 @@ function agrees(result,ref;tol=1e-11)
     end
 end
 
+struct SpeciesRadial end
+function (::SpeciesRadial)(r,central::ChemicalSpecies,neighbours::NTuple{W,ChemicalSpecies},req) where W
+    req isa EnergyOnly && return (;energy=r*r)
+    (;energy=r*r,derivative=2*r)
+end
+
+@testset "ChemicalSpecies storage, callbacks and strict identity" begin
+    labels=[ChemicalSpecies(:C),ChemicalSpecies(:C13),ChemicalSpecies(:C;atom_name=:CA)]
+    @test labels[1]==labels[2] # AtomsBase wildcard matching must not merge parameters.
+    @test !isequal(labels[1],labels[2])
+    s=TestSystem([0. 0.6 1.2;0. 0.2 0.1;0. 0. 0.],
+        [8. 0 0;0 8 0;0 0 8],(true,true,true),labels)
+    p=SmoothPair(labels,[1. 0.7 0.4;0.7 2. 0.3;0.4 0.3 3.],2.)
+    @test eltype(p.labels)===ChemicalSpecies
+    for width in (1,4,8)
+        w=Workspace(;width)
+        agrees(evaluate!(w,s,p;parallel=true),oracle(s,p))
+        @test eltype(w.species)===ChemicalSpecies
+        @test eltype(w.species_map)===ChemicalSpecies
+        @test length(w.species_map)==3
+        @test isequal(w.species,s.labels[w.p])
+        _,block=EX.geometry(w,1,2,3)
+        @test block.central_species isa ChemicalSpecies
+        @test block.neighbour_species isa NTuple{width,ChemicalSpecies}
+        perm=[3,1,2]
+        sp=TestSystem(s.xyz[:,perm],s.H,s.pbc,s.labels[perm])
+        agrees(evaluate!(w,sp,p),oracle(sp,p))
+        radial=RadialPotential(SpeciesRadial(),2.)
+        scalar=evaluate(s,radial;width=1)
+        vector=evaluate(s,radial;width)
+        @test vector.energy ≈ scalar.energy
+        @test vector.forces ≈ scalar.forces
+    end
+    @test_throws ArgumentError evaluate(s,SmoothPair([ChemicalSpecies(:C)],ones(1,1),2.))
+    @test_throws ArgumentError SmoothPair([:C,ChemicalSpecies(:C)],ones(2,2),2.)
+end
+
 @testset "serial scalar oracle, species, units and permutation" begin
     p=potential()
     for n in (0,1,2,7,31,93), pbc in ((false,false,false),(true,true,true),(true,false,true)), cluster in (false,true)
@@ -178,7 +215,7 @@ end
         w=Workspace(;width)
         for repeat=1:6
             s.xyz[1,2]+=0.02
-            s.labels[2]=isodd(repeat) ? :H : :He
+            s.labels[2]=ChemicalSpecies(isodd(repeat) ? :H : :He)
             s.H[3,3]=4.1+0.01*repeat
             agrees(evaluate!(w,s,p),oracle(s,p))
         end
@@ -212,4 +249,6 @@ end
     @test_throws ArgumentError NL.length_value(Float64,1.0)
     @test_throws ArgumentError NL.length_value(Float64,1u"eV")
 end
+include("calculators.jl")
+include("lennard_jones.jl")
 println("Validation process: Julia ",VERSION,", threads=",Threads.nthreads())

@@ -1,8 +1,9 @@
 using PotentialFrameWork, AtomsBase, Unitful
+import AtomsCalculators as AC
 using SIMD: Vec
 
 # Full block callback: no traversal, masks, endpoint reduction or units in hot loops.
-struct SoftSpring{T}
+struct SoftSpring{T} <: AbstractPairPotential
     radius::T
     amplitude::T
 end
@@ -36,3 +37,9 @@ end
 end
 radial=RadialPotential(SoftRadial(2.,0.7),2.)
 @assert evaluate(system,radial).energy ≈ result.energy
+
+# AtomsCalculators can allocate its neighbour storage or use the same workspace.
+@assert AC.potential_energy(system,p) ≈ result.energy
+calculator_result=AC.energy_forces_virial(system,p;neighbourlist=w,parallel=true)
+@assert calculator_result.energy ≈ result.energy
+println(calculator_result)

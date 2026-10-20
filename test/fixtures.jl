@@ -4,7 +4,9 @@ struct TestSystem{T} <: AtomsBase.AbstractSystem{3}
     xyz::Matrix{T}
     H::Matrix{T}
     pbc::NTuple{3,Bool}
-    labels::Vector{Symbol}
+    labels::Vector{ChemicalSpecies}
+    TestSystem(xyz::Matrix{T}, H::Matrix{T}, pbc, labels) where T =
+        new{T}(xyz,H,pbc,ChemicalSpecies.(labels))
 end
 Base.length(s::TestSystem)=size(s.xyz,2)
 AtomsBase.position(s::TestSystem,i::Integer)=s.xyz[:,i]*u"Å"
@@ -38,7 +40,7 @@ function oracle(s,p)
         r2=sum(abs2,d)
         r2<p.radius^2 || continue
         push!(pairs,(i,j))
-        a=p.amplitudes[findfirst(==(s.labels[i]),p.labels),findfirst(==(s.labels[j]),p.labels)]
+        a=p.amplitudes[findfirst(isequal(s.labels[i]),p.labels),findfirst(isequal(s.labels[j]),p.labels)]
         q=1-r2/p.radius^2
         energy+=a*q^3
         force=(-6*a*q^2/p.radius^2)*d
