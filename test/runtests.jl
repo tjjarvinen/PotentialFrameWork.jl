@@ -247,6 +247,7 @@ end
     @test_throws ArgumentError NL.length_value(Float64,1u"eV")
 end
 include("periodic_images.jl")
+include("neighbour_interface.jl")
 include("neighbour_benchmarks.jl")
 include("calculators.jl")
 include("lennard_jones.jl")

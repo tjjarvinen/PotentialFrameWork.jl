@@ -2,7 +2,11 @@
 module NeighbourList
 using AtomsBase, Unitful
 using StaticArrays: SMatrix, SVector
-export Workspace, prepare!, validate_schedule, PairBlock, pack
+export Workspace, prepare!, validate_schedule, PairBlock, pack, neighbour_list, neighbours
+
+# Implemented by NeighbourInterface after Execution is loaded.
+function neighbour_list end
+function neighbours end
 
 """A 1×W callback view. Displacements are neighbour minus central; inactive geometry is (1,0,0)."""
 struct PairBlock{W,V,M}
@@ -25,6 +29,7 @@ struct CellImage{T}
     cell::Int
     shift::NTuple{3,T} # Cartesian H*s; ignored by minimum-image fast path
     self::Bool        # owns i==j only for the positive half of nonzero images
+    lattice::NTuple{3,Int} # exact shift in the original periodic generators
 end
 
 """Reusable numeric storage. Width W and Float32/Float64 precision are concrete.
@@ -223,7 +228,7 @@ function minimum_topology!(w::Workspace{W,T}, dims, brute) where {W,T}
         end
         sort!(unique!(neighbours))
         push!(w.adjacency,neighbours)
-        push!(w.images,[CellImage(j,(zero(T),zero(T),zero(T)),false) for j in neighbours])
+        push!(w.images,[CellImage(j,(zero(T),zero(T),zero(T)),false,(0,0,0)) for j in neighbours])
         push!(w.footprints,sort!(unique!([i; neighbours])))
     end
 end
@@ -245,7 +250,7 @@ function image_topology!(w::Workspace{W,T}, H, reach, sizecell, dims, brute) whe
             j>=i || continue
             shift=ntuple(a -> w.periodic[a] ? (brute ? off[a] : fld(key[a]+off[a],dims[a])) : 0,3)
             d=H*SVector(shift)
-            push!(entries,CellImage(j,Tuple(d),shift>(0,0,0)))
+            push!(entries,CellImage(j,Tuple(d),shift>(0,0,0),shift))
         end
         neighbours=sort!(unique!([e.cell for e in entries]))
         push!(w.images,entries); push!(w.adjacency,neighbours)

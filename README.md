@@ -22,6 +22,45 @@ result.virial             # 3 × 3, eV
 energy = evaluate!(workspace, sys, potential; request=EnergyOnly()).energy
 ```
 
+The geometry can also be queried through a
+[NeighbourLists.jl-style interface](https://github.com/JuliaMolSim/NeighbourLists.jl):
+
+```julia
+using StaticArrays
+X = [SVector(0., 0., 0.), SVector(4.9, 0., 0.)]
+cell = [5. 0 0; 0 5. 0; 0 0 5.]  # lattice vectors in ROWS for this raw API
+nlist = neighbour_list(X, 1.0, cell, (true, true, true))
+j, R, S = neighbours(nlist, 1)
+# j == [2], R[1] ≈ [-0.1, 0, 0], S[1] == [-1, 0, 0]
+
+# AtomsBase input is supported too:
+nlist = neighbour_list(sys, 2.0u"Å")
+```
+
+`j` contains original one-based indices, `R` contains Cartesian `SVector`s in
+numeric Å, and `S` contains integer image `SVector`s. For raw numeric arrays,
+`R[k] = X[j[k]] - X[i] + transpose(cell)*S[k]`. The row-vector convention here
+matches NeighbourLists.jl; the force executor's internal H uses columns.
+A 3×N position matrix is also accepted. Numeric lengths mean Å; unitful positions,
+cell entries and cutoffs convert to Å. Default precision is Float64; `precision`,
+`width`, `bruteforce_threshold` and `int_type=Int32` are configurable.
+
+Each list is a materialized directed snapshot: all images within the strict
+cutoff are returned, including both self-image directions, with zero-shift self
+pairs excluded. Inputs and query results can be modified without changing the
+snapshot; rebuild after changing geometry. Neighbour order is unspecified. This
+query snapshot is separate from the `Workspace` used for force evaluation and
+uses storage proportional to directed pair images. CPU construction is supported;
+upstream `lazy` and GPU `backend` options are not implemented.
+
+When NeighbourLists is loaded, an optional package extension makes
+`NeighbourLists.neighbours(nlist,i)`, `NeighbourLists.nsites(nlist)` and
+`NeighbourLists.npairs(nlist)` work on these snapshots too. Use qualified names
+when loading both packages, for example `PotentialFrameWork.neighbour_list(...)`.
+The query returns three arrays following the current NeighbourLists 0.6 API;
+upstream's own types and constructors retain their original behavior. The base
+interface works without installing NeighbourLists.
+
 The pair potentials also implement the [AtomsCalculators interface](https://github.com/JuliaMolSim/AtomsCalculators.jl):
 
 ```julia

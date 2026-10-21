@@ -11,14 +11,17 @@ StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [weakdeps]
+NeighbourLists = "2fcf5ba9-9ed4-57cf-b73f-ff513e316b9c"
 ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 
 [extensions]
+PotentialFrameWorkNeighbourListsExt = "NeighbourLists"
 PotentialFrameWorkChainRulesCoreExt = "ChainRulesCore"
 PotentialFrameWorkForwardDiffExt = "ForwardDiff"
 
 [compat]
+NeighbourLists = "0.5.10, 0.6"
 ChainRulesCore = "1.25"
 ForwardDiff = "0.10.36, 1"
 Zygote = "0.7"
@@ -33,6 +36,7 @@ Unitful = "1"
 julia = "1.10.10"
 
 [extras]
+NeighbourLists = "2fcf5ba9-9ed4-57cf-b73f-ff513e316b9c"
 ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
@@ -41,4 +45,4 @@ EmpiricalPotentials = "38527215-9240-4c91-a638-d4250620c9e2"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test", "AtomsSystems", "EmpiricalPotentials", "ChainRulesCore", "ForwardDiff", "Zygote"]
+test = ["NeighbourLists", "Test", "AtomsSystems", "EmpiricalPotentials", "ChainRulesCore", "ForwardDiff", "Zygote"]
