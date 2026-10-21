@@ -1,0 +1,27 @@
+[deps]
+AtomsBase = "a963bdd2-2df7-4f54-a1ee-49d51e6be12a"
+AtomsCalculators = "a3e0e189-c65a-42c1-833c-339540406eb1"
+AtomsSystems = "bd665c09-60e6-46be-bbfe-8f6ec2b68ee8"
+EmpiricalPotentials = "38527215-9240-4c91-a638-d4250620c9e2"
+Folds = "41a02a25-b8f0-4f67-bc48-60067656b558"
+NeighbourLists = "2fcf5ba9-9ed4-57cf-b73f-ff513e316b9c"
+PotentialFrameWork = "069ed237-161a-43fa-b820-4bdfd41b3db4"
+SIMD = "fdea26ae-647d-5447-a871-4b548cad5224"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
+
+[sources]
+PotentialFrameWork = {path = "../.."}
+
+[compat]
+AtomsBase = "0.5.3"
+AtomsCalculators = "0.2.3"
+AtomsSystems = "=0.1.2"
+EmpiricalPotentials = "=0.2.6"
+Folds = "0.2.10"
+NeighbourLists = "0.5.10, 0.6"
+SIMD = "3.7"
+StaticArrays = "1"
+Unitful = "1"
+julia = "1.10.10"
