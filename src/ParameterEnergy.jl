@@ -43,10 +43,10 @@ AC.set_parameters!(p::SmoothPair, parameters::NamedTuple)=with_parameters(p,para
 
 @inline function cell_energy(w::Workspace{W}, bound, task, seed) where W
     energy=seed
-    for i in w.ranges[task], cell in w.adjacency[task]
-        r=w.ranges[cell]
-        for j=max(first(r),i+1):W:last(r)
-            _,block=geometry(w,i,j,last(r))
+    for i in w.ranges[task], image in w.images[task]
+        r=w.ranges[image.cell]
+        for j=max(first(r),i+(image.self ? 0 : 1)):W:last(r)
+            _,block=geometry(w,i,j,last(r),image)
             for k=1:W
                 lane(block.active,k) || continue
                 # SIMD.jl vectors cannot store arbitrary dual numbers. Geometry
@@ -70,11 +70,12 @@ Callbacks run on scalar blocks for every workspace width; this is a correctness
 path, not a promise of SIMD or AD performance. `parallel=true` uses cell phases.
 """
 function parameter_energy(sys::AbstractSystem{3},p::AbstractPairPotential,parameters::NamedTuple;
-                          neighbourlist=nothing,width=nothing,precision=nothing,parallel=false,kwargs...)
+                          neighbourlist=nothing,width=nothing,precision=nothing,parallel=false,
+                          bruteforce_threshold=nothing,kwargs...)
     seed=parameter_seed(parameters)
     updated=with_parameters(p,parameters)
     cutoff(updated)==cutoff(p) || throw(ArgumentError("parameter updates must preserve the physical cutoff"))
-    w=select_workspace(sys,neighbourlist,width,precision)
+    w=select_workspace(sys,neighbourlist,width,precision,bruteforce_threshold)
     prepare!(w,sys,cutoff(p))
     t=time_ns()
     bound=bind_species(updated,w.species_map)

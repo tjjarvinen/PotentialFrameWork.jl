@@ -36,3 +36,17 @@ for [one thread](results-1thread.txt) and [four threads](results-4threads.txt).
 A separate [Argon Lennard-Jones comparison](lennard_jones/README.md) benchmarks
 EmpiricalPotentials against this framework across system sizes and thread counts,
 with energy/force/virial agreement checks and independent Julia worker processes.
+
+For an interactive comparison on any AtomsBase system, use the public helper:
+
+```julia
+report = benchmark_neighbourlist(system, 5.0u"Å"; samples=20, warmup=3,
+                                width=4, precision=Float64, parallel=true)
+```
+
+This forces each strategy regardless of the default threshold. Each measurement
+includes preparation/scheduling and an active-pair geometry scan. Reports include
+raw time/allocation samples, stage medians, hardware/settings and the lower median
+geometry method. It does not measure potential callbacks or force accumulation;
+complete real-potential benchmarks remain necessary for production decisions.
+Set `io=nothing` for programmatic use. Cutoffs may also be numeric Å values.

@@ -10,12 +10,14 @@ export evaluate, evaluate!, execute!, outputs
     periodic ? d-round(d/L)*L : d
 end
 
-@inline function geometry(w::Workspace{W,T}, i, firstj, lastj) where {W,T}
+@inline function geometry(w::Workspace{W,T}, i, firstj, lastj, image=nothing) where {W,T}
     js=ntuple(k -> min(firstj+k-1,lastj),Val(W)) # every index valid, including padding
-    structural=pack(Val(W),k -> firstj+k-1<=lastj && js[k]>i)
-    dx=pack(Val(W), k -> displacement(w.x[js[k]]-w.x[i],w.lengths[1],w.periodic[1]))
-    dy=pack(Val(W), k -> displacement(w.y[js[k]]-w.y[i],w.lengths[2],w.periodic[2]))
-    dz=pack(Val(W), k -> displacement(w.z[js[k]]-w.z[i],w.lengths[3],w.periodic[3]))
+    self = image !== nothing && image.self
+    structural=pack(Val(W),k -> firstj+k-1<=lastj && (js[k]>i || (self && js[k]==i)))
+    shift = image === nothing ? (zero(T),zero(T),zero(T)) : image.shift
+    dx=pack(Val(W), k -> (w.minimum_image ? displacement(w.x[js[k]]-w.x[i],w.lengths[1],w.periodic[1]) : w.x[js[k]]-w.x[i]+shift[1]))
+    dy=pack(Val(W), k -> (w.minimum_image ? displacement(w.y[js[k]]-w.y[i],w.lengths[2],w.periodic[2]) : w.y[js[k]]-w.y[i]+shift[2]))
+    dz=pack(Val(W), k -> (w.minimum_image ? displacement(w.z[js[k]]-w.z[i],w.lengths[3],w.periodic[3]) : w.z[js[k]]-w.z[i]+shift[3]))
     active=structural & (dx*dx+dy*dy+dz*dz < w.cutoff*w.cutoff)
     # Safe geometry BEFORE callbacks (including divisions/logs), not NaN*0 after.
     dx=select(active,dx,one(dx)); dy=select(active,dy,zero(dy)); dz=select(active,dz,zero(dz))
@@ -32,12 +34,12 @@ end
     vir=ntuple(_ -> zero(T),9)
     for i in w.ranges[task]
         central=ntuple(_ -> zero(T),3)
-        for cell in w.adjacency[task]
-            r=w.ranges[cell]
+        for image in w.images[task]
+            r=w.ranges[image.cell]
             # Same-cell half-list skips the already owned lower triangle entirely.
-            lo=max(first(r),i+1)
+            lo=max(first(r),i+(image.self ? 0 : 1))
             for j=lo:W:last(r)
-                js,b=geometry(w,i,j,last(r))
+                js,b=geometry(w,i,j,last(r),image)
                 any(b.active) || continue
                 out=p(b,req)
                 en=select(b.active,out.energy,zero(out.energy))
@@ -123,7 +125,7 @@ function evaluate!(w::Workspace,sys,p; request=EnergyForcesVirial(), parallel=fa
     result=outputs(w,request)
     result
 end
-function evaluate(sys,p; width=4, precision=Float64, kwargs...)
-    evaluate!(Workspace(;width,precision),sys,p;kwargs...)
+function evaluate(sys,p; width=4, precision=Float64, bruteforce_threshold=32, kwargs...)
+    evaluate!(Workspace(;width,precision,bruteforce_threshold),sys,p;kwargs...)
 end
 end

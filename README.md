@@ -173,10 +173,46 @@ Every public call rebuilds order, topology and schedule, so changed positions,
 species and cells are safe. Geometry is packed from current coordinates at block
 execution; there is no skin or advertised Verlet reuse. Sorted coordinate and
 force buffers are reused, while construction still allocates temporary metadata.
-Only axis-aligned orthorhombic cells, open axes and mixed periodic axes are
-supported. Infinite diagonal lengths on open axes (isolated systems) are allowed.
-Each periodic length must be STRICTLY greater than twice the cutoff; unsupported
-cells raise an error. Triclinic cells and multiple-image interactions are deferred.
+Orthorhombic, rotated and triclinic cells support full, mixed or no periodicity.
+Cell vectors are the columns of H. Independent finite periodic vectors are
+required; unused open-axis vectors may be zero or infinite. Every image within
+the strict cutoff is included, even when the cutoff exceeds half a cell height.
+The zero-shift self pair is excluded. Nonzero self images are counted once per
+±image pair in energy and virial; their endpoint forces cancel.
+
+`Workspace(bruteforce_threshold=32)` uses all atom pairs for systems with at most
+32 atoms, avoiding spatial cell search and reducing scheduling to one task. Set
+the threshold to 0 to force cell traversal for nonempty systems, or increase it to use brute force
+for larger systems. The same keyword is accepted by `evaluate` and the
+AtomsCalculators interface; when supplying a workspace, configure it there.
+Both paths use SIMD blocks and the same periodic-image ownership. The threshold
+is a configurable starting value, not a measured universal crossover. Brute force
+uses one serial task even with `parallel=true`. Reciprocal-cell bounds ensure
+skew-cell completeness, but highly skewed or tiny periodic cells can require
+many image candidates and conservative scheduling can limit concurrency.
+
+Compare the two strategies for your own system and cutoff:
+
+```julia
+report = benchmark_neighbourlist(system, 5.0u"Å"; parallel=true)
+report.preferred          # :bruteforce or :cells
+report.bruteforce.median  # seconds; raw samples are in .seconds
+report.cells.median
+
+# Force the strategy you choose for this system:
+workspace = Workspace(bruteforce_threshold=length(system)) # brute force
+workspace = Workspace(bruteforce_threshold=0)              # cells
+```
+
+The helper warms both paths, alternates sample order, and prints min/median/max
+geometry times, preparation/traversal times and allocations. It accepts numeric
+cutoffs in Å too. Options include `width`, `precision`, `parallel`, `samples=20`,
+`warmup=3` and `io=nothing` to return results silently. Inputs and existing
+workspaces are unchanged. Every sample includes a fresh list/schedule rebuild
+and SIMD distance traversal, counting all active pair images. Potential callbacks,
+force/virial accumulation and output conversion are excluded, so compare complete
+calls with your real potential when choosing for production. Results apply to
+the measured system and settings; run without competing tests or benchmarks.
 
 Run `julia --project -e 'using Pkg; Pkg.test()'`. See
 [benchmark reproduction](benchmark/README.md) and the

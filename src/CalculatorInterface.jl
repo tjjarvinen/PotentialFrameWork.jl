@@ -30,24 +30,27 @@ function AC.zero_virial(sys::AbstractSystem{3}, p::AbstractPairPotential)
 end
 
 workspace_width(::Workspace{W}) where W = W
-function select_workspace(sys, neighbourlist, width, precision)
+function select_workspace(sys, neighbourlist, width, precision, bruteforce_threshold=nothing)
     if isnothing(neighbourlist)
-        return Workspace(width=something(width,4),precision=something(precision,default_precision(sys)))
+        return Workspace(width=something(width,4),precision=something(precision,default_precision(sys)),
+            bruteforce_threshold=something(bruteforce_threshold,32))
     end
     neighbourlist isa Workspace || throw(ArgumentError("neighbourlist must be a NeighbourList.Workspace or nothing"))
     isnothing(width) || width==workspace_width(neighbourlist) ||
         throw(ArgumentError("width conflicts with the supplied neighbourlist workspace"))
     isnothing(precision) || precision===eltype(neighbourlist.x) ||
         throw(ArgumentError("precision conflicts with the supplied neighbourlist workspace"))
+    isnothing(bruteforce_threshold) || bruteforce_threshold==neighbourlist.bruteforce_threshold ||
+        throw(ArgumentError("bruteforce_threshold conflicts with the supplied neighbourlist workspace"))
     neighbourlist
 end
 
 function compute(sys,p,request; neighbourlist=nothing,width=nothing,precision=nothing,
-                 parallel=false,parameters=nothing,kwargs...)
+                 parallel=false,parameters=nothing,bruteforce_threshold=nothing,kwargs...)
     (isnothing(parameters) || parameters===NamedTuple()) ||
         throw(ArgumentError("explicit parameters require calculate(Energy(), ...; parameters)"))
     # Unknown keywords are accepted for AtomsCalculators composition/conformance.
-    w=select_workspace(sys,neighbourlist,width,precision)
+    w=select_workspace(sys,neighbourlist,width,precision,bruteforce_threshold)
     evaluate!(w,sys,p;request,parallel)
 end
 

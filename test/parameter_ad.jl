@@ -123,3 +123,16 @@ end
         @test Zygote.gradient(f,saved)[1] ≈ ForwardDiff.gradient(f,saved)
     end
 end
+
+
+@testset "multi-image parameter derivatives" begin
+    H=[1.7 0.6 0.2;0 1.8 0.4;0 0 1.6]
+    s=TestSystem(H*[0.1 0.4 0.8;0.2 0.6 0.3;0.1 0.7 0.5],H,(true,true,true),[:H,:He,:H])
+    p=potential(); theta=AC.get_parameters(p).amplitudes
+    expected=[image_oracle(s,with_parameters(p,(;amplitudes=Float64.(1:3 .== k)));shell=3).energy for k=1:3]
+    for threshold in (0,32), width in (1,4), parallel in (false,true)
+        f=x -> parameter_energy(s,p,(;amplitudes=x);width,parallel,bruteforce_threshold=threshold)
+        @test ForwardDiff.gradient(f,theta) ≈ expected
+        @test Zygote.gradient(f,theta)[1] ≈ expected
+    end
+end

@@ -109,9 +109,6 @@ end
         r=evaluate(s,p;width=1)
         for strain in ([1. 0 0;0 1 0;0 0 1], [0. 1 0;0 0 0;0 0 0])
             I3=[1. 0 0;0 1 0;0 0 1]
-            # Axis-aligned public cells reject shear: use open cells for shear,
-            # applying the identical affine transform to x; H has no image role.
-            if pbc[1] && strain[1,2]!=0; continue; end
             ap=I3+h*strain; am=I3-h*strain
             hp=pbc[1] ? ap*s.H : s.H; hm=pbc[1] ? am*s.H : s.H
             ep=evaluate(TestSystem(ap*s.xyz,hp,pbc,s.labels),p;request=EnergyOnly(),width=1).energy
@@ -237,9 +234,9 @@ end
 end
 
 @testset "clear unsupported input errors" begin
-    p=potential(); s=fixture(5;L=4.)
+    p=potential(); s=fixture(5); s.H[:,2]=s.H[:,1]
     @test_throws ArgumentError evaluate(s,p)
-    s=fixture(5); s.H[1,2]=0.1
+    s=fixture(5); s.H[1,1]=Inf
     @test_throws ArgumentError evaluate(s,p)
     s=fixture(5); s.xyz[1,1]=NaN
     @test_throws ArgumentError evaluate(s,p)
@@ -249,6 +246,8 @@ end
     @test_throws ArgumentError NL.length_value(Float64,1.0)
     @test_throws ArgumentError NL.length_value(Float64,1u"eV")
 end
+include("periodic_images.jl")
+include("neighbour_benchmarks.jl")
 include("calculators.jl")
 include("lennard_jones.jl")
 include("parameter_ad.jl")
