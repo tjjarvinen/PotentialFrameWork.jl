@@ -20,7 +20,7 @@ function unpack(template::NamedTuple, flat)
     NamedTuple{keys(template)}(vals)
 end
 function energy_parameter_gradient(sys,p::AbstractPairPotential,parameters::NamedTuple;kwargs...)
-    PotentialFrameWork.ParameterEnergy.parameter_seed(parameters)
+    PotentialFrameWork.PairPotentials.parameter_seed(parameters)
     flat=vcat(map(x -> x isa Real ? [x] : collect(x),values(parameters))...)
     isempty(flat) && return unpack(parameters,flat)
     gradient=ForwardDiff.gradient(flat) do theta

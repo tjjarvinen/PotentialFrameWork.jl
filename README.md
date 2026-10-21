@@ -7,6 +7,32 @@ Finite-cutoff pair potentials for AtomsBase-compatible 3D systems, with explicit
 CPU SIMD blocks and phase-scheduled cell tasks writing into one sorted force
 array. Julia 1.10.10 or later and AtomsBase 0.5.3 or later are required.
 
+Source is grouped into two functional submodules:
+
+```text
+src/
+  PotentialFrameWork.jl
+  submodules/
+    NeighbourList/
+      NeighbourList.jl
+      storage.jl
+      geometry.jl
+      interface.jl
+      benchmarks.jl
+    PairPotentials/
+      PairPotentials.jl
+      models.jl
+      evaluation.jl
+      calculators.jl
+      parameters.jl
+```
+
+`NeighbourList` owns spatial storage, scheduling, block geometry, neighbour queries
+and neighbour-search benchmarks. `PairPotentials` owns interaction models, force
+and virial evaluation, AtomsCalculators methods and parameter derivatives.
+The root module reexports the public API. Low-level prepared evaluation helpers
+are now in `PairPotentials`, and geometry helpers are in `NeighbourList`.
+
 ```julia
 using PotentialFrameWork, AtomsBase, Unitful
 sys = atomic_system([:H => [0.,0.,0.]*u"Å", :He => [1.,0.,0.]*u"Å"],

@@ -2,7 +2,7 @@
 using PotentialFrameWork, Unitful, Statistics, InteractiveUtils, SIMD
 include(joinpath(@__DIR__,"..","test","fixtures.jl"))
 const NL=PotentialFrameWork.NeighbourList
-const EX=PotentialFrameWork.Execution
+const PP=PotentialFrameWork.PairPotentials
 const REPEATS=parse(Int,get(ENV,"PFW_REPEATS","7"))
 
 function geometry_scan(w::Workspace{W}) where W
@@ -11,7 +11,7 @@ function geometry_scan(w::Workspace{W}) where W
     for task in eachindex(w.ranges), i in w.ranges[task], cell in w.adjacency[task]
         r=w.ranges[cell]
         for j=max(first(r),i+1):W:last(r)
-            _,b=EX.geometry(w,i,j,last(r))
+            _,b=NL.geometry(w,i,j,last(r))
             blocks+=1; candidates+=W
             structural+=sum(b.structural); active+=sum(b.active)
             work[task]+=sum(b.active)
@@ -35,9 +35,9 @@ function run_case(n,cluster,mixed,width,parallel)
     end
     bound=bind_species(p,w.species_map)
     # Fixed-topology numeric reevaluation only. Public timings above always rebuild.
-    for _=1:2; EX.execute!(w,bound,EnergyForcesVirial();parallel); end
-    kernel=[(@timed EX.execute!(w,bound,EnergyForcesVirial();parallel)).time for _=1:REPEATS]
-    kernelbytes=@allocated EX.execute!(w,bound,EnergyForcesVirial();parallel)
+    for _=1:2; PP.execute!(w,bound,EnergyForcesVirial();parallel); end
+    kernel=[(@timed PP.execute!(w,bound,EnergyForcesVirial();parallel)).time for _=1:REPEATS]
+    kernelbytes=@allocated PP.execute!(w,bound,EnergyForcesVirial();parallel)
     geometry_scan(w)
     geometry=[(@timed geometry_scan(w)).time for _=1:REPEATS]
     occ=geometry_scan(w)

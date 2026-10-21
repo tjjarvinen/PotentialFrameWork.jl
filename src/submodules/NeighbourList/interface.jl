@@ -1,11 +1,3 @@
-"""Directed neighbour-query compatibility boundary; force execution stays a half list."""
-module NeighbourInterface
-using AtomsBase, Unitful
-using StaticArrays: SVector, SMatrix
-using ..NeighbourList: Workspace, prepare!, periodic_basis, lane
-import ..NeighbourList: neighbour_list, neighbours
-using ..Execution: geometry
-
 """Materialized directed neighbour snapshot in original atom order.
 Use `neighbour_list` and `neighbours`; queries return independent arrays.
 """
@@ -136,5 +128,4 @@ Displacements are numeric Å; shifts are dimensionless integers. Bounds are chec
 function neighbours(list::NeighbourSnapshot,i::Integer)
     checkbounds(list.indices,i)
     copy(list.indices[i]),copy(list.displacements[i]),copy(list.shifts[i])
-end
 end

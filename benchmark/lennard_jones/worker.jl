@@ -5,7 +5,7 @@ import AtomsCalculators as AC
 using Pkg
 include("common.jl")
 using .ArgonComparison
-const EX=PotentialFrameWork.Execution
+const PP=PotentialFrameWork.PairPotentials
 const NL=PotentialFrameWork.NeighbourList
 const SAMPLES=parse(Int,get(ENV,"PFW_LJ_REPEATS","7"))
 const WARMUPS=parse(Int,get(ENV,"PFW_LJ_WARMUP","3"))
@@ -14,12 +14,12 @@ SAMPLES>=3 && WARMUPS>=1 || error("use at least three samples and one warmup")
 all(>=(4),CELLS) || error("periodic FCC systems require at least four cells/axis")
 
 # Fixed-topology diagnostic, with the same boundary representation as AC calls.
-# Internal Execution entrypoints are intentional and are NOT Verlet reuse APIs.
+# Internal PairPotentials entrypoints are intentional and are NOT Verlet reuse APIs.
 function fixed_call(w,bound,parallel)
     t=time_ns()
-    EX.execute!(w,bound,EnergyForcesVirial();parallel)
+    PP.execute!(w,bound,EnergyForcesVirial();parallel)
     w.timings[:evaluation]=(time_ns()-t)*1e-9
-    r=EX.outputs(w,EnergyForcesVirial())
+    r=PP.outputs(w,EnergyForcesVirial())
     f=[SVector(r.forces[1,i],r.forces[2,i],r.forces[3,i]) for i in axes(r.forces,2)]
     (;energy=r.energy,forces=f,virial=SMatrix{3,3}(r.virial))
 end

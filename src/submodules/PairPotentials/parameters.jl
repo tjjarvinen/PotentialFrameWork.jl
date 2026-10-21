@@ -1,14 +1,3 @@
-"""Parameter-only energy evaluation, keeping spatial storage free of AD numbers."""
-module ParameterEnergy
-using AtomsBase: AbstractSystem
-import AtomsCalculators as AC
-using ..NeighbourList: Workspace, PairBlock, prepare!, lane
-using ..PairPotentials: AbstractPairPotential, SmoothPair, EnergyOnly, cutoff, bind_species
-import ..PairPotentials: with_parameters
-using ..Execution: geometry
-using ..CalculatorInterface: select_workspace
-import ..CalculatorInterface: parameter_energy
-
 # Flat NamedTuples make parameter names explicit, while scalar/vector fields are
 # directly usable by ForwardDiff and structured ChainRules tangents.
 parameter_zero(x::Real)=zero(x)
@@ -123,5 +112,4 @@ function energy_parameter_gradient(sys,p::SmoothPair,parameters::NamedTuple;kwar
         parameter_energy(sys,p,(;amplitudes=basis);kwargs...)
     end
     (;amplitudes=g)
-end
 end

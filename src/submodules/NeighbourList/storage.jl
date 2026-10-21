@@ -1,13 +1,3 @@
-"""Spatial storage and conservative cell-task schedules (no skin or cached geometry)."""
-module NeighbourList
-using AtomsBase, Unitful
-using StaticArrays: SMatrix, SVector
-export Workspace, prepare!, validate_schedule, PairBlock, pack, neighbour_list, neighbours
-
-# Implemented by NeighbourInterface after Execution is loaded.
-function neighbour_list end
-function neighbours end
-
 """A 1×W callback view. Displacements are neighbour minus central; inactive geometry is (1,0,0)."""
 struct PairBlock{W,V,M}
     central_species::ChemicalSpecies
@@ -19,7 +9,6 @@ struct PairBlock{W,V,M}
     active::M
 end
 
-using SIMD: Vec
 @inline pack(::Val{1}, f) = f(1)
 @inline pack(::Val{W}, f) where W = Vec(ntuple(f, Val(W)))
 @inline lane(x::Number, k) = x
@@ -289,5 +278,4 @@ function validate_schedule(w)
         end
     end
     true
-end
 end

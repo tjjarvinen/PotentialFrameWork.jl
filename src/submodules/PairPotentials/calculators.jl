@@ -1,14 +1,4 @@
-"""AtomsCalculators boundary for pair potentials; traversal stays in Execution."""
-module CalculatorInterface
-using AtomsBase: AbstractSystem, position
-using StaticArrays: SVector, SMatrix
-using Unitful
-import AtomsCalculators as AC
-using ..PairPotentials: AbstractPairPotential, EnergyOnly, EnergyForcesVirial
-using ..NeighbourList: Workspace
-using ..Execution: evaluate!
-
-# Defined in ParameterEnergy after this boundary module is loaded.
+# Defined in parameters.jl, included after this calculator boundary.
 function parameter_energy end
 
 AC.energy_unit(::AbstractPairPotential)=u"eV"
@@ -141,5 +131,4 @@ for PropertyType in (SingleProperty,Tuple)
             calculate(properties,sys,p,parameters,state;kwargs...)
         end
     end
-end
 end

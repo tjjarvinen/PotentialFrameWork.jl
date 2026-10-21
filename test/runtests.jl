@@ -1,7 +1,7 @@
 using PotentialFrameWork, Test, Unitful, AtomsBase
 include("fixtures.jl")
 const NL=PotentialFrameWork.NeighbourList
-const EX=PotentialFrameWork.Execution
+const PP=PotentialFrameWork.PairPotentials
 
 struct AnisotropicPair
     radius::Float64
@@ -47,7 +47,7 @@ end
         @test eltype(w.species_map)===ChemicalSpecies
         @test length(w.species_map)==3
         @test isequal(w.species,s.labels[w.p])
-        _,block=EX.geometry(w,1,2,3)
+        _,block=NL.geometry(w,1,2,3)
         @test block.central_species isa ChemicalSpecies
         @test block.neighbour_species isa NTuple{width,ChemicalSpecies}
         perm=[3,1,2]
@@ -180,7 +180,7 @@ end
             for i in w.ranges[task], cell in w.adjacency[task]
                 r=w.ranges[cell]
                 for j=max(first(r),i+1):4:last(r)
-                    js,b=EX.geometry(w,i,j,last(r))
+                    js,b=NL.geometry(w,i,j,last(r))
                     for k=1:4
                         NL.lane(b.active,k) || continue
                         a,bb=minmax(w.p[i],w.p[js[k]])
@@ -192,7 +192,7 @@ end
             @test issubset(actual,Set(w.footprints[task]))
             # Check cells from actual force destinations, not just loop metadata.
             f0=copy(w.force); fill!(w.force,0)
-            EX.cell_task!(w,bind_species(p,w.species_map),EnergyForcesVirial(),task)
+            PP.cell_task!(w,bind_species(p,w.species_map),EnergyForcesVirial(),task)
             destcells=Set(c for c in eachindex(w.ranges) if any(!iszero,w.force[:,w.ranges[c]]))
             @test issubset(destcells,Set(w.footprints[task]))
             w.force.=f0
@@ -201,7 +201,7 @@ end
         @test all(==(1),values(counts))
         w.schedule_version-=UInt(1)
         @test !validate_schedule(w)
-        @test_throws ErrorException EX.execute!(w,bind_species(p,w.species_map),EnergyForcesVirial())
+        @test_throws ErrorException PP.execute!(w,bind_species(p,w.species_map),EnergyForcesVirial())
     end
     s=fixture(25;L=4.1); p=potential()
     # Far outside the primary cell, exact faces, and crossing periodic boundaries.

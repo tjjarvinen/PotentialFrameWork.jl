@@ -28,7 +28,7 @@ process RSS or peak resident memory. No private-force baseline is implemented.
 Benchmarks should run without concurrent tests or other benchmarks. CPU affinity
 is uncontrolled; results on a shared host have noise. There is no CI speedup
 assertion. Inspect `inspect_simd.jl` LLVM for vector arithmetic, and use Julia's
-Profile/@allocated on `Execution.execute!` to investigate regressions.
+Profile/@allocated on `PairPotentials.execute!` to investigate regressions.
 
 The recorded run is summarised in [SUMMARY.md](SUMMARY.md); raw output is retained
 for [one thread](results-1thread.txt) and [four threads](results-4threads.txt).

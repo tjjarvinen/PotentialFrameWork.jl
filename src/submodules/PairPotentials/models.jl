@@ -1,9 +1,3 @@
-module PairPotentials
-using SIMD: vifelse, Vec
-using AtomsBase: ChemicalSpecies
-using ..NeighbourList: PairBlock, pack
-export AbstractPairPotential, EnergyOnly, EnergyForcesVirial, SmoothPair, RadialPotential, cutoff, bind_species
-
 """`with_parameters(potential, parameters::NamedTuple)` returns a new callback.
 Extend together with `AtomsCalculators.get_parameters` for parameterised models.
 Parameters are numeric (eV/Å conventions); the physical cutoff must stay fixed.
@@ -26,8 +20,6 @@ function cutoff end
 """Bind runtime system species to potential parameters once, outside hot loops.
 Custom interactions receive ChemicalSpecies values and may use the default."""
 bind_species(p, species_map) = p
-@inline select(mask::Bool,a,b) = ifelse(mask,a,b)
-@inline select(mask::Vec,a,b) = vifelse(mask,a,b)
 
 """Smooth finite-cutoff example: U_ab(r)=A_ab*(1-(r/c)^2)^3 for r<c.
 `labels` are AtomsBase species values; symmetric amplitudes in eV, cutoff in Å.
@@ -95,5 +87,4 @@ cutoff(p::RadialPotential)=p.radius
     safe=select(r>0,r,one(r))
     g=out.derivative/safe
     (;energy=out.energy, fx=g*b.dx, fy=g*b.dy, fz=g*b.dz)
-end
 end

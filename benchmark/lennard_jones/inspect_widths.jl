@@ -3,7 +3,7 @@ using PotentialFrameWork, AtomsBase, InteractiveUtils
 include("common.jl")
 using .ArgonComparison
 const NL=PotentialFrameWork.NeighbourList
-const EX=PotentialFrameWork.Execution
+const PP=PotentialFrameWork.PairPotentials
 
 function inspect_widths()
     directory=isempty(ARGS) ? joinpath(@__DIR__,"codegen") : abspath(ARGS[1])
@@ -22,7 +22,7 @@ function inspect_widths()
         block=PairBlock(ar,ntuple(_ -> ar,width),pack(k -> 3.7+0.01*k),
                        pack(_ -> 0.2),pack(_ -> 0.1),pack(_ -> true),pack(_ -> true))
         targets=(("callback",p,Tuple{typeof(block),EnergyForcesVirial}),
-                 ("cell_task",EX.cell_task!,Tuple{typeof(w),typeof(p),EnergyForcesVirial,Int}))
+                 ("cell_task",PP.cell_task!,Tuple{typeof(w),typeof(p),EnergyForcesVirial,Int}))
         for (name,f,signature) in targets
             llvm=sprint(io -> code_llvm(io,f,signature;debuginfo=:none))
             native=sprint(io -> code_native(io,f,signature;debuginfo=:none,syntax=:intel))

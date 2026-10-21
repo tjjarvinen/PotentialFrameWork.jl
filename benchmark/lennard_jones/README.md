@@ -62,7 +62,7 @@ Two regimes are reported separately:
   buffers are reused, but topology is rebuilt every call; the reference constructs
   its default PairList every call.
 - `fixed`: unchanged-geometry diagnostics. Reference calls receive one prebuilt
-  `nlist`. Framework calls use internal `Execution.execute!`/`outputs` with prepared
+  `nlist`. Framework calls use internal `PairPotentials.execute!`/`outputs` with prepared
   coordinates, topology, schedule and bound parameters, then return the same
   static-vector boundary shape. `setup_ms_excluded` records one setup, outside
   timings and amortised over warmups/samples/checks. These are not complete public

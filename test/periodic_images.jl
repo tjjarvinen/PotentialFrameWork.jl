@@ -36,7 +36,7 @@ function image_ownership(w::Workspace{W}) where W
         for i in w.ranges[task], image in w.images[task]
             r=w.ranges[image.cell]
             for j=max(first(r),i+(image.self ? 0 : 1)):W:last(r)
-                js,b=EX.geometry(w,i,j,last(r),image)
+                js,b=NL.geometry(w,i,j,last(r),image)
                 for k=1:W
                     NL.lane(b.active,k) || continue
                     a,bb=w.p[i],w.p[js[k]]
@@ -50,7 +50,7 @@ function image_ownership(w::Workspace{W}) where W
         end
         @test issubset(actual,Set(w.footprints[task]))
         fill!(w.force,0)
-        EX.cell_task!(w,bound,EnergyForcesVirial(),task)
+        PP.cell_task!(w,bound,EnergyForcesVirial(),task)
         destinations=Set(c for c in eachindex(w.ranges) if any(!iszero,w.force[:,w.ranges[c]]))
         @test issubset(destinations,Set(w.footprints[task]))
     end

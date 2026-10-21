@@ -1,6 +1,6 @@
 module PotentialFrameWorkNeighbourListsExt
 import NeighbourLists
-using PotentialFrameWork.NeighbourInterface: NeighbourSnapshot, neighbours
+using PotentialFrameWork.NeighbourList: NeighbourSnapshot, neighbours
 
 # Dispatch only on our type; upstream constructors/types remain upstream-owned.
 NeighbourLists.neighbours(list::NeighbourSnapshot,i::Integer)=neighbours(list,i)

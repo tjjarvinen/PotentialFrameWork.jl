@@ -1,11 +1,3 @@
-"""User-facing comparison of neighbour-search strategies without a potential."""
-module NeighbourBenchmarks
-using AtomsBase: AbstractSystem
-using Unitful
-using ..NeighbourList: Workspace, prepare!, lane
-using ..Execution: geometry
-export benchmark_neighbourlist
-
 @inline function task_pairs(w::Workspace{W}, task) where W
     pairs=0
     for i in w.ranges[task], image in w.images[task]
@@ -144,5 +136,4 @@ function print_report(io,r)
         println(io,"Select with Workspace(bruteforce_threshold=",m.atoms,
             ") for brute force, or Workspace(bruteforce_threshold=0) for cells.")
     end
-end
 end
