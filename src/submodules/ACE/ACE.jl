@@ -13,6 +13,7 @@ export ResolvedModel, load_resolved, radial_values, FullEnvironment, prepare_env
 export load_recipe
 export ace_evaluate, site_diagnostics
 export ACECalculator, design_matrix, linear_parameters, install_readout, smoothness_prior, fit_linear
+export save_calculator
 export training_rows
 export CPUExecutor, execute_prepared!, prepare_executor!, prepared_result
 export trainable_parameters, ace_vjp
@@ -22,6 +23,7 @@ include("resolved.jl")
 include("environments.jl")
 include("serial.jl")
 include("calculators.jl")
+include("persistence.jl")
 include("fitting.jl")
 include("angular_blocks.jl")
 include("cpu.jl")

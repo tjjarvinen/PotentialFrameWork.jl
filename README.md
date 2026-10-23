@@ -32,6 +32,7 @@ src/
       environments.jl
       serial.jl
       calculators.jl
+      persistence.jl
       fitting.jl
       cpu.jl
       angular_blocks.jl
@@ -326,9 +327,9 @@ The supplied TiAl ACE model is available through a versioned resolved export:
 ```julia
 using SpheriCart                   # optional reference angular backend
 const A = PotentialFrameWork.ACE
-model, ps, st = A.load_recipe("data/ace_ref/reference_model.json")
-calc = A.ACECalculator(model, ps, st; width=4)
+calc = A.ACECalculator("data/ace_ref/reference_model.json"; width=4)
 result = AC.energy_forces_virial(sys, calc; parallel=true)
+model, ps, st = calc.model, AC.get_parameters(calc), calc.state
 input = A.ace_inputs(sys, model)
 serial = A.ace_evaluate(input.positions, model, ps, input.environment, input.cell)
 ```
@@ -339,6 +340,27 @@ with Julia 1.13.2. This loads the saved model without fitting. Independent runti
 evaluation has no ACEpotentials dependency. Only the resolved scalar invariant,
 Agnesi/spline radial, pair and one-body components are supported. Element channels
 reject isotopes and custom species names explicitly.
+
+Load a resolved export directly with `A.ACECalculator("resolved_model_v1.toml")`.
+Save a self-contained calculator checkpoint after fitting or tuning:
+
+```julia
+A.save_calculator("tuned.toml", calc)  # current installed parameters and state
+# If AD training kept parameters outside the calculator:
+A.save_calculator("tuned.toml", calc; parameters=trained_ps, state=st)
+restored = A.ACECalculator("tuned.toml"; width=4, slots=Threads.nthreads())
+```
+
+Checkpoints include the complete resolved basis, references, current readout and
+radial/pair scales, and explicit state. They need no sibling reference files or
+ACEpotentials installation. Execution scratch and inference caches are rebuilt;
+load with SpheriCart available for the default angular backend, or select
+`angular_backend=:block`. Nested NamedTuples/tuples, numeric arrays/scalars,
+strings and `nothing` are supported; Float32/Float64 types and array shapes are
+preserved. Unsupported values (including AD tracers) and nonfinite numbers are
+rejected. Saving replaces the destination after a complete write and does not
+install an explicit parameter override in the calculator. This versioned TOML
+checkpoint is a PotentialFrameWork format, separate from ACEpotentials JSON.
 
 `A.design_matrix` returns original-coordinate energy/force/virial rows and a fixed
 baseline. `A.training_rows` selects present numeric labels and residual weights.

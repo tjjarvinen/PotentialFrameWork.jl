@@ -67,8 +67,8 @@ end
 Return `(model, parameters, state)`; parameters own the original readout matrices.
 The recipe JSON is exported separately in its pinned producer environment.
 """
-function load_resolved(path)
-    D=TOML.parsefile(path)
+load_resolved(path)=read_resolved(TOML.parsefile(path))
+function read_resolved(D)
     get(D,"schema",nothing)=="PotentialFrameWork.resolved_ACE" && get(D,"schema_version",nothing)==1 ||
         throw(ArgumentError("unsupported resolved ACE schema; use the pinned export_resolved_model.jl producer"))
     z=Int.(D["species_atomic_numbers"]); nz=length(z)

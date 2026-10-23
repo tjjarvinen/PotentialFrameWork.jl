@@ -1,5 +1,48 @@
 # Implementation status
 
+## ACE calculator persistence (2026-10-23)
+
+`ACE.ACECalculator(path; kwargs...)` now accepts a resolved TOML export, the
+supplied JSON recipe with its hash-checked resolved export, or a native calculator
+checkpoint. `ACE.save_calculator(path, calc; parameters=calc.parameters,
+state=calc.state)` writes a self-contained, versioned TOML checkpoint. Explicit
+parameter/state overrides support training through AtomsCalculators without
+installing optimizer results in the mutable calculator. Saving does not mutate
+the calculator; one authoritative parameter tree is stored. Complete resolved
+basis/reference data, readouts, nonlinear radial/pair scales, numeric types,
+array shapes and supported nested state survive loading in a different directory.
+Environment, schedule, scratch and derived coefficients are rebuilt with the
+requested execution settings. No dependency or core compatibility changes.
+
+The format supports nested NamedTuples/tuples, supported primitive numeric
+arrays/scalars, strings and `nothing`; unsupported objects/AD tracers and
+nonfinite parameter/state values fail explicitly. A failed validation/write does
+not truncate the destination. This is a PotentialFrameWork checkpoint, not an
+ACEpotentials JSON export. Recipe import still requires the separately resolved
+export; native checkpoints have no reference-file dependency.
+
+All **37 new persistence checks** pass, including changed readouts and nonunit/
+zero nonlinear scales, E/F/W and AtomsCalculators force-loss ForwardDiff products
+after reloading, Float32 parameters, empty shaped arrays, relocated files, stale
+inference caches, installed versus explicit parameter saves, and rejected
+shapes/schema versions/nonfinite/tracer/state values. Complete suites pass
+**44,463 assertions per process** on Julia **1.13.2 / 32 threads** and
+**1.10.12 / 4 threads**, AMD Ryzen 9 9950X. Versions remain AtomsCalculators
+0.2.3, SpheriCart 0.2.4, ForwardDiff 1.4.6, Zygote 0.7.14 and TOML 1.0.3.
+Logs: `/tmp/pfw-ace-persistence-113-t4.log` (the Julia 1.13 Pkg test subprocess
+selected 32 threads despite the parent process's `--threads=4`) and
+`/tmp/pfw-ace-persistence-110-t4.log`. Julia 1.10 used the existing isolated
+environment `/tmp/pfw-ace-110-flg1rsld` with the current changed source/tests
+copied in and its compatible Manifest preserved.
+
+Reproduce with `julia --project -e 'using Pkg;
+Pkg.test(; julia_args=["--threads=4"])'`, selecting the desired Julia version
+(use the isolated compatible environment for Julia 1.10). A core-only checkpoint
+round trip using `angular_backend=:block` also passes without loading SpheriCart
+or ACEpotentials (`/tmp/pfw-ace-persistence-optional-free.log`). `git diff --check`
+passes. Supplied reference inputs and the existing execution/force ownership
+contracts are unchanged.
+
 ## CPU ACE phase — current gates (2026-10-22)
 
 M0 reference reproduction passes on Julia 1.13.2 with the supplied, unchanged
