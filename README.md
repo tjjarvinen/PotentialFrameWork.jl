@@ -363,7 +363,14 @@ install an explicit parameter override in the calculator. This versioned TOML
 checkpoint is a PotentialFrameWork format, separate from ACEpotentials JSON.
 
 `A.design_matrix` returns original-coordinate energy/force/virial rows and a fixed
-baseline. `A.training_rows` selects present numeric labels and residual weights.
+baseline. `A.training_rows` selects present labels and residual weights. Labels
+can be plain numbers (energy/virial in eV, forces in eV/Å) or Unitful quantities
+in compatible units, which are converted before baseline subtraction. Force
+labels accept a 3×N matrix or a vector of three-component per-atom vectors, as
+used by ExtXYZ. Virial labels are configurational virials in energy units, not
+volume-normalized stress. Missing properties and `nothing` omit those rows.
+Positions and cells from AtomsBase systems are converted to Å by `A.ace_inputs`;
+the explicit numerical kernels and design matrix use plain Å/eV arrays.
 Load optional ACEfit to call `A.fit_linear`; `A.install_readout` installs the dense
 original readout coordinates. `fit_pair=false` keeps imported pair weights fixed
 and includes their predictions in the baseline. See the

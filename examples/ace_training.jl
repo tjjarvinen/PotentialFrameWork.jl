@@ -12,12 +12,13 @@ input=A.ace_inputs(sys,model)
 calc=A.ACECalculator(model,readout,st)
 println(AC.energy_forces_virial(sys,calc;parallel=true).energy)
 
-# Synthetic numeric labels; real training labels must be converted explicitly
-# to eV, eV/Å and eV before passing them to training_rows.
+# Synthetic labels; training_rows accepts plain eV/Å numbers or Unitful labels.
+# For ExtXYZ data, pass its energy, per-atom forces and virial properties here.
 target_ps=A.install_readout(readout,1.01A.linear_parameters(readout))
 target=A.ace_evaluate(input.positions,model,target_ps,input.environment,input.cell)
 design=A.design_matrix(input.positions,model,readout,input.environment,input.cell)
-rows=A.training_rows(design,target;weights=(energy=1.,forces=1.,virial=0.1))
+labels=(energy=target.energy*u"eV",forces=target.forces*u"eV/Å",virial=target.virial*u"eV")
+rows=A.training_rows(design,labels;weights=(energy=1.,forces=1.,virial=0.1))
 coeff=A.fit_linear(rows.matrix,rows.labels;row_weights=rows.row_weights,
                    prior=A.smoothness_prior(model),regularization=1e-10)
 fitted=A.install_readout(readout,coeff)

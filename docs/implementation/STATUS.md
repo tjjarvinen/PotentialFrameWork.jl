@@ -1,5 +1,44 @@
 # Implementation status
 
+## Unitful ACE training labels (2026-10-23)
+
+`ACE.training_rows` now converts Unitful energy and configurational virial labels
+to eV and force labels to eV/Å before subtracting fixed baselines. Plain numbers
+retain the same eV/Å conventions. Compatible scaled units (including J, N, meV
+and eV/nm) and mixed plain/unitful properties are accepted; incompatible
+dimensions raise Unitful.DimensionError. Residual weights retain their existing
+meaning in the converted units. Force labels also accept vectors of per-atom
+three-component vectors, preserving original atom/component ordering for
+ExtXYZ/AtomsCalculators outputs. Missing labels and `nothing` still omit rows.
+The AtomsBase geometry boundary already converts lengths to Å; explicit numerical
+kernels/design matrices continue to use plain arrays. No dependencies changed.
+README and the training example document and demonstrate Unitful labels.
+
+Validation adds 38 checks for conversions, component ordering, mixed inputs,
+dimension/length errors, omitted rows, Float32/empty force labels, input ownership,
+and design-matrix prediction recovery with nm AtomsBase geometry and Unitful
+calculator labels for both jointly fitted and fixed pair terms. The pre-edit
+Julia 1.13.2 / 4-thread suite passed 44,463 assertions
+(`/tmp/pfw-unitful-baseline.log`); the post-edit suite passed 44,501
+on both Julia 1.13.2 and 1.10.12 with four threads
+(`/tmp/pfw-unitful-final-113.log`, `/tmp/pfw-unitful-final-110.log`). Hardware:
+AMD Ryzen 9 9950X, 16 cores/32 logical
+CPUs. Unitful 1.29.0, AtomsBase 0.5.3, AtomsCalculators 0.2.3, SpheriCart 0.2.4,
+SIMD 3.8.1, ForwardDiff 1.4.6, Zygote 0.7.14. Reproduce with
+`julia --project -e 'using Pkg; Pkg.test(; julia_args=["--threads=4"])'`.
+Julia 1.10 used an isolated copy at `/tmp/pfw-unitful-110` with its own resolved
+Manifest (StaticArrays 1.9.24, NeighbourLists 0.5.10; Julia 1.13 uses 1.9.23 and
+0.6.2). Reproduce with `julia +1.10 --project=/tmp/pfw-unitful-110 -e 'using Pkg;
+Pkg.test(; julia_args=["--threads=4"])'`. The first isolated-copy attempt lacked
+the benchmark fixture included by the existing Lennard-Jones tests; copying that
+directory restored the full suite without source changes. `git diff --check`
+passes. Root/reference Manifests were preserved.
+
+A separate pinned-reference-environment check loaded the first real ExtXYZ frame,
+prepared its design matrix, and confirmed identical training rows from its plain
+labels and the same labels with eV/eV/Å units attached (ExtXYZ 0.2.2, Julia 1.13.2;
+`/tmp/pfw-unitful-extxyz.log`). Reference inputs were preserved.
+
 ## ACE calculator persistence (2026-10-23)
 
 `ACE.ACECalculator(path; kwargs...)` now accepts a resolved TOML export, the

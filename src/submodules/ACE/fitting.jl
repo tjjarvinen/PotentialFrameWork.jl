@@ -79,10 +79,18 @@ function fit_linear(args...;kwargs...)
     throw(ArgumentError("load ACEfit for linear regression"))
 end
 
-"""Select available numeric eV/Å labels from a design result; a missing property
+training_label_value(value,unit)=value
+training_label_value(value::Unitful.AbstractQuantity,unit)=ustrip(unit,value)
+
+"""Select available labels from a design result; a missing property
 or `nothing` omits those rows. Property weights multiply residuals directly.
 Returns baseline-subtracted `labels` and matching row weights for `fit_linear`.
-Force labels are 3×N and virial labels are 3×3, in original atom order.
+Unitful labels are converted to eV (energy/virial) and eV/Å (forces) before
+baseline subtraction. Plain numbers use those same units. Incompatible dimensions
+are rejected. Weights apply to residuals in these converted units.
+Force labels are 3×N or a vector of N three-component vectors, in original atom
+order; virial labels are 3×3 configurational virials (energy, without volume
+normalization). Geometry is converted separately by `ace_inputs`.
 """
 function training_rows(design,labels;weights=(energy=1.,forces=1.,virial=1.))
     n3=size(design.matrix,1)-10
@@ -90,11 +98,21 @@ function training_rows(design,labels;weights=(energy=1.,forces=1.,virial=1.))
     for (key,range) in ((:energy,1:1),(:forces,2:1+n3),(:virial,2+n3:10+n3))
         hasproperty(labels,key) || continue
         value=getproperty(labels,key); isnothing(value) && continue
-        v=key===:energy ? [value] : vec(value)
+        v=if key===:energy
+            (value,)
+        elseif key===:forces && value isa AbstractVector && all(x -> x isa AbstractVector,value)
+            all(x -> length(x)==3,value) || throw(DimensionMismatch("forces need three components per atom"))
+            collect(Iterators.flatten(value))
+        else
+            vec(value)
+        end
         length(v)==length(range) || throw(DimensionMismatch("$key label dimensions"))
         weight=getproperty(weights,key)
         isfinite(weight) && weight>=0 || throw(ArgumentError("invalid $key weight"))
-        append!(indices,range); append!(values,v); append!(residual_weights,fill(weight,length(range)))
+        unit=key===:forces ? u"eV/Å" : u"eV"
+        append!(indices,range)
+        append!(values,(training_label_value(x,unit) for x in v))
+        append!(residual_weights,fill(weight,length(range)))
     end
     (;matrix=design.matrix[indices,:],labels=values-design.baseline[indices],row_weights=residual_weights)
 end
