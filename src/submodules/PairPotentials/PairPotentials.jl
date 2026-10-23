@@ -6,6 +6,8 @@ using SIMD: Vec
 using Unitful
 import AtomsCalculators as AC
 using ..NeighbourList: Workspace, PairBlock, pack, lane, prepare!, geometry, select
+using ..NeighbourList: neighbour_list
+import AtomsBase
 
 export AbstractPairPotential, EnergyOnly, EnergyForcesVirial, SmoothPair,
     RadialPotential, cutoff, bind_species, with_parameters,
@@ -15,4 +17,5 @@ include("models.jl")
 include("evaluation.jl")
 include("calculators.jl")
 include("parameters.jl")
+include("numerical.jl")
 end

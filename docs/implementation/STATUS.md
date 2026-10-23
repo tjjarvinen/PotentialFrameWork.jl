@@ -1,5 +1,112 @@
 # Implementation status
 
+## CPU ACE phase — current gates (2026-10-22)
+
+M0 reference reproduction passes on Julia 1.13.2 with the supplied, unchanged
+reference Manifest and ACEpotentials 0.10.2. All 33 reloaded XYZ structures were
+evaluated without fitting. Maximum absolute differences from rounded stored
+predictions: energy 2.624960870889481e-8 eV, force 7.195396589665393e-8 eV/Å,
+virial 5.642368563485434e-7 eV. Correct per-atom `atom_data.force` provenance is
+checked. Full precision recomputed predictions are in
+`data/ace_ref/reloaded_predictions.toml`. Reproduce with:
+`julia --project=data/ace_ref data/ace_ref/validate_saved_model.jl`.
+Saved model SHA256:
+`a61a9e57c91cc25663359dd876c47fe9a4c3662ee8d5b4a27a92350c90435f0e`;
+XYZ SHA256:
+`249c00cc8ce9a2ca6e9d45f74b99c9690a4ade5d00df976deb4fd1365737c62c`.
+
+Actual reconstruction: species order Ti/Al (22/13); spline radial basis with
+30 channels, spline pair basis with 12 channels; real spherical L2-normalized
+SpheriCart harmonics through l=2; 27 pooled density channels; 167 selected
+products; sparse 123×167 invariant map. The 270 supplied parameters are
+WB (123×2, column-major) followed by Wpair (12×2, column-major); radial/pair
+parameter subtrees are empty in this saved model. Explicit one-body references
+are Ti=-1586.0195 and Al=-105.5954 eV. A polynomial recurrence substituted for
+these reconstructed splines would change the mathematical oracle.
+
+Fresh pre-edit `Pkg.test()` passes on Julia 1.13.2, 32 test-process threads,
+AMD Ryzen 9 9950X (16 cores/32 logical CPUs). Log:
+`/tmp/pfw-ace-baseline.log`. Zygote resolved to 0.7.14 in this test environment;
+older version/test counts below remain historical. Core Julia compatibility and
+the supplied reference Project/Manifest/model/XYZ/generation script are preserved
+(their hashes were rechecked at completion). The ignored core Manifest was
+resolved for the newly declared standard libraries; its original copy is
+`/tmp/pfw-core-manifest-before-ace.toml`. The reference Manifest was never resolved
+or overwritten. Julia 1.10 uses an isolated source/environment at
+`/tmp/pfw-ace-110-flg1rsld`, not the reference environment.
+
+Implemented gates, in review order:
+
+| Gate | Implementation and evidence |
+| --- | --- |
+| M1 | `PairPotentials/numerical.jl`: owning numeric inputs, fixed original-order unordered image metadata, explicit E/F/W; legacy callbacks/calculators/SIMD preserved. Edge-local ForwardDiff products and ChainRules cover X/ps E/F/W, including nonlinear LJ. Saved/thunk/zero pullbacks, self-images and deterministic rollout sensitivities pass. |
+| M2 | `export_resolved_model.jl` plus `ACE/resolved.jl`: narrow versioned import, source-hash convenience recipe import, all 270 original parameter coordinates, complete spline/transform/envelope and product/coupling tables. 1,136 radial value/derivative assertions pass against the pinned reconstruction. MIT attributions retained under `docs/implementation/licenses`. |
+| M3 | `ACE/environments.jl`: full directed flat adjacency and exact image labels, species buckets, safe masked tails, original-order numerical displacements, reusable capacities and new complete write footprints/phases. 28,807 oracle/padding/species/schedule checks pass. Isotopes/custom names are explicitly rejected for element-only channels. |
+| M4 | `ACE/serial.jl`: independent scalar radial/angular/density/product/sparse-map/readout reverse, fixed references and imported pair component; AtomsCalculators owning/additive outputs. All 33 fixture E/F/W agree; absolute maxima are 7.275957614183426e-12 eV, 6.163958232718869e-13 eV/Å and 8.446576771348191e-13 eV. Force/strain finite differences, translation/rotation, zero coefficients and empty cases pass. |
+| M5 | `ACE/fitting.jl` and optional ACEfit extension: dense original-coordinate E/F/W design, missing-property selection, residual weights, fixed reference subtraction, jointly fitted or fixed pair readout, metadata-derived algebraic prior. ACEfit 0.3.1 weighted rank-deficient prediction recovery and actual QR prior scaling pass (8 pinned-environment checks). The training example's synthetic residual is 3.108624468950438e-14. |
+| M6 | `ACE/cpu.jl`: SIMD joint spline Horner evaluation, capacity-managed site scratch, refreshed sparse readout precontraction, exclusive task slots, full-footprint phases and one shared species-sorted force matrix. Actual destinations, widths 1/2/4/8/16, Float32/64 buffers, growth/reset, current-ps updates and multi-site concurrent phases pass. Single-centre phases execute without thread-task creation. No worker-private full force arrays exist. |
+| M7 | Optional LuxCore/ChainRules/ForwardDiff extensions: nested explicit readout/radial/pair scales, RNG-based Lux setup/apply, E/F/W rules into positions/parameters (including optional W->X). ACE position and mixed pullbacks share one directional differentiation of analytic reverse stages, without a full Hessian/Jacobian or replay per parameter. Force-loss, saved inputs/workspace mutation, zero/thunk cotangents and pair/ACE rollout X/velocity/parameter sensitivities pass. Periodic multi-image products pass 20 independent finite-difference checks. Full Lux 1.31.4 setup/apply and a nonlinear gradient step pass in `/tmp/pfw-ace-example`. |
+| M8 | Optional generated single-input SpheriCart, explicit SIMD angular jets and tiled radial/angular/density fusion are implemented and selectable. All 33 fixtures pass 5,940 CPU width/backend/fusion/thread comparisons; standalone L=0/1/2/4/6 Float32/64 blocks and complete forces pass. SpheriCart 0.2.4's L=0 gradient limitation is handled by the exact constant/zero derivative. Reference backend remains default. Measurement artifacts and reproduction details are in `benchmark/ace`. |
+
+Final package suites pass **44,426 assertions per process** on Julia **1.13.2 /
+1 thread**, **1.13.2 / 4 threads**, and **1.10.12 / 4 threads**. Logs are
+`/tmp/pfw-ace-final-113-t1.log`, `/tmp/pfw-ace-final-113-t4.log`, and
+`/tmp/pfw-ace-final-110-t4.log`. AMD Ryzen 9 9950X, 16 cores/32 logical CPUs.
+Core test versions: AtomsBase 0.5.3, AtomsCalculators 0.2.3, SIMD 3.8.1,
+SpheriCart 0.2.4, LuxCore 1.5.3, ForwardDiff 1.4.6, ChainRulesCore 1.26.4,
+Zygote 0.7.14, Unitful 1.29.0. StaticArrays is 1.9.23 in the Julia 1.13 core
+test environment and 1.9.24 in the Julia 1.10/reference environments;
+NeighbourLists is 0.6.2 / 0.5.10 respectively. The strict oracle scripts load
+ACEpotentials before adding the core project to LOAD_PATH so pinned transitive
+versions (including StaticArrays 1.9.24) are already selected.
+
+Optional-free core load/import passes (`/tmp/pfw-ace-optional-free.log`). Reference
+scripts are documented in `benchmark/ace/README.md`; numerical logs are
+`/tmp/pfw-independent-reference.log`, `/tmp/pfw-all-frame-cpu.log`, and
+`/tmp/pfw-ace-periodic-ad.log`. Optimized radial LLVM is saved under
+`benchmark/ace/radial-llvm-julia1.13.2.txt` and contains explicit `<4 x double>`
+arithmetic; this is not a register-residency claim. `git diff --check` passes.
+
+Final isolated benchmark reports are
+`benchmark/ace/results-julia1.13.2-t1.toml` and
+`benchmark/ace/results-julia1.13.2-t4.toml`: 191 full-stack records and 72 angular
+workload records per process, nine samples after three warmups, BLAS one thread,
+no affinity pinning. Controlled synthetic cases vary 8/64 atoms, one/two populated
+element channels and spacings 2.8/4.0 Å in addition to fixtures 1/33. Complete
+public E/F/W medians (µs) for fixtures 1/33 are 51.920/1144.383 at one thread and
+52.060/1151.104 at four threads. The pinned ACEpotentials public calls measure
+81.150/1599.675 and 84.390/736.322 µs respectively. Thus there is no general
+speedup or multi-thread scaling claim; dense full-site footprints constrain
+available independent tasks. The width-4 prepared baseline allocates 64/1728
+bytes and stores exactly 48/1296 force bytes for 2/54 atoms, independent of worker
+count. Site scratch is 57,448 bytes for one slot and 229,672 for four on these
+fixtures. The final force-loss backward median is 126.691 µs with 625,424 bytes
+allocated and 1,135,889 bytes of owned saved state on fixture 1 at four threads.
+Angular blocks and tiled fusion remain optional: at L=2, 64 neighbours, width 4,
+SpheriCart batched/generated-single/explicit-block gradients measure
+0.700/1.530/3.340 µs. The complete reports contain all variations and allocation
+costs, including slower experiments. `results-prototype-position-vjp-*.toml`
+records the superseded repeated-local-gradient implementation only. Reproduction
+commands, conventions and limitations are in `benchmark/ace/README.md`.
+
+Remaining limitations: import is deliberately limited to the resolved supplied
+component families; nonlinear training exposes diagonal radial/pair scales, not
+arbitrary ACEpotentials constructors. Sorting, image selection and cell AD are
+not differentiated; numerical position/parameter products use fixed valid
+topology. Training targets the explicit primitive/Lux layer, not mutation inside
+inference/preparation. Arbitrary higher reverse orders are unverified. Cutoffs
+and fixed spline tables are not trainable. Float32 executor buffers use mixed
+Float64 imported radial arithmetic. Transform/envelope/interval selection remain
+scalar per lane; joint cubic Horner arithmetic is SIMD. Preparation and owning
+outputs allocate; there is no Verlet reuse. Dense design construction and saved
+AD data allocate. Experimental angular recurrences allocate local temporaries;
+tiled fusion retains intermediates for force reversal and need not be faster.
+No automatic crossover, general speedup, GPU/MACE, MPI, long-range or NPT/pressure-
+coupled differentiable MD support is claimed. All required numerical/derivative
+gates listed above pass; these limitations delimit the verified interfaces.
+
+The sections below are historical first-phase records.
+
 ## Milestone 0 — decisions
 
 Repository inspected: initially a root module and empty test skeleton. Package

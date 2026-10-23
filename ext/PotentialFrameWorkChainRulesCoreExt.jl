@@ -1,6 +1,7 @@
 module PotentialFrameWorkChainRulesCoreExt
 using PotentialFrameWork, ChainRulesCore
 import ChainRulesCore: rrule
+using PotentialFrameWork.ACE: ace_evaluate, ace_vjp, ResolvedModel, FullEnvironment
 
 function rrule(::typeof(parameter_energy),sys,p::AbstractPairPotential,parameters::NamedTuple;kwargs...)
     y=parameter_energy(sys,p,parameters;kwargs...)
@@ -13,11 +14,62 @@ function rrule(::typeof(parameter_energy),sys,p::AbstractPairPotential,parameter
         dp=if delta isa AbstractZero
             ZeroTangent()
         else
-            project(map(x -> x isa Real ? delta*x : delta.*x,g))
+            project(PotentialFrameWork.PairPotentials.parameter_scale(delta,g))
         end
         (NoTangent(),@not_implemented("system derivatives are outside parameter-only energy AD"),
          @not_implemented("differentiate explicit parameters, not the bundled potential"),dp)
     end
     y,energy_pullback
+end
+
+function rrule(::typeof(pair_evaluate),X,p::AbstractPairPotential,ps::NamedTuple,
+               env::PairEnvironment,H;request=EnergyForcesVirial(),state=NamedTuple())
+    y=pair_evaluate(X,p,ps,env,H;request,state)
+    # Own every numerical input and discrete map needed for recomputation. Neither
+    # caller mutation nor reuse of an unrelated inference workspace changes this.
+    saved=deepcopy((X,p,ps,env,H))
+    projectX=ProjectTo(X); projectps=ProjectTo(ps)
+    function pair_pullback(delta)
+        delta=unthunk(delta)
+        if delta isa AbstractZero
+            return (NoTangent(),ZeroTangent(),NoTangent(),ZeroTangent(),NoTangent(),NoTangent())
+        end
+        cot(name,zero_value)=if !hasproperty(delta,name)
+            zero_value
+        else
+            v=unthunk(getproperty(delta,name))
+            v isa AbstractZero ? zero_value : v
+        end
+        de=cot(:energy,zero(y.energy))
+        df=cot(:forces,zeros(eltype(X),size(X)))
+        dw=cot(:virial,zeros(eltype(X),3,3))
+        g=pair_vjp(saved...,de,df,dw)
+        (NoTangent(),projectX(g.positions),NoTangent(),projectps(g.parameters),NoTangent(),
+         @not_implemented("cell derivatives are outside the fixed-cell pair AD contract"))
+    end
+    y,pair_pullback
+end
+
+function rrule(::typeof(ace_evaluate),X,model::ResolvedModel,ps,env::FullEnvironment,H;
+               state=NamedTuple(),energy_only=false)
+    y=ace_evaluate(X,model,ps,env,H;state,energy_only)
+    saved=deepcopy((X,model,ps,env,H))
+    px=ProjectTo(X); pp=ProjectTo(ps)
+    function ace_pullback(delta)
+        delta=unthunk(delta)
+        if delta isa AbstractZero
+            return (NoTangent(),ZeroTangent(),NoTangent(),ZeroTangent(),NoTangent(),NoTangent())
+        end
+        function cot(name,z)
+            hasproperty(delta,name) || return z
+            v=unthunk(getproperty(delta,name))
+            v isa AbstractZero ? z : v
+        end
+        de=cot(:energy,zero(y.energy)); df=cot(:forces,zeros(eltype(X),size(X))); dw=cot(:virial,zeros(eltype(X),3,3))
+        g=ace_vjp(saved...,de,df,dw)
+        (NoTangent(),px(g.positions),NoTangent(),pp(g.parameters),NoTangent(),
+         @not_implemented("cell derivatives are outside the fixed-cell ACE AD contract"))
+    end
+    y,ace_pullback
 end
 end
