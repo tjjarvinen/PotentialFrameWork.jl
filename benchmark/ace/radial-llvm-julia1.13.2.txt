@@ -1,0 +1,2017 @@
+; Function Signature: radial_block!(Array{Float64, 2}, Array{Float64, 2}, NTuple{4, Float64}, PotentialFrameWork.ACE.RadialChannel{Float64}, Int64, Base.Val{4}, NTuple{4, Bool})
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:66 within `radial_block!`
+define void @"julia_radial_block!_1010"(ptr noundef nonnull align 8 dereferenceable(32) %"R::Array", ptr noundef nonnull align 8 dereferenceable(32) %"dR::Array", ptr nocapture noundef nonnull readonly align 8 dereferenceable(32) %"rs::Tuple", ptr nocapture noundef nonnull readonly align 8 dereferenceable(96) %"ch::RadialChannel", ptr nocapture noundef nonnull readonly align 8 dereferenceable(32) %.roots.ch, i64 signext %"start::Int64", ptr nocapture noundef nonnull readonly align 1 dereferenceable(4) %"active::Tuple") local_unnamed_addr #0 {
+top:
+  %gcframe1 = alloca [18 x ptr], align 16
+  call void @llvm.memset.p0.i64(ptr align 16 %gcframe1, i8 0, i64 144, i1 true)
+  %0 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 112
+  %1 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 80
+  %2 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 48
+  %3 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 16
+  %"new::#radial_block!##6#radial_block!##7" = alloca [24 x i64], align 8
+  %sret_box = alloca [3 x i64], align 8
+  %sret_box258 = alloca [3 x i64], align 8
+  %sret_box259 = alloca [3 x i64], align 8
+  %sret_box260 = alloca [3 x i64], align 8
+  %"new::Tuple268" = alloca [3 x i64], align 8
+  %"new::Tuple291" = alloca [3 x i64], align 8
+  %"new::Tuple315" = alloca [3 x i64], align 8
+  %"new::Tuple339" = alloca [3 x i64], align 8
+  %"new::Tuple363" = alloca [3 x i64], align 8
+  %"new::Tuple386" = alloca [3 x i64], align 8
+  %"new::Tuple458" = alloca [3 x i64], align 8
+  %"new::Tuple553" = alloca [3 x i64], align 8
+  %"new::Tuple653" = alloca [2 x i64], align 8
+  %"new::Tuple680" = alloca [2 x i64], align 8
+  %"new::Tuple756" = alloca [1 x i64], align 8
+  %"new::Tuple758" = alloca [1 x i64], align 8
+  %"new::Tuple762" = alloca [1 x i64], align 8
+  %"new::Tuple764" = alloca [1 x i64], align 8
+  %"new::Tuple768" = alloca [1 x i64], align 8
+  %"new::Tuple770" = alloca [1 x i64], align 8
+  %"new::Tuple774" = alloca [1 x i64], align 8
+  %"new::Tuple776" = alloca [1 x i64], align 8
+  %thread_ptr = call ptr asm "movq %fs:0, $0", "=r"() #14
+  %tls_ppgcstack = getelementptr inbounds i8, ptr %thread_ptr, i64 -8
+  %tls_pgcstack = load ptr, ptr %tls_ppgcstack, align 8
+  store i64 64, ptr %gcframe1, align 8
+  %frame.prev = getelementptr inbounds nuw i8, ptr %gcframe1, i64 8
+  %task.gcstack = load ptr, ptr %tls_pgcstack, align 8
+  store ptr %task.gcstack, ptr %frame.prev, align 8
+  store ptr %gcframe1, ptr %tls_pgcstack, align 8
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:67 within `radial_block!`
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:67 within `#radial_block!##0`
+    %"rs::Tuple.unbox" = load double, ptr %"rs::Tuple", align 8
+    %4 = call double @j_transformed_1012(ptr nocapture nonnull readonly %"ch::RadialChannel", double %"rs::Tuple.unbox")
+; ││┌ @ tuple.jl:33 within `getindex`
+     %"rs::Tuple[2]_ptr" = getelementptr inbounds nuw i8, ptr %"rs::Tuple", i64 8
+; ││└
+    %"rs::Tuple[2]_ptr.unbox" = load double, ptr %"rs::Tuple[2]_ptr", align 8
+    %5 = call double @j_transformed_1012(ptr nocapture nonnull readonly %"ch::RadialChannel", double %"rs::Tuple[2]_ptr.unbox")
+; ││┌ @ tuple.jl:33 within `getindex`
+     %"rs::Tuple[3]_ptr" = getelementptr inbounds nuw i8, ptr %"rs::Tuple", i64 16
+; ││└
+    %"rs::Tuple[3]_ptr.unbox" = load double, ptr %"rs::Tuple[3]_ptr", align 8
+    %6 = call double @j_transformed_1012(ptr nocapture nonnull readonly %"ch::RadialChannel", double %"rs::Tuple[3]_ptr.unbox")
+; ││┌ @ tuple.jl:33 within `getindex`
+     %"rs::Tuple[4]_ptr" = getelementptr inbounds nuw i8, ptr %"rs::Tuple", i64 24
+; ││└
+    %"rs::Tuple[4]_ptr.unbox" = load double, ptr %"rs::Tuple[4]_ptr", align 8
+    %7 = call double @j_transformed_1012(ptr nocapture nonnull readonly %"ch::RadialChannel", double %"rs::Tuple[4]_ptr.unbox")
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:68 within `radial_block!`
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:68 within `#radial_block!##2`
+; ││┌ @ Base_compiler.jl:57 within `getproperty`
+     %8 = getelementptr inbounds nuw i8, ptr %.roots.ch, i64 16
+     %9 = load ptr, ptr %8, align 8
+; ││└
+; ││┌ @ sort.jl:310 within `searchsortedlast`
+; │││┌ @ sort.jl:310 within `#searchsortedlast#6`
+; ││││┌ @ sort.jl:308 within `searchsortedlast`
+; │││││┌ @ abstractarray.jl:429 within `lastindex`
+; ││││││┌ @ abstractarray.jl:394 within `eachindex`
+; │││││││┌ @ essentials.jl:11 within `length`
+; ││││││││┌ @ essentials.jl:10 within `size`
+           %.size_ptr = getelementptr inbounds nuw i8, ptr %9, i64 16
+           %.size_ptr.copyload = load i64, ptr %.size_ptr, align 8
+; │││││└└└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:208
+; │││││┌ @ int.jl:87 within `+`
+        %10 = add i64 %.size_ptr.copyload, 1
+; │││││└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %11 = icmp eq i64 %.size_ptr.copyload, 0
+; │││││└└
+       br i1 %11, label %L286, label %L28.lr.ph
+
+L28.lr.ph:                                        ; preds = %top
+       %memoryref_data = load ptr, ptr %9, align 8
+       %invariant.gep = getelementptr i8, ptr %memoryref_data, i64 -8
+       %12 = fcmp ord double %4, 0.000000e+00
+       %bitcast_coercion = bitcast double %4 to i64
+       %13 = xor i64 %bitcast_coercion, 9223372036854775807
+       %14 = icmp slt i64 %bitcast_coercion, 0
+       %15 = select i1 %14, i64 %13, i64 %bitcast_coercion
+       br i1 %12, label %L28.us, label %L28
+
+L28.us:                                           ; preds = %.thread, %L28.lr.ph
+       %value_phi1865.us = phi i64 [ %26, %.thread ], [ %10, %L28.lr.ph ]
+       %value_phi864.us = phi i64 [ %25, %.thread ], [ 0, %L28.lr.ph ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %16 = sub i64 %value_phi1865.us, %value_phi864.us
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %17 = lshr i64 %16, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %18 = add i64 %17, %value_phi864.us
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:211
+; │││││┌ @ essentials.jl:975 within `getindex`
+        %memoryref_offset.us = shl i64 %18, 3
+        %gep.us = getelementptr i8, ptr %invariant.gep, i64 %memoryref_offset.us
+        %19 = load double, ptr %gep.us, align 8
+; │││││└
+; │││││┌ @ ordering.jl:118 within `lt`
+; ││││││┌ @ float.jl:637 within `isless`
+; │││││││┌ @ float.jl:708 within `isnan`
+; ││││││││┌ @ operators.jl:320 within `!=`
+; │││││││││┌ @ float.jl:621 within `==`
+            %20 = fcmp ord double %19, 0.000000e+00
+; │││││││└└└
+         br i1 %20, label %L69.us, label %.thread
+
+L69.us:                                           ; preds = %L28.us
+; │││││││ @ float.jl:639 within `isless`
+; │││││││┌ @ float.jl:631 within `_fpint`
+; ││││││││┌ @ essentials.jl:788 within `reinterpret`
+           %bitcast_coercion8.us = bitcast double %19 to i64
+; ││││││││└
+; ││││││││ @ float.jl:632 within `_fpint`
+; ││││││││┌ @ int.jl:419 within `xor`
+           %21 = xor i64 %bitcast_coercion8.us, 9223372036854775807
+; ││││││││└
+; ││││││││┌ @ essentials.jl:854 within `ifelse`
+           %22 = icmp slt i64 %bitcast_coercion8.us, 0
+           %23 = select i1 %22, i64 %21, i64 %bitcast_coercion8.us
+; │││││││└└
+; │││││││┌ @ int.jl:83 within `<`
+          %24 = icmp slt i64 %15, %23
+          %cond.fr3636 = freeze i1 %24
+; │││││└└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:0
+       %spec.select = select i1 %cond.fr3636, i64 %value_phi864.us, i64 %18
+       %spec.select3775 = select i1 %cond.fr3636, i64 %18, i64 %value_phi1865.us
+       br label %.thread
+
+.thread:                                          ; preds = %L69.us, %L28.us
+       %25 = phi i64 [ %value_phi864.us, %L28.us ], [ %spec.select, %L69.us ]
+       %26 = phi i64 [ %18, %L28.us ], [ %spec.select3775, %L69.us ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ int.jl:86 within `-`
+        %27 = add i64 %26, -1
+; │││││└
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %28 = icmp eq i64 %25, %27
+; │││││└└
+       br i1 %28, label %L76, label %L28.us
+
+L28:                                              ; preds = %L28, %L28.lr.ph
+       %value_phi864 = phi i64 [ %31, %L28 ], [ 0, %L28.lr.ph ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %29 = sub i64 %10, %value_phi864
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %30 = lshr i64 %29, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %31 = add i64 %30, %value_phi864
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %32 = icmp eq i64 %31, %.size_ptr.copyload
+; │││││└└
+       br i1 %32, label %L76, label %L28
+
+L76:                                              ; preds = %L28, %.thread
+       %value_phi.lcssa = phi i64 [ %25, %.thread ], [ %.size_ptr.copyload, %L28 ]
+; ││└└└
+; ││┌ @ int.jl:86 within `-`
+     %33 = add i64 %.size_ptr.copyload, -1
+; ││└
+; ││┌ @ intfuncs.jl:1405 within `clamp`
+; │││┌ @ operators.jl:425 within `>`
+; ││││┌ @ int.jl:83 within `<`
+       %.not = icmp slt i64 %33, %value_phi.lcssa
+; │││└└
+     %value_phi. = call i64 @llvm.smax.i64(i64 %value_phi.lcssa, i64 1)
+     %value_phi13 = select i1 %.not, i64 %33, i64 %value_phi.
+     %34 = fcmp ord double %5, 0.000000e+00
+     %bitcast_coercion34 = bitcast double %5 to i64
+     %35 = xor i64 %bitcast_coercion34, 9223372036854775807
+     %36 = icmp slt i64 %bitcast_coercion34, 0
+     %37 = select i1 %36, i64 %35, i64 %bitcast_coercion34
+     br i1 %34, label %L98.us, label %L98
+
+L98.us:                                           ; preds = %.thread3655, %L76
+     %value_phi17867.us = phi i64 [ %48, %.thread3655 ], [ %10, %L76 ]
+     %value_phi16866.us = phi i64 [ %47, %.thread3655 ], [ 0, %L76 ]
+; ││└
+; ││┌ @ sort.jl:310 within `searchsortedlast`
+; │││┌ @ sort.jl:310 within `#searchsortedlast#6`
+; ││││┌ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %38 = sub i64 %value_phi17867.us, %value_phi16866.us
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %39 = lshr i64 %38, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %40 = add i64 %39, %value_phi16866.us
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:211
+; │││││┌ @ essentials.jl:975 within `getindex`
+        %memoryref_offset24.us = shl i64 %40, 3
+        %gep.us870 = getelementptr i8, ptr %invariant.gep, i64 %memoryref_offset24.us
+        %41 = load double, ptr %gep.us870, align 8
+; │││││└
+; │││││┌ @ ordering.jl:118 within `lt`
+; ││││││┌ @ float.jl:637 within `isless`
+; │││││││┌ @ float.jl:708 within `isnan`
+; ││││││││┌ @ operators.jl:320 within `!=`
+; │││││││││┌ @ float.jl:621 within `==`
+            %42 = fcmp ord double %41, 0.000000e+00
+; │││││││└└└
+         br i1 %42, label %L139.us, label %.thread3655
+
+L139.us:                                          ; preds = %L98.us
+; │││││││ @ float.jl:639 within `isless`
+; │││││││┌ @ float.jl:631 within `_fpint`
+; ││││││││┌ @ essentials.jl:788 within `reinterpret`
+           %bitcast_coercion36.us = bitcast double %41 to i64
+; ││││││││└
+; ││││││││ @ float.jl:632 within `_fpint`
+; ││││││││┌ @ int.jl:419 within `xor`
+           %43 = xor i64 %bitcast_coercion36.us, 9223372036854775807
+; ││││││││└
+; ││││││││┌ @ essentials.jl:854 within `ifelse`
+           %44 = icmp slt i64 %bitcast_coercion36.us, 0
+           %45 = select i1 %44, i64 %43, i64 %bitcast_coercion36.us
+; │││││││└└
+; │││││││┌ @ int.jl:83 within `<`
+          %46 = icmp slt i64 %37, %45
+          %cond.fr3650 = freeze i1 %46
+; │││││└└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:0
+       %spec.select3776 = select i1 %cond.fr3650, i64 %value_phi16866.us, i64 %40
+       %spec.select3777 = select i1 %cond.fr3650, i64 %40, i64 %value_phi17867.us
+       br label %.thread3655
+
+.thread3655:                                      ; preds = %L139.us, %L98.us
+       %47 = phi i64 [ %value_phi16866.us, %L98.us ], [ %spec.select3776, %L139.us ]
+       %48 = phi i64 [ %40, %L98.us ], [ %spec.select3777, %L139.us ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ int.jl:86 within `-`
+        %49 = add i64 %48, -1
+; │││││└
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %50 = icmp eq i64 %47, %49
+; │││││└└
+       br i1 %50, label %L146, label %L98.us
+
+L98:                                              ; preds = %L98, %L76
+       %value_phi16866 = phi i64 [ %53, %L98 ], [ 0, %L76 ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %51 = sub i64 %10, %value_phi16866
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %52 = lshr i64 %51, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %53 = add i64 %52, %value_phi16866
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %54 = icmp eq i64 %53, %.size_ptr.copyload
+; │││││└└
+       br i1 %54, label %L146, label %L98
+
+L146:                                             ; preds = %L98, %.thread3655
+       %value_phi16.lcssa = phi i64 [ %47, %.thread3655 ], [ %.size_ptr.copyload, %L98 ]
+; ││└└└
+; ││┌ @ intfuncs.jl:1405 within `clamp`
+; │││┌ @ operators.jl:425 within `>`
+; ││││┌ @ int.jl:83 within `<`
+       %.not804 = icmp slt i64 %33, %value_phi16.lcssa
+; │││└└
+     %value_phi16. = call i64 @llvm.smax.i64(i64 %value_phi16.lcssa, i64 1)
+     %value_phi42 = select i1 %.not804, i64 %33, i64 %value_phi16.
+     %55 = fcmp ord double %6, 0.000000e+00
+     %bitcast_coercion63 = bitcast double %6 to i64
+     %56 = xor i64 %bitcast_coercion63, 9223372036854775807
+     %57 = icmp slt i64 %bitcast_coercion63, 0
+     %58 = select i1 %57, i64 %56, i64 %bitcast_coercion63
+     br i1 %55, label %L168.us, label %L168
+
+L168.us:                                          ; preds = %.thread3672, %L146
+     %value_phi46873.us = phi i64 [ %69, %.thread3672 ], [ %10, %L146 ]
+     %value_phi45872.us = phi i64 [ %68, %.thread3672 ], [ 0, %L146 ]
+; ││└
+; ││┌ @ sort.jl:310 within `searchsortedlast`
+; │││┌ @ sort.jl:310 within `#searchsortedlast#6`
+; ││││┌ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %59 = sub i64 %value_phi46873.us, %value_phi45872.us
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %60 = lshr i64 %59, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %61 = add i64 %60, %value_phi45872.us
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:211
+; │││││┌ @ essentials.jl:975 within `getindex`
+        %memoryref_offset53.us = shl i64 %61, 3
+        %gep.us876 = getelementptr i8, ptr %invariant.gep, i64 %memoryref_offset53.us
+        %62 = load double, ptr %gep.us876, align 8
+; │││││└
+; │││││┌ @ ordering.jl:118 within `lt`
+; ││││││┌ @ float.jl:637 within `isless`
+; │││││││┌ @ float.jl:708 within `isnan`
+; ││││││││┌ @ operators.jl:320 within `!=`
+; │││││││││┌ @ float.jl:621 within `==`
+            %63 = fcmp ord double %62, 0.000000e+00
+; │││││││└└└
+         br i1 %63, label %L209.us, label %.thread3672
+
+L209.us:                                          ; preds = %L168.us
+; │││││││ @ float.jl:639 within `isless`
+; │││││││┌ @ float.jl:631 within `_fpint`
+; ││││││││┌ @ essentials.jl:788 within `reinterpret`
+           %bitcast_coercion65.us = bitcast double %62 to i64
+; ││││││││└
+; ││││││││ @ float.jl:632 within `_fpint`
+; ││││││││┌ @ int.jl:419 within `xor`
+           %64 = xor i64 %bitcast_coercion65.us, 9223372036854775807
+; ││││││││└
+; ││││││││┌ @ essentials.jl:854 within `ifelse`
+           %65 = icmp slt i64 %bitcast_coercion65.us, 0
+           %66 = select i1 %65, i64 %64, i64 %bitcast_coercion65.us
+; │││││││└└
+; │││││││┌ @ int.jl:83 within `<`
+          %67 = icmp slt i64 %58, %66
+          %cond.fr3667 = freeze i1 %67
+; │││││└└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:0
+       %spec.select3778 = select i1 %cond.fr3667, i64 %value_phi45872.us, i64 %61
+       %spec.select3779 = select i1 %cond.fr3667, i64 %61, i64 %value_phi46873.us
+       br label %.thread3672
+
+.thread3672:                                      ; preds = %L209.us, %L168.us
+       %68 = phi i64 [ %value_phi45872.us, %L168.us ], [ %spec.select3778, %L209.us ]
+       %69 = phi i64 [ %61, %L168.us ], [ %spec.select3779, %L209.us ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ int.jl:86 within `-`
+        %70 = add i64 %69, -1
+; │││││└
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %71 = icmp eq i64 %68, %70
+; │││││└└
+       br i1 %71, label %L216, label %L168.us
+
+L168:                                             ; preds = %L168, %L146
+       %value_phi45872 = phi i64 [ %74, %L168 ], [ 0, %L146 ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %72 = sub i64 %10, %value_phi45872
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %73 = lshr i64 %72, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %74 = add i64 %73, %value_phi45872
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %75 = icmp eq i64 %74, %.size_ptr.copyload
+; │││││└└
+       br i1 %75, label %L216, label %L168
+
+L216:                                             ; preds = %L168, %.thread3672
+       %value_phi45.lcssa = phi i64 [ %68, %.thread3672 ], [ %.size_ptr.copyload, %L168 ]
+; ││└└└
+; ││┌ @ intfuncs.jl:1405 within `clamp`
+; │││┌ @ operators.jl:425 within `>`
+; ││││┌ @ int.jl:83 within `<`
+       %.not805 = icmp slt i64 %33, %value_phi45.lcssa
+; │││└└
+     %value_phi45. = call i64 @llvm.smax.i64(i64 %value_phi45.lcssa, i64 1)
+     %value_phi71 = select i1 %.not805, i64 %33, i64 %value_phi45.
+     %76 = fcmp ord double %7, 0.000000e+00
+     %bitcast_coercion92 = bitcast double %7 to i64
+     %77 = xor i64 %bitcast_coercion92, 9223372036854775807
+     %78 = icmp slt i64 %bitcast_coercion92, 0
+     %79 = select i1 %78, i64 %77, i64 %bitcast_coercion92
+     br i1 %76, label %L238.us, label %L238
+
+L238.us:                                          ; preds = %.thread3692, %L216
+     %value_phi75879.us = phi i64 [ %90, %.thread3692 ], [ %10, %L216 ]
+     %value_phi74878.us = phi i64 [ %89, %.thread3692 ], [ 0, %L216 ]
+; ││└
+; ││┌ @ sort.jl:310 within `searchsortedlast`
+; │││┌ @ sort.jl:310 within `#searchsortedlast#6`
+; ││││┌ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %80 = sub i64 %value_phi75879.us, %value_phi74878.us
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %81 = lshr i64 %80, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %82 = add i64 %81, %value_phi74878.us
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:211
+; │││││┌ @ essentials.jl:975 within `getindex`
+        %memoryref_offset82.us = shl i64 %82, 3
+        %gep.us882 = getelementptr i8, ptr %invariant.gep, i64 %memoryref_offset82.us
+        %83 = load double, ptr %gep.us882, align 8
+; │││││└
+; │││││┌ @ ordering.jl:118 within `lt`
+; ││││││┌ @ float.jl:637 within `isless`
+; │││││││┌ @ float.jl:708 within `isnan`
+; ││││││││┌ @ operators.jl:320 within `!=`
+; │││││││││┌ @ float.jl:621 within `==`
+            %84 = fcmp ord double %83, 0.000000e+00
+; │││││││└└└
+         br i1 %84, label %L279.us, label %.thread3692
+
+L279.us:                                          ; preds = %L238.us
+; │││││││ @ float.jl:639 within `isless`
+; │││││││┌ @ float.jl:631 within `_fpint`
+; ││││││││┌ @ essentials.jl:788 within `reinterpret`
+           %bitcast_coercion94.us = bitcast double %83 to i64
+; ││││││││└
+; ││││││││ @ float.jl:632 within `_fpint`
+; ││││││││┌ @ int.jl:419 within `xor`
+           %85 = xor i64 %bitcast_coercion94.us, 9223372036854775807
+; ││││││││└
+; ││││││││┌ @ essentials.jl:854 within `ifelse`
+           %86 = icmp slt i64 %bitcast_coercion94.us, 0
+           %87 = select i1 %86, i64 %85, i64 %bitcast_coercion94.us
+; │││││││└└
+; │││││││┌ @ int.jl:83 within `<`
+          %88 = icmp slt i64 %79, %87
+          %cond.fr3687 = freeze i1 %88
+; │││││└└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:0
+       %spec.select3780 = select i1 %cond.fr3687, i64 %value_phi74878.us, i64 %82
+       %spec.select3781 = select i1 %cond.fr3687, i64 %82, i64 %value_phi75879.us
+       br label %.thread3692
+
+.thread3692:                                      ; preds = %L279.us, %L238.us
+       %89 = phi i64 [ %value_phi74878.us, %L238.us ], [ %spec.select3780, %L279.us ]
+       %90 = phi i64 [ %82, %L238.us ], [ %spec.select3781, %L279.us ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ int.jl:86 within `-`
+        %91 = add i64 %90, -1
+; │││││└
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %92 = icmp eq i64 %89, %91
+; │││││└└
+       br i1 %92, label %L286, label %L238.us
+
+L238:                                             ; preds = %L238, %L216
+       %value_phi74878 = phi i64 [ %95, %L238 ], [ 0, %L216 ]
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:210
+; │││││┌ @ array.jl:2262 within `midpoint`
+; ││││││┌ @ int.jl:86 within `-`
+         %93 = sub i64 %10, %value_phi74878
+; ││││││└
+; ││││││┌ @ int.jl:576 within `>>>`
+         %94 = lshr i64 %93, 1
+; ││││││└
+; ││││││┌ @ int.jl:87 within `+`
+         %95 = add i64 %94, %value_phi74878
+; │││││└└
+; │││││ @ sort.jl:308 within `searchsortedlast` @ sort.jl:209
+; │││││┌ @ operators.jl:320 within `!=`
+; ││││││┌ @ promotion.jl:641 within `==`
+         %96 = icmp eq i64 %95, %.size_ptr.copyload
+; │││││└└
+       br i1 %96, label %L286, label %L238
+
+L286:                                             ; preds = %L238, %.thread3692, %top
+       %value_phi713685 = phi i64 [ -1, %top ], [ %value_phi71, %.thread3692 ], [ %value_phi71, %L238 ]
+       %value_phi13364836643684 = phi i64 [ -1, %top ], [ %value_phi13, %.thread3692 ], [ %value_phi13, %L238 ]
+       %97 = phi i64 [ -1, %top ], [ %33, %.thread3692 ], [ %33, %L238 ]
+       %value_phi4236653683 = phi i64 [ -1, %top ], [ %value_phi42, %.thread3692 ], [ %value_phi42, %L238 ]
+       %value_phi74.lcssa = phi i64 [ 0, %top ], [ %89, %.thread3692 ], [ %.size_ptr.copyload, %L238 ]
+; ││└└└
+; ││┌ @ intfuncs.jl:1405 within `clamp`
+; │││┌ @ operators.jl:425 within `>`
+; ││││┌ @ int.jl:83 within `<`
+       %.not806 = icmp slt i64 %97, %value_phi74.lcssa
+; │││└└
+     %value_phi74. = call i64 @llvm.smax.i64(i64 %value_phi74.lcssa, i64 1)
+     %value_phi100 = select i1 %.not806, i64 %97, i64 %value_phi74.
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:69 within `radial_block!`
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:69 within `#radial_block!##4`
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %98 = add i64 %value_phi13364836643684, -1
+      %.not807 = icmp ult i64 %98, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not807, label %L311, label %L485
+
+L311:                                             ; preds = %L286
+; │││└
+; │││ @ essentials.jl:975 within `getindex`
+     %memoryref_data106 = load ptr, ptr %9, align 8
+; │││ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %.not808 = icmp ult i64 %value_phi13364836643684, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not808, label %L341, label %L488
+
+L341:                                             ; preds = %L311
+; │││└
+; │││ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset109 = shl i64 %98, 3
+     %memoryref_data114 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset109
+     %99 = load double, ptr %memoryref_data114, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %100 = fsub double %4, %99
+; ││└
+; ││┌ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset122 = shl i64 %value_phi13364836643684, 3
+     %memoryref_data127 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset122
+     %101 = load double, ptr %memoryref_data127, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %102 = fsub double %101, %99
+; ││└
+; ││┌ @ float.jl:495 within `/`
+     %103 = fdiv double %100, %102
+; ││└
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %104 = add i64 %value_phi4236653683, -1
+      %.not809 = icmp ult i64 %104, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not809, label %L357, label %L494
+
+L357:                                             ; preds = %L341
+; ││││ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %.not810 = icmp ult i64 %value_phi4236653683, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not810, label %L387, label %L497
+
+L387:                                             ; preds = %L357
+; │││└
+; │││ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset148 = shl i64 %104, 3
+     %memoryref_data153 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset148
+     %105 = load double, ptr %memoryref_data153, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %106 = fsub double %5, %105
+; ││└
+; ││┌ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset161 = shl i64 %value_phi4236653683, 3
+     %memoryref_data166 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset161
+     %107 = load double, ptr %memoryref_data166, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %108 = fsub double %107, %105
+; ││└
+; ││┌ @ float.jl:495 within `/`
+     %109 = fdiv double %106, %108
+; ││└
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %110 = add i64 %value_phi713685, -1
+      %.not811 = icmp ult i64 %110, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not811, label %L403, label %L503
+
+L403:                                             ; preds = %L387
+; ││││ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %.not812 = icmp ult i64 %value_phi713685, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not812, label %L433, label %L506
+
+L433:                                             ; preds = %L403
+; │││└
+; │││ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset187 = shl i64 %110, 3
+     %memoryref_data192 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset187
+     %111 = load double, ptr %memoryref_data192, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %112 = fsub double %6, %111
+; ││└
+; ││┌ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset200 = shl i64 %value_phi713685, 3
+     %memoryref_data205 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset200
+     %113 = load double, ptr %memoryref_data205, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %114 = fsub double %113, %111
+; ││└
+; ││┌ @ float.jl:495 within `/`
+     %115 = fdiv double %112, %114
+; ││└
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %116 = add i64 %value_phi100, -1
+      %.not813 = icmp ult i64 %116, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not813, label %L449, label %L512
+
+L449:                                             ; preds = %L433
+; ││││ @ essentials.jl:389 within `checkbounds` @ essentials.jl:385
+      %.not814 = icmp ult i64 %value_phi100, %.size_ptr.copyload
+; ││││ @ essentials.jl:389 within `checkbounds`
+      br i1 %.not814, label %L479, label %L515
+
+L479:                                             ; preds = %L449
+; │││└
+; │││ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset226 = shl i64 %116, 3
+     %memoryref_data231 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset226
+     %117 = load double, ptr %memoryref_data231, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %118 = fsub double %7, %117
+; ││└
+; ││┌ @ essentials.jl:975 within `getindex`
+     %memoryref_byteoffset239 = shl i64 %value_phi100, 3
+     %memoryref_data244 = getelementptr inbounds i8, ptr %memoryref_data106, i64 %memoryref_byteoffset239
+     %119 = load double, ptr %memoryref_data244, align 8
+; ││└
+; ││┌ @ float.jl:493 within `-`
+     %120 = fsub double %119, %117
+; ││└
+; ││┌ @ float.jl:495 within `/`
+     %121 = fdiv double %118, %120
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:72 within `radial_block!`
+  call void @llvm.memcpy.p0.p0.i64(ptr noundef nonnull align 8 dereferenceable(32) %"new::#radial_block!##6#radial_block!##7", ptr noundef nonnull align 8 dereferenceable(32) %"rs::Tuple", i64 32, i1 false)
+  %122 = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 32
+  call void @llvm.memcpy.p0.p0.i64(ptr noundef nonnull align 8 dereferenceable(64) %122, ptr noundef nonnull align 8 dereferenceable(64) %"ch::RadialChannel", i64 64, i1 false)
+  %123 = load ptr, ptr %.roots.ch, align 8
+  %124 = getelementptr inbounds nuw i8, ptr %.roots.ch, i64 8
+  %125 = load ptr, ptr %124, align 8
+  %126 = getelementptr inbounds nuw i8, ptr %.roots.ch, i64 24
+  %127 = load ptr, ptr %126, align 8
+  %128 = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 128
+  store i64 %value_phi13364836643684, ptr %128, align 8
+  %"new::Tuple101.sroa.2.0..sroa_idx" = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 136
+  store i64 %value_phi4236653683, ptr %"new::Tuple101.sroa.2.0..sroa_idx", align 8
+  %"new::Tuple101.sroa.3.0..sroa_idx" = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 144
+  store i64 %value_phi713685, ptr %"new::Tuple101.sroa.3.0..sroa_idx", align 8
+  %"new::Tuple101.sroa.4.0..sroa_idx" = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 152
+  store i64 %value_phi100, ptr %"new::Tuple101.sroa.4.0..sroa_idx", align 8
+  %129 = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 160
+  store double %4, ptr %129, align 8
+  %"new::Tuple.sroa.2.0..sroa_idx" = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 168
+  store double %5, ptr %"new::Tuple.sroa.2.0..sroa_idx", align 8
+  %"new::Tuple.sroa.3.0..sroa_idx" = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 176
+  store double %6, ptr %"new::Tuple.sroa.3.0..sroa_idx", align 8
+  %"new::Tuple.sroa.4.0..sroa_idx" = getelementptr inbounds nuw i8, ptr %"new::#radial_block!##6#radial_block!##7", i64 184
+  store double %7, ptr %"new::Tuple.sroa.4.0..sroa_idx", align 8
+; ┌ @ ntuple.jl:19 within `ntuple`
+   store ptr %123, ptr %1, align 8
+   %130 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 88
+   store ptr %125, ptr %130, align 8
+   %131 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 96
+   store ptr %9, ptr %131, align 8
+   %132 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 104
+   store ptr %127, ptr %132, align 8
+   call void @"j_#radial_block!##6_1014"(ptr noalias nocapture noundef nonnull sret([3 x double]) align 8 %sret_box, ptr nocapture nonnull readonly %"new::#radial_block!##6#radial_block!##7", ptr nocapture nonnull readonly %1, i64 signext 1)
+   store ptr %123, ptr %3, align 8
+   %133 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 24
+   store ptr %125, ptr %133, align 8
+   %134 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 32
+   store ptr %9, ptr %134, align 8
+   %135 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 40
+   store ptr %127, ptr %135, align 8
+   call void @"j_#radial_block!##6_1014"(ptr noalias nocapture noundef nonnull sret([3 x double]) align 8 %sret_box258, ptr nocapture nonnull readonly %"new::#radial_block!##6#radial_block!##7", ptr nocapture nonnull readonly %3, i64 signext 2)
+   store ptr %123, ptr %0, align 8
+   %136 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 120
+   store ptr %125, ptr %136, align 8
+   %137 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 128
+   store ptr %9, ptr %137, align 8
+   %138 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 136
+   store ptr %127, ptr %138, align 8
+   call void @"j_#radial_block!##6_1014"(ptr noalias nocapture noundef nonnull sret([3 x double]) align 8 %sret_box259, ptr nocapture nonnull readonly %"new::#radial_block!##6#radial_block!##7", ptr nocapture nonnull readonly %0, i64 signext 3)
+   store ptr %123, ptr %2, align 8
+   %139 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 56
+   store ptr %125, ptr %139, align 8
+   %140 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 64
+   store ptr %9, ptr %140, align 8
+   %141 = getelementptr inbounds nuw i8, ptr %gcframe1, i64 72
+   store ptr %127, ptr %141, align 8
+   call void @"j_#radial_block!##6_1014"(ptr noalias nocapture noundef nonnull sret([3 x double]) align 8 %sret_box260, ptr nocapture nonnull readonly %"new::#radial_block!##6#radial_block!##7", ptr nocapture nonnull readonly %2, i64 signext 4)
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:91 within `radial_block!`
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │┌ @ broadcast.jl:899 within `materialize`
+; ││┌ @ broadcast.jl:1131 within `copy`
+; │││┌ @ ntuple.jl:65 within `ntuple`
+; ││││┌ @ ntuple.jl:68 within `macro expansion`
+       %142 = insertelement <4 x double> poison, double %103, i64 0
+       %143 = insertelement <4 x double> %142, double %109, i64 1
+       %144 = insertelement <4 x double> %143, double %115, i64 2
+       %145 = insertelement <4 x double> %144, double %121, i64 3
+; │││││┌ @ broadcast.jl:1131 within `#copy##0`
+; ││││││┌ @ broadcast.jl:677 within `_broadcast_getindex`
+; │││││││┌ @ broadcast.jl:704 within `_broadcast_getindex_evalf`
+; ││││││││┌ @ boot.jl:517 within `VecElement` @ boot.jl:515
+           %146 = load <2 x double>, ptr %sret_box, align 8
+           %147 = shufflevector <2 x double> %146, <2 x double> poison, <4 x i32> <i32 0, i32 poison, i32 poison, i32 poison>
+           %sret_box258.unbox = load double, ptr %sret_box258, align 8
+           %sret_box259.unbox = load double, ptr %sret_box259, align 8
+           %sret_box260.unbox = load double, ptr %sret_box260, align 8
+; │││││└└└└
+       %148 = insertelement <4 x double> %147, double %sret_box258.unbox, i64 1
+       %149 = insertelement <4 x double> %148, double %sret_box259.unbox, i64 2
+       %150 = insertelement <4 x double> %149, double %sret_box260.unbox, i64 3
+; └└└└└
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:91 within `#radial_block!##10`
+; ││┌ @ tuple.jl:33 within `getindex`
+     %"sret_box[2]_ptr" = getelementptr inbounds nuw i8, ptr %sret_box, i64 8
+     %"sret_box258[2]_ptr" = getelementptr inbounds nuw i8, ptr %sret_box258, i64 8
+     %"sret_box259[2]_ptr" = getelementptr inbounds nuw i8, ptr %sret_box259, i64 8
+     %"sret_box260[2]_ptr" = getelementptr inbounds nuw i8, ptr %sret_box260, i64 8
+; └└└
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │┌ @ broadcast.jl:899 within `materialize`
+; ││┌ @ broadcast.jl:1131 within `copy`
+; │││┌ @ ntuple.jl:65 within `ntuple`
+; ││││┌ @ ntuple.jl:68 within `macro expansion`
+; │││││┌ @ broadcast.jl:1131 within `#copy##0`
+; ││││││┌ @ broadcast.jl:677 within `_broadcast_getindex`
+; │││││││┌ @ broadcast.jl:704 within `_broadcast_getindex_evalf`
+; ││││││││┌ @ boot.jl:517 within `VecElement` @ boot.jl:515
+           %151 = load <2 x double>, ptr %"sret_box[2]_ptr", align 8
+           %152 = shufflevector <2 x double> %151, <2 x double> poison, <4 x i32> <i32 0, i32 poison, i32 poison, i32 poison>
+           %"sret_box258[2]_ptr.unbox" = load double, ptr %"sret_box258[2]_ptr", align 8
+           %"sret_box259[2]_ptr.unbox" = load double, ptr %"sret_box259[2]_ptr", align 8
+           %"sret_box260[2]_ptr.unbox" = load double, ptr %"sret_box260[2]_ptr", align 8
+; │││││└└└└
+       %153 = insertelement <4 x double> %152, double %"sret_box258[2]_ptr.unbox", i64 1
+       %154 = insertelement <4 x double> %153, double %"sret_box259[2]_ptr.unbox", i64 2
+       %155 = insertelement <4 x double> %154, double %"sret_box260[2]_ptr.unbox", i64 3
+; └└└└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:92 within `radial_block!`
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:92 within `#radial_block!##12`
+; ││┌ @ tuple.jl:33 within `getindex`
+     %"sret_box258[3]_ptr" = getelementptr inbounds nuw i8, ptr %sret_box258, i64 16
+     %"sret_box259[3]_ptr" = getelementptr inbounds nuw i8, ptr %sret_box259, i64 16
+     %"sret_box260[3]_ptr" = getelementptr inbounds nuw i8, ptr %sret_box260, i64 16
+; └└└
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │┌ @ broadcast.jl:899 within `materialize`
+; ││┌ @ broadcast.jl:1131 within `copy`
+; │││┌ @ ntuple.jl:65 within `ntuple`
+; ││││┌ @ ntuple.jl:68 within `macro expansion`
+; │││││┌ @ broadcast.jl:1131 within `#copy##0`
+; ││││││┌ @ broadcast.jl:677 within `_broadcast_getindex`
+; │││││││┌ @ broadcast.jl:704 within `_broadcast_getindex_evalf`
+; ││││││││┌ @ boot.jl:517 within `VecElement` @ boot.jl:515
+           %156 = extractelement <2 x double> %151, i64 1
+           %"sret_box258[3]_ptr.unbox" = load double, ptr %"sret_box258[3]_ptr", align 8
+           %"sret_box259[3]_ptr.unbox" = load double, ptr %"sret_box259[3]_ptr", align 8
+           %"sret_box260[3]_ptr.unbox" = load double, ptr %"sret_box260[3]_ptr", align 8
+; │││││└└└└
+       %157 = insertelement <4 x double> poison, double %156, i64 0
+       %158 = insertelement <4 x double> %157, double %"sret_box258[3]_ptr.unbox", i64 1
+       %159 = insertelement <4 x double> %158, double %"sret_box259[3]_ptr.unbox", i64 2
+       %160 = insertelement <4 x double> %159, double %"sret_box260[3]_ptr.unbox", i64 3
+; └└└└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ abstractarray.jl:44 within `size` @ essentials.jl:10
+   %"R::Array.size_ptr" = getelementptr inbounds nuw i8, ptr %"R::Array", i64 16
+   %161 = getelementptr inbounds nuw i8, ptr %"R::Array", i64 24
+   %"R::Array.size_ptr.copyload261" = load i64, ptr %161, align 8
+; └
+; ┌ @ range.jl:5 within `Colon`
+; │┌ @ range.jl:417 within `UnitRange`
+; ││┌ @ range.jl:428 within `unitrange_last`
+     %value_phi262 = call i64 @llvm.smax.i64(i64 %"R::Array.size_ptr.copyload261", i64 0)
+; └└└
+; ┌ @ range.jl:924 within `iterate`
+; │┌ @ range.jl:700 within `isempty`
+; ││┌ @ operators.jl:425 within `>`
+; │││┌ @ int.jl:83 within `<`
+      %162 = icmp slt i64 %"R::Array.size_ptr.copyload261", 1
+; └└└└
+  br i1 %162, label %L2030, label %L621.preheader
+
+L621.preheader:                                   ; preds = %L479
+  %.size_ptr269 = getelementptr inbounds nuw i8, ptr %127, i64 16
+  %.size270.sroa.0.0.copyload = load i64, ptr %.size_ptr269, align 8
+  %.size270.sroa.2.0..size_ptr269.sroa_idx = getelementptr inbounds nuw i8, ptr %127, i64 24
+  %.size270.sroa.2.0.copyload = load i64, ptr %.size270.sroa.2.0..size_ptr269.sroa_idx, align 8
+  %.not815 = icmp eq i64 %.size270.sroa.0.0.copyload, 0
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `radial_block!`
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##14`
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:962 within `getindex`
+; │││││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; ││││││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+         br i1 %.not815, label %L720, label %L639.lr.ph
+
+L639.lr.ph:                                       ; preds = %L621.preheader
+         %.size270.sroa.3.0..size_ptr269.sroa_idx = getelementptr inbounds nuw i8, ptr %127, i64 32
+         %.size270.sroa.3.0.copyload = load i64, ptr %.size270.sroa.3.0..size_ptr269.sroa_idx, align 8
+         %.not817 = icmp uge i64 %98, %.size270.sroa.3.0.copyload
+         %163 = mul i64 %.size270.sroa.2.0.copyload, %.size270.sroa.0.0.copyload
+         %164 = mul i64 %163, %98
+         %165 = mul i64 %163, %104
+         %.not821.not = icmp ult i64 %110, %.size270.sroa.3.0.copyload
+         %166 = mul i64 %163, %110
+         %.not823.not = icmp ult i64 %116, %.size270.sroa.3.0.copyload
+         %167 = mul i64 %163, %116
+         %168 = icmp eq i64 %.size270.sroa.0.0.copyload, 1
+         %.not825.not = icmp ult i64 %98, %.size270.sroa.3.0.copyload
+         %.not827.not = icmp ult i64 %104, %.size270.sroa.3.0.copyload
+         %169 = icmp ult i64 %.size270.sroa.0.0.copyload, 3
+         %170 = icmp ult i64 %.size270.sroa.0.0.copyload, 4
+         %invariant.op = add i64 %"start::Int64", -1
+         %"R::Array.size_ptr654.copyload" = load i64, ptr %"R::Array.size_ptr", align 8
+         %invariant.op884 = add i64 %"start::Int64", -2
+         %"dR::Array.size_ptr" = getelementptr inbounds nuw i8, ptr %"dR::Array", i64 16
+         %171 = getelementptr inbounds nuw i8, ptr %"dR::Array", i64 24
+         %.not817.fr = freeze i1 %.not817
+         %.not8161985.not = icmp eq i64 %.size270.sroa.2.0.copyload, 0
+         %or.cond = select i1 %.not817.fr, i1 true, i1 %.not8161985.not
+         br i1 %or.cond, label %L720, label %L657.lr.ph
+
+L657.lr.ph:                                       ; preds = %L639.lr.ph
+         %.not819 = icmp uge i64 %104, %.size270.sroa.3.0.copyload
+         %memoryref_data282 = load ptr, ptr %127, align 8
+; │││││││ @ abstractarray.jl:728 within `checkbounds_indices` @ abstractarray.jl:728
+         %invariant.gep2069 = getelementptr i8, ptr %memoryref_data282, i64 -8
+         %.not819.fr = freeze i1 %.not819
+         br i1 %.not819.fr, label %L657.us2093, label %L657.lr.ph.split
+
+L657.us2093:                                      ; preds = %L657.lr.ph
+         %172 = getelementptr inbounds nuw i8, ptr %"new::Tuple291", i64 16
+         %173 = getelementptr inbounds nuw i8, ptr %"new::Tuple291", i64 8
+; │││││└└
+       store i64 1, ptr %173, align 1
+       store i64 %value_phi4236653683, ptr %172, align 1
+       store i64 1, ptr %"new::Tuple291", align 1
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr nonnull %127, ptr nocapture nonnull readonly %"new::Tuple291") #15
+        unreachable
+
+L657.lr.ph.split:                                 ; preds = %L657.lr.ph
+; │││││└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_byteoffset2852142 = shl i64 %164, 3
+       %memoryref_data2902143 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset2852142
+       %174 = load double, ptr %memoryref_data2902143, align 8
+       br i1 %.not821.not, label %L657.lr.ph.split.split.split, label %L732.us2175
+
+L732.us2175:                                      ; preds = %L657.lr.ph.split
+       %175 = getelementptr inbounds nuw i8, ptr %"new::Tuple315", i64 16
+       %176 = getelementptr inbounds nuw i8, ptr %"new::Tuple315", i64 8
+; │││││ @ array.jl:962 within `getindex`
+       store i64 1, ptr %176, align 1
+       store i64 %value_phi713685, ptr %175, align 1
+       store i64 1, ptr %"new::Tuple315", align 1
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr nonnull %127, ptr nocapture nonnull readonly %"new::Tuple315") #15
+        unreachable
+
+L657.lr.ph.split.split.split:                     ; preds = %L657.lr.ph.split
+; │││││└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_byteoffset3092222 = shl i64 %165, 3
+       %memoryref_data3142223 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset3092222
+       %177 = load double, ptr %memoryref_data3142223, align 8
+       %memoryref_byteoffset3332224 = shl i64 %166, 3
+       %memoryref_data3382225 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset3332224
+       %178 = load double, ptr %memoryref_data3382225, align 8
+; │││││ @ array.jl:962 within `getindex`
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        br i1 %.not823.not, label %L885.lr.ph, label %L950
+
+L885.lr.ph:                                       ; preds = %L657.lr.ph.split.split.split
+        br i1 %168, label %L1025, label %L885.lr.ph.split
+
+L885.lr.ph.split:                                 ; preds = %L885.lr.ph
+; │││││└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_byteoffset3572339 = shl i64 %167, 3
+       %memoryref_data3622340 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset3572339
+       %179 = load double, ptr %memoryref_data3622340, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %180 = insertelement <4 x double> poison, double %174, i64 0
+         %181 = insertelement <4 x double> %180, double %177, i64 1
+         %182 = insertelement <4 x double> %181, double %178, i64 2
+         %183 = insertelement <4 x double> %182, double %179, i64 3
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:962 within `getindex`
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        br i1 %.not825.not, label %L1037.lr.ph, label %L1025
+
+L1037.lr.ph:                                      ; preds = %L885.lr.ph.split
+        br i1 %.not827.not, label %L1164.lr.ph.split, label %L1037.us
+
+L1037.us:                                         ; preds = %L1037.lr.ph
+        %184 = getelementptr inbounds nuw i8, ptr %"new::Tuple386", i64 16
+        %185 = getelementptr inbounds nuw i8, ptr %"new::Tuple386", i64 8
+; │││││└
+       store i64 1, ptr %185, align 1
+       store i64 %value_phi4236653683, ptr %184, align 1
+       store i64 2, ptr %"new::Tuple386", align 1
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr nonnull %127, ptr nocapture nonnull readonly %"new::Tuple386") #15
+        unreachable
+
+L1164.lr.ph.split:                                ; preds = %L1037.lr.ph
+; │││││└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %186 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_byteoffset2852142
+       %gep20702449 = getelementptr i8, ptr %186, i64 16
+       %187 = load double, ptr %gep20702449, align 8
+       %188 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_byteoffset3092222
+       %gep20722451 = getelementptr i8, ptr %188, i64 16
+       %189 = load double, ptr %gep20722451, align 8
+       %190 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_byteoffset3332224
+       %gep20742548 = getelementptr i8, ptr %190, i64 16
+       %191 = load double, ptr %gep20742548, align 8
+       %192 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_byteoffset3572339
+       %gep20762550 = getelementptr i8, ptr %192, i64 16
+       %193 = load double, ptr %gep20762550, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %194 = insertelement <4 x double> poison, double %187, i64 0
+         %195 = insertelement <4 x double> %194, double %189, i64 1
+         %196 = insertelement <4 x double> %195, double %191, i64 2
+         %197 = insertelement <4 x double> %196, double %193, i64 3
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:962 within `getindex`
+; │││││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; ││││││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+         br i1 %169, label %L1330, label %L1495.lr.ph
+
+L1495.lr.ph:                                      ; preds = %L1164.lr.ph.split
+; ││││││└
+; ││││││ @ abstractarray.jl:702 within `checkbounds`
+        %invariant.op2721 = add i64 %164, 3
+        br i1 %170, label %L1635, label %L1774.lr.ph.split.split
+
+L1774.lr.ph.split.split:                          ; preds = %L1495.lr.ph
+; │││││└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %gep20822756 = getelementptr i8, ptr %190, i64 24
+       %198 = load double, ptr %gep20822756, align 8
+       %gep20802754 = getelementptr i8, ptr %188, i64 24
+       %199 = load double, ptr %gep20802754, align 8
+       %gep20782673 = getelementptr i8, ptr %186, i64 24
+       %200 = load double, ptr %gep20782673, align 8
+       %gep20842823 = getelementptr i8, ptr %192, i64 24
+       %201 = load double, ptr %gep20842823, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %202 = insertelement <4 x double> poison, double %200, i64 0
+         %203 = insertelement <4 x double> %202, double %199, i64 1
+         %204 = insertelement <4 x double> %203, double %198, i64 2
+         %205 = insertelement <4 x double> %204, double %201, i64 3
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %gep20862884 = getelementptr i8, ptr %186, i64 32
+       %gep20882886 = getelementptr i8, ptr %188, i64 32
+; │││││ @ array.jl:962 within `getindex`
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        %smin3264 = call i64 @llvm.smin.i64(i64 %invariant.op, i64 0)
+        %isnotneg = icmp sgt i64 %"R::Array.size_ptr654.copyload", -1
+        %206 = select i1 %isnotneg, i64 %smin3264, i64 0
+        %207 = sub i64 0, %206
+        %smin3273 = call i64 @llvm.smin.i64(i64 %"R::Array.size_ptr654.copyload", i64 %invariant.op)
+        %208 = sub i64 %"R::Array.size_ptr654.copyload", %smin3273
+        br label %L1774
+
+L485:                                             ; preds = %L286
+; └└└└└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:69 within `radial_block!`
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:69 within `#radial_block!##4`
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds`
+      store i64 %value_phi13364836643684, ptr %"new::Tuple776", align 8
+      call void @j_throw_boundserror_1013(ptr %9, ptr nocapture nonnull readonly %"new::Tuple776") #15
+      unreachable
+
+L488:                                             ; preds = %L311
+; ││└└
+; ││┌ @ int.jl:87 within `+`
+     %209 = add i64 %value_phi13364836643684, 1
+; ││└
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds`
+      store i64 %209, ptr %"new::Tuple774", align 8
+      call void @j_throw_boundserror_1013(ptr nonnull %9, ptr nocapture nonnull readonly %"new::Tuple774") #15
+      unreachable
+
+L494:                                             ; preds = %L341
+      store i64 %value_phi4236653683, ptr %"new::Tuple770", align 8
+      call void @j_throw_boundserror_1013(ptr nonnull %9, ptr nocapture nonnull readonly %"new::Tuple770") #15
+      unreachable
+
+L497:                                             ; preds = %L357
+; ││└└
+; ││┌ @ int.jl:87 within `+`
+     %210 = add i64 %value_phi4236653683, 1
+; ││└
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds`
+      store i64 %210, ptr %"new::Tuple768", align 8
+      call void @j_throw_boundserror_1013(ptr nonnull %9, ptr nocapture nonnull readonly %"new::Tuple768") #15
+      unreachable
+
+L503:                                             ; preds = %L387
+      store i64 %value_phi713685, ptr %"new::Tuple764", align 8
+      call void @j_throw_boundserror_1013(ptr nonnull %9, ptr nocapture nonnull readonly %"new::Tuple764") #15
+      unreachable
+
+L506:                                             ; preds = %L403
+; ││└└
+; ││┌ @ int.jl:87 within `+`
+     %211 = add i64 %value_phi713685, 1
+; ││└
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds`
+      store i64 %211, ptr %"new::Tuple762", align 8
+      call void @j_throw_boundserror_1013(ptr nonnull %9, ptr nocapture nonnull readonly %"new::Tuple762") #15
+      unreachable
+
+L512:                                             ; preds = %L433
+      store i64 %value_phi100, ptr %"new::Tuple758", align 8
+      call void @j_throw_boundserror_1013(ptr nonnull %9, ptr nocapture nonnull readonly %"new::Tuple758") #15
+      unreachable
+
+L515:                                             ; preds = %L449
+; ││└└
+; ││┌ @ int.jl:87 within `+`
+     %212 = add i64 %value_phi100, 1
+; ││└
+; ││┌ @ essentials.jl:974 within `getindex`
+; │││┌ @ essentials.jl:389 within `checkbounds`
+      store i64 %212, ptr %"new::Tuple756", align 8
+      call void @j_throw_boundserror_1013(ptr nonnull %9, ptr nocapture nonnull readonly %"new::Tuple756") #15
+      unreachable
+
+L621:                                             ; preds = %L2019
+; └└└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `radial_block!`
+; ┌ @ ntuple.jl:19 within `ntuple`
+; │┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##14`
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:962 within `getindex`
+; │││││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; ││││││┌ @ abstractarray.jl:728 within `checkbounds_indices` @ abstractarray.jl:728
+; │││││││┌ @ abstractarray.jl:757 within `checkindex`
+; ││││││││┌ @ int.jl:559 within `<`
+           %exitcond3576.not.not = icmp eq i64 %value_phi26612742016214622502343247025532686275928302889, %.size270.sroa.2.0.copyload
+; │││││││└└
+         br i1 %exitcond3576.not.not, label %L720, label %L1647
+
+L720:                                             ; preds = %L621, %L639.lr.ph, %L621.preheader
+         %value_phi266.lcssa1090 = phi i64 [ 1, %L621.preheader ], [ 1, %L639.lr.ph ], [ %337, %L621 ]
+         %213 = getelementptr inbounds nuw i8, ptr %"new::Tuple268", i64 16
+         %214 = getelementptr inbounds nuw i8, ptr %"new::Tuple268", i64 8
+; │││││└└
+       store i64 1, ptr %"new::Tuple268", align 8
+       store i64 %value_phi266.lcssa1090, ptr %214, align 8
+       store i64 %value_phi13364836643684, ptr %213, align 8
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr %127, ptr nocapture nonnull readonly %"new::Tuple268") #15
+        unreachable
+
+L950:                                             ; preds = %L657.lr.ph.split.split.split
+        %215 = getelementptr inbounds nuw i8, ptr %"new::Tuple339", i64 16
+        %216 = getelementptr inbounds nuw i8, ptr %"new::Tuple339", i64 8
+; │││││└
+       store i64 1, ptr %216, align 1
+       store i64 %value_phi100, ptr %215, align 1
+       store i64 1, ptr %"new::Tuple339", align 1
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr nonnull %127, ptr nocapture nonnull readonly %"new::Tuple339") #15
+        unreachable
+
+L1025:                                            ; preds = %L885.lr.ph.split, %L885.lr.ph
+        %217 = getelementptr inbounds nuw i8, ptr %"new::Tuple363", i64 16
+        %218 = getelementptr inbounds nuw i8, ptr %"new::Tuple363", i64 8
+; │││││└
+       store i64 1, ptr %218, align 1
+       store i64 %value_phi13364836643684, ptr %217, align 1
+       store i64 2, ptr %"new::Tuple363", align 1
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr nonnull %127, ptr nocapture nonnull readonly %"new::Tuple363") #15
+        unreachable
+
+L1330:                                            ; preds = %L1164.lr.ph.split
+        %219 = getelementptr inbounds nuw i8, ptr %"new::Tuple458", i64 16
+        %220 = getelementptr inbounds nuw i8, ptr %"new::Tuple458", i64 8
+; │││││└
+       store i64 1, ptr %220, align 1
+       store i64 %value_phi13364836643684, ptr %219, align 1
+       store i64 3, ptr %"new::Tuple458", align 1
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr nonnull %127, ptr nocapture nonnull readonly %"new::Tuple458") #15
+        unreachable
+
+L1635:                                            ; preds = %L1495.lr.ph
+        %221 = getelementptr inbounds nuw i8, ptr %"new::Tuple553", i64 16
+        %222 = getelementptr inbounds nuw i8, ptr %"new::Tuple553", i64 8
+; │││││└
+       store i64 1, ptr %222, align 1
+       store i64 %value_phi13364836643684, ptr %221, align 1
+       store i64 4, ptr %"new::Tuple553", align 1
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        call void @j_throw_boundserror_1041(ptr nonnull %127, ptr nocapture nonnull readonly %"new::Tuple553") #15
+        unreachable
+
+L1647:                                            ; preds = %L621
+; │││││└
+; │││││ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:88 within `*`
+           %223 = mul i64 %.size270.sroa.0.0.copyload, %value_phi26612742016214622502343247025532686275928302889
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset332 = add i64 %166, %223
+       %memoryref_byteoffset333 = shl i64 %memoryref_offset332, 3
+       %memoryref_data338 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset333
+       %224 = load double, ptr %memoryref_data338, align 8
+       %memoryref_offset308 = add i64 %165, %223
+       %memoryref_byteoffset309 = shl i64 %memoryref_offset308, 3
+       %memoryref_data314 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset309
+       %225 = load double, ptr %memoryref_data314, align 8
+       %memoryref_offset284 = add i64 %164, %223
+       %memoryref_byteoffset285 = shl i64 %memoryref_offset284, 3
+       %memoryref_data290 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset285
+       %226 = load double, ptr %memoryref_data290, align 8
+       %memoryref_offset356 = add i64 %167, %223
+       %memoryref_byteoffset357 = shl i64 %memoryref_offset356, 3
+       %memoryref_data362 = getelementptr inbounds i8, ptr %memoryref_data282, i64 %memoryref_byteoffset357
+       %227 = load double, ptr %memoryref_data362, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %228 = insertelement <4 x double> poison, double %226, i64 0
+         %229 = insertelement <4 x double> %228, double %225, i64 1
+         %230 = insertelement <4 x double> %229, double %224, i64 2
+         %231 = insertelement <4 x double> %230, double %227, i64 3
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %232 = add i64 %223, 2
+; ││││││││└
+; ││││││││ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %233 = add i64 %165, %232
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset403 = shl i64 %233, 3
+       %gep2072 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset403
+       %234 = load double, ptr %gep2072, align 8
+; │││││ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %235 = add i64 %164, %232
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset379 = shl i64 %235, 3
+       %gep2070 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset379
+       %236 = load double, ptr %gep2070, align 8
+; │││││ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %237 = add i64 %166, %232
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset427 = shl i64 %237, 3
+       %gep2074 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset427
+       %238 = load double, ptr %gep2074, align 8
+; │││││ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %239 = add i64 %167, %232
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset451 = shl i64 %239, 3
+       %gep2076 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset451
+       %240 = load double, ptr %gep2076, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %241 = insertelement <4 x double> poison, double %236, i64 0
+         %242 = insertelement <4 x double> %241, double %234, i64 1
+         %243 = insertelement <4 x double> %242, double %238, i64 2
+         %244 = insertelement <4 x double> %243, double %240, i64 3
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %245 = add i64 %223, 3
+           %.reass2722 = add i64 %223, %invariant.op2721
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset474 = shl i64 %.reass2722, 3
+       %gep2078 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset474
+       %246 = load double, ptr %gep2078, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %247 = insertelement <4 x double> poison, double %246, i64 0
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %248 = add i64 %165, %245
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset498 = shl i64 %248, 3
+       %gep2080 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset498
+       %249 = load double, ptr %gep2080, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %250 = insertelement <4 x double> %247, double %249, i64 1
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %251 = add i64 %166, %245
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset522 = shl i64 %251, 3
+       %gep2082 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset522
+       %252 = load double, ptr %gep2082, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %253 = insertelement <4 x double> %250, double %252, i64 2
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %254 = add i64 %167, %245
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset546 = shl i64 %254, 3
+       %gep2084 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset546
+       %255 = load double, ptr %gep2084, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %256 = insertelement <4 x double> %253, double %255, i64 3
+; ││└└└└└
+; ││┌ @ ntuple.jl:19 within `ntuple`
+; │││┌ @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:94 within `#radial_block!##16`
+; ││││┌ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %257 = add i64 %223, 4
+; ││││││││└
+; ││││││││ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %258 = add i64 %164, %257
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset569 = shl i64 %258, 3
+       %gep2086 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset569
+; │││││ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %259 = add i64 %165, %257
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset593 = shl i64 %259, 3
+       %gep2088 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset593
+; │││││ @ array.jl:962 within `getindex`
+; │││││┌ @ abstractarray.jl:702 within `checkbounds`
+        br label %L1774
+
+L1774:                                            ; preds = %L1647, %L1774.lr.ph.split.split
+        %.in = phi ptr [ %gep20882886, %L1774.lr.ph.split.split ], [ %gep2088, %L1647 ]
+        %.in3725 = phi ptr [ %gep20862884, %L1774.lr.ph.split.split ], [ %gep2086, %L1647 ]
+        %260 = phi i64 [ 4, %L1774.lr.ph.split.split ], [ %257, %L1647 ]
+        %261 = phi <4 x double> [ %197, %L1774.lr.ph.split.split ], [ %244, %L1647 ]
+        %262 = phi <4 x double> [ %183, %L1774.lr.ph.split.split ], [ %231, %L1647 ]
+        %263 = phi i64 [ 0, %L1774.lr.ph.split.split ], [ %value_phi26612742016214622502343247025532686275928302889, %L1647 ]
+        %value_phi26612742016214622502343247025532686275928302889 = phi i64 [ 1, %L1774.lr.ph.split.split ], [ %337, %L1647 ]
+        %264 = phi <4 x double> [ %205, %L1774.lr.ph.split.split ], [ %256, %L1647 ]
+; │││││└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %265 = load double, ptr %.in3725, align 8
+       %266 = load double, ptr %.in, align 8
+; │││││ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %267 = add i64 %166, %260
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset617 = shl i64 %267, 3
+       %gep2090 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset617
+       %268 = load double, ptr %gep2090, align 8
+; │││││ @ array.jl:963 within `getindex`
+; │││││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; ││││││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; │││││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106 @ abstractarray.jl:3106
+; ││││││││┌ @ int.jl:87 within `+`
+           %269 = add i64 %167, %260
+; │││││└└└└
+; │││││ @ array.jl:963 within `getindex` @ essentials.jl:975
+       %memoryref_offset641 = shl i64 %269, 3
+       %gep2092 = getelementptr i8, ptr %invariant.gep2069, i64 %memoryref_offset641
+       %270 = load double, ptr %gep2092, align 8
+; ││└└└
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:6 within `Vec`
+; │││┌ @ broadcast.jl:899 within `materialize`
+; ││││┌ @ broadcast.jl:1131 within `copy`
+; │││││┌ @ ntuple.jl:65 within `ntuple`
+; ││││││┌ @ ntuple.jl:68 within `macro expansion`
+         %271 = insertelement <4 x double> poison, double %265, i64 0
+         %272 = insertelement <4 x double> %271, double %266, i64 1
+         %273 = insertelement <4 x double> %272, double %268, i64 2
+         %274 = insertelement <4 x double> %273, double %270, i64 3
+; └└└└└└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:95 within `radial_block!`
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:272 within `*`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227 within `fmul` @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:236 within `macro expansion`
+     %275 = fmul <4 x double> %145, %274
+; └└└
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:272 within `+`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227 within `fadd` @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:236 within `macro expansion`
+     %276 = fadd <4 x double> %264, %275
+; └└└
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:272 within `*`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227 within `fmul` @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:236 within `macro expansion`
+     %277 = fmul <4 x double> %145, %276
+; └└└
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:272 within `+`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227 within `fadd` @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:236 within `macro expansion`
+     %278 = fadd <4 x double> %261, %277
+; └└└
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:272 within `*`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227 within `fmul` @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:236 within `macro expansion`
+     %279 = fmul <4 x double> %145, %278
+; └└└
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:272 within `+`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227 within `fadd` @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:236 within `macro expansion`
+     %280 = fadd <4 x double> %262, %279
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:97 within `radial_block!`
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:272 within `*`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227 within `fmul` @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:227
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:236 within `macro expansion`
+     %281 = fmul <4 x double> %150, %280
+     %282 = fmul <4 x double> %155, %280
+     %.not849 = icmp uge i64 %263, %"R::Array.size_ptr.copyload261"
+     %memoryref_data664 = load ptr, ptr %"R::Array", align 8
+     %283 = mul i64 %"R::Array.size_ptr654.copyload", %263
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ range.jl:924 within `iterate`
+   %invariant.gep893 = getelementptr i8, ptr %memoryref_data664, i64 -8
+   %"dR::Array.size_ptr.copyload" = load i64, ptr %"dR::Array.size_ptr", align 8
+   %memoryref_data689 = load ptr, ptr %"dR::Array", align 8
+   %284 = mul i64 %"dR::Array.size_ptr.copyload", %263
+   %invariant.gep894 = getelementptr i8, ptr %memoryref_data689, i64 -8
+   %.not849.fr = freeze i1 %.not849
+   br i1 %.not849.fr, label %L1920, label %L1800.split
+
+L1800.split:                                      ; preds = %L1774
+   %"dR::Array.size_ptr.copyload681" = load i64, ptr %171, align 8
+   %.not851 = icmp uge i64 %263, %"dR::Array.size_ptr.copyload681"
+   %.not851.fr = freeze i1 %.not851
+   br i1 %.not851.fr, label %L1800.split.split.us, label %L1800.split.split
+
+L1800.split.split.us:                             ; preds = %L1800.split
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+; ││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; │││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+; ││││┌ @ abstractarray.jl:757 within `checkindex`
+; │││││┌ @ int.jl:559 within `<`
+        %.not848.us963 = icmp ult i64 %invariant.op, %"R::Array.size_ptr654.copyload"
+; ││││└└
+      br i1 %.not848.us963, label %L1918.us964, label %L1920
+
+L1918.us964:                                      ; preds = %L1800.split.split.us
+; └└└└
+  %.unbox.us957 = load i8, ptr %"active::Tuple", align 1
+  %285 = trunc nuw i8 %.unbox.us957 to i1
+  %286 = extractelement <4 x double> %281, i64 0
+  %value_phi652.us960 = select i1 %285, double %286, double 0.000000e+00
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+; ││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; │││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; ││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; │││││┌ @ int.jl:87 within `+`
+        %287 = add i64 %283, %"start::Int64"
+; ││└└└└
+    %memoryref_offset666.us = shl i64 %287, 3
+    %gep.us965 = getelementptr i8, ptr %invariant.gep893, i64 %memoryref_offset666.us
+    store double %value_phi652.us960, ptr %gep.us965, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  br label %L1990
+
+L1800.split.split:                                ; preds = %L1800.split
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ range.jl:924 within `iterate`
+   %isnotneg3400 = icmp sgt i64 %"dR::Array.size_ptr.copyload", -1
+   %288 = select i1 %isnotneg3400, i64 %smin3264, i64 0
+   %289 = sub i64 0, %288
+   %umax3269 = call i64 @llvm.umax.i64(i64 %289, i64 %207)
+   %smin3272 = call i64 @llvm.smin.i64(i64 %"dR::Array.size_ptr.copyload", i64 %invariant.op)
+   %290 = sub i64 %"dR::Array.size_ptr.copyload", %smin3272
+   %291 = call i64 @llvm.umin.i64(i64 %290, i64 %208)
+   %292 = select i1 %isnotneg3400, i1 %isnotneg, i1 false
+   %293 = call i64 @llvm.umin.i64(i64 %291, i64 4)
+   %exit.mainloop.at3276 = select i1 %292, i64 %293, i64 0
+   %.not3401 = icmp eq i64 %umax3269, 0
+   br i1 %.not3401, label %preloop.pseudo.exit3279, label %pass.preloop.preheader
+
+pass.preloop.preheader:                           ; preds = %L1800.split.split
+   %exit.preloop.at3271 = call i64 @llvm.umin.i64(i64 %umax3269, i64 4)
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+; ││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; │││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+      %294 = add nuw nsw i64 %exit.preloop.at3271, 1
+      br label %pass.preloop
+
+L1920:                                            ; preds = %pass.postloop, %pass.preloop, %L1800.split.split.us, %L1774
+; └└└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+    %.us-phi905 = phi i64 [ %"start::Int64", %L1800.split.split.us ], [ %.reass.postloop, %pass.postloop ], [ %.reass.preloop, %pass.preloop ], [ %"start::Int64", %L1774 ]
+    %295 = getelementptr inbounds nuw i8, ptr %"new::Tuple653", i64 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+    store i64 %.us-phi905, ptr %"new::Tuple653", align 8
+    store i64 %value_phi26612742016214622502343247025532686275928302889, ptr %295, align 8
+; ││┌ @ abstractarray.jl:702 within `checkbounds`
+     call void @j_throw_boundserror_1039(ptr nonnull %"R::Array", ptr nocapture nonnull readonly %"new::Tuple653") #15
+     unreachable
+
+L1953:                                            ; preds = %pass
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:102 within `getindex`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:802 within `extractelement`
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:809 within `macro expansion`
+     %296 = extractelement <4 x double> %274, i64 %338
+     %297 = fmul double %296, 3.000000e+00
+     %298 = extractelement <4 x double> %145, i64 %338
+     %299 = fmul double %298, %297
+     %300 = fmul double %298, %299
+     %301 = extractelement <4 x double> %264, i64 %338
+     %302 = fmul double %301, 2.000000e+00
+     %303 = fmul double %298, %302
+     %304 = fadd double %303, %300
+     %305 = extractelement <4 x double> %261, i64 %338
+     %306 = fadd double %305, %304
+     %307 = extractelement <4 x double> %160, i64 %338
+     %308 = fmul double %307, %306
+     %309 = extractelement <4 x double> %150, i64 %338
+     %310 = fmul double %309, %308
+     %311 = extractelement <4 x double> %282, i64 %338
+     %312 = fadd double %311, %310
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ range.jl:924 within `iterate`
+   br label %L1958
+
+L1958:                                            ; preds = %pass, %L1953
+   %value_phi679 = phi double [ %312, %L1953 ], [ 0.000000e+00, %pass ]
+   %.reass3724 = add i64 %value_phi649, %invariant.op3723
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+    %memoryref_offset691 = shl i64 %.reass3724, 3
+    %gep895 = getelementptr i8, ptr %invariant.gep894, i64 %memoryref_offset691
+    store double %value_phi679, ptr %gep895, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:101 within `radial_block!`
+; ┌ @ range.jl:928 within `iterate`
+   %313 = add nuw nsw i64 %value_phi649, 1
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ tuple.jl:33 within `getindex`
+   %314 = getelementptr inbounds nuw i8, ptr %"active::Tuple", i64 %value_phi649
+; └
+  %.unbox.1 = load i8, ptr %314, align 1
+  %315 = trunc nuw i8 %.unbox.1 to i1
+  %316 = extractelement <4 x double> %281, i64 %value_phi649
+  %value_phi652.1 = select i1 %315, double %316, double 0.000000e+00
+  %.reass3722.1 = add i64 %313, %invariant.op3721
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+    %memoryref_offset666.1 = shl i64 %.reass3722.1, 3
+    %gep.1 = getelementptr i8, ptr %invariant.gep893, i64 %memoryref_offset666.1
+    store double %value_phi652.1, ptr %gep.1, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  br i1 %315, label %L1953.1, label %L1958.1
+
+L1953.1:                                          ; preds = %L1958
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:102 within `getindex`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:802 within `extractelement`
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:809 within `macro expansion`
+     %317 = extractelement <4 x double> %274, i64 %value_phi649
+     %318 = fmul double %317, 3.000000e+00
+     %319 = extractelement <4 x double> %145, i64 %value_phi649
+     %320 = fmul double %319, %318
+     %321 = fmul double %319, %320
+     %322 = extractelement <4 x double> %264, i64 %value_phi649
+     %323 = fmul double %322, 2.000000e+00
+     %324 = fmul double %319, %323
+     %325 = fadd double %324, %321
+     %326 = extractelement <4 x double> %261, i64 %value_phi649
+     %327 = fadd double %326, %325
+     %328 = extractelement <4 x double> %160, i64 %value_phi649
+     %329 = fmul double %328, %327
+     %330 = extractelement <4 x double> %150, i64 %value_phi649
+     %331 = fmul double %330, %329
+     %332 = extractelement <4 x double> %282, i64 %value_phi649
+     %333 = fadd double %332, %331
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ range.jl:924 within `iterate`
+   br label %L1958.1
+
+L1958.1:                                          ; preds = %L1953.1, %L1958
+   %value_phi679.1 = phi double [ %333, %L1953.1 ], [ 0.000000e+00, %L1958 ]
+   %.reass3724.1 = add i64 %313, %invariant.op3723
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+    %memoryref_offset691.1 = shl i64 %.reass3724.1, 3
+    %gep895.1 = getelementptr i8, ptr %invariant.gep894, i64 %memoryref_offset691.1
+    store double %value_phi679.1, ptr %gep895.1, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:101 within `radial_block!`
+; ┌ @ range.jl:928 within `iterate`
+   %334 = add nuw nsw i64 %value_phi649, 2
+; └
+  %exitcond3575.not.1 = icmp eq i64 %313, %umax3574
+  br i1 %exitcond3575.not.1, label %main.exit.selector3282, label %pass
+
+main.exit.selector3282:                           ; preds = %pass.prol.loopexit, %L1958.1
+  %value_phi649.lcssa = phi i64 [ %value_phi649.preloop.copy, %pass.prol.loopexit ], [ %umax3574, %L1958.1 ]
+  %335 = icmp ult i64 %value_phi649.lcssa, 4
+  br i1 %335, label %pass.postloop, label %L2019
+
+L1990:                                            ; preds = %L1958.postloop, %L1958.preloop, %L1918.us964
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+    %.us-phi980 = phi i64 [ %"start::Int64", %L1918.us964 ], [ %.reass.postloop, %L1958.postloop ], [ %.reass.preloop, %L1958.preloop ]
+    %336 = getelementptr inbounds nuw i8, ptr %"new::Tuple680", i64 8
+    store i64 %value_phi26612742016214622502343247025532686275928302889, ptr %336, align 1
+    store i64 %.us-phi980, ptr %"new::Tuple680", align 1
+; ││┌ @ abstractarray.jl:702 within `checkbounds`
+     call void @j_throw_boundserror_1039(ptr nonnull %"dR::Array", ptr nocapture nonnull readonly %"new::Tuple680") #15
+     unreachable
+
+L2019:                                            ; preds = %L1988.postloop, %preloop.exit.selector3278, %main.exit.selector3282
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:102 within `radial_block!`
+; ┌ @ range.jl:928 within `iterate`
+; │┌ @ promotion.jl:641 within `==`
+    %.not853.not = icmp eq i64 %value_phi26612742016214622502343247025532686275928302889, %value_phi262
+; │└
+   %337 = add nuw i64 %value_phi26612742016214622502343247025532686275928302889, 1
+; └
+  br i1 %.not853.not, label %L2030, label %L621
+
+L2030:                                            ; preds = %L2019, %L479
+  %frame.prev3860 = load ptr, ptr %frame.prev, align 8
+  store ptr %frame.prev3860, ptr %tls_pgcstack, align 8
+  ret void
+
+pass:                                             ; preds = %pass.prol.loopexit, %L1958.1
+  %value_phi649 = phi i64 [ %334, %L1958.1 ], [ %value_phi649.unr, %pass.prol.loopexit ]
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ tuple.jl:33 within `getindex`
+   %338 = add nsw i64 %value_phi649, -1
+   %339 = getelementptr inbounds nuw i8, ptr %"active::Tuple", i64 %338
+; └
+  %.unbox = load i8, ptr %339, align 1
+  %340 = trunc nuw i8 %.unbox to i1
+  %341 = extractelement <4 x double> %281, i64 %338
+  %value_phi652 = select i1 %340, double %341, double 0.000000e+00
+  %.reass3722 = add i64 %value_phi649, %invariant.op3721
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+    %memoryref_offset666 = shl i64 %.reass3722, 3
+    %gep = getelementptr i8, ptr %invariant.gep893, i64 %memoryref_offset666
+    store double %value_phi652, ptr %gep, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  br i1 %340, label %L1953, label %L1958
+
+pass.preloop:                                     ; preds = %L1988.preloop, %pass.preloop.preheader
+  %value_phi649.preloop = phi i64 [ %365, %L1988.preloop ], [ 1, %pass.preloop.preheader ]
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ tuple.jl:33 within `getindex`
+   %342 = add nsw i64 %value_phi649.preloop, -1
+   %.reass.preloop = add i64 %value_phi649.preloop, %invariant.op
+   %.reass885.preloop = add i64 %value_phi649.preloop, %invariant.op884
+; └
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+; ││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; │││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+; ││││┌ @ abstractarray.jl:757 within `checkindex`
+; │││││┌ @ int.jl:559 within `<`
+        %.not848.preloop = icmp ult i64 %.reass885.preloop, %"R::Array.size_ptr654.copyload"
+; ││││└└
+      br i1 %.not848.preloop, label %L1918.preloop, label %L1920
+
+L1918.preloop:                                    ; preds = %pass.preloop
+; └└└└
+; ┌ @ tuple.jl:33 within `getindex`
+   %343 = getelementptr inbounds nuw i8, ptr %"active::Tuple", i64 %342
+; └
+  %.unbox.preloop = load i8, ptr %343, align 1
+  %344 = trunc nuw i8 %.unbox.preloop to i1
+  %345 = extractelement <4 x double> %281, i64 %342
+  %spec.select3398 = select i1 %344, double %345, double 0.000000e+00
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+; ││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; │││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; ││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; │││││┌ @ int.jl:87 within `+`
+        %346 = add i64 %283, %.reass.preloop
+; ││└└└└
+    %memoryref_offset666.preloop = shl i64 %346, 3
+    %gep.preloop = getelementptr i8, ptr %invariant.gep893, i64 %memoryref_offset666.preloop
+    store double %spec.select3398, ptr %gep.preloop, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  br i1 %344, label %L1953.preloop, label %L1958.preloop
+
+L1953.preloop:                                    ; preds = %L1918.preloop
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:102 within `getindex`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:802 within `extractelement`
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:809 within `macro expansion`
+     %347 = extractelement <4 x double> %274, i64 %342
+     %348 = fmul double %347, 3.000000e+00
+     %349 = extractelement <4 x double> %145, i64 %342
+     %350 = fmul double %349, %348
+     %351 = fmul double %349, %350
+     %352 = extractelement <4 x double> %264, i64 %342
+     %353 = fmul double %352, 2.000000e+00
+     %354 = fmul double %349, %353
+     %355 = fadd double %354, %351
+     %356 = extractelement <4 x double> %261, i64 %342
+     %357 = fadd double %356, %355
+     %358 = extractelement <4 x double> %160, i64 %342
+     %359 = fmul double %358, %357
+     %360 = extractelement <4 x double> %150, i64 %342
+     %361 = fmul double %360, %359
+     %362 = extractelement <4 x double> %282, i64 %342
+     %363 = fadd double %362, %361
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ range.jl:924 within `iterate`
+   br label %L1958.preloop
+
+L1958.preloop:                                    ; preds = %L1953.preloop, %L1918.preloop
+   %value_phi679.preloop = phi double [ %363, %L1953.preloop ], [ 0.000000e+00, %L1918.preloop ]
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+; ││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; │││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+; ││││┌ @ abstractarray.jl:757 within `checkindex`
+; │││││┌ @ int.jl:559 within `<`
+        %.not850.preloop = icmp ult i64 %.reass885.preloop, %"dR::Array.size_ptr.copyload"
+; ││││└└
+      br i1 %.not850.preloop, label %L1988.preloop, label %L1990
+
+L1988.preloop:                                    ; preds = %L1958.preloop
+; ││└└
+; ││ @ array.jl:1037 within `_setindex!`
+; ││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; │││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; ││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; │││││┌ @ int.jl:87 within `+`
+        %364 = add i64 %284, %.reass.preloop
+; ││└└└└
+    %memoryref_offset691.preloop = shl i64 %364, 3
+    %gep895.preloop = getelementptr i8, ptr %invariant.gep894, i64 %memoryref_offset691.preloop
+    store double %value_phi679.preloop, ptr %gep895.preloop, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:101 within `radial_block!`
+; ┌ @ range.jl:928 within `iterate`
+   %365 = add nuw nsw i64 %value_phi649.preloop, 1
+; └
+  %exitcond.not = icmp eq i64 %value_phi649.preloop, %exit.preloop.at3271
+  br i1 %exitcond.not, label %preloop.exit.selector3278, label %pass.preloop
+
+preloop.exit.selector3278:                        ; preds = %L1988.preloop
+  %366 = icmp ult i64 %umax3269, 4
+  br i1 %366, label %preloop.pseudo.exit3279, label %L2019
+
+preloop.pseudo.exit3279:                          ; preds = %preloop.exit.selector3278, %L1800.split.split
+  %value_phi649.preloop.copy = phi i64 [ 1, %L1800.split.split ], [ %294, %preloop.exit.selector3278 ]
+  %indvar.end3280 = phi i64 [ 0, %L1800.split.split ], [ %exit.preloop.at3271, %preloop.exit.selector3278 ]
+  %367 = icmp samesign ult i64 %indvar.end3280, %exit.mainloop.at3276
+  br i1 %367, label %pass.preheader, label %pass.postloop
+
+pass.preheader:                                   ; preds = %preloop.pseudo.exit3279
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  %umax3574 = call i64 @llvm.umax.i64(i64 %exit.mainloop.at3276, i64 %value_phi649.preloop.copy)
+  %368 = add nuw nsw i64 %umax3574, 1
+  %invariant.op3721 = add i64 %invariant.op, %283
+  %invariant.op3723 = add i64 %invariant.op, %284
+  %369 = sub nsw i64 %368, %value_phi649.preloop.copy
+  %xtraiter = and i64 %369, 1
+  %lcmp.mod.not = icmp eq i64 %xtraiter, 0
+  br i1 %lcmp.mod.not, label %pass.prol.loopexit, label %pass.prol.preheader
+
+pass.prol.preheader:                              ; preds = %pass.preheader
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ tuple.jl:33 within `getindex`
+   %370 = add nsw i64 %value_phi649.preloop.copy, -1
+   %371 = getelementptr inbounds nuw i8, ptr %"active::Tuple", i64 %370
+; └
+  %.unbox.prol = load i8, ptr %371, align 1
+  %372 = trunc nuw i8 %.unbox.prol to i1
+  %373 = extractelement <4 x double> %281, i64 %370
+  %value_phi652.prol = select i1 %372, double %373, double 0.000000e+00
+  %.reass3722.prol = add i64 %value_phi649.preloop.copy, %invariant.op3721
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+    %memoryref_offset666.prol = shl i64 %.reass3722.prol, 3
+    %gep.prol = getelementptr i8, ptr %invariant.gep893, i64 %memoryref_offset666.prol
+    store double %value_phi652.prol, ptr %gep.prol, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  br i1 %372, label %L1953.prol, label %L1958.prol
+
+L1953.prol:                                       ; preds = %pass.prol.preheader
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:102 within `getindex`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:802 within `extractelement`
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:809 within `macro expansion`
+     %374 = extractelement <4 x double> %274, i64 %370
+     %375 = fmul double %374, 3.000000e+00
+     %376 = extractelement <4 x double> %145, i64 %370
+     %377 = fmul double %376, %375
+     %378 = fmul double %376, %377
+     %379 = extractelement <4 x double> %264, i64 %370
+     %380 = fmul double %379, 2.000000e+00
+     %381 = fmul double %376, %380
+     %382 = fadd double %381, %378
+     %383 = extractelement <4 x double> %261, i64 %370
+     %384 = fadd double %383, %382
+     %385 = extractelement <4 x double> %160, i64 %370
+     %386 = fmul double %385, %384
+     %387 = extractelement <4 x double> %150, i64 %370
+     %388 = fmul double %387, %386
+     %389 = extractelement <4 x double> %282, i64 %370
+     %390 = fadd double %389, %388
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ range.jl:924 within `iterate`
+   br label %L1958.prol
+
+L1958.prol:                                       ; preds = %L1953.prol, %pass.prol.preheader
+   %value_phi679.prol = phi double [ %390, %L1953.prol ], [ 0.000000e+00, %pass.prol.preheader ]
+   %.reass3724.prol = add i64 %value_phi649.preloop.copy, %invariant.op3723
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+    %memoryref_offset691.prol = shl i64 %.reass3724.prol, 3
+    %gep895.prol = getelementptr i8, ptr %invariant.gep894, i64 %memoryref_offset691.prol
+    store double %value_phi679.prol, ptr %gep895.prol, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:101 within `radial_block!`
+; ┌ @ range.jl:928 within `iterate`
+   %391 = add nuw nsw i64 %value_phi649.preloop.copy, 1
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  br label %pass.prol.loopexit
+
+pass.prol.loopexit:                               ; preds = %L1958.prol, %pass.preheader
+  %value_phi649.unr = phi i64 [ %value_phi649.preloop.copy, %pass.preheader ], [ %391, %L1958.prol ]
+  %.not2 = icmp ult i64 %value_phi649.preloop.copy, %exit.mainloop.at3276
+  br i1 %.not2, label %pass, label %main.exit.selector3282
+
+pass.postloop:                                    ; preds = %L1988.postloop, %preloop.pseudo.exit3279, %main.exit.selector3282
+  %value_phi649.postloop = phi i64 [ %415, %L1988.postloop ], [ %368, %main.exit.selector3282 ], [ %value_phi649.preloop.copy, %preloop.pseudo.exit3279 ]
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:99 within `radial_block!`
+; ┌ @ tuple.jl:33 within `getindex`
+   %392 = add nsw i64 %value_phi649.postloop, -1
+   %.reass.postloop = add i64 %value_phi649.postloop, %invariant.op
+   %.reass885.postloop = add i64 %value_phi649.postloop, %invariant.op884
+; └
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+; ││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; │││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+; ││││┌ @ abstractarray.jl:757 within `checkindex`
+; │││││┌ @ int.jl:559 within `<`
+        %.not848.postloop = icmp ult i64 %.reass885.postloop, %"R::Array.size_ptr654.copyload"
+; ││││└└
+      br i1 %.not848.postloop, label %L1918.postloop, label %L1920
+
+L1918.postloop:                                   ; preds = %pass.postloop
+; └└└└
+; ┌ @ tuple.jl:33 within `getindex`
+   %393 = getelementptr inbounds nuw i8, ptr %"active::Tuple", i64 %392
+; └
+  %.unbox.postloop = load i8, ptr %393, align 1
+  %394 = trunc nuw i8 %.unbox.postloop to i1
+  %395 = extractelement <4 x double> %281, i64 %392
+  %spec.select3399 = select i1 %394, double %395, double 0.000000e+00
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1037 within `_setindex!`
+; ││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; │││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; ││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; │││││┌ @ int.jl:87 within `+`
+        %396 = add i64 %283, %.reass.postloop
+; ││└└└└
+    %memoryref_offset666.postloop = shl i64 %396, 3
+    %gep.postloop = getelementptr i8, ptr %invariant.gep893, i64 %memoryref_offset666.postloop
+    store double %spec.select3399, ptr %gep.postloop, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+  br i1 %394, label %L1953.postloop, label %L1958.postloop
+
+L1953.postloop:                                   ; preds = %L1918.postloop
+; ┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/simdvec.jl:102 within `getindex`
+; │┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:802 within `extractelement`
+; ││┌ @ /var/home/teemu/.julia/packages/SIMD/QQEfC/src/LLVM_intrinsics.jl:809 within `macro expansion`
+     %397 = extractelement <4 x double> %274, i64 %392
+     %398 = fmul double %397, 3.000000e+00
+     %399 = extractelement <4 x double> %145, i64 %392
+     %400 = fmul double %399, %398
+     %401 = fmul double %399, %400
+     %402 = extractelement <4 x double> %264, i64 %392
+     %403 = fmul double %402, 2.000000e+00
+     %404 = fmul double %399, %403
+     %405 = fadd double %404, %401
+     %406 = extractelement <4 x double> %261, i64 %392
+     %407 = fadd double %406, %405
+     %408 = extractelement <4 x double> %160, i64 %392
+     %409 = fmul double %408, %407
+     %410 = extractelement <4 x double> %150, i64 %392
+     %411 = fmul double %410, %409
+     %412 = extractelement <4 x double> %282, i64 %392
+     %413 = fadd double %412, %411
+; └└└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:93 within `radial_block!`
+; ┌ @ range.jl:924 within `iterate`
+   br label %L1958.postloop
+
+L1958.postloop:                                   ; preds = %L1953.postloop, %L1918.postloop
+   %value_phi679.postloop = phi double [ %413, %L1953.postloop ], [ 0.000000e+00, %L1918.postloop ]
+; └
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:100 within `radial_block!`
+; ┌ @ array.jl:1031 within `setindex!`
+; │┌ @ array.jl:1036 within `_setindex!`
+; ││┌ @ abstractarray.jl:702 within `checkbounds` @ abstractarray.jl:684
+; │││┌ @ abstractarray.jl:728 within `checkbounds_indices`
+; ││││┌ @ abstractarray.jl:757 within `checkindex`
+; │││││┌ @ int.jl:559 within `<`
+        %.not850.postloop = icmp ult i64 %.reass885.postloop, %"dR::Array.size_ptr.copyload"
+; ││││└└
+      br i1 %.not850.postloop, label %L1988.postloop, label %L1990
+
+L1988.postloop:                                   ; preds = %L1958.postloop
+; ││└└
+; ││ @ array.jl:1037 within `_setindex!`
+; ││┌ @ abstractarray.jl:1398 within `_to_linear_index`
+; │││┌ @ abstractarray.jl:3074 within `_sub2ind` @ abstractarray.jl:3090
+; ││││┌ @ abstractarray.jl:3106 within `_sub2ind_recurse` @ abstractarray.jl:3106
+; │││││┌ @ int.jl:87 within `+`
+        %414 = add i64 %284, %.reass.postloop
+; ││└└└└
+    %memoryref_offset691.postloop = shl i64 %414, 3
+    %gep895.postloop = getelementptr i8, ptr %invariant.gep894, i64 %memoryref_offset691.postloop
+    store double %value_phi679.postloop, ptr %gep895.postloop, align 8
+; └└
+;  @ /mnt/work/Coding/Potentials/dev/PotentialFrameWork/src/submodules/ACE/cpu.jl:101 within `radial_block!`
+; ┌ @ range.jl:928 within `iterate`
+; │┌ @ promotion.jl:641 within `==`
+    %.not852.postloop = icmp eq i64 %value_phi649.postloop, 4
+; │└
+   %415 = add nuw nsw i64 %value_phi649.postloop, 1
+; └
+  br i1 %.not852.postloop, label %L2019, label %pass.postloop
+}
