@@ -38,8 +38,8 @@ PotentialFrameWork.with_parameters(::ChangingCutoff,ps)=ChangingCutoff(ps.radius
     end
     @test_throws ArgumentError AC.potential_energy(s,p;parameters=params)
     @test_throws ArgumentError AC.forces(s,p;parameters=params)
-    @test_throws ArgumentError AC.calculate(AC.Forces(),s,p;parameters=params)
-    @test_throws ArgumentError AC.calculate((AC.Energy(),AC.Virial()),s,p;parameters=params)
+    @test forces_agree(AC.calculate(AC.Forces(),s,p;parameters=params).forces,AC.forces(s,p))
+    @test AC.calculate((AC.Energy(),AC.Virial()),s,p;parameters=params).virial ≈ AC.virial(s,p)
     @test_throws ArgumentError AC.calculate(AC.Energy(),s,p;parameters=theta)
     @test_throws ArgumentError AC.calculate(AC.Energy(),s,p;parameters=(amplitudes=[1.],))
     @test_throws ArgumentError AC.calculate(AC.Energy(),s,p;parameters=(amplitudes=[1.,NaN,2.],))

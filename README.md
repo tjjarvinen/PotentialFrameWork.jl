@@ -3,11 +3,11 @@
 [![Build Status](https://github.com/tjjarvinen/PotentialFrameWork.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/tjjarvinen/PotentialFrameWork.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
-Finite-cutoff pair potentials for AtomsBase-compatible 3D systems, with explicit
+CPU pair and ACE potentials for AtomsBase-compatible 3D systems, with explicit
 CPU SIMD blocks and phase-scheduled cell tasks writing into one sorted force
 array. Julia 1.10.10 or later and AtomsBase 0.5.3 or later are required.
 
-Source is grouped into two functional submodules:
+Source is grouped into three functional submodules:
 
 ```text
 src/
@@ -25,11 +25,25 @@ src/
       evaluation.jl
       calculators.jl
       parameters.jl
+      numerical.jl
+    ACE/
+      ACE.jl
+      resolved.jl
+      environments.jl
+      serial.jl
+      calculators.jl
+      persistence.jl
+      fitting.jl
+      cpu.jl
+      angular_blocks.jl
 ```
 
 `NeighbourList` owns spatial storage, scheduling, block geometry, neighbour queries
 and neighbour-search benchmarks. `PairPotentials` owns interaction models, force
 and virial evaluation, AtomsCalculators methods and parameter derivatives.
+`ACE` owns resolved-model import, full species-grouped environments, independent
+ACE evaluation, fitting features and CPU execution. ACEpotentials is used only
+by the separate pinned reference/export scripts.
 The root module reexports the public API. Low-level prepared evaluation helpers
 are now in `PairPotentials`, and geometry helpers are in `NeighbourList`.
 
@@ -123,8 +137,9 @@ output. Compatible extra keywords are accepted and ignored.
 
 `calculate` accepts individual properties or tuples, with `parameters` and `state`
 as keywords or positional arguments. `nothing` or an empty parameter NamedTuple
-uses the values bundled in the potential. Explicit parameters currently support
-energy-only requests. State is returned unchanged because the calculator is stateless.
+uses the values bundled in the potential. Explicit parameters support energy,
+forces and virial; the force/virial route is a scalar correctness path. State is
+returned unchanged because the pair calculator is stateless.
 Custom full-block potentials can subtype `AbstractPairPotential` to inherit this
 interface, as shown in [the callback example](examples/custom_callback.jl).
 
@@ -148,8 +163,8 @@ returns derivatives of numeric energy in eV. `calculate` itself still returns
 unitful energy. See the [runnable example](examples/parameter_ad.jl).
 
 For custom potentials, implement `AC.get_parameters(p)` and
-`with_parameters(p, parameters::NamedTuple)` returning a new potential. The initial
-parameter interface accepts a flat NamedTuple of real scalar/vector fields.
+`with_parameters(p, parameters::NamedTuple)` returning a new potential. Parameters
+can contain real scalars, arrays and nested NamedTuples.
 Keep the physical cutoff fixed. The reconstructed energy callback must support
 scalar blocks containing parameter-promoted numbers, including ForwardDiff duals.
 The [benchmark LJ model](benchmark/lennard_jones/common.jl) demonstrates trainable
@@ -168,9 +183,30 @@ analytic implementation; loading ForwardDiff provides a generic fallback.
 ForwardDiff, using one basis evaluation per coefficient. Reverse-mode gradients
 for generic models currently use ForwardDiff locally, so their cost grows with
 parameter count. Pullbacks capture gradients when the rule runs and can be reused
-after workspace mutation. This is first-order reverse-mode support; higher-order
-reverse-mode, parameter derivatives of forces/virials, cutoff derivatives and
-system derivatives remain follow-up work. ForwardDiff energy Hessians are tested.
+after workspace mutation. This legacy primitive differentiates parameters only;
+its system tangent explicitly reports unsupported requests. For position and
+force-output derivatives use the explicit numerical interface below. Cutoff and
+cell derivatives and arbitrary higher-order reverse AD are not provided.
+
+The explicit pair interface preserves positions and parameters through numerical
+evaluation, with fixed discrete images and original atom order:
+
+```julia
+input = pair_inputs(sys, p)       # AtomsBase/unit/topology boundary
+ps = AC.get_parameters(p)
+result = pair_evaluate(input.positions, p, ps, input.environment, input.cell)
+gx, gp = Zygote.gradient(input.positions, ps) do X, parameters
+    sum(input.positions .* pair_evaluate(X, p, parameters,
+        input.environment, input.cell).forces)
+end
+```
+
+Both ForwardDiff and ChainRulesCore must be loaded for the supplied Zygote
+pullbacks. Energy, force and virial losses differentiate into explicit positions
+and parameters at fixed cell/topology. Pair force pullbacks use edge-local AD;
+custom callbacks must preserve promoted scalar arithmetic. Saved pullbacks own
+their inputs and survive caller/workspace mutation. Rebuild discrete metadata
+after changing species, topology or cutoff. Numerical values are Å/eV throughout.
 
 Start Julia with `julia --threads=4 --project` to use four threads. `parallel=false`
 is the default. `evaluate(sys,p; width=4, precision=Float64, ...)` creates its own
@@ -284,8 +320,81 @@ Run `julia --project -e 'using Pkg; Pkg.test()'`. See
 [implementation status and measured limitations](docs/implementation/STATUS.md).
 The independent all-pairs oracle, derivatives, pair ownership, actual write
 footprints, widths/precisions and repeated threaded evaluations are tested.
-ACE site preparation, MACE layer stages, few-buffer/NUMA domains, GPU execution,
-MPI, training and long-range forces remain separate extensions.
+MACE layers, GPU execution, MPI and long-range forces remain separate phases.
+
+The supplied TiAl ACE model is available through a versioned resolved export:
+
+```julia
+using SpheriCart                   # optional reference angular backend
+const A = PotentialFrameWork.ACE
+calc = A.ACECalculator("data/ace_ref/reference_model.json"; width=4)
+result = AC.energy_forces_virial(sys, calc; parallel=true)
+model, ps, st = calc.model, AC.get_parameters(calc), calc.state
+input = A.ace_inputs(sys, model)
+serial = A.ace_evaluate(input.positions, model, ps, input.environment, input.cell)
+```
+
+`load_recipe` checks the source hash against the resolved sibling export. To
+regenerate it, run `julia --project=data/ace_ref data/ace_ref/export_resolved_model.jl`
+with Julia 1.13.2. This loads the saved model without fitting. Independent runtime
+evaluation has no ACEpotentials dependency. Only the resolved scalar invariant,
+Agnesi/spline radial, pair and one-body components are supported. Element channels
+reject isotopes and custom species names explicitly.
+
+Load a resolved export directly with `A.ACECalculator("resolved_model_v1.toml")`.
+Save a self-contained calculator checkpoint after fitting or tuning:
+
+```julia
+A.save_calculator("tuned.toml", calc)  # current installed parameters and state
+# If AD training kept parameters outside the calculator:
+A.save_calculator("tuned.toml", calc; parameters=trained_ps, state=st)
+restored = A.ACECalculator("tuned.toml"; width=4, slots=Threads.nthreads())
+```
+
+Checkpoints include the complete resolved basis, references, current readout and
+radial/pair scales, and explicit state. They need no sibling reference files or
+ACEpotentials installation. Execution scratch and inference caches are rebuilt;
+load with SpheriCart available for the default angular backend, or select
+`angular_backend=:block`. Nested NamedTuples/tuples, numeric arrays/scalars,
+strings and `nothing` are supported; Float32/Float64 types and array shapes are
+preserved. Unsupported values (including AD tracers) and nonfinite numbers are
+rejected. Saving replaces the destination after a complete write and does not
+install an explicit parameter override in the calculator. This versioned TOML
+checkpoint is a PotentialFrameWork format, separate from ACEpotentials JSON.
+
+`A.design_matrix` returns original-coordinate energy/force/virial rows and a fixed
+baseline. `A.training_rows` selects present labels and residual weights. Labels
+can be plain numbers (energy/virial in eV, forces in eV/Å) or Unitful quantities
+in compatible units, which are converted before baseline subtraction. Force
+labels accept a 3×N matrix or a vector of three-component per-atom vectors, as
+used by ExtXYZ. Virial labels are configurational virials in energy units, not
+volume-normalized stress. Missing properties and `nothing` omit those rows.
+Positions and cells from AtomsBase systems are converted to Å by `A.ace_inputs`;
+the explicit numerical kernels and design matrix use plain Å/eV arrays.
+Load optional ACEfit to call `A.fit_linear`; `A.install_readout` installs the dense
+original readout coordinates. `fit_pair=false` keeps imported pair weights fixed
+and includes their predictions in the baseline. See the
+[ACE validation and benchmark guide](benchmark/ace/README.md).
+
+For nonlinear training, `A.trainable_parameters(model, ps)` adds explicit diagonal
+radial/pair scales. Load LuxCore and call `lux_layer(model; parameters=ps)` or
+`lux_layer(p)` for pair models. `LuxCore.apply(layer, input, ps, st)` returns
+`(energy/forces/virial, st)` without putting mutable scratch in Lux state.
+Zygote rules cover both position and parameter energy/force losses and virial
+parameter losses; virial position products also work. Cell AD is explicitly
+unsupported. These rules are verified for first reverse derivatives through
+forces, including short fixed-cell rollouts; arbitrary reverse derivative order
+and differentiation through preparation or mutable inference execution are not
+claimed. Training uses the explicit numerical primitives or Lux layers.
+
+`A.CPUExecutor` owns capacity-managed scratch slots and one sorted force array.
+Rebuild the environment and call `A.prepare_executor!` before changed topology;
+`A.execute_prepared!` refreshes precontraction from current parameters. Returned
+`A.prepared_result` arrays own their storage. The default angular backend remains
+SpheriCart. Explicit `angular_backend=:generated` / `:block` and `fused=true`
+select measured experiments. Tiled fusion retains intermediates for reverse
+contraction. Imported coefficients remain Float64; a Float32 executor uses
+Float32 buffers with mixed radial arithmetic. No GPU support is implemented.
 
 For an external reference comparison, see the [Argon Lennard-Jones benchmark](benchmark/lennard_jones/README.md).
 It matches EmpiricalPotentials' cutoff formula, checks energy/forces/virial, and

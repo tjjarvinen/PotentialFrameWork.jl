@@ -1,0 +1,7 @@
+[deps]
+ACEpotentials = "3b96b61c-0fcc-4693-95ed-1ef9f35fcc53"
+AtomsBase = "a963bdd2-2df7-4f54-a1ee-49d51e6be12a"
+AtomsCalculators = "a3e0e189-c65a-42c1-833c-339540406eb1"
+AtomsSystems = "bd665c09-60e6-46be-bbfe-8f6ec2b68ee8"
+ExtXYZ = "352459e4-ddd7-4360-8937-99dcb397b478"
+Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"

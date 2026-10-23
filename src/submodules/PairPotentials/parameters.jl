@@ -1,12 +1,35 @@
-# Flat NamedTuples make parameter names explicit, while scalar/vector fields are
-# directly usable by ForwardDiff and structured ChainRules tangents.
+# NamedTuple trees preserve parameter names and scalar/array shapes for
+# ForwardDiff and structured ChainRules tangents.
 parameter_zero(x::Real)=zero(x)
-parameter_zero(x::AbstractVector{<:Real})=zero(eltype(x))
-parameter_zero(x)=throw(ArgumentError("parameter fields must be real scalars or real vectors"))
+parameter_zero(x::AbstractArray{<:Real})=zero(eltype(x))
+parameter_zero(x::NamedTuple)=sum(parameter_zero,values(x);init=0)
+parameter_zero(x)=throw(ArgumentError("parameter fields must be real scalars, arrays or nested NamedTuples"))
 function parameter_seed(parameters::NamedTuple)
     isempty(parameters) && throw(ArgumentError("explicit parameters must be nonempty"))
     sum(parameter_zero,values(parameters))
 end
+
+parameter_flatten(x::Real)=[x]
+parameter_flatten(x::AbstractArray{<:Real})=vec(copy(x))
+parameter_flatten(x::NamedTuple)=vcat(map(parameter_flatten,values(x))...)
+function parameter_rebuild(template,flat)
+    offset=Ref(0)
+    function rebuild(x)
+        if x isa NamedTuple
+            return NamedTuple{keys(x)}(map(rebuild,values(x)))
+        elseif x isa Real
+            offset[]+=1
+            return flat[offset[]]
+        else
+            n=length(x); lo=offset[]+1; offset[]+=n
+            return reshape(copy(flat[lo:offset[]]),size(x))
+        end
+    end
+    rebuild(template)
+end
+parameter_scale(delta,ps::NamedTuple)=map(x -> parameter_scale(delta,x),ps)
+parameter_scale(delta,x::Real)=delta*x
+parameter_scale(delta,x::AbstractArray)=delta.*x
 
 function AC.get_parameters(p::SmoothPair)
     n=length(p.labels)

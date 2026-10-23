@@ -65,7 +65,7 @@ function neighbour_list(X::Union{AbstractVector,AbstractMatrix},cutoff,
 end
 
 function neighbour_list(sys::AtomsBase.AbstractSystem{3},cutoff;
-                        width=4,precision=Float64,bruteforce_threshold=32,int_type=Int32)
+                        width=4,precision=Float64,bruteforce_threshold=32,int_type=Int32,timings=nothing)
     int_type in (Int8,Int16,Int32,Int64,Int128) ||
         throw(ArgumentError("int_type must be a signed built-in integer type"))
     n=length(sys)
@@ -73,7 +73,13 @@ function neighbour_list(sys::AtomsBase.AbstractSystem{3},cutoff;
     w=Workspace(;width,precision,bruteforce_threshold)
     c=numeric_length(precision,cutoff)
     prepare!(w,sys,c)
-    materialize(w,sys,int_type)
+    start=time_ns()
+    snapshot=materialize(w,sys,int_type)
+    if !isnothing(timings)
+        merge!(timings,w.timings)
+        timings[:snapshot_materialization]=(time_ns()-start)*1e-9
+    end
+    snapshot
 end
 
 function materialize(w::Workspace{W,T},sys,::Type{TI}) where {W,T,TI}

@@ -103,10 +103,18 @@ function calculate(properties,sys,p,parameters,state;kwargs...)
         throw(ArgumentError("supported properties are Energy(), Forces() and Virial()"))
     if !(isnothing(parameters) || parameters===NamedTuple())
         parameters isa NamedTuple || throw(ArgumentError("explicit parameters must be a NamedTuple"))
-        !isempty(props) && all(prop -> prop isa AC.Energy,props) ||
-            throw(ArgumentError("explicit parameters currently support energy-only requests"))
-        energy=parameter_energy(sys,p,parameters;kwargs...)*u"eV"
-        return (;energy,state)
+        isempty(props) && return (;state)
+        if all(prop -> prop isa AC.Energy,props)
+            energy=parameter_energy(sys,p,parameters;kwargs...)*u"eV"
+            return (;energy,state)
+        end
+        # Explicit scalar correctness route. Production bundled-parameter SIMD
+        # execution is unchanged. Never convert explicit parameters to workspace
+        # precision or detach force/virial parameter arithmetic.
+        input=pair_inputs(sys,p)
+        r=pair_evaluate(input.positions,p,parameters,input.environment,input.cell)
+        unitful=(;energy=r.energy*u"eV",forces=r.forces*u"eV/Å",virial=r.virial*u"eV")
+        return merge(map(prop -> property_result(prop,unitful),props)...,(;state))
     end
     isempty(props) && return (;state)
     request=all(prop -> prop isa AC.Energy,props) ? EnergyOnly() : EnergyForcesVirial()

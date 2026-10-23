@@ -1,29 +1,44 @@
-# Codex implementation handoff
+# CPU ACE implementation handoff — 22 October 2026
 
-Copy AGENTS.md into the PotentialFrameWork.jl repository root and copy
-docs/implementation/ into its docs/implementation/ directory. Merge with any
-existing instructions rather than replacing them blindly. START-HERE.md is a
-handoff note and need not be committed.
+## Install
 
-Repository inspected: https://github.com/tjjarvinen/PotentialFrameWork.jl
-Baseline HEAD observed on 2026-10-20:
-`1c58f1128a6298979d31a79389807e60537cce49`.
-It contained a package skeleton, empty source module and placeholder tests;
-Project.toml specified Julia 1.10.10 compatibility and package UUID
-069ed237-161a-43fa-b820-4bdfd41b3db4. Reinspect the working tree before editing.
+Copy this bundle's `AGENTS.md` to the repository root, merging unrelated local
+instructions. Copy its `docs/implementation/ACE-*.md` files into the matching
+directory. Leave the original implementation documents and STATUS.md in place;
+these new documents explicitly define the next phase.
 
-Suggested opening prompt in VS Code Codex:
+The reference files are already in the user's local `data/ace_ref` directory.
+This bundle deliberately does not duplicate them. Use the corrected version with
+model-predicted per-atom forces, corresponding to the uploaded `ace_ref(1).zip`.
 
-> Read AGENTS.md and the implementation documents it references. Implement the
-> initial finite-cutoff pair-potential stack through milestone 5. Start by inspecting
-> the repository and dependencies, then proceed in the documented order. Preserve
-> unrelated changes. Use the NeighbourList submodule, explicit SIMD blocks and
-> cell-task scheduling into one shared spatially ordered force array. Validate
-> numerical results, periodic ownership and parallel write footprints. Record
-> decisions, completed checks, benchmarks and limitations in STATUS.md. ACE/MACE,
-> GPU execution and long-range forces remain follow-up work.
+No potential implementation is included in this bundle. No Julia tests were run
+while preparing it. The source inspection baseline was remote main commit
+`cd5d90e72b42834983151a9324ce84ed6d3b4029` (21 October 2026).
+The local tree may have further changes and is authoritative.
 
-These documents contain instructions only: no potential implementation has been
-written or benchmarked as part of this handoff. Decisions such as starting with
-orthorhombic cells and rebuilding lists by default are explicit first-version
-defaults proposed here, not claims that every detail was previously agreed.
+## Suggested initial prompt for VS Code Codex
+
+Read AGENTS.md and all ACE documents it references. Inspect the current source,
+tests and local data/ace_ref before editing. Implement the CPU phase through M8
+of ACE-PLAN.md in small reviewable steps, preserving the existing pair API and
+one-shared-force-array execution requirement. Start by validating the saved
+reference model in its pinned environment, establishing explicit position/
+parameter interfaces and proving the required pair-potential derivative products.
+Reconstruct and export the resolved ACE basis, implement full species-grouped
+environments and an independent serial evaluator, then add ACEfit integration,
+SIMD/preallocation/parallel execution and complete Lux/ChainRules support.
+Benchmark angular block/fusion variants only after baseline correctness. Update
+STATUS.md as gates pass. GPU implementation remains a separate later phase.
+Do not stop for routine confirmation between milestones.
+
+## Review checkpoints
+
+1. Verified reference predictions; position/parameter contract and pair derivative
+   checks; explicit model/state/workspace boundaries.
+2. Imported model with intermediate, energy, force and virial agreement.
+3. ACEfit assembly and fits; optimized CPU serial/parallel evaluator.
+4. Required Lux/AD paths and short differentiable fixed-cell MD validation.
+5. Angular SIMD/fusion experiment results and documented backend choices.
+
+These checkpoints structure implementation/review; they are not mandatory
+permission pauses. Do not implement GPU or MACE to complete this CPU handoff.

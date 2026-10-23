@@ -1,44 +1,72 @@
-# PotentialFrameWork.jl — implementation guidance
+# PotentialFrameWork.jl — CPU ACE and differentiable pair implementation
 
-This is Teemu Järvinen's working package name. Preserve the package name, UUID,
-authorship, license and existing user changes. Develop components as submodules;
-the neighbour component is `NeighbourList` (singular).
+Preserve package name, UUID, authorship, license, existing public behaviour and
+unrelated user changes. This is Teemu Järvinen's working package name.
 
-Read these files before implementation, in order:
-1. `docs/implementation/INITIAL-SPEC.md`
-2. `docs/implementation/DEVELOPMENT-PLAN.md`
-3. `docs/implementation/VALIDATION.md`
+## Active scope and reading order
 
-Implement the initial finite-cutoff pair-potential stack described there. The
-central goals are explicit SIMD pair blocks and spatially scheduled force
-accumulation using one force array, with a small-buffer alternative later.
-Sorting already works in NeighbourLists.jl; investigate and reuse its approach
-rather than treating spatial sorting as an unproven research problem.
+This file supersedes the first-phase prohibition on ACE and training. That
+prohibition applied to the completed initial pair-potential implementation.
+Existing first-phase numerical, ownership and one-force-array requirements remain.
+Read, in order:
+1. `docs/implementation/ACE-REFERENCE.md`
+2. `docs/implementation/ACE-SPEC.md`
+3. `docs/implementation/ACE-PLAN.md`
+4. `docs/implementation/ACE-VALIDATION.md`
+Then inspect existing source, tests, Project.toml and the latest entries of
+`docs/implementation/STATUS.md`. Old INITIAL-SPEC/DEVELOPMENT-PLAN/VALIDATION files
+are historical context; the ACE documents govern new scope where they differ.
+
+Implement the CPU phase through M8 in ACE-PLAN.md. It includes importing the
+provided ACEpotentials model, a separate ACE evaluator, SIMD radial evaluation,
+preallocated numerical workspaces, complete species-grouped environments,
+ACEfit integration, Lux support, and ChainRules derivatives for pair and ACE
+models. Test the optional angular SIMD/fusion approaches after the baseline.
+
+GPU implementation is a separate later project phase. Preserve backend/layout
+boundaries without adding GPU dependencies, kernels or claiming GPU support.
+MACE layers, MPI, long-range electrostatics and pressure-coupled differentiable MD
+are also outside this phase.
 
 ## Working rules
 
-- Inspect the current repository, dependency APIs and existing instructions first.
-  The handoff was based on a minimal package skeleton, not a completed design.
-- Target the repository's Julia compatibility (currently `1.10.10`). Verify
-  dependency compatibility and use actual package APIs, not invented methods.
-- Use AtomsBase for system input. AtomsSystems is an optional helper, not a
-  required concrete system type. Keep generic system access outside inner loops.
-- Prefer SIMD.jl for the first CPU vector implementation. Keep width selectable
-  through concrete types; do not promise GPU portability by widening CPU vectors.
-- Keep atom/species data as runtime values, with concrete types in hot loops.
-- Implement and validate serial execution before parallel scheduling.
-- Make block evaluation and accumulation inlineable; avoid retaining all pair
-  results in memory. Separate conceptual interfaces need not create runtime costs.
-- Do not use a full force array per thread as the production implementation.
-  Such an implementation is allowed as an explicitly labelled benchmark baseline.
-- Do not implement ACE, MACE, training, GPU kernels, MPI or long-range electrostatics
-  in this first version. Preserve extension points described in the specification.
+- Reinspect the actual local tree: the user's `data/ace_ref` may be uncommitted.
+  Never replace local files with the older remote checkout.
+- Keep functional source components as submodules. Preserve `NeighbourList`
+  (singular) and `PairPotentials`; add `ACE`. Keep the root module thin.
+- Preserve Julia compatibility, currently 1.10.10, where practical. Verify new
+  dependencies' actual APIs/compatibility. Keep the pinned Julia 1.13.2 reference
+  environment separate. Do not raise core compatibility just to load a reference
+  package or regenerate reference tables.
+- Use AtomsBase as the system boundary; AtomsSystems is optional. Convert units
+  explicitly at the boundary; numerical kernels use Å/eV conventions.
+- Use explicit parameters/state and separate scratch ownership. Keep a convenient
+  calculator wrapper and compatibility adapters for existing pair callbacks.
+- Keep species/parameters as runtime data and hot loops concretely typed.
+- Prefer SIMD.jl for CPU blocks. Validate a serial correctness path first.
+- Half-list pair geometry and force schedules are not complete ACE environments.
+  Build and test full directed neighbourhoods and their force-write footprints.
+- Use one shared sorted force array in the production CPU executor. Full force
+  arrays per worker are allowed only as labelled benchmark baselines. Small
+  scratch buffers per exclusive execution slot are allowed.
+- Standard sparse maps and in-place matrix multiplication are the baseline.
+  TensorOperations.jl is optional, not a required core dependency. Bumper is
+  optional for irregular CPU temporaries, not required for workspace ownership.
+- Support AD into positions and explicit parameters; never silently detach them
+  through stored displacements, precision conversions or stale inference caches.
+- Required derivatives: energy -> positions/parameters; forces -> positions/
+  parameters; virial -> parameters. Virial -> positions is optional and must
+  explicitly report unsupported requests rather than return zero.
+- Validate force pullbacks explicitly. An energy rrule alone is insufficient for
+  force-loss training or differentiation through MD.
 - Do not spawn subagents unless the user explicitly requests delegation.
-- Run meaningful numerical and scheduling tests. Report actual measurements,
-  versions, hardware and thread counts; never invent speedups.
-- Record material implementation choices and limitations in
-  `docs/implementation/STATUS.md` as implementation proceeds. Do not silently
-  weaken the specification to make a benchmark or test pass.
+- Run meaningful numerical, derivative, memory and scheduling checks. Record
+  measurements and dependency/hardware versions; do not invent passing tests,
+  performance gains or automatic-differentiation support.
+- Update STATUS.md with completed gates, remaining limitations and reproduction
+  commands. Keep historical measurements clearly labelled.
 
-Proceed through the milestones without requesting approval for routine reversible
-implementation decisions. If a scope change is necessary, explain it clearly.
+Proceed autonomously through routine reversible implementation choices and fix
+failures within scope. If a dependency or missing input genuinely blocks progress,
+finish independent work and report the precise blocker. Never weaken a numerical
+contract silently to get a test or benchmark to pass.
