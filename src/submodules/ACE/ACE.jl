@@ -18,12 +18,22 @@ export training_rows
 export CPUExecutor, execute_prepared!, prepare_executor!, prepared_result
 export trainable_parameters, ace_vjp
 export BlockAngular, angular_block!
+export descriptors, basis_summary, basis_identity, BasisSelection, mask_basis, prune_basis, restrict_basis
+export project_species, components, mapped_prior, coefficient_map
+export restrict_parameters
+export RadialMetadata, CallableRadial, replace_radial, radial_evaluate!, radial_capabilities
+export allocating_radial
+export register_radial!, source_radial, tabulate_radial, radial_samples, plot_basis
 
 include("resolved.jl")
+include("interface.jl")
+include("radials.jl")
 include("environments.jl")
+include("projection.jl")
 include("serial.jl")
 include("calculators.jl")
 include("persistence.jl")
+include("interface_persistence.jl")
 include("fitting.jl")
 include("angular_blocks.jl")
 include("cpu.jl")

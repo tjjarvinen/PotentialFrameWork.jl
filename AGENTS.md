@@ -70,3 +70,25 @@ Proceed autonomously through routine reversible implementation choices and fix
 failures within scope. If a dependency or missing input genuinely blocks progress,
 finish independent work and report the precise blocker. Never weaken a numerical
 contract silently to get a test or benchmark to pass.
+
+## ACE interface phase — 24 October 2026
+
+Implement the CPU interface phase in this reading order:
+1. `docs/implementation/ACE-INTERFACE-SPEC.md`
+2. `docs/implementation/ACE-INTERFACE-PLAN.md`
+3. `docs/implementation/ACE-INTERFACE-VALIDATION.md`
+
+These additions extend the completed CPU ACE phase, not replace its numerical,
+unit, force-storage, scratch, AD lifetime or compatibility requirements. Preserve
+existing supported model imports and native checkpoint loading.
+
+Scope: descriptor inspection and optional UnicodePlots extension; masking and
+structural pruning; restricted construction from an existing basis; central-index
+selection; neighbor-species correlation-order projection; custom radial callables,
+derivatives and persistence. Use original indices and explicit parameters.
+
+No new site-energy API, changing regions, central-species selector, independent
+multi-group species-order counters, general ACE basis generator, model-composition
+framework, QM/MM physics, GPU implementation, or MACE layers in this phase.
+Preserve boundaries that allow those future additions. Do not delegate to agents
+without an explicit user request. Finish authorized reversible work autonomously.

@@ -11,14 +11,20 @@ mutable struct SiteScratch{T}
     A::Vector{T}
     P::Vector{T}
     dA::Vector{T}
+    U::Vector{T}
+    V::Vector{T}
+    dV::Vector{T}
+    polynomial::Matrix{T}
+    reverse_polynomial::Matrix{T}
 end
 function SiteScratch(model,capacity,::Type{T}) where T
     nr=length(model.radial_spec); nq=length(model.pair_spec); ny=(model.lmax+1)^2
     SiteScratch(zeros(SVector{3,T},capacity),zeros(T,capacity,nr),zeros(T,capacity,nr),
         zeros(T,capacity,nq),zeros(T,capacity,nq),zeros(T,capacity,ny),zeros(SVector{3,T},capacity,ny),
-        zeros(T,length(model.density)),zeros(T,length(model.products)),zeros(T,length(model.density)))
+        zeros(T,length(model.density)),zeros(T,length(model.products)),zeros(T,length(model.density)),zeros(T,length(model.density)),zeros(T,length(model.density)),
+        zeros(T,length(model.density)),projection_work(model,T)...)
 end
-mutable struct CPUExecutor{T,B,M}
+mutable struct CPUExecutor{T,B,M,R}
     model::M
     environment::FullEnvironment
     basis::B
@@ -31,6 +37,8 @@ mutable struct CPUExecutor{T,B,M}
     virials::Matrix{T}
     capacity::Int
     environment_version::UInt
+    readout::R
+    center_mask::BitVector
 end
 function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angular_backend=:sphericart)
     precision in (Float32,Float64) || throw(ArgumentError("CPU executor precision must be Float32/64"))
@@ -38,7 +46,8 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
     basis=make_angular(model,precision,angular_backend,env.width)
     T=precision
     w=CPUExecutor(model,env,basis,[SiteScratch(model,0,T) for _=1:slots],zeros(T,3,0),Int[],Int[],
-        zeros(T,length(model.products),length(model.atomic_numbers)),T[],zeros(T,9,0),0,UInt(0))
+        zeros(T,length(model.products),length(model.atomic_numbers)),T[],zeros(T,9,0),0,UInt(0),
+        zeros(promote_type(Float64,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector())
     prepare_executor!(w,env)
 end
 function prepare_executor!(w::CPUExecutor{T},env) where T
@@ -52,6 +61,7 @@ function prepare_executor!(w::CPUExecutor{T},env) where T
     for k in eachindex(w.p); w.inverse[w.p[k]]=k; end
     size(w.force,2)==n || (w.force=zeros(T,3,n))
     resize!(w.energies,n)
+    resize!(w.center_mask,n)
     size(w.virials,2)==n || (w.virials=zeros(T,9,n))
     w.environment_version=env.version
     w
@@ -63,7 +73,7 @@ function angular_ed! end
 # interval selection are scalar per lane; channel/species selection is outside
 # SIMD arithmetic. This is intentionally separate from an analytic recurrence
 # for a polynomial basis that is not the reconstructed model.
-function radial_block!(R,dR,rs,ch,start,::Val{W},active) where W
+function radial_block!(R,dR,rs,ch::RadialChannel,start,::Val{W},active,ps=NamedTuple()) where W
     xs=ntuple(k -> transformed(ch.transform,rs[k]),W)
     idx=ntuple(k -> clamp(searchsortedlast(ch.nodes,xs[k]),1,length(ch.nodes)-1),W)
     us=ntuple(k -> (xs[k]-ch.nodes[idx[k]])/(ch.nodes[idx[k]+1]-ch.nodes[idx[k]]),W)
@@ -114,9 +124,10 @@ function scale_rows!(s,ps,iz,z,lo,hi)
         end
     end
 end
-function project_rows!(s,model,lo,hi)
+function project_rows!(s,model,lo,hi,selected=false)
     for (a,(r,m)) in enumerate(model.density),j=lo:hi
-        s.A[a]+=s.R[j,r]*s.Y[j,m]
+        value=s.R[j,r]*s.Y[j,m]; s.A[a]+=value
+        if selected; s.V[a]+=value; else; s.U[a]+=value; end
     end
 end
 function cpu_site!(w::CPUExecutor{T},s::SiteScratch,i,X,H,ps,::Val{W},simd,fused=false) where {T,W}
@@ -126,7 +137,7 @@ function cpu_site!(w::CPUExecutor{T},s::SiteScratch,i,X,H,ps,::Val{W},simd,fused
         k=firstedge+j-1; s.Rs[j]=edge_displacement(X,H,env,i,k)
         env.active[k] && iszero(norm(s.Rs[j])) && throw(DomainError(0,"coincident atoms"))
     end
-    fill!(s.A,0); fill!(s.dA,0)
+    fill!(s.A,0); fill!(s.U,0); fill!(s.V,0); fill!(s.dA,0)
     for z in eachindex(model.atomic_numbers)
         lo=env.offsets[z,i]; hi=env.offsets[z+1,i]-1
         if simd
@@ -134,21 +145,21 @@ function cpu_site!(w::CPUExecutor{T},s::SiteScratch,i,X,H,ps,::Val{W},simd,fused
                 localstart=k-firstedge+1
                 rs=ntuple(lane -> norm(s.Rs[localstart+lane-1]),W)
                 active=ntuple(lane -> env.active[k+lane-1],W)
-                radial_block!(s.R,s.dR,rs,model.radial[iz,z],localstart,Val(W),active)
-                radial_block!(s.Q,s.dQ,rs,model.pair_radial[iz,z],localstart,Val(W),active)
+                radial_block!(s.R,s.dR,rs,model.radial[iz,z],localstart,Val(W),active,radial_parameters(ps,:custom_radial))
+                radial_block!(s.Q,s.dQ,rs,model.pair_radial[iz,z],localstart,Val(W),active,radial_parameters(ps,:custom_pair))
                 if fused
                     stop=localstart+W-1
                     scale_rows!(s,ps,iz,z,localstart,stop)
                     angular_ed!(view(s.Y,localstart:stop,:),view(s.dY,localstart:stop,:),w.basis,view(s.Rs,localstart:stop))
-                    project_rows!(s,model,localstart,stop)
+                    project_rows!(s,model,localstart,stop,z in model.policy.species)
                 end
             end
         else
             for k=lo:hi
                 j=k-firstedge+1
                 if env.active[k]
-                    s.R[j,:],s.dR[j,:]=radial_ed(model.radial[iz,z],norm(s.Rs[j]))
-                    s.Q[j,:],s.dQ[j,:]=radial_ed(model.pair_radial[iz,z],norm(s.Rs[j]))
+                    s.R[j,:],s.dR[j,:]=radial_ed(model.radial[iz,z],norm(s.Rs[j]),radial_parameters(ps,:custom_radial))
+                    s.Q[j,:],s.dQ[j,:]=radial_ed(model.pair_radial[iz,z],norm(s.Rs[j]),radial_parameters(ps,:custom_pair))
                 else
                     for a=1:size(s.R,2); s.R[j,a]=s.dR[j,a]=0; end
                     for a=1:size(s.Q,2); s.Q[j,a]=s.dQ[j,a]=0; end
@@ -156,29 +167,31 @@ function cpu_site!(w::CPUExecutor{T},s::SiteScratch,i,X,H,ps,::Val{W},simd,fused
             end
         end
         fused || scale_rows!(s,ps,iz,z,lo-firstedge+1,hi-firstedge+1)
+        if !pair_allowed(model,z)
+            for j=lo-firstedge+1:hi-firstedge+1,n=1:size(s.Q,2)
+                s.Q[j,n]=s.dQ[j,n]=0
+            end
+        end
     end
     if !fused && count>0
         angular_ed!(view(s.Y,1:count,:),view(s.dY,1:count,:),w.basis,view(s.Rs,1:count))
     end
-    fused || project_rows!(s,model,1,count)
-    energy=T(model.reference[iz])
-    for (k,indices) in enumerate(model.products)
-        value=one(T)
-        for a in indices; value*=s.A[a]; end
-        s.P[k]=value; energy+=w.weights[k,iz]*value
-        for t in eachindex(indices)
-            v=w.weights[k,iz]
-            for u in eachindex(indices); u==t || (v*=s.A[indices[u]]); end
-            s.dA[indices[t]]+=v
+    if !fused
+        for z in eachindex(model.atomic_numbers)
+            project_rows!(s,model,env.offsets[z,i]-firstedge+1,env.offsets[z+1,i]-firstedge,z in model.policy.species)
         end
     end
+    energy=T(reference_value(model,iz))
+    product_projection!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(w.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial)
+    for k in eachindex(s.P); energy+=w.weights[k,iz]*s.P[k]; end
     for j=1:count,n=1:size(s.Q,2); energy+=s.Q[j,n]*ps.Wpair[n,iz]; end
     w.energies[i]=energy
     for j=1:count
         k=firstedge+j-1; env.active[k] || continue
         d=s.Rs[j]; direction=d/norm(d); g=zero(SVector{3,T})
         for (a,(r,m)) in enumerate(model.density)
-            g+=s.dA[a]*(s.dR[j,r]*s.Y[j,m]*direction+s.R[j,r]*s.dY[j,m])
+            adj=env.species[env.neighbours[k]] in model.policy.species ? s.dV : s.dA
+            g+=adj[a]*(s.dR[j,r]*s.Y[j,m]*direction+s.R[j,r]*s.dY[j,m])
         end
         for n=1:size(s.Q,2); g+=ps.Wpair[n,iz]*s.dQ[j,n]*direction; end
         dest=env.neighbours[k]
@@ -195,32 +208,41 @@ shared force array. `prepare_executor!` follows every environment rebuild.
 Precontraction is refreshed from authoritative parameters on every execution.
 Scratch is exclusive per slot; phases advertise complete endpoint footprints.
 """
-function execute_prepared!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false)
+function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,centers=nothing)
     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
     env=w.environment
     env.version==w.environment_version || throw(ArgumentError("prepare executor after rebuilding the environment"))
     length(env.species)==length(w.p) || throw(ArgumentError("prepare executor after environment changes"))
     maximum((env.offsets[end,i]-env.offsets[1,i] for i in eachindex(env.species));init=0)<=w.capacity ||
         throw(ArgumentError("prepare executor after environment growth"))
-    mul!(w.weights,transpose(w.model.coupling),ps.WB)
+    selected=center_indices(centers,length(env.species))
+    selected_mask=w.center_mask; fill!(selected_mask,false)
+    for i in selected; selected_mask[i]=true; end
+    size(ps.WB)==size(w.readout) || throw(DimensionMismatch("CPU readout shape"))
+    for z in axes(w.readout,2),i in axes(w.readout,1)
+        w.readout[i,z]=w.model.policy.mask[i] ? ps.WB[i,z] : zero(eltype(w.readout))
+    end
+    mul!(w.weights,transpose(w.model.coupling),w.readout)
     fill!(w.force,0); fill!(w.energies,0); fill!(w.virials,0)
     if parallel
         for phase in env.phases
             slots=min(length(w.scratch),length(phase))
             if slots<=1
                 for i in phase
+                    selected_mask[i] || continue
                     cpu_site!(w,w.scratch[1],i,X,H,ps,Val(env.width),simd,fused)
                 end
             else
                 Threads.@threads :dynamic for slot=1:slots
                     for k=slot:slots:length(phase)
+                        selected_mask[phase[k]] || continue
                         cpu_site!(w,w.scratch[slot],phase[k],X,H,ps,Val(env.width),simd,fused)
                     end
                 end
             end
         end
     else
-        for i in eachindex(env.species); cpu_site!(w,w.scratch[1],i,X,H,ps,Val(env.width),simd,fused); end
+        for i in selected; cpu_site!(w,w.scratch[1],i,X,H,ps,Val(env.width),simd,fused); end
     end
     w
 end
@@ -229,4 +251,31 @@ inside the executor; this result survives subsequent executions and resizing.
 """
 function prepared_result(w::CPUExecutor)
     (;energy=sum(w.energies),forces=w.force[:,w.inverse],virial=reshape(vec(sum(w.virials;dims=2)),3,3))
+end
+
+# Callable adapter: scalar lanes are explicit, with no claim of arbitrary SIMD AD.
+function radial_block!(R,dR,rs,ch::CallableRadial,start,::Val{W},active,ps=NamedTuple()) where W
+    for k=1:W
+        row=start+k-1
+        if active[k]
+            radial_evaluate!(view(R,row,:),view(dR,row,:),ch,rs[k],ps)
+        else
+            for n=1:size(R,2); R[row,n]=dR[row,n]=0; end
+        end
+    end
+end
+function radial_block!(R,dR,rs,ch,start,::Val{W},active,ps=NamedTuple()) where W
+    for k=1:W
+        row=start+k-1
+        if active[k]
+            v,d=radial_ed(ch,rs[k],ps)
+            for n in eachindex(v); R[row,n]=v[n]; dR[row,n]=d[n]; end
+        else
+            for n=1:size(R,2); R[row,n]=dR[row,n]=0; end
+        end
+    end
+end
+
+function execute_prepared!(w::CPUExecutor,X,H,ps;kwargs...)
+    has_source(w.model) ? Base.invokelatest(execute_prepared_impl!,w,X,H,ps;kwargs...) : execute_prepared_impl!(w,X,H,ps;kwargs...)
 end

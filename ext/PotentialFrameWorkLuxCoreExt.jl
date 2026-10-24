@@ -23,7 +23,7 @@ function (l::PairLayer)(input,ps,st)
     y,st
 end
 function (l::ACELayer)(input,ps,st)
-    y=ace_evaluate(input.positions,l.model,ps,input.environment,input.cell)
+    y=ace_evaluate(input.positions,l.model,ps,input.environment,input.cell;centers=get(input,:centers,nothing))
     y,st
 end
 end

@@ -51,7 +51,7 @@ function checkpoint_decode(d)
     throw(ArgumentError("unsupported checkpoint value kind $kind"))
 end
 
-function checkpoint_radial(channels,spec)
+function checkpoint_radial(channels::AbstractMatrix{<:RadialChannel},spec;parameters=NamedTuple())
     entries=map(CartesianIndices(channels)) do ij
         ch=channels[ij]; t=ch.transform
         tr=Dict(string(k)=>getproperty(t,k) for k in fieldnames(typeof(t)))
@@ -65,20 +65,21 @@ function checkpoint_radial(channels,spec)
     end
     Dict("kind"=>"piecewise_cubic_agnesi","spec"=>[Dict("n"=>n,"l"=>l) for (n,l) in spec],"channels"=>vec(entries))
 end
-function checkpoint_model(m::ResolvedModel{Float64})
+function checkpoint_model(m::ResolvedModel{Float64},ps=NamedTuple())
     rows,cols,vals=findnz(m.coupling)
     Dict("schema"=>"PotentialFrameWork.resolved_ACE","schema_version"=>1,
          "source_sha256"=>m.source_sha256,"species_atomic_numbers"=>m.atomic_numbers,
          "reference_eV"=>m.reference,
          "angular"=>Dict("kind"=>"real_spherical","normalization"=>"L2","ordering"=>"l*l+l+m+1","lmax"=>m.lmax),
-         "radial"=>checkpoint_radial(m.radial,m.radial_spec),
-         "pair_radial"=>checkpoint_radial(m.pair_radial,m.pair_spec),
+         "radial"=>checkpoint_radial(m.radial,m.radial_spec;parameters=radial_parameters(ps,:custom_radial)),
+         "pair_radial"=>checkpoint_radial(m.pair_radial,m.pair_spec;parameters=radial_parameters(ps,:custom_pair)),
+         "interface_policy"=>checkpoint_policy(m.policy),
          "density_indices"=>collect.(m.density),"products"=>m.products,
          "coupling"=>Dict("shape"=>collect(size(m.coupling)),"rows"=>rows,"columns"=>cols,"values"=>vals))
 end
 checkpoint_model(m)=throw(ArgumentError("checkpoint requires a resolved Float64 ACE model"))
 
-function checkpoint_read_model(d,ps)
+function checkpoint_read_model(d,ps;allow_code=false)
     ps isa NamedTuple && hasproperty(ps,:WB) && hasproperty(ps,:Wpair) ||
         throw(ArgumentError("checkpoint parameters require WB and Wpair"))
     nz=length(d["species_atomic_numbers"])
@@ -97,7 +98,7 @@ function checkpoint_read_model(d,ps)
     modeldata=copy(d)
     modeldata["parameters"]=Dict("WB_shape"=>collect(size(ps.WB)),"Wpair_shape"=>collect(size(ps.Wpair)),
         "ordering"=>"vec(WB), vec(Wpair); Julia column-major","flat"=>vcat(vec(ps.WB),vec(ps.Wpair)))
-    first(read_resolved(modeldata))
+    first(read_resolved(modeldata;allow_code,custom_parameters=ps))
 end
 
 """
@@ -108,16 +109,18 @@ TOML export, or a recipe JSON with its matching resolved export. `resolved_path`
 is used only for recipe JSON. Execution keywords (`width`, `slots`, `precision`,
 `angular_backend`) configure fresh scratch; execution caches are never loaded.
 The default angular backend requires SpheriCart to be loaded.
+Custom source checkpoints are refused unless `allow_code=true` explicitly trusts
+the saved Julia definitions. Registered/table channels need no code opt-in.
 """
-function ACECalculator(path::AbstractString;resolved_path=joinpath(dirname(path),"resolved_model_v1.toml"),kwargs...)
+function ACECalculator(path::AbstractString;resolved_path=joinpath(dirname(path),"resolved_model_v1.toml"),allow_code=false,kwargs...)
     model,ps,st=if lowercase(splitext(path)[2])==".json" && startswith(lstrip(read(path,String)),"{")
         load_recipe(path;resolved_path)
     else
         d=TOML.parsefile(path)
         if get(d,"schema",nothing)==CHECKPOINT_SCHEMA
-            get(d,"schema_version",nothing)==1 || throw(ArgumentError("unsupported ACECalculator checkpoint version"))
+            get(d,"schema_version",nothing) in (1,2) || throw(ArgumentError("unsupported ACECalculator checkpoint version"))
             ps=checkpoint_decode(d["parameters"]); st=checkpoint_decode(d["state"])
-            checkpoint_read_model(d["model"],ps),ps,st
+            checkpoint_read_model(d["model"],ps;allow_code),ps,st
         else
             read_resolved(d)
         end
@@ -142,9 +145,12 @@ This is PotentialFrameWork's format, not an ACEpotentials recipe export.
 """
 function save_calculator(path::AbstractString,c::ACECalculator;parameters=c.parameters,state=c.state)
     # Encode/validate before opening the destination, including unsupported state.
-    p=checkpoint_encode(parameters); s=checkpoint_encode(state); m=checkpoint_model(c.model)
-    checkpoint_read_model(m,parameters)
-    d=Dict("schema"=>CHECKPOINT_SCHEMA,"schema_version"=>1,"writer_julia"=>string(VERSION),
+    p=checkpoint_encode(parameters); s=checkpoint_encode(state); m=checkpoint_model(c.model,parameters)
+    validate_checkpoint_model(c.model,parameters)
+    if all(ch -> ch isa RadialChannel,c.model.radial) && all(ch -> ch isa RadialChannel,c.model.pair_radial)
+        checkpoint_read_model(m,parameters) # preserve the original full validator
+    end
+    d=Dict("schema"=>CHECKPOINT_SCHEMA,"schema_version"=>2,"writer_julia"=>string(VERSION),
            "model"=>m,"parameters"=>p,"state"=>s)
     destination=abspath(path)
     tmp,io=mktemp(dirname(destination))

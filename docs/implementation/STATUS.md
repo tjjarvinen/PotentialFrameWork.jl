@@ -1,5 +1,131 @@
 # Implementation status
 
+## CPU ACE interface phase (2026-10-24)
+
+Started on `ACE_tuning` at `71492894e2e3881c75bc032dacab2879a4df0d57`, identical
+to local `main`; preserved the user's modified AGENTS.md and untracked interface
+specification/plan/validation documents. Package name/UUID/authors/license and
+Julia 1.10.10 compatibility are unchanged. Source remains in ACE, the root stays
+thin, and no GPU dependencies or implementation were added.
+
+The public API and mathematical conventions are documented in
+`docs/ace_interface.md`; runnable examples are `examples/ace_interface.jl`,
+`examples/ace_radial_source.jl` and the separate pinned-environment
+`examples/acepotentials_radial_adapter.jl`.
+
+| Milestone | Implementation and evidence |
+| --- | --- |
+| I0 | Inventory of ResolvedModel dispatch in numerical/calculator/CPU/ChainRules/Lux/fitting/checkpoint code; HEAD equals main; baseline 44,501 assertions on Julia 1.13.2 / 4 threads (`/tmp/pfw-interface-baseline.log`). Reference hashes below were preserved. |
+| I1 | Owning `descriptors`/`basis_summary`, namespaced original IDs and actual mixed-order coupling terms; immutable `BasisSelection`; reversible effective masks; structural pruning with coefficient/dependency maps and nonlinear scale transfer; `restrict_parameters` supports reverse scatter into parent coordinates. `restrict_basis(path; ...)` compacts serialized radial/coupling/parameter tables before constructing ResolvedModel, without constructing a full evaluator/workspace. Mask/prune/update/empty-basis, mapped prior, mixed-order metadata and repeated-provenance tests pass. |
+| I2 | Original-order `centers` at numerical, calculator, prepared CPU and fitting entry points; Lux inputs carry centers and ChainRules owns saved selections. All/range/reordered/empty/invalid behavior, site partition sums, forces on nonselected neighbors, force-write storage and saved selections are checked. Full environments are still prepared. |
+| I3 | One selected neighbor-species group and inclusive factor-order range via `project_species`; U+tV truncated convolution and division-free reverse, shared readouts, explicit reference/pair order accounting and reusable per-slot polynomial scratch. Independent tiny-factor enumeration, zeros/repeated factors, sum-of-orders, full-minus-excluded, rotation, strain, combined mask/center/design/AD checks pass. |
+| I4 | Concrete radial channel families, explicit `RadialMetadata`, in-place `CallableRadial`, analytic/value-only and allocating adapters, separate custom ps/config, declared capability diagnostics and local ForwardDiff second/mixed probes. Imported SIMD splines retain their specialized path. Smooth trainable custom examples pass scalar/Vec Float32/64/mixed-precision comparisons and force-loss position/parameter products. Pinned ACEpotentials 0.10.2 `Models.evaluate_ed` adapter passes 35 checks (`/tmp/pfw-interface-pinned-adapter.log`). |
+| I5 | Native checkpoint v2 stores policies/provenance/custom definitions and authoritative ps/st once; old v1 native/resolved loading remains tested. Registered factories, explicit trusted-source bundles and opt-in raw-distance Hermite snapshots round-trip. Source refusal precedes execution, namespaces are fresh, world transitions stay at public execution/loading boundaries, missing dependencies/hash/entrypoint/interface/reference failures are explicit. Fresh-process relocated source loading, repeated custom-pruning checkpoints and a code-disabled sentinel test pass; invalid saves preserve existing files. |
+| I6 | UnicodePlots 3.9 weakdep/extension using its direct API (no Plots.jl): order/index counts, coefficient distribution, radial curves, coupling sparsity and grouped counts. Six plot types including empty bases pass 17 checks; actual ACEfit 0.3.1 transformed Unitful-label prediction recovery and non-diagonal rectangular mapped-prior solves add four checks (`/tmp/pfw-interface-optional.log`). Core-only transformed CPU/checkpoint round trip passes with plotting, ACEpotentials, SpheriCart and AD weak dependencies absent (`/tmp/pfw-interface-core-only.log`). |
+| I7 | Full supported-version integration, small allocation/size/overhead measurements, examples and final reproduction evidence are recorded below. |
+
+Numerical, persistence and AD boundaries retain full-system original-order owning
+outputs, all directed periodic images, imported pair-site accounting, fixed
+cell/topology differentiation, saved-input ownership and the existing optional
+virial-position products. Production uses one sorted force array and exclusive
+scratch slots; masks/readout caches and center flags are refreshed in reusable
+executor buffers. No model-derived precontraction is authoritative.
+
+Material limits: callable CPU execution currently uses scalar lanes; direct
+SIMD-compatible callable inputs are checked separately. Scalar AD/allocating
+adapters and pruned custom-channel gathers can allocate and recompute parent
+channels. Noncopyable mutable callable captures require explicit config/ps;
+immutable code/module references are retained while numerical state is copied. Angular backends still compute all harmonics through the original
+lmax. Custom parameter gradients use local chunked ForwardDiff in analytic
+site reverse products; no whole-system Hessian is materialized. Capability probes
+are sampled checks, not proofs for arbitrary callables/backends/AD orders.
+Registered channels must be available at load; source loading requires explicit
+`allow_code=true`, is not a security sandbox and never installs dependencies.
+Tabulation is an explicit Float64 fixed-parameter approximation with off-grid
+value/derivative errors; it is C1, generally not C2 at knots, and does not preserve
+original custom-parameter gradients. Unknown custom index weights require an
+explicit prior or the explicit neutral prior option. General basis generation,
+independent species counters/coefficients, changing regions, site-energy APIs,
+composition/QM-MM physics, cell AD and GPU/MACE remain outside this phase.
+
+Final complete suites pass **44,757 assertions per process** on **Julia 1.13.2 /
+4 threads** and **Julia 1.10.12 / 4 threads**. Logs:
+`/tmp/pfw-interface-final-113-t4.log`, `/tmp/pfw-interface-final-110.log`.
+The standalone final interface suite passes **255 checks on Julia 1.13.2 /
+1 thread** (`/tmp/pfw-interface-final-113-t1-focused.log`). This includes ordinary
+and scalar-AD radial force losses, nested custom-pruning checkpoint loads and
+rebound custom channel compatibility. No required interface milestone remains
+unimplemented; the explicitly deferred/optional capability limits above remain.
+
+The pinned reference revalidation passes **1,276 checks**: 1,136 radial
+value/derivative comparisons, 132 checks on all 33 original-evaluator E/F/W
+predictions and eight original-coordinate design/ACEfit checks
+(`/tmp/pfw-interface-reference.log`). Maximum absolute discrepancies are
+**1.4551915228366852e-11 eV**, **6.146194664324867e-13 eV/Å** and
+**8.43769498715119e-13 eV**. The source model was loaded, never overwritten or
+refitted. The optional scalar interoperability adapter separately passes 35
+checks. The optional plotting/fitting suite passes **21 checks per process** on Julia
+1.13.2 and 1.10.12 (`/tmp/pfw-interface-optional.log`,
+`/tmp/pfw-interface-optional-110.log`),
+including actual QR solves with non-diagonal rectangular `R_old*T` operators;
+ACEfit 0.3.1's square-prior target-length assumption is handled by augmenting the
+objective explicitly in our extension, then calling its matrix QR solve.
+
+Hardware: AMD Ryzen 9 9950X, 16 cores / 32 logical CPUs. Versions: AtomsBase 0.5.3,
+AtomsCalculators 0.2.3, SIMD 3.8.1, Unitful 1.29.0, SpheriCart 0.2.4,
+ForwardDiff 1.4.6, ChainRulesCore 1.26.4, Zygote 0.7.14, LuxCore 1.5.3;
+UnicodePlots 3.9.0 and ACEfit 0.3.1 in the optional application environment.
+Core Julia 1.13 tests use StaticArrays 1.9.23 / NeighbourLists 0.6.2;
+Julia 1.10 uses StaticArrays 1.9.24 / NeighbourLists 0.5.10. The application and
+pinned reference environments use StaticArrays 1.9.24. Julia 1.10 source/tests
+were copied to `/tmp/pfw-interface-110`, retaining its separately resolved
+compatible Manifest. Root Pkg.test emits a stale ignored-Manifest project-hash
+warning after the weakdep addition; the test sandbox resolves successfully. The
+pinned reference Project/Manifest were not resolved or changed.
+
+Reproduction (application environment `/tmp/pfw-interface-env` contains
+PotentialFrameWork as a path dependency plus AtomsBase, Unitful, SIMD,
+SpheriCart, ForwardDiff, ChainRulesCore, Zygote, LuxCore, ACEfit and UnicodePlots):
+
+```sh
+julia --project -e 'using Pkg; Pkg.test(; julia_args=["--threads=4"])'
+julia +1.10 --project=/tmp/pfw-interface-110 -e 'using Pkg; Pkg.test(; julia_args=["--threads=4"])'
+julia --project=/tmp/pfw-interface-env --threads=1 test/interface_runtests.jl
+julia --project=/tmp/pfw-interface-env --threads=4 -e 'using PotentialFrameWork, SpheriCart, Test; const ACE_MODEL_PATH=joinpath(pwd(),"data/ace_ref/resolved_model_v1.toml"); include("test/ace_interface_optional.jl")'
+julia +1.10 --project=/tmp/pfw-interface-optional-110 --threads=4 -e 'using PotentialFrameWork, SpheriCart, Test; const ACE_MODEL_PATH=joinpath(pwd(),"data/ace_ref/resolved_model_v1.toml"); include("test/ace_interface_optional.jl")'
+julia --project=data/ace_ref --threads=4 data/ace_ref/validate_resolved_model.jl
+julia --project=data/ace_ref --threads=4 examples/acepotentials_radial_adapter.jl
+julia --project=/tmp/pfw-interface-env --threads=4 examples/ace_interface.jl
+julia --project=/tmp/pfw-interface-env --threads=4 benchmark/ace/interface.jl
+```
+
+The small diagnostic artifact is `benchmark/ace/interface_measurements.toml`;
+its reproduction script and workload are documented in `benchmark/ace/README.md`.
+On three periodic atoms / 56 directed active edges, serial prepared E/F/W with
+four exclusive scratch slots and one BLAS thread records **96 bytes allocated
+per prepared execution** for all five policies (not a zero-allocation claim).
+Seven samples of 100 repetitions report median times of **36.34 μs** full,
+**35.51 μs** masked, **17.63 μs** pruned, **32.74 μs** order 0 and **36.95 μs**
+orders 1:2; min/max variation is retained in the artifact. The pruned basis has
+20/20/12/12 invariant/product/density/radial dimensions versus 123/167/27/30;
+both still compute nine harmonics. Model sizes are 560,904 / 316,240 bytes
+(full/pruned), with 108,360 / 73,160 bytes of per-slot scratch summed over four
+slots. The sole production force matrix is **72 bytes** in every case, independent
+of the four slots; caches, parameter trees and total Julia executor sizes are
+reported separately. Owning numerical outputs allocate 336 bytes;
+full boundary preparation allocates 56,880 bytes (56,432 pruned). These numbers
+are a small geometry-specific diagnostic, not a general speedup or end-to-end MD
+performance claim. Environment construction and owning outputs are excluded from
+the prepared kernel times and reported separately as allocation costs. Initial
+per-call mask/readout temporaries were replaced with owned reusable buffers before
+these final measurements. `git diff --check` passes.
+
+Reference SHA256 values (unchanged):
+- model: `a61a9e57c91cc25663359dd876c47fe9a4c3662ee8d5b4a27a92350c90435f0e`
+- XYZ: `249c00cc8ce9a2ca6e9d45f74b99c9690a4ade5d00df976deb4fd1365737c62c`
+- reference Manifest: `0aeb69de6df1ce209afcc44eec338a3dd632db02801a7902324945fbbb8b7ed2`
+- reference Project: `be49f9b97d798ad7c66512e8abc7af42d729fc41a47cb7a3b3f4d72f1d06d68c`
+
 ## Unitful ACE training labels (2026-10-23)
 
 `ACE.training_rows` now converts Unitful energy and configurational virial labels
