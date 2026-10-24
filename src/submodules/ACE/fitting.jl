@@ -15,33 +15,33 @@ energy, `vec(forces)`, `vec(virial)` in original atom order, with Julia column
 ordering. `baseline` must be subtracted from labels before fitting. Imported
 pair columns and ACE columns are jointly linear in the original coordinates.
 """
-function design_matrix(X,model,ps,env,H;fit_pair=true)
+function design_matrix_impl(X,model,ps,env,H;fit_pair=true,centers=nothing)
     nb=size(model.coupling,1); nq=length(model.pair_spec); nz=length(model.atomic_numbers)
     n=length(env.species); cols=(nb+nq)*nz
     A=zeros(promote_type(eltype(X),eltype(ps.WB)),1+3n+9,cols)
-    baseline=zeros(eltype(A),size(A,1)); baseline[1]=sum(model.reference[env.species])
+    baseline=zeros(eltype(A),size(A,1)); selected_centers=center_indices(centers,n)
+    baseline[1]=sum((reference_value(model,env.species[i]) for i in selected_centers);init=zero(eltype(A)))
     basis=angular_basis(model.lmax,eltype(model.reference))
-    for i=1:n
-        iz=env.species[i]; data=site_diagnostics(X,model,ps,env,H,i;basis)
+    for i in selected_centers
+        iz=env.species[i]; data=site_diagnostics_impl(X,model,ps,env,H,i;basis)
         wb=(iz-1)*nb .+ (1:nb); wp=nb*nz+(iz-1)*nq .+ (1:nq)
         A[1,wb] .+= data.B
         A[1,wp] .+= vec(sum(data.Q;dims=1))
         # Differentiate products once in density coordinates, then apply the
         # fixed sparse invariant map. Never evaluate the whole model per column.
-        D=zeros(eltype(A),length(model.products),length(model.density))
-        for (k,indices) in enumerate(model.products), t in eachindex(indices)
-            v=one(eltype(A))
-            for u in eachindex(indices); u==t || (v*=data.A[indices[u]]); end
-            D[k,indices[t]]+=v
+        dBdU=zeros(eltype(A),nb,length(model.density)); dBdV=similar(dBdU)
+        for row=1:nb
+            weights=Vector(model.coupling[row,:]).*model.policy.mask[row]
+            proj=density_reverse(model,weights,data.U,data.V)
+            dBdU[row,:]=proj.dU; dBdV[row,:]=proj.dV
         end
-        dBdA=model.coupling*D
         for (j,k) in enumerate(data.edges)
             d=data.Rs[j]; direction=d/data.rs[j]
             dAdd=zeros(eltype(A),length(model.density),3)
             for (a,(r,m)) in enumerate(model.density), axis=1:3
                 dAdd[a,axis]=data.dR[j,r]*data.Y[j,m]*direction[axis]+data.R[j,r]*data.dY[j,m][axis]
             end
-            dB=dBdA*dAdd
+            dB=(data.zs[j] in model.policy.species ? dBdV : dBdU)*dAdd
             dQ=data.dQ[j,:]*transpose(direction)
             dest=env.neighbours[k]
             for (indices,derivatives) in ((wb,dB),(wp,dQ)), a=1:3
@@ -65,14 +65,21 @@ end
 Each invariant uses the largest sum(n+l) among its structurally coupled products;
 pair columns use (1+n+l)^p. No precontracted coordinate prior is substituted.
 """
-function smoothness_prior(model;p=4,fit_pair=true)
-    degrees=[sum(sum(model.radial_spec[model.density[a][1]]) for a in product) for product in model.products]
+function smoothness_prior(model;p=4,fit_pair=true,unknown=:error)
+    radial_weights=family_index_weights(model)
+    pair_weights=fit_pair ? family_index_weights(model;pair=true) : Int[]
+    if isnothing(radial_weights) || isnothing(pair_weights)
+        unknown===:neutral || throw(ArgumentError("undefined custom index weights: supply a prior or unknown=:neutral"))
+        n=(size(model.coupling,1)+(fit_pair ? length(model.pair_spec) : 0))*length(model.atomic_numbers)
+        return Diagonal(ones(n))
+    end
+    degrees=[sum(radial_weights[model.density[a][1]] for a in product) for product in model.products]
     d=ones(Float64,size(model.coupling,1))
     for j=1:size(model.coupling,2), k in nzrange(model.coupling,j)
         i=rowvals(model.coupling)[k]; d[i]=max(d[i],1+degrees[j])
     end
     nz=length(model.atomic_numbers)
-    Diagonal(fit_pair ? vcat(repeat(d.^p,nz),repeat([(1+sum(s))^p for s in model.pair_spec],nz)) : repeat(d.^p,nz))
+    Diagonal(fit_pair ? vcat(repeat(d.^p,nz),repeat((1 .+ pair_weights).^p,nz)) : repeat(d.^p,nz))
 end
 
 function fit_linear(args...;kwargs...)
@@ -115,4 +122,8 @@ function training_rows(design,labels;weights=(energy=1.,forces=1.,virial=1.))
         append!(residual_weights,fill(weight,length(range)))
     end
     (;matrix=design.matrix[indices,:],labels=values-design.baseline[indices],row_weights=residual_weights)
+end
+
+function design_matrix(X,model,ps,env,H;kwargs...)
+    has_source(model) ? Base.invokelatest(design_matrix_impl,X,model,ps,env,H;kwargs...) : design_matrix_impl(X,model,ps,env,H;kwargs...)
 end

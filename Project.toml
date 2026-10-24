@@ -15,6 +15,7 @@ StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [weakdeps]
+UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
 LuxCore = "bb33d45b-7691-41d6-9220-0943567d0623"
 ACEfit = "ad31a8ef-59f5-4a01-b543-a85c2f73e95c"
 SpheriCart = "5caf2b29-02d9-47a3-9434-5931c85ba645"
@@ -23,6 +24,7 @@ ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 
 [extensions]
+PotentialFrameWorkUnicodePlotsExt = "UnicodePlots"
 PotentialFrameWorkLuxCoreExt = "LuxCore"
 PotentialFrameWorkACEfitExt = "ACEfit"
 PotentialFrameWorkSpheriCartExt = "SpheriCart"
@@ -31,6 +33,7 @@ PotentialFrameWorkChainRulesCoreExt = "ChainRulesCore"
 PotentialFrameWorkForwardDiffExt = "ForwardDiff"
 
 [compat]
+UnicodePlots = "3.9"
 LuxCore = "1"
 ACEfit = "0.3.1"
 SpheriCart = "0.2.4"

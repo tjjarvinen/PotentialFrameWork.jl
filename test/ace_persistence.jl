@@ -81,8 +81,16 @@ import AtomsCalculators as AC
         jsonpath=joinpath(dir,"checkpoint.json")
         A.save_calculator(jsonpath,original)
         @test A.ACECalculator(jsonpath;slots=1).parameters==original.parameters
+        # Historical v1 checkpoints have neither interface policy nor custom
+        # radial definitions. They remain loadable without migration by callers.
+        legacy=TOML.parsefile(jsonpath)
+        legacy["schema_version"]=1
+        delete!(legacy["model"],"interface_policy")
+        legacy_path=joinpath(dir,"legacy.toml")
+        open(io -> TOML.print(io,legacy),legacy_path,"w")
+        @test A.ACECalculator(legacy_path;slots=1).parameters==original.parameters
         # Explicit schema/shape errors fail before numerical execution.
-        saved["schema_version"]=2
+        saved["schema_version"]=999
         open(io -> TOML.print(io,saved),path,"w")
         @test_throws ArgumentError A.ACECalculator(path)
         saved["schema_version"]=1

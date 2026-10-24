@@ -362,6 +362,11 @@ rejected. Saving replaces the destination after a complete write and does not
 install an explicit parameter override in the calculator. This versioned TOML
 checkpoint is a PotentialFrameWork format, separate from ACEpotentials JSON.
 
+See the [CPU ACE interface guide](docs/ace_interface.md) for descriptor metadata,
+masking/pruning, restricted construction, original-index centers, neighbor-species
+order projection, custom radial callables/persistence, and optional UnicodePlots.
+Runnable examples are in `examples/ace_interface.jl`.
+
 `A.design_matrix` returns original-coordinate energy/force/virial rows and a fixed
 baseline. `A.training_rows` selects present labels and residual weights. Labels
 can be plain numbers (energy/virial in eV, forces in eV/Å) or Unitful quantities

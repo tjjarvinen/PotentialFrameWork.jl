@@ -142,3 +142,20 @@ EquivariantTensors 0.4.3 is used by the producer; runtime products/couplings use
 exported numerical indices and standard SparseArrays. Historical first-phase pair
 benchmarks are unchanged. `results-prototype-position-vjp-*.toml` is superseded
 prototype evidence, not the final directional-Hessian implementation.
+
+## ACE interface measurements
+
+`julia --project=<application-env> --threads=4 benchmark/ace/interface.jl`
+measures prepared serial E/F/W on one explicit three-atom periodic system, with
+four exclusive scratch slots. It writes `interface_measurements.toml` (or an
+output path argument). Seven samples of 100 repetitions report min/median/max;
+BLAS uses one thread. Imported/full, masked, structurally pruned and species-order
+policies use the same geometry and physical neighbor cutoff. Model/scratch sizes,
+prepared kernel allocations, owning numerical outputs and boundary preparation
+allocations are separate. The production force matrix remains one 3×N array.
+
+This is a small diagnostic, not a general speed comparison. Pruned predictions
+are those of the retained model; masks/pruning do not reproduce the untrimmed
+model unless discarded coefficients had no contribution. Full harmonics are
+still evaluated through the original lmax. The explicit custom radial adapters
+and local AD fallbacks have separate costs and are not included in these timings.

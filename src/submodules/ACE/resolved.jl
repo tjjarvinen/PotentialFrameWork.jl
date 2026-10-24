@@ -15,11 +15,11 @@ struct RadialChannel{T}
     nodes::Vector{T}
     coefficients::Array{T,3} # polynomial power, radial channel, interval
 end
-struct ResolvedModel{T}
+struct ResolvedModel{T,R,Q,P}
     atomic_numbers::Vector{Int}
     reference::Vector{T}
-    radial::Matrix{RadialChannel{T}}
-    pair_radial::Matrix{RadialChannel{T}}
+    radial::R
+    pair_radial::Q
     radial_spec::Vector{Tuple{Int,Int}}
     pair_spec::Vector{Tuple{Int,Int}}
     lmax::Int
@@ -27,9 +27,20 @@ struct ResolvedModel{T}
     products::Vector{Vector{Int}}
     coupling::SparseMatrixCSC{T,Int}
     source_sha256::String
+    policy::P
 end
 
-function read_radial(D,nz)
+function ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha)
+    policy=default_policy(sha,rspec,density,products,C)
+    ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy)
+end
+function ResolvedModel{T}(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha) where T
+    ResolvedModel(Int.(z),T.(ref),radial,pair,rspec,pspec,Int(lmax),density,products,
+        SparseMatrixCSC{T,Int}(C),String(sha))
+end
+
+function read_radial(D,nz;allow_code=false,parameters=NamedTuple())
+    get(D,"kind",nothing)=="interface_channels_v1" && return read_custom_radial(D,nz;allow_code,parameters)
     D["kind"]=="piecewise_cubic_agnesi" || throw(ArgumentError("unsupported resolved radial kind"))
     result=Matrix{RadialChannel{Float64}}(undef,nz,nz)
     seen=Set{Tuple{Int,Int}}()
@@ -68,7 +79,7 @@ Return `(model, parameters, state)`; parameters own the original readout matrice
 The recipe JSON is exported separately in its pinned producer environment.
 """
 load_resolved(path)=read_resolved(TOML.parsefile(path))
-function read_resolved(D)
+function read_resolved(D;allow_code=false,custom_parameters=NamedTuple())
     get(D,"schema",nothing)=="PotentialFrameWork.resolved_ACE" && get(D,"schema_version",nothing)==1 ||
         throw(ArgumentError("unsupported resolved ACE schema; use the pinned export_resolved_model.jl producer"))
     z=Int.(D["species_atomic_numbers"]); nz=length(z)
@@ -77,7 +88,8 @@ function read_resolved(D)
     angular["kind"]=="real_spherical" && angular["normalization"]=="L2" && angular["ordering"]=="l*l+l+m+1" ||
         throw(ArgumentError("unsupported angular convention"))
     lmax=Int(angular["lmax"]); lmax>=0 || throw(ArgumentError("invalid lmax"))
-    radial,rspec=read_radial(D["radial"],nz); pair,pspec=read_radial(D["pair_radial"],nz)
+    radial,rspec=read_radial(D["radial"],nz;allow_code,parameters=radial_parameters(custom_parameters,:custom_radial))
+    pair,pspec=read_radial(D["pair_radial"],nz;allow_code,parameters=radial_parameters(custom_parameters,:custom_pair))
     density=[Tuple(Int.(v)) for v in D["density_indices"]]
     all(v -> length(v)==2 && 1<=v[1]<=length(rspec) && 1<=v[2]<=(lmax+1)^2,density) ||
         throw(ArgumentError("invalid density indices"))
@@ -97,6 +109,7 @@ function read_resolved(D)
     WB=reshape(copy(flat[1:m*nz]),m,nz)
     Wpair=reshape(copy(flat[m*nz+1:end]),length(pspec),nz)
     model=ResolvedModel(z,Float64.(D["reference_eV"]),radial,pair,rspec,pspec,lmax,density,products,C,D["source_sha256"])
+    haskey(D,"interface_policy") && (model=model_with(model;policy=read_policy(D["interface_policy"],model)))
     model,(;WB,Wpair),NamedTuple()
 end
 
