@@ -9,8 +9,8 @@ coordinates. The resolved spline tables remain fixed; cutoffs are never trainabl
 """
 function trainable_parameters(model,ps)
     nz=length(model.atomic_numbers)
-    merge(deepcopy(ps),(;radial=(;scale=ones(length(model.radial_spec),nz,nz)),
-                       pair=(;scale=ones(length(model.pair_spec),nz,nz))))
+    merge(deepcopy(ps),(;radial=hasproperty(ps,:radial) ? deepcopy(ps.radial) : (;scale=ones(length(model.radial_spec),nz,nz)),
+                       pair=hasproperty(ps,:pair) ? deepcopy(ps.pair) : (;scale=ones(length(model.pair_spec),nz,nz))))
 end
 radial_scale(ps,key,n,iz,jz)=hasproperty(ps,key) ? getproperty(ps,key).scale[n,iz,jz] : 1
 
@@ -48,7 +48,7 @@ function radial_ed(ch::RadialChannel,r::Real)
     values,derivatives
 end
 
-function site_diagnostics(X,model,ps,env,H,i;basis=angular_basis(model.lmax,eltype(model.reference)))
+function site_diagnostics_impl(X,model,ps,env,H,i;basis=angular_basis(model.lmax,eltype(model.reference)))
     iz=env.species[i]
     edges=[k for k=env.offsets[1,i]:env.offsets[end,i]-1 if env.active[k]]
     Rs=[edge_displacement(X,H,env,i,k) for k in edges]
@@ -65,8 +65,8 @@ function site_data(model,ps,iz,zs,Rs;basis=angular_basis(model.lmax,eltype(model
     rawR=similar(R); rawQ=similar(Q)
     for j in eachindex(Rs)
         jz=zs[j]
-        R[j,:],dR[j,:]=radial_ed(model.radial[iz,jz],rs[j])
-        Q[j,:],dQ[j,:]=radial_ed(model.pair_radial[iz,jz],rs[j])
+        R[j,:],dR[j,:]=radial_ed(model.radial[iz,jz],rs[j],radial_parameters(ps,:custom_radial))
+        Q[j,:],dQ[j,:]=radial_ed(model.pair_radial[iz,jz],rs[j],radial_parameters(ps,:custom_pair))
         for n=1:size(R,2)
             rawR[j,n]=R[j,n]; scale=radial_scale(ps,:radial,n,iz,jz)
             R[j,n]*=scale; dR[j,n]*=scale
@@ -74,51 +74,49 @@ function site_data(model,ps,iz,zs,Rs;basis=angular_basis(model.lmax,eltype(model
         for n=1:size(Q,2)
             rawQ[j,n]=Q[j,n]; scale=radial_scale(ps,:pair,n,iz,jz)
             Q[j,n]*=scale; dQ[j,n]*=scale
+            if !pair_allowed(model,jz); Q[j,n]=zero(T); dQ[j,n]=zero(T); rawQ[j,n]=zero(T); end
         end
     end
     Y,dY=isempty(Rs) ? (zeros(T,0,(model.lmax+1)^2),zeros(SVector{3,T},0,(model.lmax+1)^2)) : angular_ed(basis,Rs)
-    A=zeros(T,length(model.density))
+    A=zeros(T,length(model.density)); U=similar(A); V=similar(A); fill!(U,0); fill!(V,0)
     for (a,(n,m)) in enumerate(model.density), j in eachindex(Rs)
-        A[a]+=R[j,n]*Y[j,m]
+        value=R[j,n]*Y[j,m]; A[a]+=value
+        if zs[j] in model.policy.species; V[a]+=value; else; U[a]+=value; end
     end
-    P=[prod(A[a] for a in indices) for indices in model.products]
-    B=model.coupling*P
-    energy=model.reference[iz]+dot(ps.WB[:,iz],B)+sum(Q[j,n]*ps.Wpair[n,iz] for j in eachindex(Rs),n=1:size(Q,2);init=zero(T))
-    (;energy,Rs,rs,R,dR,Q,dQ,rawR,rawQ,Y,dY,A,P,B)
+    projection=density_reverse(model,zeros(T,length(model.products)),U,V)
+    P=projection.P
+    B=(model.coupling*P) .* collect(Bool,model.policy.mask)
+    energy=reference_value(model,iz)+dot(ps.WB[:,iz],B)+sum(Q[j,n]*ps.Wpair[n,iz] for j in eachindex(Rs),n=1:size(Q,2);init=zero(T))
+    (;energy,Rs,rs,R,dR,Q,dQ,rawR,rawQ,Y,dY,A,U,V,P,B,zs)
 end
 
 function site_reverse(model,ps,iz,data)
     T=eltype(data.A)
-    weights=transpose(model.coupling)*ps.WB[:,iz]
-    dA=zeros(T,length(model.density))
-    for (k,indices) in enumerate(model.products), t in eachindex(indices)
-        v=weights[k]
-        for u in eachindex(indices); u==t || (v*=data.A[indices[u]]); end
-        dA[indices[t]]+=v
-    end
+    weights=transpose(model.coupling)*(ps.WB[:,iz].*collect(Bool,model.policy.mask))
+    projection=density_reverse(model,weights,data.U,data.V)
+    dA=projection.dU; dV=projection.dV
     gradients=Vector{SVector{3,T}}(undef,length(data.Rs))
     for j in eachindex(data.Rs)
         g=zero(SVector{3,T}); direction=data.Rs[j]/data.rs[j]
+        adj=data.zs[j] in model.policy.species ? dV : dA
         for (a,(n,m)) in enumerate(model.density)
-            g+=dA[a]*(data.dR[j,n]*data.Y[j,m]*direction+data.R[j,n]*data.dY[j,m])
+            g+=adj[a]*(data.dR[j,n]*data.Y[j,m]*direction+data.R[j,n]*data.dY[j,m])
         end
-        g+=sum(ps.Wpair[n,iz]*data.dQ[j,n] for n=1:size(data.Q,2))*direction
+        g+=sum((ps.Wpair[n,iz]*data.dQ[j,n] for n=1:size(data.Q,2));init=zero(T))*direction
         gradients[j]=g
     end
-    (;density=dA,gradients)
+    (;density=dA,selected_density=dV,gradients)
 end
 
 function site_parameter_gradient(model,ps,iz,zs,data;reverse=nothing)
     T=eltype(data.A)
-    gradient=map(ps) do subtree
-        subtree isa NamedTuple ? map(a -> zeros(T,size(a)),subtree) : zeros(T,size(subtree))
-    end
+    gradient=parameter_rebuild(ps,fill(zero(T),length(parameter_flatten(ps))))
     gradient.WB[:,iz] .= data.B
     gradient.Wpair[:,iz] .= vec(sum(data.Q;dims=1))
     if hasproperty(ps,:radial)
         reverse=isnothing(reverse) ? site_reverse(model,ps,iz,data) : reverse
         for j in eachindex(zs),(a,(n,m)) in enumerate(model.density)
-            gradient.radial.scale[n,iz,zs[j]]+=reverse.density[a]*data.rawR[j,n]*data.Y[j,m]
+            gradient.radial.scale[n,iz,zs[j]]+=(zs[j] in model.policy.species ? reverse.selected_density[a] : reverse.density[a])*data.rawR[j,n]*data.Y[j,m]
         end
     end
     if hasproperty(ps,:pair)
@@ -126,8 +124,9 @@ function site_parameter_gradient(model,ps,iz,zs,data;reverse=nothing)
             gradient.pair.scale[n,iz,zs[j]]+=ps.Wpair[n,iz]*data.rawQ[j,n]
         end
     end
-    gradient
+    custom_parameter_gradient(model,ps,iz,zs,data,gradient)
 end
+custom_parameter_gradient(model,ps,iz,zs,data,g)=g
 
 function ace_vjp(args...)
     throw(ArgumentError("load ForwardDiff for local ACE higher derivative products"))
@@ -137,8 +136,8 @@ end
 Forces reverse selected products without division, so zero density factors are
 valid. Every directed centre contributes once. Public outputs own their storage.
 """
-function ace_evaluate(X::AbstractMatrix,model::ResolvedModel,ps,env::FullEnvironment,H::AbstractMatrix;
-                      state=NamedTuple(),energy_only=false)
+function ace_evaluate_impl(X::AbstractMatrix,model::ResolvedModel,ps,env::FullEnvironment,H::AbstractMatrix;
+                      state=NamedTuple(),energy_only=false,centers=nothing)
     size(X)==(3,length(env.species)) || throw(DimensionMismatch("positions must be 3×N"))
     size(H)==(3,3) || throw(DimensionMismatch("cell must be 3×3"))
     size(ps.WB)==(size(model.coupling,1),length(model.atomic_numbers)) || throw(DimensionMismatch("WB shape"))
@@ -146,8 +145,8 @@ function ace_evaluate(X::AbstractMatrix,model::ResolvedModel,ps,env::FullEnviron
     T=typeof(zero(eltype(X))+parameter_seed(ps))
     energy=zero(T); forces=zeros(T,size(X)); virial=zeros(T,3,3)
     basis=angular_basis(model.lmax,eltype(model.reference))
-    for i in eachindex(env.species)
-        data=site_diagnostics(X,model,ps,env,H,i;basis)
+    for i in center_indices(centers,length(env.species))
+        data=site_diagnostics_impl(X,model,ps,env,H,i;basis)
         energy+=data.energy
         energy_only && continue
         iz=env.species[i]
@@ -162,4 +161,11 @@ function ace_evaluate(X::AbstractMatrix,model::ResolvedModel,ps,env::FullEnviron
         end
     end
     energy_only ? (;energy) : (;energy,forces,virial)
+end
+
+function ace_evaluate(X::AbstractMatrix,model::ResolvedModel,ps,env::FullEnvironment,H::AbstractMatrix;kwargs...)
+    has_source(model) ? Base.invokelatest(ace_evaluate_impl,X,model,ps,env,H;kwargs...) : ace_evaluate_impl(X,model,ps,env,H;kwargs...)
+end
+function site_diagnostics(X,model,ps,env,H,i;kwargs...)
+    has_source(model) ? Base.invokelatest(site_diagnostics_impl,X,model,ps,env,H,i;kwargs...) : site_diagnostics_impl(X,model,ps,env,H,i;kwargs...)
 end

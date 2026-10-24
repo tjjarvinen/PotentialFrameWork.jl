@@ -51,8 +51,9 @@ function rrule(::typeof(pair_evaluate),X,p::AbstractPairPotential,ps::NamedTuple
 end
 
 function rrule(::typeof(ace_evaluate),X,model::ResolvedModel,ps,env::FullEnvironment,H;
-               state=NamedTuple(),energy_only=false)
-    y=ace_evaluate(X,model,ps,env,H;state,energy_only)
+               state=NamedTuple(),energy_only=false,centers=nothing)
+    y=ace_evaluate(X,model,ps,env,H;state,energy_only,centers)
+    saved_centers=deepcopy(centers)
     saved=deepcopy((X,model,ps,env,H))
     px=ProjectTo(X); pp=ProjectTo(ps)
     function ace_pullback(delta)
@@ -66,7 +67,7 @@ function rrule(::typeof(ace_evaluate),X,model::ResolvedModel,ps,env::FullEnviron
             v isa AbstractZero ? z : v
         end
         de=cot(:energy,zero(y.energy)); df=cot(:forces,zeros(eltype(X),size(X))); dw=cot(:virial,zeros(eltype(X),3,3))
-        g=ace_vjp(saved...,de,df,dw)
+        g=ace_vjp(saved...,de,df,dw;centers=saved_centers)
         (NoTangent(),px(g.positions),NoTangent(),pp(g.parameters),NoTangent(),
          @not_implemented("cell derivatives are outside the fixed-cell ACE AD contract"))
     end

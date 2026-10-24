@@ -37,7 +37,7 @@ function prepare_environment!(env::FullEnvironment,sys,model::ResolvedModel;kwar
     resize!(env.species,n)
     for i=1:n; env.species[i]=element_channel(model,AtomsBase.species(sys,i)); end
     env.timings[:element_channels]=(time_ns()-start)*1e-9
-    env.cutoff=maximum(ch.transform.rcut for family in (model.radial,model.pair_radial) for ch in family)
+    env.cutoff=maximum(radial_cutoff(ch) for family in (model.radial,model.pair_radial) for ch in family)
     snapshot=neighbour_list(sys,env.cutoff;timings=env.timings,kwargs...)
     start=time_ns()
     size(env.offsets)==(nz+1,n) || (env.offsets=zeros(Int,nz+1,n))
