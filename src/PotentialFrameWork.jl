@@ -1,4 +1,5 @@
 module PotentialFrameWork
+include("submodules/NeighbourInterface/NeighbourInterface.jl")
 include("submodules/NeighbourList/NeighbourList.jl")
 include("submodules/PairPotentials/PairPotentials.jl")
 include("submodules/ACE/ACE.jl")
@@ -10,7 +11,7 @@ using .PairPotentials: AbstractPairPotential, SmoothPair, RadialPotential, Energ
 using .PairPotentials: PairEnvironment, pair_inputs, pair_evaluate, pair_vjp
 using .PairPotentials: lux_layer
 
-export NeighbourList, PairPotentials, ACE, Workspace, PairBlock,
+export NeighbourInterface, NeighbourList, PairPotentials, ACE, Workspace, PairBlock,
     PairEnvironment, pair_inputs, pair_evaluate, pair_vjp,
     lux_layer,
     AbstractPairPotential, SmoothPair, RadialPotential, EnergyOnly, EnergyForcesVirial,

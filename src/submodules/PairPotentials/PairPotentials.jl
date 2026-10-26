@@ -1,5 +1,6 @@
 """Pair models, force evaluation, calculator integration and parameter derivatives."""
 module PairPotentials
+import ..NeighbourInterface as NI
 using AtomsBase: ChemicalSpecies, AbstractSystem, position
 using StaticArrays: SVector, SMatrix
 using SIMD: Vec
@@ -7,6 +8,7 @@ using Unitful
 import AtomsCalculators as AC
 using ..NeighbourList: Workspace, PairBlock, pack, lane, prepare!, geometry, select
 using ..NeighbourList: neighbour_list
+import ..NeighbourList as NL
 import AtomsBase
 
 export AbstractPairPotential, EnergyOnly, EnergyForcesVirial, SmoothPair,

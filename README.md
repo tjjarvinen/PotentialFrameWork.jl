@@ -404,3 +404,14 @@ Float32 buffers with mixed radial arithmetic. No GPU support is implemented.
 For an external reference comparison, see the [Argon Lennard-Jones benchmark](benchmark/lennard_jones/README.md).
 It matches EmpiricalPotentials' cutoff formula, checks energy/forces/virial, and
 measures multiple system sizes and thread counts using AtomsSystems fixtures.
+
+The experimental [CPU neighborhood evaluation interface](docs/neighbour_evaluation.md)
+uses local protocol declarations, explicit parameters, pair/complete-site callbacks,
+and a CPU batch loop fallback. Existing pair and ACE APIs remain available;
+`ACE.CPUExecutor` / `ACE.ACECalculator` accept `batch_size` (default 1).
+A dependency-light [third-party callback example](examples/neighbour_evaluation.jl)
+shows accessor-based pair and angular-site evaluation without a required supertype.
+Pair callbacks normally consume `NeighbourInterface.distance(block)` and return
+`dE/dr` with `set_radial_derivative!`; the backend supplies orientation during
+force/virial reduction. Displacement access and Cartesian gradient outputs remain
+available for orientation-dependent interactions.

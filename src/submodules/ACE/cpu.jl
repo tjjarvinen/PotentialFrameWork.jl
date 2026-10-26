@@ -24,7 +24,14 @@ function SiteScratch(model,capacity,::Type{T}) where T
         zeros(T,length(model.density)),zeros(T,length(model.products)),zeros(T,length(model.density)),zeros(T,length(model.density)),zeros(T,length(model.density)),
         zeros(T,length(model.density)),projection_work(model,T)...)
 end
-mutable struct CPUExecutor{T,B,M,R}
+struct PreparedACE{M,B,C,W}
+    model::M
+    basis::B
+    weights::C
+    simd::Bool
+    fused::Bool
+end
+mutable struct CPUExecutor{T,B,M,R,S,P}
     model::M
     environment::FullEnvironment
     basis::B
@@ -39,18 +46,27 @@ mutable struct CPUExecutor{T,B,M,R}
     environment_version::UInt
     readout::R
     center_mask::BitVector
+    slots::S
+    batch_size::Int
+    prepared::P
 end
-function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angular_backend=:sphericart)
+function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angular_backend=:sphericart,batch_size=1)
     precision in (Float32,Float64) || throw(ArgumentError("CPU executor precision must be Float32/64"))
     slots>0 || throw(ArgumentError("slots must be positive"))
+    batch_size isa Integer && batch_size>0 || throw(ArgumentError("batch_size must be positive"))
+    NL.check_units(model)
     basis=make_angular(model,precision,angular_backend,env.width)
     T=precision
-    w=CPUExecutor(model,env,basis,[SiteScratch(model,0,T) for _=1:slots],zeros(T,3,0),Int[],Int[],
-        zeros(T,length(model.products),length(model.atomic_numbers)),T[],zeros(T,9,0),0,UInt(0),
-        zeros(promote_type(Float64,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector())
+    scratch=[NI.make_scratch(model,0,T) for _=1:slots]
+    weights=zeros(T,length(model.products),length(model.atomic_numbers))
+    prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false)
+    w=CPUExecutor(model,env,basis,scratch,zeros(T,3,0),Int[],Int[],
+        weights,T[],zeros(T,9,0),0,UInt(0),
+        zeros(promote_type(Float64,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector(),NL.site_slots(scratch,0,batch_size,T),Int(batch_size),prepared)
     prepare_executor!(w,env)
 end
 function prepare_executor!(w::CPUExecutor{T},env) where T
+    env.width==prepared_width(w.prepared) || throw(ArgumentError("prepare a new executor for a changed layout width"))
     w.environment=env; n=length(env.species)
     capacity=maximum((env.offsets[end,i]-env.offsets[1,i] for i=1:n);init=0)
     if capacity>w.capacity
@@ -63,6 +79,10 @@ function prepare_executor!(w::CPUExecutor{T},env) where T
     resize!(w.energies,n)
     resize!(w.center_mask,n)
     size(w.virials,2)==n || (w.virials=zeros(T,9,n))
+    for k in eachindex(w.slots)
+        w.slots[k].scratch=w.scratch[k]
+        for out in w.slots[k].outputs; resize!(out.gradients,w.capacity); end
+    end
     w.environment_version=env.version
     w
 end
@@ -130,34 +150,35 @@ function project_rows!(s,model,lo,hi,selected=false)
         if selected; s.V[a]+=value; else; s.U[a]+=value; end
     end
 end
-function cpu_site!(w::CPUExecutor{T},s::SiteScratch,i,X,H,ps,::Val{W},simd,fused=false) where {T,W}
-    env=w.environment; model=w.model; iz=env.species[i]
-    firstedge=env.offsets[1,i]; count=env.offsets[end,i]-firstedge
+function NI.evaluate_site!(out,p::PreparedACE{M,B,C,W},site,ps,s::SiteScratch{T},props) where {M,B,C,W,T}
+    model=p.model; iz=NI.central_species(site)
+    count=NI.neighbour_count(site); firstedge=1
+    simd=p.simd; fused=p.fused
     for j=1:count
-        k=firstedge+j-1; s.Rs[j]=edge_displacement(X,H,env,i,k)
-        env.active[k] && iszero(norm(s.Rs[j])) && throw(DomainError(0,"coincident atoms"))
+        k=firstedge+j-1; s.Rs[j]=NI.displacement(site,j)
+        NI.active(site,k) && iszero(norm(s.Rs[j])) && throw(DomainError(0,"coincident atoms"))
     end
     fill!(s.A,0); fill!(s.U,0); fill!(s.V,0); fill!(s.dA,0)
     for z in eachindex(model.atomic_numbers)
-        lo=env.offsets[z,i]; hi=env.offsets[z+1,i]-1
+        range=NI.species_range(site,z); lo=first(range); hi=last(range)
         if simd
             for k=lo:W:hi
                 localstart=k-firstedge+1
                 rs=ntuple(lane -> norm(s.Rs[localstart+lane-1]),W)
-                active=ntuple(lane -> env.active[k+lane-1],W)
+                active=ntuple(lane -> NI.active(site,k+lane-1),W)
                 radial_block!(s.R,s.dR,rs,model.radial[iz,z],localstart,Val(W),active,radial_parameters(ps,:custom_radial))
                 radial_block!(s.Q,s.dQ,rs,model.pair_radial[iz,z],localstart,Val(W),active,radial_parameters(ps,:custom_pair))
                 if fused
                     stop=localstart+W-1
                     scale_rows!(s,ps,iz,z,localstart,stop)
-                    angular_ed!(view(s.Y,localstart:stop,:),view(s.dY,localstart:stop,:),w.basis,view(s.Rs,localstart:stop))
+                    angular_ed!(view(s.Y,localstart:stop,:),view(s.dY,localstart:stop,:),p.basis,view(s.Rs,localstart:stop))
                     project_rows!(s,model,localstart,stop,z in model.policy.species)
                 end
             end
         else
             for k=lo:hi
                 j=k-firstedge+1
-                if env.active[k]
+                if NI.active(site,k)
                     s.R[j,:],s.dR[j,:]=radial_ed(model.radial[iz,z],norm(s.Rs[j]),radial_parameters(ps,:custom_radial))
                     s.Q[j,:],s.dQ[j,:]=radial_ed(model.pair_radial[iz,z],norm(s.Rs[j]),radial_parameters(ps,:custom_pair))
                 else
@@ -174,33 +195,39 @@ function cpu_site!(w::CPUExecutor{T},s::SiteScratch,i,X,H,ps,::Val{W},simd,fused
         end
     end
     if !fused && count>0
-        angular_ed!(view(s.Y,1:count,:),view(s.dY,1:count,:),w.basis,view(s.Rs,1:count))
+        angular_ed!(view(s.Y,1:count,:),view(s.dY,1:count,:),p.basis,view(s.Rs,1:count))
     end
     if !fused
         for z in eachindex(model.atomic_numbers)
-            project_rows!(s,model,env.offsets[z,i]-firstedge+1,env.offsets[z+1,i]-firstedge,z in model.policy.species)
+            project_rows!(s,model,first(NI.species_range(site,z)),last(NI.species_range(site,z)),z in model.policy.species)
         end
     end
     energy=T(reference_value(model,iz))
-    product_projection!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(w.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial)
-    for k in eachindex(s.P); energy+=w.weights[k,iz]*s.P[k]; end
+    product_projection!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial)
+    for k in eachindex(s.P); energy+=p.weights[k,iz]*s.P[k]; end
     for j=1:count,n=1:size(s.Q,2); energy+=s.Q[j,n]*ps.Wpair[n,iz]; end
-    w.energies[i]=energy
+    NL.wants(AC.Energy,props) && NI.set_energy!(out,energy)
+    (NL.wants(AC.Forces,props) || NL.wants(AC.Virial,props)) || return nothing
     for j=1:count
-        k=firstedge+j-1; env.active[k] || continue
+        k=firstedge+j-1; NI.active(site,k) || continue
         d=s.Rs[j]; direction=d/norm(d); g=zero(SVector{3,T})
         for (a,(r,m)) in enumerate(model.density)
-            adj=env.species[env.neighbours[k]] in model.policy.species ? s.dV : s.dA
+            adj=NI.neighbour_species(site,k) in model.policy.species ? s.dV : s.dA
             g+=adj[a]*(s.dR[j,r]*s.Y[j,m]*direction+s.R[j,r]*s.dY[j,m])
         end
         for n=1:size(s.Q,2); g+=ps.Wpair[n,iz]*s.dQ[j,n]*direction; end
-        dest=env.neighbours[k]
-        for a=1:3
-            w.force[a,w.inverse[i]]+=g[a]; w.force[a,w.inverse[dest]]-=g[a]
-            for b=1:3; w.virials[a+3(b-1),i]-=d[a]*g[b]; end
-        end
+        NI.set_gradient!(out,j,g)
     end
     nothing
+end
+
+# Compatibility helper for existing site-footprint diagnostics.
+function cpu_site!(w::CPUExecutor,s::SiteScratch,i,X,H,ps,::Val{W},simd,fused=false) where W
+    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused)
+    site=NL.SiteView(w.environment,X,H,i); out=w.slots[1].outputs[1]
+    props=(AC.Energy(),AC.Forces(),AC.Virial())
+    NI.evaluate_site!(out,p,site,ps,s,props)
+    NL.reduce_site!(w.force,w.inverse,w.energies,w.virials,w.environment,i,site,out,props)
 end
 
 """Prepared CPU inference with original-order numeric inputs and one sorted
@@ -208,7 +235,7 @@ shared force array. `prepare_executor!` follows every environment rebuild.
 Precontraction is refreshed from authoritative parameters on every execution.
 Scratch is exclusive per slot; phases advertise complete endpoint footprints.
 """
-function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,centers=nothing)
+function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()))
     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
     env=w.environment
     env.version==w.environment_version || throw(ArgumentError("prepare executor after rebuilding the environment"))
@@ -223,27 +250,11 @@ function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,f
         w.readout[i,z]=w.model.policy.mask[i] ? ps.WB[i,z] : zero(eltype(w.readout))
     end
     mul!(w.weights,transpose(w.model.coupling),w.readout)
-    fill!(w.force,0); fill!(w.energies,0); fill!(w.virials,0)
-    if parallel
-        for phase in env.phases
-            slots=min(length(w.scratch),length(phase))
-            if slots<=1
-                for i in phase
-                    selected_mask[i] || continue
-                    cpu_site!(w,w.scratch[1],i,X,H,ps,Val(env.width),simd,fused)
-                end
-            else
-                Threads.@threads :dynamic for slot=1:slots
-                    for k=slot:slots:length(phase)
-                        selected_mask[phase[k]] || continue
-                        cpu_site!(w,w.scratch[slot],phase[k],X,H,ps,Val(env.width),simd,fused)
-                    end
-                end
-            end
-        end
-    else
-        for i in selected; cpu_site!(w,w.scratch[1],i,X,H,ps,Val(env.width),simd,fused); end
-    end
+    props=NL.normalize_properties(properties)
+    env.width==prepared_width(w.prepared) || throw(ArgumentError("stale layout width"))
+    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused)
+    NL.execute_sites!(w.force,w.inverse,w.energies,w.virials,env,selected,selected_mask,w.slots,p,X,H,ps,props,w.batch_size;parallel)
+
     w
 end
 """Owning original-order numerical outputs. Prepared scratch is borrowed only
@@ -279,3 +290,31 @@ end
 function execute_prepared!(w::CPUExecutor,X,H,ps;kwargs...)
     has_source(w.model) ? Base.invokelatest(execute_prepared_impl!,w,X,H,ps;kwargs...) : execute_prepared_impl!(w,X,H,ps;kwargs...)
 end
+
+AC.energy_unit(::ResolvedModel)=u"eV"
+AC.length_unit(::ResolvedModel)=u"Å"
+AC.energy_unit(p::PreparedACE)=AC.energy_unit(p.model)
+AC.length_unit(p::PreparedACE)=AC.length_unit(p.model)
+NI.evaluation_kind(::ResolvedModel)=:site
+NI.species_channels(m::ResolvedModel)=ChemicalSpecies.(m.atomic_numbers)
+NI.search_cutoff(m::ResolvedModel)=maximum(radial_cutoff(ch) for family in (m.radial,m.pair_radial) for ch in family)
+NI.make_scratch(m::ResolvedModel,capacity,::Type{T}) where T=SiteScratch(m,capacity,T)
+NI.make_scratch(p::PreparedACE,capacity,::Type{T}) where T=SiteScratch(p.model,capacity,T)
+function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1,angular_backend=:sphericart,simd=true,fused=false,kwargs...)
+    fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
+    width in (1,2,4,8,16) || throw(ArgumentError("unsupported environment width"))
+    NL.check_units(m)
+    # Provider species identities are mapped explicitly by prepare_environment!;
+    # numerical channel IDs may only be used with that declared ordering.
+    all(s -> element_channel(m,s)>0,species) || throw(ArgumentError("species channels"))
+    basis=make_angular(m,precision,angular_backend,width)
+    weights=zeros(precision,length(m.products),length(m.atomic_numbers))
+    PreparedACE{typeof(m),typeof(basis),typeof(weights),width}(m,basis,weights,simd,fused)
+end
+function NI.update_prepared!(p::PreparedACE,ps)
+    readout=ps.WB .* collect(Bool,p.model.policy.mask)
+    mul!(p.weights,transpose(p.model.coupling),readout)
+    p
+end
+
+prepared_width(::PreparedACE{M,B,C,W}) where {M,B,C,W}=W

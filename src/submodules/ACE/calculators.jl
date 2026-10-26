@@ -9,9 +9,9 @@ mutable struct ACECalculator{M,P,S,W}
     environment::FullEnvironment
     executor::W
 end
-function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads(),precision=Float64,angular_backend=:sphericart)
+function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads(),precision=Float64,angular_backend=:sphericart,batch_size=1)
     env=FullEnvironment(;width)
-    executor=CPUExecutor(model,env;slots,precision,angular_backend)
+    executor=CPUExecutor(model,env;slots,precision,angular_backend,batch_size)
     ACECalculator(model,deepcopy(ps),deepcopy(st),env,executor)
 end
 AC.get_parameters(c::ACECalculator)=deepcopy(c.parameters)
@@ -25,7 +25,7 @@ AC.length_unit(::ACECalculator)=u"Å"
 AC.promote_force_type(sys::AbstractSystem{3},c::ACECalculator)=SVector{3,typeof(zero(eltype(c.executor.force))*u"eV/Å")}
 AC.zero_energy(sys::AbstractSystem{3},c::ACECalculator)=zero(eltype(c.executor.force))*u"eV"
 AC.zero_virial(sys::AbstractSystem{3},c::ACECalculator)=zero(SMatrix{3,3,typeof(AC.zero_energy(sys,c)),9})
-function calculator_result(sys,c;parameters=c.parameters,energy_only=false,parallel=false,simd=true,fused=false,centers=nothing,kwargs...)
+function calculator_result(sys,c;parameters=c.parameters,energy_only=false,parallel=false,simd=true,fused=false,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),kwargs...)
     parameters=(isnothing(parameters) || parameters===NamedTuple()) ? c.parameters : parameters
     fast_parameters=parameter_seed(parameters) isa Union{Float32,Float64}
     input=ace_inputs(sys,c.model;environment=c.environment)
@@ -33,7 +33,7 @@ function calculator_result(sys,c;parameters=c.parameters,energy_only=false,paral
         ace_evaluate(input.positions,c.model,parameters,input.environment,input.cell;state=c.state,energy_only,centers)
     else
         prepare_executor!(c.executor,c.environment)
-        execute_prepared!(c.executor,input.positions,input.cell,parameters;parallel,simd,fused,centers)
+        execute_prepared!(c.executor,input.positions,input.cell,parameters;parallel,simd,fused,centers,properties)
         prepared_result(c.executor)
     end
     if energy_only
@@ -63,9 +63,10 @@ end
 function calculate_ace(properties,sys::AbstractSystem{3},c::ACECalculator;
                       parameters=c.parameters,state=c.state,kwargs...)
     props=properties isa Tuple ? properties : (properties,)
+    normalized=NL.normalize_properties(props)
     all(p -> p isa Union{AC.Energy,AC.Forces,AC.Virial},props) || throw(ArgumentError("unsupported ACE property"))
     isempty(props) && return (;state)
-    r=calculator_result(sys,c;parameters,energy_only=all(p -> p isa AC.Energy,props),kwargs...)
+    r=calculator_result(sys,c;parameters,energy_only=all(p -> p isa AC.Energy,props),properties=normalized,kwargs...)
     key(::AC.Energy)=:energy; key(::AC.Forces)=:forces; key(::AC.Virial)=:virial
     merge((NamedTuple{(key(p),)}((r[key(p)],)) for p in props)...,(;state))
 end
