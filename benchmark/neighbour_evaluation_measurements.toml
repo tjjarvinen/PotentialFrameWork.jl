@@ -1,0 +1,59 @@
+baseline_commit = "576862ac018957aaa4bde9640b098dca7d6fc0c9"
+notes = "Identical isolated application dependency versions; sequential processes, no concurrent tests. Tiny timings are not general throughput claims."
+
+
+[before]
+SIMD = "3.8.1"
+method = "serial prepared E/F/W; width 4; four slots; BLAS 1; 20 warmups; nine samples of 100 calls; three periodic atoms; preparation/output excluded"
+AtomsBase = "0.5.3"
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+threads = 4
+blas_threads = 1
+SpheriCart = "0.2.4"
+julia = "1.13.3"
+Unitful = "1.29.0"
+scratch_bytes = 108360
+
+[before.ace]
+seconds_min = 3.519162e-5
+seconds_median = 3.541582e-5
+bytes = 96
+
+[before.pair]
+seconds_min = 8.024999999999999e-7
+seconds_median = 8.0491e-7
+bytes = 0
+
+[after]
+SIMD = "3.8.1"
+slot_bytes = 111368
+method = "serial prepared E/F/W; width 4; four slots; BLAS 1; 20 warmups; nine samples of 100 calls; three periodic atoms; preparation/output excluded"
+AtomsBase = "0.5.3"
+gradient_bytes = 2304
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+threads = 4
+blas_threads = 1
+SpheriCart = "0.2.4"
+julia = "1.13.3"
+Unitful = "1.29.0"
+scratch_bytes = 108360
+
+[after.ace_batch_2]
+seconds_min = 3.494652e-5
+seconds_median = 3.525482e-5
+bytes = 0
+
+[after.ace]
+seconds_min = 3.553622e-5
+seconds_median = 3.578033e-5
+bytes = 0
+
+[after.ace_batch_5]
+seconds_min = 3.508532e-5
+seconds_median = 3.510533e-5
+bytes = 0
+
+[after.pair]
+seconds_min = 8.5881e-7
+seconds_median = 8.635e-7
+bytes = 0

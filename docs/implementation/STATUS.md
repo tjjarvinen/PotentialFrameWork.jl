@@ -1,5 +1,204 @@
 # Implementation status
 
+## Distance-first pair callback refinement (2026-10-26)
+
+At the user's request, pair callbacks now primarily consume `NI.distance(block)`
+and write `NI.set_radial_derivative!(out,dEdr)`. `NeighbourList` forms
+`g=(dEdr/r)*d` and performs force/virial reduction. `NI.displacement(block)` and
+Cartesian `set_gradient!` remain optional; no mandatory trait or potential
+supertype was added. The native accessor computes scalar/SIMD distances from safe
+current block geometry. Cartesian legacy paths incur no mandatory square root
+or extra stored distance array. Output setters select the radial or Cartesian
+representation; inactive values remain unconsumed. The established regular-origin
+contract remains: dE/dr=0 at r=0, or explicit rejection by the potential.
+
+`RadialPotential` and `SmoothPair` prepare native radial adapters. SmoothPair's
+explicit triangular parameter indices retain original model species coordinates,
+even when provider packing uses a different species order. Updated explicit
+parameters remain authoritative. Historical callable adapters, anisotropic pair
+callbacks and the functional derivative implementation are retained. The portable
+pair example and independent reference backend now use radial outputs, and a
+separate distance-only test view deliberately has no displacement accessor.
+
+New tests compare native/legacy radial forces and virials over Float32/64,
+SIMD widths 1/4/8 and serial/threaded execution, check the regular origin and
+explicit parameter updates, and retain the existing property-subset, anisotropic,
+periodic-image and derivative regressions. Final validation and measurements
+are recorded below; earlier interface timings remain historical evidence.
+
+Final full suites pass **47,518 assertions per process** on Julia **1.13.3** and
+**1.10.12**, each with four threads (`/tmp/pfw-radial-final-113.log`,
+`/tmp/pfw-radial-final-110.log`). This adds 61 focused radial checks to the prior
+47,457-check suite. The root-environment distance-first example also passes
+(`/tmp/pfw-radial-example.log`). Existing force-loss, parameter/position AD,
+anisotropic virial, units, scheduling and reference regressions remain passing.
+Reproduce with the same isolated application environments/commands in the section
+below, or run `test/neighbour_evaluation.jl` through the existing focused runner.
+No new dependencies or reference files were modified.
+
+Final warmed inference (`benchmark/inspect_neighbour_evaluation.jl`) reports
+0 bytes for the native radial pair cell task, legacy Cartesian pair cell task and
+ACE site callback; the radial pair `code_warntype` has `Body::Nothing` and no
+`::Any` locals (`/tmp/pfw-radial-inference.log`,
+`/tmp/pfw-radial-pair-warntype.txt`). Sequential three-atom prepared measurements
+use the same hardware/dependencies/options as the interface measurements below
+and are saved separately in `benchmark/radial_pair_measurements.toml`: legacy
+Cartesian SmoothPair median **0.841 μs**, native radial SmoothPair **0.811 μs**,
+and the uniform analytic RadialPotential adapter **0.686 μs**. Each allocates
+**0 bytes per warmed call**. The adapter uses a simpler species-independent
+function; these tiny measurements establish neither a general speedup nor a
+throughput guarantee. No extra force array or stored distance array was added;
+SmoothPair retains only a species-sized structural parameter-index map. Historical
+interface measurements remain unchanged. Final `git diff --check` passes.
+
+
+## CPU neighborhood evaluation interface (2026-10-26)
+
+Implemented on `neighbor_list_interface`, starting from
+`576862ac018957aaa4bde9640b098dca7d6fc0c9`. Preserved the user's modified AGENTS.md,
+untracked neighborhood specification/plan/validation documents, package identity,
+compatibility, optional dependency boundaries and all reference data. This section
+supersedes earlier module-ownership descriptions only for the completed interface.
+
+M0–M6 are complete. `NeighbourInterface` contains only declarations/contracts and
+imports AtomsCalculators; it has no backend/model imports or allocation/traversal
+algorithms. `NeighbourList` owns full connectivity/species packing, safe native
+pair/site/batch views and supplied outputs, direct execution, loop batching,
+colored phases and reduction. ACE retains mathematical channel/cutoff selection,
+local scratch, radial/angular/projection kernels and authoritative parameter/cache
+updates. `ACE.FullEnvironment` and `ACE.edge_displacement` remain compatibility
+bindings. PairPotentials retains models/binding, legacy request/callback adapters,
+public extraction/output and calculator boundaries; fused pair block traversal is
+preserved. Backend loops contain no ACE type checks.
+
+Final signatures, ownership and implementer contracts are in
+`docs/neighbour_evaluation.md`; `examples/neighbour_evaluation.jl` implements pair
+and angular-site callbacks without native view-field access or mandatory supertypes.
+Preparation, scratch and optional derived-coefficient refresh hooks use explicit
+parameters and declared units. All property subsets use canonical typed AC tuples
+inside callbacks; legacy requests remain supported. Existing calculator result-key
+order, state, additive destinations and public units are preserved. Unsupported
+native unit conventions fail explicitly; convertible system input units still work.
+
+`batch_size` is a positive integer construction option on ACE CPUExecutor,
+ACECalculator and generic site preparation. Size 1 dispatches directly; larger
+sizes dispatch to a specialized batch method or the CPU loop fallback. Serial
+selected-center order, full neighborhoods, bounded exclusive scratch slots, distinct
+pending outputs, tail handling, stale version/capacity/layout rejection and owning
+original-order totals are tested. Parallel work batches within complete-endpoint
+colored phases, retaining one shared sorted force array and barriers. No global
+edge-gradient array or worker-sized full force arrays were added.
+
+`test/neighbour_evaluation.jl` adds 2,700 checks: independent differently stored
+O(N²) open-cell pair/angular-site evaluation, angular finite-difference force and
+strain checks, explicit unsupported reference geometry, every requested subset,
+duplicates/order, empty requests/environments/systems, precision, SIMD padding,
+poisoned inactive output storage, batch 1/2/nondivisors/tails, direct vs specialized
+batch dispatch, serial/threaded agreement, selected centers/order, parameter updates,
+model transformations and layout lifetime. Existing image, scheduling, unit,
+calculator, fitting/design, persistence, custom/source radial and AD tests remain.
+The additional standalone `test/neighbour_saved_reference.jl` passes 597 checks
+against all 33 saved full-precision ACEpotentials predictions with width 1/4 and
+batch 1/2/5, including source/geometry hashes. It does not regenerate/refit data.
+
+Validation evidence:
+
+- Initial unchanged-source Pkg.test: 44,757 assertions on Julia 1.13.3, child
+  process 32 threads (`/tmp/pfw-neighbour-baseline.log`). The initial attempt hit
+  the read-only default depot; a writable `/tmp/pfw-depot` overlay fixed this.
+  Registry DNS was unavailable, but installed packages plus offline resolution
+  supplied all required core/test dependencies without modifying root manifests.
+- Final Julia 1.13.3 / 4 threads: 47,457 assertions
+  (`/tmp/pfw-neighbour-final2-113.log`). Final focused 1-thread suite: 2,700
+  (`/tmp/pfw-neighbour-final2-focused-t1.log`).
+- Final Julia 1.10.12 / 4 threads: 47,457 assertions
+  (`/tmp/pfw-neighbour-final-110.log`), including optional NeighbourLists 0.5.10.
+- Saved 33-frame check: 597 assertions (`/tmp/pfw-neighbour-saved-reference.log`).
+- Dependency-light example passes in the root environment without loading any
+  optional neighborhood/ACE/AD packages (`/tmp/pfw-neighbour-core-example.log`).
+- `code_warntype` on the imported prepared site callback has `Body::Nothing` and
+  no `::Any` locals; function-barrier warmed callback allocation is 0 bytes
+  (`/tmp/pfw-neighbour-inference-final.log`, `/tmp/pfw-neighbour-site-warntype.txt`).
+  Final pair cell-task inference also has `Body::Nothing`, no `::Any` locals
+  and 0 warmed bytes (`/tmp/pfw-neighbour-final-inference.log`,
+  `/tmp/pfw-neighbour-pair-warntype.txt`).
+  The global-splat probe's 448 bytes were measurement-wrapper overhead, excluded
+  from the function-barrier result. Legacy pair adapter inlining removed an
+  initially observed 576-byte prepared-call allocation regression.
+
+Development checks caught and fixed calculator output-key reordering, batch-method
+fallback ambiguity, single-property result-shape handling and a dynamically built
+prepared-evaluator type. Earlier test processes that loaded intermediate source
+failed the later-added single-property tests; final clean processes use the fixed
+source. Numerical tolerances and historical results were not weakened.
+
+Hardware: AMD Ryzen 9 9950X, 16 cores/32 logical CPUs. Application environments use
+AtomsBase 0.5.3, AtomsCalculators 0.2.3, SIMD 3.8.1, StaticArrays 1.9.24,
+Unitful 1.29.0, SpheriCart 0.2.4, ForwardDiff 1.4.6, ChainRulesCore 1.26.4,
+Zygote 0.7.14, LuxCore 1.5.3 and EmpiricalPotentials 0.2.6. NeighbourLists is
+0.6.2 on Julia 1.13 and 0.5.10 on Julia 1.10. Julia 1.10.12 and 1.13.3 are the
+available supported runtimes; exact 1.10.10/1.13.2 binaries are not installed.
+The pinned Julia 1.13.2 reference environment is unchanged and was not regenerated.
+
+Reproduction (isolated application environments include the Project test extras;
+root and pinned manifests are preserved):
+
+```sh
+export JULIA_DEPOT_PATH=/tmp/pfw-depot:/var/home/teemu/.julia
+julia --project=/tmp/pfw-neighbour-env --threads=4 test/runtests.jl
+/var/home/teemu/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/bin/julia --project=/tmp/pfw-neighbour-env110 --threads=4 test/runtests.jl
+julia --project=/tmp/pfw-neighbour-env --threads=4 test/neighbour_saved_reference.jl
+julia --project --threads=1 examples/neighbour_evaluation.jl
+julia --project=/tmp/pfw-neighbour-env benchmark/inspect_neighbour_evaluation.jl
+julia --project=/tmp/pfw-neighbour-env --threads=4 benchmark/neighbour_evaluation.jl "$PWD" /tmp/pfw-neighbour-after.toml
+```
+
+For baseline timing, the unchanged source/project/manifest/ext snapshot is
+`/tmp/pfw-neighbour-before`, with application environment
+`/tmp/pfw-neighbour-before-env`. Activate that environment and pass the snapshot
+as the benchmark's package-root argument. Run sequentially without concurrent tests.
+
+Final sequential prepared measurements (Julia 1.13.3, four Julia threads,
+BLAS one thread; serial execution; width 4, four exclusive slots; same three-atom
+periodic fixture; 20 warmups then nine samples of 100 calls, excluding preparation
+and owning outputs) are saved in `benchmark/neighbour_evaluation_measurements.toml`:
+
+| Prepared evaluation | Before median | After median | Before/after bytes per call |
+| --- | ---: | ---: | ---: |
+| Pair E/F/W | 0.805 μs | 0.864 μs | 0 / 0 |
+| ACE E/F/W, batch 1 | 35.416 μs | 35.780 μs | 96 / 0 |
+| ACE E/F/W, batch 2 | — | 35.255 μs | — / 0 |
+| ACE E/F/W, batch 5 | — | 35.105 μs | — / 0 |
+
+The observed default-path differences are about +7.3% pair (59 ns) and +1.0%
+ACE on this tiny fixture. Earlier repeated development samples varied enough
+that these are not general slowdown/speedup estimates. No batch throughput gain
+is claimed. Existing ACE scratch is 108,360 bytes across four slots before and
+after. New batch-1 gradient storage is 2,304 bytes (24 padded edges/site capacity,
+Float64, four slots); batch 2/5 require 4,608/11,520 bytes. Slot container summary
+including the existing aliased scratch is 111,368 bytes at batch 1; do not add that
+summary to scratch bytes as if they were disjoint allocations. The production
+force storage remains one `3*N*sizeof(T)` array. Final `git diff --check` passes.
+No required interface gate remains unverified in the available runtimes. Exact
+pinned-binary re-execution and live ACEpotentials re-export were not performed;
+the supplied saved oracle was checked without modification.
+
+Remaining limits are intentional: mutating inference executors have no new AD
+rules; the functional serial/ForwardDiff/ChainRules/Zygote/Lux path preserves the
+existing E→X/ps, F→X/ps (including force-loss products), W→ps and documented W→X
+capabilities/errors, saved inputs and repeat/delayed pullbacks. Legacy pair
+adapters may compute/discard extras, and ACE prepared energy-only uses existing
+joint derivative kernels. Scalar/custom radial fallback allocation limits remain.
+Generic ACE preparation currently allocates a masked readout during its once-per-
+execution refresh (the production CPUExecutor reuses its readout buffer), not per
+site. Callback separation adds a bounded local gradient write/read and backend
+geometry reconstruction. The batch loop is a correctness fallback with no optimized
+contractions. No new site-energy API, skin reuse, gather/atomic reduction, GPU/MACE,
+AD optimization, external protocol changes or upstream proposal was introduced.
+The independent reference backend is deliberately limited to open geometry;
+existing optional NeighbourLists query interoperability remains separate.
+
+
 ## CPU ACE interface phase (2026-10-24)
 
 Started on `ACE_tuning` at `71492894e2e3881c75bc032dacab2879a4df0d57`, identical

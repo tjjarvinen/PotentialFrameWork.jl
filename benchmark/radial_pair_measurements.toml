@@ -1,0 +1,42 @@
+SIMD = "3.8.1"
+slot_bytes = 111368
+method = "serial prepared E/F/W; width 4; four slots; BLAS 1; 20 warmups; nine samples of 100 calls; three periodic atoms; preparation/output excluded"
+AtomsBase = "0.5.3"
+gradient_bytes = 2304
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+threads = 4
+blas_threads = 1
+SpheriCart = "0.2.4"
+julia = "1.13.3"
+Unitful = "1.29.0"
+scratch_bytes = 108360
+
+[ace_batch_2]
+seconds_min = 3.550404e-5
+seconds_median = 3.582853e-5
+bytes = 0
+
+[native_radial_smooth]
+seconds_min = 8.093999999999999e-7
+seconds_median = 8.1131e-7
+bytes = 0
+
+[ace]
+seconds_min = 3.531903e-5
+seconds_median = 3.561653e-5
+bytes = 0
+
+[ace_batch_5]
+seconds_min = 3.539273e-5
+seconds_median = 3.555403e-5
+bytes = 0
+
+[native_radial_adapter]
+seconds_min = 6.8501e-7
+seconds_median = 6.858e-7
+bytes = 0
+
+[pair]
+seconds_min = 8.4e-7
+seconds_median = 8.412e-7
+bytes = 0

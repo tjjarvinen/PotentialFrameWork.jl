@@ -99,6 +99,7 @@ property_result(::AC.Virial,r)=(;virial=static_virial(r.virial))
 const SingleProperty=Union{AC.Energy,AC.Forces,AC.Virial}
 function calculate(properties,sys,p,parameters,state;kwargs...)
     props=properties isa Tuple ? properties : (properties,)
+    normalized=NL.normalize_properties(props)
     all(prop -> prop isa Union{AC.Energy,AC.Forces,AC.Virial},props) ||
         throw(ArgumentError("supported properties are Energy(), Forces() and Virial()"))
     if !(isnothing(parameters) || parameters===NamedTuple())
@@ -117,7 +118,7 @@ function calculate(properties,sys,p,parameters,state;kwargs...)
         return merge(map(prop -> property_result(prop,unitful),props)...,(;state))
     end
     isempty(props) && return (;state)
-    request=all(prop -> prop isa AC.Energy,props) ? EnergyOnly() : EnergyForcesVirial()
+    request=normalized
     r=compute(sys,p,request;kwargs...)
     merge(map(prop -> property_result(prop,r),props)...,(;state))
 end

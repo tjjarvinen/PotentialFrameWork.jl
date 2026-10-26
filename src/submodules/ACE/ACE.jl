@@ -1,5 +1,6 @@
 """Independent CPU ACE numerical model and resolved-model import boundary."""
 module ACE
+import ..NeighbourInterface as NI
 using TOML, LinearAlgebra, SparseArrays, StaticArrays
 using SHA
 using SIMD: Vec
@@ -7,7 +8,8 @@ using AtomsBase, Unitful
 import AtomsCalculators as AC
 using ..PairPotentials: force_vectors, static_virial, check_destination, add_forces!
 using ..PairPotentials: parameter_seed, parameter_flatten, parameter_rebuild
-using ..NeighbourList: neighbour_list
+using ..NeighbourList: neighbour_list, FullEnvironment, edge_displacement
+import ..NeighbourList as NL
 
 export ResolvedModel, load_resolved, radial_values, FullEnvironment, prepare_environment!, ace_inputs
 export load_recipe
