@@ -37,6 +37,7 @@ PotentialFrameWorkForwardDiffExt = "ForwardDiff"
 [compat]
 KernelAbstractions = "0.9.34, 0.10.3"
 AcceleratedKernels = "0.4.3, 0.5.10"
+LinearAlgebra = "1.10"
 UnicodePlots = "3.9"
 LuxCore = "1"
 ACEfit = "0.3.1"
