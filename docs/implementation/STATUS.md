@@ -1,5 +1,108 @@
 # Implementation status
 
+## GPU phase 1: sorted cells and radial pairs (2026-10-27)
+
+Delivered G0–G5 on base `a6b3dd56e2560fe1339f0f41464da052f5cb7ff7`.
+The user's appended AGENTS.md, untracked GPU specification/plan/validation files,
+reference environments/data and package identity are preserved. GPU execution is
+explicit opt-in inference; existing CPU APIs, multi-image/skew geometry, colored
+force ownership, calculators and functional AD remain supported.
+
+`NeighbourList` owns GPU configuration/workspace, generic geometry extraction,
+sparse integer-triple record keys, AK record sorting, device unpack/ranges/binary
+lookup, scalar NI views/outputs, both KA interaction kernels, reductions and skin
+connectivity. `PairPotentials` owns GPU model preparation, runtime species/parameter
+binding, SmoothPair and shifted Lennard-Jones mathematics, custom radial
+certification and public owning-result boundaries. NeighbourInterface remains a
+pure protocol; AtomsCalculators and the root module are unchanged. Core KA/AK
+have no mandatory GPU vendor package; AMDGPU is confined to the application
+validation environment. Julia compatibility remains 1.10.10.
+
+The default is Float64, central-thread ownership and fresh cells on every call.
+Explicit Float32 is supported. Experimental candidate tiling assigns one bounded
+central tile to one workgroup, stages central positions, loads contiguous candidate
+runs and reduces center forces in local memory. There are no inter-workgroup force
+atomics, full force buffers per workgroup or dense distance matrices. Both paths
+use the same unweighted radial callback and full directed force/half E/W convention.
+Parameters refresh on every supplied call, retaining original model species indices
+and full named/isotopic ChemicalSpecies identities. Numerical results own device
+storage; convenience results own unitful original-order host arrays. Prepared
+inputs borrow reusable upload storage and reject after later preparation on the
+same workspace. Numerical execution reads one reduced scalar to reject singular
+origins/nonfinite callback output, including force-only requests; it never reads
+forces merely to satisfy the host convenience API. This synchronization is timed.
+
+Optional skin was implemented after fresh traversal and tiling. Device count/scan/
+fill builds exact conservative atom CSR candidates at cutoff+skin; reuse updates
+positions in a fixed sorted permutation and filters at the physical cutoff.
+Device maximum displacement plus a conservative threshold margin triggers rebuild.
+Raw-coordinate differences conservatively handle wrapped jumps without inferring
+winding. Metadata/species/cutoff changes invalidate connectivity; capacity grows
+without truncation. Skin=0 remains default and no automatic tuning is provided.
+
+Final full suites pass **49,059 assertions per process** on Julia **1.13.3** and
+**1.10.12**, four threads, including all prior 47,518 CPU/interface/AD assertions
+and 1,541 new kernel/interface/error/lifetime checks. Logs:
+`/tmp/pfw-gpu-regression-113.log`, `/tmp/pfw-gpu-regression-110.log`.
+These resolve KA 0.9.45/AK 0.4.4 with SpheriCart 0.2.4. Compatibility adapters
+also support the KA 0.10.3/AK 0.5.10 device environment. Separate POCL CPU kernel
+suites pass on both Julia versions; its original struct-reinterpretation compiler
+failure was fixed by explicit species-field decoding. Standalone CPU-only import
+passed without AMDGPU/CUDA loaded (`/tmp/pfw-gpu-cpu-load.log`).
+
+The RX 6800 XT real-device suite passes **1,539 assertions** on Julia 1.13.3,
+AMDGPU 2.10.0, KA 0.10.3, AK 0.5.10, GPUCompiler 2.18.0, GPUArrays 12.1.1 and
+LLVM.jl 10.4.2. The device reports gfx1030, 15.984 GiB and wavefront 32. Host:
+Ryzen 9 9950X, Linux 7.2.11-200.fc44.x86_64, HIP 7.1.52802. Relevant dependencies:
+AtomsBase 0.5.3, AtomsCalculators 0.2.3, AtomsBuilder 0.2.3, AtomsSystems 0.1.2,
+SIMD 3.8.1, StaticArrays 1.9.24 and Unitful 1.29.0. Diagnostics/test summaries
+are persisted in `GPU-PAIR-HARDWARE.txt`; exact benchmark dependencies are in
+`benchmark/gpu_pair_measurements.toml`. Tests include all property subsets,
+precision overrides, independent converted-geometry sums, force/strain differences,
+strict species accessors, parameter updates, origins, sparse/open/mixed/periodic
+cells, aliases, tails/dense populations, alternate launches, skin trajectories and
+invalidation, owning outputs and unsupported requests. GPU AD explicitly rejects.
+
+Final synchronized warm Float32 argon full E/F/W medians (seven repetitions,
+32 Julia threads for CPU comparisons): 10,976 atoms, central numerical **0.479 ms**,
+public GPU **0.728 ms**, public CPU **4.741 ms**; candidate numerical **1.395 ms**.
+97,556 atoms: central numerical **1.477 ms**, public GPU **2.906 ms**, public CPU
+**28.655 ms**; candidate numerical **11.693 ms**. Numerical timings include fresh
+cells/sort/search/reduction, scalar validation and owning device result copies,
+excluding upload/host force copies. Public timings include extraction/upload and
+unitful host outputs. All 48 cases, first-call/capacity costs, variation, stage
+profiles and memory/host allocations are recorded. Candidate tiling is slower in
+these fresh-cell samples. In the forty-step nonuniform 10,976-atom trajectory,
+skin 0.5 rebuilt once: central amortized **0.256 ms** versus fresh **0.455 ms**;
+candidate **0.242 ms** versus fresh **1.371 ms**. Rebuild/reuse paths were warmed
+separately; every evolving step matches fresh GPU execution outside timing.
+These measurements describe the tested cases, not general performance promises.
+
+Reproduce from the repository (GPU application setup and callback examples are in
+`docs/gpu_pairs.md`):
+
+```sh
+julia --project -t4 -e 'using Pkg; Pkg.test(;julia_args=["--threads=4"])'
+julia --project=/tmp/pfw-gpu test/gpu_pairs.jl --amdgpu
+julia --project=/tmp/pfw-gpu examples/gpu_pairs.jl
+julia --project=/tmp/pfw-gpu benchmark/gpu_pairs.jl
+julia --project=/tmp/pfw-gpu benchmark/gpu_pair_force_errors.jl
+```
+
+Julia 1.10 used `/var/home/teemu/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/bin/julia`
+with isolated `/tmp/pfw-gpu110` and `Pkg.test("PotentialFrameWork";
+julia_args=["--threads=4"])`; the separate pinned ACE reference environment was
+not changed. No real-device gate remains open for the tested RX 6800 XT environment.
+Earlier AMDGPU 2.8 attempts failed sort-kernel compilation on Julia 1.12/1.13;
+a Julia 1.10 LLVM attempt crashed. Those GPU combinations are not claimed as
+supported. GPU skew/multi-image, GPU AD, GPU ACE/MACE and other vendors remain
+unsupported/untested as documented. The G1 radial correctness gate uses the
+production device-built cells; no transferred-CPU-connectivity prototype is kept.
+See `GPU-PAIR-RESULTS.md` and `docs/gpu_pairs.md` for tolerances, storage/lifetimes,
+limitations and complete reproduction details. Historical measurements below are
+unchanged.
+
+
 ## Distance-first pair callback refinement (2026-10-26)
 
 At the user's request, pair callbacks now primarily consume `NI.distance(block)`

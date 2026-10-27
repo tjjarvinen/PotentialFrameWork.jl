@@ -415,3 +415,6 @@ Pair callbacks normally consume `NeighbourInterface.distance(block)` and return
 `dE/dr` with `set_radial_derivative!`; the backend supplies orientation during
 force/virial reduction. Displacement access and Cartesian gradient outputs remain
 available for orientation-dependent interactions.
+
+GPU radial pair inference, device setup, ownership and limitations are documented
+in [docs/gpu_pairs.md](docs/gpu_pairs.md). The default CPU APIs are unchanged.

@@ -139,3 +139,42 @@ Pair protocol refinement: distance is the primary pair input, with radial dE/dr
 outputs converted to Cartesian gradients in the backend. Displacement access and
 Cartesian gradient outputs remain optional, preserving anisotropic and legacy
 callbacks. Keep the functional pair AD adapters compatible.
+
+
+## GPU phase 1 — sorted cells and radial pairs, 27 October 2026
+
+The user now authorizes GPU neighbor infrastructure and radial pair evaluation.
+This supersedes previous prohibitions on GPU dependencies/kernels and alternative
+GPU force reductions for this phase only. Optional buffered connectivity/skin is
+also authorized, after the default fresh-cell implementation. CPU ownership and
+colored scheduling rules continue to govern the existing CPU implementation;
+they do not prescribe the new GPU scheduler. Preserve all unrelated contracts.
+
+Read in order:
+1. docs/implementation/GPU-PAIR-SPEC.md
+2. docs/implementation/GPU-PAIR-PLAN.md
+3. docs/implementation/GPU-PAIR-VALIDATION.md
+
+Keep NeighbourInterface a pure protocol and AtomsCalculators unchanged. Generic
+GPU machinery belongs in NeighbourList; model mathematics and preparation belong
+in PairPotentials. Retain functional CPU AD, parameter authority, output ownership,
+units and CPU multi-image behavior. GPU execution supports single-image geometry
+only. Initial supported cells are orthorhombic/open/partially periodic; skew GPU
+support is optional and requires a correct tested closest-image algorithm.
+
+Use KernelAbstractions for custom kernels and AcceleratedKernels for suitable
+parallel primitives. RX 6800 XT/AMDGPU is the primary real test target. Keep device
+integration optional and CPU-only loading functional. Preserve Julia 1.10.10
+compatibility where practical and verify actual dependency APIs/compat bounds.
+Do not silently raise the core Julia requirement.
+
+Preserve record sorting with aligned positions, species and original indices;
+sorting is not a presumed bottleneck. Baseline full-directed central ownership
+and experimental candidate-thread tiling share storage and potential callbacks.
+Do not materialize dense distance matrices. Precision Float32/Float64 is explicit.
+
+GPU ACE/MACE, GPU AD, MPI, long-range electrostatics and matrix-core algorithms
+remain outside scope. Do not spawn subagents. Complete routine reversible work,
+run meaningful checks, and update STATUS.md with actual results and reproduction
+commands. Never claim support or performance that has not been tested.
+

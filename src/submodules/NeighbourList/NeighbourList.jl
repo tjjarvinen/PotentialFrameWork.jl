@@ -15,4 +15,5 @@ include("interface.jl")
 include("environments.jl")
 include("execution.jl")
 include("benchmarks.jl")
+include("gpu.jl")
 end
