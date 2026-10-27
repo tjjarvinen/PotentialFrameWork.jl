@@ -20,4 +20,6 @@ include("evaluation.jl")
 include("calculators.jl")
 include("parameters.jl")
 include("numerical.jl")
+include("gpu.jl")
+include("lennard_jones.jl")
 end

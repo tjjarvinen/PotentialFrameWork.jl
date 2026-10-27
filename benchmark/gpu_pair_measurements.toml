@@ -1,0 +1,4260 @@
+julia = "1.13.3"
+device = "HIPDevice(id=1, name=AMD Radeon RX 6800 XT, gcn_arch=gfx1030)"
+force_norm_validation = "separate deterministic replay; timing fields unchanged"
+repetitions = 7
+cpu = "znver5"
+julia_threads = 32
+
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8256
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.5498778028676834e7
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.5132219210000001
+seed = 20261041
+energy_error_original_per_atom_eV = 1.2107190404102537e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 219528
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 5.109533905
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.003e-5
+    minimum = 1.842e-5
+    maximum = 2.1040000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 4.096e-5
+    minimum = 4.0220000000000005e-5
+    maximum = 4.685e-5
+
+    [measurements.stages.extraction]
+    median = 0.00010219000000000001
+    minimum = 9.9591e-5
+    maximum = 0.000110431
+
+    [measurements.stages.reduction]
+    median = 2.313e-5
+    minimum = 2.279e-5
+    maximum = 2.362e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010084
+    minimum = 0.000100171
+    maximum = 0.00010498
+
+    [measurements.stages.interaction]
+    median = 0.00028369100000000003
+    minimum = 0.000281981
+    maximum = 0.00028536100000000003
+
+    [measurements.stages.geometry_upload]
+    median = 4.097e-5
+    minimum = 3.7680000000000005e-5
+    maximum = 4.4681e-5
+
+    [measurements.stages.key_generation]
+    median = 4.0610000000000006e-5
+    minimum = 4.0100000000000006e-5
+    maximum = 6.467e-5
+
+    [measurements.public]
+    median = 0.0006085820000000001
+    minimum = 0.0005979220000000001
+    maximum = 0.000639752
+
+    [measurements.numeric]
+    median = 0.000430452
+    minimum = 0.000415651
+    maximum = 0.000442631
+
+    [measurements.cpu]
+    median = 0.004030894
+    minimum = 0.003762262
+    maximum = 0.012866863000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9728
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.2906705679301944e7
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.00043714100000000005
+seed = 20261041
+energy_error_original_per_atom_eV = 1.2107190404102537e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 131752
+upload_buffer_bytes = 219528
+max_force_error_original_eV_A = 2.5952498345356394e-6
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 2.7139441051444176e-6
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.222875068
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 1.0289415968145477e-6
+max_force_error_eV_A = 1.0274816304445267e-6
+
+    [measurements.stages.unpack_ranges]
+    median = 1.9620000000000002e-5
+    minimum = 1.933e-5
+    maximum = 2.169e-5
+
+    [measurements.stages.host_output_copy]
+    median = 7.6381e-5
+    minimum = 7.271e-5
+    maximum = 8.5041e-5
+
+    [measurements.stages.extraction]
+    median = 0.00010162
+    minimum = 0.00010084
+    maximum = 0.0001043
+
+    [measurements.stages.reduction]
+    median = 2.385e-5
+    minimum = 2.2780000000000002e-5
+    maximum = 2.5690000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00013511
+    minimum = 0.00012489100000000002
+    maximum = 0.000160241
+
+    [measurements.stages.interaction]
+    median = 0.000304801
+    minimum = 0.00030421100000000003
+    maximum = 0.000313041
+
+    [measurements.stages.geometry_upload]
+    median = 3.685e-5
+    minimum = 3.368e-5
+    maximum = 4.1360000000000004e-5
+
+    [measurements.stages.key_generation]
+    median = 4.2430000000000005e-5
+    minimum = 3.981e-5
+    maximum = 5.8800000000000006e-5
+
+    [measurements.public]
+    median = 0.000727883
+    minimum = 0.0007160620000000001
+    maximum = 0.0007454520000000001
+
+    [measurements.numeric]
+    median = 0.00047916100000000003
+    minimum = 0.000474722
+    maximum = 0.00048655100000000005
+
+    [measurements.cpu]
+    median = 0.004740586000000001
+    minimum = 0.004341725
+    maximum = 0.011825780000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8256
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.87756473009867e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000422541
+seed = 20261041
+energy_error_original_per_atom_eV = 1.2107190404102537e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 219528
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.393983562
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.039e-5
+    minimum = 2.025e-5
+    maximum = 2.0810000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.214e-5
+    minimum = 2.0421e-5
+    maximum = 2.2440000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.00010269000000000001
+    minimum = 0.00010053
+    maximum = 0.00010502100000000001
+
+    [measurements.stages.reduction]
+    median = 2.355e-5
+    minimum = 2.2541e-5
+    maximum = 5.754e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010561
+    minimum = 9.999000000000001e-5
+    maximum = 0.000109241
+
+    [measurements.stages.interaction]
+    median = 0.001264764
+    minimum = 0.001260555
+    maximum = 0.001268264
+
+    [measurements.stages.geometry_upload]
+    median = 4.0050000000000004e-5
+    minimum = 3.677e-5
+    maximum = 4.371e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9771e-5
+    minimum = 1.948e-5
+    maximum = 6.802e-5
+
+    [measurements.public]
+    median = 0.001577185
+    minimum = 0.0015656650000000002
+    maximum = 0.001588795
+
+    [measurements.numeric]
+    median = 0.001393324
+    minimum = 0.001385675
+    maximum = 0.0014184940000000002
+
+    [measurements.cpu]
+    median = 0.0038361240000000002
+    minimum = 0.003698722
+    maximum = 0.004009923
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9728
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.86835981688285e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.00031050100000000003
+seed = 20261041
+energy_error_original_per_atom_eV = 1.2107190404102537e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 131752
+upload_buffer_bytes = 219528
+max_force_error_original_eV_A = 2.59408568131737e-6
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 2.713008350293325e-6
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.243377006
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 1.028632709676458e-6
+max_force_error_eV_A = 1.0272487998008728e-6
+
+    [measurements.stages.unpack_ranges]
+    median = 2.0490000000000002e-5
+    minimum = 1.986e-5
+    maximum = 2.0620000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 4.185e-5
+    minimum = 4.114e-5
+    maximum = 4.708e-5
+
+    [measurements.stages.extraction]
+    median = 0.00019693
+    minimum = 0.000100691
+    maximum = 0.000201511
+
+    [measurements.stages.reduction]
+    median = 2.345e-5
+    minimum = 2.307e-5
+    maximum = 2.7000000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000129411
+    minimum = 0.00012786
+    maximum = 0.000138531
+
+    [measurements.stages.interaction]
+    median = 0.0012307350000000002
+    minimum = 0.001222144
+    maximum = 0.001242674
+
+    [measurements.stages.geometry_upload]
+    median = 3.8690000000000004e-5
+    minimum = 3.346e-5
+    maximum = 3.983e-5
+
+    [measurements.stages.key_generation]
+    median = 1.955e-5
+    minimum = 1.87e-5
+    maximum = 3.105e-5
+
+    [measurements.public]
+    median = 0.001638656
+    minimum = 0.0016236850000000001
+    maximum = 0.011258137000000001
+
+    [measurements.numeric]
+    median = 0.0013949540000000001
+    minimum = 0.0013923350000000002
+    maximum = 0.001398774
+
+    [measurements.cpu]
+    median = 0.004594985
+    minimum = 0.0043350540000000005
+    maximum = 0.004726276000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8336
+energy_error_per_atom_eV = 1.0357765827406708e-17
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.12414550496016e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.260190382
+seed = 20261041
+energy_error_original_per_atom_eV = 1.0357765827406708e-17
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 351240
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 2.000036837
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.3160000000000002e-5
+    minimum = 2.215e-5
+    maximum = 2.4310000000000003e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.1320000000000003e-5
+    minimum = 1.9880000000000003e-5
+    maximum = 2.5240000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011093000000000001
+    minimum = 0.00010819100000000001
+    maximum = 0.00011364
+
+    [measurements.stages.reduction]
+    median = 2.5670000000000003e-5
+    minimum = 2.298e-5
+    maximum = 2.767e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010124
+    minimum = 9.996000000000001e-5
+    maximum = 0.000139491
+
+    [measurements.stages.interaction]
+    median = 0.001422195
+    minimum = 0.001408755
+    maximum = 0.001450855
+
+    [measurements.stages.geometry_upload]
+    median = 4.672e-5
+    minimum = 4.112e-5
+    maximum = 5.1191000000000005e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9540000000000003e-5
+    minimum = 1.798e-5
+    maximum = 2.7550000000000002e-5
+
+    [measurements.public]
+    median = 0.001751076
+    minimum = 0.0017325760000000002
+    maximum = 0.001769296
+
+    [measurements.numeric]
+    median = 0.0015406760000000002
+    minimum = 0.001530695
+    maximum = 0.0015472650000000001
+
+    [measurements.cpu]
+    median = 0.004242724000000001
+    minimum = 0.0040024330000000006
+    maximum = 0.006711912
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9808
+energy_error_per_atom_eV = 1.0357765827406708e-17
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 6.545348723490026e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000359621
+seed = 20261041
+energy_error_original_per_atom_eV = 1.0357765827406708e-17
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 263504
+upload_buffer_bytes = 351240
+max_force_error_original_eV_A = 2.0539125955565396e-15
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 2.071919066067914e-15
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.22259625700000002
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 2.071919066067914e-15
+max_force_error_eV_A = 2.0539125955565396e-15
+
+    [measurements.stages.unpack_ranges]
+    median = 2.1830000000000003e-5
+    minimum = 1.8841e-5
+    maximum = 2.266e-5
+
+    [measurements.stages.host_output_copy]
+    median = 5.8240000000000005e-5
+    minimum = 5.2300000000000004e-5
+    maximum = 6.513100000000001e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011365000000000001
+    minimum = 0.0001088
+    maximum = 0.00011735100000000001
+
+    [measurements.stages.reduction]
+    median = 2.358e-5
+    minimum = 2.305e-5
+    maximum = 2.5221e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010184
+    minimum = 0.0001005
+    maximum = 0.000107361
+
+    [measurements.stages.interaction]
+    median = 0.0015294150000000001
+    minimum = 0.001527666
+    maximum = 0.001531695
+
+    [measurements.stages.geometry_upload]
+    median = 5.109e-5
+    minimum = 4.236e-5
+    maximum = 6.15e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9940000000000002e-5
+    minimum = 1.789e-5
+    maximum = 2.3860000000000002e-5
+
+    [measurements.public]
+    median = 0.0019811570000000003
+    minimum = 0.001948927
+    maximum = 0.012487472000000001
+
+    [measurements.numeric]
+    median = 0.001676916
+    minimum = 0.001672405
+    maximum = 0.0016883360000000001
+
+    [measurements.cpu]
+    median = 0.004825136000000001
+    minimum = 0.004460475
+    maximum = 0.0051261480000000005
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8336
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.212954088057669e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000388191
+seed = 20261041
+energy_error_original_per_atom_eV = 0.0
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 351240
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.23930621300000002
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.044e-5
+    minimum = 1.9961e-5
+    maximum = 2.0580000000000003e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.143e-5
+    minimum = 1.98e-5
+    maximum = 2.19e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011023000000000001
+    minimum = 0.00010731
+    maximum = 0.00022970000000000003
+
+    [measurements.stages.reduction]
+    median = 2.619e-5
+    minimum = 2.5920000000000003e-5
+    maximum = 2.8760000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000107311
+    minimum = 0.00010038000000000001
+    maximum = 0.000111991
+
+    [measurements.stages.interaction]
+    median = 0.004974177000000001
+    minimum = 0.004826637
+    maximum = 0.005127047
+
+    [measurements.stages.geometry_upload]
+    median = 5.185e-5
+    minimum = 4.201e-5
+    maximum = 5.8620000000000005e-5
+
+    [measurements.stages.key_generation]
+    median = 2.0070000000000003e-5
+    minimum = 1.933e-5
+    maximum = 3.118e-5
+
+    [measurements.public]
+    median = 0.005180808
+    minimum = 0.005112876000000001
+    maximum = 0.005214377
+
+    [measurements.numeric]
+    median = 0.004959886
+    minimum = 0.004920176
+    maximum = 0.005046677
+
+    [measurements.cpu]
+    median = 0.004037873
+    minimum = 0.003782483
+    maximum = 0.010564265000000002
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9808
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.094789211835559e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.00033999100000000005
+seed = 20261041
+energy_error_original_per_atom_eV = 0.0
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 263504
+upload_buffer_bytes = 351240
+max_force_error_original_eV_A = 2.0554846887066436e-15
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 2.0728365509632613e-15
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.22665406000000002
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 2.0728365509632613e-15
+max_force_error_eV_A = 2.0554846887066436e-15
+
+    [measurements.stages.unpack_ranges]
+    median = 1.965e-5
+    minimum = 1.861e-5
+    maximum = 2.0340000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 6.0740000000000005e-5
+    minimum = 5.236e-5
+    maximum = 7.364e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011276000000000001
+    minimum = 0.00010858000000000001
+    maximum = 0.000115841
+
+    [measurements.stages.reduction]
+    median = 2.3460000000000002e-5
+    minimum = 2.2820000000000002e-5
+    maximum = 2.4900000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010693100000000001
+    minimum = 0.00010563
+    maximum = 0.00011251
+
+    [measurements.stages.interaction]
+    median = 0.005094307
+    minimum = 0.005061127
+    maximum = 0.0051281470000000004
+
+    [measurements.stages.geometry_upload]
+    median = 4.8961e-5
+    minimum = 4.057e-5
+    maximum = 5.933e-5
+
+    [measurements.stages.key_generation]
+    median = 2.012e-5
+    minimum = 1.793e-5
+    maximum = 3.8211000000000004e-5
+
+    [measurements.public]
+    median = 0.005517079
+    minimum = 0.0054762380000000005
+    maximum = 0.0058363600000000005
+
+    [measurements.numeric]
+    median = 0.005239668
+    minimum = 0.005194507
+    maximum = 0.005521128
+
+    [measurements.cpu]
+    median = 0.004538535000000001
+    minimum = 0.004308984
+    maximum = 0.011575709
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8240
+energy_error_per_atom_eV = 5.5607833893134284e-9
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.458054517929286e7
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.167540652
+seed = 20261041
+energy_error_original_per_atom_eV = 3.029156639160538e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.239816824
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 1.86e-5
+    minimum = 1.789e-5
+    maximum = 2.6980000000000003e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.184e-5
+    minimum = 2.016e-5
+    maximum = 2.285e-5
+
+    [measurements.stages.extraction]
+    median = 9.8701e-5
+    minimum = 9.781e-5
+    maximum = 9.955000000000001e-5
+
+    [measurements.stages.reduction]
+    median = 2.3230000000000003e-5
+    minimum = 2.2680000000000003e-5
+    maximum = 2.4840000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 9.934000000000001e-5
+    minimum = 9.837100000000001e-5
+    maximum = 0.00010518
+
+    [measurements.stages.interaction]
+    median = 0.00031395100000000003
+    minimum = 0.000310841
+    maximum = 0.00031540100000000004
+
+    [measurements.stages.geometry_upload]
+    median = 3.862e-5
+    minimum = 3.626e-5
+    maximum = 4.0100000000000006e-5
+
+    [measurements.stages.key_generation]
+    median = 1.743e-5
+    minimum = 1.736e-5
+    maximum = 2.281e-5
+
+    [measurements.public]
+    median = 0.000636832
+    minimum = 0.000623822
+    maximum = 0.000672092
+
+    [measurements.numeric]
+    median = 0.000446532
+    minimum = 0.00044261100000000004
+    maximum = 0.00046666100000000005
+
+    [measurements.cpu]
+    median = 0.004910076
+    minimum = 0.004750866
+    maximum = 0.005871250000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9712
+energy_error_per_atom_eV = 5.5607833893134284e-9
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.1492027624774575e7
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000416802
+seed = 20261041
+energy_error_original_per_atom_eV = 3.029156639160538e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 131752
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 2.0334165360587635e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.1284632721225192e-8
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.194238411
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 1.4495163291883273e-8
+max_force_error_eV_A = 1.4341821952257305e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 2.031e-5
+    minimum = 1.902e-5
+    maximum = 2.1910000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 4.275e-5
+    minimum = 4.1141000000000005e-5
+    maximum = 4.5090000000000004e-5
+
+    [measurements.stages.extraction]
+    median = 9.944000000000001e-5
+    minimum = 9.857e-5
+    maximum = 0.000101291
+
+    [measurements.stages.reduction]
+    median = 2.3460000000000002e-5
+    minimum = 2.303e-5
+    maximum = 2.8800000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00013358
+    minimum = 0.00012606
+    maximum = 0.000138231
+
+    [measurements.stages.interaction]
+    median = 0.00033895100000000004
+    minimum = 0.000337431
+    maximum = 0.000341711
+
+    [measurements.stages.geometry_upload]
+    median = 4.139e-5
+    minimum = 3.388e-5
+    maximum = 4.2751000000000005e-5
+
+    [measurements.stages.key_generation]
+    median = 1.963e-5
+    minimum = 1.686e-5
+    maximum = 2.2000000000000003e-5
+
+    [measurements.public]
+    median = 0.000721622
+    minimum = 0.000719262
+    maximum = 0.0007605130000000001
+
+    [measurements.numeric]
+    median = 0.000510701
+    minimum = 0.00048021200000000004
+    maximum = 0.000826683
+
+    [measurements.cpu]
+    median = 0.005473518
+    minimum = 0.0052472180000000005
+    maximum = 0.005780029000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8240
+energy_error_per_atom_eV = 5.5607833893134284e-9
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.555976249892435e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000324671
+seed = 20261041
+energy_error_original_per_atom_eV = 3.029156639160538e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.23089013500000002
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.057e-5
+    minimum = 1.9e-5
+    maximum = 2.9711e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.201e-5
+    minimum = 2.0241e-5
+    maximum = 2.9860000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.00010018100000000001
+    minimum = 9.9541e-5
+    maximum = 0.0001023
+
+    [measurements.stages.reduction]
+    median = 2.387e-5
+    minimum = 2.262e-5
+    maximum = 3.7141e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010766100000000001
+    minimum = 0.00010410000000000001
+    maximum = 0.00012091
+
+    [measurements.stages.interaction]
+    median = 0.001314674
+    minimum = 0.0013127050000000002
+    maximum = 0.001333084
+
+    [measurements.stages.geometry_upload]
+    median = 4.063e-5
+    minimum = 3.409e-5
+    maximum = 4.376e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9920000000000002e-5
+    minimum = 1.739e-5
+    maximum = 3.3501e-5
+
+    [measurements.public]
+    median = 0.0016432550000000001
+    minimum = 0.001630156
+    maximum = 0.0016527750000000002
+
+    [measurements.numeric]
+    median = 0.0014526250000000001
+    minimum = 0.001443955
+    maximum = 0.001466545
+
+    [measurements.cpu]
+    median = 0.005230368
+    minimum = 0.004787816
+    maximum = 0.005652789
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9712
+energy_error_per_atom_eV = 5.5607833893134284e-9
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.714664258176975e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000322561
+seed = 20261041
+energy_error_original_per_atom_eV = 3.029156639160538e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 131752
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 2.0166818335461416e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.0931280429892224e-8
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.250108909
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 1.4745471510480002e-8
+max_force_error_eV_A = 1.4695615391246974e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 2.1101e-5
+    minimum = 2.053e-5
+    maximum = 2.2420000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 4.419e-5
+    minimum = 4.1360000000000004e-5
+    maximum = 4.7391e-5
+
+    [measurements.stages.extraction]
+    median = 0.000138341
+    minimum = 0.00010523100000000001
+    maximum = 0.000209211
+
+    [measurements.stages.reduction]
+    median = 2.544e-5
+    minimum = 2.341e-5
+    maximum = 2.602e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010621
+    minimum = 9.8651e-5
+    maximum = 0.00012286
+
+    [measurements.stages.interaction]
+    median = 0.0012868250000000001
+    minimum = 0.0012853440000000001
+    maximum = 0.001346694
+
+    [measurements.stages.geometry_upload]
+    median = 3.881e-5
+    minimum = 3.524e-5
+    maximum = 4.0990000000000006e-5
+
+    [measurements.stages.key_generation]
+    median = 2.0e-5
+    minimum = 1.948e-5
+    maximum = 6.367100000000001e-5
+
+    [measurements.public]
+    median = 0.0016836960000000002
+    minimum = 0.001666195
+    maximum = 0.001696505
+
+    [measurements.numeric]
+    median = 0.001422745
+    minimum = 0.001416935
+    maximum = 0.001472075
+
+    [measurements.cpu]
+    median = 0.005360818000000001
+    minimum = 0.005237297
+    maximum = 0.00586254
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8320
+energy_error_per_atom_eV = 5.178882913703354e-18
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.179228900059193e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.1429984
+seed = 20261041
+energy_error_original_per_atom_eV = 5.178882913703354e-18
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.24833159200000002
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.09e-5
+    minimum = 1.885e-5
+    maximum = 2.5830000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.1530000000000002e-5
+    minimum = 1.9900000000000003e-5
+    maximum = 2.366e-5
+
+    [measurements.stages.extraction]
+    median = 0.00010547
+    minimum = 0.000103701
+    maximum = 0.00011213000000000001
+
+    [measurements.stages.reduction]
+    median = 2.5030000000000003e-5
+    minimum = 2.303e-5
+    maximum = 2.828e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010800000000000001
+    minimum = 0.000103511
+    maximum = 0.00011285
+
+    [measurements.stages.interaction]
+    median = 0.001397505
+    minimum = 0.001394485
+    maximum = 0.001401965
+
+    [measurements.stages.geometry_upload]
+    median = 4.9460000000000004e-5
+    minimum = 4.0991e-5
+    maximum = 5.8320000000000004e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9770000000000002e-5
+    minimum = 1.927e-5
+    maximum = 2.396e-5
+
+    [measurements.public]
+    median = 0.001736696
+    minimum = 0.001724206
+    maximum = 0.0017475650000000002
+
+    [measurements.numeric]
+    median = 0.0015288550000000002
+    minimum = 0.0015242650000000001
+    maximum = 0.001535825
+
+    [measurements.cpu]
+    median = 0.005158857
+    minimum = 0.004780947000000001
+    maximum = 0.012808722000000002
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9792
+energy_error_per_atom_eV = 5.178882913703354e-18
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 6.568580807128729e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000356601
+seed = 20261041
+energy_error_original_per_atom_eV = 5.178882913703354e-18
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 263504
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 2.896852679609707e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.907720283946319e-17
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.198252315
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 2.907720283946319e-17
+max_force_error_eV_A = 2.896852679609707e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 1.9171e-5
+    minimum = 1.8730000000000002e-5
+    maximum = 2.4580000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 5.4210000000000004e-5
+    minimum = 5.0940000000000004e-5
+    maximum = 6.9721e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011083000000000001
+    minimum = 0.000104851
+    maximum = 0.00012037
+
+    [measurements.stages.reduction]
+    median = 2.3310000000000002e-5
+    minimum = 2.2741e-5
+    maximum = 2.9060000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010803100000000001
+    minimum = 0.000106921
+    maximum = 0.00011099
+
+    [measurements.stages.interaction]
+    median = 0.0015190750000000002
+    minimum = 0.0015168550000000001
+    maximum = 0.001525686
+
+    [measurements.stages.geometry_upload]
+    median = 4.8541e-5
+    minimum = 4.3111e-5
+    maximum = 5.126e-5
+
+    [measurements.stages.key_generation]
+    median = 1.923e-5
+    minimum = 1.758e-5
+    maximum = 2.7590000000000002e-5
+
+    [measurements.public]
+    median = 0.001961596
+    minimum = 0.001942457
+    maximum = 0.001985297
+
+    [measurements.numeric]
+    median = 0.001670985
+    minimum = 0.001661776
+    maximum = 0.001704006
+
+    [measurements.cpu]
+    median = 0.005825980000000001
+    minimum = 0.005520008000000001
+    maximum = 0.015576703
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8320
+energy_error_per_atom_eV = 5.178882913703354e-18
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.1852366320996047e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000595542
+seed = 20261041
+energy_error_original_per_atom_eV = 5.178882913703354e-18
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.23831278900000002
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.0490000000000002e-5
+    minimum = 2.01e-5
+    maximum = 2.089e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.1401e-5
+    minimum = 2.0150000000000002e-5
+    maximum = 2.241e-5
+
+    [measurements.stages.extraction]
+    median = 0.00010522000000000001
+    minimum = 0.00010367
+    maximum = 0.00012837000000000002
+
+    [measurements.stages.reduction]
+    median = 2.6370000000000003e-5
+    minimum = 2.549e-5
+    maximum = 2.8950000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010759
+    minimum = 0.00010217
+    maximum = 0.000112251
+
+    [measurements.stages.interaction]
+    median = 0.005093917
+    minimum = 0.004866976
+    maximum = 0.005164327000000001
+
+    [measurements.stages.geometry_upload]
+    median = 4.9760000000000005e-5
+    minimum = 4.0820000000000006e-5
+    maximum = 5.1101000000000004e-5
+
+    [measurements.stages.key_generation]
+    median = 1.963e-5
+    minimum = 1.9180000000000003e-5
+    maximum = 2.108e-5
+
+    [measurements.public]
+    median = 0.005222358000000001
+    minimum = 0.005146427
+    maximum = 0.005434008000000001
+
+    [measurements.numeric]
+    median = 0.005022797000000001
+    minimum = 0.004949616
+    maximum = 0.0052653380000000005
+
+    [measurements.cpu]
+    median = 0.005333048
+    minimum = 0.005000246000000001
+    maximum = 0.013407115
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9792
+energy_error_per_atom_eV = 5.178882913703354e-18
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.007888866570882e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.00034274100000000003
+seed = 20261041
+energy_error_original_per_atom_eV = 5.178882913703354e-18
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 263504
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 2.905661822261152e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.916846415631367e-17
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.231470066
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 2.916846415631367e-17
+max_force_error_eV_A = 2.905661822261152e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 2.156e-5
+    minimum = 2.0640000000000002e-5
+    maximum = 2.462e-5
+
+    [measurements.stages.host_output_copy]
+    median = 6.288000000000001e-5
+    minimum = 6.0400000000000004e-5
+    maximum = 6.851100000000001e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011180100000000001
+    minimum = 0.00010680000000000001
+    maximum = 0.0071488440000000006
+
+    [measurements.stages.reduction]
+    median = 2.9880000000000002e-5
+    minimum = 2.3950000000000003e-5
+    maximum = 3.9801e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010635000000000001
+    minimum = 0.00010208000000000001
+    maximum = 0.000135761
+
+    [measurements.stages.interaction]
+    median = 0.005278578
+    minimum = 0.005085617000000001
+    maximum = 0.005380988000000001
+
+    [measurements.stages.geometry_upload]
+    median = 5.034e-5
+    minimum = 4.303e-5
+    maximum = 5.2180000000000005e-5
+
+    [measurements.stages.key_generation]
+    median = 2.0081e-5
+    minimum = 1.9370000000000003e-5
+    maximum = 2.432e-5
+
+    [measurements.public]
+    median = 0.005762599
+    minimum = 0.0055390890000000005
+    maximum = 0.012741223000000001
+
+    [measurements.numeric]
+    median = 0.0054664380000000005
+    minimum = 0.005163607000000001
+    maximum = 0.005541099000000001
+
+    [measurements.cpu]
+    median = 0.005691908000000001
+    minimum = 0.005535599
+    maximum = 0.006164370000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8240
+energy_error_per_atom_eV = 2.7803916946567142e-9
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.5479303869019292e7
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000385511
+seed = 20261041
+energy_error_original_per_atom_eV = 4.6309398712900855e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.000534622
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.031e-5
+    minimum = 1.893e-5
+    maximum = 2.502e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.046e-5
+    minimum = 2.014e-5
+    maximum = 2.218e-5
+
+    [measurements.stages.extraction]
+    median = 0.0001027
+    minimum = 9.713e-5
+    maximum = 0.005240097
+
+    [measurements.stages.reduction]
+    median = 2.311e-5
+    minimum = 2.2380000000000003e-5
+    maximum = 2.718e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010476
+    minimum = 0.00010039
+    maximum = 0.00011430000000000001
+
+    [measurements.stages.interaction]
+    median = 0.000294171
+    minimum = 0.000292951
+    maximum = 0.00029856100000000003
+
+    [measurements.stages.geometry_upload]
+    median = 4.0180000000000005e-5
+    minimum = 3.443e-5
+    maximum = 4.2470000000000005e-5
+
+    [measurements.stages.key_generation]
+    median = 1.891e-5
+    minimum = 1.84e-5
+    maximum = 2.001e-5
+
+    [measurements.public]
+    median = 0.000628292
+    minimum = 0.000612942
+    maximum = 0.000669523
+
+    [measurements.numeric]
+    median = 0.00043078100000000003
+    minimum = 0.000425361
+    maximum = 0.000439951
+
+    [measurements.cpu]
+    median = 0.004108533
+    minimum = 0.003839293
+    maximum = 0.004621885
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9712
+energy_error_per_atom_eV = 2.7803916946567142e-9
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.3901345975031625e7
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.00034065100000000003
+seed = 20261041
+energy_error_original_per_atom_eV = 4.6309398712900855e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 131752
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 2.1219678330927644e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.1936089620817966e-8
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.000518002
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 1.3903156848016351e-8
+max_force_error_eV_A = 1.3876615412300453e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 1.857e-5
+    minimum = 1.819e-5
+    maximum = 2.1130000000000003e-5
+
+    [measurements.stages.host_output_copy]
+    median = 4.4800000000000005e-5
+    minimum = 4.199e-5
+    maximum = 4.948e-5
+
+    [measurements.stages.extraction]
+    median = 0.00010583000000000001
+    minimum = 0.00010367
+    maximum = 0.000110971
+
+    [measurements.stages.reduction]
+    median = 2.305e-5
+    minimum = 2.266e-5
+    maximum = 2.8890000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010049100000000001
+    minimum = 9.765e-5
+    maximum = 0.00010308000000000001
+
+    [measurements.stages.interaction]
+    median = 0.00031993200000000004
+    minimum = 0.000317461
+    maximum = 0.000321641
+
+    [measurements.stages.geometry_upload]
+    median = 4.015e-5
+    minimum = 3.914e-5
+    maximum = 4.1360000000000004e-5
+
+    [measurements.stages.key_generation]
+    median = 1.8650000000000003e-5
+    minimum = 1.702e-5
+    maximum = 2.0241e-5
+
+    [measurements.public]
+    median = 0.000717582
+    minimum = 0.0007053620000000001
+    maximum = 0.0007287820000000001
+
+    [measurements.numeric]
+    median = 0.00045922100000000005
+    minimum = 0.00045655100000000003
+    maximum = 0.000465402
+
+    [measurements.cpu]
+    median = 0.004927286
+    minimum = 0.004467565000000001
+    maximum = 0.009407662
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8240
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.814519085980357e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000565832
+seed = 20261041
+energy_error_original_per_atom_eV = 1.8505482782689484e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.001463045
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.014e-5
+    minimum = 1.995e-5
+    maximum = 2.1680000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.215e-5
+    minimum = 2.203e-5
+    maximum = 2.279e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011466
+    minimum = 0.000112491
+    maximum = 0.000119061
+
+    [measurements.stages.reduction]
+    median = 2.3160000000000002e-5
+    minimum = 2.294e-5
+    maximum = 2.572e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010338
+    minimum = 0.00010064000000000001
+    maximum = 0.00010816100000000001
+
+    [measurements.stages.interaction]
+    median = 0.0012802150000000001
+    minimum = 0.001274194
+    maximum = 0.001283234
+
+    [measurements.stages.geometry_upload]
+    median = 3.9620000000000004e-5
+    minimum = 3.5300000000000004e-5
+    maximum = 4.1561000000000004e-5
+
+    [measurements.stages.key_generation]
+    median = 1.972e-5
+    minimum = 1.904e-5
+    maximum = 5.6000000000000006e-5
+
+    [measurements.public]
+    median = 0.001604776
+    minimum = 0.0015909750000000001
+    maximum = 0.001614235
+
+    [measurements.numeric]
+    median = 0.001404565
+    minimum = 0.0013985050000000002
+    maximum = 0.001413105
+
+    [measurements.cpu]
+    median = 0.0043672350000000006
+    minimum = 0.003788393
+    maximum = 0.009507772000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9712
+energy_error_per_atom_eV = 0.0
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.92477242271614e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000592802
+seed = 20261041
+energy_error_original_per_atom_eV = 1.8505482782689484e-9
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 131752
+upload_buffer_bytes = 219552
+max_force_error_original_eV_A = 1.947361874807599e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.189438835061351e-8
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 614896
+first_execution_seconds = 0.0014551240000000001
+main_buffer_bytes = 1580584
+max_atom_force_error_eV_A = 1.4187185648495415e-8
+max_force_error_eV_A = 1.4163106243358925e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 2.054e-5
+    minimum = 1.881e-5
+    maximum = 2.099e-5
+
+    [measurements.stages.host_output_copy]
+    median = 4.583e-5
+    minimum = 4.1190000000000004e-5
+    maximum = 4.9130000000000006e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011476
+    minimum = 0.000105221
+    maximum = 0.005328468
+
+    [measurements.stages.reduction]
+    median = 2.322e-5
+    minimum = 2.3080000000000003e-5
+    maximum = 2.5960000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000100971
+    minimum = 9.99e-5
+    maximum = 0.00010526100000000001
+
+    [measurements.stages.interaction]
+    median = 0.001248895
+    minimum = 0.001240744
+    maximum = 0.001251654
+
+    [measurements.stages.geometry_upload]
+    median = 4.172e-5
+    minimum = 3.6961e-5
+    maximum = 5.650100000000001e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9410000000000002e-5
+    minimum = 1.8731e-5
+    maximum = 3.52e-5
+
+    [measurements.public]
+    median = 0.001655446
+    minimum = 0.0016440850000000002
+    maximum = 0.007114274
+
+    [measurements.numeric]
+    median = 0.001385024
+    minimum = 0.001381845
+    maximum = 0.0013956650000000001
+
+    [measurements.cpu]
+    median = 0.0045425050000000005
+    minimum = 0.0041380340000000005
+    maximum = 0.004942287
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8320
+energy_error_per_atom_eV = 1.5536648741110063e-17
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 8.092163370869686e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000618232
+seed = 20261041
+energy_error_original_per_atom_eV = 1.5536648741110063e-17
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.0014280850000000002
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.054e-5
+    minimum = 2.002e-5
+    maximum = 2.082e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.177e-5
+    minimum = 2.142e-5
+    maximum = 2.1930000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011745000000000001
+    minimum = 0.00011132000000000001
+    maximum = 0.00022581100000000002
+
+    [measurements.stages.reduction]
+    median = 2.371e-5
+    minimum = 2.3381000000000002e-5
+    maximum = 2.4540000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010462000000000001
+    minimum = 0.00010179000000000001
+    maximum = 0.000123841
+
+    [measurements.stages.interaction]
+    median = 0.001216894
+    minimum = 0.001213604
+    maximum = 0.0012209150000000002
+
+    [measurements.stages.geometry_upload]
+    median = 4.928e-5
+    minimum = 4.1500000000000006e-5
+    maximum = 5.971e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9690000000000003e-5
+    minimum = 1.923e-5
+    maximum = 2.741e-5
+
+    [measurements.public]
+    median = 0.001567395
+    minimum = 0.0015578550000000001
+    maximum = 0.001586806
+
+    [measurements.numeric]
+    median = 0.001356374
+    minimum = 0.001353954
+    maximum = 0.0013585650000000002
+
+    [measurements.cpu]
+    median = 0.004547605000000001
+    minimum = 0.003781813
+    maximum = 0.00907177
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9792
+energy_error_per_atom_eV = 1.5536648741110063e-17
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 7.391419999797974e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0006060120000000001
+seed = 20261041
+energy_error_original_per_atom_eV = 1.5536648741110063e-17
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 263504
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 2.5317814793431037e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.978955146668575e-17
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.001548895
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 2.978955146668575e-17
+max_force_error_eV_A = 2.5317814793431037e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 2.018e-5
+    minimum = 1.863e-5
+    maximum = 2.059e-5
+
+    [measurements.stages.host_output_copy]
+    median = 6.516e-5
+    minimum = 5.156e-5
+    maximum = 6.878e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011799000000000001
+    minimum = 0.00011061000000000001
+    maximum = 0.004970227000000001
+
+    [measurements.stages.reduction]
+    median = 2.347e-5
+    minimum = 2.3011e-5
+    maximum = 2.708e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010855000000000001
+    minimum = 0.00010513
+    maximum = 0.00011288
+
+    [measurements.stages.interaction]
+    median = 0.0013456540000000002
+    minimum = 0.0013424250000000002
+    maximum = 0.0013488250000000001
+
+    [measurements.stages.geometry_upload]
+    median = 4.902e-5
+    minimum = 4.0980000000000004e-5
+    maximum = 6.237e-5
+
+    [measurements.stages.key_generation]
+    median = 1.919e-5
+    minimum = 1.91e-5
+    maximum = 5.631e-5
+
+    [measurements.public]
+    median = 0.001782485
+    minimum = 0.0017717350000000002
+    maximum = 0.001817896
+
+    [measurements.numeric]
+    median = 0.0014849650000000002
+    minimum = 0.001481106
+    maximum = 0.0014927240000000002
+
+    [measurements.cpu]
+    median = 0.004990426
+    minimum = 0.004528965
+    maximum = 0.008975
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 8320
+energy_error_per_atom_eV = 1.0357765827406708e-17
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.4220571376871956e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.000597622
+seed = 20261041
+energy_error_original_per_atom_eV = 1.0357765827406708e-17
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.004870417
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.012e-5
+    minimum = 1.866e-5
+    maximum = 2.0810000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.171e-5
+    minimum = 2.148e-5
+    maximum = 2.2040000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.00012549000000000002
+    minimum = 0.00011994100000000001
+    maximum = 0.000131241
+
+    [measurements.stages.reduction]
+    median = 2.3101e-5
+    minimum = 2.2990000000000002e-5
+    maximum = 2.5160000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00011081100000000001
+    minimum = 0.00010368000000000001
+    maximum = 0.00011576
+
+    [measurements.stages.interaction]
+    median = 0.004379015
+    minimum = 0.004352364
+    maximum = 0.004463016
+
+    [measurements.stages.geometry_upload]
+    median = 4.804e-5
+    minimum = 4.129e-5
+    maximum = 5.5440000000000005e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9410000000000002e-5
+    minimum = 1.76e-5
+    maximum = 5.2430000000000005e-5
+
+    [measurements.public]
+    median = 0.004712336
+    minimum = 0.004689405000000001
+    maximum = 0.004767996
+
+    [measurements.numeric]
+    median = 0.004531685000000001
+    minimum = 0.004488545
+    maximum = 0.004729146
+
+    [measurements.cpu]
+    median = 0.004427245000000001
+    minimum = 0.004122894
+    maximum = 0.009282922
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 9792
+energy_error_per_atom_eV = 1.0357765827406708e-17
+replication = 14
+workgroup = 64
+numeric_atoms_per_second = 2.2932756002872447e6
+density_atoms_A3 = 0.027485444121075137
+cutoff_A = 8.5
+initial_prepare_seconds = 0.005144298
+seed = 20261041
+energy_error_original_per_atom_eV = 1.0357765827406708e-17
+n = 10976
+cell_lengths_A = [73.64, 73.64, 73.64]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 263504
+upload_buffer_bytes = 351280
+max_force_error_original_eV_A = 2.684078003259427e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 2.684399908867652e-17
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 702944
+first_execution_seconds = 0.004802206000000001
+main_buffer_bytes = 2370896
+max_atom_force_error_eV_A = 2.684399908867652e-17
+max_force_error_eV_A = 2.684078003259427e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 2.0481000000000003e-5
+    minimum = 2.037e-5
+    maximum = 2.082e-5
+
+    [measurements.stages.host_output_copy]
+    median = 5.991e-5
+    minimum = 4.9661000000000004e-5
+    maximum = 7.374000000000001e-5
+
+    [measurements.stages.extraction]
+    median = 0.00011929100000000001
+    minimum = 0.0001062
+    maximum = 0.004755985
+
+    [measurements.stages.reduction]
+    median = 2.3520000000000002e-5
+    minimum = 2.3060000000000003e-5
+    maximum = 2.722e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00010361
+    minimum = 0.000101181
+    maximum = 0.000125671
+
+    [measurements.stages.interaction]
+    median = 0.0046290260000000005
+    minimum = 0.004590095000000001
+    maximum = 0.004669975000000001
+
+    [measurements.stages.geometry_upload]
+    median = 5.1551e-5
+    minimum = 4.165e-5
+    maximum = 6.36e-5
+
+    [measurements.stages.key_generation]
+    median = 1.9280000000000002e-5
+    minimum = 1.902e-5
+    maximum = 2.2740000000000003e-5
+
+    [measurements.public]
+    median = 0.005097638000000001
+    minimum = 0.005050908000000001
+    maximum = 0.005135107000000001
+
+    [measurements.numeric]
+    median = 0.004786167
+    minimum = 0.004725086
+    maximum = 0.004809746
+
+    [measurements.cpu]
+    median = 0.0047954650000000005
+    minimum = 0.004283145
+    maximum = 0.009681492
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9312
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 6.901220638014156e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0030314400000000003
+seed = 20261056
+energy_error_original_per_atom_eV = 7.657882553281966e-10
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 1951128
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.362506215
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.703e-5
+    minimum = 2.6770000000000003e-5
+    maximum = 2.862e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.2340000000000003e-5
+    minimum = 2.205e-5
+    maximum = 2.3e-5
+
+    [measurements.stages.extraction]
+    median = 0.0009399330000000001
+    minimum = 0.000882403
+    maximum = 0.001225724
+
+    [measurements.stages.reduction]
+    median = 2.6150000000000002e-5
+    minimum = 2.5690000000000003e-5
+    maximum = 2.794e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000302611
+    minimum = 0.000273721
+    maximum = 0.00033423100000000005
+
+    [measurements.stages.interaction]
+    median = 0.0010326830000000002
+    minimum = 0.001030854
+    maximum = 0.001040363
+
+    [measurements.stages.geometry_upload]
+    median = 0.0001149
+    minimum = 0.00010499100000000001
+    maximum = 0.00012497000000000002
+
+    [measurements.stages.key_generation]
+    median = 3.0240000000000002e-5
+    minimum = 2.9910000000000003e-5
+    maximum = 7.068000000000001e-5
+
+    [measurements.public]
+    median = 0.002589318
+    minimum = 0.002555879
+    maximum = 0.0027408890000000003
+
+    [measurements.numeric]
+    median = 0.001413605
+    minimum = 0.001395725
+    maximum = 0.001422965
+
+    [measurements.cpu]
+    median = 0.024052811
+    minimum = 0.023148797000000002
+    maximum = 0.031834066
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10784
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 6.604004129364178e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.006388891000000001
+seed = 20261056
+energy_error_original_per_atom_eV = 7.657882553281966e-10
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 1170712
+upload_buffer_bytes = 1951128
+max_force_error_original_eV_A = 5.097487571999399e-6
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 5.588631439431455e-6
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.0016078960000000002
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 2.223470119133708e-6
+max_force_error_eV_A = 2.061016857624054e-6
+
+    [measurements.stages.unpack_ranges]
+    median = 2.722e-5
+    minimum = 2.6470000000000002e-5
+    maximum = 2.987e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.000186221
+    minimum = 0.000172611
+    maximum = 0.000395871
+
+    [measurements.stages.extraction]
+    median = 0.0011958440000000002
+    minimum = 0.001165404
+    maximum = 0.0013381150000000002
+
+    [measurements.stages.reduction]
+    median = 2.616e-5
+    minimum = 2.5730000000000003e-5
+    maximum = 2.7950000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000306651
+    minimum = 0.00030410100000000003
+    maximum = 0.000313441
+
+    [measurements.stages.interaction]
+    median = 0.001096514
+    minimum = 0.001091104
+    maximum = 0.001099444
+
+    [measurements.stages.geometry_upload]
+    median = 0.000118881
+    minimum = 0.00011644
+    maximum = 0.00012472
+
+    [measurements.stages.key_generation]
+    median = 3.2710000000000004e-5
+    minimum = 3.2200000000000003e-5
+    maximum = 3.4750000000000004e-5
+
+    [measurements.public]
+    median = 0.00290557
+    minimum = 0.002874039
+    maximum = 0.008265358
+
+    [measurements.numeric]
+    median = 0.0014772250000000002
+    minimum = 0.001464205
+    maximum = 0.001482435
+
+    [measurements.cpu]
+    median = 0.028655036000000002
+    minimum = 0.027237382
+    maximum = 0.07753713000000001
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9312
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 8.20129817178204e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001553445
+seed = 20261056
+energy_error_original_per_atom_eV = 7.657882553281966e-10
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 1951128
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.012235421000000002
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.6730000000000003e-5
+    minimum = 2.6220000000000003e-5
+    maximum = 2.9760000000000003e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.214e-5
+    minimum = 2.0261e-5
+    maximum = 2.2760000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.0008832530000000001
+    minimum = 0.000878773
+    maximum = 0.000911883
+
+    [measurements.stages.reduction]
+    median = 2.61e-5
+    minimum = 2.595e-5
+    maximum = 2.9400000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000306861
+    minimum = 0.000287111
+    maximum = 0.00034491100000000005
+
+    [measurements.stages.interaction]
+    median = 0.011562209
+    minimum = 0.011306398
+    maximum = 0.01163663
+
+    [measurements.stages.geometry_upload]
+    median = 0.00011778
+    minimum = 0.000107671
+    maximum = 0.00012596000000000002
+
+    [measurements.stages.key_generation]
+    median = 3.2710000000000004e-5
+    minimum = 3.078e-5
+    maximum = 5.0490000000000006e-5
+
+    [measurements.public]
+    median = 0.013361164
+    minimum = 0.013061914
+    maximum = 0.013413055
+
+    [measurements.numeric]
+    median = 0.01189519
+    minimum = 0.011673619000000001
+    maximum = 0.01194075
+
+    [measurements.cpu]
+    median = 0.023204758000000002
+    minimum = 0.022865697
+    maximum = 0.030478183000000002
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10784
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 8.342776638822918e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001264965
+seed = 20261056
+energy_error_original_per_atom_eV = 7.657882553281966e-10
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 1170712
+upload_buffer_bytes = 1951128
+max_force_error_original_eV_A = 5.097720402643053e-6
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 5.591499254832493e-6
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.012475541000000001
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 2.221987642769818e-6
+max_force_error_eV_A = 2.0603183656930923e-6
+
+    [measurements.stages.unpack_ranges]
+    median = 2.8040000000000003e-5
+    minimum = 2.6831e-5
+    maximum = 2.9860000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.00010089
+    minimum = 9.117000000000001e-5
+    maximum = 0.000127741
+
+    [measurements.stages.extraction]
+    median = 0.0008907230000000001
+    minimum = 0.0008696130000000001
+    maximum = 0.000896223
+
+    [measurements.stages.reduction]
+    median = 2.894e-5
+    minimum = 2.86e-5
+    maximum = 3.234e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000306331
+    minimum = 0.00028399100000000004
+    maximum = 0.00032872200000000004
+
+    [measurements.stages.interaction]
+    median = 0.011299728
+    minimum = 0.011073627
+    maximum = 0.011322308000000001
+
+    [measurements.stages.geometry_upload]
+    median = 0.00011846
+    minimum = 0.00010654100000000001
+    maximum = 0.00012800000000000002
+
+    [measurements.stages.key_generation]
+    median = 3.19e-5
+    minimum = 3.156e-5
+    maximum = 3.4461e-5
+
+    [measurements.public]
+    median = 0.013085583000000001
+    minimum = 0.012832213
+    maximum = 0.018072261000000003
+
+    [measurements.numeric]
+    median = 0.011693469000000001
+    minimum = 0.011425978000000002
+    maximum = 0.011715189
+
+    [measurements.cpu]
+    median = 0.031667116
+    minimum = 0.026301018000000002
+    maximum = 0.078219482
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9392
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 1.0056560680163106e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001405975
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 3121800
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.29609393300000003
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 3.0940000000000005e-5
+    minimum = 3.073e-5
+    maximum = 3.478e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.2040000000000002e-5
+    minimum = 2.031e-5
+    maximum = 2.682e-5
+
+    [measurements.stages.extraction]
+    median = 0.0009623030000000001
+    minimum = 0.000952204
+    maximum = 0.001089923
+
+    [measurements.stages.reduction]
+    median = 3.266e-5
+    minimum = 3.1780000000000004e-5
+    maximum = 3.758e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00035951200000000004
+    minimum = 0.000357031
+    maximum = 0.000394212
+
+    [measurements.stages.interaction]
+    median = 0.009005220000000001
+    minimum = 0.00898176
+    maximum = 0.010627075000000001
+
+    [measurements.stages.geometry_upload]
+    median = 0.00016202
+    minimum = 0.000154331
+    maximum = 0.000173821
+
+    [measurements.stages.key_generation]
+    median = 3.3731e-5
+    minimum = 3.282e-5
+    maximum = 3.741e-5
+
+    [measurements.public]
+    median = 0.011321348
+    minimum = 0.011068207
+    maximum = 0.013200035
+
+    [measurements.numeric]
+    median = 0.009700732
+    minimum = 0.009464922
+    maximum = 0.009751903000000001
+
+    [measurements.cpu]
+    median = 0.023926771000000003
+    minimum = 0.023413138
+    maximum = 0.033237981
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10864
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 9.251218918930452e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001617595
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 2341424
+upload_buffer_bytes = 3121800
+max_force_error_original_eV_A = 3.9110967069155844e-15
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 4.079288956737047e-15
+strategy = "central"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.010520795000000001
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 4.079288956737047e-15
+max_force_error_eV_A = 3.9110967069155844e-15
+
+    [measurements.stages.unpack_ranges]
+    median = 3.294e-5
+    minimum = 3.217e-5
+    maximum = 3.463e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.000133471
+    minimum = 0.00012660000000000001
+    maximum = 0.00015636100000000002
+
+    [measurements.stages.extraction]
+    median = 0.000986293
+    minimum = 0.000950373
+    maximum = 0.005879690000000001
+
+    [measurements.stages.reduction]
+    median = 3.206e-5
+    minimum = 3.1780000000000004e-5
+    maximum = 3.34e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00036703100000000003
+    minimum = 0.000363401
+    maximum = 0.00038858100000000004
+
+    [measurements.stages.interaction]
+    median = 0.010085324000000001
+    minimum = 0.009834693
+    maximum = 0.010118134
+
+    [measurements.stages.geometry_upload]
+    median = 0.000165441
+    minimum = 0.00014717000000000002
+    maximum = 0.00017226
+
+    [measurements.stages.key_generation]
+    median = 3.5220000000000005e-5
+    minimum = 3.43e-5
+    maximum = 3.9761e-5
+
+    [measurements.public]
+    median = 0.01193958
+    minimum = 0.011786630000000001
+    maximum = 0.012194091
+
+    [measurements.numeric]
+    median = 0.010545205
+    minimum = 0.010294794000000001
+    maximum = 0.010872556
+
+    [measurements.cpu]
+    median = 0.028524696000000002
+    minimum = 0.026572149000000003
+    maximum = 0.034714327
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9392
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 2.201767494156083e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0026356590000000003
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 3121800
+max_force_error_original_eV_A = 0.0
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.044473489000000005
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 3.402e-5
+    minimum = 3.0770000000000005e-5
+    maximum = 4.072e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.0150000000000002e-5
+    minimum = 2.001e-5
+    maximum = 2.2040000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.000974763
+    minimum = 0.0009682130000000001
+    maximum = 0.001001263
+
+    [measurements.stages.reduction]
+    median = 3.1310000000000003e-5
+    minimum = 3.09e-5
+    maximum = 3.3271e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000377111
+    minimum = 0.000368451
+    maximum = 0.000383521
+
+    [measurements.stages.interaction]
+    median = 0.043852527
+    minimum = 0.043733457
+    maximum = 0.044031298
+
+    [measurements.stages.geometry_upload]
+    median = 0.00016146000000000002
+    minimum = 0.000146921
+    maximum = 0.000174431
+
+    [measurements.stages.key_generation]
+    median = 3.476e-5
+    minimum = 3.4280000000000004e-5
+    maximum = 7.887100000000001e-5
+
+    [measurements.public]
+    median = 0.045693204
+    minimum = 0.045467822000000005
+    maximum = 0.05058101
+
+    [measurements.numeric]
+    median = 0.044308039
+    minimum = 0.044146538000000006
+    maximum = 0.04469691
+
+    [measurements.cpu]
+    median = 0.029217077
+    minimum = 0.025759226000000003
+    maximum = 0.076160435
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10864
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 2.0952561935872738e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001571995
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 2341424
+upload_buffer_bytes = 3121800
+max_force_error_original_eV_A = 3.9132651112605554e-15
+species_fractions = [1.0]
+max_atom_force_error_original_eV_A = 4.081976019905883e-15
+strategy = "candidate"
+kind = "argon"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.046458266000000005
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 4.081976019905883e-15
+max_force_error_eV_A = 3.9132651112605554e-15
+
+    [measurements.stages.unpack_ranges]
+    median = 3.3230000000000005e-5
+    minimum = 3.274e-5
+    maximum = 3.3440000000000005e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.000133021
+    minimum = 0.00011702
+    maximum = 0.00044918100000000005
+
+    [measurements.stages.extraction]
+    median = 0.001032523
+    minimum = 0.001008523
+    maximum = 0.008725659
+
+    [measurements.stages.reduction]
+    median = 3.281e-5
+    minimum = 3.2211e-5
+    maximum = 3.46e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00036339200000000003
+    minimum = 0.00035802100000000003
+    maximum = 0.000389891
+
+    [measurements.stages.interaction]
+    median = 0.046196914000000006
+    minimum = 0.045891455000000005
+    maximum = 0.046411775
+
+    [measurements.stages.geometry_upload]
+    median = 0.000147481
+    minimum = 0.00014045
+    maximum = 0.00016489100000000002
+
+    [measurements.stages.key_generation]
+    median = 3.5730000000000005e-5
+    minimum = 3.519e-5
+    maximum = 4.0561e-5
+
+    [measurements.public]
+    median = 0.049091954
+    minimum = 0.048973835
+    maximum = 0.054634124000000006
+
+    [measurements.numeric]
+    median = 0.046560416
+    minimum = 0.046413676
+    maximum = 0.046713456
+
+    [measurements.cpu]
+    median = 0.028430645
+    minimum = 0.026723889
+    maximum = 0.036266531000000005
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9296
+energy_error_per_atom_eV = 5.00513808177061e-9
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 6.5479318734793186e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0027933990000000002
+seed = 20261056
+energy_error_original_per_atom_eV = 6.403812611563675e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.0017650460000000001
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.939e-5
+    minimum = 2.8590000000000002e-5
+    maximum = 3.0550000000000004e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.0870000000000002e-5
+    minimum = 2.042e-5
+    maximum = 2.254e-5
+
+    [measurements.stages.extraction]
+    median = 0.0009095630000000001
+    minimum = 0.000899633
+    maximum = 0.0064187720000000005
+
+    [measurements.stages.reduction]
+    median = 2.7731000000000003e-5
+    minimum = 2.727e-5
+    maximum = 2.8340000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000309801
+    minimum = 0.00028932100000000004
+    maximum = 0.00033894100000000005
+
+    [measurements.stages.interaction]
+    median = 0.0011331330000000001
+    minimum = 0.001131014
+    maximum = 0.001141483
+
+    [measurements.stages.geometry_upload]
+    median = 0.00011092
+    minimum = 0.000107751
+    maximum = 0.000134771
+
+    [measurements.stages.key_generation]
+    median = 3.3990000000000005e-5
+    minimum = 3.319e-5
+    maximum = 4.1240000000000005e-5
+
+    [measurements.public]
+    median = 0.0026159990000000004
+    minimum = 0.0025891990000000004
+    maximum = 0.0026357990000000003
+
+    [measurements.numeric]
+    median = 0.001489875
+    minimum = 0.0014831850000000001
+    maximum = 0.001530275
+
+    [measurements.cpu]
+    median = 0.029485718
+    minimum = 0.028164894000000003
+    maximum = 0.038169198
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10768
+energy_error_per_atom_eV = 5.00513808177061e-9
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 6.169724988221008e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0016076060000000001
+seed = 20261056
+energy_error_original_per_atom_eV = 6.403812611563675e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 1170712
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 6.330733404237327e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 6.803673851408657e-8
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.001667836
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 3.9965662779195554e-8
+max_force_error_eV_A = 3.55576048605144e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 2.903e-5
+    minimum = 2.881e-5
+    maximum = 3.0440000000000003e-5
+
+    [measurements.stages.host_output_copy]
+    median = 8.936000000000001e-5
+    minimum = 7.631100000000001e-5
+    maximum = 0.050511609000000006
+
+    [measurements.stages.extraction]
+    median = 0.000868113
+    minimum = 0.0008619430000000001
+    maximum = 0.000878373
+
+    [measurements.stages.reduction]
+    median = 2.724e-5
+    minimum = 2.686e-5
+    maximum = 2.833e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000306681
+    minimum = 0.00028420100000000004
+    maximum = 0.000354831
+
+    [measurements.stages.interaction]
+    median = 0.001198264
+    minimum = 0.001193014
+    maximum = 0.001202704
+
+    [measurements.stages.geometry_upload]
+    median = 0.000122081
+    minimum = 0.00010824000000000001
+    maximum = 0.00013998
+
+    [measurements.stages.key_generation]
+    median = 3.376e-5
+    minimum = 3.321e-5
+    maximum = 4.059e-5
+
+    [measurements.public]
+    median = 0.0029505110000000003
+    minimum = 0.00293524
+    maximum = 0.007941486000000001
+
+    [measurements.numeric]
+    median = 0.001581205
+    minimum = 0.001571036
+    maximum = 0.001590365
+
+    [measurements.cpu]
+    median = 0.035985961000000004
+    minimum = 0.028992567
+    maximum = 0.037818957
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9296
+energy_error_per_atom_eV = 5.00513808177061e-9
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 7.986200563199215e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001207154
+seed = 20261056
+energy_error_original_per_atom_eV = 6.403812611563675e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.012481102
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.862e-5
+    minimum = 2.837e-5
+    maximum = 2.8840000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.2210000000000002e-5
+    minimum = 2.0600000000000003e-5
+    maximum = 2.3120000000000002e-5
+
+    [measurements.stages.extraction]
+    median = 0.0008592230000000001
+    minimum = 0.0008572530000000001
+    maximum = 0.0008741630000000001
+
+    [measurements.stages.reduction]
+    median = 2.6660000000000002e-5
+    minimum = 2.614e-5
+    maximum = 4.3921e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000307681
+    minimum = 0.00027939100000000004
+    maximum = 0.000334291
+
+    [measurements.stages.interaction]
+    median = 0.011795419000000001
+    minimum = 0.011771130000000001
+    maximum = 0.01208782
+
+    [measurements.stages.geometry_upload]
+    median = 0.00011931000000000001
+    minimum = 0.00010676
+    maximum = 0.000126691
+
+    [measurements.stages.key_generation]
+    median = 3.3060000000000005e-5
+    minimum = 3.2890000000000005e-5
+    maximum = 3.7080000000000004e-5
+
+    [measurements.public]
+    median = 0.013485126
+    minimum = 0.013238625
+    maximum = 0.013516385
+
+    [measurements.numeric]
+    median = 0.012215571000000001
+    minimum = 0.012144571000000002
+    maximum = 0.012398671
+
+    [measurements.cpu]
+    median = 0.028590446000000002
+    minimum = 0.027815894
+    maximum = 0.036711733
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10768
+energy_error_per_atom_eV = 5.00513808177061e-9
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 8.124155780995225e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0014261450000000002
+seed = 20261056
+energy_error_original_per_atom_eV = 6.403812611563675e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 1170712
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 6.443692646197524e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 6.847074435883287e-8
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.013306124
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 3.8954375725097634e-8
+max_force_error_eV_A = 3.591412678360939e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 2.932e-5
+    minimum = 2.8700000000000003e-5
+    maximum = 3.0410000000000002e-5
+
+    [measurements.stages.host_output_copy]
+    median = 8.323e-5
+    minimum = 8.183100000000001e-5
+    maximum = 0.0012004140000000001
+
+    [measurements.stages.extraction]
+    median = 0.000872403
+    minimum = 0.0008484930000000001
+    maximum = 0.001114014
+
+    [measurements.stages.reduction]
+    median = 3.3440000000000005e-5
+    minimum = 2.852e-5
+    maximum = 8.8991e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00031102100000000003
+    minimum = 0.00029133100000000003
+    maximum = 0.000350621
+
+    [measurements.stages.interaction]
+    median = 0.011575009
+    minimum = 0.011540899
+    maximum = 0.01181163
+
+    [measurements.stages.geometry_upload]
+    median = 0.00011762
+    minimum = 0.0001083
+    maximum = 0.000128971
+
+    [measurements.stages.key_generation]
+    median = 3.385e-5
+    minimum = 3.29e-5
+    maximum = 3.947e-5
+
+    [measurements.public]
+    median = 0.013387295
+    minimum = 0.013241324
+    maximum = 0.013666946000000001
+
+    [measurements.numeric]
+    median = 0.01200814
+    minimum = 0.01194948
+    maximum = 0.012341541000000001
+
+    [measurements.cpu]
+    median = 0.0299821
+    minimum = 0.029543859000000002
+    maximum = 0.035513929
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9376
+energy_error_per_atom_eV = 4.661398077888229e-18
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 1.0295352380164402e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001318495
+seed = 20261056
+energy_error_original_per_atom_eV = 4.661398077888229e-18
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.009555572
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 3.4240000000000004e-5
+    minimum = 3.336e-5
+    maximum = 3.477e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.044e-5
+    minimum = 2.0e-5
+    maximum = 2.2360000000000003e-5
+
+    [measurements.stages.extraction]
+    median = 0.001361124
+    minimum = 0.0009566430000000001
+    maximum = 0.001382255
+
+    [measurements.stages.reduction]
+    median = 3.3650000000000005e-5
+    minimum = 3.321e-5
+    maximum = 3.775e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000358711
+    minimum = 0.000356521
+    maximum = 0.000751962
+
+    [measurements.stages.interaction]
+    median = 0.00899373
+    minimum = 0.00893655
+    maximum = 0.009245911
+
+    [measurements.stages.geometry_upload]
+    median = 0.000162401
+    minimum = 0.000154341
+    maximum = 0.00017209000000000001
+
+    [measurements.stages.key_generation]
+    median = 3.511e-5
+    minimum = 3.2540000000000004e-5
+    maximum = 7.523000000000001e-5
+
+    [measurements.public]
+    median = 0.010899127000000002
+    minimum = 0.010608965000000001
+    maximum = 0.01180714
+
+    [measurements.numeric]
+    median = 0.009475732
+    minimum = 0.009376791
+    maximum = 0.009704742
+
+    [measurements.cpu]
+    median = 0.02966204
+    minimum = 0.028481905000000002
+    maximum = 0.08514023600000001
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10848
+energy_error_per_atom_eV = 4.661398077888229e-18
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 9.554641992297012e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.002030477
+seed = 20261056
+energy_error_original_per_atom_eV = 4.661398077888229e-18
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 2341424
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 6.423897871976614e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 7.020257337744487e-17
+strategy = "central"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.010269194
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 7.020257337744487e-17
+max_force_error_eV_A = 6.423897871976614e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 4.394e-5
+    minimum = 3.5770000000000005e-5
+    maximum = 4.5950000000000006e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.00013946
+    minimum = 0.000122661
+    maximum = 0.00019576100000000003
+
+    [measurements.stages.extraction]
+    median = 0.000953343
+    minimum = 0.0009397230000000001
+    maximum = 0.000970854
+
+    [measurements.stages.reduction]
+    median = 3.079e-5
+    minimum = 3.0050000000000002e-5
+    maximum = 3.614e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00041217200000000004
+    minimum = 0.00039459200000000003
+    maximum = 0.00041423100000000004
+
+    [measurements.stages.interaction]
+    median = 0.009961324
+    minimum = 0.009718542
+    maximum = 0.009998973000000001
+
+    [measurements.stages.geometry_upload]
+    median = 0.00015926000000000002
+    minimum = 0.00014087
+    maximum = 0.000177481
+
+    [measurements.stages.key_generation]
+    median = 4.525e-5
+    minimum = 3.451e-5
+    maximum = 4.7480000000000006e-5
+
+    [measurements.public]
+    median = 0.0118241
+    minimum = 0.011679209000000001
+    maximum = 0.017051368
+
+    [measurements.numeric]
+    median = 0.010210325000000001
+    minimum = 0.010144034000000001
+    maximum = 0.010491845000000001
+
+    [measurements.cpu]
+    median = 0.036068281
+    minimum = 0.030884943
+    maximum = 0.083074649
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9376
+energy_error_per_atom_eV = 4.661398077888229e-18
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 2.193774789620267e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001606875
+seed = 20261056
+energy_error_original_per_atom_eV = 4.661398077888229e-18
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.044958251000000005
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 3.26e-5
+    minimum = 3.2200000000000003e-5
+    maximum = 3.4891e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.184e-5
+    minimum = 2.0170000000000002e-5
+    maximum = 2.237e-5
+
+    [measurements.stages.extraction]
+    median = 0.0009517630000000001
+    minimum = 0.0009397330000000001
+    maximum = 0.006108311
+
+    [measurements.stages.reduction]
+    median = 3.396e-5
+    minimum = 3.3350000000000004e-5
+    maximum = 3.6960000000000005e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000359631
+    minimum = 0.00035696100000000004
+    maximum = 0.000379152
+
+    [measurements.stages.interaction]
+    median = 0.044151028
+    minimum = 0.043814477000000004
+    maximum = 0.044208728
+
+    [measurements.stages.geometry_upload]
+    median = 0.000154771
+    minimum = 0.00013934
+    maximum = 0.00017278
+
+    [measurements.stages.key_generation]
+    median = 3.5381e-5
+    minimum = 3.457e-5
+    maximum = 5.215e-5
+
+    [measurements.public]
+    median = 0.045752653000000004
+    minimum = 0.045605943
+    maximum = 0.046121335
+
+    [measurements.numeric]
+    median = 0.044469469000000005
+    minimum = 0.044387549000000005
+    maximum = 0.0446572
+
+    [measurements.cpu]
+    median = 0.028758847
+    minimum = 0.028011293000000003
+    maximum = 0.036909184000000005
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10848
+energy_error_per_atom_eV = 4.661398077888229e-18
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 2.0968233929455117e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0015688850000000001
+seed = 20261056
+energy_error_original_per_atom_eV = 4.661398077888229e-18
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, true]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 2341424
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 6.364266752489911e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 7.056598783615465e-17
+strategy = "candidate"
+kind = "mixed"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.046795407000000004
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 7.056598783615465e-17
+max_force_error_eV_A = 6.364266752489911e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 4.173e-5
+    minimum = 3.557e-5
+    maximum = 4.757e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.00012798
+    minimum = 0.00011608000000000001
+    maximum = 0.00013040100000000001
+
+    [measurements.stages.extraction]
+    median = 0.0009351730000000001
+    minimum = 0.000920393
+    maximum = 0.000989123
+
+    [measurements.stages.reduction]
+    median = 3.122e-5
+    minimum = 3.0390000000000002e-5
+    maximum = 3.2800000000000004e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00037659200000000003
+    minimum = 0.00037068100000000004
+    maximum = 0.000389551
+
+    [measurements.stages.interaction]
+    median = 0.046265165000000004
+    minimum = 0.045957074
+    maximum = 0.046318926
+
+    [measurements.stages.geometry_upload]
+    median = 0.0001584
+    minimum = 0.000155861
+    maximum = 0.00017137100000000002
+
+    [measurements.stages.key_generation]
+    median = 3.461e-5
+    minimum = 3.43e-5
+    maximum = 3.981e-5
+
+    [measurements.public]
+    median = 0.048493872
+    minimum = 0.048058561
+    maximum = 0.056184309
+
+    [measurements.numeric]
+    median = 0.046525616000000006
+    minimum = 0.046410046
+    maximum = 0.046675906
+
+    [measurements.cpu]
+    median = 0.030980494
+    minimum = 0.030074121000000002
+    maximum = 0.039819394
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9296
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 7.1931486799854e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.00289491
+seed = 20261056
+energy_error_original_per_atom_eV = 5.4741439522616105e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.002175137
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.898e-5
+    minimum = 2.864e-5
+    maximum = 3.0080000000000003e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.195e-5
+    minimum = 2.0580000000000003e-5
+    maximum = 2.3351e-5
+
+    [measurements.stages.extraction]
+    median = 0.0008670430000000001
+    minimum = 0.0008596830000000001
+    maximum = 0.008032007
+
+    [measurements.stages.reduction]
+    median = 2.691e-5
+    minimum = 2.6510000000000002e-5
+    maximum = 2.809e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00030809100000000003
+    minimum = 0.000286431
+    maximum = 0.00031089100000000004
+
+    [measurements.stages.interaction]
+    median = 0.000989413
+    minimum = 0.000985994
+    maximum = 0.000994773
+
+    [measurements.stages.geometry_upload]
+    median = 0.00012207100000000002
+    minimum = 0.00011373000000000001
+    maximum = 0.00014053
+
+    [measurements.stages.key_generation]
+    median = 3.353e-5
+    minimum = 3.2691e-5
+    maximum = 4.897e-5
+
+    [measurements.public]
+    median = 0.002454319
+    minimum = 0.002448888
+    maximum = 0.0024820180000000003
+
+    [measurements.numeric]
+    median = 0.0013562350000000001
+    minimum = 0.0013452450000000001
+    maximum = 0.001605885
+
+    [measurements.cpu]
+    median = 0.027590612
+    minimum = 0.026122678000000003
+    maximum = 0.035237298
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10768
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 6.785772664512695e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0014417750000000002
+seed = 20261056
+energy_error_original_per_atom_eV = 5.4741439522616105e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 1170712
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 5.8891531402242674e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 6.054688548124001e-8
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.0022999780000000003
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 3.777075363586846e-8
+max_force_error_eV_A = 3.744935384020209e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 2.8800000000000002e-5
+    minimum = 2.854e-5
+    maximum = 2.9991e-5
+
+    [measurements.stages.host_output_copy]
+    median = 9.256100000000001e-5
+    minimum = 8.729e-5
+    maximum = 9.4151e-5
+
+    [measurements.stages.extraction]
+    median = 0.000882823
+    minimum = 0.0008790130000000001
+    maximum = 0.0008898830000000001
+
+    [measurements.stages.reduction]
+    median = 2.6900000000000003e-5
+    minimum = 2.648e-5
+    maximum = 2.7980000000000003e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00030756100000000003
+    minimum = 0.00028576100000000004
+    maximum = 0.000309301
+
+    [measurements.stages.interaction]
+    median = 0.001051854
+    minimum = 0.001044173
+    maximum = 0.001053803
+
+    [measurements.stages.geometry_upload]
+    median = 0.00012133
+    minimum = 0.000117861
+    maximum = 0.00015715100000000001
+
+    [measurements.stages.key_generation]
+    median = 3.3520000000000004e-5
+    minimum = 3.2500000000000004e-5
+    maximum = 5.267e-5
+
+    [measurements.public]
+    median = 0.0027977090000000002
+    minimum = 0.0027680490000000003
+    maximum = 0.009570022000000001
+
+    [measurements.numeric]
+    median = 0.0014376550000000001
+    minimum = 0.0014260450000000001
+    maximum = 0.0014441340000000001
+
+    [measurements.cpu]
+    median = 0.029917620000000002
+    minimum = 0.028517496000000003
+    maximum = 0.040575615
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9296
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 8.137173208951925e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001504965
+seed = 20261056
+energy_error_original_per_atom_eV = 5.4741439522616105e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 4
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.01205377
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 2.8870000000000003e-5
+    minimum = 2.8340000000000003e-5
+    maximum = 3.503e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.218e-5
+    minimum = 2.2040000000000002e-5
+    maximum = 2.233e-5
+
+    [measurements.stages.extraction]
+    median = 0.0008656130000000001
+    minimum = 0.000846623
+    maximum = 0.006083331
+
+    [measurements.stages.reduction]
+    median = 2.686e-5
+    minimum = 2.6241e-5
+    maximum = 2.9540000000000002e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00030641100000000003
+    minimum = 0.000284471
+    maximum = 0.000308861
+
+    [measurements.stages.interaction]
+    median = 0.011628629000000001
+    minimum = 0.011376338000000001
+    maximum = 0.01169057
+
+    [measurements.stages.geometry_upload]
+    median = 0.00011655
+    minimum = 0.00010682100000000001
+    maximum = 0.00012797
+
+    [measurements.stages.key_generation]
+    median = 3.315e-5
+    minimum = 3.091e-5
+    maximum = 3.7210000000000005e-5
+
+    [measurements.public]
+    median = 0.012876253
+    minimum = 0.012837933000000001
+    maximum = 0.013156064
+
+    [measurements.numeric]
+    median = 0.01198893
+    minimum = 0.011737559000000002
+    maximum = 0.012034260000000001
+
+    [measurements.cpu]
+    median = 0.027667083000000002
+    minimum = 0.026136397000000002
+    maximum = 0.03304775
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10768
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 8.420330874914808e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001444235
+seed = 20261056
+energy_error_original_per_atom_eV = 5.4741439522616105e-9
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float32"
+perturbation_A = 0.03
+owning_result_bytes = 1170712
+upload_buffer_bytes = 1951152
+max_force_error_original_eV_A = 5.773101616278042e-8
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 6.056129551627106e-8
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 5473376
+first_execution_seconds = 0.011788979000000002
+main_buffer_bytes = 14048104
+max_atom_force_error_eV_A = 3.6245101142640124e-8
+max_force_error_eV_A = 3.608874976634979e-8
+
+    [measurements.stages.unpack_ranges]
+    median = 2.8791000000000003e-5
+    minimum = 2.86e-5
+    maximum = 3.753e-5
+
+    [measurements.stages.host_output_copy]
+    median = 9.034e-5
+    minimum = 8.335e-5
+    maximum = 0.004975097
+
+    [measurements.stages.extraction]
+    median = 0.000877913
+    minimum = 0.0008580430000000001
+    maximum = 0.000966094
+
+    [measurements.stages.reduction]
+    median = 3.0050000000000002e-5
+    minimum = 2.9900000000000002e-5
+    maximum = 3.319e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000308031
+    minimum = 0.000297151
+    maximum = 0.000312601
+
+    [measurements.stages.interaction]
+    median = 0.011419138
+    minimum = 0.011188657000000001
+    maximum = 0.011451318
+
+    [measurements.stages.geometry_upload]
+    median = 0.00011721100000000001
+    minimum = 0.00011538100000000001
+    maximum = 0.00012463
+
+    [measurements.stages.key_generation]
+    median = 3.5430000000000005e-5
+    minimum = 3.3730000000000004e-5
+    maximum = 5.202e-5
+
+    [measurements.public]
+    median = 0.013146264000000001
+    minimum = 0.012895513
+    maximum = 0.018269011
+
+    [measurements.numeric]
+    median = 0.011585768000000001
+    minimum = 0.011564859
+    maximum = 0.01183644
+
+    [measurements.cpu]
+    median = 0.033060821000000004
+    minimum = 0.027207762000000003
+    maximum = 0.034034844
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9376
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 1.2339635710315805e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001340945
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.007801116
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 3.2880000000000004e-5
+    minimum = 3.249e-5
+    maximum = 3.3100000000000005e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.15e-5
+    minimum = 2.006e-5
+    maximum = 2.2190000000000003e-5
+
+    [measurements.stages.extraction]
+    median = 0.0009427330000000001
+    minimum = 0.0009379130000000001
+    maximum = 0.000980273
+
+    [measurements.stages.reduction]
+    median = 3.0890000000000004e-5
+    minimum = 3.013e-5
+    maximum = 4.914e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00036229100000000005
+    minimum = 0.000354071
+    maximum = 0.00038566100000000003
+
+    [measurements.stages.interaction]
+    median = 0.007207265
+    minimum = 0.007134953
+    maximum = 0.007454175
+
+    [measurements.stages.geometry_upload]
+    median = 0.000163911
+    minimum = 0.00014697
+    maximum = 0.00016769000000000002
+
+    [measurements.stages.key_generation]
+    median = 3.257e-5
+    minimum = 3.1270000000000004e-5
+    maximum = 3.5291000000000005e-5
+
+    [measurements.public]
+    median = 0.00910583
+    minimum = 0.00880726
+    maximum = 0.05996208200000001
+
+    [measurements.numeric]
+    median = 0.007905906
+    minimum = 0.007625445000000001
+    maximum = 0.008043877000000001
+
+    [measurements.cpu]
+    median = 0.027140991000000003
+    minimum = 0.026662880000000003
+    maximum = 0.036943194000000006
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10848
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 1.1289637005235037e7
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0015533550000000002
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 2341424
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 6.093216209368535e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 6.233288587158282e-17
+strategy = "central"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.008528179
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 6.233288587158282e-17
+max_force_error_eV_A = 6.093216209368535e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 3.455e-5
+    minimum = 3.3860000000000004e-5
+    maximum = 4.1830000000000004e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.000124671
+    minimum = 0.00011721000000000001
+    maximum = 0.00013558
+
+    [measurements.stages.extraction]
+    median = 0.0009490630000000001
+    minimum = 0.000935803
+    maximum = 0.000988244
+
+    [measurements.stages.reduction]
+    median = 3.095e-5
+    minimum = 3.0001000000000003e-5
+    maximum = 3.456e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00037213100000000005
+    minimum = 0.000367681
+    maximum = 0.000373882
+
+    [measurements.stages.interaction]
+    median = 0.008166597000000001
+    minimum = 0.007907387
+    maximum = 0.008256118
+
+    [measurements.stages.geometry_upload]
+    median = 0.00016117
+    minimum = 0.00015536100000000002
+    maximum = 0.000169261
+
+    [measurements.stages.key_generation]
+    median = 3.245e-5
+    minimum = 3.2120000000000004e-5
+    maximum = 3.3390000000000004e-5
+
+    [measurements.public]
+    median = 0.010131064
+    minimum = 0.009955374000000001
+    maximum = 0.015289261
+
+    [measurements.numeric]
+    median = 0.008641199
+    minimum = 0.008609549000000001
+    maximum = 0.008678519
+
+    [measurements.cpu]
+    median = 0.034764527
+    minimum = 0.030095111
+    maximum = 0.08505024500000001
+[[measurements]]
+central_tile = 4
+request = "EnergyOnly"
+host_allocated_bytes = 9376
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 2.4138941088423855e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.001603355
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 8
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 0.0
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 0.0
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.040674117
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 0.0
+max_force_error_eV_A = 0.0
+
+    [measurements.stages.unpack_ranges]
+    median = 3.2631e-5
+    minimum = 3.241e-5
+    maximum = 3.328e-5
+
+    [measurements.stages.host_output_copy]
+    median = 2.0320000000000002e-5
+    minimum = 2.0e-5
+    maximum = 2.209e-5
+
+    [measurements.stages.extraction]
+    median = 0.0009598440000000001
+    minimum = 0.000920703
+    maximum = 0.00599835
+
+    [measurements.stages.reduction]
+    median = 3.063e-5
+    minimum = 3.0100000000000003e-5
+    maximum = 3.423e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.00035477100000000004
+    minimum = 0.000352921
+    maximum = 0.000379242
+
+    [measurements.stages.interaction]
+    median = 0.039778873
+    minimum = 0.039583453000000005
+    maximum = 0.040146624000000006
+
+    [measurements.stages.geometry_upload]
+    median = 0.000157531
+    minimum = 0.00013954
+    maximum = 0.000167831
+
+    [measurements.stages.key_generation]
+    median = 3.383e-5
+    minimum = 3.244e-5
+    maximum = 7.606e-5
+
+    [measurements.public]
+    median = 0.041654470000000006
+    minimum = 0.041319688
+    maximum = 0.041898861
+
+    [measurements.numeric]
+    median = 0.040414366
+    minimum = 0.040321296
+    maximum = 0.040578526000000004
+
+    [measurements.cpu]
+    median = 0.027447992
+    minimum = 0.026393848
+    maximum = 0.035313109
+[[measurements]]
+central_tile = 4
+request = "EnergyForcesVirial"
+host_allocated_bytes = 10848
+energy_error_per_atom_eV = 0.0
+replication = 29
+workgroup = 64
+numeric_atoms_per_second = 2.2901392527957056e6
+density_atoms_A3 = 0.027485444121075144
+cutoff_A = 8.5
+initial_prepare_seconds = 0.0015392350000000001
+seed = 20261056
+energy_error_original_per_atom_eV = 0.0
+n = 97556
+cell_lengths_A = [152.54, 152.54, 152.54]
+periodicity = [true, true, false]
+precision = "Float64"
+perturbation_A = 0.03
+owning_result_bytes = 2341424
+upload_buffer_bytes = 3121840
+max_force_error_original_eV_A = 6.299214622140781e-17
+species_fractions = [0.5, 0.5]
+max_atom_force_error_original_eV_A = 6.428148642458428e-17
+strategy = "candidate"
+kind = "slab"
+skin = 0.0
+scratch_bytes = 6264064
+first_execution_seconds = 0.042538533
+main_buffer_bytes = 21072176
+max_atom_force_error_eV_A = 6.428148642458428e-17
+max_force_error_eV_A = 6.299214622140781e-17
+
+    [measurements.stages.unpack_ranges]
+    median = 3.2840000000000004e-5
+    minimum = 3.2540000000000004e-5
+    maximum = 3.35e-5
+
+    [measurements.stages.host_output_copy]
+    median = 0.00012455000000000002
+    minimum = 0.00011798
+    maximum = 0.00013376000000000002
+
+    [measurements.stages.extraction]
+    median = 0.000948633
+    minimum = 0.0009278730000000001
+    maximum = 0.00606
+
+    [measurements.stages.reduction]
+    median = 3.4200000000000005e-5
+    minimum = 3.368e-5
+    maximum = 3.8440000000000005e-5
+
+    [measurements.stages.keys_and_sort]
+    median = 0.000360322
+    minimum = 0.000353331
+    maximum = 0.000381321
+
+    [measurements.stages.interaction]
+    median = 0.041963631
+    minimum = 0.041824581
+    maximum = 0.042312252
+
+    [measurements.stages.geometry_upload]
+    median = 0.00015930000000000002
+    minimum = 0.000146021
+    maximum = 0.000169151
+
+    [measurements.stages.key_generation]
+    median = 3.7111000000000004e-5
+    minimum = 3.2500000000000004e-5
+    maximum = 7.267000000000001e-5
+
+    [measurements.public]
+    median = 0.044210418
+    minimum = 0.043862367
+    maximum = 0.09175037800000001
+
+    [measurements.numeric]
+    median = 0.042598283
+    minimum = 0.042311892000000004
+    maximum = 0.042691053
+
+    [measurements.cpu]
+    median = 0.029271258
+    minimum = 0.028509716
+    maximum = 0.035582379000000004
+
+[dependencies]
+AcceleratedKernels = "0.5.10"
+StyledStrings = "1.11.0"
+IteratorInterfaceExtensions = "1.0.0"
+SLEEF_jll = "3.9.0+2"
+pocl_standalone_jll = "7.2.3+2"
+AtomsSystems = "0.1.2"
+LaTeXStrings = "1.4.1"
+BFloat16s = "0.6.3"
+SPIRV_Tools_jll = "2025.4.0+0"
+SPIRVIntrinsics = "1.5.1"
+FileWatching = "1.11.0"
+StaticArrays = "1.9.24"
+Random123 = "1.7.1"
+GPUToolbox = "3.4.3"
+Chemfiles_jll = "0.10.4+0"
+tree_sitter_ptx_jll = "0.1.0+0"
+LightXML = "0.9.3"
+LLVMDowngrader_jll = "0.12.2+0"
+Atomix = "1.7.0"
+Crayons = "4.2.0"
+InteractiveUtils = "1.11.0"
+Parsers = "3.0.2"
+RandomNumbers = "1.6.0"
+Requires = "1.3.1"
+HashArrayMappedTries = "0.2.0"
+SuiteSparse_jll = "7.10.1+0"
+Compat = "4.18.1"
+SIMD = "3.8.1"
+GPUArrays = "12.1.1"
+OpenSSL_jll = "3.5.8+0"
+JuliaSyntaxHighlighting = "1.12.0"
+Dates = "1.11.0"
+Sockets = "1.11.0"
+Statistics = "1.11.5"
+Xorg_libpciaccess_jll = "0.19.0+0"
+Random = "1.11.0"
+MacroTools = "0.5.16"
+CodecZlib = "0.7.9"
+UnitfulAtomic = "1.0.0"
+JSON = "1.13.0"
+ArgCheck = "2.5.0"
+AMDGPU = "2.10.0"
+Libdl = "1.11.0"
+Preferences = "1.6.1"
+Zlib_jll = "1.3.2+0"
+extxyz_jll = "0.4.4+0"
+libblastrampoline_jll = "5.15.0+0"
+tree_sitter_llvm_jll = "1.1.0+0"
+Markdown = "1.11.0"
+StructUtils = "2.11.2"
+UUIDs = "1.11.0"
+LinearAlgebra = "1.13.0"
+XML2_jll = "2.15.4+0"
+tree_sitter_spirv_jll = "0.1.0+0"
+Scratch = "1.3.0"
+ScopedValues = "1.6.2"
+Serialization = "1.11.0"
+TOML = "1.0.3"
+Tables = "1.14.0"
+Tracy = "0.1.6"
+StringManipulation = "0.6.1"
+Test = "1.11.0"
+PrettyTables = "3.5.0"
+HTTP = "2.13.1"
+ExtXYZ = "0.4.4"
+AbstractFFTs = "1.5.0"
+Unicode = "1.11.0"
+Base64 = "1.11.0"
+Reexport = "1.2.2"
+GPUArraysCore = "0.2.1"
+AtomsBase = "0.5.3"
+Rotations = "1.7.1"
+StaticArraysCore = "1.4.4"
+AtomsCalculators = "0.2.3"
+PrecompileTools = "1.3.4"
+tree_sitter_gcn_jll = "0.1.0+0"
+SparseArrays = "1.13.0"
+TranscodingStreams = "0.11.3"
+OpenBLAS_jll = "0.3.30+0"
+Quaternions = "0.7.7"
+Artifacts = "1.11.0"
+PotentialFrameWork = "0.1.0-DEV"
+Printf = "1.11.0"
+LLVMOpenMP_jll = "23.1.1+0"
+XCrySDenStructureFormat = "0.2.0"
+AtomsBuilder = "0.2.3"
+Unitful = "1.29.0"
+NetworkOptions = "1.3.0"
+Adapt = "4.7.4"
+REPL = "1.11.0"
+KernelInterface = "0.4.3"
+UnsafeAtomics = "0.4.0"
+PubChemCrawler = "1.4.1"
+Chemfiles = "0.10.43"
+Libiconv_jll = "1.18.0+0"
+TableTraits = "1.0.1"
+AMDGPU_LLVM_Backend_jll = "23.1.3+0"
+OrderedCollections = "2.0.3"
+CEnum = "1.0.0"
+LibTracyClient_jll = "0.13.1+0"
+CompilerCaching = "0.4.5"
+Hwloc_jll = "2.15.0+0"
+SPIRV_LLVM_Backend_jll = "23.1.1+8"
+RealDot = "0.1.0"
+DataValueInterfaces = "1.0.0"
+Logging = "1.11.0"
+JLLWrappers = "1.8.0"
+URIs = "1.7.2"
+SHA = "1.0.0"
+Zstd_jll = "1.5.7+1"
+PeriodicTable = "1.2.1"
+ExprTools = "0.1.11"
+LLVM = "10.4.2"
+DocStringExtensions = "0.9.5"
+CompilerSupportLibraries_jll = "1.5.5+2"
+KernelAbstractions = "0.10.3"
+DataAPI = "1.16.0"
+Reseau = "1.6.3"
+AtomsIO = "0.3.2"
+PCRE2_jll = "10.47.0+0"
+EnumX = "1.0.7"
+LLVMExtra_jll = "0.0.56+0"
+GPUCompiler = "2.18.0"

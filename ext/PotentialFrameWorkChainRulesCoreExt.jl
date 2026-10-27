@@ -73,4 +73,18 @@ function rrule(::typeof(ace_evaluate),X,model::ResolvedModel,ps,env::FullEnviron
     end
     y,ace_pullback
 end
+# These entrypoints deliberately implement inference only.
+for f in (PotentialFrameWork.PairPotentials.evaluate_gpu,
+          PotentialFrameWork.PairPotentials.evaluate_gpu!,
+          PotentialFrameWork.PairPotentials.execute_gpu!,
+          PotentialFrameWork.PairPotentials.prepare_gpu_execution,
+          PotentialFrameWork.NeighbourList.gpu_execute!)
+    @eval function ChainRulesCore.rrule(::typeof($f),args...;kwargs...)
+        throw(ArgumentError("GPU differentiation is unsupported; use the functional CPU pair_evaluate path"))
+    end
+    @eval function ChainRulesCore.frule(tangents,::typeof($f),args...;kwargs...)
+        throw(ArgumentError("GPU differentiation is unsupported; use the functional CPU pair_evaluate path"))
+    end
+end
+
 end
