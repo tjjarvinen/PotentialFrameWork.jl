@@ -24,6 +24,7 @@ export descriptors, basis_summary, basis_identity, BasisSelection, mask_basis, p
 export project_species, components, mapped_prior, coefficient_map
 export restrict_parameters
 export RadialMetadata, CallableRadial, replace_radial, radial_evaluate!, radial_capabilities
+export ACEFeatureLayer, FeatureIrrep, ace_features, feature_parameters, feature_basis_summary, feature_vjp
 export allocating_radial
 export register_radial!, source_radial, tabulate_radial, radial_samples, plot_basis
 
@@ -33,6 +34,8 @@ include("radials.jl")
 include("environments.jl")
 include("projection.jl")
 include("serial.jl")
+include("feature_coupling.jl")
+include("features.jl")
 include("calculators.jl")
 include("persistence.jl")
 include("interface_persistence.jl")
