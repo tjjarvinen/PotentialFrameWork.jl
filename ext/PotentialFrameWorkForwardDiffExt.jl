@@ -141,4 +141,16 @@ function radial_ad_probe(ch::PotentialFrameWork.ACE.CallableRadial,ps,r)
     end
 end
 
+function PotentialFrameWork.ACE.feature_radial_parameter_vjp(ch,r::Real,ps::NamedTuple,adj)
+    A=PotentialFrameWork.ACE
+    A.feature_require_parameter_ad(ch)
+    flat=parameter_flatten(ps)
+    isempty(flat) && return ps
+    g=ForwardDiff.gradient(flat) do theta
+        values=A.radial_values(ch,r,parameter_rebuild(ps,theta))
+        dot(adj,values)
+    end
+    parameter_rebuild(ps,g)
+end
+
 end

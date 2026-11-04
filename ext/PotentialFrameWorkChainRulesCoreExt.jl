@@ -73,6 +73,29 @@ function rrule(::typeof(ace_evaluate),X,model::ResolvedModel,ps,env::FullEnviron
     end
     y,ace_pullback
 end
+function rrule(::typeof(PotentialFrameWork.ACE.ace_features),X,
+               layer::PotentialFrameWork.ACE.ACEFeatureLayer,ps,env::FullEnvironment,H)
+    A=PotentialFrameWork.ACE
+    y=A.ace_features(X,layer,ps,env,H)
+    saved=deepcopy((X,layer,ps,env,H))
+    px=ProjectTo(X); pp=ProjectTo(ps)
+    function feature_pullback(delta)
+        delta=unthunk(delta)
+        if delta isa AbstractZero
+            return (NoTangent(),ZeroTangent(),NoTangent(),ZeroTangent(),NoTangent(),NoTangent())
+        end
+        cot=map(eachindex(y)) do b
+            d=unthunk(delta[b])
+            d isa AbstractZero ? zero(y[b]) : d
+        end
+        all(size(cot[b])==size(y[b]) for b in eachindex(y)) || throw(DimensionMismatch("feature cotangent block shape"))
+        g=A.feature_vjp(saved...,Tuple(cot))
+        (NoTangent(),px(g.positions),NoTangent(),pp(g.parameters),NoTangent(),
+         @not_implemented("cell derivatives are outside the fixed-cell feature AD contract"))
+    end
+    y,feature_pullback
+end
+
 # These entrypoints deliberately implement inference only.
 for f in (PotentialFrameWork.PairPotentials.evaluate_gpu,
           PotentialFrameWork.PairPotentials.evaluate_gpu!,

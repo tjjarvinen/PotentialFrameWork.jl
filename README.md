@@ -418,3 +418,6 @@ available for orientation-dependent interactions.
 
 GPU radial pair inference, device setup, ownership and limitations are documented
 in [docs/gpu_pairs.md](docs/gpu_pairs.md). The default CPU APIs are unchanged.
+
+CPU equivariant per-atom ACE features, explicit parameters, basis construction and
+first-order position/parameter derivatives are documented in [ACE features](docs/ace_features.md).

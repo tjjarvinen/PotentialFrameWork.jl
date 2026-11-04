@@ -1,5 +1,103 @@
 # Implementation status
 
+## CPU equivariant ACE feature layer (2026-11-04)
+
+Implemented the feature phase from `ACE-Equivariant-Codex-Instructions.md` on
+`13f5cf5e249692bbe0cdb0890d1476b09cdaf339`. The supplied untracked instruction
+file, local reference data/environments and unrelated files are preserved.
+`ACEFeatureLayer`, `feature_parameters`, `feature_basis_summary` and
+`ace_features(X, layer, ps, environment, H)` live in ACE. The root module,
+scalar ACE evaluator/prepared executor, calculators, import/checkpoint formats,
+ACEfit path, CPU scheduling and GPU code are unchanged. No dependency or Julia
+compatibility requirement was added.
+
+The generated constructor accepts species, an explicit radial basis, correlation,
+input lmax, totaldegree truncation and ordered `(L, parity, channels)` blocks.
+It generates complete species-resolved density channels, commuting products and
+sparse real Clebsch–Gordan multiplets, removes zero/dependent coupling paths as
+whole multiplets, and reports available basis multiplicities separately from
+readout width/rank bounds. Intermediate/output L may exceed input lmax. A small
+resolved-table constructor and an identical-coordinate scalar 0e adapter provide
+independent reference checks. The scalar adapter excludes reference/pair terms
+and rejects species-order projected bases. Mixing parameters have an explicit
+central-species axis and share weights across magnetic components.
+
+Owning tuple outputs have `(2L+1, channels, original atoms)` axes. The serial
+feature path reuses full directed environments, radial/angular evaluation and the
+scalar division-free product reverse. The ChainRules rule contracts arbitrary
+feature cotangents into position, mixing, radial-scale and callable-radial
+parameter gradients without full Jacobians. It snapshots model/inputs/parameters/
+topology for pullback lifetime safety. Zero/thunked blocks and empty/isolated
+systems are covered. Custom parameter VJPs use ForwardDiff on locally contracted
+radial values. Analytic position derivatives need the callable d/dr contract;
+trainable callable values must declare `ad=true` and support generic ForwardDiff
+arithmetic. Lux setup/apply uses the existing `lux_layer` convention with owning
+explicit parameters and unchanged state.
+
+Focused suites pass **163 assertions** on both Julia **1.13.3** and **1.10.12**,
+four threads. They cover a hand-resolved nonzero cross-product 1e fixture,
+generated 0e/1o/1e blocks, symmetric-cube multiplicity/dependence removal,
+correlation three and L=3, real-harmonic rotations, inversion, translation,
+permutation/original order, invalid/unavailable irreps, wider readouts, periodic
+multi-image topology and self-images, arbitrary/single-block cotangents,
+position/parameter finite differences and ForwardDiff checks, saved pullbacks
+after later forwards and mutation, Lux, a composed invariant head's forces, and
+scalar many-body equality with reference/pair subtraction.
+
+The full suites on Julia **1.13.3** and **1.10.12** each pass **49,222 assertions**
+(49,059 existing plus 163 feature assertions), including scalar ACE, import, persistence, fitting-row,
+AD, neighborhood and portable CPU GPU-kernel regressions. The optional existing
+scalar ACEfit regression passes **4 assertions** with ACEfit **0.3.1**. The
+separate UnicodePlots tests were not rerun (UnicodePlots is not installed in the
+local depot); no plotting code changed. A standalone root-environment import
+passes with the SpheriCart extension absent, confirming optional CPU-only loading.
+Logs: `/tmp/pfw-equivariant-full113.log`, `/tmp/pfw-equivariant-full110.log`,
+`/tmp/pfw-feature-tests110.log`,
+`/tmp/pfw-feature-optional-tests.log`, `/tmp/pfw-feature-cpu-load.log`.
+
+Host: AMD Ryzen 9 9950X (16 cores/32 logical CPUs, znver5). Both application
+environments resolve SpheriCart 0.2.4, ChainRulesCore 1.26.5, ForwardDiff 1.4.6,
+LuxCore 1.5.3, Zygote 0.7.15, AtomsBase 0.5.3, AtomsCalculators 0.2.3,
+StaticArrays 1.9.24, SIMD 3.8.1, Unitful 1.29.0, KernelAbstractions 0.9.45,
+AcceleratedKernels 0.5.10 and NeighbourLists 0.5.10. The root and pinned reference
+Project/Manifest files were preserved; tests used isolated application environments
+and writable temporary depots layered over the installed packages.
+
+`benchmark/ace_features.jl` measures the warmed serial reference path, with
+preparation excluded. For its three-atom/two-species correlation-two fixture
+(14 densities, 107 products, 15/12/6 coupled basis channels), Julia 1.13.3 / four
+threads reports **16,816 bytes** for forward evaluation, **78,936 bytes** for
+rrule forward including snapshot creation, and **79,088 bytes** for pullback.
+Output array payload is **360 bytes** and saved-pullback `summarysize` is
+**17,536 bytes**. These are allocating correctness paths; no speedup or
+allocation-free claim is made. The diagnostic timings in
+`/tmp/pfw-equivariant-costs.log` were collected while a separate regression run
+was active and are not used as performance evidence. No new production force
+buffers or CPU reduction strategy were introduced.
+
+Reproduction with this checkout developed in an environment containing the test
+extras (the application Project/Manifest files are under `/tmp/pfw-equivariant`
+and `/tmp/pfw-equivariant110`):
+
+```sh
+JULIA_DEPOT_PATH=/tmp/pfw-julia-depot:/var/home/teemu/.julia julia --project=/tmp/pfw-equivariant -t4 test/ace_features_runtests.jl
+JULIA_DEPOT_PATH=/tmp/pfw-julia-depot:/var/home/teemu/.julia julia --project=/tmp/pfw-equivariant -t4 test/runtests.jl
+JULIA_DEPOT_PATH=/tmp/pfw-julia-depot110:/var/home/teemu/.julia /var/home/teemu/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/bin/julia --project=/tmp/pfw-equivariant110 -t4 test/runtests.jl
+JULIA_DEPOT_PATH=/tmp/pfw-julia-depot:/var/home/teemu/.julia julia --project=/tmp/pfw-equivariant -t4 benchmark/ace_features.jl
+JULIA_DEPOT_PATH=/tmp/pfw-julia-depot:/var/home/teemu/.julia PFW_ROOT="$PWD" julia --project=/tmp/pfw-equivariant-optional -t4 /tmp/pfw-feature-optional-tests.jl
+```
+
+See `docs/ace_features.md` for construction/evaluation signatures, parameter axes,
+normalization/phase conventions, truncation and derivative contracts. Tables and
+numerical reference computation use at least Float64 and retain promoted AD
+arithmetic. Construction uses numerical multiplet rank detection and has
+combinatorial cost; no large-basis optimization is claimed. Caller-supplied
+resolved tables must themselves be valid intertwiners. Cell/topology derivatives,
+feature SIMD/GPU, full MACE, general equivariant training and mixed derivatives
+for composed-model force losses remain outside this phase. No new feature
+checkpoint schema or scalar ACEfit replacement was introduced.
+
+
 ## GPU phase 1: sorted cells and radial pairs (2026-10-27)
 
 Delivered G0–G5 on base `a6b3dd56e2560fe1339f0f41464da052f5cb7ff7`.
