@@ -1,0 +1,9 @@
+[ Info: KA CPU arithmetic validation, not AMD hardware validation
+Test Summary:  | Pass  Total   Time
+GPU scalar ACE |  654    654  18.0s
+Test Summary:                                    | Pass  Total  Time
+GPU ACE derivatives, updates, and custom radials |   31     31  4.8s
+Test Summary:                             | Pass  Total  Time
+GPU ACE geometry, filters, and invariance |   45     45  2.3s
+Test Summary:                                      | Pass  Total  Time
+GPU ACE constant angular and empty invariant bases |   16     16  5.0s

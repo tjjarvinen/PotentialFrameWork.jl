@@ -24,7 +24,7 @@ end
 function model_with(m;radial=m.radial,pair_radial=m.pair_radial,radial_spec=m.radial_spec,
                     density=m.density,products=m.products,coupling=m.coupling,policy=m.policy)
     ResolvedModel(copy(m.atomic_numbers),copy(m.reference),radial,pair_radial,radial_spec,
-        copy(m.pair_spec),m.lmax,density,products,coupling,m.source_sha256,policy)
+        copy(m.pair_spec),m.lmax,density,products,coupling,m.source_sha256,policy,m.coordinate_kind,m.coefficient_precision)
 end
 basis_identity(m)=bytes2hex(SHA.sha256(string(m.policy.origin,m.policy.rows)))
 
@@ -33,6 +33,7 @@ not distinct neighbors. `index_weight` is sum(n+l), not a physical polynomial
 degree. Coupled terms retain their individual angular/radial dependencies.
 """
 function descriptors(m)
+    require_invariant_coordinates(m)
     [begin
         columns=structural_columns(m,(i,))
         terms=[(;product=j,original_product=collect(m.policy.products)[j],coefficient=m.coupling[i,j],
@@ -221,4 +222,10 @@ end
 
 function structural_columns(m,rows)
     [j for j=1:size(m.coupling,2) if any(k -> rowvals(m.coupling)[k] in rows,nzrange(m.coupling,j))]
+end
+
+require_invariant_coordinates(m)=nothing # lightweight restricted-construction specification
+function require_invariant_coordinates(m::ResolvedModel)
+    m.coordinate_kind===:invariant || throw(ArgumentError("legacy precontracted PI coordinates are not individually invariant; descriptor selection and invariant fitting are unsupported for this imported representation"))
+    nothing
 end

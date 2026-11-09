@@ -1,0 +1,87 @@
+omitted = []
+schema = "PotentialFrameWork.GPUACESuite"
+version = 1
+
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-gpu-ace-env --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend cpu --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float64 --strategy staged --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/1-cpu-Float64-staged-t4-a3.4.toml --spacing 3.4 --sizes 4`"
+id = "1-cpu-Float64-staged-t4-a3.4"
+log = "/tmp/pfw-m1-full/1-cpu-Float64-staged-t4-a3.4.log"
+passed = true
+report = "/tmp/pfw-m1-full/1-cpu-Float64-staged-t4-a3.4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-gpu-ace-env --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend cpu --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float32 --strategy staged --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/2-cpu-Float32-staged-t4-a3.4.toml --spacing 3.4 --sizes 4`"
+id = "2-cpu-Float32-staged-t4-a3.4"
+log = "/tmp/pfw-m1-full/2-cpu-Float32-staged-t4-a3.4.log"
+passed = true
+report = "/tmp/pfw-m1-full/2-cpu-Float32-staged-t4-a3.4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-gpu-ace-env --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend cpu --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float64 --strategy staged --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/3-cpu-Float64-staged-t4-a3.2.toml --spacing 3.2 --sizes 4`"
+id = "3-cpu-Float64-staged-t4-a3.2"
+log = "/tmp/pfw-m1-full/3-cpu-Float64-staged-t4-a3.2.log"
+passed = true
+report = "/tmp/pfw-m1-full/3-cpu-Float64-staged-t4-a3.2.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-gpu-ace-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend cpu --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float64 --strategy staged --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/4-cpu-Float64-staged-t1-a3.4.toml --spacing 3.4 --sizes 4`"
+id = "4-cpu-Float64-staged-t1-a3.4"
+log = "/tmp/pfw-m1-full/4-cpu-Float64-staged-t1-a3.4.log"
+passed = true
+report = "/tmp/pfw-m1-full/4-cpu-Float64-staged-t1-a3.4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-ace-amd-modern --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend amd --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float64 --strategy staged --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/5-amd-Float64-staged-t4-a3.4.toml --spacing 3.4 --sizes 4`"
+id = "5-amd-Float64-staged-t4-a3.4"
+log = "/tmp/pfw-m1-full/5-amd-Float64-staged-t4-a3.4.log"
+passed = true
+report = "/tmp/pfw-m1-full/5-amd-Float64-staged-t4-a3.4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-ace-amd-modern --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend amd --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float32 --strategy staged --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/6-amd-Float32-staged-t4-a3.4.toml --spacing 3.4 --sizes 4`"
+id = "6-amd-Float32-staged-t4-a3.4"
+log = "/tmp/pfw-m1-full/6-amd-Float32-staged-t4-a3.4.log"
+passed = true
+report = "/tmp/pfw-m1-full/6-amd-Float32-staged-t4-a3.4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-ace-amd-modern --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend amd --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float64 --strategy staged --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/7-amd-Float64-staged-t4-a3.2.toml --spacing 3.2 --sizes 4`"
+id = "7-amd-Float64-staged-t4-a3.2"
+log = "/tmp/pfw-m1-full/7-amd-Float64-staged-t4-a3.2.log"
+passed = true
+report = "/tmp/pfw-m1-full/7-amd-Float64-staged-t4-a3.2.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-ace-amd-modern --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend amd --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float64 --strategy baseline --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/8-amd-Float64-baseline-t4-a3.4.toml --spacing 3.4 --sizes 4`"
+id = "8-amd-Float64-baseline-t4-a3.4"
+log = "/tmp/pfw-m1-full/8-amd-Float64-baseline-t4-a3.4.log"
+passed = true
+report = "/tmp/pfw-m1-full/8-amd-Float64-baseline-t4-a3.4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-ace-amd-modern --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl --preset full --backend amd --models tial,ti,tialv --data /tmp/pfw-public-ace --precision Float64 --strategy compact --samples 3 --seconds 0.1 --output /tmp/pfw-m1-full/9-amd-Float64-compact-t4-a3.4.toml --spacing 3.4 --sizes 4`"
+id = "9-amd-Float64-compact-t4-a3.4"
+log = "/tmp/pfw-m1-full/9-amd-Float64-compact-t4-a3.4.log"
+passed = true
+report = "/tmp/pfw-m1-full/9-amd-Float64-compact-t4-a3.4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-gpu-ace-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/audit.jl /mnt/work/Coding/Potentials/dev/PotentialFrameWork/data/ace_ref/resolved_model_v1.toml /tmp/pfw-m1-full/audit-tial`"
+id = "audit-tial"
+log = "/tmp/pfw-m1-full/audit-tial.log"
+passed = true
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-gpu-ace-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/audit.jl /tmp/pfw-public-ace/ti-resolved.toml /tmp/pfw-m1-full/audit-ti`"
+id = "audit-ti"
+log = "/tmp/pfw-m1-full/audit-ti.log"
+passed = true
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-gpu-ace-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/audit.jl /tmp/pfw-public-ace/tialv-resolved.toml /tmp/pfw-m1-full/audit-tialv`"
+id = "audit-tialv"
+log = "/tmp/pfw-m1-full/audit-tialv.log"
+passed = true
+
+[options]
+amd-project = "/tmp/pfw-ace-amd-modern"
+audit = "true"
+backend = "both"
+cpu-project = "/tmp/pfw-gpu-ace-env"
+data = "/tmp/pfw-public-ace"
+models = "tial,ti,tialv"
+output = "/tmp/pfw-m1-full"
+preset = "full"
+samples = "3"
+seconds = "0.1"
+sizes = "4"
+threads = "4"

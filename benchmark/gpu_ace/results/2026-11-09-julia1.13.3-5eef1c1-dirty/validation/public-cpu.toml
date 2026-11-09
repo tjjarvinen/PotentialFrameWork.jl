@@ -1,0 +1,84 @@
+storage = "Array"
+julia = "1.13.3"
+device = "CPU"
+
+[[cases]]
+model = "ti"
+atoms = 3
+energy_abs_eV = 9.094947017729282e-12
+force_max_eV_per_A = 1.1324274851176597e-14
+precision = "Float64"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 1
+virial_max_eV = 2.930988785010413e-14
+[[cases]]
+model = "ti"
+atoms = 3
+energy_abs_eV = 0.003111422531219432
+force_max_eV_per_A = 4.404363425525304e-6
+precision = "Float32"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 1
+virial_max_eV = 8.389906378525325e-6
+[[cases]]
+model = "ti"
+atoms = 128
+energy_abs_eV = 1.7462298274040222e-10
+force_max_eV_per_A = 2.4855117963795692e-14
+precision = "Float64"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 2
+virial_max_eV = 4.689582056016661e-12
+[[cases]]
+model = "ti"
+atoms = 128
+energy_abs_eV = 0.00807029104907997
+force_max_eV_per_A = 1.637346262237105e-5
+precision = "Float32"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 2
+virial_max_eV = 0.0020357784115958566
+[[cases]]
+model = "tialv"
+atoms = 3
+energy_abs_eV = 3.637978807091713e-12
+force_max_eV_per_A = 2.6645352591003757e-15
+precision = "Float64"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 1
+virial_max_eV = 7.105427357601002e-15
+[[cases]]
+model = "tialv"
+atoms = 3
+energy_abs_eV = 0.002779694904347707
+force_max_eV_per_A = 4.936582197245798e-6
+precision = "Float32"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 1
+virial_max_eV = 9.176104260433249e-6
+[[cases]]
+model = "tialv"
+atoms = 128
+energy_abs_eV = 3.7834979593753815e-10
+force_max_eV_per_A = 2.3425705819590803e-14
+precision = "Float64"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 2
+virial_max_eV = 1.7905676941154525e-12
+[[cases]]
+model = "tialv"
+atoms = 128
+energy_abs_eV = 0.19188834074884653
+force_max_eV_per_A = 1.388664193036071e-5
+precision = "Float32"
+implementation_virial_max_eV = 0.0
+implementation_force_max_eV_per_A = 0.0
+frame = 2
+virial_max_eV = 0.0008834589214075095

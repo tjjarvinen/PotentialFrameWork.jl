@@ -421,3 +421,10 @@ in [docs/gpu_pairs.md](docs/gpu_pairs.md). The default CPU APIs are unchanged.
 
 CPU equivariant per-atom ACE features, explicit parameters, basis construction and
 first-order position/parameter derivatives are documented in [ACE features](docs/ace_features.md).
+
+Scalar GPU ACE inference, precision conversion and comparisons are documented in
+[docs/gpu_ace.md](docs/gpu_ace.md). Reproducible public-model acquisition, independent
+oracles, quick/full benchmarks and CPU SIMD inspection are in
+[benchmark/gpu_ace/README.md](benchmark/gpu_ace/README.md).
+
+CPU SIMD measurements and generated-code evidence: [GPU ACE audit](docs/gpu_ace_cpu_simd_audit.md).

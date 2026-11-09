@@ -25,12 +25,15 @@ export project_species, components, mapped_prior, coefficient_map
 export restrict_parameters
 export RadialMetadata, CallableRadial, replace_radial, radial_evaluate!, radial_capabilities
 export ACEFeatureLayer, FeatureIrrep, ace_features, feature_parameters, feature_basis_summary, feature_vjp
+export adapt_model, GPUACEModel, GPUExecutor, execute_gpu!, gpu_result, gpu_memory, compare_precision
 export allocating_radial
 export register_radial!, source_radial, tabulate_radial, radial_samples, plot_basis
 
 include("resolved.jl")
 include("interface.jl")
 include("radials.jl")
+include("legacy_radial.jl")
+register_radial!("PotentialFrameWork.legacy_polynomial.v1",(c,m)->LegacyPolynomial())
 include("environments.jl")
 include("projection.jl")
 include("serial.jl")
@@ -42,4 +45,7 @@ include("interface_persistence.jl")
 include("fitting.jl")
 include("angular_blocks.jl")
 include("cpu.jl")
+include("adaptation.jl")
+include("gpu.jl")
+include("precision.jl")
 end

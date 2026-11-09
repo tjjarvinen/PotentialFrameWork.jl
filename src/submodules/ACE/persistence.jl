@@ -65,10 +65,10 @@ function checkpoint_radial(channels::AbstractMatrix{<:RadialChannel},spec;parame
     end
     Dict("kind"=>"piecewise_cubic_agnesi","spec"=>[Dict("n"=>n,"l"=>l) for (n,l) in spec],"channels"=>vec(entries))
 end
-function checkpoint_model(m::ResolvedModel{Float64},ps=NamedTuple())
+function checkpoint_model(m::ResolvedModel,ps=NamedTuple())
     rows,cols,vals=findnz(m.coupling)
     Dict("schema"=>"PotentialFrameWork.resolved_ACE","schema_version"=>1,
-         "source_sha256"=>m.source_sha256,"species_atomic_numbers"=>m.atomic_numbers,
+         "source_sha256"=>m.source_sha256,"coordinate_kind"=>string(m.coordinate_kind),"coefficient_precision"=>string(m.coefficient_precision),"species_atomic_numbers"=>m.atomic_numbers,
          "reference_eV"=>m.reference,
          "angular"=>Dict("kind"=>"real_spherical","normalization"=>"L2","ordering"=>"l*l+l+m+1","lmax"=>m.lmax),
          "radial"=>checkpoint_radial(m.radial,m.radial_spec;parameters=radial_parameters(ps,:custom_radial)),
@@ -77,7 +77,7 @@ function checkpoint_model(m::ResolvedModel{Float64},ps=NamedTuple())
          "density_indices"=>collect.(m.density),"products"=>m.products,
          "coupling"=>Dict("shape"=>collect(size(m.coupling)),"rows"=>rows,"columns"=>cols,"values"=>vals))
 end
-checkpoint_model(m)=throw(ArgumentError("checkpoint requires a resolved Float64 ACE model"))
+checkpoint_model(m)=throw(ArgumentError("checkpoint requires a resolved ACE model"))
 
 function checkpoint_read_model(d,ps;allow_code=false)
     ps isa NamedTuple && hasproperty(ps,:WB) && hasproperty(ps,:Wpair) ||

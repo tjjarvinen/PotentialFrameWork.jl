@@ -1,0 +1,9 @@
+1-cpu-Float64-staged-t4-a3.4
+2-cpu-Float32-staged-t4-a3.4
+3-cpu-Float64-staged-t4-a3.2
+4-cpu-Float64-staged-t1-a3.4
+5-amd-Float64-staged-t4-a3.4
+6-amd-Float32-staged-t4-a3.4
+7-amd-Float64-staged-t4-a3.2
+8-amd-Float64-baseline-t4-a3.4
+9-amd-Float64-compact-t4-a3.4

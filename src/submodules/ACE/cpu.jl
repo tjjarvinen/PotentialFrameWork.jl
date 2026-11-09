@@ -62,7 +62,7 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
     prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false)
     w=CPUExecutor(model,env,basis,scratch,zeros(T,3,0),Int[],Int[],
         weights,T[],zeros(T,9,0),0,UInt(0),
-        zeros(promote_type(Float64,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector(),NL.site_slots(scratch,0,batch_size,T),Int(batch_size),prepared)
+        zeros(promote_type(T,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector(),NL.site_slots(scratch,0,batch_size,T),Int(batch_size),prepared)
     prepare_executor!(w,env)
 end
 function prepare_executor!(w::CPUExecutor{T},env) where T

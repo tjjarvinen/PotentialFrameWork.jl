@@ -1,0 +1,53 @@
+┌ Warning: Your AMD Ryzen 9 9950X 16-Core Processor GPU (gfx1036) can silently lose kernel results unless HIP uses system-scope fences, which are not enabled because other AMD GPUs in this system don't need them, and would be slowed down.
+│ To enable them, call `AMDGPU.system_scope_fences!(true)` and restart Julia. See the FAQ in the AMDGPU.jl documentation for details.
+└ @ AMDGPU.HIP ~/.julia/packages/AMDGPU/2ss6K/src/hip/device.jl:73
+AMDGPU versioninfo
+┌───────────┬──────────────────┬───────────┬────────────────────────────────────
+│ Available │ Name             │ Version   │ Path                              ⋯
+├───────────┼──────────────────┼───────────┼────────────────────────────────────
+│     +     │ LLD              │ -         │ /usr/lib64/rocm/llvm/bin/ld.lld   ⋯
+│     +     │ Device Libraries │ -         │ /var/home/teemu/.julia/scratchspa ⋯
+│     +     │ HIP              │ 7.1.52802 │ /usr/lib64/libamdhip64.so         ⋯
+│     +     │ rocBLAS          │ 5.1.1     │ /usr/lib64/librocblas.so.5        ⋯
+│     +     │ rocSOLVER        │ 3.31.0    │ /usr/lib64/librocsolver.so.0      ⋯
+│     +     │ rocSPARSE        │ 4.1.0     │ /usr/lib64/librocsparse.so.1      ⋯
+│     +     │ rocRAND          │ 4.1.0     │ /usr/lib64/librocrand.so          ⋯
+│     +     │ rocFFT           │ 1.0.35    │ /usr/lib64/librocfft.so.0         ⋯
+│     -     │ hipTENSOR        │ -         │ -                                 ⋯
+│     +     │ MIOpen           │ 3.5.1     │ /usr/lib64/libMIOpen.so.1         ⋯
+└───────────┴──────────────────┴───────────┴────────────────────────────────────
+                                                                1 column omitted
+Julia packages: 
+- AMDGPU.jl: 2.10.0
+- GPUArrays: 12.2.0
+- GPUCompiler: 2.22.0
+- KernelInterface: 0.4.6
+- KernelAbstractions: 0.10.7
+- LLVM: 10.4.3
+- AMDGPU_LLVM_Backend_jll: 23.1.3+1
+- LLVMDowngrader_jll: 0.12.2+0
+
+Toolchain:
+- Julia: 1.13.3
+- LLVM: 20.1.8
+
+
+AMDGPU devices
+┌────┬─────────────────────────────────────┬──────────┬───────────┬─────────────
+│ Id │                                Name │ GCN arch │ Wavefront │     Memory ⋯
+├────┼─────────────────────────────────────┼──────────┼───────────┼─────────────
+│  1 │               AMD Radeon RX 6800 XT │  gfx1030 │        32 │ 15.984 GiB ⋯
+│  2 │ AMD Ryzen 9 9950X 16-Core Processor │  gfx1036 │        32 │ 30.234 GiB ⋯
+└────┴─────────────────────────────────────┴──────────┴───────────┴─────────────
+                                                                1 column omitted
+
+Test Summary:  | Pass  Total   Time
+GPU scalar ACE |  654    654  25.5s
+Test Summary:                                    | Pass  Total  Time
+GPU ACE derivatives, updates, and custom radials |   31     31  6.2s
+Test Summary:                             | Pass  Total  Time
+GPU ACE geometry, filters, and invariance |   45     45  3.2s
+Test Summary:                                         | Pass  Total  Time
+AMD selected-device placement and calculator boundary |   12     12  4.1s
+Test Summary:                                      | Pass  Total  Time
+GPU ACE constant angular and empty invariant bases |   16     16  5.0s

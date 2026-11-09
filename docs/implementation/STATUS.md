@@ -1,5 +1,75 @@
 # Implementation status
 
+## GPU ACE milestone 1 (2026-11-09)
+
+Implemented scalar GPU ACE E/F/V, coherent Float32/Float64 model/parameter
+adaptation, optional AMD device integration, resident preparation and owning or
+borrowed outputs, site batching, analytic callable radials, precision reports,
+public fitted-model conversion/oracles and a sequential BenchmarkTools workflow.
+The root package identity, Julia 1.10.10 compatibility declaration, existing CPU
+AD/equivariant paths, local pure protocol and pinned reference data are preserved.
+The supplied milestone instruction file remains untouched.
+
+The RX 6800 XT is available: the restricted sandbox hid device nodes. Actual
+hardware checks use the host-accessible device, not a CPU kernel substitute.
+The tested stack is Julia 1.13.3, AMDGPU 2.10.0, KernelAbstractions 0.10.7,
+AcceleratedKernels 0.5.12 and HIP 7.1.52802 on gfx1030 (72 CUs). CPU checks also
+use Julia 1.10.12; the independent SpheriCart 0.2.4 checks use a separate KA 0.9
+environment. No mandatory vendor dependency was added.
+
+Validation: full suites pass **53,958 assertions on each Julia version**; actual
+RX hardware passes **758 ACE assertions** and **1,539 existing pair assertions**.
+The public Ti and April08 Ti–Al–V models pass **34 independent checks per backend**
+(CPU and AMD), including both precisions and small/all-species and 128-atom bulk
+fixtures. Angular values/Cartesian derivatives include independent SpheriCart
+comparisons at lmax 0/1/2/4/6. Force and strain finite differences at h=1e-5
+have worst errors 1.919e-7 eV/Å, 1.587e-7 eV (open strain), and 5.157e-8 eV
+(periodic diagonal strain), against the unchanged 2e-7 absolute tolerance.
+Net force norm is 7.217e-16 eV/Å. Full-order projection gives zero force difference.
+
+Public legacy JSONs contain precontracted complex PI coordinates, not the paper's
+independent invariant fitting rows. The isolated ACEpotentials 0.6.6 exporter
+preserves fitted coefficients/order, pair/reference terms and exact analytic
+radial recurrences, and expands complex products algebraically into real
+harmonics. No refitting or tabulation approximation is used. Individual-row
+invariant inspection/selection and invariant fitting reject this representation;
+scalar inference, central selection and neighbor-species order projection work.
+Source DOI, license, Crown/AWE notice, fit selection and checksums are retained in
+`benchmark/gpu_ace/THIRD_PARTY.md` and acquisition metadata. TiAl's pinned original
+ACEpotentials 0.10.2 model remains a separate oracle.
+
+Both quick and bounded full presets ran on CPU and AMD. Quick includes all three
+models at 128 atoms and TiAl at 11,664 atoms; full uses `--sizes 4` for both
+precisions, denser cells, separate thread-count processes, staged/baseline/compact
+and deterministic five-frame sequences. The larger default public-model and
+27,648-atom cases remain unmeasured. In the quick Float64 run, staged prepared
+TiAl at 11,664 atoms measured 29.44 ms AMD / 50.17 ms CPU (four threads). At
+128 atoms, staged AMD is slower than CPU for all models. Compact reduces the
+128-atom AMD prepared medians to 1.43 ms TiAl, 45.14 ms Ti and 251.56 ms alloy;
+these short-budget timings include slow cases with one sample. Original-package
+oracle boundaries and raw samples are retained; no universal speedup is claimed.
+
+Automatic compact selection is restricted to the tested RX 6800 XT / Float64 /
+128–1,024-atom small-spline range (lmax ≤ 2, ≤27 densities, ≤167 products).
+TiAl at 1,024 atoms measured 11.07 ms staged / 3.845 ms compact; 11,664 atoms
+show no robust compact advantage. Other configurations retain staged defaults
+and manual overrides. The final automatic-path checks verify all three sizes.
+CPU SIMD source and actual LLVM/native kernels are documented in
+`docs/gpu_ace_cpu_simd_audit.md`: packed spline Horner and compiler-vectorized
+SpheriCart coexist with mainly scalar density/product/reverse/scatter loops.
+Batched SpheriCart remains the measured CPU baseline. Initial wrapper-only dumps
+are preserved and explicitly distinguished from corrected inspection artifacts.
+
+Reproduction and timing boundaries: `benchmark/gpu_ace/README.md`; public APIs and
+limitations: `docs/gpu_ace.md`; raw evidence is under
+`benchmark/gpu_ace/results/2026-11-09-julia1.13.3-5eef1c1-dirty/`.
+GPU execution remains orthorhombic single-image scalar inference. GPU AD/training,
+equivariant outputs, skew/multiple images and other vendor validation are deferred.
+Device allocator high-water marks/register spills are not measured; reported
+array payloads and host allocations are separate. CPU optional integrations not
+exercised by the recorded full suites are not newly claimed as validated.
+
+
 ## CPU equivariant ACE feature layer (2026-11-04)
 
 Implemented the feature phase from `ACE-Equivariant-Codex-Instructions.md` on
