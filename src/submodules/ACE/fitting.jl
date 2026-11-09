@@ -16,6 +16,7 @@ ordering. `baseline` must be subtracted from labels before fitting. Imported
 pair columns and ACE columns are jointly linear in the original coordinates.
 """
 function design_matrix_impl(X,model,ps,env,H;fit_pair=true,centers=nothing)
+    require_invariant_coordinates(model)
     nb=size(model.coupling,1); nq=length(model.pair_spec); nz=length(model.atomic_numbers)
     n=length(env.species); cols=(nb+nq)*nz
     A=zeros(promote_type(eltype(X),eltype(ps.WB)),1+3n+9,cols)

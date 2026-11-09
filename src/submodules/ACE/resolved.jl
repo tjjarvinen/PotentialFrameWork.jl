@@ -28,7 +28,15 @@ struct ResolvedModel{T,R,Q,P}
     coupling::SparseMatrixCSC{T,Int}
     source_sha256::String
     policy::P
+    coordinate_kind::Symbol
+    coefficient_precision::DataType # precision already lost cannot be recovered by promotion
 end
+
+ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy,kind)=
+    ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy,kind,eltype(ref))
+
+ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy)=
+    ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy,:invariant)
 
 function ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha)
     policy=default_policy(sha,rspec,density,products,C)
@@ -51,7 +59,7 @@ function read_radial(D,nz;allow_code=false,parameters=NamedTuple())
         push!(seen,ij)
         t=ch["transform"]
         t["normalization_rin"]==t["rin"] || throw(ArgumentError("unsupported differing transform origins"))
-        transform=AgnesiTransform(Int(t["p"]),Int(t["q"]),t["a"],t["rin"],t["r0"],t["yin"],t["ycut"],t["rcut"])
+        transform=AgnesiTransform{Float64}(Int(t["p"]),Int(t["q"]),t["a"],t["rin"],t["r0"],t["yin"],t["ycut"],t["rcut"])
         transform.p>0 && transform.q>=transform.p && transform.a>0 && transform.rcut>transform.r0>transform.rin ||
             throw(ArgumentError("invalid Agnesi transform"))
         kind=Symbol(ch["envelope_kind"]); e=ch["envelope"]
@@ -78,7 +86,11 @@ end
 Return `(model, parameters, state)`; parameters own the original readout matrices.
 The recipe JSON is exported separately in its pinned producer environment.
 """
-load_resolved(path)=read_resolved(TOML.parsefile(path))
+function load_resolved(path;array_type=Array,precision=Float64)
+    m,ps,st=read_resolved(TOML.parsefile(path))
+    b=adapt_model(m,ps;array_type,precision)
+    b.model,b.parameters,st
+end
 function read_resolved(D;allow_code=false,custom_parameters=NamedTuple())
     get(D,"schema",nothing)=="PotentialFrameWork.resolved_ACE" && get(D,"schema_version",nothing)==1 ||
         throw(ArgumentError("unsupported resolved ACE schema; use the pinned export_resolved_model.jl producer"))
@@ -109,7 +121,13 @@ function read_resolved(D;allow_code=false,custom_parameters=NamedTuple())
     WB=reshape(copy(flat[1:m*nz]),m,nz)
     Wpair=reshape(copy(flat[m*nz+1:end]),length(pspec),nz)
     model=ResolvedModel(z,Float64.(D["reference_eV"]),radial,pair,rspec,pspec,lmax,density,products,C,D["source_sha256"])
+    if get(get(D,"conversion",Dict()),"kind",nothing)=="exact_legacy_complex_PI_to_real" || get(D,"coordinate_kind",nothing)=="legacy_PI"
+        model=ResolvedModel(model.atomic_numbers,model.reference,model.radial,model.pair_radial,model.radial_spec,model.pair_spec,model.lmax,model.density,model.products,model.coupling,model.source_sha256,model.policy,:legacy_PI)
+    end
     haskey(D,"interface_policy") && (model=model_with(model;policy=read_policy(D["interface_policy"],model)))
+    precision=get(D,"coefficient_precision","Float64")
+    precision in ("Float32","Float64") || throw(ArgumentError("unsupported coefficient provenance precision"))
+    model=ResolvedModel(model.atomic_numbers,model.reference,model.radial,model.pair_radial,model.radial_spec,model.pair_spec,model.lmax,model.density,model.products,model.coupling,model.source_sha256,model.policy,model.coordinate_kind,precision=="Float32" ? Float32 : Float64)
     model,(;WB,Wpair),NamedTuple()
 end
 
@@ -117,11 +135,12 @@ end
 resolved export. The source hash must match; otherwise rerun the pinned exporter.
 No ACEpotentials constructor or evaluator is loaded in the package process.
 """
-function load_recipe(path;resolved_path=joinpath(dirname(path),"resolved_model_v1.toml"))
+function load_recipe(path;resolved_path=joinpath(dirname(path),"resolved_model_v1.toml"),array_type=Array,precision=Float64)
     isfile(resolved_path) || throw(ArgumentError("missing resolved export; run data/ace_ref/export_resolved_model.jl in its pinned environment"))
     model,ps,st=load_resolved(resolved_path)
     bytes2hex(SHA.sha256(read(path)))==model.source_sha256 || throw(ArgumentError("recipe hash differs from the resolved export; regenerate it in the pinned environment"))
-    model,ps,st
+    b=adapt_model(model,ps;array_type,precision)
+    b.model,b.parameters,st
 end
 
 function transformed(t::AgnesiTransform,r)

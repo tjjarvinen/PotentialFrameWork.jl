@@ -2,9 +2,9 @@
 `spec` lists (n,l) labels; optional index weights are algebraic prior metadata.
 Cutoff is fixed in Å; `origin` is a declared policy, not an inferred dimension.
 """
-struct RadialMetadata
+struct RadialMetadata{T}
     spec::Vector{Tuple{Int,Int}}
-    cutoff::Float64
+    cutoff::T
     index_weights::Union{Nothing,Vector{Int}}
     simd::Bool
     ad::Bool
@@ -23,10 +23,10 @@ function RadialMetadata(spec;cutoff,index_weights=nothing,simd=false,ad=false,or
     isnothing(iw) || length(iw)==length(sp) || throw(DimensionMismatch("radial index weights"))
     RadialMetadata(sp,Float64(cutoff),iw,simd,ad,origin,envelope,channel_dependence)
 end
-struct CallableRadial{F,C,S}
+struct CallableRadial{F,C,S,M<:RadialMetadata}
     evaluator::F
     config::C
-    metadata::RadialMetadata
+    metadata::M
     persistence::S
 end
 # Code closures commonly capture a module binding (e.g. a local `A=ACE`). Julia
@@ -205,10 +205,10 @@ function (::SmoothExponential)(v,d,r,ps,c)
     nothing
 end
 
-struct TabulatedRadial{T}
+struct TabulatedRadial{T,M<:RadialMetadata}
     nodes::Vector{T}
     coefficients::Array{T,3}
-    metadata::RadialMetadata
+    metadata::M
     report::NamedTuple
 end
 radial_cutoff(ch::TabulatedRadial)=ch.metadata.cutoff

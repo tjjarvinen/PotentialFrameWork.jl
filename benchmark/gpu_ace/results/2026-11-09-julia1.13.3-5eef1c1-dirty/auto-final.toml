@@ -1,0 +1,374 @@
+blas_threads = 1
+boundary = "Prepared numeric EFV; synchronized; resident model/input; fresh cells at skin=0; owning=false GPU outputs borrow executor; CPU precision casting excluded"
+commit = "5eef1c1e128385ce74950984256ca4590c0fce47"
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_target = "znver5"
+dirty = true
+elapsed_seconds = 17.991510152816772
+gpu = "HIPDevice(id=1, name=AMD Radeon RX 6800 XT, gcn_arch=gfx1030)"
+hip_runtime = "7.1.52802"
+julia = "1.13.3"
+kernel_release = "7.2.15-300.fc45.x86_64"
+limitations = ["Public legacy export verification required separately", "Oracle timing is in separate serialized fixtures; thread/SIMD sweeps use audit.jl and separate processes", "Device allocations not measured; host allocations are separate from buffer payloads"]
+omitted = []
+os = "Linux"
+schema = "PotentialFrameWork.GPUACEBenchmark"
+threads = 4
+version = 1
+
+[[cases]]
+angular_channels = 9
+atoms = 128
+complete_strategy = "compact"
+density_components = 27
+directed_edges = 3328
+model = "tial"
+model_sha256 = "a61a9e57c91cc25663359dd876c47fe9a4c3662ee8d5b4a27a92350c90435f0e"
+position_rounding_max_A = 0.0
+precision = "Float64"
+products = 167
+published_invariant_basis_count = 123
+radial_channels = 30
+readout_coordinate_kind = "invariant"
+readout_coordinates = 123
+replication = 4
+requested_strategy = "auto"
+resolved_sha256 = "9f10f5dfacf91cc72e231125e38e60255e4aeec9e108b432efa89628f4f31fb9"
+species_atomic_numbers = [22, 13]
+species_counts = [64, 64]
+strategy = "compact"
+structure_sha256 = "064a323612e22a938ae5675570ed9a2ecaf6f37557016cbfcd9323d5234e4e53"
+
+    [cases.accuracy]
+    absolute_energy_eV = 1.4551915228366852e-11
+    energy_per_atom_eV = 1.1368683772161603e-13
+    force_max_atom_vector_eV_per_A = 6.241811806197997e-15
+    force_max_component_eV_per_A = 6.231126725708691e-15
+    force_rms_component_eV_per_A = 1.8452568231151093e-15
+    virial_max_component_eV = 4.547473508864641e-13
+    virial_rms_component_eV = 2.1216142025989728e-13
+
+    [cases.complete_EFV]
+    atoms_per_second = 76851.16750732638
+    device_allocations = "unavailable"
+    host_allocations = 2213
+    host_bytes = 102576
+    maximum_s = 0.002499391
+    median_s = 0.001665557
+    minimum_s = 0.001644946
+    raw_gc_ns = [0.0, 0.0, 0.0]
+    raw_seconds = [0.002499391, 0.001644946, 0.001665557]
+    samples = 3
+    std_s = 0.00048747311223321164
+
+    [cases.independent_oracle]
+
+    [cases.memory]
+    adjoint_bytes = 27648
+    compact_shared_payload_bytes_per_group = 6656
+    compiler_register_and_spill_bytes = "unavailable"
+    connectivity_bytes = 27648
+    density_bytes = 27648
+    density_shared_payload_bytes_per_group = 1024
+    model_device_array_bytes = 550804
+    model_host_descriptor_bytes = 560920
+    output_force_bytes = 3072
+    weights_bytes = 2672
+
+        [cases.memory.resident_array_payloads]
+        adjoints = 27648
+        connectivity = 27648
+        density = 27648
+        host_model_descriptor = 560920
+        inputs = 4112
+        model_tables = 550804
+        note = "Array payloads; sorting/reduction/skin auxiliary allocations and host object headers are additional"
+        outputs = 13392
+        parameters = 2160
+        selection = 3072
+        sorted_cells = 14336
+        weights = 2672
+
+    [cases.prepared_EFV]
+    atoms_per_second = 89241.14351370269
+    device_allocations = "unavailable"
+    host_allocations = 160
+    host_bytes = 10864
+    maximum_s = 0.0023975000000000003
+    median_s = 0.0014343160000000001
+    minimum_s = 0.001421285
+    raw_gc_ns = [0.0, 0.0, 0.0]
+    raw_seconds = [0.0023975000000000003, 0.0014343160000000001, 0.001421285]
+    samples = 3
+    std_s = 0.000559894179144893
+
+    [cases.synchronized_stage_seconds]
+    density = 0.000158061
+    fused_products_edges = 0.0009516240000000001
+    neighbors = 0.006505316000000001
+    readout = 3.762e-5
+    reduction = 4.643e-5
+
+    [cases.trajectory]
+[[cases]]
+angular_channels = 9
+atoms = 1024
+complete_strategy = "compact"
+density_components = 27
+directed_edges = 26624
+model = "tial"
+model_sha256 = "a61a9e57c91cc25663359dd876c47fe9a4c3662ee8d5b4a27a92350c90435f0e"
+position_rounding_max_A = 0.0
+precision = "Float64"
+products = 167
+published_invariant_basis_count = 123
+radial_channels = 30
+readout_coordinate_kind = "invariant"
+readout_coordinates = 123
+replication = 8
+requested_strategy = "auto"
+resolved_sha256 = "9f10f5dfacf91cc72e231125e38e60255e4aeec9e108b432efa89628f4f31fb9"
+species_atomic_numbers = [22, 13]
+species_counts = [512, 512]
+strategy = "compact"
+structure_sha256 = "e9e449f88776823a80632c333cba0ed566a3c11c5ff7c47e6b46853ce3bc3ed9"
+
+    [cases.accuracy]
+    absolute_energy_eV = 1.1641532182693481e-10
+    energy_per_atom_eV = 1.1368683772161603e-13
+    force_max_atom_vector_eV_per_A = 7.322480468326915e-15
+    force_max_component_eV_per_A = 6.617970060851519e-15
+    force_rms_component_eV_per_A = 1.7412240440960307e-15
+    virial_max_component_eV = 5.002220859751105e-12
+    virial_rms_component_eV = 1.8146546760591535e-12
+
+    [cases.complete_EFV]
+    atoms_per_second = 232556.66070437414
+    device_allocations = "unavailable"
+    host_allocations = 16840
+    host_bytes = 723568
+    maximum_s = 0.004570989
+    median_s = 0.004403228
+    minimum_s = 0.0043764780000000005
+    raw_gc_ns = [0.0, 0.0, 0.0]
+    raw_seconds = [0.004570989, 0.004403228, 0.0043764780000000005]
+    samples = 3
+    std_s = 0.00010543073930468901
+
+    [cases.independent_oracle]
+
+    [cases.memory]
+    adjoint_bytes = 221184
+    compact_shared_payload_bytes_per_group = 6656
+    compiler_register_and_spill_bytes = "unavailable"
+    connectivity_bytes = 221184
+    density_bytes = 221184
+    density_shared_payload_bytes_per_group = 1024
+    model_device_array_bytes = 550804
+    model_host_descriptor_bytes = 560920
+    output_force_bytes = 24576
+    weights_bytes = 2672
+
+        [cases.memory.resident_array_payloads]
+        adjoints = 221184
+        connectivity = 221184
+        density = 221184
+        host_model_descriptor = 560920
+        inputs = 32784
+        model_tables = 550804
+        note = "Array payloads; sorting/reduction/skin auxiliary allocations and host object headers are additional"
+        outputs = 106576
+        parameters = 2160
+        selection = 24576
+        sorted_cells = 114688
+        weights = 2672
+
+    [cases.prepared_EFV]
+    atoms_per_second = 266178.94919621234
+    device_allocations = "unavailable"
+    host_allocations = 187
+    host_bytes = 11344
+    maximum_s = 0.0045165480000000004
+    median_s = 0.0038470360000000003
+    minimum_s = 0.0038424260000000003
+    raw_gc_ns = [0.0, 0.0, 0.0]
+    raw_seconds = [0.0045165480000000004, 0.0038424260000000003, 0.0038470360000000003]
+    samples = 3
+    std_s = 0.0003878805746463724
+
+    [cases.synchronized_stage_seconds]
+    density = 0.0007166830000000001
+    fused_products_edges = 0.002290589
+    neighbors = 0.000875504
+    readout = 3.07e-5
+    reduction = 4.36e-5
+
+    [cases.trajectory]
+[[cases]]
+angular_channels = 9
+atoms = 11664
+complete_strategy = "staged"
+density_components = 27
+directed_edges = 303264
+model = "tial"
+model_sha256 = "a61a9e57c91cc25663359dd876c47fe9a4c3662ee8d5b4a27a92350c90435f0e"
+position_rounding_max_A = 0.0
+precision = "Float64"
+products = 167
+published_invariant_basis_count = 123
+radial_channels = 30
+readout_coordinate_kind = "invariant"
+readout_coordinates = 123
+replication = 18
+requested_strategy = "auto"
+resolved_sha256 = "9f10f5dfacf91cc72e231125e38e60255e4aeec9e108b432efa89628f4f31fb9"
+species_atomic_numbers = [22, 13]
+species_counts = [5832, 5832]
+strategy = "staged"
+structure_sha256 = "8d08d8cebea9beb0777220205a7a9f6431edd293e092d32c867325757456a44a"
+
+    [cases.accuracy]
+    absolute_energy_eV = 1.862645149230957e-9
+    energy_per_atom_eV = 1.5969179948825076e-13
+    force_max_atom_vector_eV_per_A = 8.909639917207999e-15
+    force_max_component_eV_per_A = 8.777700788442644e-15
+    force_rms_component_eV_per_A = 1.825825568241044e-15
+    virial_max_component_eV = 1.382431946694851e-10
+    virial_rms_component_eV = 5.363339120006433e-11
+
+    [cases.complete_EFV]
+    atoms_per_second = 350158.2196399855
+    device_allocations = "unavailable"
+    host_allocations = 208428
+    host_bytes = 8386464
+    maximum_s = 0.033482307
+    median_s = 0.033310656
+    minimum_s = 0.033279236000000004
+    raw_gc_ns = [0.0, 0.0, 0.0]
+    raw_seconds = [0.033482307, 0.033310656, 0.033279236000000004]
+    samples = 3
+    std_s = 0.00010930775608497939
+
+    [cases.independent_oracle]
+
+    [cases.memory]
+    adjoint_bytes = 2519424
+    compact_shared_payload_bytes_per_group = 0
+    compiler_register_and_spill_bytes = "unavailable"
+    connectivity_bytes = 2519424
+    density_bytes = 2519424
+    density_shared_payload_bytes_per_group = 1024
+    model_device_array_bytes = 550804
+    model_host_descriptor_bytes = 560920
+    output_force_bytes = 279936
+    weights_bytes = 2672
+
+        [cases.memory.resident_array_payloads]
+        adjoints = 2519424
+        connectivity = 2519424
+        density = 2519424
+        host_model_descriptor = 560920
+        inputs = 373264
+        model_tables = 550804
+        note = "Array payloads; sorting/reduction/skin auxiliary allocations and host object headers are additional"
+        outputs = 1213136
+        parameters = 2160
+        selection = 279936
+        sorted_cells = 1306368
+        weights = 2672
+
+    [cases.prepared_EFV]
+    atoms_per_second = 398441.35099765763
+    device_allocations = "unavailable"
+    host_allocations = 251
+    host_bytes = 13344
+    maximum_s = 0.029285929000000002
+    median_s = 0.029274070000000003
+    minimum_s = 0.02927015
+    raw_gc_ns = [0.0, 0.0, 0.0]
+    raw_seconds = [0.02927015, 0.029285929000000002, 0.029274070000000003]
+    samples = 3
+    std_s = 8.215626594078822e-6
+
+    [cases.synchronized_stage_seconds]
+    density = 0.007135769
+    edges = 0.020390783000000003
+    neighbors = 0.001092085
+    products = 0.000771553
+    readout = 3.426e-5
+    reduction = 4.7991e-5
+
+    [cases.trajectory]
+
+[options]
+backend = "amd"
+data = ""
+models = "tial"
+output = "/tmp/pfw-m1-auto-final.toml"
+parallel = "true"
+precision = "Float64"
+preset = "quick"
+samples = "3"
+seconds = "0.2"
+sizes = "4,8,18"
+spacing = "3.4"
+strategy = "auto"
+
+[source_files_sha256]
+"Project.toml" = "33a6426b36e674445da502a3389bc8b13fdfc2cbcfea3f06b4b9b94afec2cea4"
+"benchmark/gpu_ace/audit.jl" = "843bb7ba4fbbff4a6b243bd68dac00e87973330d90794b130c04b000c2b95629"
+"benchmark/gpu_ace/run.jl" = "d7e8cef163e406c585e85795ace9348a4cabdaa4790ff5d2751f1063f3aff7ef"
+"benchmark/gpu_ace/suite.jl" = "3e0be5bf1d9ce2ec9684c9c63777d5570c734d2aa161e2ab5c753d92f652bacf"
+"benchmark/gpu_ace/workloads.jl" = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "796635c5d0bd81010bf00ff2b2c9d2285dbe1cd8cb96144607ec7f852c7d4950"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "87ba63c6cdf9c9c2bf5936277f4081129f3a499430e6529779ea5a99b1ad52e7"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "0c824742b9c91901b06e309a30f08694893f2c312614ac8567cffbe2038232e0"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "485461724ff67c4d2c994401eb447be818ac3bcf52fdba092f9fee27f73f5c3a"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "f380760ab5394ef6e0ef6c303013a04b155fbe00e5bc6c60a39487c67ca08a5f"
+"src/submodules/ACE/adaptation.jl" = "aec733e36b2c34fe3b729085f2ed3d8fa91f7486e8289b5614febc07cd869f80"
+"src/submodules/ACE/angular_blocks.jl" = "90dbee708364153a01433fba30c824cf1e3abf11d5da22debed3c1dabf80275b"
+"src/submodules/ACE/calculators.jl" = "e6e7ef9c6cf8c43e465164d4be0b38eb5222c2ffe21ff10a52742da18ca2fb65"
+"src/submodules/ACE/cpu.jl" = "8b32999d0965e974103dcf5a786d80d0ba21930a64a2efb0158761b31c661f60"
+"src/submodules/ACE/environments.jl" = "647e6cbbfaf1016f6f6f7069d6f73c958a6b78c4c8cf786d429bb4f99f242ff3"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/features.jl" = "10f5fd604fb5bade29ea33aca88450bb0063bb5733e9a7ab358ad4f19b9093c0"
+"src/submodules/ACE/fitting.jl" = "c963538a24c56a0d1118ba0d07a0f1f4a740832b1b9a52683b6946f283c136fc"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "26cbb278ab48e68f5f47bc50241f99cb01bc85d62bbc2ad797aab5d5d897d9d6"
+"src/submodules/ACE/interface_persistence.jl" = "1bb98926435386695d0467a22efc9a7761fd37fda03857f00b29ff5083b15de4"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "88059d902b25cf0014a6b58253e301039f85dfababe9a4ff888601fed06895cf"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "6c985ecebd086faebe397dc0b80fb0d3d814b38eff8c4cc818e8574ce8bc3b8f"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "479c23cf53244be1940b2c8a8d3ae7ab0c5bad9b42ebe4a83242fc9063597b84"
+"src/submodules/ACE/serial.jl" = "7e7b9c1616de672d40f308b46c36e9572cdd5655ffb6980fa57ad09328d85a44"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "ff2d999a047a766e1ebe60442d088080ad4ac72c856ad8b9091d3d94c302d0d8"
+"src/submodules/NeighbourList/NeighbourList.jl" = "9c2c264fcf017b913e959608d505b29acf2c86a95e7528f6524bada4284330ac"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AMDGPU = "2.10.0"
+AcceleratedKernels = "0.5.12"
+BenchmarkTools = "1.8.0"
+KernelAbstractions = "0.10.7"
+SIMD = "3.8.2"

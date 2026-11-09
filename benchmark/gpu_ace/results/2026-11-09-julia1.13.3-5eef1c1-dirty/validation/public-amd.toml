@@ -1,0 +1,84 @@
+storage = "ROCArray"
+julia = "1.13.3"
+device = "HIPDevice(id=1, name=AMD Radeon RX 6800 XT, gcn_arch=gfx1030)"
+
+[[cases]]
+model = "ti"
+atoms = 3
+energy_abs_eV = 9.094947017729282e-12
+force_max_eV_per_A = 1.1324274851176597e-14
+precision = "Float64"
+implementation_virial_max_eV = 6.217248937900877e-15
+implementation_force_max_eV_per_A = 2.6645352591003757e-15
+frame = 1
+virial_max_eV = 2.842170943040401e-14
+[[cases]]
+model = "ti"
+atoms = 3
+energy_abs_eV = 0.003111422531219432
+force_max_eV_per_A = 3.450689109119054e-6
+precision = "Float32"
+implementation_virial_max_eV = 1.9073486328125e-6
+implementation_force_max_eV_per_A = 9.5367431640625e-7
+frame = 1
+virial_max_eV = 6.482557745712825e-6
+[[cases]]
+model = "ti"
+atoms = 128
+energy_abs_eV = 1.7462298274040222e-10
+force_max_eV_per_A = 3.327893516313907e-14
+precision = "Float64"
+implementation_virial_max_eV = 1.0516032489249483e-12
+implementation_force_max_eV_per_A = 1.9456658506555868e-14
+frame = 2
+virial_max_eV = 3.637978807091713e-12
+[[cases]]
+model = "ti"
+atoms = 128
+energy_abs_eV = 0.03932029104907997
+force_max_eV_per_A = 1.5061718072750807e-5
+precision = "Float32"
+implementation_virial_max_eV = 0.00018310546875
+implementation_force_max_eV_per_A = 9.123235940933228e-6
+frame = 2
+virial_max_eV = 0.0018831905209708566
+[[cases]]
+model = "tialv"
+atoms = 3
+energy_abs_eV = 5.002220859751105e-12
+force_max_eV_per_A = 1.2212453270876722e-15
+precision = "Float64"
+implementation_virial_max_eV = 3.552713678800501e-15
+implementation_force_max_eV_per_A = 1.7763568394002505e-15
+frame = 1
+virial_max_eV = 3.6637359812630166e-15
+[[cases]]
+model = "tialv"
+atoms = 3
+energy_abs_eV = 0.002291413654347707
+force_max_eV_per_A = 3.982907880839548e-6
+precision = "Float32"
+implementation_virial_max_eV = 1.9073486328125e-6
+implementation_force_max_eV_per_A = 1.430511474609375e-6
+frame = 1
+virial_max_eV = 7.268755627620749e-6
+[[cases]]
+model = "tialv"
+atoms = 128
+energy_abs_eV = 3.4924596548080444e-10
+force_max_eV_per_A = 2.3592239273284576e-14
+precision = "Float64"
+implementation_virial_max_eV = 1.4210854715202004e-13
+implementation_force_max_eV_per_A = 8.826273045769994e-15
+frame = 2
+virial_max_eV = 1.7905676941154525e-12
+[[cases]]
+model = "tialv"
+atoms = 128
+energy_abs_eV = 0.08251334074884653
+force_max_eV_per_A = 1.4445435475129997e-5
+precision = "Float32"
+implementation_virial_max_eV = 0.0001068115234375
+implementation_force_max_eV_per_A = 3.3676624298095703e-6
+frame = 2
+virial_max_eV = 0.0008224237651575095

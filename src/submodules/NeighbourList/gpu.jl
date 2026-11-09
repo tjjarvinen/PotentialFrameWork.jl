@@ -512,7 +512,7 @@ function gpu_skin!(w::GPUWorkspace{T},positions,identities,labels) where T
     # Raw-coordinate endpoint displacement bounds torus displacement. Wrapped
     # crossings rebuild conservatively; no winding is inferred or required.
     signature=(w.lengths,w.periodic,w.counts,w.radius,w.config.skin,length(labels),w.n)
-    rebuild=isnothing(w.cache) || w.cache.signature!=signature
+    rebuild=iszero(w.config.skin) || isnothing(w.cache) || w.cache.signature!=signature
     if !rebuild
         gpu_displacements!(w.backend,w.config.workgroup)(w.cache.distance2,positions,w.cache.reference,identities,w.cache.identities,labels,w.cache.labels;ndrange=w.n)
         max2=gpu_max(w.cache.distance2,w.cache.maxworkspace) # identified host scalar read
@@ -523,7 +523,7 @@ function gpu_skin!(w::GPUWorkspace{T},positions,identities,labels) where T
         old=w.cache
         reusable=!isnothing(old) && length(old.offsets)==w.n
         offsets=reusable ? old.offsets : KA.allocate(w.backend,Int,w.n)
-        empty=KA.allocate(w.backend,Int,0)
+        empty=reusable && hasproperty(old,:empty) ? old.empty : KA.allocate(w.backend,Int,0)
         search=w.radius+T(w.config.skin)
         # Inflate radius slightly to conservatively include rounding at the bound.
         search=nextfloat(search,16)
@@ -538,9 +538,22 @@ function gpu_skin!(w::GPUWorkspace{T},positions,identities,labels) where T
         distance2=reusable ? old.distance2 : KA.allocate(w.backend,T,w.n)
         copyto!(reference,positions)
         maxworkspace=reusable ? old.maxworkspace : gpu_max_workspace(distance2)
-        w.cache=(;offsets,neighbors,signature,scanworkspace,maxworkspace,identities=copy(identities),labels=copy(labels),reference,distance2)
+        savedids=reusable ? old.identities : similar(identities)
+        savedlabels=reusable && length(old.labels)==length(labels) ? old.labels : similar(labels)
+        copyto!(savedids,identities); copyto!(savedlabels,labels)
+        w.cache=(;offsets,neighbors,signature,scanworkspace,maxworkspace,identities=savedids,labels=savedlabels,reference,distance2,empty)
     else
         gpu_update_positions!(w.backend,w.config.workgroup)(w.x,positions,w.permutation;ndrange=w.n)
     end
     nothing
+end
+
+# Generic original/sorted index mapping for directed-site GPU executors.
+@kernel function gpu_inverse_permutation!(inverse,permutation)
+    i=@index(Global,Linear)
+    @inbounds inverse[permutation[i]]=i
+end
+@kernel function gpu_select_indices!(sorted,original,inverse)
+    k=@index(Global,Linear)
+    @inbounds sorted[k]=inverse[original[k]]
 end

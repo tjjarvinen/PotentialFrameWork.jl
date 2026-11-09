@@ -9,7 +9,16 @@ mutable struct ACECalculator{M,P,S,W}
     environment::FullEnvironment
     executor::W
 end
-function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads(),precision=Float64,angular_backend=:sphericart,batch_size=1)
+function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads(),precision=Float64,angular_backend=:sphericart,batch_size=1,array_type=Array)
+    if array_type!==Array || model isa GPUACEModel
+        b=adapt_model(model,ps;array_type,precision)
+        if b.model isa GPUACEModel
+            return GPUACECalculator(b.model,b.parameters,deepcopy(st),nothing)
+        end
+        model=b.model; ps=b.parameters
+    elseif (eltype(model.reference)!==precision || !coherent_float_type(ps,precision)) && parameter_seed(ps) isa Union{Float32,Float64,Integer}
+        b=adapt_model(model,ps;precision); model=b.model; ps=b.parameters
+    end
     env=FullEnvironment(;width)
     executor=CPUExecutor(model,env;slots,precision,angular_backend,batch_size)
     ACECalculator(model,deepcopy(ps),deepcopy(st),env,executor)
@@ -28,7 +37,8 @@ AC.zero_virial(sys::AbstractSystem{3},c::ACECalculator)=zero(SMatrix{3,3,typeof(
 function calculator_result(sys,c;parameters=c.parameters,energy_only=false,parallel=false,simd=true,fused=false,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),kwargs...)
     parameters=(isnothing(parameters) || parameters===NamedTuple()) ? c.parameters : parameters
     fast_parameters=parameter_seed(parameters) isa Union{Float32,Float64}
-    input=ace_inputs(sys,c.model;environment=c.environment)
+    boundary=fast_parameters && eltype(c.executor.force)===Float32 ? precision_geometry(sys,Float32) : sys
+    input=fast_parameters ? ace_inputs(boundary,c.model;environment=c.environment,precision=eltype(c.executor.force)) : ace_inputs(sys,c.model;environment=c.environment)
     y=if energy_only || !fast_parameters
         ace_evaluate(input.positions,c.model,parameters,input.environment,input.cell;state=c.state,energy_only,centers)
     else

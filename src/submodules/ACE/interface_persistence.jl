@@ -82,7 +82,7 @@ function read_channel(d;allow_code=false,parameters=NamedTuple(),source_cache=Di
         length(xs)>=2 && first(xs)>=0 && last(xs)==metadata.cutoff && all(>(0),diff(xs)) || throw(ArgumentError("invalid tabulation nodes"))
         c=checkpoint_decode(d["coefficients"])
         size(c)==(4,length(metadata.spec),length(xs)-1) || throw(DimensionMismatch("tabulation coefficients"))
-        return TabulatedRadial(xs,c,metadata,checkpoint_decode(d["report"]))
+        return TabulatedRadial(xs,Float64.(c),metadata,checkpoint_decode(d["report"]))
     elseif kind!="callable"
         throw(ArgumentError("unsupported radial channel kind $kind"))
     end

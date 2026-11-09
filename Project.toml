@@ -17,6 +17,7 @@ StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [weakdeps]
+AMDGPU = "21141c5a-9bdb-4563-92ae-f87d6854732e"
 UnicodePlots = "b8865327-cd53-5732-bb35-84acbb429228"
 LuxCore = "bb33d45b-7691-41d6-9220-0943567d0623"
 ACEfit = "ad31a8ef-59f5-4a01-b543-a85c2f73e95c"
@@ -26,6 +27,7 @@ ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
 ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
 
 [extensions]
+PotentialFrameWorkAMDGPUExt = "AMDGPU"
 PotentialFrameWorkUnicodePlotsExt = "UnicodePlots"
 PotentialFrameWorkLuxCoreExt = "LuxCore"
 PotentialFrameWorkACEfitExt = "ACEfit"
@@ -35,6 +37,7 @@ PotentialFrameWorkChainRulesCoreExt = "ChainRulesCore"
 PotentialFrameWorkForwardDiffExt = "ForwardDiff"
 
 [compat]
+AMDGPU = "2.8, 2.10"
 KernelAbstractions = "0.9.34, 0.10.3"
 AcceleratedKernels = "0.4.3, 0.5.10"
 UnicodePlots = "3.9"

@@ -1,0 +1,9 @@
+absolute_tolerance = 2.0e-7
+device = "HIPDevice(id=1, name=AMD Radeon RX 6800 XT, gcn_arch=gfx1030)"
+force_fd_max_eV_per_A = 1.918817089108238e-7
+full_order_projection_force_max_eV_per_A = 0.0
+julia = "1.13.3"
+net_force_norm_eV_per_A = 7.216783253021517e-16
+open_strain_fd_max_eV = 1.5871033198777695e-7
+periodic_diagonal_strain_fd_max_eV = 5.156564267944086e-8
+step = 1.0e-5

@@ -1,0 +1,7 @@
+version = 1
+julia = "1.13.3"
+schema = "PotentialFrameWork.PublicACEVerification"
+
+[resolved_sha256]
+ti = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+tialv = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"

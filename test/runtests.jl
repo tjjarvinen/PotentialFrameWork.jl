@@ -265,3 +265,6 @@ println("Validation process: Julia ",VERSION,", threads=",Threads.nthreads())
 
 # Portable CPU kernel checks; real-device checks require the standalone opt-in.
 include("gpu_pairs.jl")
+
+include("ace_adaptation.jl")
+include("gpu_ace.jl")
