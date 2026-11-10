@@ -1,0 +1,58 @@
+[
+  {
+    "model": "small-tial",
+    "source_sha256": "446f4150a39c9144226948d77014188ee8a816758fbb4b6ad1ce5ab97e888517",
+    "model_sha256": "581c3e64965d6ada9fcf923671ac3ad602a4e93b1a9074560958fa27867d243c",
+    "oracle_sha256": "25440d6ec03e8e8f6e92c0339c88b5b15c731dd1c0c8060ca1d600ece3a2bb4c",
+    "version": "0.10.2",
+    "geometry_g": [
+      4,
+      8,
+      18
+    ]
+  },
+  {
+    "model": "medium-ti",
+    "source_sha256": "3ab07c97d33a8c57f5ca49017da8557c472ab492228aac6cb80b8d3ef5eb4e3f",
+    "model_sha256": "b5e6f784586bf5df4d5f1cbea618f99954299241362d0a2641586b9208411e1a",
+    "oracle_sha256": "d5aa8c1cbd6f058a3bf457c67c15f4e62195c23b3c0fd2db391e8dfad5960536",
+    "version": "0.10.2",
+    "geometry_g": [
+      4,
+      8,
+      18
+    ]
+  },
+  {
+    "model": "large-tial",
+    "source_sha256": "4e3469eef11e0f4f5d5e8c3f22684a55a4dd565a338a977ff8086a5c0c5043f4",
+    "model_sha256": "39b1f2b659c4e839c204b18db54e892f41da89130655c0e91361d5150bedff0c",
+    "oracle_sha256": "6fd6bb0fc250bcd1c537cfbc168767d67fc31ec675535abb5c61fe9f45c5191d",
+    "version": "0.10.2",
+    "geometry_g": [
+      4,
+      8,
+      18
+    ]
+  },
+  {
+    "model": "ti",
+    "source_sha256": "aa4c9f27bbb17709ce31ab0bd7786b9f363b458f6e0ed2cfcbfe9a7a57834e8b",
+    "model_sha256": "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c",
+    "oracle_sha256": "0be29f474f3ef55ebc0096be2ef1e3d0b81bfa9278ca3ab6d90a7bbc2a215b83",
+    "version": "0.6.6",
+    "geometry_g": [
+      4
+    ]
+  },
+  {
+    "model": "tialv",
+    "source_sha256": "652218003294aa3a582ace53c86f8c90749e643e9027d4b99a06cadb50d1d277",
+    "model_sha256": "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7",
+    "oracle_sha256": "0810b9510f64b8636e94a5d5c0319ac3762f95ac14ffa9e73558629a13ee1953",
+    "version": "0.6.6",
+    "geometry_g": [
+      4
+    ]
+  }
+]

@@ -16,13 +16,18 @@ mutable struct SiteScratch{T}
     dV::Vector{T}
     polynomial::Matrix{T}
     reverse_polynomial::Matrix{T}
+    dag_values::Vector{T}
+    dag_adjoints::Vector{T}
 end
-function SiteScratch(model,capacity,::Type{T}) where T
+# Original array constructor: DAG storage grows once on first use, if needed.
+SiteScratch(args::Vararg{Any,15})=SiteScratch(args...,eltype(args[8])[],eltype(args[8])[])
+SiteScratch{T}(args::Vararg{Any,15}) where T=SiteScratch{T}(args...,T[],T[])
+function SiteScratch(model,capacity,::Type{T},plan=ProductDAG(model.products,length(model.density))) where T
     nr=length(model.radial_spec); nq=length(model.pair_spec); ny=(model.lmax+1)^2
     SiteScratch(zeros(SVector{3,T},capacity),zeros(T,capacity,nr),zeros(T,capacity,nr),
         zeros(T,capacity,nq),zeros(T,capacity,nq),zeros(T,capacity,ny),zeros(SVector{3,T},capacity,ny),
         zeros(T,length(model.density)),zeros(T,length(model.products)),zeros(T,length(model.density)),zeros(T,length(model.density)),zeros(T,length(model.density)),
-        zeros(T,length(model.density)),projection_work(model,T)...)
+        zeros(T,length(model.density)),projection_work(model,T)...,zeros(T,plan.nleaves+length(plan.left)),zeros(T,plan.nleaves+length(plan.left)))
 end
 struct PreparedACE{M,B,C,W}
     model::M
@@ -31,8 +36,10 @@ struct PreparedACE{M,B,C,W}
     simd::Bool
     fused::Bool
     product_algorithm::Symbol
+    product_plan::ProductDAG
 end
-# Preserve the original explicit prepared constructor.
+# Preserve both original explicit prepared constructors.
+PreparedACE{M,B,C,W}(m,b,c,simd,fused,algorithm) where {M,B,C,W}=PreparedACE{M,B,C,W}(m,b,c,simd,fused,check_product_algorithm(algorithm),ProductDAG(m.products,length(m.density)))
 PreparedACE{M,B,C,W}(m,b,c,simd,fused) where {M,B,C,W}=PreparedACE{M,B,C,W}(m,b,c,simd,fused,:auto)
 mutable struct CPUExecutor{T,B,M,R,S,P}
     model::M
@@ -61,9 +68,9 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
     NL.check_units(model)
     basis=make_angular(model,precision,angular_backend,env.width)
     T=precision
-    scratch=[NI.make_scratch(model,0,T) for _=1:slots]
     weights=zeros(T,length(model.products),length(model.atomic_numbers))
     prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false,product_algorithm)
+    scratch=[NI.make_scratch(prepared,0,T) for _=1:slots]
     w=CPUExecutor(model,env,basis,scratch,zeros(T,3,0),Int[],Int[],
         weights,T[],zeros(T,9,0),0,UInt(0),
         zeros(promote_type(T,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector(),NL.site_slots(scratch,0,batch_size,T),Int(batch_size),prepared)
@@ -71,11 +78,12 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
 end
 function prepare_executor!(w::CPUExecutor{T},env) where T
     env.width==prepared_width(w.prepared) || throw(ArgumentError("prepare a new executor for a changed layout width"))
+    check_product_topology(w.prepared.product_plan,w.model)
     w.environment=env; n=length(env.species)
     capacity=maximum((env.offsets[end,i]-env.offsets[1,i] for i=1:n);init=0)
     if capacity>w.capacity
         w.capacity=max(capacity,2w.capacity)
-        for k in eachindex(w.scratch); w.scratch[k]=SiteScratch(w.model,w.capacity,T); end
+        for k in eachindex(w.scratch); w.scratch[k]=SiteScratch(w.model,w.capacity,T,w.prepared.product_plan); end
     end
     w.p=sortperm(env.species); resize!(w.inverse,n)
     for k in eachindex(w.p); w.inverse[w.p[k]]=k; end
@@ -207,7 +215,13 @@ function NI.evaluate_site!(out,p::PreparedACE{M,B,C,W},site,ps,s::SiteScratch{T}
         end
     end
     energy=T(reference_value(model,iz))
-    prepared_products!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial,p.product_algorithm)
+    # Compatibility scratch may predate the DAG fields; grow outside its kernel.
+    if p.product_algorithm===:dag && isnothing(model.policy.orders)
+        nodes=p.product_plan.nleaves+length(p.product_plan.left)
+        length(s.dag_values)==nodes || resize!(s.dag_values,nodes)
+        length(s.dag_adjoints)==nodes || resize!(s.dag_adjoints,nodes)
+    end
+    prepared_products!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial,p.product_algorithm,p.product_plan,s.dag_values,s.dag_adjoints)
     for k in eachindex(s.P); energy+=p.weights[k,iz]*s.P[k]; end
     for j=1:count,n=1:size(s.Q,2); energy+=s.Q[j,n]*ps.Wpair[n,iz]; end
     NL.wants(AC.Energy,props) && NI.set_energy!(out,energy)
@@ -227,7 +241,7 @@ end
 
 # Compatibility helper for existing site-footprint diagnostics.
 function cpu_site!(w::CPUExecutor,s::SiteScratch,i,X,H,ps,::Val{W},simd,fused=false) where W
-    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused,w.prepared.product_algorithm)
+    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused,w.prepared.product_algorithm,w.prepared.product_plan)
     site=NL.SiteView(w.environment,X,H,i); out=w.slots[1].outputs[1]
     props=(AC.Energy(),AC.Forces(),AC.Virial())
     NI.evaluate_site!(out,p,site,ps,s,props)
@@ -241,6 +255,7 @@ Scratch is exclusive per slot; phases advertise complete endpoint footprints.
 """
 function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,product_algorithm=w.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()))
     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
+    check_product_topology(w.prepared.product_plan,w.model)
     env=w.environment
     env.version==w.environment_version || throw(ArgumentError("prepare executor after rebuilding the environment"))
     length(env.species)==length(w.p) || throw(ArgumentError("prepare executor after environment changes"))
@@ -256,7 +271,7 @@ function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,f
     mul!(w.weights,transpose(w.model.coupling),w.readout)
     props=NL.normalize_properties(properties)
     env.width==prepared_width(w.prepared) || throw(ArgumentError("stale layout width"))
-    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused,check_product_algorithm(product_algorithm))
+    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused,check_product_algorithm(product_algorithm),w.prepared.product_plan)
     NL.execute_sites!(w.force,w.inverse,w.energies,w.virials,env,selected,selected_mask,w.slots,p,X,H,ps,props,w.batch_size;parallel)
 
     w
@@ -303,7 +318,7 @@ NI.evaluation_kind(::ResolvedModel)=:site
 NI.species_channels(m::ResolvedModel)=ChemicalSpecies.(m.atomic_numbers)
 NI.search_cutoff(m::ResolvedModel)=maximum(radial_cutoff(ch) for family in (m.radial,m.pair_radial) for ch in family)
 NI.make_scratch(m::ResolvedModel,capacity,::Type{T}) where T=SiteScratch(m,capacity,T)
-NI.make_scratch(p::PreparedACE,capacity,::Type{T}) where T=SiteScratch(p.model,capacity,T)
+NI.make_scratch(p::PreparedACE,capacity,::Type{T}) where T=SiteScratch(p.model,capacity,T,p.product_plan)
 function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1,angular_backend=:sphericart,simd=true,fused=false,product_algorithm=:auto,kwargs...)
     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
     width in (1,2,4,8,16) || throw(ArgumentError("unsupported environment width"))
@@ -316,6 +331,7 @@ function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1
     PreparedACE{typeof(m),typeof(basis),typeof(weights),width}(m,basis,weights,simd,fused,check_product_algorithm(product_algorithm))
 end
 function NI.update_prepared!(p::PreparedACE,ps)
+    check_product_topology(p.product_plan,p.model)
     readout=ps.WB .* collect(Bool,p.model.policy.mask)
     mul!(p.weights,transpose(p.model.coupling),readout)
     p

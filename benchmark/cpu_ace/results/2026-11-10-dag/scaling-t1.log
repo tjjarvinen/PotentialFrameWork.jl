@@ -1,0 +1,4 @@
+small-tial 1024 Float64 optimized prepared=0.0109888795 public=0.025923313000000003
+small-tial 1024 Float64 dag prepared=0.010205257 public=0.024994299500000004
+large-tial 1024 Float64 optimized prepared=0.13953676050000002 public=0.15557235800000002
+large-tial 1024 Float64 dag prepared=0.06852333050000001 public=0.083533429

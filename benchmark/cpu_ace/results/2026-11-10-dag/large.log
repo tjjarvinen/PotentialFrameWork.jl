@@ -1,0 +1,8 @@
+small-tial 11664 Float64 optimized prepared=0.121379235 public=0.3133532135
+small-tial 11664 Float64 dag prepared=0.115235273 public=0.3133489085
+small-tial 11664 Float32 optimized prepared=0.11343439150000001 public=0.1455684815
+small-tial 11664 Float32 dag prepared=0.10680017250000001 public=0.13949685
+large-tial 11664 Float64 optimized prepared=1.6630121255 public=1.8452748445
+large-tial 11664 Float64 dag prepared=0.775673405 public=0.9751391255000001
+large-tial 11664 Float32 optimized prepared=1.5909939130000001 public=1.5964333725000002
+large-tial 11664 Float32 dag prepared=0.7373864080000001 public=0.7799882305000001

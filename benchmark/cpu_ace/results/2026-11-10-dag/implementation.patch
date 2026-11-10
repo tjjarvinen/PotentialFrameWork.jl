@@ -1,0 +1,561 @@
+diff --git a/benchmark/cpu_ace/README.md b/benchmark/cpu_ace/README.md
+index a370e92..b0f8990 100644
+--- a/benchmark/cpu_ace/README.md
++++ b/benchmark/cpu_ace/README.md
+@@ -1,6 +1,11 @@
+-# CPU ACE optimization stage 1
++# CPU ACE benchmarks
+ 
+-Measured results and limitations: [stage-one report](REPORT.md).
++Measured results and limitations: [stage-one report](REPORT.md) and
++[CPU product DAG report](DAG-REPORT.md).
++
++The DAG comparison uses `dag.jl`; its fixed settings, immutable stage-one
++baseline, exact sequential commands, raw observations and environment snapshots
++are in [DAG reproduction](results/2026-11-10-dag/REPRODUCE.md).
+ 
+ `run.jl` is CPU only. It imports no vendor package and needs no GPU device.
+ `quick` covers all model/precision combinations at 128 atoms plus small TiAl at
+@@ -85,14 +90,24 @@ optimization does not imply faster AD or features.
+ 
+ `CPUExecutor(...; product_algorithm=:auto)`, `ACECalculator(...; product_algorithm=...)`,
+ `execute_prepared!(...; product_algorithm=...)`, public calculator combined calls
+-and `NeighbourInterface.prepare_potential` accept `:reference`, `:optimized`, or
+-`:auto`. `:reference` always uses the original polynomial algorithm. Both other
+-choices use prefix/reverse products **only when `policy.orders === nothing`**;
++and `NeighbourInterface.prepare_potential` accept `:reference`, `:optimized`, `:dag`, or
++`:auto`. `:reference` always uses the original polynomial algorithm. `:optimized` and `:auto`
++use prefix/reverse products; `:dag` uses a deterministic shared product graph.
++These unrestricted algorithms apply **only when `policy.orders === nothing`**;
+ restricted policies always fall back to polynomial projection, even when selected
+ density happens to be zero. Nonempty unrestricted species partitions are valid.
+ Weights refresh on every execution. Functional AD, energy-only calculator calls,
+ and equivariant features keep their existing algorithms and lifetime semantics.
+-The existing five-argument explicitly typed PreparedACE constructor remains valid.
++The existing five- and six-argument explicitly typed PreparedACE constructors
++remain valid. `ACE.effective_product_algorithm(requested, model.policy.orders)`
++reports the effective prepared product path. Auto stays on prefix/reverse.
++Graphs depend only on original product structure and density indices, never
++weights, and belong to preparation. Prepared model structure is immutable;
++changed topology requires a new prepared potential/executor. Each slot owns its
++DAG values and adjoints, with polynomial fallback scratch retained. Ordinary
++calculator reuse retains the graph; fresh calculator construction builds it.
++Functional AD and features continue to use polynomial projection; the mutable
++DAG inference reverse supplies density adjoints for forces/virial only.
+ 
+ ## Legacy and PACE
+ 
+diff --git a/benchmark/cpu_ace/common.jl b/benchmark/cpu_ace/common.jl
+index b75e162..ad1718b 100644
+--- a/benchmark/cpu_ace/common.jl
++++ b/benchmark/cpu_ace/common.jl
+@@ -46,10 +46,10 @@ function diagnostics(w,X,H,ps,algorithm,samples,seconds,codepath)
+     m=w.model; s=w.scratch[1]; env=w.environment; site=NL.SiteView(env,X,H,1)
+     n=A.NI.neighbour_count(site); iz=A.NI.central_species(site)
+     props=(AC.Energy(),AC.Forces(),AC.Virial()); out=w.slots[1].outputs[1]
+-    p=typeof(w.prepared)(m,w.basis,w.weights,true,false,algorithm)
++    p=typeof(w.prepared)(m,w.basis,w.weights,true,false,algorithm,w.prepared.product_plan)
+     A.NI.evaluate_site!(out,p,site,ps,s,props)
+     # Capture first-site rather than last-site density state.
+-    productargs=(s.P,s.dA,s.dV,s.U,s.V,m.products,view(w.weights,:,iz),m.policy.orders,s.polynomial,s.reverse_polynomial,algorithm)
++    productargs=(s.P,s.dA,s.dV,s.U,s.V,m.products,view(w.weights,:,iz),m.policy.orders,s.polynomial,s.reverse_polynomial,algorithm,w.prepared.product_plan,s.dag_values,s.dag_adjoints)
+     jobs=Pair{String,Any}[
+         "geometry_radii"=>(() -> [norm(A.NI.displacement(site,j)) for j=1:n]),
+         "angular"=>(() -> A.angular_ed!(view(s.Y,1:n,:),view(s.dY,1:n,:),w.basis,view(s.Rs,1:n))),
+@@ -90,6 +90,10 @@ function diagnostics(w,X,H,ps,algorithm,samples,seconds,codepath)
+             A.NI.set_gradient!(out,j,g)
+         end
+     end))
++    if A.effective_product_algorithm(algorithm,m.policy.orders)===:dag
++        push!(jobs,"dag_forward"=>(() -> A.dag_forward!(s.P,s.U,s.V,p.product_plan,s.dag_values)))
++        push!(jobs,"dag_reverse"=>(() -> A.dag_reverse!(s.dA,s.dV,view(w.weights,:,iz),p.product_plan,s.dag_values,s.dag_adjoints)))
++    end
+     results=Dict{String,Any}()
+     for (name,f) in jobs
+         A.NI.evaluate_site!(out,p,site,ps,s,props)
+@@ -101,6 +105,7 @@ function diagnostics(w,X,H,ps,algorithm,samples,seconds,codepath)
+         args=(s.R,s.dR,ntuple(_->eltype(X)(2.3),W),ch,1,Val(W),ntuple(_->true,W),A.radial_parameters(ps,:custom_radial))
+         for (name,f,args) in (("radial",A.radial_block!,args),("products_dispatch",A.prepared_products!,productargs),
+                 ("products_unrestricted",A.unrestricted_products!,(productargs[1:7]...,s.polynomial)),
++                ("products_dag",A.dag_products!,(s.P,s.dA,s.dV,s.U,s.V,view(w.weights,:,iz),p.product_plan,s.dag_values,s.dag_adjoints)),
+                 ("products_reference",A.product_projection!,productargs[1:10]),("site",A.NI.evaluate_site!,(out,p,site,ps,s,props)))
+             open(joinpath(codepath,name*".llvm.txt"),"w") do io; code_llvm(io,f,typeof(args)); end
+             open(joinpath(codepath,name*".native.txt"),"w") do io; code_native(io,f,typeof(args)); end
+diff --git a/docs/implementation/STATUS.md b/docs/implementation/STATUS.md
+index c4a2233..a7d0055 100644
+--- a/docs/implementation/STATUS.md
++++ b/docs/implementation/STATUS.md
+@@ -1,5 +1,85 @@
+ # Implementation status
+ 
++## CPU ACE product DAG (2026-11-10)
++
++Completed the supplied `CPU-ACE-Product-DAG-Codex-Instructions.md` scope from
++`4985499b6eb12421f512c3cb9d27671e5f76ec9b`. Tracked starting source was clean;
++the supplied untracked instructions were preserved with the immutable source
++archive identity. Historical stage-one results, reference inputs, model/oracle
++caches and pinned manifests are unchanged. No agents were delegated.
++
++Prepared scalar CPU ACE now accepts `product_algorithm=:dag` alongside preserved
++`:reference`, `:optimized` and `:auto` behavior. A deterministic canonical-prefix
++plan shares scalar products and reverses weighted terminal seeds additively,
++preserving every original coordinate, repeated factors, zero factors and weights.
++One parameter-independent plan is shared read-only; numerical node values and
++adjoints belong to exclusive scratch slots. Coefficients/masks refresh weights
++without rebuilding the plan; structural snapshots reject stale product topology.
++CPUExecutor and generic NeighbourInterface preparation, growth and legacy
++constructors are covered. Restricted-order requests retain polynomial fallback;
++`ACE.effective_product_algorithm` reports the prepared effective path.
++
++Auto stays on prefix/reverse. Functional AD and equivariant features retain
++polynomial projection and their existing derivative rules; this mutation path
++adds no AD claim. Radial/SIMD defaults, neighborhoods, scheduler, one shared force
++array, units, model/checkpoint coordinates and GPU execution are unchanged.
++
++Validation: **56,658 assertions / 62 testsets pass per full process**, Julia
++**1.13.3 and 1.10.12**, four threads (2,065 added assertions). Focused DAG checks
++pass 2,700 assertions; optional ACEfit 0.3.1 passes four, and CPU-only loading
++passes with vendor/angular/plot extensions absent. Force/strain differences keep
++2e-7 tolerance at h=1e-5; product/weighted-adjoint tolerances are unchanged.
++Repeated inputs/weights/algorithms, zeros/repeats/shared descendants, nonzero U/V,
++pruning, custom radials, growth, constructor compatibility, center selection,
++generic batching and existing AD/geometry/lifetime/equivariance regressions pass.
++Direct full-model comparisons against immutable stage-one output pass **72 cases**
++across all fixtures, both precisions, 128/1,024 and selected 11,664-atom cases.
++Existing prefix outputs are identical. DAG maximum force/virial disagreement is
++2.504e-14 / 1.819e-11 in Float64 and 1.336e-5 / 0.00390625 in Float32, in eV/Å
++and eV respectively. Independent modern/legacy cached oracles pass where available;
++legacy independent caches cover 128 atoms only. Explicit arbitrary-order
++reassociation errors and Float32 application sensitivities are recorded.
++
++On Ryzen 9 9950X, Julia 1.13.3, pinned cores and BLAS=1, **612 sequential
++BenchmarkTools trials all reached ten warmed samples**. The grid covers all five
++fixtures at 128/1,024 atoms in both precisions, small/large modern 11,664-atom
++cases in both precisions, real-site product/forward/reverse/readout diagnostics,
++prepared/public/fresh-calculator calls, immutable stage-one comparisons and
++1/4/16-core scaling. Width 4, fusion off and SpheriCart are fixed.
++
++Large TiAl Float64 at 1,024 atoms improves prefix → DAG **139.909 → 68.453 ms
++prepared (2.04×)** and **155.992 → 83.257 ms public (1.87×)**; at 11,664,
++**1,663.012 → 775.673 ms prepared (2.14×)** and **1,845.275 → 975.139 ms public
++(1.89×)**. Small/medium prepared gains are about 5–7%; small TiAl Float64 public
++at 11,664 is effectively unchanged. Small-model parallel public medians slightly
++regress within observed variation. Large TiAl 1,024 prepared gains at 1/4/16 cores
++are 2.04× / 1.54× / 1.83×; small parallel cases are noisy. Shared integration raises
++fresh prefix-calculator costs versus immutable stage one; these are reported,
++not hidden in same-checkout speedups. No universal Float32/parallel gain is claimed.
++
++Serial warmed numerical execution allocates zero host bytes in every measured
++main/large case. Large TiAl has 16,229 multiply nodes / 13,919 output coordinates;
++plan-array payload is 771,656 bytes, Float64 DAG scratch 262,304 bytes per slot,
++retained polynomial tables 400 bytes and total slot scratch 484,368 bytes at
++128/1,024 atoms. Sixteen slots use 7,749,888 scratch bytes plus the single 24,576-byte
++shared force array at 1,024 atoms; parallel scheduling still allocates. Plan build
++is 1.149 ms / 7,333,584 allocated bytes. All model/type counts and constructor costs
++are retained separately from host allocation volume and allocator peaks.
++Concrete forward/reverse callees show no observed Float32 widening or direct
++allocator calls, and six warmed callee probes allocate zero bytes. Index checks
++remain. `perf` is absent; no cache/bandwidth saturation claim is made. Portable
++KA CPU regression tests pass; real GPUs and optional UnicodePlots were not rerun.
++
++Report and review recommendation: `benchmark/cpu_ace/DAG-REPORT.md` (linked from
++benchmark README). Exact commands, manifests, source/model/geometry hashes, raw
++TOML/JSON, immutable output comparisons, reassociation evidence, profiles and code
++inspection are under `benchmark/cpu_ace/results/2026-11-10-dag/`; reproduce with
++`commands.sh` then `complete-validation.sh`, and the two full-suite commands in
++`REPRODUCE.md`. The measured next review is large-model DAG reverse/indexing;
++small-model public preparation is a distinct issue. Scalar sharing does not
++establish MACE tensor, training AD or GPU speedups. No subsequent optimization
++stage was implemented.
++
+ ## CPU ACE optimization stage 1 (2026-11-10)
+ 
+ Completed the stage-one implementation from the supplied instructions on
+diff --git a/src/submodules/ACE/cpu.jl b/src/submodules/ACE/cpu.jl
+index fc2213a..d920c2f 100644
+--- a/src/submodules/ACE/cpu.jl
++++ b/src/submodules/ACE/cpu.jl
+@@ -16,13 +16,18 @@ mutable struct SiteScratch{T}
+     dV::Vector{T}
+     polynomial::Matrix{T}
+     reverse_polynomial::Matrix{T}
++    dag_values::Vector{T}
++    dag_adjoints::Vector{T}
+ end
+-function SiteScratch(model,capacity,::Type{T}) where T
++# Original array constructor: DAG storage grows once on first use, if needed.
++SiteScratch(args::Vararg{Any,15})=SiteScratch(args...,eltype(args[8])[],eltype(args[8])[])
++SiteScratch{T}(args::Vararg{Any,15}) where T=SiteScratch{T}(args...,T[],T[])
++function SiteScratch(model,capacity,::Type{T},plan=ProductDAG(model.products,length(model.density))) where T
+     nr=length(model.radial_spec); nq=length(model.pair_spec); ny=(model.lmax+1)^2
+     SiteScratch(zeros(SVector{3,T},capacity),zeros(T,capacity,nr),zeros(T,capacity,nr),
+         zeros(T,capacity,nq),zeros(T,capacity,nq),zeros(T,capacity,ny),zeros(SVector{3,T},capacity,ny),
+         zeros(T,length(model.density)),zeros(T,length(model.products)),zeros(T,length(model.density)),zeros(T,length(model.density)),zeros(T,length(model.density)),
+-        zeros(T,length(model.density)),projection_work(model,T)...)
++        zeros(T,length(model.density)),projection_work(model,T)...,zeros(T,plan.nleaves+length(plan.left)),zeros(T,plan.nleaves+length(plan.left)))
+ end
+ struct PreparedACE{M,B,C,W}
+     model::M
+@@ -31,8 +36,10 @@ struct PreparedACE{M,B,C,W}
+     simd::Bool
+     fused::Bool
+     product_algorithm::Symbol
++    product_plan::ProductDAG
+ end
+-# Preserve the original explicit prepared constructor.
++# Preserve both original explicit prepared constructors.
++PreparedACE{M,B,C,W}(m,b,c,simd,fused,algorithm) where {M,B,C,W}=PreparedACE{M,B,C,W}(m,b,c,simd,fused,check_product_algorithm(algorithm),ProductDAG(m.products,length(m.density)))
+ PreparedACE{M,B,C,W}(m,b,c,simd,fused) where {M,B,C,W}=PreparedACE{M,B,C,W}(m,b,c,simd,fused,:auto)
+ mutable struct CPUExecutor{T,B,M,R,S,P}
+     model::M
+@@ -61,9 +68,9 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
+     NL.check_units(model)
+     basis=make_angular(model,precision,angular_backend,env.width)
+     T=precision
+-    scratch=[NI.make_scratch(model,0,T) for _=1:slots]
+     weights=zeros(T,length(model.products),length(model.atomic_numbers))
+     prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false,product_algorithm)
++    scratch=[NI.make_scratch(prepared,0,T) for _=1:slots]
+     w=CPUExecutor(model,env,basis,scratch,zeros(T,3,0),Int[],Int[],
+         weights,T[],zeros(T,9,0),0,UInt(0),
+         zeros(promote_type(T,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector(),NL.site_slots(scratch,0,batch_size,T),Int(batch_size),prepared)
+@@ -71,11 +78,12 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
+ end
+ function prepare_executor!(w::CPUExecutor{T},env) where T
+     env.width==prepared_width(w.prepared) || throw(ArgumentError("prepare a new executor for a changed layout width"))
++    check_product_topology(w.prepared.product_plan,w.model)
+     w.environment=env; n=length(env.species)
+     capacity=maximum((env.offsets[end,i]-env.offsets[1,i] for i=1:n);init=0)
+     if capacity>w.capacity
+         w.capacity=max(capacity,2w.capacity)
+-        for k in eachindex(w.scratch); w.scratch[k]=SiteScratch(w.model,w.capacity,T); end
++        for k in eachindex(w.scratch); w.scratch[k]=SiteScratch(w.model,w.capacity,T,w.prepared.product_plan); end
+     end
+     w.p=sortperm(env.species); resize!(w.inverse,n)
+     for k in eachindex(w.p); w.inverse[w.p[k]]=k; end
+@@ -207,7 +215,13 @@ function NI.evaluate_site!(out,p::PreparedACE{M,B,C,W},site,ps,s::SiteScratch{T}
+         end
+     end
+     energy=T(reference_value(model,iz))
+-    prepared_products!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial,p.product_algorithm)
++    # Compatibility scratch may predate the DAG fields; grow outside its kernel.
++    if p.product_algorithm===:dag && isnothing(model.policy.orders)
++        nodes=p.product_plan.nleaves+length(p.product_plan.left)
++        length(s.dag_values)==nodes || resize!(s.dag_values,nodes)
++        length(s.dag_adjoints)==nodes || resize!(s.dag_adjoints,nodes)
++    end
++    prepared_products!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial,p.product_algorithm,p.product_plan,s.dag_values,s.dag_adjoints)
+     for k in eachindex(s.P); energy+=p.weights[k,iz]*s.P[k]; end
+     for j=1:count,n=1:size(s.Q,2); energy+=s.Q[j,n]*ps.Wpair[n,iz]; end
+     NL.wants(AC.Energy,props) && NI.set_energy!(out,energy)
+@@ -227,7 +241,7 @@ end
+ 
+ # Compatibility helper for existing site-footprint diagnostics.
+ function cpu_site!(w::CPUExecutor,s::SiteScratch,i,X,H,ps,::Val{W},simd,fused=false) where W
+-    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused,w.prepared.product_algorithm)
++    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused,w.prepared.product_algorithm,w.prepared.product_plan)
+     site=NL.SiteView(w.environment,X,H,i); out=w.slots[1].outputs[1]
+     props=(AC.Energy(),AC.Forces(),AC.Virial())
+     NI.evaluate_site!(out,p,site,ps,s,props)
+@@ -241,6 +255,7 @@ Scratch is exclusive per slot; phases advertise complete endpoint footprints.
+ """
+ function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,product_algorithm=w.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()))
+     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
++    check_product_topology(w.prepared.product_plan,w.model)
+     env=w.environment
+     env.version==w.environment_version || throw(ArgumentError("prepare executor after rebuilding the environment"))
+     length(env.species)==length(w.p) || throw(ArgumentError("prepare executor after environment changes"))
+@@ -256,7 +271,7 @@ function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,f
+     mul!(w.weights,transpose(w.model.coupling),w.readout)
+     props=NL.normalize_properties(properties)
+     env.width==prepared_width(w.prepared) || throw(ArgumentError("stale layout width"))
+-    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused,check_product_algorithm(product_algorithm))
++    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused,check_product_algorithm(product_algorithm),w.prepared.product_plan)
+     NL.execute_sites!(w.force,w.inverse,w.energies,w.virials,env,selected,selected_mask,w.slots,p,X,H,ps,props,w.batch_size;parallel)
+ 
+     w
+@@ -303,7 +318,7 @@ NI.evaluation_kind(::ResolvedModel)=:site
+ NI.species_channels(m::ResolvedModel)=ChemicalSpecies.(m.atomic_numbers)
+ NI.search_cutoff(m::ResolvedModel)=maximum(radial_cutoff(ch) for family in (m.radial,m.pair_radial) for ch in family)
+ NI.make_scratch(m::ResolvedModel,capacity,::Type{T}) where T=SiteScratch(m,capacity,T)
+-NI.make_scratch(p::PreparedACE,capacity,::Type{T}) where T=SiteScratch(p.model,capacity,T)
++NI.make_scratch(p::PreparedACE,capacity,::Type{T}) where T=SiteScratch(p.model,capacity,T,p.product_plan)
+ function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1,angular_backend=:sphericart,simd=true,fused=false,product_algorithm=:auto,kwargs...)
+     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
+     width in (1,2,4,8,16) || throw(ArgumentError("unsupported environment width"))
+@@ -316,6 +331,7 @@ function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1
+     PreparedACE{typeof(m),typeof(basis),typeof(weights),width}(m,basis,weights,simd,fused,check_product_algorithm(product_algorithm))
+ end
+ function NI.update_prepared!(p::PreparedACE,ps)
++    check_product_topology(p.product_plan,p.model)
+     readout=ps.WB .* collect(Bool,p.model.policy.mask)
+     mul!(p.weights,transpose(p.model.coupling),readout)
+     p
+diff --git a/src/submodules/ACE/projection.jl b/src/submodules/ACE/projection.jl
+index ed5b0ce..7c9af74 100644
+--- a/src/submodules/ACE/projection.jl
++++ b/src/submodules/ACE/projection.jl
+@@ -55,12 +55,15 @@ function unrestricted_products!(P,dU,dV,U,V,products,weights,prefix)
+     nothing
+ end
+ function check_product_algorithm(algorithm)
+-    algorithm in (:auto,:reference,:optimized) ||
+-        throw(ArgumentError("product_algorithm must be :auto, :reference or :optimized"))
++    algorithm in (:auto,:reference,:optimized,:dag) ||
++        throw(ArgumentError("product_algorithm must be :auto, :reference, :optimized or :dag"))
+     algorithm
+ end
+-function prepared_products!(P,dU,dV,U,V,products,weights,orders,fwd,rev,algorithm)
+-    if algorithm!==:reference && isnothing(orders)
++function prepared_products!(P,dU,dV,U,V,products,weights,orders,fwd,rev,algorithm,plan=nothing,values=nothing,adjoints=nothing)
++    if algorithm===:dag && isnothing(orders)
++        isnothing(plan) && throw(ArgumentError(":dag requires a prepared ProductDAG"))
++        dag_products!(P,dU,dV,U,V,weights,plan,values,adjoints)
++    elseif algorithm!==:reference && isnothing(orders)
+         unrestricted_products!(P,dU,dV,U,V,products,weights,fwd)
+     else
+         product_projection!(P,dU,dV,U,V,products,weights,orders,fwd,rev)
+@@ -76,3 +79,74 @@ function density_reverse(model,weights,U,V)
+     product_projection!(P,dU,dV,U,V,model.products,weights,model.policy.orders,fwd,rev)
+     (;P,dU,dV)
+ end
++
++# Structural, parameter-independent prefix DAG. Leaves occupy 1:nleaves;
++# multiplication i occupies nleaves+i. Arrays are shared read-only by slots.
++# topology retains original ordering too: changing coordinates requires preparation.
++struct ProductDAG
++    nleaves::Int
++    left::Vector{Int}
++    right::Vector{Int}
++    terminals::Vector{Int}
++    topology::Vector{Vector{Int}}
++end
++function ProductDAG(products,nleaves::Integer)
++    nleaves>=0 || throw(ArgumentError("negative density count"))
++    left=Int[]; right=Int[]; terminals=Int[]
++    intern=Dict{Tuple{Int,Int},Int}()
++    for factors in products
++        isempty(factors) && throw(ArgumentError("empty ACE product factors are unsupported"))
++        all(a -> 1<=a<=nleaves,factors) || throw(ArgumentError("product density index out of bounds"))
++        indices=sort(collect(Int,factors))
++        node=first(indices)
++        for a in Iterators.drop(indices,1)
++            operands=minmax(node,a)
++            node=get!(intern,operands) do
++                push!(left,operands[1]); push!(right,operands[2])
++                Int(nleaves)+length(left)
++            end
++        end
++        push!(terminals,node)
++    end
++    ProductDAG(Int(nleaves),left,right,terminals,[collect(Int,p) for p in products])
++end
++function check_product_topology(plan::ProductDAG,model)
++    (plan.nleaves==length(model.density) && plan.topology==model.products) ||
++        throw(ArgumentError("ACE product topology changed; prepare a new potential/executor"))
++    nothing
++end
++# No division, fast-math, or bounds-check changes. Separate phases permit honest
++# diagnostics of the real production callees.
++function dag_forward!(P,U,V,plan::ProductDAG,values)
++    for a=1:plan.nleaves
++        values[a]=U[a]+V[a]
++    end
++    for i in eachindex(plan.left)
++        values[plan.nleaves+i]=values[plan.left[i]]*values[plan.right[i]]
++    end
++    for j in eachindex(plan.terminals)
++        P[j]=values[plan.terminals[j]]
++    end
++    nothing
++end
++function dag_reverse!(dU,dV,weights,plan::ProductDAG,values,adjoints)
++    fill!(adjoints,0)
++    for j in eachindex(plan.terminals)
++        adjoints[plan.terminals[j]]+=weights[j]
++    end
++    for i=length(plan.left):-1:1
++        l=plan.left[i]; r=plan.right[i]; g=adjoints[plan.nleaves+i]
++        adjoints[l]+=g*values[r]
++        adjoints[r]+=g*values[l]
++    end
++    for a=1:plan.nleaves
++        dU[a]=adjoints[a]; dV[a]=adjoints[a]
++    end
++    nothing
++end
++function dag_products!(P,dU,dV,U,V,weights,plan::ProductDAG,values,adjoints)
++    dag_forward!(P,U,V,plan,values)
++    dag_reverse!(dU,dV,weights,plan,values,adjoints)
++end
++# Report the path actually selected, including the restricted-policy fallback.
++effective_product_algorithm(algorithm,orders)=!isnothing(orders) || algorithm===:reference ? :reference : algorithm===:dag ? :dag : :optimized
+diff --git a/test/ace_products.jl b/test/ace_products.jl
+index b7e30c9..bca6c15 100644
+--- a/test/ace_products.jl
++++ b/test/ace_products.jl
+@@ -55,7 +55,7 @@
+         for params in (b.parameters,A.install_readout(b.parameters,.7A.linear_parameters(b.parameters))), centers in (nothing,[2])
+             A.execute_prepared!(w,input.positions,input.cell,params;product_algorithm=:reference,centers)
+             ref=A.prepared_result(w)
+-            for algorithm in (:optimized,:auto)
++            for algorithm in (:optimized,:auto,:dag)
+                 A.execute_prepared!(w,input.positions,input.cell,params;product_algorithm=algorithm,parallel=true,centers)
+                 r=A.prepared_result(w); tol=T===Float32 ? 3e-4 : 2e-10
+                 @test r.energy ≈ ref.energy atol=tol rtol=tol
+@@ -73,10 +73,10 @@ end
+     m,ps,_=A.load_resolved(ACE_MODEL_PATH); m=A.components(m;reference=false)
+     X=[.4 2.6 1.1;0. .2 2.8;0. .3 .1]
+     H=[16. .4 .1;0 17. .3;0 0 18.]
+-    for periodic in (false,true)
++    for periodic in (false,true), algorithm in (:optimized,:dag)
+         sys=TestSystem(X,H,(periodic,periodic,periodic),[:Ti,:Al,:Ti])
+         input=A.ace_inputs(sys,m;environment=A.FullEnvironment(width=4))
+-        w=A.CPUExecutor(m,input.environment;product_algorithm=:optimized)
++        w=A.CPUExecutor(m,input.environment;product_algorithm=algorithm)
+         evaluate(x,h)=begin
+             A.execute_prepared!(w,x,h,ps)
+             A.prepared_result(w)
+@@ -94,7 +94,7 @@ end
+             @test fd ≈ y.virial[a,b] atol=2e-7 rtol=2e-7
+         end
+         calc=A.ACECalculator(m,ps;product_algorithm=:reference)
+-        r=A.AC.energy_forces_virial(sys,calc;product_algorithm=:optimized)
++        r=A.AC.energy_forces_virial(sys,calc;product_algorithm=algorithm)
+         @test ustrip(u"eV",r.energy) ≈ y.energy atol=2e-10
+         @test reduce(hcat,[ustrip.(u"eV/Å",v) for v in r.forces]) ≈ y.forces atol=2e-10
+         @test ustrip.(u"eV",r.virial) ≈ y.virial atol=2e-10
+@@ -102,3 +102,133 @@ end
+         @test p.product_algorithm===:reference
+     end
+ end
++
++@testset "product DAG values, weighted reverse and structural lifetime" begin
++    A=ACECore
++    # Duplicate terminals, canonical reordering, outputs used internally, equal
++    # operands, repeated and unused leaves, every order through six.
++    products=[[2],[2,1],[1,2],[2,2],[2,1,3],[1,2,3,4],
++              [4,3,2,1,4],[2,1,2,3,4,4],[1,1],[1,1,1]]
++    plan=A.ProductDAG(products,5)
++    @test plan.terminals[2]==plan.terminals[3]
++    @test A.ProductDAG(products,5).left==plan.left
++    @test_throws ArgumentError A.ProductDAG([Int[]],5)
++    @test_throws ArgumentError A.ProductDAG([[0]],5)
++    for T in (Float32,Float64)
++        tol=T===Float32 ? 2e-5 : 3e-12
++        P=zeros(T,length(products)); dU=zeros(T,5); dV=similar(dU)
++        fwd=zeros(T,7,7); rev=similar(fwd)
++        values=zeros(T,5+length(plan.left)); adjoints=similar(values)
++        for u in ([.7,-.3,1.2,-.6,3.],[0.,-.3,1.2,.6,0.],[0.,0.,1.2,-.6,2.]),
++            v in (zeros(5),[.2,.3,-.4,.1,0.]), pass in 1:3
++            U=T.(u).*T(pass); V=T.(v)
++            weights=T[isodd(j+pass) ? 0 : sin(j)/pass for j in eachindex(products)]
++            expected=Tuple[]
++            for algorithm in (:reference,:optimized)
++                A.prepared_products!(P,dU,dV,U,V,products,weights,nothing,fwd,rev,algorithm)
++                push!(expected,(copy(P),copy(dU),copy(dV)))
++            end
++            fill!(values,T(NaN)); fill!(adjoints,T(NaN))
++            A.prepared_products!(P,dU,dV,U,V,products,weights,nothing,fwd,rev,:dag,plan,values,adjoints)
++            for reference in expected, (y,r) in zip((P,dU,dV),reference)
++                @test y ≈ r atol=tol rtol=tol
++            end
++            @test P ≈ [prod(U[a]+V[a] for a in ids) for ids in products] atol=tol rtol=tol
++            @test iszero(dU[5]) && iszero(dV[5])
++            loss(u,v)=sum(weights[j]*prod(u[a]+v[a] for a in ids) for (j,ids) in enumerate(products))
++            h=T===Float32 ? T(.002) : T(1e-5)
++            ftol=T===Float32 ? 2e-4 : 5e-8
++            for a in (1,2,4)
++                delta=zeros(T,5); delta[a]=h
++                @test dU[a] ≈ (loss(U+delta,V)-loss(U-delta,V))/(2h) atol=ftol rtol=ftol
++                @test dV[a] ≈ (loss(U,V+delta)-loss(U,V-delta))/(2h) atol=ftol rtol=ftol
++            end
++            for orders in (0:0,1:2,0:6)
++                A.product_projection!(P,dU,dV,U,V,products,weights,orders,fwd,rev)
++                reference=(copy(P),copy(dU),copy(dV))
++                A.prepared_products!(P,dU,dV,U,V,products,weights,orders,fwd,rev,:dag,plan,values,adjoints)
++                @test (P,dU,dV)==reference
++                @test A.effective_product_algorithm(:dag,orders)===:reference
++            end
++        end
++        emptyplan=A.ProductDAG(Vector{Int}[],5)
++        A.dag_products!(T[],dU,dV,ones(T,5),ones(T,5),T[],emptyplan,zeros(T,5),ones(T,5))
++        @test all(iszero,dU) && all(iszero,dV)
++    end
++    m,ps,_=A.load_resolved(ACE_MODEL_PATH)
++    sys=TestSystem([.1 2.3 1.1;.2 .7 2.4;.3 1.2 1.5],
++        [3.7 .7 .1;0 3.8 .3;0 0 3.6],(true,true,true),[:Ti,:Al,:Ti])
++    input=A.ace_inputs(sys,m;environment=A.FullEnvironment(width=4))
++    w=A.CPUExecutor(m,input.environment;product_algorithm=:dag,slots=2)
++    p=w.prepared; plan=p.product_plan
++    @test all(s->length(s.dag_values)==plan.nleaves+length(plan.left),w.scratch)
++    A.execute_prepared!(w,input.positions,input.cell,ps)
++    owning=A.prepared_result(w); saved=deepcopy(owning)
++    for algorithm in (:optimized,:dag,:reference,:dag)
++        A.execute_prepared!(w,input.positions,input.cell,ps;product_algorithm=algorithm)
++        @test A.prepared_result(w).forces ≈ saved.forces atol=2e-10 rtol=2e-10
++    end
++    @test owning==saved
++    @test w.prepared.product_plan===plan
++    legacy=A.PreparedACE{typeof(m),typeof(p.basis),typeof(p.weights),4}(m,p.basis,p.weights,true,false)
++    @test legacy.product_algorithm===:auto
++    legacy6=typeof(p)(m,p.basis,p.weights,true,false,:dag)
++    @test legacy6.product_plan.terminals==plan.terminals
++    legacy_s=A.SiteScratch((getfield(w.scratch[1],k) for k in 1:15)...)
++    site=A.NL.SiteView(input.environment,input.positions,input.cell,1)
++    A.NI.evaluate_site!(w.slots[1].outputs[1],p,site,ps,legacy_s,(A.AC.Energy(),A.AC.Forces(),A.AC.Virial()))
++    @test length(legacy_s.dag_values)==length(w.scratch[1].dag_values)
++    generic=A.NI.prepare_potential(m,[AtomsBase.species(sys,i) for i=1:length(sys)];width=4,product_algorithm=:dag)
++    A.NI.update_prepared!(generic,ps)
++    @test generic.product_algorithm===:dag
++    @test length(A.NI.make_scratch(generic,0,Float32).dag_values)==length(w.scratch[1].dag_values)
++    # A changed structural model gets a new plan; old prepared metadata rejects
++    # in-place mutation before execution rather than silently using stale nodes.
++    old=copy(m.products[1]); m.products[1][1]=mod1(old[1]+1,length(m.density))
++    @test_throws ArgumentError A.execute_prepared!(w,input.positions,input.cell,ps)
++    @test_throws ArgumentError A.prepare_executor!(w,input.environment)
++    @test_throws ArgumentError A.NI.update_prepared!(generic,ps)
++    m.products[1].=old
++end
++
++@testset "DAG prepared integration: pruning, custom radials, growth and batching" begin
++    A=ACECore; NL=A.NL
++    m,ps,_=A.load_resolved(ACE_MODEL_PATH)
++    selection=A.BasisSelection(m;indices=[1,4,9,17,33,57])
++    pruned=A.prune_basis(m,ps,selection)
++    empty=A.prune_basis(m,ps,A.BasisSelection(m;indices=Int[]))
++    metadata=A.RadialMetadata(m.radial_spec;cutoff=5.5,simd=true,ad=true,origin=:regular)
++    ch=A.CallableRadial(A.SmoothExponential(),metadata;config=(powers=[n-1 for (n,l) in m.radial_spec],cutoff=5.5))
++    custom=A.replace_radial(m,ps,fill(ch,2,2);parameters=(rate=[.7],amplitude=[.2]))
++    systems=(TestSystem(zeros(3,1),9Matrix{Float64}(I,3,3),(false,false,false),[:Ti]),
++        TestSystem([.1 2.3 1.1;.2 .7 2.4;.3 1.2 1.5],[3.7 .7 .1;0 3.8 .3;0 0 3.6],(true,true,true),[:Ti,:Al,:Ti]),
++        TestSystem([0. 2.5 15. 17.5 30. 32.5;zeros(2,6)],50Matrix{Float64}(I,3,3),(false,false,false),[:Ti,:Al,:Ti,:Al,:Ti,:Al]))
++    for bundle in ((model=m,parameters=ps),pruned,empty,custom), T in (Float32,Float64), width in (1,4)
++        b=A.adapt_model(bundle.model,bundle.parameters;precision=T)
++        env=A.FullEnvironment(;width); w=A.CPUExecutor(b.model,env;precision=T,slots=2,product_algorithm=:dag)
++        graph=w.prepared.product_plan
++        for sys in (systems...,systems[1],systems[2])
++            input=A.ace_inputs(sys,b.model;environment=env,precision=T)
++            A.prepare_executor!(w,env)
++            @test w.prepared.product_plan===graph
++            for simd in (false,true), centers in (nothing,[1])
++                expected=A.ace_evaluate(input.positions,b.model,b.parameters,env,input.cell;centers)
++                A.execute_prepared!(w,input.positions,input.cell,b.parameters;simd,centers,parallel=true)
++                y=A.prepared_result(w); tol=T===Float32 ? 3e-4 : 2e-10
++                @test y.energy ≈ expected.energy atol=tol rtol=tol
++                @test y.forces ≈ expected.forces atol=tol rtol=tol
++                @test y.virial ≈ expected.virial atol=tol rtol=tol
++            end
++        end
++        for batch_size in (1,2,4)
++            generic=NL.prepare_site_execution(b.model,systems[3];precision=T,width,slots=2,batch_size,product_algorithm=:dag)
++            NL.execute!(generic.execution,generic.positions,generic.cell,b.parameters;parallel=true)
++            y=NL.site_result(generic.execution)
++            expected=A.ace_evaluate(generic.positions,b.model,b.parameters,generic.execution.environment,generic.cell)
++            tol=T===Float32 ? 3e-4 : 2e-10
++            @test y.energy ≈ expected.energy atol=tol rtol=tol
++            @test y.forces ≈ expected.forces atol=tol rtol=tol
++            @test y.virial ≈ expected.virial atol=tol rtol=tol
++        end
++    end
++end

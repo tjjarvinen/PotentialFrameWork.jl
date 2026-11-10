@@ -1,0 +1,774 @@
+stageone_output_sha256 = "c7a9543f26007fbdb81f4e2354db8b36f7de30e11572df65d3b2ba780e317036"
+
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 4.884981308350689e-15
+    virial_max_eV = 1.1368683772161603e-13
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 2.3283064365386963e-6
+    virial_max_eV = 0.0001068115234375
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 5.190292640122607e-15
+    virial_max_eV = 1.3642420526593924e-12
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 2.734363079071045e-6
+    virial_max_eV = 0.000732421875
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 11664
+model = "small-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 5.551115123125783e-15
+    virial_max_eV = 1.8189894035458565e-11
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 11664
+model = "small-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 3.0249357223510742e-6
+    virial_max_eV = 0.00390625
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "medium-ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "medium-ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "medium-ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 2.1094237467877974e-15
+    virial_max_eV = 5.684341886080802e-14
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "medium-ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "medium-ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "medium-ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.3709068298339844e-6
+    virial_max_eV = 6.103515625e-5
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "medium-ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "medium-ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "medium-ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 3.219646771412954e-15
+    virial_max_eV = 4.547473508864641e-13
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "medium-ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "medium-ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "medium-ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.6391277313232422e-6
+    virial_max_eV = 0.000732421875
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 8.743006318923108e-16
+    virial_max_eV = 1.4210854715202004e-14
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 3.725290298461914e-7
+    virial_max_eV = 8.58306884765625e-6
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 8.604228440844963e-16
+    virial_max_eV = 4.263256414560601e-14
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 5.21540641784668e-7
+    virial_max_eV = 3.0517578125e-5
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 11664
+model = "large-tial"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.2420620087993939e-15
+    virial_max_eV = 1.1368683772161603e-12
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 11664
+model = "large-tial"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 6.109476089477539e-7
+    virial_max_eV = 0.0008544921875
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.9192980538207394e-14
+    virial_max_eV = 8.810729923425242e-13
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.1879950761795044e-5
+    virial_max_eV = 0.000335693359375
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "ti"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 2.5043335460939176e-14
+    virial_max_eV = 1.8189894035458565e-12
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "ti"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.2770295143127441e-5
+    virial_max_eV = 0.0032958984375
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "tialv"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "tialv"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "tialv"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.3405943022348765e-14
+    virial_max_eV = 2.5579538487363607e-13
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "tialv"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "tialv"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 128
+model = "tialv"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 9.566545486450195e-6
+    virial_max_eV = 0.0002593994140625
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "tialv"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "tialv"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "tialv"
+precision = "Float64"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 2.4771851236948805e-14
+    virial_max_eV = 9.094947017729282e-13
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "tialv"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "tialv"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+atoms = 1024
+model = "tialv"
+precision = "Float32"
+
+    [cases.stageone_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.3360753655433655e-5
+    virial_max_eV = 0.0013427734375
+
+[source_files_sha256]
+"Project.toml" = "33a6426b36e674445da502a3389bc8b13fdfc2cbcfea3f06b4b9b94afec2cea4"
+"benchmark/gpu_ace/audit.jl" = "843bb7ba4fbbff4a6b243bd68dac00e87973330d90794b130c04b000c2b95629"
+"benchmark/gpu_ace/run.jl" = "d7e8cef163e406c585e85795ace9348a4cabdaa4790ff5d2751f1063f3aff7ef"
+"benchmark/gpu_ace/suite.jl" = "3e0be5bf1d9ce2ec9684c9c63777d5570c734d2aa161e2ab5c753d92f652bacf"
+"benchmark/gpu_ace/workloads.jl" = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "796635c5d0bd81010bf00ff2b2c9d2285dbe1cd8cb96144607ec7f852c7d4950"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "87ba63c6cdf9c9c2bf5936277f4081129f3a499430e6529779ea5a99b1ad52e7"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "0c824742b9c91901b06e309a30f08694893f2c312614ac8567cffbe2038232e0"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "485461724ff67c4d2c994401eb447be818ac3bcf52fdba092f9fee27f73f5c3a"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "f380760ab5394ef6e0ef6c303013a04b155fbe00e5bc6c60a39487c67ca08a5f"
+"src/submodules/ACE/adaptation.jl" = "aec733e36b2c34fe3b729085f2ed3d8fa91f7486e8289b5614febc07cd869f80"
+"src/submodules/ACE/angular_blocks.jl" = "90dbee708364153a01433fba30c824cf1e3abf11d5da22debed3c1dabf80275b"
+"src/submodules/ACE/calculators.jl" = "4e2fbe75297e143dfeeda8aeaaaf0921a688ce55b5ea5056d096cc928d9cebc8"
+"src/submodules/ACE/cpu.jl" = "39b97b592e353f1bdfc94e47c4970ba6d55c9845c79e6bb68c67c76c1fc9cd1b"
+"src/submodules/ACE/environments.jl" = "647e6cbbfaf1016f6f6f7069d6f73c958a6b78c4c8cf786d429bb4f99f242ff3"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/features.jl" = "10f5fd604fb5bade29ea33aca88450bb0063bb5733e9a7ab358ad4f19b9093c0"
+"src/submodules/ACE/fitting.jl" = "c963538a24c56a0d1118ba0d07a0f1f4a740832b1b9a52683b6946f283c136fc"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "26cbb278ab48e68f5f47bc50241f99cb01bc85d62bbc2ad797aab5d5d897d9d6"
+"src/submodules/ACE/interface_persistence.jl" = "1bb98926435386695d0467a22efc9a7761fd37fda03857f00b29ff5083b15de4"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "88059d902b25cf0014a6b58253e301039f85dfababe9a4ff888601fed06895cf"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "85b6030cd4a0d31d333948b766b2b66c7d70a2e52d8dd545f1a93ab4d78a426a"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "479c23cf53244be1940b2c8a8d3ae7ab0c5bad9b42ebe4a83242fc9063597b84"
+"src/submodules/ACE/serial.jl" = "7e7b9c1616de672d40f308b46c36e9572cdd5655ffb6980fa57ad09328d85a44"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "ff2d999a047a766e1ebe60442d088080ad4ac72c856ad8b9091d3d94c302d0d8"
+"src/submodules/NeighbourList/NeighbourList.jl" = "9c2c264fcf017b913e959608d505b29acf2c86a95e7528f6524bada4284330ac"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"

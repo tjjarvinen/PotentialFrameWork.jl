@@ -46,10 +46,10 @@ function diagnostics(w,X,H,ps,algorithm,samples,seconds,codepath)
     m=w.model; s=w.scratch[1]; env=w.environment; site=NL.SiteView(env,X,H,1)
     n=A.NI.neighbour_count(site); iz=A.NI.central_species(site)
     props=(AC.Energy(),AC.Forces(),AC.Virial()); out=w.slots[1].outputs[1]
-    p=typeof(w.prepared)(m,w.basis,w.weights,true,false,algorithm)
+    p=typeof(w.prepared)(m,w.basis,w.weights,true,false,algorithm,w.prepared.product_plan)
     A.NI.evaluate_site!(out,p,site,ps,s,props)
     # Capture first-site rather than last-site density state.
-    productargs=(s.P,s.dA,s.dV,s.U,s.V,m.products,view(w.weights,:,iz),m.policy.orders,s.polynomial,s.reverse_polynomial,algorithm)
+    productargs=(s.P,s.dA,s.dV,s.U,s.V,m.products,view(w.weights,:,iz),m.policy.orders,s.polynomial,s.reverse_polynomial,algorithm,w.prepared.product_plan,s.dag_values,s.dag_adjoints)
     jobs=Pair{String,Any}[
         "geometry_radii"=>(() -> [norm(A.NI.displacement(site,j)) for j=1:n]),
         "angular"=>(() -> A.angular_ed!(view(s.Y,1:n,:),view(s.dY,1:n,:),w.basis,view(s.Rs,1:n))),
@@ -90,6 +90,10 @@ function diagnostics(w,X,H,ps,algorithm,samples,seconds,codepath)
             A.NI.set_gradient!(out,j,g)
         end
     end))
+    if A.effective_product_algorithm(algorithm,m.policy.orders)===:dag
+        push!(jobs,"dag_forward"=>(() -> A.dag_forward!(s.P,s.U,s.V,p.product_plan,s.dag_values)))
+        push!(jobs,"dag_reverse"=>(() -> A.dag_reverse!(s.dA,s.dV,view(w.weights,:,iz),p.product_plan,s.dag_values,s.dag_adjoints)))
+    end
     results=Dict{String,Any}()
     for (name,f) in jobs
         A.NI.evaluate_site!(out,p,site,ps,s,props)
@@ -101,6 +105,7 @@ function diagnostics(w,X,H,ps,algorithm,samples,seconds,codepath)
         args=(s.R,s.dR,ntuple(_->eltype(X)(2.3),W),ch,1,Val(W),ntuple(_->true,W),A.radial_parameters(ps,:custom_radial))
         for (name,f,args) in (("radial",A.radial_block!,args),("products_dispatch",A.prepared_products!,productargs),
                 ("products_unrestricted",A.unrestricted_products!,(productargs[1:7]...,s.polynomial)),
+                ("products_dag",A.dag_products!,(s.P,s.dA,s.dV,s.U,s.V,view(w.weights,:,iz),p.product_plan,s.dag_values,s.dag_adjoints)),
                 ("products_reference",A.product_projection!,productargs[1:10]),("site",A.NI.evaluate_site!,(out,p,site,ps,s,props)))
             open(joinpath(codepath,name*".llvm.txt"),"w") do io; code_llvm(io,f,typeof(args)); end
             open(joinpath(codepath,name*".native.txt"),"w") do io; code_native(io,f,typeof(args)); end

@@ -1,0 +1,35 @@
+julia = "1.13.3"
+script_sha256 = "3e4f16428fb87cc58b129daee68c19688be23ebfd3d4d38bec4627d57db403a2"
+
+[[cases]]
+P_dU_dV_max_abs = [1.9073486328125e-6, 4.76837158203125e-7, 4.76837158203125e-7]
+P_dU_dV_max_scaled_element_error = [0.006929643399857679, 0.005947143218389328, 0.005947143218389328]
+atol = 2.0e-5
+calls = 18
+comparison = "reference"
+precision = "Float32"
+rtol = 2.0e-5
+[[cases]]
+P_dU_dV_max_abs = [2.384185791015625e-7, 2.384185791015625e-7, 2.384185791015625e-7]
+P_dU_dV_max_scaled_element_error = [0.003486467103613967, 0.0032015420675584284, 0.0032015420675584284]
+atol = 2.0e-5
+calls = 18
+comparison = "optimized"
+precision = "Float32"
+rtol = 2.0e-5
+[[cases]]
+P_dU_dV_max_abs = [3.552713678800501e-15, 8.881784197001252e-16, 8.881784197001252e-16]
+P_dU_dV_max_scaled_element_error = [0.00010259248329512217, 6.90423272041407e-5, 6.90423272041407e-5]
+atol = 3.0e-12
+calls = 18
+comparison = "reference"
+precision = "Float64"
+rtol = 3.0e-12
+[[cases]]
+P_dU_dV_max_abs = [8.881784197001252e-16, 4.440892098500626e-16, 4.440892098500626e-16]
+P_dU_dV_max_scaled_element_error = [3.599944956631506e-5, 6.422450926315655e-5, 6.422450926315655e-5]
+atol = 3.0e-12
+calls = 18
+comparison = "optimized"
+precision = "Float64"
+rtol = 3.0e-12
