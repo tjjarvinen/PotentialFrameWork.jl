@@ -1,0 +1,14 @@
+
+This potential was saved with following versions:
+
+JuLIP v0.14.5
+ACEbase v0.4.3
+ACE1x v0.1.10
+ACE1 v0.12.0
+ACEmd v0.1.9
+ACEpotentials v0.6.6
+ACEfit v0.1.5
+
+If you have problems with using this potential, pin your installation to above versions.
+
+benchmark/cpu_ace/results/2026-11-10/models/tialv-resolved.toml densities=441 products=51379 PI coordinates=130755 radial errors=(6.128431095930864e-14, 1.0231815394945443e-12)

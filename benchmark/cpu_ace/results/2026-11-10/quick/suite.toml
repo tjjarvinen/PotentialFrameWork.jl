@@ -1,0 +1,27 @@
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset quick --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 5 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/quick/current-t1.toml --parallel false --historical false --diagnostics true --widths 4 --codegen /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/quick/codegen`"
+id = "current-t1"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/quick/current-t1.log"
+passed = true
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/quick/current-t1.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-baseline-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset quick --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 5 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/quick/historical-t1.toml --parallel false --historical true --diagnostics false --widths 4`"
+id = "historical-t1"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/quick/historical-t1.log"
+passed = true
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/quick/historical-t1.toml"
+
+[options]
+baseline-project = "/tmp/pfw-stage1-baseline-env"
+codegen = "true"
+data = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models"
+features = "false"
+models = "small-tial,medium-ti,large-tial"
+output = "benchmark/cpu_ace/results/2026-11-10/quick"
+preset = "quick"
+project = "/tmp/pfw-stage1-env"
+samples = "10"
+seconds = "5"
+sizes = ""
+threads = ""
+widths = "4"

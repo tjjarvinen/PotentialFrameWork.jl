@@ -1,0 +1,60 @@
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset full --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 60 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml --parallel false --historical false --diagnostics true --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final --sizes 8`"
+id = "current-t1"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.log"
+passed = true
+process_wall_s = 160.30903816223145
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-env --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset full --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 60 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml --parallel true --historical false --diagnostics false --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final --sizes 8`"
+id = "current-t4"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.log"
+passed = true
+process_wall_s = 58.52633714675903
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-env --threads=16 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset full --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 60 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml --parallel true --historical false --diagnostics false --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final --sizes 8`"
+id = "current-t16"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.log"
+passed = true
+process_wall_s = 50.64619207382202
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-baseline-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset full --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 60 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml --parallel false --historical true --diagnostics false --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final --sizes 8`"
+id = "historical-t1"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.log"
+passed = true
+process_wall_s = 100.90540409088135
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-baseline-env --threads=4 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset full --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 60 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml --parallel true --historical true --diagnostics false --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final --sizes 8`"
+id = "historical-t4"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.log"
+passed = true
+process_wall_s = 52.54508900642395
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-baseline-env --threads=16 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset full --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 60 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml --parallel true --historical true --diagnostics false --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final --sizes 8`"
+id = "historical-t16"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.log"
+passed = true
+process_wall_s = 42.06820201873779
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml"
+
+[options]
+baseline-project = "/tmp/pfw-stage1-baseline-env"
+codegen = "false"
+data = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models"
+features = "false"
+models = "small-tial,medium-ti,large-tial"
+oracle-data = "benchmark/cpu_ace/results/2026-11-10/oracles-final"
+output = "benchmark/cpu_ace/results/2026-11-10/full-1024"
+precisions = "Float64,Float32"
+preset = "full"
+profile = "false"
+project = "/tmp/pfw-stage1-env"
+samples = "10"
+seconds = "60"
+sizes = "8"
+threads = "1,4,16"
+widths = "4"

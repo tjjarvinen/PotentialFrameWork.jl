@@ -1,0 +1,15 @@
+Generating medium-ti
+medium-ti 128 atoms 2.597257 ms
+medium-ti 1024 atoms 21.4358265 ms
+medium-ti 11664 atoms 258.027399 ms
+Generating large-tial
+large-tial 128 atoms 14.8435535 ms
+large-tial 1024 atoms 129.324968 ms
+large-tial 11664 atoms 1450.455404 ms
+Generating small-tial
+small-tial 128 atoms 2.4405805 ms
+small-tial 1024 atoms 20.040242 ms
+small-tial 11664 atoms 239.9944225 ms
+[ Info: saving project
+[ Info: saving project
+[ Info: saving project

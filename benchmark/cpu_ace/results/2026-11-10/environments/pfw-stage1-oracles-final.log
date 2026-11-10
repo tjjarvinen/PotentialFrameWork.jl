@@ -1,0 +1,9 @@
+small-tial 128 2.362197 ms; 10 samples
+small-tial 1024 19.226438 ms; 10 samples
+small-tial 11664 232.7153595 ms; 10 samples
+medium-ti 128 2.5506155 ms; 10 samples
+medium-ti 1024 20.908218 ms; 10 samples
+medium-ti 11664 254.337425 ms; 10 samples
+large-tial 128 16.638052 ms; 10 samples
+large-tial 1024 122.9778025 ms; 10 samples
+large-tial 11664 1383.334726 ms; 10 samples

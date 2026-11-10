@@ -1,0 +1,2 @@
+1dfa10ca9a60d006e4364ed22133dd0d13d4c058efc8d09a3942b243c509b597  benchmark/cpu_ace/results/2026-11-10/implementation.patch
+95f77f4f5d6460a32112c05cad4f37f6a236d29d77acb482c410423c1942736d  benchmark/cpu_ace/results/2026-11-10/harness-and-new-tests.tar.gz

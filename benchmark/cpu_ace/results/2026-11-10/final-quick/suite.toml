@@ -1,0 +1,36 @@
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset quick --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 30 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml --parallel false --historical false --diagnostics true --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final --codegen /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/codegen --profile /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/profiles`"
+id = "current-t1"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.log"
+passed = true
+process_wall_s = 130.0754370689392
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-baseline-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/run.jl --preset quick --data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models --models small-tial,medium-ti,large-tial --samples 10 --seconds 30 --output /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml --parallel false --historical true --diagnostics false --widths 4 --precisions Float64,Float32 --oracle-data /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final`"
+id = "historical-t1"
+log = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.log"
+passed = true
+process_wall_s = 64.91268491744995
+report = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml"
+[[jobs]]
+command = "`/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/bin/julia -C native -J/var/home/teemu/.julia/juliaup/julia-1.13.3+0.x64.linux.gnu/lib/julia/sys.so -g1 --startup-file=no --project=/tmp/pfw-stage1-env --threads=1 /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/features.jl /mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/final-quick/features.toml 10 30`"
+id = "features"
+passed = true
+
+[options]
+baseline-project = "/tmp/pfw-stage1-baseline-env"
+codegen = "true"
+data = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models"
+features = "true"
+models = "small-tial,medium-ti,large-tial"
+oracle-data = "benchmark/cpu_ace/results/2026-11-10/oracles-final"
+output = "benchmark/cpu_ace/results/2026-11-10/final-quick"
+precisions = "Float64,Float32"
+preset = "quick"
+profile = "true"
+project = "/tmp/pfw-stage1-env"
+samples = "10"
+seconds = "30"
+sizes = ""
+threads = ""
+widths = "4"

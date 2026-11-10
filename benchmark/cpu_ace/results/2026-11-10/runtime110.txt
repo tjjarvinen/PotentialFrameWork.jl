@@ -1,0 +1,30 @@
+Julia Version 1.10.12
+Commit d93beab124c (2026-08-15 10:29 UTC)
+Build Info:
+  Official https://julialang.org/ release
+Platform Info:
+  OS: Linux (x86_64-linux-gnu)
+  uname: Linux 7.2.15-300.fc45.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Nov  1 16:11:16 UTC 2026 x86_64 unknown
+  CPU: AMD Ryzen 9 9950X 16-Core Processor: 
+                 speed         user         nice          sys         idle          irq
+       #1-32  5448 MHz      30538 s        901 s       1981 s     523147 s        285 s
+  Memory: 60.46729278564453 GB (49417.3671875 MB free)
+  Uptime: 1738.32 sec
+  Load Avg:  4.47  3.25  2.15
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-15.0.7 (ORCJIT, generic)
+Threads: 32 default, 0 interactive, 16 GC (on 32 virtual cores)
+Environment:
+  JULIA_DEPOT_PATH = /tmp/pfw-stage1-depot110:/var/home/teemu/.julia
+  JULIA_NUM_THREADS = auto
+  XDG_DATA_HOME = /var/home/teemu/.local/share
+  XDG_CONFIG_HOME = /var/home/teemu/.config
+  DISTROBOX_ENTER_PATH = /usr/bin/distrobox-enter
+  VSCODE_CODE_CACHE_PATH = /var/home/teemu/.config/Code/CachedData/6d62b1d5dace93a33b3a6d3eca1317bd5e15bcb1
+  HOME = /var/home/teemu
+  XDG_CACHE_HOME = /var/home/teemu/.cache
+  TERM = dumb
+  XDG_STATE_HOME = /var/home/teemu/.local/state
+  DEBUGINFOD_IMA_CERT_PATH = /etc/keys/ima:
+  PATH = /var/home/teemu/.codex/tmp/arg0-linux/codex-arg0q5Dxgn:/var/home/teemu/.local/share/../bin:/var/home/teemu/.juliaup/bin:/var/home/teemu/.local/bin:/var/home/teemu/bin:/usr/local/bin:/usr/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/bin:/var/home/teemu/.vscode/extensions/openai.chatgpt-26.1021.22027-linux-x64/bin/linux-x86_64

@@ -1,0 +1,4204 @@
+{
+  "schema": "PFW.CPUACE.Stage1.Summary.v1",
+  "baseline_commit": "ea076d3c18d5ae66776f1fa785e729f2eadfba54",
+  "baseline_archive_sha256": "9f4e36bbd310404dd1c8d6d9e365d1a1e24d546884e2fab88608db2d3dd519fd",
+  "production_source_sha256": {
+    "src/PotentialFrameWork.jl": "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28",
+    "src/submodules/NeighbourList/storage.jl": "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c",
+    "src/submodules/NeighbourList/geometry.jl": "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840",
+    "src/submodules/NeighbourList/interface.jl": "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665",
+    "src/submodules/NeighbourList/benchmarks.jl": "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b",
+    "src/submodules/NeighbourList/NeighbourList.jl": "9c2c264fcf017b913e959608d505b29acf2c86a95e7528f6524bada4284330ac",
+    "src/submodules/NeighbourList/environments.jl": "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f",
+    "src/submodules/NeighbourList/execution.jl": "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2",
+    "src/submodules/NeighbourList/gpu.jl": "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6",
+    "src/submodules/PairPotentials/models.jl": "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9",
+    "src/submodules/PairPotentials/evaluation.jl": "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca",
+    "src/submodules/PairPotentials/calculators.jl": "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46",
+    "src/submodules/PairPotentials/parameters.jl": "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174",
+    "src/submodules/PairPotentials/PairPotentials.jl": "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7",
+    "src/submodules/PairPotentials/numerical.jl": "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7",
+    "src/submodules/PairPotentials/gpu.jl": "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6",
+    "src/submodules/PairPotentials/lennard_jones.jl": "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916",
+    "src/submodules/ACE/ACE.jl": "f380760ab5394ef6e0ef6c303013a04b155fbe00e5bc6c60a39487c67ca08a5f",
+    "src/submodules/ACE/resolved.jl": "479c23cf53244be1940b2c8a8d3ae7ab0c5bad9b42ebe4a83242fc9063597b84",
+    "src/submodules/ACE/environments.jl": "647e6cbbfaf1016f6f6f7069d6f73c958a6b78c4c8cf786d429bb4f99f242ff3",
+    "src/submodules/ACE/serial.jl": "7e7b9c1616de672d40f308b46c36e9572cdd5655ffb6980fa57ad09328d85a44",
+    "src/submodules/ACE/calculators.jl": "4e2fbe75297e143dfeeda8aeaaaf0921a688ce55b5ea5056d096cc928d9cebc8",
+    "src/submodules/ACE/fitting.jl": "c963538a24c56a0d1118ba0d07a0f1f4a740832b1b9a52683b6946f283c136fc",
+    "src/submodules/ACE/cpu.jl": "9a79112552589b038a844d99b4a59df3fd968d596b14da51dfced2356466dbe4",
+    "src/submodules/ACE/angular_blocks.jl": "90dbee708364153a01433fba30c824cf1e3abf11d5da22debed3c1dabf80275b",
+    "src/submodules/ACE/persistence.jl": "88059d902b25cf0014a6b58253e301039f85dfababe9a4ff888601fed06895cf",
+    "src/submodules/ACE/interface.jl": "26cbb278ab48e68f5f47bc50241f99cb01bc85d62bbc2ad797aab5d5d897d9d6",
+    "src/submodules/ACE/radials.jl": "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361",
+    "src/submodules/ACE/projection.jl": "840da4418048f5ba443088036504f836a4e5984c2a9aaa2ed841f6929d1067fd",
+    "src/submodules/ACE/interface_persistence.jl": "1bb98926435386695d0467a22efc9a7761fd37fda03857f00b29ff5083b15de4",
+    "src/submodules/ACE/feature_coupling.jl": "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c",
+    "src/submodules/ACE/features.jl": "10f5fd604fb5bade29ea33aca88450bb0063bb5733e9a7ab358ad4f19b9093c0",
+    "src/submodules/ACE/adaptation.jl": "aec733e36b2c34fe3b729085f2ed3d8fa91f7486e8289b5614febc07cd869f80",
+    "src/submodules/ACE/gpu.jl": "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163",
+    "src/submodules/ACE/precision.jl": "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86",
+    "src/submodules/ACE/legacy_radial.jl": "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa",
+    "src/submodules/NeighbourInterface/NeighbourInterface.jl": "ff2d999a047a766e1ebe60442d088080ad4ac72c856ad8b9091d3d94c302d0d8"
+  },
+  "snapshots": {
+    "implementation.patch": "1dfa10ca9a60d006e4364ed22133dd0d13d4c058efc8d09a3942b243c509b597",
+    "harness-and-new-tests.tar.gz": "95f77f4f5d6460a32112c05cad4f37f6a236d29d77acb482c410423c1942736d",
+    "final-harness-and-tests.tar.gz": "5b96be23d6277a42cce8c41b034bd952a968447deb2db939f6b2a8d89acc85ec"
+  },
+  "boundaries": {
+    "prepared": "Combined numeric E/F/V with fresh authoritative readout precontraction; excludes graph/executor preparation and owning output copies",
+    "complete_public": "Combined public calculator call including fresh graph/executor preparation, units and owning output conversion",
+    "repeated_frames": "Three deterministic perturbed public frames; fresh connectivity on every frame; owning outputs",
+    "modern_external": "ACEpotentials 0.10.2 combined public Float64 E/F/V, fresh PairList; initial load/compilation excluded",
+    "legacy_external": "ACEpotentials 0.6.6/ACE1 analytic; three separate JuLIP calls; native fixed-geometry neighbor cache"
+  },
+  "validation": {
+    "assertions_per_full_suite": 54593,
+    "julia_versions": [
+      "1.13.3",
+      "1.10.12"
+    ],
+    "threads": 4,
+    "new_assertions": 635,
+    "optional_ACEfit_assertions": 4,
+    "public_cases": 44
+  },
+  "models": {
+    "small-tial": {
+      "active_product_weights_per_central_species": [
+        167,
+        167
+      ],
+      "active_readout_per_central_species": [
+        123,
+        123
+      ],
+      "coordinate_kind": "invariant",
+      "coupling_nnz": 167,
+      "coupling_shape": [
+        123,
+        167
+      ],
+      "cutoff_A": 5.5,
+      "density_count": 27,
+      "harmonic_count": 9,
+      "lmax": 2,
+      "pair_radial_count": 12,
+      "products": 167,
+      "radial_count": 30,
+      "radial_representation": "PotentialFrameWork.ACE.RadialChannel{Float64}",
+      "species": [
+        22,
+        13
+      ],
+      "product_orders": {
+        "1": 12,
+        "2": 63,
+        "3": 92
+      }
+    },
+    "medium-ti": {
+      "active_product_weights_per_central_species": [
+        230
+      ],
+      "active_readout_per_central_species": [
+        110
+      ],
+      "coordinate_kind": "invariant",
+      "coupling_nnz": 230,
+      "coupling_shape": [
+        110,
+        230
+      ],
+      "cutoff_A": 5.5,
+      "density_count": 43,
+      "harmonic_count": 25,
+      "lmax": 4,
+      "pair_radial_count": 10,
+      "products": 230,
+      "radial_count": 37,
+      "radial_representation": "PotentialFrameWork.ACE.RadialChannel{Float64}",
+      "species": [
+        22
+      ],
+      "product_orders": {
+        "1": 10,
+        "2": 81,
+        "3": 139
+      }
+    },
+    "large-tial": {
+      "active_product_weights_per_central_species": [
+        13919,
+        13919
+      ],
+      "active_readout_per_central_species": [
+        3727,
+        3727
+      ],
+      "coordinate_kind": "invariant",
+      "coupling_nnz": 14855,
+      "coupling_shape": [
+        3727,
+        13919
+      ],
+      "cutoff_A": 5.5,
+      "density_count": 165,
+      "harmonic_count": 49,
+      "lmax": 6,
+      "pair_radial_count": 24,
+      "products": 13919,
+      "radial_count": 108,
+      "radial_representation": "PotentialFrameWork.ACE.RadialChannel{Float64}",
+      "species": [
+        22,
+        13
+      ],
+      "product_orders": {
+        "1": 24,
+        "2": 630,
+        "3": 4264,
+        "4": 9001
+      }
+    },
+    "ti": {
+      "active_product_weights_per_central_species": [
+        16444
+      ],
+      "active_readout_per_central_species": [
+        12539
+      ],
+      "coordinate_kind": "legacy_PI",
+      "coupling_nnz": 30017,
+      "coupling_shape": [
+        12539,
+        16444
+      ],
+      "cutoff_A": 6.000000000000002,
+      "density_count": 329,
+      "harmonic_count": 49,
+      "lmax": 6,
+      "pair_radial_count": 20,
+      "products": 16444,
+      "radial_count": 27,
+      "radial_representation": "PotentialFrameWork.ACE.CallableRadial{PotentialFrameWork.ACE.LegacyPolynomial, @NamedTuple{a::Float64, rin::Float64, r0::Float64, p::Int64, q::Int64, x1::Float64, x2::Float64, y1::Float64, y2::Float64, A::Vector{Float64}, B::Vector{Float64}, C::Vector{Float64}, pl::Int64, pr::Int64, tl::Float64, tr::Float64, envelope_power::Int64, envelope_r0::Float64, offset::Int64, cutoff::Float64}, @NamedTuple{route::String, id::String}, PotentialFrameWork.ACE.RadialMetadata{Float64}}",
+      "species": [
+        22
+      ],
+      "product_orders": {
+        "1": 26,
+        "2": 994,
+        "3": 15424
+      }
+    },
+    "tialv": {
+      "active_product_weights_per_central_species": [
+        51379,
+        51379,
+        51379
+      ],
+      "active_readout_per_central_species": [
+        43585,
+        43585,
+        43585
+      ],
+      "coordinate_kind": "legacy_PI",
+      "coupling_nnz": 271722,
+      "coupling_shape": [
+        130755,
+        51379
+      ],
+      "cutoff_A": 6.000000000000002,
+      "density_count": 441,
+      "harmonic_count": 25,
+      "lmax": 4,
+      "pair_radial_count": 45,
+      "products": 51379,
+      "radial_count": 66,
+      "radial_representation": "PotentialFrameWork.ACE.CallableRadial{PotentialFrameWork.ACE.LegacyPolynomial, @NamedTuple{a::Float64, rin::Float64, r0::Float64, p::Int64, q::Int64, x1::Float64, x2::Float64, y1::Float64, y2::Float64, A::Vector{Float64}, B::Vector{Float64}, C::Vector{Float64}, pl::Int64, pr::Int64, tl::Float64, tr::Float64, envelope_power::Int64, envelope_r0::Float64, offset::Int64, cutoff::Float64}, @NamedTuple{route::String, id::String}, PotentialFrameWork.ACE.RadialMetadata{Float64}}",
+      "species": [
+        13,
+        22,
+        23
+      ],
+      "product_orders": {
+        "1": 63,
+        "2": 2880,
+        "3": 48436
+      }
+    }
+  },
+  "datasets": [
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "sha256": "3914078e0bda68e03ff3381f1dc3a1ab05700408c9b7b70e31fdf0f6a8b46a6e",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 16
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "sha256": "9fdebe20efc22d2f6a44200be7e25dd0e3f2e7c747e7407d7ab67401105b4d2d",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 8
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "sha256": "9013eff55b0afbe9c5ed614148f14da95ecdd809950ae62185baf49c8e3e5dc9",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 12
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "sha256": "22165810eb375814f08166eda06cc7201e46129e1787d5b873ccfea21bc2a681",
+      "threads": 16,
+      "blas_threads": 1,
+      "cases": 12
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "sha256": "ae1f4c52f15d9dff0ddff65ba7671839662e57f77faed884e2897634aa11bb97",
+      "threads": 4,
+      "blas_threads": 1,
+      "cases": 12
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml",
+      "sha256": "5d0d0185bc488e1ec01d361f79ee8895bf8a63e9779f6140ba8f80c15f99427f",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 6
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml",
+      "sha256": "c3ccb291a8b779f4d6a54ae6e1b992ce04b622d08b1b0ada49a1db47fd589d9d",
+      "threads": 16,
+      "blas_threads": 1,
+      "cases": 6
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml",
+      "sha256": "0dc70c7e0adf4160e76a1dacf0a1a3a2fe35a37b9f6765c367be0c2d80fc191c",
+      "threads": 4,
+      "blas_threads": 1,
+      "cases": 6
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/large-11664/current-t1.toml",
+      "sha256": "f0a6823bbe8244e1b7a97878483dced438f28657f66b1a9c4abf6b3c2bdcdbaf",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 4
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "sha256": "29f1ce3acc1d859df8ab5503060e6d98a29c2d48c8259c8ee44b4aee2fa7bc40",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 8
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/legacy-128/historical-t1.toml",
+      "sha256": "900e6bed3fb8ab43ae94bca0e6bb55b0c5afecc2ae8af237f5a96c0d0b4b992b",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 4
+    },
+    {
+      "path": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "sha256": "d8372fe2062a1c51cf5806e05d42dae756f016f1da0328679d4d4a9008234e46",
+      "threads": 1,
+      "blas_threads": 1,
+      "cases": 8
+    }
+  ],
+  "cases": [
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0017425460000000002,
+          "min_s": 0.0017366310000000002,
+          "max_s": 0.001745301,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0034290865,
+          "min_s": 0.0033975710000000003,
+          "max_s": 0.003845779,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1976024,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.010357594500000001,
+          "min_s": 0.010327704,
+          "max_s": 0.010522987000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5928072,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0013171485,
+          "min_s": 0.0013071530000000001,
+          "max_s": 0.001321363,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0030433095000000003,
+          "min_s": 0.002992143,
+          "max_s": 0.0039479910000000005,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1976024,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.009010341000000002,
+          "min_s": 0.008964090000000001,
+          "max_s": 0.009117992,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5928072,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0016486895000000002,
+          "min_s": 0.0016373300000000002,
+          "max_s": 0.0016549890000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.001923559,
+          "min_s": 0.0019159840000000001,
+          "max_s": 0.002090808,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.0058094685000000005,
+          "min_s": 0.0058003740000000005,
+          "max_s": 0.005850275,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0012251620000000001,
+          "min_s": 0.001220542,
+          "max_s": 0.0012879030000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.001532627,
+          "min_s": 0.001521447,
+          "max_s": 0.0017192910000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.004584467,
+          "min_s": 0.004574242,
+          "max_s": 0.004628962,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.15964770650000001,
+          "min_s": 0.159553055,
+          "max_s": 0.16008571500000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.35674080100000005,
+          "min_s": 0.33753814800000004,
+          "max_s": 0.41850026300000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 246013800,
+          "host_allocations": 7925294
+        },
+        "repeated_frames": {
+          "median_s": 1.1190626205,
+          "min_s": 1.056132582,
+          "max_s": 1.1360309560000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 738224040,
+          "host_allocations": 23783556
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.12012053650000001,
+          "min_s": 0.119955586,
+          "max_s": 0.12115251,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.31767019350000003,
+          "min_s": 0.296997865,
+          "max_s": 0.35945788700000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 246013800,
+          "host_allocations": 7925294
+        },
+        "repeated_frames": {
+          "median_s": 1.000774316,
+          "min_s": 0.9324157230000001,
+          "max_s": 1.0203650850000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 738224040,
+          "host_allocations": 23783556
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.1501478135,
+          "min_s": 0.14999563400000002,
+          "max_s": 0.150424624,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.18174856550000001,
+          "min_s": 0.179003817,
+          "max_s": 0.198032583,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 71488352,
+          "host_allocations": 908722
+        },
+        "repeated_frames": {
+          "median_s": 0.5656889105,
+          "min_s": 0.5488813,
+          "max_s": 0.6300711790000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 214465136,
+          "host_allocations": 2726168
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.112220674,
+          "min_s": 0.11212769800000001,
+          "max_s": 0.11246536,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.1454999865,
+          "min_s": 0.141030802,
+          "max_s": 0.16030121900000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 71488352,
+          "host_allocations": 908722
+        },
+        "repeated_frames": {
+          "median_s": 0.45047478,
+          "min_s": 0.43230728700000004,
+          "max_s": 0.49758277900000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 214465136,
+          "host_allocations": 2726168
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0022390830000000002,
+          "min_s": 0.002236138,
+          "max_s": 0.0022576880000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0037592635000000003,
+          "min_s": 0.0037512030000000003,
+          "max_s": 0.004026715,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1871576,
+          "host_allocations": 39883
+        },
+        "repeated_frames": {
+          "median_s": 0.01124613,
+          "min_s": 0.01122827,
+          "max_s": 0.01135823,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5614728,
+          "host_allocations": 119649
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.001620621,
+          "min_s": 0.001616065,
+          "max_s": 0.001634905,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0031343060000000003,
+          "min_s": 0.0031056810000000003,
+          "max_s": 0.0032742920000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1871576,
+          "host_allocations": 39883
+        },
+        "repeated_frames": {
+          "median_s": 0.0094763935,
+          "min_s": 0.009447624,
+          "max_s": 0.009600104,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5614728,
+          "host_allocations": 119649
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0021308810000000003,
+          "min_s": 0.002121801,
+          "max_s": 0.002204231,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.002354292,
+          "min_s": 0.002345312,
+          "max_s": 0.002611824,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.007143707000000001,
+          "min_s": 0.007085757000000001,
+          "max_s": 0.0071868570000000005,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.001487718,
+          "min_s": 0.0014824670000000001,
+          "max_s": 0.001495067,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.001759539,
+          "min_s": 0.0017480190000000002,
+          "max_s": 0.0018547400000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.005325112,
+          "min_s": 0.005298667,
+          "max_s": 0.005374117,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.072906526,
+          "min_s": 0.072773115,
+          "max_s": 0.073087127,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.07484547600000001,
+          "min_s": 0.07464846500000001,
+          "max_s": 0.075186188,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2456472,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.223927995,
+          "min_s": 0.223597663,
+          "max_s": 0.226192107,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 7369416,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.017583956,
+          "min_s": 0.017546201,
+          "max_s": 0.017669211,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.019391535,
+          "min_s": 0.019320860000000002,
+          "max_s": 0.019530011,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2456472,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.058378721,
+          "min_s": 0.05821764,
+          "max_s": 0.05858808200000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 7369416,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.071170277,
+          "min_s": 0.071112797,
+          "max_s": 0.071395578,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.071577074,
+          "min_s": 0.071539529,
+          "max_s": 0.07178629,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1216832,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.21553820150000003,
+          "min_s": 0.21530614,
+          "max_s": 0.215701463,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 3650496,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.01734483,
+          "min_s": 0.017310209,
+          "max_s": 0.017930912,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0177435815,
+          "min_s": 0.017694251,
+          "max_s": 0.017960013,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1216832,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.05333282,
+          "min_s": 0.053257535,
+          "max_s": 0.053476616000000005,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 3650496,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.001751904,
+          "min_s": 0.0017457190000000002,
+          "max_s": 0.0017782000000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0034024325,
+          "min_s": 0.003389787,
+          "max_s": 0.003756689,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1976008,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.010208698000000002,
+          "min_s": 0.010179082,
+          "max_s": 0.010366654000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5928024,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0016587885000000002,
+          "min_s": 0.0016518180000000002,
+          "max_s": 0.001670129,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0019273055,
+          "min_s": 0.00192175,
+          "max_s": 0.0021584710000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.005806885500000001,
+          "min_s": 0.005792510000000001,
+          "max_s": 0.005839100000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.158780784,
+          "min_s": 0.15865605800000002,
+          "max_s": 0.158967949,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.3541462865,
+          "min_s": 0.340617127,
+          "max_s": 0.412679318,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 246013784,
+          "host_allocations": 7925294
+        },
+        "repeated_frames": {
+          "median_s": 1.111228531,
+          "min_s": 1.05465075,
+          "max_s": 1.127441285,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 738223992,
+          "host_allocations": 23783556
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.14895041350000002,
+          "min_s": 0.148798127,
+          "max_s": 0.15007937400000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.183387826,
+          "min_s": 0.17947479500000002,
+          "max_s": 0.194994526,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 71488352,
+          "host_allocations": 908722
+        },
+        "repeated_frames": {
+          "median_s": 0.557228144,
+          "min_s": 0.5477518450000001,
+          "max_s": 0.6231339340000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 214465136,
+          "host_allocations": 2726168
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0022398865,
+          "min_s": 0.002237282,
+          "max_s": 0.002241481,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0037294940000000003,
+          "min_s": 0.0037014900000000004,
+          "max_s": 0.004145041,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1871560,
+          "host_allocations": 39883
+        },
+        "repeated_frames": {
+          "median_s": 0.011251028,
+          "min_s": 0.011195247,
+          "max_s": 0.011327018000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5614680,
+          "host_allocations": 119649
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0020887855,
+          "min_s": 0.002084301,
+          "max_s": 0.002110021,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.002346712,
+          "min_s": 0.0023354820000000003,
+          "max_s": 0.002654034,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.0071151115,
+          "min_s": 0.007100817000000001,
+          "max_s": 0.007162337,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.073053752,
+          "min_s": 0.072929806,
+          "max_s": 0.07327715700000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0746866005,
+          "min_s": 0.07457622500000001,
+          "max_s": 0.07497769700000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2456456,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.22461765350000001,
+          "min_s": 0.224342648,
+          "max_s": 0.22509446100000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 7369368,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/final-quick/historical-t1.toml",
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0729835915,
+          "min_s": 0.07293384600000001,
+          "max_s": 0.073053137,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.072480089,
+          "min_s": 0.072314633,
+          "max_s": 0.072636085,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1216832,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.21742880650000002,
+          "min_s": 0.21721210000000002,
+          "max_s": 0.217812324,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 3650496,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.014040535,
+          "min_s": 0.014025530000000001,
+          "max_s": 0.014094140000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.028883730000000003,
+          "min_s": 0.028772755,
+          "max_s": 0.029169847000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18762904,
+          "host_allocations": 527873
+        },
+        "repeated_frames": {
+          "median_s": 0.0880858055,
+          "min_s": 0.086700545,
+          "max_s": 0.10508932600000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 56327480,
+          "host_allocations": 1585075
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.010606705000000001,
+          "min_s": 0.010591355,
+          "max_s": 0.010808936,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.025671302,
+          "min_s": 0.025533232000000003,
+          "max_s": 0.025817684,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18762904,
+          "host_allocations": 527873
+        },
+        "repeated_frames": {
+          "median_s": 0.07879960450000001,
+          "min_s": 0.07726474800000001,
+          "max_s": 0.094973864,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 56327480,
+          "host_allocations": 1585075
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.013091518,
+          "min_s": 0.013082083000000001,
+          "max_s": 0.013113983000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0159416635,
+          "min_s": 0.015912103,
+          "max_s": 0.016192794,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6065248,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 0.048113416500000006,
+          "min_s": 0.047901681,
+          "max_s": 0.049137099000000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18195488,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0097918245,
+          "min_s": 0.009758789,
+          "max_s": 0.00981445,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.012558734000000002,
+          "min_s": 0.012509739,
+          "max_s": 0.012623210000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6065248,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 0.037941260000000004,
+          "min_s": 0.037801999,
+          "max_s": 0.039187518000000005,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18195488,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.017847167000000004,
+          "min_s": 0.017816237000000002,
+          "max_s": 0.017874347000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.031233307000000002,
+          "min_s": 0.031141121,
+          "max_s": 0.031413733,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17713912,
+          "host_allocations": 487911
+        },
+        "repeated_frames": {
+          "median_s": 0.095224111,
+          "min_s": 0.094054998,
+          "max_s": 0.11860480300000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 53176808,
+          "host_allocations": 1465052
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0130144325,
+          "min_s": 0.012984602000000001,
+          "max_s": 0.013340704,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.026366482500000003,
+          "min_s": 0.026182946000000002,
+          "max_s": 0.026456668000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17713912,
+          "host_allocations": 487911
+        },
+        "repeated_frames": {
+          "median_s": 0.08029051000000001,
+          "min_s": 0.079322193,
+          "max_s": 0.102612749,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 53176808,
+          "host_allocations": 1465052
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.01695462,
+          "min_s": 0.016933021,
+          "max_s": 0.01700333,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.020586116,
+          "min_s": 0.020558446,
+          "max_s": 0.020859878000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6065248,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 0.061846999,
+          "min_s": 0.06155727800000001,
+          "max_s": 0.063002847,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18195488,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.012198681500000001,
+          "min_s": 0.012173336000000002,
+          "max_s": 0.012218477,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.014691635000000001,
+          "min_s": 0.014662764000000002,
+          "max_s": 0.014724454000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6065248,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 0.044561091500000004,
+          "min_s": 0.044321945,
+          "max_s": 0.045421072,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18195488,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.5785712075,
+          "min_s": 0.577988004,
+          "max_s": 0.579276883,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.6338804825000001,
+          "min_s": 0.6331897940000001,
+          "max_s": 0.637716299,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 22554968,
+          "host_allocations": 527873
+        },
+        "repeated_frames": {
+          "median_s": 2.2085984675,
+          "min_s": 2.201845649,
+          "max_s": 2.228399794,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 67703672,
+          "host_allocations": 1585075
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.13795961750000002,
+          "min_s": 0.137840332,
+          "max_s": 0.138076263,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.154870336,
+          "min_s": 0.15468407,
+          "max_s": 0.15590029600000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 22554968,
+          "host_allocations": 527873
+        },
+        "repeated_frames": {
+          "median_s": 0.4640103995,
+          "min_s": 0.46352076600000003,
+          "max_s": 0.485897797,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 67703672,
+          "host_allocations": 1585075
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.5709913115,
+          "min_s": 0.569901126,
+          "max_s": 0.572171999,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.580343576,
+          "min_s": 0.579855603,
+          "max_s": 0.581152901,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 9849952,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 1.75429461,
+          "min_s": 1.7530157080000002,
+          "max_s": 1.762193522,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 29549600,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.13613337650000001,
+          "min_s": 0.13597256100000002,
+          "max_s": 0.136368723,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.139246005,
+          "min_s": 0.13905472900000002,
+          "max_s": 0.140160515,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 9849952,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 0.42142046650000003,
+          "min_s": 0.420772678,
+          "max_s": 0.43113100800000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 29549600,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0037410110000000002,
+          "min_s": 0.0033010680000000003,
+          "max_s": 0.003853852,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.0191974085,
+          "min_s": 0.018626625,
+          "max_s": 0.024136557000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 19541432,
+          "host_allocations": 538018
+        },
+        "repeated_frames": {
+          "median_s": 0.059312061,
+          "min_s": 0.056926632000000005,
+          "max_s": 0.082671558,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 58675704,
+          "host_allocations": 1615676
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0026980105,
+          "min_s": 0.002558264,
+          "max_s": 0.002738496,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.018580605,
+          "min_s": 0.018010772,
+          "max_s": 0.019241619,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 19541432,
+          "host_allocations": 538018
+        },
+        "repeated_frames": {
+          "median_s": 0.05589472100000001,
+          "min_s": 0.054384868,
+          "max_s": 0.079797702,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 58675704,
+          "host_allocations": 1615676
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0029074665,
+          "min_s": 0.002878816,
+          "max_s": 0.003040338,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.0062923350000000005,
+          "min_s": 0.006155065,
+          "max_s": 0.0065610270000000005,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6843776,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.020358195500000002,
+          "min_s": 0.019412179,
+          "max_s": 0.021846514,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 20543712,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0024457740000000004,
+          "min_s": 0.002286963,
+          "max_s": 0.002549884,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.005516486000000001,
+          "min_s": 0.00539582,
+          "max_s": 0.005896124,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6843776,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.0175834345,
+          "min_s": 0.017030956,
+          "max_s": 0.019211929000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 20543712,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.004217154000000001,
+          "min_s": 0.004081253,
+          "max_s": 0.004315125,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.018599405,
+          "min_s": 0.018193793,
+          "max_s": 0.018891777000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18492440,
+          "host_allocations": 498056
+        },
+        "repeated_frames": {
+          "median_s": 0.057137688500000006,
+          "min_s": 0.055546214000000003,
+          "max_s": 0.07909974800000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 55525032,
+          "host_allocations": 1495653
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.003196823,
+          "min_s": 0.0031004080000000002,
+          "max_s": 0.0033294690000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.0174101085,
+          "min_s": 0.017187837,
+          "max_s": 0.01773007,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18492440,
+          "host_allocations": 498056
+        },
+        "repeated_frames": {
+          "median_s": 0.053804514500000004,
+          "min_s": 0.050972058,
+          "max_s": 0.075039585,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 55525032,
+          "host_allocations": 1495653
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0032681035000000002,
+          "min_s": 0.0030289070000000004,
+          "max_s": 0.0037072800000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.006682853000000001,
+          "min_s": 0.006516796,
+          "max_s": 0.007656943,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6843776,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.020879618500000002,
+          "min_s": 0.019591151,
+          "max_s": 0.023864784,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 20543712,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0025913695000000002,
+          "min_s": 0.0025130540000000002,
+          "max_s": 0.002930457,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.005984284,
+          "min_s": 0.005868524,
+          "max_s": 0.0063294760000000005,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6843776,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.018119118,
+          "min_s": 0.017593729000000002,
+          "max_s": 0.019178818,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 20543712,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.13364138650000001,
+          "min_s": 0.128334996,
+          "max_s": 0.138087242,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1002032,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.149707687,
+          "min_s": 0.142959119,
+          "max_s": 0.156021333,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 23557000,
+          "host_allocations": 538018
+        },
+        "repeated_frames": {
+          "median_s": 0.46661158050000007,
+          "min_s": 0.44724445100000004,
+          "max_s": 0.484885224,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 70729736,
+          "host_allocations": 1615676
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.026665511000000003,
+          "min_s": 0.025859126000000003,
+          "max_s": 0.028589672000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1002032,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.0437324875,
+          "min_s": 0.040410429000000005,
+          "max_s": 0.044641042000000006,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 23557000,
+          "host_allocations": 538018
+        },
+        "repeated_frames": {
+          "median_s": 0.1329747925,
+          "min_s": 0.126879188,
+          "max_s": 0.15051693200000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 70729736,
+          "host_allocations": 1615676
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.08931785,
+          "min_s": 0.08372275400000001,
+          "max_s": 0.09929499200000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1002032,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.0968287035,
+          "min_s": 0.090303431,
+          "max_s": 0.10793019100000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 10851984,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.296488188,
+          "min_s": 0.27943342200000004,
+          "max_s": 0.32314721900000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 32575664,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t16.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.025241353,
+          "min_s": 0.024424498000000003,
+          "max_s": 0.026924802,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1002032,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.029694407500000002,
+          "min_s": 0.0246893,
+          "max_s": 0.033045218,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 10851984,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.089412221,
+          "min_s": 0.086228238,
+          "max_s": 0.107579829,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 32575664,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0042775650000000005,
+          "min_s": 0.0042315040000000005,
+          "max_s": 0.0045631660000000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.0200316315,
+          "min_s": 0.019786485000000003,
+          "max_s": 0.020902481,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18996264,
+          "host_allocations": 530716
+        },
+        "repeated_frames": {
+          "median_s": 0.060975635,
+          "min_s": 0.059785478,
+          "max_s": 0.07803043400000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 57034344,
+          "host_allocations": 1593686
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0033452495000000004,
+          "min_s": 0.0032581290000000002,
+          "max_s": 0.0035155810000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.0189908805,
+          "min_s": 0.01882444,
+          "max_s": 0.019839065000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18996264,
+          "host_allocations": 530716
+        },
+        "repeated_frames": {
+          "median_s": 0.0581447485,
+          "min_s": 0.056395888000000005,
+          "max_s": 0.07528530800000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 57034344,
+          "host_allocations": 1593686
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.003965018000000001,
+          "min_s": 0.003931003000000001,
+          "max_s": 0.0053150110000000006,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.0086245205,
+          "min_s": 0.007322323,
+          "max_s": 0.008876352,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6298608,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.023216705500000004,
+          "min_s": 0.021160353,
+          "max_s": 0.023856909000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18902352,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0030343180000000003,
+          "min_s": 0.002995947,
+          "max_s": 0.004108404,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.006141736,
+          "min_s": 0.005861084000000001,
+          "max_s": 0.007136662,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6298608,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.0199035205,
+          "min_s": 0.01884032,
+          "max_s": 0.020732411000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18902352,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.005345766,
+          "min_s": 0.00528023,
+          "max_s": 0.005410872000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.019482558500000004,
+          "min_s": 0.019192522,
+          "max_s": 0.021341534000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17947272,
+          "host_allocations": 490754
+        },
+        "repeated_frames": {
+          "median_s": 0.061097275500000006,
+          "min_s": 0.057372064,
+          "max_s": 0.080510498,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 53883672,
+          "host_allocations": 1473663
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.003944843,
+          "min_s": 0.0039212330000000005,
+          "max_s": 0.005306581,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.01803975,
+          "min_s": 0.017791963,
+          "max_s": 0.019137041,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17947272,
+          "host_allocations": 490754
+        },
+        "repeated_frames": {
+          "median_s": 0.057640550500000005,
+          "min_s": 0.053668993000000005,
+          "max_s": 0.07225363,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 53883672,
+          "host_allocations": 1473663
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0049136085000000005,
+          "min_s": 0.004827418,
+          "max_s": 0.004970239,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.0083796685,
+          "min_s": 0.007939976,
+          "max_s": 0.009736407,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6298608,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.025813140000000002,
+          "min_s": 0.02413271,
+          "max_s": 0.027472530000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18902352,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0035779205000000002,
+          "min_s": 0.0035588200000000003,
+          "max_s": 0.0038009130000000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.00692334,
+          "min_s": 0.0065713180000000005,
+          "max_s": 0.008993302,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6298608,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.021036697,
+          "min_s": 0.020841871,
+          "max_s": 0.021304914,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18902352,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.166606193,
+          "min_s": 0.16525951500000002,
+          "max_s": 0.17697232200000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 456864,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.18358066900000003,
+          "min_s": 0.180811313,
+          "max_s": 0.18870678800000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 23011832,
+          "host_allocations": 530716
+        },
+        "repeated_frames": {
+          "median_s": 0.557470435,
+          "min_s": 0.5500942630000001,
+          "max_s": 0.574060569,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 69088376,
+          "host_allocations": 1593686
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.039571644,
+          "min_s": 0.039383663,
+          "max_s": 0.041490484,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 456864,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.05550922900000001,
+          "min_s": 0.05467149,
+          "max_s": 0.057113323,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 23011832,
+          "host_allocations": 530716
+        },
+        "repeated_frames": {
+          "median_s": 0.1694174235,
+          "min_s": 0.165706347,
+          "max_s": 0.180418551,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 69088376,
+          "host_allocations": 1593686
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.16445323550000002,
+          "min_s": 0.16199949700000002,
+          "max_s": 0.168372233,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 456864,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.16605988,
+          "min_s": 0.16454058100000002,
+          "max_s": 0.18174278800000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 10306816,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.5038473215,
+          "min_s": 0.49909637500000004,
+          "max_s": 0.517992761,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 30934304,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/current-t4.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.039523973500000004,
+          "min_s": 0.039163872,
+          "max_s": 0.040323749000000006,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 456864,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.0431576045,
+          "min_s": 0.04244188,
+          "max_s": 0.044645663,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 10306816,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.1285010975,
+          "min_s": 0.126840168,
+          "max_s": 0.13663487300000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 30934304,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.014060384500000002,
+          "min_s": 0.014051319000000001,
+          "max_s": 0.014240941000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.028734552500000003,
+          "min_s": 0.028624752000000003,
+          "max_s": 0.029412006,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18762888,
+          "host_allocations": 527873
+        },
+        "repeated_frames": {
+          "median_s": 0.08833473500000001,
+          "min_s": 0.08649118,
+          "max_s": 0.104121299,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 56327432,
+          "host_allocations": 1585075
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0133060755,
+          "min_s": 0.013288505,
+          "max_s": 0.013321396000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.016035456000000003,
+          "min_s": 0.01598219,
+          "max_s": 0.016145601000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6065248,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 0.0492075885,
+          "min_s": 0.048938937,
+          "max_s": 0.050097904000000006,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18195488,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.017976487,
+          "min_s": 0.017969362000000003,
+          "max_s": 0.018018692000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.031452168,
+          "min_s": 0.031172806,
+          "max_s": 0.031758869,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17713896,
+          "host_allocations": 487911
+        },
+        "repeated_frames": {
+          "median_s": 0.0942549385,
+          "min_s": 0.093774351,
+          "max_s": 0.11664060000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 53176760,
+          "host_allocations": 1465052
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.016942771000000002,
+          "min_s": 0.016923506,
+          "max_s": 0.016971576000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.019731716500000003,
+          "min_s": 0.019707472,
+          "max_s": 0.019775572,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6065248,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 0.059476796,
+          "min_s": 0.059178004000000006,
+          "max_s": 0.060535193,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18195488,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.5894884810000001,
+          "min_s": 0.5889416630000001,
+          "max_s": 0.590476452,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.612033659,
+          "min_s": 0.611682801,
+          "max_s": 0.6125538460000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 22554952,
+          "host_allocations": 527873
+        },
+        "repeated_frames": {
+          "median_s": 1.8183534405000001,
+          "min_s": 1.816239098,
+          "max_s": 1.8335711760000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 67703624,
+          "host_allocations": 1585075
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t1.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.578023701,
+          "min_s": 0.57779641,
+          "max_s": 0.578783425,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.5734701560000001,
+          "min_s": 0.573196334,
+          "max_s": 0.5740122590000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 9849952,
+          "host_allocations": 74938
+        },
+        "repeated_frames": {
+          "median_s": 1.7161035770000002,
+          "min_s": 1.713974949,
+          "max_s": 1.7208385190000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 29549600,
+          "host_allocations": 224818
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0035682755000000003,
+          "min_s": 0.0032616790000000004,
+          "max_s": 0.003765352,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.0195580705,
+          "min_s": 0.018621355000000003,
+          "max_s": 0.021074679000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 19541416,
+          "host_allocations": 538018
+        },
+        "repeated_frames": {
+          "median_s": 0.056950727500000006,
+          "min_s": 0.055831096000000004,
+          "max_s": 0.07144892400000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 58675656,
+          "host_allocations": 1615676
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0029743370000000005,
+          "min_s": 0.002938057,
+          "max_s": 0.0030578080000000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.006042109,
+          "min_s": 0.005848743,
+          "max_s": 0.0061598650000000005,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6843776,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.020179974000000003,
+          "min_s": 0.019058177000000003,
+          "max_s": 0.03701653,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 20543712,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.004223689,
+          "min_s": 0.004098703,
+          "max_s": 0.004805477000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.018621665500000002,
+          "min_s": 0.018003182,
+          "max_s": 0.019715262,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18492424,
+          "host_allocations": 498056
+        },
+        "repeated_frames": {
+          "median_s": 0.054661204000000005,
+          "min_s": 0.053474072000000004,
+          "max_s": 0.06893348,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 55524984,
+          "host_allocations": 1495653
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0034619050000000004,
+          "min_s": 0.0033453090000000003,
+          "max_s": 0.003703071,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 778528,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.006498042000000001,
+          "min_s": 0.006365756,
+          "max_s": 0.006659318,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6843776,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.021257530500000003,
+          "min_s": 0.020466586000000002,
+          "max_s": 0.040000666000000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 20543712,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.15926086650000001,
+          "min_s": 0.139799421,
+          "max_s": 0.17558094400000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1002032,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.149293501,
+          "min_s": 0.144233626,
+          "max_s": 0.165132932,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 23556984,
+          "host_allocations": 538018
+        },
+        "repeated_frames": {
+          "median_s": 0.6101345985000001,
+          "min_s": 0.553490147,
+          "max_s": 0.656477575,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 70729688,
+          "host_allocations": 1615676
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t16.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 16,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.09040930850000001,
+          "min_s": 0.076510625,
+          "max_s": 0.09805462000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1002032,
+          "host_allocations": 10145
+        },
+        "complete_public": {
+          "median_s": 0.096783915,
+          "min_s": 0.081638293,
+          "max_s": 0.104395442,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 10851984,
+          "host_allocations": 85083
+        },
+        "repeated_frames": {
+          "median_s": 0.2951787025,
+          "min_s": 0.289142072,
+          "max_s": 0.30346190100000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 32575664,
+          "host_allocations": 255419
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0042686845,
+          "min_s": 0.0042135340000000005,
+          "max_s": 0.004724397,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.020849263,
+          "min_s": 0.019243909,
+          "max_s": 0.022548278,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18996248,
+          "host_allocations": 530716
+        },
+        "repeated_frames": {
+          "median_s": 0.060236631000000006,
+          "min_s": 0.059276566,
+          "max_s": 0.071591155,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 57034296,
+          "host_allocations": 1593686
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml",
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.003956678,
+          "min_s": 0.003913752,
+          "max_s": 0.005649592,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.007180496,
+          "min_s": 0.00708161,
+          "max_s": 0.007596353,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6298608,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.022632178000000003,
+          "min_s": 0.021703852000000003,
+          "max_s": 0.026402839,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18902352,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0056242265,
+          "min_s": 0.005483511,
+          "max_s": 0.007557192000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.020350265,
+          "min_s": 0.01933415,
+          "max_s": 0.021478432000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17947256,
+          "host_allocations": 490754
+        },
+        "repeated_frames": {
+          "median_s": 0.06179196000000001,
+          "min_s": 0.059052904,
+          "max_s": 0.07449918100000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 53883624,
+          "host_allocations": 1473663
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml",
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.005118094,
+          "min_s": 0.005029149,
+          "max_s": 0.006661407,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 233360,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.008173436,
+          "min_s": 0.007894115,
+          "max_s": 0.009614394,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 6298608,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.025089672,
+          "min_s": 0.024262487000000003,
+          "max_s": 0.026100188000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 18902352,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.25885846,
+          "min_s": 0.25645712200000004,
+          "max_s": 0.29497231,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 456864,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.272377121,
+          "min_s": 0.271706618,
+          "max_s": 0.299726696,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 23011816,
+          "host_allocations": 530716
+        },
+        "repeated_frames": {
+          "median_s": 0.8303044640000001,
+          "min_s": 0.8249885090000001,
+          "max_s": 0.863466866,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 69088328,
+          "host_allocations": 1593686
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/full-1024/historical-t4.toml",
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 4,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.164859688,
+          "min_s": 0.163542236,
+          "max_s": 0.16963163,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 456864,
+          "host_allocations": 2843
+        },
+        "complete_public": {
+          "median_s": 0.1661551255,
+          "min_s": 0.165394496,
+          "max_s": 0.169448059,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 10306816,
+          "host_allocations": 77781
+        },
+        "repeated_frames": {
+          "median_s": 0.517534539,
+          "min_s": 0.5072228510000001,
+          "max_s": 0.524011486,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 30934304,
+          "host_allocations": 233429
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/large-11664/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 11664,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.205503432,
+          "min_s": 0.205278081,
+          "max_s": 0.205999864,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.384695437,
+          "min_s": 0.37359726400000004,
+          "max_s": 0.446877868,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 231856328,
+          "host_allocations": 7332052
+        },
+        "repeated_frames": {
+          "median_s": 1.2118874880000001,
+          "min_s": 1.1630310190000002,
+          "max_s": 1.2291331280000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 695734952,
+          "host_allocations": 22003144
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/large-11664/current-t1.toml",
+      "model": "medium-ti",
+      "atoms": 11664,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.14868427550000002,
+          "min_s": 0.148485474,
+          "max_s": 0.15044775100000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.338113841,
+          "min_s": 0.31771384,
+          "max_s": 0.38748161200000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 231856328,
+          "host_allocations": 7332052
+        },
+        "repeated_frames": {
+          "median_s": 1.0396260215000002,
+          "min_s": 1.0017562100000001,
+          "max_s": 1.046742257,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 695734952,
+          "host_allocations": 22003144
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/large-11664/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 11664,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 6.6715779525,
+          "min_s": 6.661188227,
+          "max_s": 6.784404813,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 6.9958532060000005,
+          "min_s": 6.968364050000001,
+          "max_s": 7.047286124,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 289131304,
+          "host_allocations": 7925294
+        },
+        "repeated_frames": {
+          "median_s": 20.633533444,
+          "min_s": 20.555980171,
+          "max_s": 20.660239839000003,
+          "samples": 5,
+          "undersampled": true,
+          "host_bytes": 867576552,
+          "host_allocations": 23783556
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/large-11664/current-t1.toml",
+      "model": "large-tial",
+      "atoms": 11664,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 1.604238674,
+          "min_s": 1.5926303780000002,
+          "max_s": 1.6060781880000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 1.7988518880000002,
+          "min_s": 1.7837200500000001,
+          "max_s": 1.8558291930000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 289131304,
+          "host_allocations": 7925294
+        },
+        "repeated_frames": {
+          "median_s": 5.496100541500001,
+          "min_s": 5.407129139,
+          "max_s": 5.514859869,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 867576552,
+          "host_allocations": 23783556
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.074664492,
+          "min_s": 0.07459188700000001,
+          "max_s": 0.07502934900000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.07809872000000001,
+          "min_s": 0.077957104,
+          "max_s": 0.078579207,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5790264,
+          "host_allocations": 76350
+        },
+        "repeated_frames": {
+          "median_s": 0.2338717125,
+          "min_s": 0.233746642,
+          "max_s": 0.23437611600000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17361576,
+          "host_allocations": 228778
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0248051435,
+          "min_s": 0.024755009,
+          "max_s": 0.024864550000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0282383,
+          "min_s": 0.028156245000000003,
+          "max_s": 0.028669548000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5790264,
+          "host_allocations": 76350
+        },
+        "repeated_frames": {
+          "median_s": 0.085263858,
+          "min_s": 0.084957657,
+          "max_s": 0.086644445,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17361576,
+          "host_allocations": 228778
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0734625465,
+          "min_s": 0.07340221200000001,
+          "max_s": 0.073838974,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.07404419500000001,
+          "min_s": 0.073761874,
+          "max_s": 0.07518781000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 3243984,
+          "host_allocations": 10294
+        },
+        "repeated_frames": {
+          "median_s": 0.22275685700000003,
+          "min_s": 0.222115784,
+          "max_s": 0.22506387800000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 9731952,
+          "host_allocations": 30882
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.023686343000000002,
+          "min_s": 0.023621443000000002,
+          "max_s": 0.023829924000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.024186766000000002,
+          "min_s": 0.024123226,
+          "max_s": 0.025970674000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 3243984,
+          "host_allocations": 10294
+        },
+        "repeated_frames": {
+          "median_s": 0.07278933400000001,
+          "min_s": 0.07264743800000001,
+          "max_s": 0.07296326900000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 9731952,
+          "host_allocations": 30882
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.21711833000000003,
+          "min_s": 0.21704622,
+          "max_s": 0.21870740800000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.23032643800000002,
+          "min_s": 0.230206023,
+          "max_s": 0.23106320700000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 4609880,
+          "host_allocations": 91198
+        },
+        "repeated_frames": {
+          "median_s": 0.6651739315,
+          "min_s": 0.6640001510000001,
+          "max_s": 0.6715447370000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 13818376,
+          "host_allocations": 273258
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.060118253,
+          "min_s": 0.060082728,
+          "max_s": 0.060283189,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.06492478600000001,
+          "min_s": 0.06479277,
+          "max_s": 0.065770125,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 4609880,
+          "host_allocations": 91198
+        },
+        "repeated_frames": {
+          "median_s": 0.192588647,
+          "min_s": 0.191685968,
+          "max_s": 0.20279914200000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 13818376,
+          "host_allocations": 273258
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.21423630100000002,
+          "min_s": 0.21396725500000002,
+          "max_s": 0.21556813200000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.21770899300000002,
+          "min_s": 0.21686817900000002,
+          "max_s": 0.218579867,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1617888,
+          "host_allocations": 10294
+        },
+        "repeated_frames": {
+          "median_s": 0.6460191550000001,
+          "min_s": 0.645128231,
+          "max_s": 0.647376292,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 4853664,
+          "host_allocations": 30882
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/current-t1.toml",
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.057837022,
+          "min_s": 0.057754087,
+          "max_s": 0.057873407,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.059731671,
+          "min_s": 0.059614196,
+          "max_s": 0.060245169,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1617888,
+          "host_allocations": 10294
+        },
+        "repeated_frames": {
+          "median_s": 0.1785790455,
+          "min_s": 0.178452505,
+          "max_s": 0.17954876,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 4853664,
+          "host_allocations": 30882
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/historical-t1.toml",
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.074366661,
+          "min_s": 0.07421427600000001,
+          "max_s": 0.076244065,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.07767876700000001,
+          "min_s": 0.07749705100000001,
+          "max_s": 0.080112324,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5790248,
+          "host_allocations": 76350
+        },
+        "repeated_frames": {
+          "median_s": 0.23436240800000002,
+          "min_s": 0.23318633700000002,
+          "max_s": 0.23589704,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 17361528,
+          "host_allocations": 228778
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/historical-t1.toml",
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.074929154,
+          "min_s": 0.074877939,
+          "max_s": 0.074975549,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0738013585,
+          "min_s": 0.073664593,
+          "max_s": 0.074059424,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 3243984,
+          "host_allocations": 10294
+        },
+        "repeated_frames": {
+          "median_s": 0.22126968000000002,
+          "min_s": 0.220699958,
+          "max_s": 0.22209436400000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 9731952,
+          "host_allocations": 30882
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/historical-t1.toml",
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.217011535,
+          "min_s": 0.216207686,
+          "max_s": 0.219969304,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.22175461750000003,
+          "min_s": 0.22110845,
+          "max_s": 0.222159824,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 4609864,
+          "host_allocations": 91198
+        },
+        "repeated_frames": {
+          "median_s": 0.6701354405000001,
+          "min_s": 0.668465623,
+          "max_s": 0.6712842760000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 13818328,
+          "host_allocations": 273258
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/legacy-128/historical-t1.toml",
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 4,
+      "algorithm": "historical",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.2199169285,
+          "min_s": 0.219342891,
+          "max_s": 0.220066684,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.213510468,
+          "min_s": 0.213070951,
+          "max_s": 0.216648058,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1617888,
+          "host_allocations": 10294
+        },
+        "repeated_frames": {
+          "median_s": 0.6400750875000001,
+          "min_s": 0.6395190040000001,
+          "max_s": 0.6414280840000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 4853664,
+          "host_allocations": 30882
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 1,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0016467580000000001,
+          "min_s": 0.001641008,
+          "max_s": 0.001649428,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0033731515,
+          "min_s": 0.003358676,
+          "max_s": 0.003808909,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1976024,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.0099838045,
+          "min_s": 0.009958099,
+          "max_s": 0.01017117,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5928072,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 1,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0012228010000000001,
+          "min_s": 0.0012200560000000002,
+          "max_s": 0.001244436,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0029092745,
+          "min_s": 0.0028921740000000004,
+          "max_s": 0.0031656550000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1976024,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.008715123000000002,
+          "min_s": 0.008690113000000001,
+          "max_s": 0.008821383,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5928072,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 8,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.002260756,
+          "min_s": 0.002255841,
+          "max_s": 0.002263591,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.003945764500000001,
+          "min_s": 0.003915429000000001,
+          "max_s": 0.00413577,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1976024,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.011890389000000001,
+          "min_s": 0.011865668000000001,
+          "max_s": 0.011978349000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5928072,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "width": 8,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.001817554,
+          "min_s": 0.001814908,
+          "max_s": 0.0018284190000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0035171070000000002,
+          "min_s": 0.0034895480000000003,
+          "max_s": 0.0036534780000000004,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 1976024,
+          "host_allocations": 43211
+        },
+        "repeated_frames": {
+          "median_s": 0.010599857,
+          "min_s": 0.010548462000000002,
+          "max_s": 0.011066995000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 5928072,
+          "host_allocations": 129633
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 1,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.001468422,
+          "min_s": 0.0014569070000000001,
+          "max_s": 0.0014809270000000002,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0017500885,
+          "min_s": 0.0017417490000000001,
+          "max_s": 0.0020269100000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.005394286,
+          "min_s": 0.005374247,
+          "max_s": 0.005451037000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 1,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.001059165,
+          "min_s": 0.001052736,
+          "max_s": 0.0010644650000000001,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0013223365,
+          "min_s": 0.001307166,
+          "max_s": 0.001428447,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.00396753,
+          "min_s": 0.00395501,
+          "max_s": 0.004049019,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 8,
+      "algorithm": "reference",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.002035515,
+          "min_s": 0.00202921,
+          "max_s": 0.0020399800000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0023285315,
+          "min_s": 0.0023144010000000002,
+          "max_s": 0.002663682,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.00705416,
+          "min_s": 0.007036115000000001,
+          "max_s": 0.007088055,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    },
+    {
+      "source": "benchmark/cpu_ace/results/2026-11-10/widths/current-t1.toml",
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "width": 8,
+      "algorithm": "optimized",
+      "threads": 1,
+      "boundaries": {
+        "prepared": {
+          "median_s": 0.0016217480000000001,
+          "min_s": 0.0016127880000000002,
+          "max_s": 0.001625738,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 0,
+          "host_allocations": 0
+        },
+        "complete_public": {
+          "median_s": 0.0019108895,
+          "min_s": 0.0019036290000000002,
+          "max_s": 0.0019785790000000003,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 743744,
+          "host_allocations": 8766
+        },
+        "repeated_frames": {
+          "median_s": 0.0058045535,
+          "min_s": 0.0057881880000000005,
+          "max_s": 0.005838478,
+          "samples": 10,
+          "undersampled": false,
+          "host_bytes": 2231232,
+          "host_allocations": 26298
+        }
+      }
+    }
+  ],
+  "omissions": [
+    "External Float32 unsupported; PFW rounded-reference error and Float64 application sensitivity are separate",
+    "PACE executable available/probed; no spline-equivalent numerical comparison launched or timed",
+    "Real RX hardware and UnicodePlots not rerun; portable GPU regressions passed",
+    "Medium/large Float32 at 11664 atoms numerically validated but not timed; legacy timing limited to 128 atoms",
+    "Historical-source large 11664 model timing not measured; same-checkout reference path timed",
+    "Large 11664 reference replay has five warmed samples; all final prepared/public trials have ten"
+  ]
+}
