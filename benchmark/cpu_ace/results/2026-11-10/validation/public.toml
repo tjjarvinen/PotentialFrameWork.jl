@@ -1,0 +1,707 @@
+julia = "1.13.3"
+schema = "PFW.CPUACE.PublicValidation.v1"
+
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 5.820766091346741e-11
+    forces_max_eV_per_A = 2.3725466036239595e-13
+    virial_max_eV = 2.317084024650029e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 5.820766091346741e-11
+    forces_max_eV_per_A = 2.3725466036239595e-13
+    virial_max_eV = 2.317084024650029e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.006639524464844726
+    forces_max_eV_per_A = 8.858021766311452e-6
+    virial_max_eV = 0.00010062421821999123
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.006639524464844726
+    forces_max_eV_per_A = 8.858021766311452e-6
+    virial_max_eV = 0.00010062421821999123
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.1641532182693481e-10
+    forces_max_eV_per_A = 3.2882030431835574e-13
+    virial_max_eV = 3.069544618483633e-11
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.1641532182693481e-10
+    forces_max_eV_per_A = 3.2882030431835574e-13
+    virial_max_eV = 3.069544618483633e-11
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.019943468272686005
+    forces_max_eV_per_A = 1.2714267612068397e-5
+    virial_max_eV = 0.0013675321042683208
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.019943468272686005
+    forces_max_eV_per_A = 1.2714267612068397e-5
+    virial_max_eV = 0.0013675321042683208
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.4901161193847656e-8
+    forces_max_eV_per_A = 3.863576125695545e-13
+    virial_max_eV = 1.382431946694851e-10
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.4901161193847656e-8
+    forces_max_eV_per_A = 3.863576125695545e-13
+    virial_max_eV = 1.382431946694851e-10
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.12393773719668388
+    forces_max_eV_per_A = 1.7325910148802137e-5
+    virial_max_eV = 0.05470852519647451
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "small-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.12393773719668388
+    forces_max_eV_per_A = 1.7325910148802137e-5
+    virial_max_eV = 0.05470852519647451
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.1368683772161603e-13
+    forces_max_eV_per_A = 2.493005801795789e-13
+    virial_max_eV = 5.229594535194337e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.1368683772161603e-13
+    forces_max_eV_per_A = 2.493005801795789e-13
+    virial_max_eV = 5.229594535194337e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 4.8014130186402326e-5
+    forces_max_eV_per_A = 1.9499464823435897e-5
+    virial_max_eV = 0.00016602603944326777
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 4.8014130186402326e-5
+    forces_max_eV_per_A = 1.9499464823435897e-5
+    virial_max_eV = 0.00016602603944326777
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 2.7284841053187847e-12
+    forces_max_eV_per_A = 2.7133850721838826e-13
+    virial_max_eV = 3.728928277269006e-11
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 2.7284841053187847e-12
+    forces_max_eV_per_A = 2.7133850721838826e-13
+    virial_max_eV = 3.728928277269006e-11
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.00023119128263715538
+    forces_max_eV_per_A = 4.637595503120817e-5
+    virial_max_eV = 0.000923964817502565
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.00023119128263715538
+    forces_max_eV_per_A = 4.637595503120817e-5
+    virial_max_eV = 0.000923964817502565
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.418811734765768e-10
+    forces_max_eV_per_A = 3.8613556796462944e-13
+    virial_max_eV = 1.709850039333105e-10
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.418811734765768e-10
+    forces_max_eV_per_A = 3.8613556796462944e-13
+    virial_max_eV = 1.709850039333105e-10
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.0011683110969897825
+    forces_max_eV_per_A = 9.055547589184587e-5
+    virial_max_eV = 0.06308938366055372
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "medium-ti"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.0011683110969897825
+    forces_max_eV_per_A = 9.055547589184587e-5
+    virial_max_eV = 0.06308938366055372
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.0658141036401503e-14
+    forces_max_eV_per_A = 2.6548208076349056e-14
+    virial_max_eV = 3.7125857943465235e-13
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.0658141036401503e-14
+    forces_max_eV_per_A = 2.6548208076349056e-14
+    virial_max_eV = 3.7125857943465235e-13
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 2.684418980436476e-7
+    forces_max_eV_per_A = 2.8687662588788854e-6
+    virial_max_eV = 0.00010636266414465467
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 2.684418980436476e-7
+    forces_max_eV_per_A = 2.8687662588788854e-6
+    virial_max_eV = 0.00010636266414465467
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 4.973799150320701e-14
+    forces_max_eV_per_A = 2.7144952952085077e-14
+    virial_max_eV = 5.8548721426632255e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 4.973799150320701e-14
+    forces_max_eV_per_A = 2.7144952952085077e-14
+    virial_max_eV = 5.8548721426632255e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 1024
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 9.394169254051121e-6
+    forces_max_eV_per_A = 4.960995553762726e-6
+    virial_max_eV = 0.0007558232961315525
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 1024
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 9.394169254051121e-6
+    forces_max_eV_per_A = 4.960995553762726e-6
+    virial_max_eV = 0.0007558232961315525
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 5.684341886080802e-14
+    forces_max_eV_per_A = 4.3270942384765476e-14
+    virial_max_eV = 2.4556356947869062e-11
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 5.684341886080802e-14
+    forces_max_eV_per_A = 4.3270942384765476e-14
+    virial_max_eV = 2.4556356947869062e-11
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 11664
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.00013504876898196017
+    forces_max_eV_per_A = 1.1738908875180698e-5
+    virial_max_eV = 0.007924636709731203
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 11664
+model = "large-tial"
+oracle_version = "0.10.2"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.00013504876898196017
+    forces_max_eV_per_A = 1.1738908875180698e-5
+    virial_max_eV = 0.007924636709731203
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "ti"
+oracle_version = "0.6.6"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.7462298274040222e-10
+    forces_max_eV_per_A = 2.5202062658991053e-14
+    virial_max_eV = 4.575895218295045e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "ti"
+oracle_version = "0.6.6"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 1.7462298274040222e-10
+    forces_max_eV_per_A = 2.5202062658991053e-14
+    virial_max_eV = 4.575895218295045e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "ti"
+oracle_version = "0.6.6"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.00807029104907997
+    forces_max_eV_per_A = 1.5418521983556754e-5
+    virial_max_eV = 0.001976534593723045
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "ti"
+oracle_version = "0.6.6"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.00807029104907997
+    forces_max_eV_per_A = 1.5418521983556754e-5
+    virial_max_eV = 0.001976534593723045
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "tialv"
+oracle_version = "0.6.6"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 3.7834979593753815e-10
+    forces_max_eV_per_A = 2.353672812205332e-14
+    virial_max_eV = 2.2737367544323206e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "tialv"
+oracle_version = "0.6.6"
+precision = "Float64"
+
+    [cases.external_errors]
+    energy_abs_eV = 3.7834979593753815e-10
+    forces_max_eV_per_A = 2.353672812205332e-14
+    virial_max_eV = 2.2737367544323206e-12
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "reference"
+atoms = 128
+model = "tialv"
+oracle_version = "0.6.6"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.19188834074884653
+    forces_max_eV_per_A = 1.4095258186630488e-5
+    virial_max_eV = 0.001004545071054963
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "optimized"
+atoms = 128
+model = "tialv"
+oracle_version = "0.6.6"
+precision = "Float32"
+
+    [cases.external_errors]
+    energy_abs_eV = 0.19188834074884653
+    forces_max_eV_per_A = 1.4095258186630488e-5
+    virial_max_eV = 0.001004545071054963
+
+    [cases.prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0

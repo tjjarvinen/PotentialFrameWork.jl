@@ -1,0 +1,8 @@
+ti 128 Float64 reference prepared ms=74.664492
+ti 128 Float64 optimized prepared ms=24.8051435
+ti 128 Float32 reference prepared ms=73.4625465
+ti 128 Float32 optimized prepared ms=23.686343
+tialv 128 Float64 reference prepared ms=217.11833000000001
+tialv 128 Float64 optimized prepared ms=60.118253
+tialv 128 Float32 reference prepared ms=214.23630100000003
+tialv 128 Float32 optimized prepared ms=57.837022000000005

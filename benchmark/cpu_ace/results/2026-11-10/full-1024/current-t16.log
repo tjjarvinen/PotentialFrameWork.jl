@@ -1,0 +1,12 @@
+small-tial 1024 Float64 reference prepared ms=3.7410110000000003
+small-tial 1024 Float64 optimized prepared ms=2.6980105
+small-tial 1024 Float32 reference prepared ms=2.9074665000000004
+small-tial 1024 Float32 optimized prepared ms=2.4457740000000006
+medium-ti 1024 Float64 reference prepared ms=4.217154000000001
+medium-ti 1024 Float64 optimized prepared ms=3.196823
+medium-ti 1024 Float32 reference prepared ms=3.2681035
+medium-ti 1024 Float32 optimized prepared ms=2.5913695000000003
+large-tial 1024 Float64 reference prepared ms=133.6413865
+large-tial 1024 Float64 optimized prepared ms=26.665511000000002
+large-tial 1024 Float32 reference prepared ms=89.31785
+large-tial 1024 Float32 optimized prepared ms=25.241353

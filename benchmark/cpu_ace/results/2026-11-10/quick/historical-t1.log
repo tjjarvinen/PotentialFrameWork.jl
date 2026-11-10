@@ -1,0 +1,8 @@
+small-tial 128 Float64 historical prepared ms=1.7664805000000001
+small-tial 128 Float32 historical prepared ms=1.648175
+small-tial 11664 Float64 historical prepared ms=157.8718945
+small-tial 11664 Float32 historical prepared ms=149.71926900000003
+medium-ti 128 Float64 historical prepared ms=2.216422
+medium-ti 128 Float32 historical prepared ms=2.0863365
+large-tial 128 Float64 historical prepared ms=72.718818
+large-tial 128 Float32 historical prepared ms=71.3121485

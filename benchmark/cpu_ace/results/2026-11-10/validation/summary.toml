@@ -1,0 +1,30 @@
+schema = "PFW.CPUACE.Stage1.Validation.v1"
+new_assertions = 635
+full_assertions_per_process = 54593
+julia_versions = ["1.13.3", "1.10.12"]
+threads = 4
+optional_ACEfit_version = "0.3.1"
+optional_ACEfit_assertions = 4
+public_calculator_cases = 44
+public_calculator_results = "public.toml"
+cpu_only_loading = "passed with AMDGPU and SpheriCart extensions absent"
+functional_derivative_path = "unchanged polynomial projection; full scalar AD, force pullbacks, MD, equivariant feature/readout and Lux regressions passed"
+prepared_force_strain_fd = "44 assertions; h=1e-5, atol=rtol=2e-7; open and periodic nonsymmetric geometries"
+product_tests = "591 assertions; Float32/Float64 values/weighted U,V adjoints, zeros, repeated factors, finite differences, constrained fallback, empty product sets, selections, masks and parameter updates"
+float64_product_algebra_tolerance = 3e-12
+float32_product_algebra_tolerance = 2e-5
+float64_product_fd_step = 1e-5
+float64_product_fd_tolerance = 5e-8
+float32_product_fd_step = 0.002
+float32_product_fd_tolerance = 2e-4
+fd_tolerance_reason = "central differences incur O(h^2) truncation and O(eps/h) rounding; separate from algebraic comparison; established package tolerances unchanged"
+
+[[omissions]]
+component = "real RX 6800 XT GPU regressions"
+status = "not rerun"
+reason = "CPU-only prepared implementation changed; GPU algorithms untouched; portable GPU-kernel regressions pass in both full suites; no new real-device coverage claimed"
+
+[[omissions]]
+component = "UnicodePlots optional extension"
+status = "not rerun"
+reason = "not installed in these application environments; plotting code unchanged"

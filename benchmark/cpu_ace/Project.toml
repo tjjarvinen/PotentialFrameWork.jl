@@ -1,0 +1,10 @@
+[deps]
+ChainRulesCore = "d360d2e6-b24c-11e9-a2a3-2a2ae2dbcce4"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+PotentialFrameWork = "069ed237-161a-43fa-b820-4bdfd41b3db4"
+SpheriCart = "5caf2b29-02d9-47a3-9434-5931c85ba645"
+[compat]
+BenchmarkTools = "1"
+SpheriCart = "0.2.4"
+julia = "1.10"

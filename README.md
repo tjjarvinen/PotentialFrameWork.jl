@@ -398,8 +398,18 @@ Rebuild the environment and call `A.prepare_executor!` before changed topology;
 `A.prepared_result` arrays own their storage. The default angular backend remains
 SpheriCart. Explicit `angular_backend=:generated` / `:block` and `fused=true`
 select measured experiments. Tiled fusion retains intermediates for reverse
-contraction. Imported coefficients remain Float64; a Float32 executor uses
-Float32 buffers with mixed radial arithmetic. No GPU support is implemented.
+contraction. Use `A.adapt_model(model, ps; precision=Float32)` for coherent
+Float32 model/parameter arithmetic; selecting Float32 scratch alone on an
+unadapted Float64 model retains mixed radial arithmetic.
+
+Prepared scalar inference accepts `product_algorithm=:auto` (default),
+`:reference`, or `:optimized` in the CPU executor/calculator constructors and
+execution calls. Unrestricted products use a division-free prefix/reverse sweep;
+restricted species-order policies retain polynomial projection. The reference
+choice always retains the original algorithm. Functional AD and equivariant
+features keep their existing general paths. The [CPU stage-one benchmark suite](benchmark/cpu_ace/README.md)
+provides matched modern/legacy comparisons, stage diagnostics and historical
+source reproduction.
 
 For an external reference comparison, see the [Argon Lennard-Jones benchmark](benchmark/lennard_jones/README.md).
 It matches EmpiricalPotentials' cutoff formula, checks energy/forces/virial, and

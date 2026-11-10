@@ -1,0 +1,4 @@
+Test Summary:                                                          | Pass  Total   Time
+prepared product algorithm: division-free values and weighted adjoints |  585    585  12.7s
+Test Summary:                                          | Pass  Total  Time
+optimized prepared force and strain finite differences |   44     44  1.4s

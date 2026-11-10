@@ -1,0 +1,16 @@
+small-tial 128 Float64 reference prepared ms=1.7475815
+small-tial 128 Float64 optimized prepared ms=1.3127600000000001
+small-tial 128 Float32 reference prepared ms=1.6858760000000002
+small-tial 128 Float32 optimized prepared ms=1.2464095000000002
+small-tial 11664 Float64 reference prepared ms=159.754208
+small-tial 11664 Float64 optimized prepared ms=120.25133200000002
+small-tial 11664 Float32 reference prepared ms=151.94402950000003
+small-tial 11664 Float32 optimized prepared ms=112.43792300000001
+medium-ti 128 Float64 reference prepared ms=2.2273935
+medium-ti 128 Float64 optimized prepared ms=1.611491
+medium-ti 128 Float32 reference prepared ms=2.098303
+medium-ti 128 Float32 optimized prepared ms=1.5010455
+large-tial 128 Float64 reference prepared ms=72.66512
+large-tial 128 Float64 optimized prepared ms=17.4227445
+large-tial 128 Float32 reference prepared ms=71.08293400000001
+large-tial 128 Float32 optimized prepared ms=17.213309000000002

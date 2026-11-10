@@ -1,0 +1,216 @@
+    Updating `/tmp/pfw-stage1-modern/Project.toml`
+  [6e4b80f9] + BenchmarkTools v1.8.0
+    Manifest No packages added to or removed from `/tmp/pfw-stage1-modern/Manifest.toml`
+WARNING: Imported binding DecoratedParticles.system was undeclared at import time during import to AtomsBaseExt.
+WARNING: Constructor for type "Array" was extended in `LowRankApprox` without explicit qualification or import.
+  NOTE: Assumed "Array" refers to `Base.Array`. This behavior is deprecated and may differ in future versions.
+  NOTE: This behavior may have differed in Julia versions prior to 1.12.
+  Hint: If you intended to create a new generic function of the same name, use `function Array end`.
+  Hint: To silence the warning, qualify `Array` as `Base.Array` in the method signature or explicitly `import Base: Array`.
+┌ Warning: Reseau precompile workload failed; skipping the rest of it
+│   exception =
+│    SystemError: socket: Operation not permitted
+│    Stacktrace:
+│      [1] _throw_errno(op::String, errno::Int32)
+│        @ Reseau.SocketOps ~/.julia/packages/Reseau/3sG3i/src/socket_ops/linux.jl:46
+│      [2] open_socket
+│        @ ~/.julia/packages/Reseau/3sG3i/src/socket_ops/linux.jl:140 [inlined]
+│      [3] open_socket
+│        @ ~/.julia/packages/Reseau/3sG3i/src/socket_ops/linux.jl:138 [inlined]
+│      [4] _pc_stream_pair()
+│        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:70
+│      [5] _pc_run_eventloops_workload!()
+│        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:193
+│      [6] _pc_run_selected_workloads!()
+│        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:862
+│      [7] _pc_run_precompile_workloads!()
+│        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:887
+│      [8] macro expansion
+│        @ ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:900 [inlined]
+│      [9] macro expansion
+│        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:70 [inlined]
+│     [10] macro expansion
+│        @ ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:899 [inlined]
+│     [11] macro expansion
+│        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:118 [inlined]
+│     [12] top-level scope
+│        @ ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:115
+│     [13] include(mapexpr::Function, mod::Module, _path::String)
+│        @ Base ./Base.jl:310
+│     [14] top-level scope
+│        @ ~/.julia/packages/Reseau/3sG3i/src/Reseau.jl:22
+│     [15] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:309
+│     [16] include_package_for_output(pkg::Base.PkgId, input::String, depot_path::Vector{String}, dl_load_path::Vector{String}, load_path::Vector{String}, concrete_deps::Vector{Pair{Base.PkgId, UInt128}}, source::Nothing, preresolved::Vector{Pair{Base.PkgId, String}})
+│        @ Base ./loading.jl:3229
+│     [17] top-level scope
+│        @ stdin:5
+│     [18] eval(m::Module, e::Any)
+│        @ Core ./boot.jl:489
+│     [19] include_string(mapexpr::typeof(identity), mod::Module, code::String, filename::String)
+│        @ Base ./loading.jl:3064
+│     [20] include_string
+│        @ ./loading.jl:3074 [inlined]
+│     [21] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:342
+│     [22] _start()
+│        @ Base ./client.jl:577
+└ @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:892
+┌ Info: Ignoring an error that occurred during the precompilation workload
+│   exception =
+│    http connect error to 127.0.0.1:0: listen tcp -> 127.0.0.1:0: SystemError: socket: Operation not permitted
+│    Stacktrace:
+│      [1] _listen_tcp(network::String, address::String, backlog::Int64, reuseaddr::Bool)
+│        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/http_server.jl:1358
+│      [2] serve!(handler::HTTP.Handlers.Router{typeof(HTTP.Handlers.default404), typeof(HTTP.Handlers.default405), Nothing}, host::String, port_num::Int64; read_timeout_ns::Int64, read_header_timeout_ns::Int64, write_timeout_ns::Int64, idle_timeout_ns::Int64, read_timeout::Nothing, read_header_timeout::Nothing, write_timeout::Nothing, idle_timeout::Nothing, readtimeout::Nothing, verbose::Nothing, max_header_bytes::Int64, max_body_bytes::Int64, http2_settings::HTTP.HTTP2Settings, max_concurrent_streams::Int64, allow_h2c::Bool, listenany::Bool, reuseaddr::Bool, backlog::Int64)
+│        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/http_server.jl:1734
+│      [3] serve!
+│        @ ~/.julia/packages/HTTP/RKAhY/src/http_server.jl:1710 [inlined]
+│      [4] _run_precompile_workload_inner!()
+│        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:178
+│      [5] _run_precompile_workload!()
+│        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:387
+│      [6] macro expansion
+│        @ ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:441 [inlined]
+│      [7] macro expansion
+│        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:70 [inlined]
+│      [8] macro expansion
+│        @ ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:440 [inlined]
+│      [9] macro expansion
+│        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:118 [inlined]
+│     [10] top-level scope
+│        @ ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:439
+│     [11] include(mapexpr::Function, mod::Module, _path::String)
+│        @ Base ./Base.jl:310
+│     [12] IncludeInto
+│        @ ./Base.jl:311 [inlined]
+│     [13] top-level scope
+│        @ ~/.julia/packages/HTTP/RKAhY/src/HTTP.jl:96
+│     [14] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:309
+│     [15] include_package_for_output(pkg::Base.PkgId, input::String, depot_path::Vector{String}, dl_load_path::Vector{String}, load_path::Vector{String}, concrete_deps::Vector{Pair{Base.PkgId, UInt128}}, source::Nothing, preresolved::Vector{Pair{Base.PkgId, String}})
+│        @ Base ./loading.jl:3229
+│     [16] top-level scope
+│        @ stdin:5
+│     [17] eval(m::Module, e::Any)
+│        @ Core ./boot.jl:489
+│     [18] include_string(mapexpr::typeof(identity), mod::Module, code::String, filename::String)
+│        @ Base ./loading.jl:3064
+│     [19] include_string
+│        @ ./loading.jl:3074 [inlined]
+│     [20] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:342
+│     [21] _start()
+└        @ Base ./client.jl:577
+
+  4 dependencies had output during precompilation:
+┌ HTTP
+│  ┌ Info: Ignoring an error that occurred during the precompilation workload
+│  │   exception =
+│  │    http connect error to 127.0.0.1:0: listen tcp -> 127.0.0.1:0: SystemError: socket: Operation not permitted
+│  │    Stacktrace:
+│  │      [1] _listen_tcp(network::String, address::String, backlog::Int64, reuseaddr::Bool)
+│  │        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/http_server.jl:1358
+│  │      [2] serve!(handler::HTTP.Handlers.Router{typeof(HTTP.Handlers.default404), typeof(HTTP.Handlers.default405), Nothing}, host::String, port_num::Int64; read_timeout_ns::Int64, read_header_timeout_ns::Int64, write_timeout_ns::Int64, idle_timeout_ns::Int64, read_timeout::Nothing, read_header_timeout::Nothing, write_timeout::Nothing, idle_timeout::Nothing, readtimeout::Nothing, verbose::Nothing, max_header_bytes::Int64, max_body_bytes::Int64, http2_settings::HTTP.HTTP2Settings, max_concurrent_streams::Int64, allow_h2c::Bool, listenany::Bool, reuseaddr::Bool, backlog::Int64)
+│  │        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/http_server.jl:1734
+│  │      [3] serve!
+│  │        @ ~/.julia/packages/HTTP/RKAhY/src/http_server.jl:1710 [inlined]
+│  │      [4] _run_precompile_workload_inner!()
+│  │        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:178
+│  │      [5] _run_precompile_workload!()
+│  │        @ HTTP ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:387
+│  │      [6] macro expansion
+│  │        @ ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:441 [inlined]
+│  │      [7] macro expansion
+│  │        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:70 [inlined]
+│  │      [8] macro expansion
+│  │        @ ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:440 [inlined]
+│  │      [9] macro expansion
+│  │        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:118 [inlined]
+│  │     [10] top-level scope
+│  │        @ ~/.julia/packages/HTTP/RKAhY/src/precompile.jl:439
+│  │     [11] include(mapexpr::Function, mod::Module, _path::String)
+│  │        @ Base ./Base.jl:310
+│  │     [12] IncludeInto
+│  │        @ ./Base.jl:311 [inlined]
+│  │     [13] top-level scope
+│  │        @ ~/.julia/packages/HTTP/RKAhY/src/HTTP.jl:96
+│  │     [14] include(mod::Module, _path::String)
+│  │        @ Base ./Base.jl:309
+│  │     [15] include_package_for_output(pkg::Base.PkgId, input::String, depot_path::Vector{String}, dl_load_path::Vector{String}, load_path::Vector{String}, concrete_deps::Vector{Pair{Base.PkgId, UInt128}}, source::Nothing, preresolved::Vector{Pair{Base.PkgId, String}})
+│  │        @ Base ./loading.jl:3229
+│  │     [16] top-level scope
+│  │        @ stdin:5
+│  │     [17] eval(m::Module, e::Any)
+│  │        @ Core ./boot.jl:489
+│  │     [18] include_string(mapexpr::typeof(identity), mod::Module, code::String, filename::String)
+│  │        @ Base ./loading.jl:3064
+│  │     [19] include_string
+│  │        @ ./loading.jl:3074 [inlined]
+│  │     [20] exec_options(opts::Base.JLOptions)
+│  │        @ Base ./client.jl:342
+│  │     [21] _start()
+│  └        @ Base ./client.jl:577
+└  
+┌ Reseau
+│  ┌ Warning: Reseau precompile workload failed; skipping the rest of it
+│  │   exception =
+│  │    SystemError: socket: Operation not permitted
+│  │    Stacktrace:
+│  │      [1] _throw_errno(op::String, errno::Int32)
+│  │        @ Reseau.SocketOps ~/.julia/packages/Reseau/3sG3i/src/socket_ops/linux.jl:46
+│  │      [2] open_socket
+│  │        @ ~/.julia/packages/Reseau/3sG3i/src/socket_ops/linux.jl:140 [inlined]
+│  │      [3] open_socket
+│  │        @ ~/.julia/packages/Reseau/3sG3i/src/socket_ops/linux.jl:138 [inlined]
+│  │      [4] _pc_stream_pair()
+│  │        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:70
+│  │      [5] _pc_run_eventloops_workload!()
+│  │        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:193
+│  │      [6] _pc_run_selected_workloads!()
+│  │        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:862
+│  │      [7] _pc_run_precompile_workloads!()
+│  │        @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:887
+│  │      [8] macro expansion
+│  │        @ ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:900 [inlined]
+│  │      [9] macro expansion
+│  │        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:70 [inlined]
+│  │     [10] macro expansion
+│  │        @ ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:899 [inlined]
+│  │     [11] macro expansion
+│  │        @ ~/.julia/packages/PrecompileTools/QUxvR/src/workloads.jl:118 [inlined]
+│  │     [12] top-level scope
+│  │        @ ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:115
+│  │     [13] include(mapexpr::Function, mod::Module, _path::String)
+│  │        @ Base ./Base.jl:310
+│  │     [14] top-level scope
+│  │        @ ~/.julia/packages/Reseau/3sG3i/src/Reseau.jl:22
+│  │     [15] include(mod::Module, _path::String)
+│  │        @ Base ./Base.jl:309
+│  │     [16] include_package_for_output(pkg::Base.PkgId, input::String, depot_path::Vector{String}, dl_load_path::Vector{String}, load_path::Vector{String}, concrete_deps::Vector{Pair{Base.PkgId, UInt128}}, source::Nothing, preresolved::Vector{Pair{Base.PkgId, String}})
+│  │        @ Base ./loading.jl:3229
+│  │     [17] top-level scope
+│  │        @ stdin:5
+│  │     [18] eval(m::Module, e::Any)
+│  │        @ Core ./boot.jl:489
+│  │     [19] include_string(mapexpr::typeof(identity), mod::Module, code::String, filename::String)
+│  │        @ Base ./loading.jl:3064
+│  │     [20] include_string
+│  │        @ ./loading.jl:3074 [inlined]
+│  │     [21] exec_options(opts::Base.JLOptions)
+│  │        @ Base ./client.jl:342
+│  │     [22] _start()
+│  │        @ Base ./client.jl:577
+│  └ @ Reseau ~/.julia/packages/Reseau/3sG3i/src/6_precompile_workload.jl:892
+└  
+┌ LowRankApprox
+│  WARNING: Constructor for type "Array" was extended in `LowRankApprox` without explicit qualification or import.
+│    NOTE: Assumed "Array" refers to `Base.Array`. This behavior is deprecated and may differ in future versions.
+│    NOTE: This behavior may have differed in Julia versions prior to 1.12.
+│    Hint: If you intended to create a new generic function of the same name, use `function Array end`.
+│    Hint: To silence the warning, qualify `Array` as `Base.Array` in the method signature or explicitly `import Base: Array`.
+└  
+┌ DecoratedParticles → AtomsBaseExt
+│  WARNING: Imported binding DecoratedParticles.system was undeclared at import time during import to AtomsBaseExt.
+└  
+0.10.2

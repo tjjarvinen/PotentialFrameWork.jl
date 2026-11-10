@@ -1,5 +1,92 @@
 # Implementation status
 
+## CPU ACE optimization stage 1 (2026-11-10)
+
+Completed the stage-one implementation from the supplied instructions on
+`ea076d3c18d5ae66776f1fa785e729f2eadfba54`. Before editing, archived the clean
+tracked source; the supplied untracked instruction file and original reference
+inputs remain untouched. Immutable historical source, compatible application
+manifests, source hashes/patches, cached model/geometry identities and exact
+commands are recorded under `benchmark/cpu_ace/`. Historical benchmark artifacts
+are unchanged. No delegation was used; package identity and Julia 1.10.10 core
+compatibility remain unchanged.
+
+Prepared CPU scalar inference now accepts `product_algorithm=:reference`,
+`:optimized`, or `:auto` in executor/calculator construction, execution and generic
+potential preparation. The reference uses the original polynomial algorithm.
+The other choices use division-free prefix/reverse evaluation only when
+`policy.orders === nothing`, including nonempty U/V species partitions.
+Repeated/zero factors and weighted additive U/V adjoints use existing bounded
+scratch, without per-product allocation or polynomial-table clearing. Restricted
+policies always retain general projection. Parameters/masks refresh every call.
+Functional AD, equivariant features, original imports/checkpoints, GPU mathematics,
+CPU coloring, exclusive scratch ownership and one shared sorted force array are
+preserved. The explicitly typed original five-argument PreparedACE constructor
+remains compatible.
+
+CPU-only quick/full BenchmarkTools entry points now cover matched modern
+ACEpotentials 0.10.2 models: supplied small TiAl, deterministic synthetic medium
+Ti and large TiAl. Their radial/harmonic/density/product counts and coupling
+structure are recorded, including the large model's 13,919 products and 14,855
+coupling nonzeros. Its actual backend is Models.ACEModel / EquivariantTensors,
+not old ACE1. Published Ti/Ti–Al–V remain separately labelled 0.6.6/ACE1 analytic
+comparisons, with attribution and exact pair/reference contributions retained.
+The legacy environment runs on Julia 1.10.12; its bundled MbedTLS_jll manifest
+cannot be loaded directly on Julia 1.13. Original pinned environments are intact.
+
+Final sequential measurements cover 128/1,024/11,664 atoms, both PFW precisions,
+1/4/16-thread processes, additional controlled physical-core affinity repeats,
+widths 1/4/8, prepared/public/three-frame fresh-rebuild boundaries, stage
+microbenchmarks, sampling profiles and actual Float32/Float64 callee dumps.
+All final prepared/public trials have ten warmed samples; the expensive large
+11,664-atom reference replay has five, explicitly flagged. Medium/large Float32
+at 11,664 atoms are numerically validated but not timed. Legacy timings are
+128 atoms only. No CPU skin reuse, product DAG, broad batching/contraction/
+reduction rewrite or AD optimization was introduced.
+
+On AMD Ryzen 9 9950X / Julia 1.13.3 / one BLAS thread, serial Float64 large TiAl
+prepared E/F/V improves **578.57 -> 137.96 ms at 1,024 atoms (4.19×)** and
+**6.672 -> 1.604 s at 11,664 (4.16×)**. The historical-source 1,024-atom result is
+589.49 ms, a 4.27× total gain. Small TiAl improves **159.65 -> 120.12 ms** at
+11,664 atoms (1.33× incremental, 1.32× historical). Published Ti and Ti–Al–V
+improve 3.01× / 3.61× at 128 atoms. Complete public calls do not universally beat
+modern ACEpotentials; losses and affinity-dependent parallel variation are
+reported. External Float32 is unsupported and labelled separately from PFW
+rounded-reference agreement and Float64 application sensitivity.
+
+Serial prepared execution allocates zero measured host bytes in these cases;
+parallel task scheduling still allocates (large TiAl / 1,024 atoms: 456,864 bytes
+at four threads, 1,002,032 at sixteen). Scratch payload is separate from allocation
+volume and allocator peaks. Product work remains dominant in large fixtures;
+shared-product plans are the measured next priority. For small-model public
+calls, preparation/species packing and scheduling merit separate profiling.
+There is no universal Float32 or width speed claim. General scalar/vector/tensor
+feature and position/parameter pullback costs are preserved as separate baselines.
+
+Validation: **54,593 assertions pass per full test/runtests.jl process**, Julia
+**1.13.3** and **1.10.12**, four threads (635 added assertions). Required existing
+energy/force/virial derivatives, force pullbacks, fixed-cell rollout, equivariance/
+parity, parameter authority, lifetime, units and portable GPU regressions pass.
+The new prepared force/strain stencil retains 2e-7 tolerance at h=1e-5; product
+finite-difference tolerances are separately justified, with existing tolerances
+unchanged. Optional ACEfit 0.3.1 passes four assertions. Separate **44 public
+E/F/V cases** pass against independent oracles and prepared outputs. CPU-only
+loading passes with vendor/angular extensions absent. Real RX hardware and
+optional UnicodePlots were not rerun; no new coverage is claimed.
+
+PACE at `/opt/lammps-static/bin/lmp` is available and probed, with executable
+hash/version/help retained. No PACE timing comparison was launched: equivalent
+exported spline interpolation, endpoint/pair-table behavior and numerical E/F/V
+conventions remain unvalidated. This is an explicit optional unsupported result.
+
+Report, measured limitations and next-stage recommendation:
+`benchmark/cpu_ace/REPORT.md`. Reproduction:
+`benchmark/cpu_ace/README.md` and
+`benchmark/cpu_ace/results/2026-11-10/REPRODUCE.md`. Raw TOML/JSON, source snapshots,
+environments, validation logs, profiles, compressed generated code and host
+identity are under `benchmark/cpu_ace/results/2026-11-10/`.
+
+
 ## GPU ACE milestone 1 (2026-11-09)
 
 Implemented scalar GPU ACE E/F/V, coherent Float32/Float64 model/parameter

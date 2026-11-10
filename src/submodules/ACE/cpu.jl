@@ -30,7 +30,10 @@ struct PreparedACE{M,B,C,W}
     weights::C
     simd::Bool
     fused::Bool
+    product_algorithm::Symbol
 end
+# Preserve the original explicit prepared constructor.
+PreparedACE{M,B,C,W}(m,b,c,simd,fused) where {M,B,C,W}=PreparedACE{M,B,C,W}(m,b,c,simd,fused,:auto)
 mutable struct CPUExecutor{T,B,M,R,S,P}
     model::M
     environment::FullEnvironment
@@ -50,7 +53,8 @@ mutable struct CPUExecutor{T,B,M,R,S,P}
     batch_size::Int
     prepared::P
 end
-function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angular_backend=:sphericart,batch_size=1)
+function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angular_backend=:sphericart,batch_size=1,product_algorithm=:auto)
+    check_product_algorithm(product_algorithm)
     precision in (Float32,Float64) || throw(ArgumentError("CPU executor precision must be Float32/64"))
     slots>0 || throw(ArgumentError("slots must be positive"))
     batch_size isa Integer && batch_size>0 || throw(ArgumentError("batch_size must be positive"))
@@ -59,7 +63,7 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
     T=precision
     scratch=[NI.make_scratch(model,0,T) for _=1:slots]
     weights=zeros(T,length(model.products),length(model.atomic_numbers))
-    prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false)
+    prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false,product_algorithm)
     w=CPUExecutor(model,env,basis,scratch,zeros(T,3,0),Int[],Int[],
         weights,T[],zeros(T,9,0),0,UInt(0),
         zeros(promote_type(T,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector(),NL.site_slots(scratch,0,batch_size,T),Int(batch_size),prepared)
@@ -203,7 +207,7 @@ function NI.evaluate_site!(out,p::PreparedACE{M,B,C,W},site,ps,s::SiteScratch{T}
         end
     end
     energy=T(reference_value(model,iz))
-    product_projection!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial)
+    prepared_products!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial,p.product_algorithm)
     for k in eachindex(s.P); energy+=p.weights[k,iz]*s.P[k]; end
     for j=1:count,n=1:size(s.Q,2); energy+=s.Q[j,n]*ps.Wpair[n,iz]; end
     NL.wants(AC.Energy,props) && NI.set_energy!(out,energy)
@@ -223,7 +227,7 @@ end
 
 # Compatibility helper for existing site-footprint diagnostics.
 function cpu_site!(w::CPUExecutor,s::SiteScratch,i,X,H,ps,::Val{W},simd,fused=false) where W
-    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused)
+    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused,w.prepared.product_algorithm)
     site=NL.SiteView(w.environment,X,H,i); out=w.slots[1].outputs[1]
     props=(AC.Energy(),AC.Forces(),AC.Virial())
     NI.evaluate_site!(out,p,site,ps,s,props)
@@ -235,7 +239,7 @@ shared force array. `prepare_executor!` follows every environment rebuild.
 Precontraction is refreshed from authoritative parameters on every execution.
 Scratch is exclusive per slot; phases advertise complete endpoint footprints.
 """
-function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()))
+function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,product_algorithm=w.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()))
     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
     env=w.environment
     env.version==w.environment_version || throw(ArgumentError("prepare executor after rebuilding the environment"))
@@ -252,7 +256,7 @@ function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,f
     mul!(w.weights,transpose(w.model.coupling),w.readout)
     props=NL.normalize_properties(properties)
     env.width==prepared_width(w.prepared) || throw(ArgumentError("stale layout width"))
-    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused)
+    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused,check_product_algorithm(product_algorithm))
     NL.execute_sites!(w.force,w.inverse,w.energies,w.virials,env,selected,selected_mask,w.slots,p,X,H,ps,props,w.batch_size;parallel)
 
     w
@@ -300,7 +304,7 @@ NI.species_channels(m::ResolvedModel)=ChemicalSpecies.(m.atomic_numbers)
 NI.search_cutoff(m::ResolvedModel)=maximum(radial_cutoff(ch) for family in (m.radial,m.pair_radial) for ch in family)
 NI.make_scratch(m::ResolvedModel,capacity,::Type{T}) where T=SiteScratch(m,capacity,T)
 NI.make_scratch(p::PreparedACE,capacity,::Type{T}) where T=SiteScratch(p.model,capacity,T)
-function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1,angular_backend=:sphericart,simd=true,fused=false,kwargs...)
+function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1,angular_backend=:sphericart,simd=true,fused=false,product_algorithm=:auto,kwargs...)
     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
     width in (1,2,4,8,16) || throw(ArgumentError("unsupported environment width"))
     NL.check_units(m)
@@ -309,7 +313,7 @@ function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1
     all(s -> element_channel(m,s)>0,species) || throw(ArgumentError("species channels"))
     basis=make_angular(m,precision,angular_backend,width)
     weights=zeros(precision,length(m.products),length(m.atomic_numbers))
-    PreparedACE{typeof(m),typeof(basis),typeof(weights),width}(m,basis,weights,simd,fused)
+    PreparedACE{typeof(m),typeof(basis),typeof(weights),width}(m,basis,weights,simd,fused,check_product_algorithm(product_algorithm))
 end
 function NI.update_prepared!(p::PreparedACE,ps)
     readout=ps.WB .* collect(Bool,p.model.policy.mask)

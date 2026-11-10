@@ -1,0 +1,184 @@
+diff --git a/src/submodules/ACE/calculators.jl b/src/submodules/ACE/calculators.jl
+index e0b1cd7..1555923 100644
+--- a/src/submodules/ACE/calculators.jl
++++ b/src/submodules/ACE/calculators.jl
+@@ -9,7 +9,7 @@ mutable struct ACECalculator{M,P,S,W}
+     environment::FullEnvironment
+     executor::W
+ end
+-function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads(),precision=Float64,angular_backend=:sphericart,batch_size=1,array_type=Array)
++function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads(),precision=Float64,angular_backend=:sphericart,batch_size=1,array_type=Array,product_algorithm=:auto)
+     if array_type!==Array || model isa GPUACEModel
+         b=adapt_model(model,ps;array_type,precision)
+         if b.model isa GPUACEModel
+@@ -20,7 +20,7 @@ function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads()
+         b=adapt_model(model,ps;precision); model=b.model; ps=b.parameters
+     end
+     env=FullEnvironment(;width)
+-    executor=CPUExecutor(model,env;slots,precision,angular_backend,batch_size)
++    executor=CPUExecutor(model,env;slots,precision,angular_backend,batch_size,product_algorithm)
+     ACECalculator(model,deepcopy(ps),deepcopy(st),env,executor)
+ end
+ AC.get_parameters(c::ACECalculator)=deepcopy(c.parameters)
+@@ -34,7 +34,7 @@ AC.length_unit(::ACECalculator)=u"Å"
+ AC.promote_force_type(sys::AbstractSystem{3},c::ACECalculator)=SVector{3,typeof(zero(eltype(c.executor.force))*u"eV/Å")}
+ AC.zero_energy(sys::AbstractSystem{3},c::ACECalculator)=zero(eltype(c.executor.force))*u"eV"
+ AC.zero_virial(sys::AbstractSystem{3},c::ACECalculator)=zero(SMatrix{3,3,typeof(AC.zero_energy(sys,c)),9})
+-function calculator_result(sys,c;parameters=c.parameters,energy_only=false,parallel=false,simd=true,fused=false,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),kwargs...)
++function calculator_result(sys,c;parameters=c.parameters,energy_only=false,parallel=false,simd=true,fused=false,product_algorithm=c.executor.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),kwargs...)
+     parameters=(isnothing(parameters) || parameters===NamedTuple()) ? c.parameters : parameters
+     fast_parameters=parameter_seed(parameters) isa Union{Float32,Float64}
+     boundary=fast_parameters && eltype(c.executor.force)===Float32 ? precision_geometry(sys,Float32) : sys
+@@ -43,7 +43,7 @@ function calculator_result(sys,c;parameters=c.parameters,energy_only=false,paral
+         ace_evaluate(input.positions,c.model,parameters,input.environment,input.cell;state=c.state,energy_only,centers)
+     else
+         prepare_executor!(c.executor,c.environment)
+-        execute_prepared!(c.executor,input.positions,input.cell,parameters;parallel,simd,fused,centers,properties)
++        execute_prepared!(c.executor,input.positions,input.cell,parameters;parallel,simd,fused,product_algorithm,centers,properties)
+         prepared_result(c.executor)
+     end
+     if energy_only
+diff --git a/src/submodules/ACE/cpu.jl b/src/submodules/ACE/cpu.jl
+index c33e14c..fc2213a 100644
+--- a/src/submodules/ACE/cpu.jl
++++ b/src/submodules/ACE/cpu.jl
+@@ -30,7 +30,10 @@ struct PreparedACE{M,B,C,W}
+     weights::C
+     simd::Bool
+     fused::Bool
++    product_algorithm::Symbol
+ end
++# Preserve the original explicit prepared constructor.
++PreparedACE{M,B,C,W}(m,b,c,simd,fused) where {M,B,C,W}=PreparedACE{M,B,C,W}(m,b,c,simd,fused,:auto)
+ mutable struct CPUExecutor{T,B,M,R,S,P}
+     model::M
+     environment::FullEnvironment
+@@ -50,7 +53,8 @@ mutable struct CPUExecutor{T,B,M,R,S,P}
+     batch_size::Int
+     prepared::P
+ end
+-function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angular_backend=:sphericart,batch_size=1)
++function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angular_backend=:sphericart,batch_size=1,product_algorithm=:auto)
++    check_product_algorithm(product_algorithm)
+     precision in (Float32,Float64) || throw(ArgumentError("CPU executor precision must be Float32/64"))
+     slots>0 || throw(ArgumentError("slots must be positive"))
+     batch_size isa Integer && batch_size>0 || throw(ArgumentError("batch_size must be positive"))
+@@ -59,7 +63,7 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
+     T=precision
+     scratch=[NI.make_scratch(model,0,T) for _=1:slots]
+     weights=zeros(T,length(model.products),length(model.atomic_numbers))
+-    prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false)
++    prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false,product_algorithm)
+     w=CPUExecutor(model,env,basis,scratch,zeros(T,3,0),Int[],Int[],
+         weights,T[],zeros(T,9,0),0,UInt(0),
+         zeros(promote_type(T,eltype(model.coupling)),size(model.coupling,1),length(model.atomic_numbers)),BitVector(),NL.site_slots(scratch,0,batch_size,T),Int(batch_size),prepared)
+@@ -203,7 +207,7 @@ function NI.evaluate_site!(out,p::PreparedACE{M,B,C,W},site,ps,s::SiteScratch{T}
+         end
+     end
+     energy=T(reference_value(model,iz))
+-    product_projection!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial)
++    prepared_products!(s.P,s.dA,s.dV,s.U,s.V,model.products,view(p.weights,:,iz),model.policy.orders,s.polynomial,s.reverse_polynomial,p.product_algorithm)
+     for k in eachindex(s.P); energy+=p.weights[k,iz]*s.P[k]; end
+     for j=1:count,n=1:size(s.Q,2); energy+=s.Q[j,n]*ps.Wpair[n,iz]; end
+     NL.wants(AC.Energy,props) && NI.set_energy!(out,energy)
+@@ -223,7 +227,7 @@ end
+ 
+ # Compatibility helper for existing site-footprint diagnostics.
+ function cpu_site!(w::CPUExecutor,s::SiteScratch,i,X,H,ps,::Val{W},simd,fused=false) where W
+-    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused)
++    p=PreparedACE{typeof(w.model),typeof(w.basis),typeof(w.weights),W}(w.model,w.basis,w.weights,simd,fused,w.prepared.product_algorithm)
+     site=NL.SiteView(w.environment,X,H,i); out=w.slots[1].outputs[1]
+     props=(AC.Energy(),AC.Forces(),AC.Virial())
+     NI.evaluate_site!(out,p,site,ps,s,props)
+@@ -235,7 +239,7 @@ shared force array. `prepare_executor!` follows every environment rebuild.
+ Precontraction is refreshed from authoritative parameters on every execution.
+ Scratch is exclusive per slot; phases advertise complete endpoint footprints.
+ """
+-function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()))
++function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,fused=false,product_algorithm=w.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()))
+     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
+     env=w.environment
+     env.version==w.environment_version || throw(ArgumentError("prepare executor after rebuilding the environment"))
+@@ -252,7 +256,7 @@ function execute_prepared_impl!(w::CPUExecutor,X,H,ps;parallel=false,simd=true,f
+     mul!(w.weights,transpose(w.model.coupling),w.readout)
+     props=NL.normalize_properties(properties)
+     env.width==prepared_width(w.prepared) || throw(ArgumentError("stale layout width"))
+-    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused)
++    p=typeof(w.prepared)(w.model,w.basis,w.weights,simd,fused,check_product_algorithm(product_algorithm))
+     NL.execute_sites!(w.force,w.inverse,w.energies,w.virials,env,selected,selected_mask,w.slots,p,X,H,ps,props,w.batch_size;parallel)
+ 
+     w
+@@ -300,7 +304,7 @@ NI.species_channels(m::ResolvedModel)=ChemicalSpecies.(m.atomic_numbers)
+ NI.search_cutoff(m::ResolvedModel)=maximum(radial_cutoff(ch) for family in (m.radial,m.pair_radial) for ch in family)
+ NI.make_scratch(m::ResolvedModel,capacity,::Type{T}) where T=SiteScratch(m,capacity,T)
+ NI.make_scratch(p::PreparedACE,capacity,::Type{T}) where T=SiteScratch(p.model,capacity,T)
+-function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1,angular_backend=:sphericart,simd=true,fused=false,kwargs...)
++function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1,angular_backend=:sphericart,simd=true,fused=false,product_algorithm=:auto,kwargs...)
+     fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
+     width in (1,2,4,8,16) || throw(ArgumentError("unsupported environment width"))
+     NL.check_units(m)
+@@ -309,7 +313,7 @@ function NI.prepare_potential(m::ResolvedModel,species;precision=Float64,width=1
+     all(s -> element_channel(m,s)>0,species) || throw(ArgumentError("species channels"))
+     basis=make_angular(m,precision,angular_backend,width)
+     weights=zeros(precision,length(m.products),length(m.atomic_numbers))
+-    PreparedACE{typeof(m),typeof(basis),typeof(weights),width}(m,basis,weights,simd,fused)
++    PreparedACE{typeof(m),typeof(basis),typeof(weights),width}(m,basis,weights,simd,fused,check_product_algorithm(product_algorithm))
+ end
+ function NI.update_prepared!(p::PreparedACE,ps)
+     readout=ps.WB .* collect(Bool,p.model.policy.mask)
+diff --git a/src/submodules/ACE/projection.jl b/src/submodules/ACE/projection.jl
+index de73210..ed5b0ce 100644
+--- a/src/submodules/ACE/projection.jl
++++ b/src/submodules/ACE/projection.jl
+@@ -33,6 +33,39 @@ function product_projection!(P,dU,dV,U,V,products,weights,orders,fwd,rev)
+     end
+     nothing
+ end
++# Prepared scalar inference only. Functional AD and feature evaluation retain
++# product_projection! above. The first row of existing bounded scratch stores
++# prefixes; reverse needs one scalar, including at zero/repeated factors.
++function unrestricted_products!(P,dU,dV,U,V,products,weights,prefix)
++    fill!(dU,0); fill!(dV,0)
++    for (j,indices) in enumerate(products)
++        prefix[1,1]=one(eltype(prefix))
++        for (t,a) in enumerate(indices)
++            prefix[1,t+1]=prefix[1,t]*(U[a]+V[a])
++        end
++        P[j]=prefix[1,length(indices)+1]
++        adj=weights[j]
++        for t=length(indices):-1:1
++            a=indices[t]
++            g=adj*prefix[1,t]
++            dU[a]+=g; dV[a]+=g
++            adj*=U[a]+V[a]
++        end
++    end
++    nothing
++end
++function check_product_algorithm(algorithm)
++    algorithm in (:auto,:reference,:optimized) ||
++        throw(ArgumentError("product_algorithm must be :auto, :reference or :optimized"))
++    algorithm
++end
++function prepared_products!(P,dU,dV,U,V,products,weights,orders,fwd,rev,algorithm)
++    if algorithm!==:reference && isnothing(orders)
++        unrestricted_products!(P,dU,dV,U,V,products,weights,fwd)
++    else
++        product_projection!(P,dU,dV,U,V,products,weights,orders,fwd,rev)
++    end
++end
+ function projection_work(model,::Type{T}) where T
+     K=projection_degree(model); nu=maximum(length,model.products;init=0)
+     zeros(T,K+1,nu+1),zeros(T,K+1,nu+1)
+diff --git a/test/runtests.jl b/test/runtests.jl
+index bd46977..a80d617 100644
+--- a/test/runtests.jl
++++ b/test/runtests.jl
+@@ -257,6 +257,7 @@ include("ace.jl")
+ include("ace_training_units.jl")
+ include("ace_persistence.jl")
+ include("ace_cpu_ad.jl")
++include("ace_products.jl")
+ include("ace_features.jl")
+ include("ace_angular.jl")
+ include("ace_interface.jl")

@@ -1,0 +1,524 @@
+affinity = "uncontrolled; inspect process environment"
+blas_threads = 1
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_target = "znver5"
+julia = "1.13.3"
+llvm_version = "20.1.8"
+loaded_package_source = "/tmp/pfw-stage1-baseline/src/PotentialFrameWork.jl"
+pace_executable_sha256 = "599d046dde36bcf7666dacd45a0a6feb2265743058dea5c1e0d5970a57805784"
+pace_probe = """\nLarge-scale Atomic/Molecular Massively Parallel Simulator - 30 Sep 2026\nGit info (release / patch_30Sep2026)\n\nUsage example: /opt/lammps-static/bin/lmp -var t 300 -echo screen -in in.alloy\n\nList of command-line options supported by this LAMMPS executable:\n\n-echo none/screen/log/both  : echoing of input script (-e)\n-help                       : print this help message (-h)\n-in none/filename           : read input from file or stdin (default) (-i)\n-kokkos on/off ...          : turn KOKKOS mode on or off (-k)\n-log none/filename          : where to send log output (-l)\n-mdi '<mdi flags>'          : pass flags to the MolSSI Driver Interface\n-mpicolor color             : which exe in a multi-exe mpirun cmd (-m)\n-cite                       : select citation reminder style (-c)\n-nocite                     : disable citation reminder (-nc)\n-nonbuf                     : disable screen/logfile buffering (-nb)\n-package style ...          : invoke package command (-pk)\n-partition size1 size2 ...  : assign partition sizes (-p)\n-plog basename              : basename for partition logs (-pl)\n-pscreen basename           : basename for partition screens (-ps)\n-restart2data rfile dfile ... : convert restart to data file (-r2data)\n-restart2dump rfile dgroup dstyle dfile ... \n                            : convert restart to dump file (-r2dump)\n-restart2info rfile         : print info about restart rfile (-r2info)\n-reorder topology-specs     : processor reordering (-r)\n-screen none/filename       : where to send screen output (-sc)\n-skiprun                    : skip loops in run and minimize (-sr)\n-suffix gpu/intel/kk/opt/omp: style suffix to apply (-sf)\n-var varname value          : set index style variable (-v)\n\nOS: Linux \"Fedora Linux 44 (Container Image)\" 7.2.15-300.fc45.x86_64 x86_64\n\nCompiler: GNU C++ 14.2.0 with OpenMP 4.5\nC++ standard: C++20\nUsing fmt library emulation with std::format\nEmbedded JSON class version: 3.12.0\n\nMPI v1.0: LAMMPS MPI STUBS for LAMMPS version 30 Sep 2026\n\nAccelerator configuration:\n\nKOKKOS package API: OpenMP Serial\nKOKKOS package precision: double\nKOKKOS package random numbers: device\nKOKKOS package view layout: legacy\nKokkos library version: 5.2.1\nOPENMP package API: OpenMP\nOPENMP package precision: double\nOpenMP standard: OpenMP 4.5\n\nFFT information:\n\nFFT precision  = double\nFFT engine  = mpiFFT\nFFT library = KISS\nKOKKOS FFT engine  = mpiFFT\nKOKKOS FFT library = KISS\n\nActive compile time flags:\n\n-DLAMMPS_GZIP\n-DLAMMPS_PNG\n-DLAMMPS_JPEG\n-DLAMMPS_CURL\n-DLAMMPS_SMALLBIG\nsizeof(smallint): 32-bit\nsizeof(imageint): 32-bit\nsizeof(tagint):   32-bit\nsizeof(bigint):   64-bit\n\nAvailable compression formats:\n\nExtension: .gz     Command: gzip\nExtension: .bz2    Command: bzip2\nExtension: .zst    Command: zstd\nExtension: .xz     Command: xz\nExtension: .lzma   Command: xz\nExtension: .7z     Command: 7z\n\n\nInstalled packages:\n\nAMOEBA APIP ASPHERE BOCS BODY BPM BROWNIAN CG-DNA CG-SPICA CLASS2 COLLOID \nCOLVARS COMPRESS CORESHELL DIELECTRIC DIFFRACTION DIPOLE DPD-BASIC DPD-MESO \nDPD-REACT DPD-SMOOTH DRUDE EFF ELECTRODE EXTRA-COMMAND EXTRA-COMPUTE EXTRA-DUMP \nEXTRA-FIX EXTRA-MOLECULE EXTRA-PAIR FEP GRANSURF GRANULAR GRAPHICS INTERLAYER \nKOKKOS KSPACE LEPTON MACHDYN MANIFOLD MANYBODY MC MEAM MESONT MGPT MISC ML-IAP \nML-PACE ML-POD ML-RUNNER ML-SNAP ML-UF3 MOFFF MOLECULE OPENMP OPT ORIENT PERI \nPHONON PLUGIN PTM QEQ QTB REACTION REAXFF REPLICA RHEO RIGID SHOCK SMTBQ SPH \nSPIN SRD TALLY UEF VORONOI YAFF \n\nLists of individual styles included in this LAMMPS executable\n(a trailing * marks a style currently provided by a plugin)\n\n* Atom styles:\namoeba     bond        dipole/kk     full       molecular/kk  sphere\nangle      bond/kk     dpd           full/kk    oxdna         sphere/kk\nangle/kk   bpm/sphere  dpd/kk        hybrid     peri          spin\napip       charge      edpd          hybrid/kk  rheo          spin/kk\natomic     charge/kk   electron      line       rheo/thermal  tdpd\natomic/kk  dielectric  ellipsoid     mdpd       smd           template\nbody       dipole      ellipsoid/kk  molecular  sph           tri\n\n\n* Body styles:\nnparticle  rounded/polygon  rounded/polyhedron\n\n\n* Integrate styles:\nrespa  respa/omp  verlet  verlet/kk  verlet/split  verlet/split/rk\n\n\n* Minimize styles:\ncg     fire     fire/old  quickmin     sd     spin     spin/lbfgs\ncg/kk  fire/kk  hftn      quickmin/kk  sd/kk  spin/cg\n\n\n* Pair styles:\nadp                                   lj/cut/coul/debye/omp\nadp/kk                                lj/cut/coul/dsf\nadp/omp                               lj/cut/coul/dsf/kk\nagni                                  lj/cut/coul/dsf/omp\nagni/omp                              lj/cut/coul/esp\naip/water/2dm                         lj/cut/coul/long\naip/water/2dm/opt                     lj/cut/coul/long/cs\nairebo                                lj/cut/coul/long/cs/kk\nairebo/bc                             lj/cut/coul/long/cs/omp\nairebo/bc/omp                         lj/cut/coul/long/dielectric\nairebo/morse                          lj/cut/coul/long/dielectric/omp\nairebo/morse/omp                      lj/cut/coul/long/kk\nairebo/omp                            lj/cut/coul/long/omp\namoeba                                lj/cut/coul/long/opt\natm                                   lj/cut/coul/long/soft\natm/omp                               lj/cut/coul/long/soft/kk\nawpmd/cut                             lj/cut/coul/long/soft/omp\nbeck                                  lj/cut/coul/msm\nbeck/kk                               lj/cut/coul/msm/dielectric\nbeck/omp                              lj/cut/coul/msm/omp\nbody/nparticle                        lj/cut/coul/wolf\nbody/nparticle/omp                    lj/cut/coul/wolf/kk\nbody/rounded/polygon                  lj/cut/coul/wolf/omp\nbody/rounded/polygon/omp              lj/cut/dipole/cut\nbody/rounded/polyhedron               lj/cut/dipole/cut/kk\nbody/rounded/polyhedron/omp           lj/cut/dipole/cut/omp\nbondval                               lj/cut/dipole/long\nbondval/kk                            lj/cut/dipole/long/omp\nbondval/vec                           lj/cut/kk\nbondval/vec/kk                        lj/cut/omp\nbop                                   lj/cut/opt\nborn                                  lj/cut/soft\nborn/coul/dsf                         lj/cut/soft/gapsys\nborn/coul/dsf/cs                      lj/cut/soft/kk\nborn/coul/dsf/cs/kk                   lj/cut/soft/omp\nborn/coul/dsf/cs/omp                  lj/cut/sphere\nborn/coul/dsf/kk                      lj/cut/sphere/kk\nborn/coul/dsf/omp                     lj/cut/sphere/omp\nborn/coul/long                        lj/cut/thole/long\nborn/coul/long/cs                     lj/cut/thole/long/omp\nborn/coul/long/cs/kk                  lj/cut/tip4p/cut\nborn/coul/long/cs/omp                 lj/cut/tip4p/cut/kk\nborn/coul/long/kk                     lj/cut/tip4p/cut/omp\nborn/coul/long/omp                    lj/cut/tip4p/long\nborn/coul/msm                         lj/cut/tip4p/long/kk\nborn/coul/msm/omp                     lj/cut/tip4p/long/omp\nborn/coul/wolf                        lj/cut/tip4p/long/opt\nborn/coul/wolf/cs                     lj/cut/tip4p/long/soft\nborn/coul/wolf/cs/kk                  lj/cut/tip4p/long/soft/omp\nborn/coul/wolf/cs/omp                 lj/expand\nborn/coul/wolf/kk                     lj/expand/coul/long\nborn/coul/wolf/omp                    lj/expand/coul/long/kk\nborn/gauss                            lj/expand/coul/long/omp\nborn/gauss/kk                         lj/expand/kk\nborn/gauss/omp                        lj/expand/omp\nborn/kk                               lj/expand/sphere\nborn/omp                              lj/expand/sphere/kk\nbpm/peri                              lj/expand/sphere/omp\nbpm/spring                            lj/gromacs\nbrownian                              lj/gromacs/coul/gromacs\nbrownian/kk                           lj/gromacs/coul/gromacs/kk\nbrownian/omp                          lj/gromacs/coul/gromacs/omp\nbrownian/poly                         lj/gromacs/kk\nbrownian/poly/omp                     lj/gromacs/omp\nbuck                                  lj/long/coul/long\nbuck/coul/cut                         lj/long/coul/long/dielectric\nbuck/coul/cut/kk                      lj/long/coul/long/omp\nbuck/coul/cut/omp                     lj/long/coul/long/opt\nbuck/coul/long                        lj/long/dipole/long\nbuck/coul/long/cs                     lj/long/tip4p/long\nbuck/coul/long/cs/kk                  lj/long/tip4p/long/omp\nbuck/coul/long/cs/omp                 lj/mdf\nbuck/coul/long/kk                     lj/mdf/kk\nbuck/coul/long/omp                    lj/mdf/omp\nbuck/coul/msm                         lj/pirani\nbuck/coul/msm/omp                     lj/pirani/kk\nbuck/kk                               lj/pirani/omp\nbuck/long/coul/long                   lj/relres\nbuck/long/coul/long/omp               lj/relres/kk\nbuck/mdf                              lj/relres/omp\nbuck/mdf/kk                           lj/sdk\nbuck/mdf/omp                          lj/sdk/coul/long\nbuck/omp                              lj/sdk/coul/long/kk\nbuck6d/coul/gauss/dsf                 lj/sdk/coul/long/omp\nbuck6d/coul/gauss/dsf/kk              lj/sdk/coul/msm\nbuck6d/coul/gauss/dsf/omp             lj/sdk/coul/msm/omp\nbuck6d/coul/gauss/long                lj/sdk/kk\nbuck6d/coul/gauss/long/kk             lj/sdk/omp\nbuck6d/coul/gauss/long/omp            lj/sf\ncolloid                               lj/sf/dipole/sf\ncolloid/kk                            lj/sf/dipole/sf/omp\ncolloid/omp                           lj/sf/kk\ncomb                                  lj/sf/omp\ncomb/omp                              lj/smooth\ncomb3                                 lj/smooth/kk\ncosine/squared                        lj/smooth/linear\ncosine/squared/kk                     lj/smooth/linear/kk\ncosine/squared/omp                    lj/smooth/linear/omp\ncoul/ctip                             lj/smooth/omp\ncoul/cut                              lj/spica\ncoul/cut/dielectric                   lj/spica/coul/long\ncoul/cut/global                       lj/spica/coul/long/kk\ncoul/cut/global/kk                    lj/spica/coul/long/omp\ncoul/cut/global/omp                   lj/spica/coul/msm\ncoul/cut/kk                           lj/spica/coul/msm/omp\ncoul/cut/omp                          lj/spica/kk\ncoul/cut/soft                         lj/spica/omp\ncoul/cut/soft/gapsys                  lj/switch3/coulgauss/long\ncoul/cut/soft/gapsys/omp              lj/switch3/coulgauss/long/kk\ncoul/cut/soft/kk                      lj/switch3/coulgauss/long/omp\ncoul/cut/soft/omp                     lj96/cut\ncoul/debye                            lj96/cut/kk\ncoul/debye/kk                         lj96/cut/omp\ncoul/debye/omp                        local/density\ncoul/diel                             local/density/omp\ncoul/diel/kk                          lubricate\ncoul/diel/omp                         lubricate/omp\ncoul/dsf                              lubricate/poly\ncoul/dsf/kk                           lubricate/poly/omp\ncoul/dsf/omp                          lubricateU\ncoul/esp                              lubricateU/poly\ncoul/exclude                          mdpd\ncoul/exclude/omp                      mdpd/rhosum\ncoul/long                             meam\ncoul/long/cs                          meam/c\ncoul/long/cs/kk                       meam/kk\ncoul/long/cs/omp                      meam/ms\ncoul/long/dielectric                  meam/ms/kk\ncoul/long/kk                          meam/spline\ncoul/long/omp                         meam/spline/omp\ncoul/long/soft                        meam/sw/spline\ncoul/long/soft/kk                     mesocnt\ncoul/long/soft/omp                    mesocnt/viscous\ncoul/msm                              mesont/tpm\ncoul/msm/omp                          mgpt\ncoul/shield                           mie/cut\ncoul/shield/kk                        mie/cut/kk\ncoul/shield/omp                       mie/cut/omp\ncoul/slater/cut                       mliap\ncoul/slater/cut/kk                    mliap/kk\ncoul/slater/cut/omp                   mm3/switch3/coulgauss/long\ncoul/slater/long                      mm3/switch3/coulgauss/long/kk\ncoul/slater/long/kk                   mm3/switch3/coulgauss/long/omp\ncoul/slater/long/omp                  momb\ncoul/streitz                          momb/kk\ncoul/streitz/omp                      momb/omp\ncoul/tt                               morse\ncoul/wolf                             morse/kk\ncoul/wolf/cs                          morse/omp\ncoul/wolf/cs/kk                       morse/opt\ncoul/wolf/cs/omp                      morse/smooth/linear\ncoul/wolf/kk                          morse/smooth/linear/kk\ncoul/wolf/omp                         morse/smooth/linear/omp\ndispersion/d3                         morse/soft\ndpd                                   morse/soft/kk\ndpd/coul/slater/long                  morse/soft/omp\ndpd/ext                               multi/lucy\ndpd/ext/kk                            multi/lucy/rx\ndpd/ext/omp                           multi/lucy/rx/kk\ndpd/ext/tstat                         nb3b/harmonic\ndpd/ext/tstat/kk                      nb3b/harmonic/omp\ndpd/ext/tstat/omp                     nb3b/screened\ndpd/fdt                               nm/cut\ndpd/fdt/energy                        nm/cut/coul/cut\ndpd/fdt/energy/kk                     nm/cut/coul/cut/kk\ndpd/kk                                nm/cut/coul/cut/omp\ndpd/omp                               nm/cut/coul/long\ndpd/tstat                             nm/cut/coul/long/kk\ndpd/tstat/kk                          nm/cut/coul/long/omp\ndpd/tstat/omp                         nm/cut/kk\ndrip                                  nm/cut/omp\ndrip/omp                              nm/cut/split\ndsmc                                  nm/cut/split/kk\ne3b                                   nm/cut/split/omp\ne3b/omp                               oxdna/coaxstk\neam                                   oxdna/excv\neam/alloy                             oxdna/hbond\neam/alloy/kk                          oxdna/stk\neam/alloy/omp                         oxdna/xstk\neam/alloy/opt                         oxdna2/coaxstk\neam/apip                              oxdna2/dh\neam/cd                                oxdna2/excv\neam/cd/old                            oxdna2/hbond\neam/fs                                oxdna2/stk\neam/fs/apip                           oxdna2/xstk\neam/fs/kk                             oxdna3/coaxstk\neam/fs/omp                            oxdna3/dh\neam/fs/opt                            oxdna3/excv\neam/he                                oxdna3/hbond\neam/he/kk                             oxdna3/stk\neam/he/omp                            oxdna3/xstk\neam/he/opt                            oxrna2/coaxstk\neam/kk                                oxrna2/dh\neam/omp                               oxrna2/excv\neam/opt                               oxrna2/hbond\nedip                                  oxrna2/stk\nedip/multi                            oxrna2/xstk\nedip/omp                              pace\nedpd                                  pace/apip\neff/cut                               pace/extrapolation\neim                                   pace/extrapolation/kk\neim/omp                               pace/fast/apip\nexp6/rx                               pace/kk\nexp6/rx/kk                            pace/precise/apip\nextep                                 pedone\nextep/omp                             pedone/kk\ngauss                                 pedone/omp\ngauss/cut                             peri/eps\ngauss/cut/kk                          peri/lps\ngauss/cut/omp                         peri/lps/omp\ngauss/kk                              peri/pmb\ngauss/omp                             peri/pmb/omp\ngayberne                              peri/ves\ngayberne/omp                          pod\ngran/hertz/history                    pod/kk\ngran/hertz/history/kk                 polymorphic\ngran/hertz/history/omp                rann\ngran/hooke                            reax\ngran/hooke/history                    reax/c\ngran/hooke/history/kk                 reaxff\ngran/hooke/history/omp                reaxff/kk\ngran/hooke/kk                         reaxff/omp\ngran/hooke/omp                        rebo\ngranular                              rebo/omp\ngranular/superellipsoid               rebomos\ngw                                    rebomos/omp\ngw/omp                                resquared\ngw/zbl                                resquared/omp\ngw/zbl/omp                            rheo\nharmonic/cut                          rheo/solid\nharmonic/cut/kk                       runner\nharmonic/cut/omp                      saip/metal\nhbond/dreiding/lj                     saip/metal/opt\nhbond/dreiding/lj/angleoffset         saip/metal/tmd\nhbond/dreiding/lj/angleoffset/omp     saip/metal/tmd/opt\nhbond/dreiding/lj/omp                 sdpd/taitwater/isothermal\nhbond/dreiding/morse                  smatb\nhbond/dreiding/morse/angleoffset      smatb/single\nhbond/dreiding/morse/angleoffset/omp  smd/hertz\nhbond/dreiding/morse/omp              smd/tlsph\nhippo                                 smd/tri_surface\nhybrid                                smd/ulsph\nhybrid/kk                             smtbq\nhybrid/molecular                      snap\nhybrid/molecular/omp                  snap/kk\nhybrid/omp                            soft\nhybrid/overlay                        soft/kk\nhybrid/overlay/kk                     soft/omp\nhybrid/overlay/omp                    sph/heatconduction\nhybrid/scaled                         sph/idealgas\nhybrid/scaled/kk                      sph/lj\nhybrid/scaled/omp                     sph/rhosum\nilp/graphene/hbn                      sph/taitwater\nilp/graphene/hbn/opt                  sph/taitwater/morris\nilp/tmd                               spin/dipole/cut\nilp/tmd/opt                           spin/dipole/long\nkolmogorov/crespi/full                spin/dmi\nkolmogorov/crespi/z                   spin/exchange\nlambda/input/apip                     spin/exchange/biquadratic\nlambda/input/csp/apip                 spin/magelec\nlambda/zone/apip                      spin/neel\nlcbop                                 srp\nlcbop/omp                             srp/react\nldd                                   surf/granular\nlebedeva/z                            sw\nlennard/mdf                           sw/angle/table\nlennard/mdf/kk                        sw/kk\nlennard/mdf/omp                       sw/mod\nlepton                                sw/mod/kk\nlepton/coul                           sw/mod/omp\nlepton/coul/omp                       sw/omp\nlepton/omp                            table\nlepton/sphere                         table/kk\nlepton/sphere/omp                     table/omp\nline/lj                               table/rx\nline/lj/omp                           table/rx/kk\nlist                                  tdpd\nlj/charmm/coul/charmm                 tersoff\nlj/charmm/coul/charmm/implicit        tersoff/kk\nlj/charmm/coul/charmm/implicit/kk     tersoff/mod\nlj/charmm/coul/charmm/implicit/omp    tersoff/mod/c\nlj/charmm/coul/charmm/kk              tersoff/mod/c/kk\nlj/charmm/coul/charmm/omp             tersoff/mod/c/omp\nlj/charmm/coul/long                   tersoff/mod/kk\nlj/charmm/coul/long/kk                tersoff/mod/omp\nlj/charmm/coul/long/omp               tersoff/omp\nlj/charmm/coul/long/opt               tersoff/table\nlj/charmm/coul/long/soft              tersoff/table/omp\nlj/charmm/coul/long/soft/kk           tersoff/zbl\nlj/charmm/coul/long/soft/omp          tersoff/zbl/kk\nlj/charmm/coul/msm                    tersoff/zbl/omp\nlj/charmm/coul/msm/omp                thole\nlj/charmmfsw/coul/charmmfsh           threebody/table\nlj/charmmfsw/coul/charmmfsh/kk        threebody/table/omp\nlj/charmmfsw/coul/charmmfsh/omp       tip4p/cut\nlj/charmmfsw/coul/long                tip4p/cut/kk\nlj/charmmfsw/coul/long/kk             tip4p/cut/omp\nlj/charmmfsw/coul/long/omp            tip4p/long\nlj/class2                             tip4p/long/kk\nlj/class2/coul/cut                    tip4p/long/omp\nlj/class2/coul/cut/kk                 tip4p/long/soft\nlj/class2/coul/cut/omp                tip4p/long/soft/omp\nlj/class2/coul/cut/soft               tracker\nlj/class2/coul/cut/soft/omp           tri/lj\nlj/class2/coul/long                   tri/lj/omp\nlj/class2/coul/long/cs                uf3\nlj/class2/coul/long/cs/kk             uf3/kk\nlj/class2/coul/long/cs/omp            ufm\nlj/class2/coul/long/kk                ufm/kk\nlj/class2/coul/long/omp               ufm/omp\nlj/class2/coul/long/soft              ufm/opt\nlj/class2/coul/long/soft/omp          vashishta\nlj/class2/kk                          vashishta/kk\nlj/class2/omp                         vashishta/omp\nlj/class2/soft                        vashishta/table\nlj/class2/soft/kk                     vashishta/table/omp\nlj/class2/soft/omp                    wf/cut\nlj/cubic                              wf/cut/kk\nlj/cubic/kk                           wf/cut/omp\nlj/cubic/omp                          ylz\nlj/cut                                ylz/kk\nlj/cut/coul/cut                       ylz/omp\nlj/cut/coul/cut/dielectric            yukawa\nlj/cut/coul/cut/dielectric/omp        yukawa/colloid\nlj/cut/coul/cut/kk                    yukawa/colloid/kk\nlj/cut/coul/cut/omp                   yukawa/colloid/omp\nlj/cut/coul/cut/soft                  yukawa/kk\nlj/cut/coul/cut/soft/kk               yukawa/omp\nlj/cut/coul/cut/soft/omp              zbl\nlj/cut/coul/debye                     zbl/kk\nlj/cut/coul/debye/dielectric          zbl/omp\nlj/cut/coul/debye/dielectric/omp      zero\nlj/cut/coul/debye/kk                  zero/coul\n\n\n* Bond styles:\nbpm/peri            gromos/omp              morse/kk\nbpm/rotational      harmonic                morse/omp\nbpm/spring          harmonic/kk             nonlinear\nbpm/spring/plastic  harmonic/omp            nonlinear/kk\nbpm/zero            harmonic/restrain       nonlinear/omp\nclass2              harmonic/restrain/kk    oxdna/fene\nclass2/kk           harmonic/restrain/omp   oxdna2/fene\nclass2/omp          harmonic/shift          oxdna3/fene\nfene                harmonic/shift/cut      oxrna2/fene\nfene/expand         harmonic/shift/cut/kk   quartic\nfene/expand/kk      harmonic/shift/cut/omp  quartic/exp\nfene/expand/omp     harmonic/shift/kk       quartic/exp/kk\nfene/kk             harmonic/shift/omp      quartic/kk\nfene/nm             hybrid                  quartic/omp\nfene/nm/kk          hybrid/kk               rheo/shell\nfene/nm/omp         lepton                  special\nfene/omp            lepton/omp              table\ngaussian            mesocnt                 table/kk\ngaussian/kk         mm3                     table/omp\ngaussian/omp        mm3/kk                  zero\ngromos              mm3/omp\ngromos/kk           morse\n\n\n* Angle styles:\namoeba               cosine/shift/exp/kk            harmonic/kk\ncharmm               cosine/shift/exp/omp           harmonic/omp\ncharmm/kk            cosine/shift/kk                hybrid\ncharmm/omp           cosine/shift/omp               hybrid/kk\nclass2               cosine/squared                 lepton\nclass2/kk            cosine/squared/kk              lepton/omp\nclass2/omp           cosine/squared/omp             mesocnt\nclass2/p6            cosine/squared/restricted      mm3\nclass2/p6/kk         cosine/squared/restricted/kk   mm3/kk\nclass2/p6/omp        cosine/squared/restricted/omp  mm3/omp\nclass2xe             cross                          mwlc\nclass2xe/kk          cross/kk                       mwlc/kk\nclass2xe/omp         cross/omp                      mwlc/omp\ncosine               dipole                         quartic\ncosine/buck6d        dipole/kk                      quartic/kk\ncosine/buck6d/omp    dipole/omp                     quartic/omp\ncosine/delta         fourier                        sdk\ncosine/delta/kk      fourier/kk                     sdk/kk\ncosine/delta/omp     fourier/omp                    sdk/omp\ncosine/kk            fourier/simple                 spica\ncosine/omp           fourier/simple/kk              spica/kk\ncosine/periodic      fourier/simple/omp             spica/omp\ncosine/periodic/kk   gaussian                       table\ncosine/periodic/omp  gaussian/kk                    table/kk\ncosine/shift         gaussian/omp                   table/omp\ncosine/shift/exp     harmonic                       zero\n\n\n* Dihedral styles:\ncharmm                         fourier             nharmonic/omp\ncharmm/kk                      fourier/kk          opls\ncharmm/omp                     fourier/omp         opls/kk\ncharmmfsw                      harmonic            opls/omp\ncharmmfsw/kk                   harmonic/kk         quadratic\ncharmmfsw/omp                  harmonic/omp        quadratic/kk\nclass2                         helix               quadratic/omp\nclass2/kk                      helix/kk            spherical\nclass2/omp                     helix/omp           spherical/kk\nclass2xe                       hybrid              spherical/omp\nclass2xe/kk                    hybrid/kk           table\nclass2xe/omp                   lepton              table/cut\ncosine/shift/exp               lepton/omp          table/cut/kk\ncosine/shift/exp/kk            multi/harmonic      table/cut/omp\ncosine/shift/exp/omp           multi/harmonic/kk   table/kk\ncosine/squared/restricted      multi/harmonic/omp  table/omp\ncosine/squared/restricted/kk   nharmonic           zero\ncosine/squared/restricted/omp  nharmonic/kk\n\n\n* Improper styles:\namoeba      cvff/kk       fourier       inversion/harmonic      sqdistharm/omp\nclass2      cvff/omp      fourier/kk    inversion/harmonic/kk   umbrella\nclass2/kk   distance      fourier/omp   inversion/harmonic/omp  umbrella/kk\nclass2/omp  distance/kk   harmonic      ring                    umbrella/omp\ncossq       distance/omp  harmonic/kk   ring/kk                 zero\ncossq/kk    distharm      harmonic/omp  ring/omp\ncossq/omp   distharm/kk   hybrid        sqdistharm\ncvff        distharm/omp  hybrid/kk     sqdistharm/kk\n\n\n* KSpace styles:\nesp                msm/cg           pppm/dipole/spin      pppm/rk\newald              msm/cg/omp       pppm/disp             pppm/stagger\newald/dipole       msm/dielectric   pppm/disp/dielectric  pppm/tip4p\newald/dipole/spin  msm/omp          pppm/disp/omp         pppm/tip4p/kk\newald/disp         pppm             pppm/disp/tip4p       pppm/tip4p/omp\newald/disp/dipole  pppm/cg          pppm/disp/tip4p/omp   zero\newald/electrode    pppm/cg/omp      pppm/electrode\newald/omp          pppm/dielectric  pppm/kk\nmsm                pppm/dipole      pppm/omp\n\n\n* Fix styles:\naccelerate/cos           manifoldforce           reax/c/bonds\nacks2/reax               meso/move               reax/c/species\nacks2/reax/kk            mol/swap                reaxff/bonds\nacks2/reaxff             momentum                reaxff/bonds/kk\nacks2/reaxff/kk          momentum/chunk          reaxff/species\nadapt                    momentum/kk             reaxff/species/kk\nadapt/fep                move                    recenter\nadd/heat                 msst                    recenter/kk\naddforce                 mvv/dpd                 restrain\naddforce/kk              mvv/edpd                rheo\naddtorque                mvv/tdpd                rheo/oxidation\naddtorque/atom           neb                     rheo/pressure\naddtorque/atom/kk        neb/spin                rheo/thermal\naddtorque/group          neighbor/swap           rheo/viscosity\naddtorque/group/kk       nonaffine/displacement  rhok\nalchemy                  nph                     rigid\nalign/self               nph/asphere             rigid/meso\namoeba/bitorsion         nph/asphere/omp         rigid/nph\namoeba/pitorsion         nph/body                rigid/nph/omp\nappend/atoms             nph/eff                 rigid/nph/small\natc                      nph/kk                  rigid/nph/small/kk\natom/swap                nph/omp                 rigid/npt\natom_weight/apip         nph/sphere              rigid/npt/omp\nave/atom                 nph/sphere/kk           rigid/npt/small\nave/chunk                nph/sphere/omp          rigid/npt/small/kk\nave/correlate            nphug                   rigid/nve\nave/correlate/long       npt                     rigid/nve/omp\nave/grid                 npt/asphere             rigid/nve/small\nave/histo                npt/asphere/omp         rigid/nve/small/kk\nave/histo/weight         npt/body                rigid/nvt\nave/moments              npt/cauchy              rigid/nvt/omp\nave/spatial              npt/eff                 rigid/nvt/small\nave/spatial/sphere       npt/kk                  rigid/nvt/small/kk\nave/time                 npt/omp                 rigid/omp\naveforce                 npt/sphere              rigid/small\naveforce/kk              npt/sphere/kk           rigid/small/kk\nbalance                  npt/sphere/omp          rigid/small/omp\nbaoab                    npt/uef                 rx\nbaoab/kk                 numdiff                 rx/kk\nbocs                     numdiff/virial          saed/vtk\nbond/break               nve                     set\nbond/create              nve/asphere             setforce\nbond/create/angle        nve/asphere/kk          setforce/kk\nbond/react               nve/asphere/noforce     setforce/spin\nbond/swap                nve/asphere/noforce/kk  settorque/atom\nbox/relax                nve/awpmd               settorque/atom/kk\nbrownian                 nve/body                sgcmc\nbrownian/asphere         nve/bpm/sphere          shake\nbrownian/kk              nve/dot                 shake/kk\nbrownian/sphere          nve/dotc/langevin       shardlow\ncharge/regulation        nve/eff                 shardlow/kk\ncmap                     nve/kk                  smd\ncmap/kk                  nve/limit               smd/adjust_dt\ncolvars                  nve/limit/kk            smd/integrate_tlsph\ncolvars/kk               nve/line                smd/integrate_ulsph\ncontroller               nve/manifold/rattle     smd/move_tri_surf\ndamping/cundall          nve/noforce             smd/setvel\ndamping/cundall/kk       nve/noforce/kk          smd/wall_surface\ndeform                   nve/omp                 sph\ndeform/kk                nve/sphere              sph/stationary\ndeform/pressure          nve/sphere/kk           spring\ndeposit                  nve/sphere/omp          spring/chunk\ndpd/energy               nve/spin                spring/kk\ndpd/energy/kk            nve/tri                 spring/rg\ndrag                     nvk                     spring/rg/kk\ndrag/kk                  nvk/kk                  spring/self\ndrude                    nvt                     spring/self/kk\ndrude/transform/direct   nvt/asphere             srd\ndrude/transform/inverse  nvt/asphere/omp         store/force\ndt/reset                 nvt/body                store/force/kk\ndt/reset/kk              nvt/eff                 store/state\nedpd/source              nvt/kk                  surface/global\nefield                   nvt/manifold/rattle     surface/local\nefield/kk                nvt/omp                 tdpd/source\nefield/lepton            nvt/sllod               temp/berendsen\nefield/tip4p             nvt/sllod/eff           temp/berendsen/kk\nehex                     nvt/sllod/kk            temp/csld\nelectrode/conp           nvt/sllod/omp           temp/csld/kk\nelectrode/conq           nvt/sphere              temp/csvr\nelectrode/thermo         nvt/sphere/kk           temp/csvr/kk\nelectron/stopping        nvt/sphere/omp          temp/rescale\nelectron/stopping/fit    nvt/uef                 temp/rescale/eff\nelectron/stopping/kk     oneway                  temp/rescale/kk\nenforce2d                oneway/kk               tfmc\nenforce2d/kk             orient/bcc              tgnpt/drude\neos/cv                   orient/bcc/omp          tgnvt/drude\neos/table                orient/eco              thermal/conductivity\neos/table/rx             orient/eco/omp          ti/spring\neos/table/rx/kk          orient/fcc              ti/spring/kk\nevaporate                orient/fcc/omp          tmd\nexternal                 pafi                    ttm\nexternal/kk              pair                    ttm/cascade\nffl                      phonon                  ttm/grid\nfilter/corotate          pimd                    ttm/mod\nflow/gauss               pimd/langevin           ttm/thermal\nflow/gauss/kk            pimd/langevin/bosonic   tune/kspace\nfreeze                   pimd/nvt                vector\nfreeze/kk                pimd/nvt/bosonic        viscosity\ngcmc                     planeforce              viscous\ngemc                     planeforce/kk           viscous/kk\ngjf                      poems                   viscous/nonlinear\ngjf/kk                   polarize/bem/gmres      viscous/nonlinear/kk\ngld                      polarize/bem/icc        viscous/sphere\ngle                      polarize/functional     viscous/sphere/kk\ngraphics/arrows          pour                    wall/body/polygon\ngraphics/chunk           precession/spin         wall/body/polyhedron\ngraphics/isosurface      press/berendsen         wall/colloid\ngraphics/labels          press/berendsen/kk      wall/ees\ngraphics/lines           press/langevin          wall/flow\ngraphics/objects         press/langevin/kk       wall/flow/kk\ngraphics/periodic        print                   wall/gran\ngraphics/replica         propel/self             wall/gran/kk\ngravity                  propel/self/kk          wall/gran/region\ngravity/kk               property/atom           wall/harmonic\ngravity/omp              property/atom/kk        wall/harmonic/kk\ngrem                     qbmsst                  wall/harmonic/outside\nhalt                     qeq/comb                wall/harmonic/outside/kk\nhalt/kk                  qeq/comb/omp            wall/harmonic/returned\nheat                     qeq/ctip                wall/lepton\nheat/flow                qeq/ctip/omp            wall/lj1043\nheat/kk                  qeq/dynamic             wall/lj1043/kk\nhmc                      qeq/dynamic/omp         wall/lj126\nhyper/global             qeq/fire                wall/lj126/kk\nhyper/local              qeq/fire/omp            wall/lj93\nilves                    qeq/point               wall/lj93/kk\nimd                      qeq/point/omp           wall/morse\nindent                   qeq/reax                wall/morse/kk\nipi                      qeq/reax/kk             wall/piston\nlambda/apip              qeq/reax/omp            wall/piston/kk\nlambda/la/csp/apip       qeq/reaxff              wall/reflect\nlambda_thermostat/apip   qeq/reaxff/kk           wall/reflect/kk\nlangevin                 qeq/reaxff/omp          wall/reflect/stochastic\nlangevin/drude           qeq/rel/reaxff          wall/region\nlangevin/eff             qeq/shielded            wall/region/ees\nlangevin/kk              qeq/shielded/omp        wall/region/kk\nlangevin/spin            qeq/slater              wall/srd\nlb/pc                    qeq/slater/omp          wall/table\nlb/rigid/pc/sphere       qtb                     widom\nlineforce                qtpie/reaxff\nlineforce/kk             rattle\n\n\n* Compute styles:\nackland/atom             gyration                smd/internal/energy\nackland/atom/omp         gyration/chunk          smd/plastic/strain\nadf                      gyration/kk             smd/plastic/strain/rate\naggregate/atom           gyration/shape          smd/rho\nangle                    gyration/shape/chunk    smd/tlsph/defgrad\nangle/local              hbond/local             smd/tlsph/dt\nangmom/chunk             heat/flux               smd/tlsph/num/neighs\nave/sphere/atom          heat/flux/tally         smd/tlsph/shape\nave/sphere/atom/kk       heat/flux/virial/tally  smd/tlsph/strain\nave/sphere/atom/omp      hexorder/atom           smd/tlsph/strain/rate\nbasal/atom               hexorder/atom/kk        smd/tlsph/stress\nbody/local               hexorder/atom/omp       smd/triangle/vertices\nbond                     hma                     smd/ulsph/effm\nbond/local               improper                smd/ulsph/num/neighs\nborn/matrix              improper/local          smd/ulsph/strain\ncentro/atom              inertia                 smd/ulsph/strain/rate\ncentro/atom/kk           inertia/chunk           smd/ulsph/stress\ncentro/atom/omp          inertia/kk              smd/vol\ncentroid/stress/atom     ke                      sna/atom\nchunk/atom               ke/atom                 sna/grid\nchunk/spread/atom        ke/atom/eff             sna/grid/kk\ncluster/atom             ke/atom/kk              sna/grid/local\ncna/atom                 ke/atom/omp             sna/grid/local/kk\ncna/atom/omp             ke/eff                  snad/atom\ncnp/atom                 ke/kk                   snap\ncnp/atom/omp             ke/rigid                snav/atom\ncom                      mesont                  sph/e/atom\ncom/chunk                mliap                   sph/rho/atom\ncom/kk                   momentum                sph/t/atom\ncomposition/atom         msd                     spin\ncomposition/atom/kk      msd/chunk               stress/atom\ncomposition/atom/omp     msd/nongauss            stress/cartesian\ncontact/atom             nbond/atom              stress/cylinder\ncontact/atom/omp         omega/chunk             stress/mop\ncoord/atom               orientorder/atom        stress/mop/profile\ncoord/atom/kk            orientorder/atom/kk     stress/spherical\ncoord/atom/omp           orientorder/atom/omp    stress/tally\ncount/type               pace                    tdpd/cc/atom\ndamage/atom              pair                    temp\ndihedral                 pair/local              temp/asphere\ndihedral/local           pe                      temp/body\ndilatation/atom          pe/atom                 temp/chunk\ndipole                   pe/mol/tally            temp/com\ndipole/chunk             pe/tally                temp/com/kk\ndipole/tip4p             plasticity/atom         temp/cs\ndipole/tip4p/chunk       pod/atom                temp/deform\ndisplace/atom            pod/global              temp/deform/eff\ndpd                      pod/local               temp/deform/kk\ndpd/atom                 podd/atom               temp/drude\nedpd/temp/atom           pressure                temp/eff\nefield/atom              pressure/alchemy        temp/kk\nefield/wolf/atom         pressure/cylinder       temp/partial\nentropy/atom             pressure/uef            temp/partial/kk\nentropy/atom/kk          property/atom           temp/profile\nentropy/atom/omp         property/chunk          temp/profile/kk\nerotate/asphere          property/grid           temp/ramp\nerotate/asphere/kk       property/local          temp/ramp/kk\nerotate/rigid            ptm/atom                temp/region\nerotate/sphere           rattlers/atom           temp/region/eff\nerotate/sphere/atom      rdf                     temp/region/kk\nerotate/sphere/atom/kk   rdf/omp                 temp/rotate\nerotate/sphere/atom/omp  reaxff/atom             temp/sphere\nerotate/sphere/kk        reaxff/atom/kk          temp/sphere/kk\nevent/displace           reduce                  temp/uef\nfabric                   reduce/chunk            ti\nfep                      reduce/region           torque/chunk\nfep/ta                   rheo/property/atom      vacf\nforce/tally              rigid/local             vacf/chunk\nfragment/atom            saed                    vcm/chunk\nfrenkel                  slcsa/atom              viscosity/cos\ngaussian/grid/local      slice                   voronoi/atom\ngaussian/grid/local/kk   smd/contact/radius      xrd\nglobal/atom              smd/damage\ngroup/group              smd/hourglass/error\n\n\n* Region styles:\nblock     cone/kk      ellipsoid     plane     prism/kk   union\nblock/kk  cylinder     ellipsoid/kk  plane/kk  sphere\ncone      cylinder/kk  intersect     prism     sphere/kk\n\n\n* Dump styles:\natom        cfg/gz     custom/gz     grid      local/zstd  xyz/gz\natom/gz     cfg/mpiio  custom/mpiio  grid/vtk  movie       xyz/mpiio\natom/mpiio  cfg/uef    custom/zstd   image     vtk         xyz/zstd\natom/zstd   cfg/zstd   dcd           local     xtc         yaml\ncfg         custom     extxyz        local/gz  xyz\n\n\n* Command styles\nangle_write          geturl            plugin          tad\nbalance              group2ndx         prd             temper\nbox                  hyper             read_data       temper/grem\nchange_box           info              read_dump       temper/npt\ncreate_atoms         kim_init          read_restart    third_order\ncreate_bonds         kim_interactions  region2vmd      third_order/kk\ncreate_box           kim_param         replicate       velocity\ndelete_atoms         kim_property      rerun           write_coeff\ndelete_bonds         kim_query         reset_atom_ids  write_data\ndihedral_write       message           reset_ids       write_dump\ndisplace_atoms       minimize          reset_mol_ids   write_molecule\ndynamical_matrix     ndx2group         run             write_restart\ndynamical_matrix/kk  neb               server\nfitpod               neb/spin          set\n\n\n"""
+schema = "PFW.CPUACE.Stage1.v1"
+threads = 1
+
+[[cases]]
+adaptation_s = 0.027842093
+algorithm = "historical"
+atoms = 128
+backend = "CPU"
+cell_sha256 = "62aff02e04aa8e47cb56481f7309bf07e24660a92a18ffca9469d7ec63a2fcee"
+edges = 7424
+external_boundary = "legacy ACEpotentials 0.6.6 / ACE1 analytic; three separate JuLIP E/F/V calls; resident geometry; owning outputs"
+external_evaluator = "ACEpotentials 0.6.6 / ACE1 analytic"
+external_precision_comparison = "matched Float64"
+external_raw_s = [0.046081271, 0.047476667, 0.047618509, 0.047252953, 0.04600928, 0.047593919000000005, 0.047320504000000006, 0.047074109, 0.046171773000000006, 0.047522508000000005]
+first_preparation_s = 1.321844282
+first_prepared_call_s = 1.065276684
+g = 4
+geometry_sha256 = "add6ee26957f9417d56c62cf8fd1f32218eba014c034debcb5f449e3f56f6b22"
+model = "ti"
+model_file_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+model_load_s = 2.090978057
+packed_lanes = 7680
+phase_sizes = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+precision = "Float64"
+scratch_payload_bytes = 285608
+single_shared_force_bytes = 3072
+species_sha256 = "9c81e66dac5aa3091e26c83eeaa144a171b84c8af931381f9c5a1239518af49b"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 76350
+    host_bytes = 5790248
+    max_s = 0.080112324
+    median_s = 0.07767876700000001
+    min_s = 0.07749705100000001
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.07766305200000001, 0.07769448200000001, 0.077537542, 0.07749705100000001, 0.080112324, 0.078353935, 0.07775306300000001, 0.07753062100000001, 0.077601502, 0.077732402]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.258950481
+
+    [cases.external_Float64_errors]
+    energy_abs_eV = 1.7462298274040222e-10
+    forces_max_eV_per_A = 2.5202062658991053e-14
+    virial_max_eV = 4.575895218295045e-12
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [16444]
+    active_readout_per_central_species = [12539]
+    coordinate_kind = "legacy_PI"
+    coupling_nnz = 30017
+    coupling_shape = [12539, 16444]
+    cutoff_A = 6.000000000000002
+    density_count = 329
+    harmonic_count = 49
+    lmax = 6
+    pair_radial_count = 20
+    products = 16444
+    radial_count = 27
+    radial_representation = "PotentialFrameWork.ACE.CallableRadial{PotentialFrameWork.ACE.LegacyPolynomial, @NamedTuple{a::Float64, rin::Float64, r0::Float64, p::Int64, q::Int64, x1::Float64, x2::Float64, y1::Float64, y2::Float64, A::Vector{Float64}, B::Vector{Float64}, C::Vector{Float64}, pl::Int64, pr::Int64, tl::Float64, tr::Float64, envelope_power::Int64, envelope_r0::Float64, offset::Int64, cutoff::Float64}, @NamedTuple{route::String, id::String}, PotentialFrameWork.ACE.RadialMetadata{Float64}}"
+    species = [22]
+
+        [cases.metadata.product_orders]
+        1 = 26
+        2 = 994
+        3 = 15424
+
+    [cases.preparation_stage_s]
+    boundary_extraction = 0.044235532
+    element_channels = 0.025343141000000003
+    extraction = 0.054284240000000004
+    full_environment_schedule = 0.011971667
+    schedule = 2.34e-6
+    snapshot_materialization = 0.31786941300000005
+    sorting_packing = 0.263280672
+    species_packing = 0.017272683
+    topology = 0.099387026
+
+    [cases.prepared]
+    host_allocations = 0
+    host_bytes = 0
+    max_s = 0.076244065
+    median_s = 0.074366661
+    min_s = 0.07421427600000001
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.07421427600000001, 0.07436682600000001, 0.07429904600000001, 0.074299316, 0.074441767, 0.07441792600000001, 0.074366496, 0.07434444700000001, 0.076244065, 0.074520337]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.074560476
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.repeated_frames]
+    connectivity = "fresh rebuild every frame; includes public owning outputs"
+    frames = 3
+    host_allocations = 228778
+    host_bytes = 17361528
+    max_s = 0.23589704
+    median_s = 0.23436240800000002
+    min_s = 0.23318633700000002
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.23419187200000002, 0.23589704, 0.23402668100000001, 0.23318633700000002, 0.23486947500000002, 0.23441803400000003, 0.23430678200000002, 0.23497974600000002, 0.235658999, 0.23421192200000002]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.233064637
+[[cases]]
+adaptation_s = 0.267302521
+algorithm = "historical"
+atoms = 128
+backend = "CPU"
+cell_sha256 = "62aff02e04aa8e47cb56481f7309bf07e24660a92a18ffca9469d7ec63a2fcee"
+edges = 7424
+external_boundary = "legacy ACEpotentials 0.6.6 / ACE1 analytic; three separate JuLIP E/F/V calls; resident geometry; owning outputs"
+external_evaluator = "ACEpotentials 0.6.6 / ACE1 analytic"
+external_precision_comparison = "application sensitivity against Float64; external Float32 unsupported"
+external_raw_s = [0.046081271, 0.047476667, 0.047618509, 0.047252953, 0.04600928, 0.047593919000000005, 0.047320504000000006, 0.047074109, 0.046171773000000006, 0.047522508000000005]
+first_preparation_s = 1.0416418
+first_prepared_call_s = 1.09170267
+g = 4
+geometry_sha256 = "057de6d7b50bbe0ff0a9b91470b9e68bc7dbbb24822d4be8dc0e701906e4bf11"
+model = "ti"
+model_file_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+model_load_s = 2.090978057
+packed_lanes = 7680
+phase_sizes = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+precision = "Float32"
+scratch_payload_bytes = 142804
+single_shared_force_bytes = 1536
+species_sha256 = "9c81e66dac5aa3091e26c83eeaa144a171b84c8af931381f9c5a1239518af49b"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 10294
+    host_bytes = 3243984
+    max_s = 0.074059424
+    median_s = 0.0738013585
+    min_s = 0.073664593
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.073976595, 0.073883074, 0.074059424, 0.073664593, 0.073804544, 0.07379817300000001, 0.073759924, 0.07376613300000001, 0.073882974, 0.073769913]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.541304694
+
+    [cases.external_Float64_errors]
+    energy_abs_eV = 0.00807029104907997
+    forces_max_eV_per_A = 1.5418521983556754e-5
+    virial_max_eV = 0.001976534593723045
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [16444]
+    active_readout_per_central_species = [12539]
+    coordinate_kind = "legacy_PI"
+    coupling_nnz = 30017
+    coupling_shape = [12539, 16444]
+    cutoff_A = 6.0
+    density_count = 329
+    harmonic_count = 49
+    lmax = 6
+    pair_radial_count = 20
+    products = 16444
+    radial_count = 27
+    radial_representation = "PotentialFrameWork.ACE.CallableRadial{PotentialFrameWork.ACE.LegacyPolynomial, @NamedTuple{a::Float32, rin::Float32, r0::Float32, p::Int64, q::Int64, x1::Float32, x2::Float32, y1::Float32, y2::Float32, A::Vector{Float32}, B::Vector{Float32}, C::Vector{Float32}, pl::Int64, pr::Int64, tl::Float32, tr::Float32, envelope_power::Int64, envelope_r0::Float32, offset::Int64, cutoff::Float32}, @NamedTuple{route::String, id::String}, PotentialFrameWork.ACE.RadialMetadata{Float32}}"
+    species = [22]
+
+        [cases.metadata.product_orders]
+        1 = 26
+        2 = 994
+        3 = 15424
+
+    [cases.preparation_stage_s]
+    boundary_extraction = 0.045681759
+    element_channels = 0.025959915
+    extraction = 0.055674867
+    full_environment_schedule = 0.00042265200000000003
+    schedule = 2.1000000000000002e-6
+    snapshot_materialization = 0.214601908
+    sorting_packing = 0.16139778300000002
+    species_packing = 0.001889639
+    topology = 0.056527481000000004
+
+    [cases.prepared]
+    host_allocations = 0
+    host_bytes = 0
+    max_s = 0.074975549
+    median_s = 0.074929154
+    min_s = 0.074877939
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.074918439, 0.07494705900000001, 0.074975549, 0.074881339, 0.074886989, 0.074931919, 0.074949739, 0.074963209, 0.07492638900000001, 0.074877939]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.07521004
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.repeated_frames]
+    connectivity = "fresh rebuild every frame; includes public owning outputs"
+    frames = 3
+    host_allocations = 30882
+    host_bytes = 9731952
+    max_s = 0.22209436400000002
+    median_s = 0.22126968000000002
+    min_s = 0.220699958
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.221539022, 0.22129369000000002, 0.22209436400000002, 0.22158659200000003, 0.22114139900000002, 0.22124567, 0.221454441, 0.22091373800000003, 0.220699958, 0.22097481800000002]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.221424231
+[[cases]]
+adaptation_s = 0.096604633
+algorithm = "historical"
+atoms = 128
+backend = "CPU"
+cell_sha256 = "62aff02e04aa8e47cb56481f7309bf07e24660a92a18ffca9469d7ec63a2fcee"
+edges = 7424
+external_boundary = "legacy ACEpotentials 0.6.6 / ACE1 analytic; three separate JuLIP E/F/V calls; resident geometry; owning outputs"
+external_evaluator = "ACEpotentials 0.6.6 / ACE1 analytic"
+external_precision_comparison = "matched Float64"
+external_raw_s = [0.050124954000000006, 0.051728792, 0.051789034000000005, 0.051788533000000005, 0.05157536, 0.049876739, 0.052081509000000005, 0.051904036, 0.051859114000000005, 0.051578650000000004]
+first_preparation_s = 0.055527216
+first_prepared_call_s = 0.664594104
+g = 4
+geometry_sha256 = "add6ee26957f9417d56c62cf8fd1f32218eba014c034debcb5f449e3f56f6b22"
+model = "tialv"
+model_file_sha256 = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"
+model_load_s = 0.66590834
+packed_lanes = 8104
+phase_sizes = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+precision = "Float64"
+scratch_payload_bytes = 595328
+single_shared_force_bytes = 3072
+species_sha256 = "b9f357b63eee6da0e0b04df3aca8236cf45d4350d66e1cca86c4b7947a7eabf2"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 91198
+    host_bytes = 4609864
+    max_s = 0.222159824
+    median_s = 0.22175461750000003
+    min_s = 0.22110845
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.221364001, 0.22190537300000002, 0.221625871, 0.22206555400000003, 0.221694783, 0.22181445200000002, 0.221643162, 0.222102284, 0.222159824, 0.22110845]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.225925462
+
+    [cases.external_Float64_errors]
+    energy_abs_eV = 3.7834979593753815e-10
+    forces_max_eV_per_A = 2.353672812205332e-14
+    virial_max_eV = 2.2737367544323206e-12
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [51379, 51379, 51379]
+    active_readout_per_central_species = [43585, 43585, 43585]
+    coordinate_kind = "legacy_PI"
+    coupling_nnz = 271722
+    coupling_shape = [130755, 51379]
+    cutoff_A = 6.000000000000002
+    density_count = 441
+    harmonic_count = 25
+    lmax = 4
+    pair_radial_count = 45
+    products = 51379
+    radial_count = 66
+    radial_representation = "PotentialFrameWork.ACE.CallableRadial{PotentialFrameWork.ACE.LegacyPolynomial, @NamedTuple{a::Float64, rin::Float64, r0::Float64, p::Int64, q::Int64, x1::Float64, x2::Float64, y1::Float64, y2::Float64, A::Vector{Float64}, B::Vector{Float64}, C::Vector{Float64}, pl::Int64, pr::Int64, tl::Float64, tr::Float64, envelope_power::Int64, envelope_r0::Float64, offset::Int64, cutoff::Float64}, @NamedTuple{route::String, id::String}, PotentialFrameWork.ACE.RadialMetadata{Float64}}"
+    species = [13, 22, 23]
+
+        [cases.metadata.product_orders]
+        1 = 63
+        2 = 2880
+        3 = 48436
+
+    [cases.preparation_stage_s]
+    boundary_extraction = 3.469e-5
+    element_channels = 0.020742390000000003
+    extraction = 5.835e-5
+    full_environment_schedule = 0.00042014200000000003
+    schedule = 2.11e-6
+    snapshot_materialization = 0.0008618050000000001
+    sorting_packing = 4.7510000000000004e-5
+    species_packing = 0.0023720810000000003
+    topology = 1.1370000000000001e-5
+
+    [cases.prepared]
+    host_allocations = 0
+    host_bytes = 0
+    max_s = 0.219969304
+    median_s = 0.217011535
+    min_s = 0.216207686
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.21650122700000002, 0.216207686, 0.21629272600000002, 0.216607438, 0.21739106100000002, 0.21693809, 0.21708498, 0.219969304, 0.217295761, 0.217383131]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.221052959
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.repeated_frames]
+    connectivity = "fresh rebuild every frame; includes public owning outputs"
+    frames = 3
+    host_allocations = 273258
+    host_bytes = 13818328
+    max_s = 0.6712842760000001
+    median_s = 0.6701354405000001
+    min_s = 0.668465623
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.668755364, 0.6691751250000001, 0.6712842760000001, 0.6710608250000001, 0.668465623, 0.6695658280000001, 0.668678953, 0.670705053, 0.6707060930000001, 0.6708179940000001]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.65947404
+[[cases]]
+adaptation_s = 0.041267967
+algorithm = "historical"
+atoms = 128
+backend = "CPU"
+cell_sha256 = "62aff02e04aa8e47cb56481f7309bf07e24660a92a18ffca9469d7ec63a2fcee"
+edges = 7424
+external_boundary = "legacy ACEpotentials 0.6.6 / ACE1 analytic; three separate JuLIP E/F/V calls; resident geometry; owning outputs"
+external_evaluator = "ACEpotentials 0.6.6 / ACE1 analytic"
+external_precision_comparison = "application sensitivity against Float64; external Float32 unsupported"
+external_raw_s = [0.050124954000000006, 0.051728792, 0.051789034000000005, 0.051788533000000005, 0.05157536, 0.049876739, 0.052081509000000005, 0.051904036, 0.051859114000000005, 0.051578650000000004]
+first_preparation_s = 0.061767526
+first_prepared_call_s = 0.6868775
+g = 4
+geometry_sha256 = "057de6d7b50bbe0ff0a9b91470b9e68bc7dbbb24822d4be8dc0e701906e4bf11"
+model = "tialv"
+model_file_sha256 = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"
+model_load_s = 0.66590834
+packed_lanes = 8104
+phase_sizes = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+precision = "Float32"
+scratch_payload_bytes = 297664
+single_shared_force_bytes = 1536
+species_sha256 = "b9f357b63eee6da0e0b04df3aca8236cf45d4350d66e1cca86c4b7947a7eabf2"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 10294
+    host_bytes = 1617888
+    max_s = 0.216648058
+    median_s = 0.213510468
+    min_s = 0.213070951
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.216648058, 0.21391658500000002, 0.21326931100000002, 0.21476417900000003, 0.213320962, 0.21327679200000002, 0.21313131100000002, 0.213070951, 0.21369997400000001, 0.21438806700000002]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.213660504
+
+    [cases.external_Float64_errors]
+    energy_abs_eV = 0.19188834074884653
+    forces_max_eV_per_A = 1.4095258186630488e-5
+    virial_max_eV = 0.001004545071054963
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [51379, 51379, 51379]
+    active_readout_per_central_species = [43585, 43585, 43585]
+    coordinate_kind = "legacy_PI"
+    coupling_nnz = 271722
+    coupling_shape = [130755, 51379]
+    cutoff_A = 6.0
+    density_count = 441
+    harmonic_count = 25
+    lmax = 4
+    pair_radial_count = 45
+    products = 51379
+    radial_count = 66
+    radial_representation = "PotentialFrameWork.ACE.CallableRadial{PotentialFrameWork.ACE.LegacyPolynomial, @NamedTuple{a::Float32, rin::Float32, r0::Float32, p::Int64, q::Int64, x1::Float32, x2::Float32, y1::Float32, y2::Float32, A::Vector{Float32}, B::Vector{Float32}, C::Vector{Float32}, pl::Int64, pr::Int64, tl::Float32, tr::Float32, envelope_power::Int64, envelope_r0::Float32, offset::Int64, cutoff::Float32}, @NamedTuple{route::String, id::String}, PotentialFrameWork.ACE.RadialMetadata{Float32}}"
+    species = [13, 22, 23]
+
+        [cases.metadata.product_orders]
+        1 = 63
+        2 = 2880
+        3 = 48436
+
+    [cases.preparation_stage_s]
+    boundary_extraction = 5.0020000000000006e-5
+    element_channels = 0.026261946
+    extraction = 7.743100000000001e-5
+    full_environment_schedule = 0.00043340200000000005
+    schedule = 2.43e-6
+    snapshot_materialization = 0.0008122540000000001
+    sorting_packing = 6.201e-5
+    species_packing = 0.0024166110000000004
+    topology = 1.304e-5
+
+    [cases.prepared]
+    host_allocations = 0
+    host_bytes = 0
+    max_s = 0.220066684
+    median_s = 0.2199169285
+    min_s = 0.219342891
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.21960484200000002, 0.219620792, 0.21990241300000002, 0.219972454, 0.22006667400000002, 0.219931444, 0.220066684, 0.219984004, 0.219822033, 0.219342891]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.218689478
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.repeated_frames]
+    connectivity = "fresh rebuild every frame; includes public owning outputs"
+    frames = 3
+    host_allocations = 30882
+    host_bytes = 4853664
+    max_s = 0.6414280840000001
+    median_s = 0.6400750875000001
+    min_s = 0.6395190040000001
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.6414280840000001, 0.640362139, 0.639717926, 0.6395190040000001, 0.639788036, 0.6404765400000001, 0.6395488140000001, 0.640880122, 0.641380654, 0.639685755]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.64080278
+
+[harness_sha256]
+"common.jl" = "ee30456403919b3b034be877d3231ee32182f338d3dd55feb417cb9c69c84ff4"
+"features.jl" = "8257187723726e5a1d29b08a572cae9e8634d208327927195b0d3a09024317e8"
+"generate_modern.jl" = "c7162af2cc760911c18f40cc7d856732574b8cddf0036cf92c3421c1a0701521"
+"legacy_oracle.jl" = "f70da168c1cadf7704d815de7044854f4850330586c2336d9c1375d7ce7cebe3"
+"oracle_modern.jl" = "6b443e321a2db16c4296847aaec8cb17086bac2a4147f94e321e0806ef77cbe0"
+"run.jl" = "edc62cb18c5eca2bc6cd206b774fc2959854acfec1f5fc82d11f6d4ce87613c7"
+"suite.jl" = "47f2a369d60218f0eea75ba0875aaee3f8690e11ff54a6005bd1883baf4bfd42"
+
+[[omissions]]
+model = "PACE"
+reason = "Executable probed; equivalent exported spline interpolation and pair tables not validated in stage 1. No PACE comparison launched."
+status = "unsupported"
+
+[options]
+codegen = ""
+data = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/models"
+diagnostics = "false"
+historical = "true"
+models = "ti,tialv"
+oracle-data = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/oracles-final"
+output = "/mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/cpu_ace/results/2026-11-10/legacy-128/historical-t1.toml"
+pace = "/opt/lammps-static/bin/lmp"
+parallel = "false"
+precisions = "Float64,Float32"
+preset = "quick"
+profile = ""
+samples = "10"
+seconds = "30"
+sizes = "4"
+widths = "4"
+
+[source_files_sha256]
+"../../mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/audit.jl" = "843bb7ba4fbbff4a6b243bd68dac00e87973330d90794b130c04b000c2b95629"
+"../../mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/run.jl" = "d7e8cef163e406c585e85795ace9348a4cabdaa4790ff5d2751f1063f3aff7ef"
+"../../mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/suite.jl" = "3e0be5bf1d9ce2ec9684c9c63777d5570c734d2aa161e2ab5c753d92f652bacf"
+"../../mnt/work/Coding/Potentials/dev/PotentialFrameWork/benchmark/gpu_ace/workloads.jl" = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+"Project.toml" = "33a6426b36e674445da502a3389bc8b13fdfc2cbcfea3f06b4b9b94afec2cea4"
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "796635c5d0bd81010bf00ff2b2c9d2285dbe1cd8cb96144607ec7f852c7d4950"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "87ba63c6cdf9c9c2bf5936277f4081129f3a499430e6529779ea5a99b1ad52e7"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "0c824742b9c91901b06e309a30f08694893f2c312614ac8567cffbe2038232e0"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "485461724ff67c4d2c994401eb447be818ac3bcf52fdba092f9fee27f73f5c3a"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "f380760ab5394ef6e0ef6c303013a04b155fbe00e5bc6c60a39487c67ca08a5f"
+"src/submodules/ACE/adaptation.jl" = "aec733e36b2c34fe3b729085f2ed3d8fa91f7486e8289b5614febc07cd869f80"
+"src/submodules/ACE/angular_blocks.jl" = "90dbee708364153a01433fba30c824cf1e3abf11d5da22debed3c1dabf80275b"
+"src/submodules/ACE/calculators.jl" = "e6e7ef9c6cf8c43e465164d4be0b38eb5222c2ffe21ff10a52742da18ca2fb65"
+"src/submodules/ACE/cpu.jl" = "8b32999d0965e974103dcf5a786d80d0ba21930a64a2efb0158761b31c661f60"
+"src/submodules/ACE/environments.jl" = "647e6cbbfaf1016f6f6f7069d6f73c958a6b78c4c8cf786d429bb4f99f242ff3"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/features.jl" = "10f5fd604fb5bade29ea33aca88450bb0063bb5733e9a7ab358ad4f19b9093c0"
+"src/submodules/ACE/fitting.jl" = "c963538a24c56a0d1118ba0d07a0f1f4a740832b1b9a52683b6946f283c136fc"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "26cbb278ab48e68f5f47bc50241f99cb01bc85d62bbc2ad797aab5d5d897d9d6"
+"src/submodules/ACE/interface_persistence.jl" = "1bb98926435386695d0467a22efc9a7761fd37fda03857f00b29ff5083b15de4"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "88059d902b25cf0014a6b58253e301039f85dfababe9a4ff888601fed06895cf"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "6c985ecebd086faebe397dc0b80fb0d3d814b38eff8c4cc818e8574ce8bc3b8f"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "479c23cf53244be1940b2c8a8d3ae7ab0c5bad9b42ebe4a83242fc9063597b84"
+"src/submodules/ACE/serial.jl" = "7e7b9c1616de672d40f308b46c36e9572cdd5655ffb6980fa57ad09328d85a44"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "ff2d999a047a766e1ebe60442d088080ad4ac72c856ad8b9091d3d94c302d0d8"
+"src/submodules/NeighbourList/NeighbourList.jl" = "9c2c264fcf017b913e959608d505b29acf2c86a95e7528f6524bada4284330ac"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AcceleratedKernels = "0.4.4"
+BenchmarkTools = "1.8.0"
+KernelAbstractions = "0.9.45"
+SIMD = "3.8.2"
+SpheriCart = "0.2.4"
+StaticArrays = "1.9.24"

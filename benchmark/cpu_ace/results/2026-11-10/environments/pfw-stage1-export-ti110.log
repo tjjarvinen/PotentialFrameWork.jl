@@ -1,0 +1,53 @@
+┌ Info: Ignoring an error that occurred during the precompilation workload
+│   exception =
+│    IOError: bind: operation not permitted (EPERM)
+│    Stacktrace:
+│      [1] bind(sock::Sockets.TCPServer, host::Sockets.IPv4, port::UInt16; ipv6only::Bool, reuseaddr::Bool, kws::@Kwargs{})
+│        @ Sockets ~/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/share/julia/stdlib/v1.10/Sockets/src/Sockets.jl:271
+│      [2] bind
+│        @ ~/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/share/julia/stdlib/v1.10/Sockets/src/Sockets.jl:254 [inlined]
+│      [3] bind
+│        @ ~/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/share/julia/stdlib/v1.10/Sockets/src/Sockets.jl:284 [inlined]
+│      [4] listenany(host::Sockets.IPv4, default_port::UInt16; backlog::Int64)
+│        @ Sockets ~/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/share/julia/stdlib/v1.10/Sockets/src/Sockets.jl:722
+│      [5] listenany
+│        @ ~/.julia/juliaup/julia-1.10.12+0.x64.linux.gnu/share/julia/stdlib/v1.10/Sockets/src/Sockets.jl:718 [inlined]
+│      [6] HTTP.Servers.Listener(addr::Sockets.InetAddr{Sockets.IPv4}, host::String, port::String; sslconfig::MbedTLS.SSLConfig, reuseaddr::Bool, backlog::Int64, server::Nothing, listenany::Bool, kw::@Kwargs{verbose::Int64})
+│        @ HTTP.Servers ~/.julia/packages/HTTP/vikg9/src/Servers.jl:50
+│      [7] Listener
+│        @ ~/.julia/packages/HTTP/vikg9/src/Servers.jl:39 [inlined]
+│      [8] Listener
+│        @ ~/.julia/packages/HTTP/vikg9/src/Servers.jl:74 [inlined]
+│      [9] #listen!#9
+│        @ ~/.julia/packages/HTTP/vikg9/src/Servers.jl:332 [inlined]
+│     [10] serve!(::Function, ::Sockets.IPv4, ::Vararg{Any}; stream::Bool, kw::@Kwargs{verbose::Int64, listenany::Bool, sslconfig::MbedTLS.SSLConfig})
+│        @ HTTP.Handlers ~/.julia/packages/HTTP/vikg9/src/Handlers.jl:140
+│     [11] macro expansion
+│        @ ~/.julia/packages/HTTP/vikg9/src/precompile.jl:22 [inlined]
+│     [12] macro expansion
+│        @ ~/.julia/packages/PrecompileTools/L8A3n/src/workloads.jl:140 [inlined]
+│     [13] top-level scope
+│        @ ~/.julia/packages/HTTP/vikg9/src/precompile.jl:4
+│     [14] include(mod::Module, _path::String)
+│        @ Base ./Base.jl:495
+│     [15] include
+│        @ ~/.julia/packages/HTTP/vikg9/src/HTTP.jl:1 [inlined]
+│     [16] top-level scope
+│        @ ~/.julia/packages/HTTP/vikg9/src/HTTP.jl:651
+│     [17] include
+│        @ ./Base.jl:495 [inlined]
+│     [18] include_package_for_output(pkg::Base.PkgId, input::String, depot_path::Vector{String}, dl_load_path::Vector{String}, load_path::Vector{String}, concrete_deps::Vector{Pair{Base.PkgId, UInt128}}, source::String)
+│        @ Base ./loading.jl:2306
+│     [19] top-level scope
+│        @ stdin:5
+│     [20] eval
+│        @ ./boot.jl:385 [inlined]
+│     [21] include_string(mapexpr::typeof(identity), mod::Module, code::String, filename::String)
+│        @ Base ./loading.jl:2160
+│     [22] include_string
+│        @ ./loading.jl:2170 [inlined]
+│     [23] exec_options(opts::Base.JLOptions)
+│        @ Base ./client.jl:314
+│     [24] _start()
+└        @ Base ./client.jl:550
+benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml densities=329 products=16444 PI coordinates=12539 radial errors=(7.605027718682322e-14, 4.092726157978177e-12)

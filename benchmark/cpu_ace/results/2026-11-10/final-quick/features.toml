@@ -1,0 +1,93 @@
+blas_threads = 1
+julia = "1.13.3"
+schema = "PFW.CPUACE.Features.v1"
+threads = 1
+
+[[cases]]
+atoms = 3
+boundary = "functional serial CPU features, owning outputs; prepared environment; joint position/parameter pullback"
+density_count = 14
+irreps = "(PotentialFrameWork.ACE.FeatureIrrep(0, :even, 3), PotentialFrameWork.ACE.FeatureIrrep(1, :odd, 2), PotentialFrameWork.ACE.FeatureIrrep(1, :even, 2), PotentialFrameWork.ACE.FeatureIrrep(2, :even, 2))"
+output_payload_bytes = 600
+product_count = 119
+saved_pullback_summarysize = 22016
+
+    [cases.forward]
+    host_allocations = 286
+    host_bytes = 20688
+    max_s = 4.363e-5
+    median_s = 7.975e-6
+    min_s = 7.2900000000000005e-6
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [4.363e-5, 9.58e-6, 7.96e-6, 7.99e-6, 8.07e-6, 7.39e-6, 7.51e-6, 7.670000000000001e-6, 7.2900000000000005e-6, 8.11e-6]
+    samples = 10
+    undersampled = false
+    warmup_s = 7.3181e-5
+
+    [cases.position_parameter_pullback]
+    host_allocations = 1323
+    host_bytes = 93840
+    max_s = 0.000111001
+    median_s = 4.3520000000000003e-5
+    min_s = 4.1920000000000005e-5
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.000111001, 4.5190000000000006e-5, 4.3650000000000004e-5, 4.1920000000000005e-5, 4.2261e-5, 4.351e-5, 4.296e-5, 4.589e-5, 4.3530000000000005e-5, 4.2701e-5]
+    samples = 10
+    undersampled = false
+    warmup_s = 1.122441178
+
+    [cases.rule_forward]
+    host_allocations = 1142
+    host_bytes = 89608
+    max_s = 0.000158021
+    median_s = 3.35555e-5
+    min_s = 3.134e-5
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.000158021, 4.0940000000000004e-5, 3.452e-5, 3.3651e-5, 3.3270000000000005e-5, 3.2460000000000004e-5, 3.388e-5, 3.346e-5, 3.134e-5, 3.2961000000000005e-5]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.0001264
+[[cases]]
+atoms = 32
+boundary = "functional serial CPU features, owning outputs; prepared environment; joint position/parameter pullback"
+density_count = 14
+irreps = "(PotentialFrameWork.ACE.FeatureIrrep(0, :even, 3), PotentialFrameWork.ACE.FeatureIrrep(1, :odd, 2), PotentialFrameWork.ACE.FeatureIrrep(1, :even, 2), PotentialFrameWork.ACE.FeatureIrrep(2, :even, 2))"
+output_payload_bytes = 6400
+product_count = 119
+saved_pullback_summarysize = 93488
+
+    [cases.forward]
+    host_allocations = 6096
+    host_bytes = 571496
+    max_s = 0.000243111
+    median_s = 0.000145661
+    min_s = 0.00013778100000000001
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.000243111, 0.00013778100000000001, 0.00014066100000000001, 0.00013883, 0.000150851, 0.000151111, 0.00014536100000000002, 0.00014395, 0.000147381, 0.000145961]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.00014831
+
+    [cases.position_parameter_pullback]
+    host_allocations = 122262
+    host_bytes = 4965168
+    max_s = 0.002757704
+    median_s = 0.0026506135
+    min_s = 0.002631923
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.002757704, 0.002631923, 0.002645924, 0.002651164, 0.002643583, 0.002657584, 0.002660664, 0.002669354, 0.0026500630000000002, 0.002646444]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.002666164
+
+    [cases.rule_forward]
+    host_allocations = 7249
+    host_bytes = 713584
+    max_s = 0.00032716200000000004
+    median_s = 0.000182941
+    min_s = 0.00017375000000000002
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.00032716200000000004, 0.000205071, 0.000181831, 0.000193491, 0.00018405100000000002, 0.000179091, 0.000188571, 0.00017375000000000002, 0.00017603100000000002, 0.000175591]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.000222581

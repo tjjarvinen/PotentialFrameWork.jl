@@ -33,6 +33,39 @@ function product_projection!(P,dU,dV,U,V,products,weights,orders,fwd,rev)
     end
     nothing
 end
+# Prepared scalar inference only. Functional AD and feature evaluation retain
+# product_projection! above. The first row of existing bounded scratch stores
+# prefixes; reverse needs one scalar, including at zero/repeated factors.
+function unrestricted_products!(P,dU,dV,U,V,products,weights,prefix)
+    fill!(dU,0); fill!(dV,0)
+    for (j,indices) in enumerate(products)
+        prefix[1,1]=one(eltype(prefix))
+        for (t,a) in enumerate(indices)
+            prefix[1,t+1]=prefix[1,t]*(U[a]+V[a])
+        end
+        P[j]=prefix[1,length(indices)+1]
+        adj=weights[j]
+        for t=length(indices):-1:1
+            a=indices[t]
+            g=adj*prefix[1,t]
+            dU[a]+=g; dV[a]+=g
+            adj*=U[a]+V[a]
+        end
+    end
+    nothing
+end
+function check_product_algorithm(algorithm)
+    algorithm in (:auto,:reference,:optimized) ||
+        throw(ArgumentError("product_algorithm must be :auto, :reference or :optimized"))
+    algorithm
+end
+function prepared_products!(P,dU,dV,U,V,products,weights,orders,fwd,rev,algorithm)
+    if algorithm!==:reference && isnothing(orders)
+        unrestricted_products!(P,dU,dV,U,V,products,weights,fwd)
+    else
+        product_projection!(P,dU,dV,U,V,products,weights,orders,fwd,rev)
+    end
+end
 function projection_work(model,::Type{T}) where T
     K=projection_degree(model); nu=maximum(length,model.products;init=0)
     zeros(T,K+1,nu+1),zeros(T,K+1,nu+1)
