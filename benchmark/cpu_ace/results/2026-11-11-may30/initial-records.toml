@@ -1,0 +1,730 @@
+[[records]]
+VV_distance_A = 2.896336346357252
+VV_image = [0, 0, 0]
+VV_neighbor = 2
+atoms = 128
+cell = [13.735999999999999, 0.0, 0.0, 0.31279999999999997, 13.532, 0.0, -0.14959999999999998, 0.23120000000000002, 13.6816]
+composition = [42, 42, 44]
+directed_neighbors = 7334
+face_heights_A = [13.73145162018379, 13.53006829469225, 13.681600000000001]
+fixture = "bcc-128"
+fixture_sha256 = "23cf9057acb42fff8fec0844c24f293fbf77553b35d68e5ef49cbcdb05591457"
+geometry_sha256 = "ff7c425703e42ca3fc532116b2738af99efa27450c995e9e11add162472b41bb"
+minimum_distance_A = 2.8778884752032527
+seed = "analytic sin/cos v1; no RNG"
+
+    [records.checks.ET_conversion]
+    energy_per_atom_eV = 2.2737367544323206e-13
+    force_component_eV_per_A = 1.1324274851176597e-14
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0822299141722568e-9, 2.1397266554524034e-8]
+    virial_component_eV = 1.1084466677857563e-12
+
+    [records.checks.dag_prepared]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7897684162780934e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0822299141883707e-9, 2.1397266554671222e-8]
+    virial_component_eV = 1.261923898709938e-11
+
+    [records.checks.dag_public]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7897684162780934e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0822299141883707e-9, 2.1397266554671222e-8]
+    virial_component_eV = 1.261923898709938e-11
+
+    [records.checks.optimized_prepared]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7928215295958125e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0822299141883707e-9, 2.1397266554671222e-8]
+    virial_component_eV = 1.2875034371973015e-11
+
+    [records.checks.optimized_public]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7928215295958125e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0822299141883707e-9, 2.1397266554671222e-8]
+    virial_component_eV = 1.2875034371973015e-11
+
+    [records.checks.spline_approximation]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 7.448223149353339e-9
+    passed = true
+    thresholds = [2.2e-6, 2.0822299141722567e-5, 0.00021397266554524036]
+    virial_component_eV = 2.2910761288130743e-8
+
+    [records.setup]
+    dag_calculator_s = 0.000496932
+    dag_executor_s = 0.000419452
+    optimized_calculator_s = 0.387453988
+    optimized_executor_s = 0.024145627
+
+    [records.timings.dag_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 9.617738e6
+    median_ns = 9.314032e6
+    min_ns = 9.289307e6
+    raw_ns = [9.617738e6, 9.314177e6, 9.303357e6, 9.307418e6, 9.289307e6, 9.298087e6, 9.326677e6, 9.313887e6, 9.332028e6, 9.329987e6]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.009378028
+
+    [records.timings.dag_public]
+    allocations = 92736
+    bytes = 4952632
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.3813295e7
+    median_ns = 1.33633685e7
+    min_ns = 1.3317473e7
+    raw_ns = [1.3813295e7, 1.3388164e7, 1.3377803e7, 1.3336234e7, 1.3348993e7, 1.3344243e7, 1.3348564e7, 1.3317473e7, 1.3383943e7, 1.3377744e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.013870806
+
+    [records.timings.et_polynomial_public]
+    allocations = 124145
+    bytes = 205989144
+    gc_ns = [0.0, 1.647747e6, 4.532058e6, 1.67581729e8, 0.0, 7.022887e6, 1.63476024e8, 0.0, 1.750597e6, 8.291463e6]
+    max_ns = 3.51157733e8
+    median_ns = 1.93388548e8
+    min_ns = 1.81618295e8
+    raw_ns = [1.86458815e8, 1.91803787e8, 1.81618295e8, 3.51157733e8, 1.94973309e8, 1.9036263e8, 3.46799296e8, 1.95053299e8, 1.85283781e8, 1.9773904e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.19521569
+
+    [records.timings.optimized_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.25356e7
+    median_ns = 1.23414845e7
+    min_ns = 1.2265769e7
+    raw_ns = [1.25356e7, 1.230566e7, 1.2295949e7, 1.2265769e7, 1.2343259e7, 1.236006e7, 1.2361089e7, 1.2346339e7, 1.233971e7, 1.2329819e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.01264071
+
+    [records.timings.optimized_public]
+    allocations = 92736
+    bytes = 4952632
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.6665087e7
+    median_ns = 1.630766e7
+    min_ns = 1.6281635e7
+    raw_ns = [1.6665087e7, 1.6315175e7, 1.6292735e7, 1.6281635e7, 1.6283905e7, 1.6290525e7, 1.6325096e7, 1.6302835e7, 1.6320455e7, 1.6312485e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.016744247
+
+    [records.timings.polynomial_public]
+    allocations = 183925
+    bytes = 64313216
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 1.0816123e7, 0.0, 0.0, 2.971852e6, 0.0]
+    max_ns = 3.3773305e7
+    median_ns = 2.0026445e7
+    min_ns = 1.7829051e7
+    raw_ns = [1.8935035e7, 1.9221987e7, 2.1481636e7, 2.0830903e7, 2.255263e7, 3.3773305e7, 1.7831482e7, 1.8613604e7, 2.1570816e7, 1.7829051e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.04257113
+
+    [records.timings.spline_public]
+    allocations = 111353
+    bytes = 31862176
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.3703145e7
+    median_ns = 1.2823026e7
+    min_ns = 1.1425835e7
+    raw_ns = [1.2025318e7, 1.1872888e7, 1.1510216e7, 1.1425835e7, 1.1639487e7, 1.3703145e7, 1.3622264e7, 1.3620734e7, 1.3688565e7, 1.3652415e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.038603065
+[[records]]
+VV_distance_A = 2.8817243426145183
+VV_image = [0, -1, 0]
+VV_neighbor = 114
+atoms = 1024
+cell = [27.471999999999998, 0.0, 0.0, 0.6255999999999999, 27.064, 0.0, -0.29919999999999997, 0.46240000000000003, 27.3632]
+composition = [341, 340, 343]
+directed_neighbors = 58788
+face_heights_A = [27.46290324036758, 27.0601365893845, 27.363200000000003]
+fixture = "bcc-1024"
+fixture_sha256 = "231c15e22700add832bb1bec087004f6da135b7f9d853058484147d7aef48b36"
+geometry_sha256 = "d6bee510061d378412594ff00dce47e732a20a3dfff34a59692d311eb68f17b6"
+minimum_distance_A = 2.8592563673824056
+seed = "analytic sin/cos v1; no RNG"
+
+    [records.checks.ET_conversion]
+    energy_per_atom_eV = 1.3642420526593924e-12
+    force_component_eV_per_A = 1.3808398868775384e-14
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0862305339256137e-9, 4.2129438721307616e-8]
+    virial_component_eV = 1.0206946399193839e-11
+
+    [records.checks.dag_prepared]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7413626924044365e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.086230534026281e-9, 4.212943872192304e-8]
+    virial_component_eV = 5.994849061607965e-11
+
+    [records.checks.dag_public]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7413626924044365e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.086230534026281e-9, 4.212943872192304e-8]
+    virial_component_eV = 5.994849061607965e-11
+
+    [records.checks.optimized_prepared]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7360336218862358e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.086230534026281e-9, 4.212943872192304e-8]
+    virial_component_eV = 6.214406766957836e-11
+
+    [records.checks.optimized_public]
+    energy_per_atom_eV = 9.094947017729282e-13
+    force_component_eV_per_A = 2.7360336218862358e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.086230534026281e-9, 4.212943872192304e-8]
+    virial_component_eV = 6.214406766957836e-11
+
+    [records.checks.spline_approximation]
+    energy_per_atom_eV = 4.547473508864641e-13
+    force_component_eV_per_A = 1.1382883968735769e-8
+    passed = true
+    thresholds = [2.2e-6, 2.086230533925614e-5, 0.0004212943872130762]
+    virial_component_eV = 4.1278553908341564e-8
+
+    [records.setup]
+    dag_calculator_s = 0.000541192
+    dag_executor_s = 0.000481092
+    optimized_calculator_s = 0.000587052
+    optimized_executor_s = 0.000504622
+
+    [records.timings.dag_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 7.496667e7
+    median_ns = 7.4629153e7
+    min_ns = 7.4407248e7
+    raw_ns = [7.4638108e7, 7.4407248e7, 7.4429507e7, 7.4514608e7, 7.4748118e7, 7.496667e7, 7.4671468e7, 7.4644759e7, 7.4620198e7, 7.4571678e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.074392408
+
+    [records.timings.dag_public]
+    allocations = 1164238
+    bytes = 46507408
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.12096408e8
+    median_ns = 1.09379897e8
+    min_ns = 1.08219812e8
+    raw_ns = [1.08219812e8, 1.08403454e8, 1.08400873e8, 1.08630684e8, 1.08848725e8, 1.09911069e8, 1.11555476e8, 1.12096408e8, 1.11938707e8, 1.12008527e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.109335357
+
+    [records.timings.et_polynomial_public]
+    allocations = 1286587
+    bytes = 1652339232
+    gc_ns = [1.76111004e8, 3.78396521e8, 3.55848491e8, 3.56984696e8, 3.55691233e8]
+    max_ns = 2.332355789e9
+    median_ns = 2.291257175e9
+    min_ns = 2.133629036e9
+    raw_ns = [2.133629036e9, 2.332355789e9, 2.29727975e9, 2.291257175e9, 2.284452658e9]
+    samples = 5
+    undersampled = true
+    warmup_s = 2.296531937
+
+    [records.timings.optimized_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 9.8546433e7
+    median_ns = 9.83554385e7
+    min_ns = 9.8211543e7
+    raw_ns = [9.8325393e7, 9.8546433e7, 9.8211543e7, 9.8228532e7, 9.8252273e7, 9.8358023e7, 9.8411223e7, 9.8430473e7, 9.8387923e7, 9.8352854e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.098851545
+
+    [records.timings.optimized_public]
+    allocations = 1164238
+    bytes = 46507408
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.36879767e8
+    median_ns = 1.34143906e8
+    min_ns = 1.32384379e8
+    raw_ns = [1.32384379e8, 1.3278948e8, 1.33069542e8, 1.3254269e8, 1.3262173e8, 1.3521827e8, 1.36667366e8, 1.36879767e8, 1.36506976e8, 1.36754996e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.132970391
+
+    [records.timings.polynomial_public]
+    allocations = 1563115
+    bytes = 516592656
+    gc_ns = [1.0335201e7, 1.3444934e7, 1.2252938e7, 1.5027829e7, 1.4714659e7, 1.3543849e7, 1.4643677e7, 1.4206857e7, 1.4766947e7, 1.3616242e7]
+    max_ns = 1.69684378e8
+    median_ns = 1.55782617e8
+    min_ns = 1.54167766e8
+    raw_ns = [1.67568929e8, 1.69684378e8, 1.56469876e8, 1.56033053e8, 1.55469421e8, 1.54167766e8, 1.5494099e8, 1.55941563e8, 1.55623671e8, 1.54238617e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.171059554
+
+    [records.timings.spline_public]
+    allocations = 981379
+    bytes = 256470224
+    gc_ns = [0.0, 5.192011e6, 5.866043e6, 4.058647e6, 6.985308e6, 1.0089739e7, 9.907969e6, 9.831891e6, 9.805289e6, 9.910688e6]
+    max_ns = 1.10872773e8
+    median_ns = 1.02047013e8
+    min_ns = 9.1514566e7
+    raw_ns = [9.1514566e7, 1.02001707e8, 1.03254263e8, 1.10872773e8, 1.0023689e8, 1.08625624e8, 1.02038398e8, 1.02055628e8, 1.01782587e8, 1.02112318e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.096127814
+[[records]]
+VV_distance_A = 2.896336346357252
+VV_image = [0, 0, 0]
+VV_neighbor = 2
+atoms = 3456
+cell = [41.208, 0.0, 0.0, 0.9383999999999999, 40.596, 0.0, -0.4487999999999999, 0.6936, 41.044799999999995]
+composition = [1151, 1151, 1154]
+directed_neighbors = 197952
+face_heights_A = [41.19435486055137, 40.59020488407674, 41.044799999999995]
+fixture = "bcc-3456"
+fixture_sha256 = "22ccf23265c821ea17ce343340795afd0c9a7448d8e5e4b282c383b8ad806f9e"
+geometry_sha256 = "5426e0f29eb821da3d17069408b9d6714e8679d2339ff72977a74e2bfe5c9939"
+minimum_distance_A = 2.856459306220133
+seed = "analytic sin/cos v1; no RNG"
+
+    [records.checks.ET_conversion]
+    energy_per_atom_eV = 2.6947991163642317e-13
+    force_component_eV_per_A = 1.687538997430238e-14
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0640783130288826e-9, 1.5696145160035344e-7]
+    virial_component_eV = 8.731149137020111e-11
+
+    [records.checks.dag_prepared]
+    energy_per_atom_eV = 2.6947991163642317e-13
+    force_component_eV_per_A = 3.194139397422191e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0640783130128018e-9, 1.5696145159564682e-7]
+    virial_component_eV = 1.127773430198431e-10
+
+    [records.checks.dag_public]
+    energy_per_atom_eV = 2.6947991163642317e-13
+    force_component_eV_per_A = 3.194139397422191e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0640783130128018e-9, 1.5696145159564682e-7]
+    virial_component_eV = 1.127773430198431e-10
+
+    [records.checks.optimized_prepared]
+    energy_per_atom_eV = 2.6947991163642317e-13
+    force_component_eV_per_A = 3.193084685548797e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0640783130128018e-9, 1.5696145159564682e-7]
+    virial_component_eV = 1.1186784831807017e-10
+
+    [records.checks.optimized_public]
+    energy_per_atom_eV = 2.6947991163642317e-13
+    force_component_eV_per_A = 3.193084685548797e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0640783130128018e-9, 1.5696145159564682e-7]
+    virial_component_eV = 1.1186784831807017e-10
+
+    [records.checks.spline_approximation]
+    energy_per_atom_eV = 0.0
+    force_component_eV_per_A = 8.22023560331786e-9
+    passed = true
+    thresholds = [2.2e-6, 2.0640783130288827e-5, 0.0015696145160035346]
+    virial_component_eV = 4.53152267709811e-7
+
+    [records.setup]
+    dag_calculator_s = 0.000497842
+    dag_executor_s = 0.000499972
+    optimized_calculator_s = 0.000557712
+    optimized_executor_s = 0.000448552
+
+    [records.timings.dag_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 2.48417902e8
+    median_ns = 2.482503515e8
+    min_ns = 2.47963081e8
+    raw_ns = [2.47963081e8, 2.48078672e8, 2.48246371e8, 2.48254332e8, 2.48327163e8, 2.48417902e8, 2.48289233e8, 2.48082431e8, 2.48303182e8, 2.48044261e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.247110158
+
+    [records.timings.dag_public]
+    allocations = 4920316
+    bytes = 173034112
+    gc_ns = [0.0, 0.0, 0.0, 2.6669767e7, 0.0, 2.2279059e7, 0.0, 1.7320399e7, 1.1612557e7, 1.0616402e7]
+    max_ns = 3.93613303e8
+    median_ns = 3.789566485e8
+    min_ns = 3.65903042e8
+    raw_ns = [3.65903042e8, 3.74547686e8, 3.83288502e8, 3.93613303e8, 3.72716159e8, 3.9279562e8, 3.70289379e8, 3.85987182e8, 3.79362045e8, 3.78551252e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.371705996
+
+    [records.timings.et_polynomial_public]
+    allocations = 5031645
+    bytes = 5577953984
+    gc_ns = [7.21417094e8, 9.34571095e8]
+    max_ns = 7.513226281e9
+    median_ns = 7.4189643845e9
+    min_ns = 7.324702488e9
+    raw_ns = [7.324702488e9, 7.513226281e9]
+    samples = 2
+    undersampled = true
+    warmup_s = 7.324412987
+
+    [records.timings.optimized_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 3.29162445e8
+    median_ns = 3.28063636e8
+    min_ns = 3.2786649e8
+    raw_ns = [3.28650223e8, 3.28069211e8, 3.29162445e8, 3.28651303e8, 3.27899941e8, 3.28170841e8, 3.2786649e8, 3.28058061e8, 3.2795491e8, 3.27968231e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.329929039
+
+    [records.timings.optimized_public]
+    allocations = 4920316
+    bytes = 173034112
+    gc_ns = [0.0, 0.0, 0.0, 2.6827177e7, 0.0, 0.0, 2.5917513e7, 1.8075782e7, 0.0, 1.3349974e7]
+    max_ns = 4.76532464e8
+    median_ns = 4.61506229e8
+    min_ns = 4.4815334e8
+    raw_ns = [4.4815334e8, 4.55820812e8, 4.6556989e8, 4.76532464e8, 4.54565706e8, 4.60201319e8, 4.74293726e8, 4.71699525e8, 4.48309931e8, 4.62811139e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.447205567
+
+    [records.timings.polynomial_public]
+    allocations = 5478182
+    bytes = 1743957008
+    gc_ns = [4.3169383e7, 4.6589308e7, 4.7449868e7, 4.7568202e7, 4.8211323e7, 4.6031255e7, 4.6035623e7, 4.7033939e7, 4.5631054e7, 4.4718218e7]
+    max_ns = 5.68784403e8
+    median_ns = 5.20795576e8
+    min_ns = 5.1820012e8
+    raw_ns = [5.68784403e8, 5.20821381e8, 5.21638114e8, 5.21367394e8, 5.22930369e8, 5.18921154e8, 5.20769771e8, 5.20297929e8, 5.1820012e8, 5.18775693e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.532373087
+
+    [records.timings.spline_public]
+    allocations = 3519398
+    bytes = 868071440
+    gc_ns = [1.1391126e7, 2.7111797e7, 3.0479412e7, 2.9467108e7, 2.9674737e7, 2.9846277e7, 2.7704951e7, 2.8350448e7, 2.8442432e7, 1.7259143e8]
+    max_ns = 4.88560602e8
+    median_ns = 3.397365225e8
+    min_ns = 3.2787728e8
+    raw_ns = [3.2787728e8, 3.40002288e8, 3.4019215e8, 3.39601717e8, 3.4045958e8, 3.39871328e8, 3.3770671e8, 3.3798064e8, 3.38739714e8, 4.88560602e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.5556444
+[[records]]
+VV_distance_A = 3.148243761252187
+VV_image = [0, 0, 0]
+VV_neighbor = 2
+atoms = 150
+cell = [16.16, 0.0, 0.0, 8.398697348592673, 13.787124428248262, 0.0, -0.17244407789193575, 0.2665044840148098, 15.770794759935216]
+composition = [49, 49, 52]
+directed_neighbors = 5700
+face_heights_A = [13.798675146155015, 13.785156303696333, 15.770794759935214]
+fixture = "hcp-150"
+fixture_sha256 = "d9b1ee01f423c3cfec1be719b767030ab9f53095e9f4f9b3ec2f3b911386d8bf"
+geometry_sha256 = "83d4dd7121f8dd1f8597833981383a9da99df6d11e95e3ed04240ede6234af70"
+minimum_distance_A = 3.119090706760977
+seed = "analytic sin/cos v1; no RNG"
+
+    [records.checks.ET_conversion]
+    energy_per_atom_eV = 1.940255363782247e-13
+    force_component_eV_per_A = 8.659739592076221e-15
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0780876854261144e-9, 2.275727231379675e-8]
+    virial_component_eV = 2.2168933355715126e-12
+
+    [records.checks.dag_prepared]
+    energy_per_atom_eV = 1.940255363782247e-13
+    force_component_eV_per_A = 2.33241204128376e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.07808768543192e-9, 2.275727231365272e-8]
+    virial_component_eV = 1.1311840353300795e-11
+
+    [records.checks.dag_public]
+    energy_per_atom_eV = 1.940255363782247e-13
+    force_component_eV_per_A = 2.33241204128376e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.07808768543192e-9, 2.275727231365272e-8]
+    virial_component_eV = 1.1311840353300795e-11
+
+    [records.checks.optimized_prepared]
+    energy_per_atom_eV = 1.940255363782247e-13
+    force_component_eV_per_A = 2.3344937094549323e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.07808768543192e-9, 2.275727231365272e-8]
+    virial_component_eV = 1.1084466677857563e-11
+
+    [records.checks.optimized_public]
+    energy_per_atom_eV = 1.940255363782247e-13
+    force_component_eV_per_A = 2.3344937094549323e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.07808768543192e-9, 2.275727231365272e-8]
+    virial_component_eV = 1.1084466677857563e-11
+
+    [records.checks.spline_approximation]
+    energy_per_atom_eV = 3.880510727564494e-13
+    force_component_eV_per_A = 2.0932157673847485e-9
+    passed = true
+    thresholds = [2.2e-6, 2.0780876854261148e-5, 0.0002275727231379675]
+    virial_component_eV = 1.446214525913092e-8
+
+    [records.setup]
+    dag_calculator_s = 0.000435232
+    dag_executor_s = 0.000421202
+    optimized_calculator_s = 0.000514852
+    optimized_executor_s = 0.000434682
+
+    [records.timings.dag_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 8.274183e6
+    median_ns = 8.1181825e6
+    min_ns = 8.087872e6
+    raw_ns = [8.274183e6, 8.145102e6, 8.126423e6, 8.102112e6, 8.118203e6, 8.126902e6, 8.109933e6, 8.118162e6, 8.087872e6, 8.097313e6]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.008138273
+
+    [records.timings.dag_public]
+    allocations = 76901
+    bytes = 4322456
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.1625456e7
+    median_ns = 1.14064455e7
+    min_ns = 1.1373646e7
+    raw_ns = [1.1625456e7, 1.1405216e7, 1.1400305e7, 1.1373646e7, 1.1450396e7, 1.1397895e7, 1.1413576e7, 1.1429175e7, 1.1393016e7, 1.1407675e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.011915988
+
+    [records.timings.et_polynomial_public]
+    allocations = 99035
+    bytes = 171643144
+    gc_ns = [0.0, 0.0, 5.169401e6, 1.588046e6, 2.58e6, 1.461306e6, 1.65002669e8, 0.0, 1.743557e6, 5.752963e6]
+    max_ns = 3.06806865e8
+    median_ns = 1.443115515e8
+    min_ns = 1.39062916e8
+    raw_ns = [1.39062916e8, 1.55399381e8, 1.43215632e8, 1.43127812e8, 1.42490659e8, 1.41495885e8, 3.06806865e8, 1.48016652e8, 1.51069944e8, 1.45407471e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.144867229
+
+    [records.timings.optimized_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.1841138e7
+    median_ns = 1.16430465e7
+    min_ns = 1.1615046e7
+    raw_ns = [1.1841138e7, 1.1628976e7, 1.1655267e7, 1.1615046e7, 1.1625426e7, 1.1659067e7, 1.1643997e7, 1.1642096e7, 1.1656897e7, 1.1629716e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.011832768
+
+    [records.timings.optimized_public]
+    allocations = 76901
+    bytes = 4322456
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.5244431e7
+    median_ns = 1.49337195e7
+    min_ns = 1.4905269e7
+    raw_ns = [1.5244431e7, 1.496605e7, 1.4956e7, 1.4905269e7, 1.492272e7, 1.4931209e7, 1.493546e7, 1.49241e7, 1.494755e7, 1.4931979e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.015355332
+
+    [records.timings.polynomial_public]
+    allocations = 148917
+    bytes = 56039424
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0758843e7, 0.0, 0.0, 0.0]
+    max_ns = 2.9141687e7
+    median_ns = 1.80110175e7
+    min_ns = 1.5929013e7
+    raw_ns = [1.6827287e7, 1.6274035e7, 1.8092983e7, 1.8514924e7, 1.8386453e7, 1.8287203e7, 2.9141687e7, 1.6060934e7, 1.5929013e7, 1.7929052e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.016554866
+
+    [records.timings.spline_public]
+    allocations = 92817
+    bytes = 30839424
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.263398e7
+    median_ns = 1.0876113e7
+    min_ns = 1.0655973e7
+    raw_ns = [1.1323796e7, 1.0964923e7, 1.1146615e7, 1.0787303e7, 1.1119675e7, 1.0778143e7, 1.0690552e7, 1.0655973e7, 1.0712793e7, 1.263398e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.011454376
+[[records]]
+VV_distance_A = 2.8213065704029763
+VV_image = [0, 0, 0]
+VV_neighbor = 49
+atoms = 240
+cell = [18.584, 0.0, 0.0, 9.658501950881574, 15.855193092485502, 0.0, -0.15675, 0.24225000000000002, 14.3355]
+composition = [78, 79, 83]
+directed_neighbors = 13272
+face_heights_A = [15.868476418078265, 15.852929749250785, 14.3355]
+fixture = "omega-240"
+fixture_sha256 = "48dc8ea281e53f24b5173ab136aabc6a44e55365d4417c109791ff1d03f6a134"
+geometry_sha256 = "d723432754d6cbfca2d031dc0d9f3689ca996d55866f2cf7e89707cb63d27611"
+minimum_distance_A = 2.6034634637054364
+seed = "analytic sin/cos v1; no RNG"
+
+    [records.checks.ET_conversion]
+    energy_per_atom_eV = 2.4253192047278086e-13
+    force_component_eV_per_A = 1.51684220739412e-14
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.042649305188501e-9, 3.1225453483043447e-8]
+    virial_component_eV = 1.3642420526593924e-12
+
+    [records.checks.dag_prepared]
+    energy_per_atom_eV = 2.4253192047278086e-13
+    force_component_eV_per_A = 3.0565307229668548e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0426493051736247e-9, 3.1225453483306106e-8]
+    virial_component_eV = 1.5916157281026244e-11
+
+    [records.checks.dag_public]
+    energy_per_atom_eV = 2.4253192047278086e-13
+    force_component_eV_per_A = 3.0565307229668548e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0426493051736247e-9, 3.1225453483306106e-8]
+    virial_component_eV = 1.5916157281026244e-11
+
+    [records.checks.optimized_prepared]
+    energy_per_atom_eV = 2.4253192047278086e-13
+    force_component_eV_per_A = 3.057502168113402e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0426493051736247e-9, 3.1225453483306106e-8]
+    virial_component_eV = 1.602984411874786e-11
+
+    [records.checks.optimized_public]
+    energy_per_atom_eV = 2.4253192047278086e-13
+    force_component_eV_per_A = 3.057502168113402e-12
+    passed = true
+    thresholds = [2.2000000000000002e-10, 2.0426493051736247e-9, 3.1225453483306106e-8]
+    virial_component_eV = 1.602984411874786e-11
+
+    [records.checks.spline_approximation]
+    energy_per_atom_eV = 7.275957614183426e-13
+    force_component_eV_per_A = 4.344982360016125e-9
+    passed = true
+    thresholds = [2.2e-6, 2.042649305188501e-5, 0.0003122545348304345]
+    virial_component_eV = 4.6450297830347154e-8
+
+    [records.setup]
+    dag_calculator_s = 0.000470482
+    dag_executor_s = 0.000454912
+    optimized_calculator_s = 0.000545222
+    optimized_executor_s = 0.000440882
+
+    [records.timings.dag_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 1.7381709e7
+    median_ns = 1.71317285e7
+    min_ns = 1.7044448e7
+    raw_ns = [1.7223138e7, 1.7088879e7, 1.7044448e7, 1.7246779e7, 1.7145428e7, 1.7116429e7, 1.7100008e7, 1.7126188e7, 1.7137269e7, 1.7381709e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.017154239
+
+    [records.timings.dag_public]
+    allocations = 168323
+    bytes = 9076776
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 2.4813319e7
+    median_ns = 2.4493693e7
+    min_ns = 2.4381578e7
+    raw_ns = [2.4813319e7, 2.4381578e7, 2.4443537e7, 2.4479108e7, 2.4480388e7, 2.4470828e7, 2.4506998e7, 2.4519828e7, 2.4551478e7, 2.4674658e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.024947159
+
+    [records.timings.et_polynomial_public]
+    allocations = 224417
+    bytes = 376972504
+    gc_ns = [1.581227e6, 0.0, 1.71378414e8, 3.236153e6, 3.0961942e7, 1.42273138e8, 5.721623e6, 1.87151607e8, 5.838123e6, 1.68495913e8]
+    max_ns = 5.22480048e8
+    median_ns = 3.504543e8
+    min_ns = 3.30441611e8
+    raw_ns = [3.30441611e8, 3.39718737e8, 4.95184489e8, 3.37296918e8, 3.61189863e8, 4.76541634e8, 3.36151413e8, 5.22480048e8, 3.38307742e8, 5.03258111e8]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.493276882
+
+    [records.timings.optimized_prepared]
+    allocations = 1
+    bytes = 32
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 2.2896101e7
+    median_ns = 2.2764361e7
+    min_ns = 2.2738911e7
+    raw_ns = [2.2896101e7, 2.2751781e7, 2.2805771e7, 2.2757611e7, 2.2738911e7, 2.2784121e7, 2.2765831e7, 2.2763101e7, 2.2765621e7, 2.2760171e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.023033462
+
+    [records.timings.optimized_public]
+    allocations = 168323
+    bytes = 9076776
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_ns = 3.0454572e7
+    median_ns = 3.02213905e7
+    min_ns = 3.0109671e7
+    raw_ns = [3.0404381e7, 3.0340552e7, 3.01697e7, 3.0109671e7, 3.021465e7, 3.0228131e7, 3.0202631e7, 3.014895e7, 3.0322251e7, 3.0454572e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.030696593
+
+    [records.timings.polynomial_public]
+    allocations = 333603
+    bytes = 117802944
+    gc_ns = [0.0, 0.0, 0.0, 1.1549586e7, 0.0, 7.926921e6, 0.0, 5.439422e6, 3.491534e6, 2.431329e6]
+    max_ns = 4.6515016e7
+    median_ns = 3.88086195e7
+    min_ns = 3.517185e7
+    raw_ns = [3.5211171e7, 3.9225687e7, 3.8736684e7, 4.6515016e7, 3.744678e7, 4.508644e7, 3.517185e7, 4.0910794e7, 3.8880555e7, 3.6555856e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.034675089
+
+    [records.timings.spline_public]
+    allocations = 202323
+    bytes = 59081280
+    gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.311911e6, 0.0, 0.0, 0.0]
+    max_ns = 2.9225797e7
+    median_ns = 2.1737537e7
+    min_ns = 2.1166584e7
+    raw_ns = [2.2205109e7, 2.2098198e7, 2.1336765e7, 2.1219265e7, 2.1166584e7, 2.4131927e7, 2.9225797e7, 2.2028088e7, 2.1446515e7, 2.1446986e7]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.022230279

@@ -256,3 +256,20 @@ angular/origin error policy. Public results own storage; prepared scratch is
 borrowed only inside exclusive execution slots. No force array per worker is
 introduced. Model sizes, callable-adapter costs and projection overhead must be
 measured separately from full environment preparation and owning output costs.
+
+## Resolved angular and envelope conventions
+
+Resolved v1 imports and native checkpoints preserve `angular.kind` as
+`real_spherical` or `real_solid`, with L2 normalization and `l*l+l+m+1` order.
+Historical constructors continue to default to spherical harmonics. CPU scalar,
+SpheriCart, generated and explicit block paths honor this convention, including
+Cartesian derivatives and functional force-loss VJPs. Precision conversion,
+model selection/pruning and native saving preserve it.
+
+`PolyEnvelope1sR` uses `((r/rcut)^(-p)-1)*(1-r/rcut)` inside the cutoff, with
+zero value and slope at/above it. Scalar/SIMD distance derivatives are shared;
+`ACE1_PolyEnvelope1sR` retains its separate legacy formula. Coincident physical
+atoms remain an explicit error. The scalar feature adapter and GPU packing
+reject the new solid/modern-envelope representation explicitly. See the
+[fitted May30 comparison](../benchmark/cpu_ace/MAY30-REPORT.md) for the precise
+coverage, approximation error, fixture provenance and reproduction commands.

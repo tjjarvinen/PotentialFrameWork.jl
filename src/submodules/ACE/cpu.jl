@@ -121,13 +121,7 @@ function radial_block!(R,dR,rs,ch::RadialChannel,start,::Val{W},active,ps=NamedT
             -2t.a*transform_deriv/((1+t.a*transformed_u)^2*(t.ycut-t.yin))
         end
         envelope_val=envelope(ch,r,x); ep=ch.envelope_parameters
-        envelope_deriv=if ch.envelope===:PolyEnvelope2sX
-            p=Int(ep[3]); q=Int(ep[4])
-            ep[1]<x<ep[2] ? ep[5]*(p*(x-ep[1])^(p-1)*(ep[2]-x)^q-q*(x-ep[1])^p*(ep[2]-x)^(q-1))*dx : zero(x)
-        else
-            rc,r0,p=ep; p=Int(p)
-            r>rc ? zero(r) : p/r0*((rc/r0)^(-p-1)-(r/r0)^(-p-1))
-        end
+        envelope_deriv=envelope_derivative(ch,r,x,dx)
         (envelope_val,envelope_deriv,dx/(ch.nodes[idx[k]+1]-ch.nodes[idx[k]]))
     end
     u=Vec(us); e=Vec(ntuple(k -> factors[k][1],W)); de=Vec(ntuple(k -> factors[k][2],W))

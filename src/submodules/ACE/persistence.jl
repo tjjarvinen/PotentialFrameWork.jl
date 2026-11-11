@@ -57,6 +57,7 @@ function checkpoint_radial(channels::AbstractMatrix{<:RadialChannel},spec;parame
         tr=Dict(string(k)=>getproperty(t,k) for k in fieldnames(typeof(t)))
         tr["normalization_rin"]=t.rin
         keys=ch.envelope===:PolyEnvelope2sX ? ("x1","x2","p1","p2","s") :
+             ch.envelope===:PolyEnvelope1sR ? ("rcut","p") :
              ch.envelope===:ACE1_PolyEnvelope1sR ? ("rcut","r0","p") :
              throw(ArgumentError("unsupported checkpoint radial envelope $(ch.envelope)"))
         Dict("centre"=>ij[1],"neighbour"=>ij[2],"transform"=>tr,
@@ -70,7 +71,7 @@ function checkpoint_model(m::ResolvedModel,ps=NamedTuple())
     Dict("schema"=>"PotentialFrameWork.resolved_ACE","schema_version"=>1,
          "source_sha256"=>m.source_sha256,"coordinate_kind"=>string(m.coordinate_kind),"coefficient_precision"=>string(m.coefficient_precision),"species_atomic_numbers"=>m.atomic_numbers,
          "reference_eV"=>m.reference,
-         "angular"=>Dict("kind"=>"real_spherical","normalization"=>"L2","ordering"=>"l*l+l+m+1","lmax"=>m.lmax),
+         "angular"=>Dict("kind"=>string(m.angular_kind),"normalization"=>"L2","ordering"=>"l*l+l+m+1","lmax"=>m.lmax),
          "radial"=>checkpoint_radial(m.radial,m.radial_spec;parameters=radial_parameters(ps,:custom_radial)),
          "pair_radial"=>checkpoint_radial(m.pair_radial,m.pair_spec;parameters=radial_parameters(ps,:custom_pair)),
          "interface_policy"=>checkpoint_policy(m.policy),

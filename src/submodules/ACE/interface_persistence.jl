@@ -126,6 +126,7 @@ end
 channel_spec(ch)=ch.metadata.spec
 channel_spec(ch::SubsetRadial)=channel_spec(ch.parent)[ch.indices]
 function validate_checkpoint_model(m,ps)
+    m.angular_kind in (:real_spherical,:real_solid) || throw(ArgumentError("unsupported angular convention $(m.angular_kind)"))
     nz=length(m.atomic_numbers)
     length(unique(m.atomic_numbers))==nz && all(>(0),m.atomic_numbers) || throw(ArgumentError("invalid species channels"))
     length(m.reference)==nz && all(isfinite,m.reference) && all(isfinite,nonzeros(m.coupling)) || throw(ArgumentError("nonfinite/invalid model values"))

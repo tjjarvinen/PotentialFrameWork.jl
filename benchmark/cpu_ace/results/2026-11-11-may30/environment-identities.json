@@ -1,0 +1,3687 @@
+{
+  "producer": {
+    "julia_version": "1.13.3",
+    "file_hashes": {
+      "Project.toml": "923dc9cfba1cb66ddbde23dfa3edbcf2e498a852a439ca73227c75024fca1fcc",
+      "Manifest.toml": "b5ea9349e1934878a26ff26bf96ae3e66149daf452e0e816590bc682748bf981"
+    },
+    "packages": {
+      "ACEbase": [
+        {
+          "git-tree-sha1": "0e50b7a4762456c54adcbd686c426f1f62ce80d4",
+          "version": "0.4.8"
+        }
+      ],
+      "ACEfit": [
+        {
+          "git-tree-sha1": "cce00a716e56ecf51eae535c7c945db58ff58ce6",
+          "version": "0.3.1"
+        }
+      ],
+      "ACEpotentials": [
+        {
+          "git-tree-sha1": "122380505eab4093f9b858885fd3ace08e916eb4",
+          "pinned": true,
+          "version": "0.10.3"
+        }
+      ],
+      "ADTypes": [
+        {
+          "git-tree-sha1": "629de23e1c16911b439dabd2303c08af9575b226",
+          "version": "1.24.0"
+        }
+      ],
+      "AbstractFFTs": [
+        {
+          "git-tree-sha1": "d92ad398961a3ed262d8bf04a1a2b8340f915fef",
+          "version": "1.5.0"
+        }
+      ],
+      "AcceleratedKernels": [
+        {
+          "git-tree-sha1": "6c32b2b30572dde2187280f68dcce3f389a454d0",
+          "version": "0.5.12"
+        }
+      ],
+      "Accessors": [
+        {
+          "git-tree-sha1": "7063ad1083578215c7c4bf410368150abe8d5524",
+          "version": "0.1.45"
+        }
+      ],
+      "ActiveSetPursuit": [
+        {
+          "git-tree-sha1": "e9fa6a4f8f0ec431de572c7871b960b1d3f014d6",
+          "version": "0.1.0"
+        }
+      ],
+      "Adapt": [
+        {
+          "git-tree-sha1": "dee8388a9bec89c8713ad176f96960ae2f98598a",
+          "version": "4.7.4"
+        }
+      ],
+      "AliasTables": [
+        {
+          "git-tree-sha1": "9876e1e164b144ca45e9e3198d0b689cadfed9ff",
+          "version": "1.1.3"
+        }
+      ],
+      "ArgCheck": [
+        {
+          "git-tree-sha1": "f9e9a66c9b7be1ad7372bbd9b062d9230c30c5ce",
+          "version": "2.5.0"
+        }
+      ],
+      "ArgParse": [
+        {
+          "git-tree-sha1": "22cf435ac22956a7b45b0168abbc871176e7eecc",
+          "version": "1.2.0"
+        }
+      ],
+      "ArgTools": [
+        {
+          "version": "1.1.2"
+        }
+      ],
+      "ArrayInterface": [
+        {
+          "git-tree-sha1": "1aec1ff0dcaa83a484e7f72097562fa3102c6722",
+          "version": "7.30.2"
+        }
+      ],
+      "Artifacts": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Atomix": [
+        {
+          "git-tree-sha1": "aa7d720632c3bf29efff118c744c67f8431dff66",
+          "version": "1.6.0"
+        }
+      ],
+      "AtomsBase": [
+        {
+          "git-tree-sha1": "5e39d3a8a6ec33d2e59559fc6acb6c74a1067d40",
+          "version": "0.5.3"
+        }
+      ],
+      "AtomsBuilder": [
+        {
+          "git-tree-sha1": "462053961de0c8228e92b2ec2f1f517096793fcf",
+          "version": "0.2.3"
+        }
+      ],
+      "AtomsCalculators": [
+        {
+          "git-tree-sha1": "99c477979252acdb189f3e4161970e42634e426a",
+          "version": "0.2.3"
+        }
+      ],
+      "AtomsCalculatorsUtilities": [
+        {
+          "git-tree-sha1": "56b7df19e6c5de86f297104a19e0cf019c81a0c4",
+          "version": "0.1.8"
+        }
+      ],
+      "AtomsIO": [
+        {
+          "git-tree-sha1": "2963939362c8bda6513e32d448aa3202185a38dd",
+          "version": "0.3.2"
+        }
+      ],
+      "AtomsSystems": [
+        {
+          "git-tree-sha1": "4188f37e2436beef7a8d653985a157640dc196e9",
+          "version": "0.1.2"
+        }
+      ],
+      "AxisAlgorithms": [
+        {
+          "git-tree-sha1": "01b8ccb13d68535d73d2b0c23e39bd23155fb712",
+          "version": "1.1.0"
+        }
+      ],
+      "BFloat16s": [
+        {
+          "git-tree-sha1": "e9f53743fbe41a7e794d58f79d7a13699d9748fa",
+          "version": "0.6.2"
+        }
+      ],
+      "BangBang": [
+        {
+          "git-tree-sha1": "cceb62468025be98d42a5dc581b163c20896b040",
+          "version": "0.4.9"
+        }
+      ],
+      "Base64": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Baselet": [
+        {
+          "git-tree-sha1": "aebf55e6d7795e02ca500a689d326ac979aaf89e",
+          "version": "0.1.1"
+        }
+      ],
+      "BenchmarkTools": [
+        {
+          "git-tree-sha1": "9670d3febc2b6da60a0ae57846ba74670290653f",
+          "version": "1.8.0"
+        }
+      ],
+      "BitTwiddlingConvenienceFunctions": [
+        {
+          "git-tree-sha1": "f21cfd4950cb9f0587d5067e69405ad2acd27b87",
+          "version": "0.1.6"
+        }
+      ],
+      "Bumper": [
+        {
+          "git-tree-sha1": "d8f7e73bde2cd6ea8a6273dc42af76c354bd5406",
+          "version": "0.7.2"
+        }
+      ],
+      "CEnum": [
+        {
+          "git-tree-sha1": "bcf137722d8a23a2e299ce86e3f43aa963d6a03a",
+          "version": "1.0.0"
+        }
+      ],
+      "CPUSummary": [
+        {
+          "git-tree-sha1": "f3a21d7fc84ba618a779d1ed2fcca2e682865bab",
+          "version": "0.2.7"
+        }
+      ],
+      "Calculus": [
+        {
+          "git-tree-sha1": "9cb23bbb1127eefb022b022481466c0f1127d430",
+          "version": "0.5.2"
+        }
+      ],
+      "ChainRules": [
+        {
+          "git-tree-sha1": "1ead3389af17a852800ddace32338fd9a9234d12",
+          "version": "1.74.2"
+        }
+      ],
+      "ChainRulesCore": [
+        {
+          "git-tree-sha1": "4378c3544d8fcc3c8a521782db0e93e2c32d1838",
+          "version": "1.26.4"
+        }
+      ],
+      "Chemfiles": [
+        {
+          "git-tree-sha1": "8d4217428ee7c64605d1217a8ea810436fd03742",
+          "version": "0.10.43"
+        }
+      ],
+      "Chemfiles_jll": [
+        {
+          "git-tree-sha1": "f3743181e30d87c23d9c8ebd493b77f43d8f1890",
+          "version": "0.10.4+0"
+        }
+      ],
+      "ChunkSplitters": [
+        {
+          "git-tree-sha1": "1c52c8e2673edc030191177ff1aee42d25149acb",
+          "version": "3.2.0"
+        }
+      ],
+      "CloseOpenIntervals": [
+        {
+          "git-tree-sha1": "05ba0d07cd4fd8b7a39541e31a7b0254704ea581",
+          "version": "0.1.13"
+        }
+      ],
+      "CodecInflate64": [
+        {
+          "git-tree-sha1": "d981a6e8656b1e363a2731716f46851a2257deb7",
+          "version": "0.1.3"
+        }
+      ],
+      "CodecZlib": [
+        {
+          "git-tree-sha1": "970758a3d591a2a5c2a907c53f2e2f8c1b1d3537",
+          "version": "0.7.9"
+        }
+      ],
+      "Combinatorics": [
+        {
+          "git-tree-sha1": "c761b00e7755700f9cdf5b02039939d1359330e1",
+          "version": "1.1.0"
+        }
+      ],
+      "CommonSolve": [
+        {
+          "git-tree-sha1": "6c389fa857f6ca5a95474b52a52023fd77f24cb7",
+          "version": "0.2.14"
+        }
+      ],
+      "CommonSubexpressions": [
+        {
+          "git-tree-sha1": "cda2cfaebb4be89c9084adaca7dd7333369715c5",
+          "version": "0.3.1"
+        }
+      ],
+      "CommonWorldInvalidations": [
+        {
+          "git-tree-sha1": "7c4ea0adfb7238bf4678aa36325863fab6163f6f",
+          "version": "1.2.2"
+        }
+      ],
+      "Compat": [
+        {
+          "git-tree-sha1": "9d8a54ce4b17aa5bdce0ea5c34bc5e7c340d16ad",
+          "version": "4.18.1"
+        }
+      ],
+      "CompilerSupportLibraries_jll": [
+        {
+          "version": "1.5.5+2"
+        }
+      ],
+      "CompositionsBase": [
+        {
+          "git-tree-sha1": "802bb88cd69dfd1509f6670416bd4434015693ad",
+          "version": "0.1.2"
+        }
+      ],
+      "ConcreteStructs": [
+        {
+          "git-tree-sha1": "a72c3b5ce6d2a477f55b5c9b8756e91e695c67f6",
+          "version": "0.2.8"
+        }
+      ],
+      "ConstructionBase": [
+        {
+          "git-tree-sha1": "b4b092499347b18a015186eae3042f72267106cb",
+          "version": "1.6.0"
+        }
+      ],
+      "CpuId": [
+        {
+          "git-tree-sha1": "5dbd5150b96f29553fc3b553c6bfb0eadf7ac204",
+          "version": "0.3.3"
+        }
+      ],
+      "Crayons": [
+        {
+          "git-tree-sha1": "54b76cbb40d9a0f5368c880725b2f141da77c94f",
+          "version": "4.2.0"
+        }
+      ],
+      "DataAPI": [
+        {
+          "git-tree-sha1": "abe83f3a2f1b857aac70ef8b269080af17764bbe",
+          "version": "1.16.0"
+        }
+      ],
+      "DataFrames": [
+        {
+          "git-tree-sha1": "5fab31e2e01e70ad66e3e24c968c264d1cf166d6",
+          "version": "1.8.2"
+        }
+      ],
+      "DataStructures": [
+        {
+          "git-tree-sha1": "b0bc6d2cad1fed8b7fd59a1551a991cb3d2809e6",
+          "version": "0.19.6"
+        }
+      ],
+      "DataValueInterfaces": [
+        {
+          "git-tree-sha1": "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6",
+          "version": "1.0.0"
+        }
+      ],
+      "Dates": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "DecoratedParticles": [
+        {
+          "git-tree-sha1": "1327ceb4cde912a3e1a79f59a6964e1a17ac095e",
+          "version": "0.1.4"
+        }
+      ],
+      "DefineSingletons": [
+        {
+          "git-tree-sha1": "0fba8b706d0178b4dc7fd44a96a92382c9065c2c",
+          "version": "0.1.2"
+        }
+      ],
+      "DiffResults": [
+        {
+          "git-tree-sha1": "782dd5f4561f5d267313f23853baaaa4c52ea621",
+          "version": "1.1.0"
+        }
+      ],
+      "DiffRules": [
+        {
+          "git-tree-sha1": "79a2aca180a85c690c58a020d47b426954b590f8",
+          "version": "1.16.0"
+        }
+      ],
+      "DifferentiationInterface": [
+        {
+          "git-tree-sha1": "0693d8b0a4608ff289d228ab4c598df5894845cd",
+          "version": "0.7.21"
+        }
+      ],
+      "DispatchDoctor": [
+        {
+          "git-tree-sha1": "278d0120d7c22ef36bd8d22f349868d6a782a949",
+          "version": "0.4.29"
+        }
+      ],
+      "Distributed": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "DocStringExtensions": [
+        {
+          "git-tree-sha1": "7442a5dfe1ebb773c29cc2962a8980f47221d76c",
+          "version": "0.9.5"
+        }
+      ],
+      "Downloads": [
+        {
+          "version": "1.7.0"
+        }
+      ],
+      "DynamicPolynomials": [
+        {
+          "git-tree-sha1": "b95c4325301d86a6a1b59790b71f7269a8702dd5",
+          "version": "0.6.8"
+        }
+      ],
+      "EmpiricalPotentials": [
+        {
+          "git-tree-sha1": "5c4cb3b68aa3b621f1d86a94b544e0936ef25418",
+          "version": "0.2.6"
+        }
+      ],
+      "EnumX": [
+        {
+          "git-tree-sha1": "c49898e8438c828577f04b92fc9368c388ac783c",
+          "version": "1.0.7"
+        }
+      ],
+      "EnzymeCore": [
+        {
+          "git-tree-sha1": "04c4269956f90d8f5c9acc73b774c5293481f4d7",
+          "version": "0.8.26"
+        }
+      ],
+      "EquivariantTensors": [
+        {
+          "git-tree-sha1": "53c9725cf0c4ed149f5f7fc88f20dd0c89b2e416",
+          "version": "0.4.3"
+        }
+      ],
+      "ExprTools": [
+        {
+          "git-tree-sha1": "d2e49e7efd29719d6f28b891b0e0e159daa9d2b4",
+          "version": "0.1.11"
+        }
+      ],
+      "ExpressionExplorer": [
+        {
+          "git-tree-sha1": "fdcc9d4a253e0041d37c95487f9ae027c3ec002d",
+          "version": "1.1.6"
+        }
+      ],
+      "ExtXYZ": [
+        {
+          "git-tree-sha1": "9ab4547c100303d4208aba26a31586e7e321a9bf",
+          "version": "0.2.2"
+        }
+      ],
+      "ExternalDocstrings": [
+        {
+          "git-tree-sha1": "1224740fc4d07c989949e1c1b508ebd49a65a5f6",
+          "version": "0.1.1"
+        }
+      ],
+      "FFTW": [
+        {
+          "git-tree-sha1": "97f08406df914023af55ade2f843c39e99c5d969",
+          "version": "1.10.0"
+        }
+      ],
+      "FFTW_jll": [
+        {
+          "git-tree-sha1": "6866aec60ef98e3164cd8d6855225684207e9dff",
+          "version": "3.3.12+0"
+        }
+      ],
+      "FastClosures": [
+        {
+          "git-tree-sha1": "acebe244d53ee1b461970f8910c235b259e772ef",
+          "version": "0.3.2"
+        }
+      ],
+      "FileWatching": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "FillArrays": [
+        {
+          "git-tree-sha1": "417289ac840d201005d9ed16789a46defccbe36d",
+          "version": "1.18.1"
+        }
+      ],
+      "FiniteDiff": [
+        {
+          "git-tree-sha1": "5031f23e040bf17082e5b52422d77b5e844eefb1",
+          "version": "2.33.0"
+        }
+      ],
+      "Folds": [
+        {
+          "git-tree-sha1": "7eb4bc88d8295e387a667fd43d67c157ddee76cf",
+          "version": "0.2.10"
+        }
+      ],
+      "ForwardDiff": [
+        {
+          "git-tree-sha1": "3b0f72e2ffef1a139ac450725c9ecd01c0a3c050",
+          "version": "1.4.6"
+        }
+      ],
+      "Functors": [
+        {
+          "git-tree-sha1": "416b521e1158dd93cd99b3adcd872085726b36a1",
+          "version": "0.5.4"
+        }
+      ],
+      "Future": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "GPUArraysCore": [
+        {
+          "git-tree-sha1": "0b2b3e8b8fb7c1f5ddbf498be2eb2b3b37c9c0ed",
+          "version": "0.2.1"
+        }
+      ],
+      "Glob": [
+        {
+          "git-tree-sha1": "246c628cec062230b7d183aab88841fa94fcabe9",
+          "version": "1.5.0"
+        }
+      ],
+      "HTTP": [
+        {
+          "git-tree-sha1": "33d8e43f09dce4d79b076f3022e96063db806df3",
+          "version": "2.11.2"
+        }
+      ],
+      "HalfIntegers": [
+        {
+          "git-tree-sha1": "9c3149243abb5bc0bad0431d6c4fcac0f4443c7c",
+          "version": "1.6.0"
+        }
+      ],
+      "HashArrayMappedTries": [
+        {
+          "git-tree-sha1": "2eaa69a7cab70a52b9687c8bf950a5a93ec895ae",
+          "version": "0.2.0"
+        }
+      ],
+      "HostCPUFeatures": [
+        {
+          "git-tree-sha1": "af9ab7d1f70739a47f03be78771ebda38c3c71bf",
+          "version": "0.1.18"
+        }
+      ],
+      "HyperDualNumbers": [
+        {
+          "git-tree-sha1": "a7e4a62f3428a3bbc0bfd8d06274f95c8af9e60d",
+          "version": "4.0.10"
+        }
+      ],
+      "IRTools": [
+        {
+          "git-tree-sha1": "49cdf75487f4991f27eb7cbce6420e0bde444079",
+          "version": "0.4.22"
+        }
+      ],
+      "IfElse": [
+        {
+          "git-tree-sha1": "debdd00ffef04665ccbb3e150747a77560e8fad1",
+          "version": "0.1.1"
+        }
+      ],
+      "InitialValues": [
+        {
+          "git-tree-sha1": "4da0f88e9a39111c2fa3add390ab15f3a44f3ca3",
+          "version": "0.3.1"
+        }
+      ],
+      "InlineStrings": [
+        {
+          "git-tree-sha1": "06b65886c7577a3784d616e29f1302c2e36e389d",
+          "version": "1.4.6"
+        }
+      ],
+      "InputBuffers": [
+        {
+          "git-tree-sha1": "e5392ea00942566b631e991dd896942189937b2f",
+          "version": "1.1.1"
+        }
+      ],
+      "IntelOpenMP_jll": [
+        {
+          "git-tree-sha1": "ec1debd61c300961f98064cfb21287613ad7f303",
+          "version": "2025.2.0+0"
+        }
+      ],
+      "InteractiveUtils": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Interpolations": [
+        {
+          "git-tree-sha1": "48922d06068130f87e43edef52382e6a94305ae6",
+          "version": "0.16.3"
+        }
+      ],
+      "InverseFunctions": [
+        {
+          "git-tree-sha1": "5cc6ad3e2bfc75a11eed92632ee341d37f4a4536",
+          "version": "0.1.18"
+        }
+      ],
+      "InvertedIndices": [
+        {
+          "git-tree-sha1": "6da3c4316095de0f5ee2ebd875df8721e7e0bdbe",
+          "version": "1.3.1"
+        }
+      ],
+      "IrrationalConstants": [
+        {
+          "git-tree-sha1": "d22e8bdb3f03c300a103ff23c0dd5a654c6701de",
+          "version": "0.2.7"
+        }
+      ],
+      "IterativeSolvers": [
+        {
+          "git-tree-sha1": "59545b0a2b27208b0650df0a46b8e3019f85055b",
+          "version": "0.9.4"
+        }
+      ],
+      "IteratorInterfaceExtensions": [
+        {
+          "git-tree-sha1": "a3f24677c21f5bbe9d2a714f95dcd58337fb2856",
+          "version": "1.0.0"
+        }
+      ],
+      "JLLWrappers": [
+        {
+          "git-tree-sha1": "7204148362dafe5fe6a273f855b8ccbe4df8173e",
+          "version": "1.8.0"
+        }
+      ],
+      "JSON": [
+        {
+          "git-tree-sha1": "8c60c3ccb8c4bca0a31fc67aee1bbdb071e53119",
+          "version": "1.12.0"
+        }
+      ],
+      "JuliaSyntaxHighlighting": [
+        {
+          "version": "1.12.0"
+        }
+      ],
+      "KernelAbstractions": [
+        {
+          "git-tree-sha1": "e51d16f9dcff134c4ecf79e7cfa764c59d2d648e",
+          "version": "0.9.45"
+        }
+      ],
+      "LLVM": [
+        {
+          "git-tree-sha1": "d6f76806396042e87f43093492b9bd9912d60156",
+          "version": "10.4.0"
+        }
+      ],
+      "LLVMExtra_jll": [
+        {
+          "git-tree-sha1": "39def0b4521e0ef2bf26960d8965729f496bb4ec",
+          "version": "0.0.56+0"
+        }
+      ],
+      "LaTeXStrings": [
+        {
+          "git-tree-sha1": "f88f3ccef05a6a72a0cf0ed417c8fd68530f4ab2",
+          "version": "1.4.1"
+        }
+      ],
+      "LayoutPointers": [
+        {
+          "git-tree-sha1": "a9eaadb366f5493a5654e843864c13d8b107548c",
+          "version": "0.1.17"
+        }
+      ],
+      "LazyArtifacts": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "LibCURL": [
+        {
+          "version": "1.0.0"
+        }
+      ],
+      "LibCURL_jll": [
+        {
+          "version": "8.22.0+0"
+        }
+      ],
+      "LibGit2": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "LibGit2_jll": [
+        {
+          "version": "1.9.7+0"
+        }
+      ],
+      "LibSSH2_jll": [
+        {
+          "version": "1.11.104+0"
+        }
+      ],
+      "Libdl": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Libiconv_jll": [
+        {
+          "git-tree-sha1": "be484f5c92fad0bd8acfef35fe017900b0b73809",
+          "version": "1.18.0+0"
+        }
+      ],
+      "LightXML": [
+        {
+          "git-tree-sha1": "aa971a09f0f1fe92fe772713a564aa48abe510df",
+          "version": "0.9.3"
+        }
+      ],
+      "LineSearches": [
+        {
+          "git-tree-sha1": "9ea3422d03222c6de679934d1c08f0a99405aa03",
+          "version": "7.5.1"
+        }
+      ],
+      "LinearAlgebra": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "LinearOperators": [
+        {
+          "git-tree-sha1": "99a44fc6443bfe118cfe64ca059136bc85e64ccb",
+          "version": "2.14.3"
+        }
+      ],
+      "LogExpFunctions": [
+        {
+          "git-tree-sha1": "28d620bcdb37a3fb02de9f521928ee453690f414",
+          "version": "1.0.3"
+        }
+      ],
+      "Logging": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "LoopVectorization": [
+        {
+          "git-tree-sha1": "7a8449291a67c97435ec4d704ca08a548097305c",
+          "version": "0.12.175"
+        }
+      ],
+      "LowRankApprox": [
+        {
+          "git-tree-sha1": "031af63ba945e23424815014ba0e59c28f5aed32",
+          "version": "0.5.5"
+        }
+      ],
+      "LowRankMatrices": [
+        {
+          "git-tree-sha1": "59c5bb0708be6796604caec16d4357013dc3d132",
+          "version": "1.0.2"
+        }
+      ],
+      "Lux": [
+        {
+          "git-tree-sha1": "b7654d9b1144792d7fa165add2e07434329e3193",
+          "version": "1.31.4"
+        }
+      ],
+      "LuxCore": [
+        {
+          "git-tree-sha1": "9455b1e829d8dacad236143869be70b7fdb826b8",
+          "version": "1.5.3"
+        }
+      ],
+      "LuxLib": [
+        {
+          "git-tree-sha1": "6a6453d556f7bc3870d797657636b1ad5f45fd27",
+          "version": "1.15.9"
+        }
+      ],
+      "MKL_jll": [
+        {
+          "git-tree-sha1": "282cadc186e7b2ae0eeadbd7a4dffed4196ae2aa",
+          "version": "2025.2.0+0"
+        }
+      ],
+      "MLDataDevices": [
+        {
+          "git-tree-sha1": "29b00f22be6fd821a214760f0224329f21998a05",
+          "version": "1.17.10"
+        }
+      ],
+      "MacroTools": [
+        {
+          "git-tree-sha1": "1e0228a030642014fe5cfe68c2c0a818f9e3f522",
+          "version": "0.5.16"
+        }
+      ],
+      "ManualMemory": [
+        {
+          "git-tree-sha1": "bcaef4fc7a0cfe2cba636d84cda54b5e4e4ca3cd",
+          "version": "0.1.8"
+        }
+      ],
+      "Markdown": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "MicroCollections": [
+        {
+          "git-tree-sha1": "44d32db644e84c75dab479f1bc15ee76a1a3618f",
+          "version": "0.2.0"
+        }
+      ],
+      "Missings": [
+        {
+          "git-tree-sha1": "ec4f7fbeab05d7747bdf98eb74d130a2a2ed298d",
+          "version": "1.2.0"
+        }
+      ],
+      "Mmap": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "MozillaCACerts_jll": [
+        {
+          "version": "2026.10.20"
+        }
+      ],
+      "MultivariatePolynomials": [
+        {
+          "git-tree-sha1": "65f1160de342181533efa7061f86539d420ab81d",
+          "version": "0.5.20"
+        }
+      ],
+      "MutableArithmetics": [
+        {
+          "git-tree-sha1": "158af80b4d50a7bdc37c8357c4c4554c335cfe5f",
+          "version": "1.9.0"
+        }
+      ],
+      "NLSolversBase": [
+        {
+          "git-tree-sha1": "25a6638571a902ecfb1ae2a18fc1575f86b1d4df",
+          "version": "7.10.0"
+        }
+      ],
+      "NNlib": [
+        {
+          "git-tree-sha1": "1a010a94a537c48b042cf6eedd5a660395d329ba",
+          "version": "0.9.51"
+        }
+      ],
+      "NaNMath": [
+        {
+          "git-tree-sha1": "676c0f1c1c34224d6869675047a54b42fdc7b8c5",
+          "version": "1.1.5"
+        }
+      ],
+      "NamedTupleTools": [
+        {
+          "git-tree-sha1": "90914795fc59df44120fe3fff6742bb0d7adb1d0",
+          "version": "0.14.3"
+        }
+      ],
+      "NeighbourLists": [
+        {
+          "git-tree-sha1": "acefbae381d91ddccf2e7ed887df7a9de415060d",
+          "version": "0.5.10"
+        }
+      ],
+      "NetworkOptions": [
+        {
+          "version": "1.3.0"
+        }
+      ],
+      "Nullables": [
+        {
+          "git-tree-sha1": "8f87854cc8f3685a60689d8edecaa29d2251979b",
+          "version": "1.0.0"
+        }
+      ],
+      "Octavian": [
+        {
+          "git-tree-sha1": "21d5b4557036561266a7578ae3f9914d18ae5685",
+          "version": "0.3.29"
+        }
+      ],
+      "OffsetArrays": [
+        {
+          "git-tree-sha1": "117432e406b5c023f665fa73dc26e79ec3630151",
+          "version": "1.17.0"
+        }
+      ],
+      "OpenBLAS_jll": [
+        {
+          "version": "0.3.30+0"
+        }
+      ],
+      "OpenLibm_jll": [
+        {
+          "version": "0.8.7+0"
+        }
+      ],
+      "OpenSSL_jll": [
+        {
+          "version": "3.5.8+0"
+        }
+      ],
+      "OpenSpecFun_jll": [
+        {
+          "git-tree-sha1": "1346c9208249809840c91b26703912dff463d335",
+          "version": "0.5.6+0"
+        }
+      ],
+      "Optim": [
+        {
+          "git-tree-sha1": "48968edaf014f67e58fe4c8a4ce72d392aed3294",
+          "version": "1.13.3"
+        }
+      ],
+      "Optimisers": [
+        {
+          "git-tree-sha1": "ce02e5e508795e3df43be2f6a2220e3fd0aae206",
+          "version": "0.4.11"
+        }
+      ],
+      "OrderedCollections": [
+        {
+          "git-tree-sha1": "94ba93778373a53bfd5a0caaf7d809c445292ff4",
+          "version": "1.8.2"
+        }
+      ],
+      "PCRE2_jll": [
+        {
+          "version": "10.47.0+0"
+        }
+      ],
+      "PackageCompiler": [
+        {
+          "git-tree-sha1": "2ae7775a207e94fd829174c2bb1d319670c37589",
+          "version": "2.4.5"
+        }
+      ],
+      "ParallelDataTransfer": [
+        {
+          "git-tree-sha1": "bc589aa8c8d7cd9551541d0d63414ef8b894af8e",
+          "version": "0.5.1"
+        }
+      ],
+      "Parsers": [
+        {
+          "git-tree-sha1": "663e8b48b789916221e0765393b289ca6c88f24e",
+          "version": "3.0.0"
+        }
+      ],
+      "PartialWaveFunctions": [
+        {
+          "git-tree-sha1": "9e94fb961f02c4eaeb8e83268cb34245395030dd",
+          "version": "0.2.0"
+        }
+      ],
+      "PeriodicTable": [
+        {
+          "git-tree-sha1": "238aa6298007565529f911b734e18addd56985e1",
+          "version": "1.2.1"
+        }
+      ],
+      "Pkg": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "PolyesterWeave": [
+        {
+          "git-tree-sha1": "645bed98cd47f72f67316fd42fc47dee771aefcd",
+          "version": "0.2.2"
+        }
+      ],
+      "Polynomials4ML": [
+        {
+          "git-tree-sha1": "753cadaf6496e559332f9f608f43218356313f9f",
+          "version": "0.5.10"
+        }
+      ],
+      "PooledArrays": [
+        {
+          "git-tree-sha1": "36d8b4b899628fb92c2749eb488d884a926614d3",
+          "version": "1.4.3"
+        }
+      ],
+      "PositiveFactorizations": [
+        {
+          "git-tree-sha1": "17275485f373e6673f7e7f97051f703ed5b15b20",
+          "version": "0.2.4"
+        }
+      ],
+      "PotentialFrameWork": [
+        {
+          "path": "/mnt/work/Coding/Potentials/dev/PotentialFrameWork",
+          "version": "0.1.0-DEV"
+        }
+      ],
+      "PrecompileTools": [
+        {
+          "git-tree-sha1": "edbeefc7a4889f528644251bdb5fc9ab5348bc2c",
+          "version": "1.3.4"
+        }
+      ],
+      "Preferences": [
+        {
+          "git-tree-sha1": "aef1987d90dcc2e2cbd919ad10b2d25bcce4f418",
+          "version": "1.6.1"
+        }
+      ],
+      "PrettyTables": [
+        {
+          "git-tree-sha1": "99fd8f32ab6728ff205cddd24e2d9ea6cbb498d3",
+          "version": "3.5.0"
+        }
+      ],
+      "Printf": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Profile": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "ProgressMeter": [
+        {
+          "git-tree-sha1": "ce5ba3edfdeba107a721748d53b5f5887f415853",
+          "version": "1.13.0"
+        }
+      ],
+      "PtrArrays": [
+        {
+          "git-tree-sha1": "4fbbafbc6251b883f4d2705356f3641f3652a7fe",
+          "version": "1.4.0"
+        }
+      ],
+      "PubChemCrawler": [
+        {
+          "git-tree-sha1": "a63426d1b1a89080d1e8f06afd5b96442d1f511a",
+          "version": "1.4.1"
+        }
+      ],
+      "QRupdate": [
+        {
+          "git-tree-sha1": "9c781b2bffcb97bbef75c2abf3208149a032e92f",
+          "version": "1.0.1"
+        }
+      ],
+      "QuadGK": [
+        {
+          "git-tree-sha1": "5e8e8b0ab68215d7a2b14b9921a946fee794749e",
+          "version": "2.11.3"
+        }
+      ],
+      "Quaternions": [
+        {
+          "git-tree-sha1": "4d8c1b7c3329c1885b857abb50d08fa3f4d9e3c8",
+          "version": "0.7.7"
+        }
+      ],
+      "REPL": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Random": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Ratios": [
+        {
+          "git-tree-sha1": "1342a47bf3260ee108163042310d26f2be5ec90b",
+          "version": "0.4.5"
+        }
+      ],
+      "ReactantCore": [
+        {
+          "git-tree-sha1": "1fe4e616752a0c4818ae88a504fc59b0fb016659",
+          "version": "0.1.26"
+        }
+      ],
+      "RealDot": [
+        {
+          "git-tree-sha1": "9f0a1b71baaf7650f4fa8a1d168c7fb6ee41f0c9",
+          "version": "0.1.0"
+        }
+      ],
+      "RecipesBase": [
+        {
+          "git-tree-sha1": "0c0dcffc464cda2ff33fc8ffc1dd1bdd53cd98be",
+          "version": "1.4.0"
+        }
+      ],
+      "Reexport": [
+        {
+          "git-tree-sha1": "45e428421666073eab6f2da5c9d310d99bb12f9b",
+          "version": "1.2.2"
+        }
+      ],
+      "Referenceables": [
+        {
+          "git-tree-sha1": "02d31ad62838181c1a3a5fd23a1ce5914a643601",
+          "version": "0.1.3"
+        }
+      ],
+      "RelocatableFolders": [
+        {
+          "git-tree-sha1": "ffdaf70d81cf6ff22c2b6e733c900c3321cab864",
+          "version": "1.0.1"
+        }
+      ],
+      "Requires": [
+        {
+          "git-tree-sha1": "62389eeff14780bfe55195b7204c0d8738436d64",
+          "version": "1.3.1"
+        }
+      ],
+      "Reseau": [
+        {
+          "git-tree-sha1": "c1332beecf9cf267e99b83ab878a3460f047964f",
+          "version": "1.6.1"
+        }
+      ],
+      "Roots": [
+        {
+          "git-tree-sha1": "3eff988b9bd09543783e2e051b0a1eef11f65c2d",
+          "version": "2.3.0"
+        }
+      ],
+      "Rotations": [
+        {
+          "git-tree-sha1": "5680a9276685d392c87407df00d57c9924d9f11e",
+          "version": "1.7.1"
+        }
+      ],
+      "SHA": [
+        {
+          "version": "1.0.0"
+        }
+      ],
+      "SIMD": [
+        {
+          "git-tree-sha1": "0651e0ac84b2027c5f227c058d37f81b5be373bd",
+          "version": "3.8.2"
+        }
+      ],
+      "SIMDTypes": [
+        {
+          "git-tree-sha1": "330289636fb8107c5f32088d2741e9fd7a061a5c",
+          "version": "0.1.0"
+        }
+      ],
+      "SLEEFPirates": [
+        {
+          "git-tree-sha1": "72312aa278823c0e99ce31186e22d917d2d11f99",
+          "version": "0.6.46"
+        }
+      ],
+      "SciMLPublic": [
+        {
+          "git-tree-sha1": "74685afb51732a464fbce79a72708f7c4203ceb7",
+          "version": "1.3.0"
+        }
+      ],
+      "ScopedValues": [
+        {
+          "git-tree-sha1": "67a144433c4ce877ee6d1ada69a124d6b1ecf7be",
+          "version": "1.6.2"
+        }
+      ],
+      "Scratch": [
+        {
+          "git-tree-sha1": "9b81b8393e50b7d4e6d0a9f14e192294d3b7c109",
+          "version": "1.3.0"
+        }
+      ],
+      "SentinelArrays": [
+        {
+          "git-tree-sha1": "084c47c7c5ce5cfecefa0a98dff69eb3646b5a80",
+          "version": "1.4.10"
+        }
+      ],
+      "Serialization": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Setfield": [
+        {
+          "git-tree-sha1": "c5391c6ace3bc430ca630251d02ea9687169ca68",
+          "version": "1.1.2"
+        }
+      ],
+      "SharedArrays": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Sockets": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "SortingAlgorithms": [
+        {
+          "git-tree-sha1": "13cd91cc9be159e3f4d95b857fa2aa383b53772a",
+          "version": "1.2.3"
+        }
+      ],
+      "SparseArrays": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "SparseInverseSubset": [
+        {
+          "git-tree-sha1": "eec446511ab8c3293dd846c61c15128392fceed5",
+          "version": "0.1.3"
+        }
+      ],
+      "SpecialFunctions": [
+        {
+          "git-tree-sha1": "88ef0d98204515bc53dd4aaea5f7788882d1b66c",
+          "version": "2.9.1"
+        }
+      ],
+      "SpheriCart": [
+        {
+          "git-tree-sha1": "6afdb7696752e4612d09f399c062e66f5e9673cd",
+          "version": "0.2.4"
+        }
+      ],
+      "SplittablesBase": [
+        {
+          "git-tree-sha1": "e08a62abc517eb79667d0a29dc08a3b589516bb5",
+          "version": "0.1.15"
+        }
+      ],
+      "StarAlgebras": [
+        {
+          "git-tree-sha1": "95c5ea2eef117ba1310ee14aa1737d3ea2d262ae",
+          "version": "0.3.1"
+        }
+      ],
+      "Static": [
+        {
+          "git-tree-sha1": "474a5283ad435618090122872eea6a8165ea6bcf",
+          "version": "1.4.6"
+        }
+      ],
+      "StaticArrayInterface": [
+        {
+          "git-tree-sha1": "2a635e15d5035c53b345077c947f31ff91744078",
+          "version": "1.10.0"
+        }
+      ],
+      "StaticArrays": [
+        {
+          "git-tree-sha1": "8a8a52f887f38d44014e24ee46b8a7311c625f6d",
+          "version": "1.9.24"
+        }
+      ],
+      "StaticArraysCore": [
+        {
+          "git-tree-sha1": "6ab403037779dae8c514bad259f32a447262455a",
+          "version": "1.4.4"
+        }
+      ],
+      "StaticPolynomials": [
+        {
+          "git-tree-sha1": "0b4ec86a5ba2269c51897381dd0e7a222650f447",
+          "version": "1.3.7"
+        }
+      ],
+      "Statistics": [
+        {
+          "git-tree-sha1": "e2b53ce13a53367e96601081e33d34746b571bad",
+          "version": "1.11.5"
+        }
+      ],
+      "StatsAPI": [
+        {
+          "git-tree-sha1": "178ed29fd5b2a2cfc3bd31c13375ae925623ff36",
+          "version": "1.8.0"
+        }
+      ],
+      "StatsBase": [
+        {
+          "git-tree-sha1": "adb9da019510162e67a4493fc235c23203d8b09e",
+          "version": "0.34.13"
+        }
+      ],
+      "StrideArrays": [
+        {
+          "git-tree-sha1": "a009ced9a1952b91f3982a6e06df672189c6cbc9",
+          "version": "0.1.29"
+        }
+      ],
+      "StrideArraysCore": [
+        {
+          "git-tree-sha1": "5316097111523c9a970596a5b33cfea5f92e8581",
+          "version": "0.5.9"
+        }
+      ],
+      "StringEncodings": [
+        {
+          "git-tree-sha1": "b765e46ba27ecf6b44faf70df40c57aa3a547dcb",
+          "version": "0.3.7"
+        }
+      ],
+      "StringManipulation": [
+        {
+          "git-tree-sha1": "9e3a02d73a8f0a9be04e677dbef758aab40f8bea",
+          "version": "0.6.1"
+        }
+      ],
+      "StructArrays": [
+        {
+          "git-tree-sha1": "4daaddbe37aa80b4551bf7c56adf53e7cfcdf35a",
+          "version": "0.7.4"
+        }
+      ],
+      "StructUtils": [
+        {
+          "git-tree-sha1": "9372decd34a91c0e1183fcb0e826182b89699150",
+          "version": "2.11.0"
+        }
+      ],
+      "StyledStrings": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "SuiteSparse": [
+        {}
+      ],
+      "SuiteSparse_jll": [
+        {
+          "version": "7.10.1+0"
+        }
+      ],
+      "TOML": [
+        {
+          "version": "1.0.3"
+        }
+      ],
+      "TableTraits": [
+        {
+          "git-tree-sha1": "c06b2f539df1c6efa794486abfb6ed2022561a39",
+          "version": "1.0.1"
+        }
+      ],
+      "Tables": [
+        {
+          "git-tree-sha1": "a94d9bdda1b7bed0046cea645639ab3f62196fac",
+          "version": "1.14.0"
+        }
+      ],
+      "Tar": [
+        {
+          "version": "1.10.0"
+        }
+      ],
+      "TaskLocalValues": [
+        {
+          "git-tree-sha1": "67e469338d9ce74fc578f7db1736a74d93a49eb8",
+          "version": "0.1.3"
+        }
+      ],
+      "Test": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "TextWrap": [
+        {
+          "git-tree-sha1": "43044b737fa70bc12f6105061d3da38f881a3e3c",
+          "version": "1.0.2"
+        }
+      ],
+      "ThreadedScans": [
+        {
+          "git-tree-sha1": "ca1ba3000289eacba571aaa4efcefb642e7a1de6",
+          "version": "0.1.0"
+        }
+      ],
+      "ThreadingUtilities": [
+        {
+          "git-tree-sha1": "e12924c87b5476110130841e973ba9b9f20ae599",
+          "version": "0.5.7"
+        }
+      ],
+      "TimerOutputs": [
+        {
+          "git-tree-sha1": "2244393f04554e24b54896b430b2ab3850a2232d",
+          "version": "1.2.2"
+        }
+      ],
+      "TranscodingStreams": [
+        {
+          "git-tree-sha1": "0c45878dcfdcfa8480052b6ab162cdd138781742",
+          "version": "0.11.3"
+        }
+      ],
+      "Transducers": [
+        {
+          "git-tree-sha1": "4aa1fdf6c1da74661f6f5d3edfd96648321dade9",
+          "version": "0.4.85"
+        }
+      ],
+      "URIs": [
+        {
+          "git-tree-sha1": "0392e5e3c5327b90a487b0ff3e818c4aecd3660b",
+          "version": "1.7.1"
+        }
+      ],
+      "UUIDs": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "UnPack": [
+        {
+          "git-tree-sha1": "387c1f73762231e86e0c9c5443ce3b4a0a9a0c2b",
+          "version": "1.0.2"
+        }
+      ],
+      "Unicode": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Unitful": [
+        {
+          "git-tree-sha1": "1f0f9f401753701a7e4113b5056ca38d33875b55",
+          "version": "1.29.0"
+        }
+      ],
+      "UnitfulAtomic": [
+        {
+          "git-tree-sha1": "903be579194534af1c4b4778d1ace676ca042238",
+          "version": "1.0.0"
+        }
+      ],
+      "UnsafeArrays": [
+        {
+          "git-tree-sha1": "c63023bd84f46f9df786c90180d4f79dbfdafa2a",
+          "version": "1.0.9"
+        }
+      ],
+      "UnsafeAtomics": [
+        {
+          "git-tree-sha1": "74ac5e0e702972da953ffc981094617070be582d",
+          "version": "0.4.0"
+        }
+      ],
+      "VectorizationBase": [
+        {
+          "git-tree-sha1": "807a234dc5e6132dd6cf4c9317ca0917c4001ab3",
+          "version": "0.21.74"
+        }
+      ],
+      "VectorizedRNG": [
+        {
+          "git-tree-sha1": "2f294b26d806de1273608d5871080ef5c6e897f5",
+          "version": "0.2.26"
+        }
+      ],
+      "VectorizedStatistics": [
+        {
+          "git-tree-sha1": "e6b69204f739942b70e647b7013cf6adeeb4fb79",
+          "version": "0.5.11"
+        }
+      ],
+      "WeightInitializers": [
+        {
+          "git-tree-sha1": "d60c958a009b5a25cf8ea4eb3f9a2cf7352a9c6f",
+          "version": "1.3.4"
+        }
+      ],
+      "WignerD": [
+        {
+          "git-tree-sha1": "e70934634040a5833c8a61172073339848b55933",
+          "version": "0.1.5"
+        }
+      ],
+      "WithAlloc": [
+        {
+          "git-tree-sha1": "ab73e13dc0d7c021e02e744ea8b658d98a9572e4",
+          "version": "0.1.1"
+        }
+      ],
+      "WoodburyMatrices": [
+        {
+          "git-tree-sha1": "248a7031b3da79a127f14e5dc5f417e26f9f6db7",
+          "version": "1.1.0"
+        }
+      ],
+      "XCrySDenStructureFormat": [
+        {
+          "git-tree-sha1": "b217639bffd1105e78ff65ad444e9e0a2d518759",
+          "version": "0.2.0"
+        }
+      ],
+      "XML2_jll": [
+        {
+          "git-tree-sha1": "b826aedca5fce2e3c91904e338c279e5c1a2da74",
+          "version": "2.15.4+0"
+        }
+      ],
+      "YAML": [
+        {
+          "git-tree-sha1": "9c685a6e94e255019e2bf9486318147cd42fe34a",
+          "version": "0.4.17"
+        }
+      ],
+      "ZipArchives": [
+        {
+          "git-tree-sha1": "3e6acd912522133953125645b263934ae2ac745e",
+          "version": "2.6.1"
+        }
+      ],
+      "Zlib_jll": [
+        {
+          "version": "1.3.2+0"
+        }
+      ],
+      "Zstd_jll": [
+        {
+          "version": "1.5.7+1"
+        }
+      ],
+      "Zygote": [
+        {
+          "git-tree-sha1": "536d09ce04de624082edacc40d1fb9c434b806dc",
+          "version": "0.7.14"
+        }
+      ],
+      "ZygoteRules": [
+        {
+          "git-tree-sha1": "c6a86c133861234450ab260dee01b42abd604095",
+          "version": "0.2.8"
+        }
+      ],
+      "extxyz_jll": [
+        {
+          "git-tree-sha1": "873d06b969d13a1bd315ed847824b8cfded76542",
+          "version": "0.1.3+0"
+        }
+      ],
+      "libblastrampoline_jll": [
+        {
+          "version": "5.15.0+0"
+        }
+      ],
+      "libcleri_jll": [
+        {
+          "git-tree-sha1": "9cf7bea1bc957a2133fe6ea57c95b36b5addc364",
+          "version": "0.12.1+3"
+        }
+      ],
+      "nghttp2_jll": [
+        {
+          "version": "1.70.0+0"
+        }
+      ],
+      "oneTBB_jll": [
+        {
+          "git-tree-sha1": "ed2d8d4ad96c03d3abe3382cdbbdea9489b63636",
+          "version": "2023.1.0+0"
+        }
+      ],
+      "p7zip_jll": [
+        {
+          "version": "17.8.3+0"
+        }
+      ]
+    }
+  },
+  "test113": {
+    "julia_version": "1.13.3",
+    "file_hashes": {
+      "Project.toml": "57f61a340fb2fd19e54eb422330ace0574a60137c36f59f427dc0f1ad41badc9",
+      "Manifest.toml": "a13598bfe3b4b07597730cd7711bcf9b602b4df36a1c0865dce64399dd0aee00"
+    },
+    "packages": {
+      "AMDGPU": [
+        {
+          "git-tree-sha1": "b68fa9b3c836d0829212c90269a6d5b28b8c0e3c",
+          "version": "2.8.0"
+        }
+      ],
+      "AMDGPU_LLVM_Backend_jll": [
+        {
+          "git-tree-sha1": "73496f150f809ae747a5cec0f665ae5a46962d28",
+          "version": "22.1.8+2"
+        }
+      ],
+      "AbstractFFTs": [
+        {
+          "git-tree-sha1": "d92ad398961a3ed262d8bf04a1a2b8340f915fef",
+          "version": "1.5.0"
+        }
+      ],
+      "AcceleratedKernels": [
+        {
+          "git-tree-sha1": "f75592c5dc92f7f75e544b156eba7165d4418193",
+          "version": "0.4.4"
+        }
+      ],
+      "Accessors": [
+        {
+          "git-tree-sha1": "8c0bc12397dabf5d2dfc4b5763ec463854cc44d3",
+          "version": "0.1.46"
+        }
+      ],
+      "Adapt": [
+        {
+          "git-tree-sha1": "eec8a0ad4e4b673afba213931504c360fffb8f97",
+          "version": "4.8.0"
+        }
+      ],
+      "ArgCheck": [
+        {
+          "git-tree-sha1": "f9e9a66c9b7be1ad7372bbd9b062d9230c30c5ce",
+          "version": "2.5.0"
+        }
+      ],
+      "ArgTools": [
+        {
+          "version": "1.1.2"
+        }
+      ],
+      "Artifacts": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Atomix": [
+        {
+          "git-tree-sha1": "1bbcf97714051f302b3beafab65bcdeb6044c4df",
+          "version": "1.2.1"
+        }
+      ],
+      "AtomsBase": [
+        {
+          "git-tree-sha1": "5e39d3a8a6ec33d2e59559fc6acb6c74a1067d40",
+          "version": "0.5.3"
+        }
+      ],
+      "AtomsCalculators": [
+        {
+          "git-tree-sha1": "99c477979252acdb189f3e4161970e42634e426a",
+          "version": "0.2.3"
+        }
+      ],
+      "AtomsCalculatorsUtilities": [
+        {
+          "git-tree-sha1": "43555bae37776b9bf12b68062632a93477869001",
+          "version": "0.1.9"
+        }
+      ],
+      "AtomsSystems": [
+        {
+          "git-tree-sha1": "4188f37e2436beef7a8d653985a157640dc196e9",
+          "version": "0.1.2"
+        }
+      ],
+      "BFloat16s": [
+        {
+          "git-tree-sha1": "59ba860cf4d7e2fe58f35c8d08cfe765b6c33655",
+          "version": "0.6.5"
+        }
+      ],
+      "BangBang": [
+        {
+          "git-tree-sha1": "cceb62468025be98d42a5dc581b163c20896b040",
+          "version": "0.4.9"
+        }
+      ],
+      "Base64": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Baselet": [
+        {
+          "git-tree-sha1": "aebf55e6d7795e02ca500a689d326ac979aaf89e",
+          "version": "0.1.1"
+        }
+      ],
+      "BenchmarkTools": [
+        {
+          "git-tree-sha1": "9670d3febc2b6da60a0ae57846ba74670290653f",
+          "version": "1.8.0"
+        }
+      ],
+      "Bumper": [
+        {
+          "git-tree-sha1": "d8f7e73bde2cd6ea8a6273dc42af76c354bd5406",
+          "version": "0.7.2"
+        }
+      ],
+      "CEnum": [
+        {
+          "git-tree-sha1": "389ad5c84de1ae7cf0e28e381131c98ea87d54fc",
+          "version": "0.5.0"
+        }
+      ],
+      "ChainRules": [
+        {
+          "git-tree-sha1": "f3cdc9ecdea0c528f7d9e0b031b0d7ae0aa2bf3c",
+          "version": "1.74.13"
+        }
+      ],
+      "ChainRulesCore": [
+        {
+          "git-tree-sha1": "295fa9b898db109bc56df62c0fc20bd105cec00e",
+          "version": "1.26.8"
+        }
+      ],
+      "ChunkSplitters": [
+        {
+          "git-tree-sha1": "1c52c8e2673edc030191177ff1aee42d25149acb",
+          "version": "3.2.0"
+        }
+      ],
+      "CommonSubexpressions": [
+        {
+          "git-tree-sha1": "cda2cfaebb4be89c9084adaca7dd7333369715c5",
+          "version": "0.3.1"
+        }
+      ],
+      "Compat": [
+        {
+          "git-tree-sha1": "9d8a54ce4b17aa5bdce0ea5c34bc5e7c340d16ad",
+          "version": "4.18.1"
+        }
+      ],
+      "CompilerCaching": [
+        {
+          "git-tree-sha1": "1de3647e392372f1a77e41ae705ceaa12473bc08",
+          "version": "0.5.3"
+        }
+      ],
+      "CompilerSupportLibraries_jll": [
+        {
+          "version": "1.5.5+2"
+        }
+      ],
+      "CompositionsBase": [
+        {
+          "git-tree-sha1": "802bb88cd69dfd1509f6670416bd4434015693ad",
+          "version": "0.1.2"
+        }
+      ],
+      "ConstructionBase": [
+        {
+          "git-tree-sha1": "b1bc10667320dd5367aff450a992c951ea38fbbc",
+          "version": "1.6.1"
+        }
+      ],
+      "Crayons": [
+        {
+          "git-tree-sha1": "54b76cbb40d9a0f5368c880725b2f141da77c94f",
+          "version": "4.2.0"
+        }
+      ],
+      "DataAPI": [
+        {
+          "git-tree-sha1": "abe83f3a2f1b857aac70ef8b269080af17764bbe",
+          "version": "1.16.0"
+        }
+      ],
+      "DataValueInterfaces": [
+        {
+          "git-tree-sha1": "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6",
+          "version": "1.0.0"
+        }
+      ],
+      "Dates": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "DefineSingletons": [
+        {
+          "git-tree-sha1": "0fba8b706d0178b4dc7fd44a96a92382c9065c2c",
+          "version": "0.1.2"
+        }
+      ],
+      "DiffResults": [
+        {
+          "git-tree-sha1": "782dd5f4561f5d267313f23853baaaa4c52ea621",
+          "version": "1.1.0"
+        }
+      ],
+      "DiffRules": [
+        {
+          "git-tree-sha1": "79a2aca180a85c690c58a020d47b426954b590f8",
+          "version": "1.16.0"
+        }
+      ],
+      "DispatchDoctor": [
+        {
+          "git-tree-sha1": "278d0120d7c22ef36bd8d22f349868d6a782a949",
+          "version": "0.4.29"
+        }
+      ],
+      "Distributed": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "DocStringExtensions": [
+        {
+          "git-tree-sha1": "38ef52f18cbdfa783ec6c25acc23fb1e8525ec16",
+          "version": "0.10.2"
+        }
+      ],
+      "Downloads": [
+        {
+          "version": "1.7.0"
+        }
+      ],
+      "EmpiricalPotentials": [
+        {
+          "git-tree-sha1": "5c4cb3b68aa3b621f1d86a94b544e0936ef25418",
+          "version": "0.2.6"
+        }
+      ],
+      "ExprTools": [
+        {
+          "git-tree-sha1": "d2e49e7efd29719d6f28b891b0e0e159daa9d2b4",
+          "version": "0.1.11"
+        }
+      ],
+      "ExternalDocstrings": [
+        {
+          "git-tree-sha1": "1224740fc4d07c989949e1c1b508ebd49a65a5f6",
+          "version": "0.1.1"
+        }
+      ],
+      "FileWatching": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "FillArrays": [
+        {
+          "git-tree-sha1": "831f86fde78ab7f6470d6ba4d1161a11fb6b4ec0",
+          "version": "1.18.2"
+        }
+      ],
+      "Folds": [
+        {
+          "git-tree-sha1": "7eb4bc88d8295e387a667fd43d67c157ddee76cf",
+          "version": "0.2.10"
+        }
+      ],
+      "ForwardDiff": [
+        {
+          "git-tree-sha1": "a55669aa77ae8bbdc7310c4027112500ff5ec874",
+          "version": "1.4.7"
+        }
+      ],
+      "Future": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "GPUArrays": [
+        {
+          "git-tree-sha1": "574e443e2545f8622b716676c9358ca8a7ea57b4",
+          "version": "11.5.16"
+        }
+      ],
+      "GPUArraysCore": [
+        {
+          "git-tree-sha1": "0b2b3e8b8fb7c1f5ddbf498be2eb2b3b37c9c0ed",
+          "version": "0.2.1"
+        }
+      ],
+      "GPUCompiler": [
+        {
+          "git-tree-sha1": "717e7c75e4b431c0ff187e6518d2157396e6afe9",
+          "version": "2.6.0"
+        }
+      ],
+      "GPUToolbox": [
+        {
+          "git-tree-sha1": "a380d7a5bf9be3fb1e85344c683bab446f4861c0",
+          "version": "3.5.1"
+        }
+      ],
+      "HashArrayMappedTries": [
+        {
+          "git-tree-sha1": "2eaa69a7cab70a52b9687c8bf950a5a93ec895ae",
+          "version": "0.2.0"
+        }
+      ],
+      "IRTools": [
+        {
+          "git-tree-sha1": "eb7dbaba9b60b122c6526b369291695d25e4128a",
+          "version": "0.4.25"
+        }
+      ],
+      "InitialValues": [
+        {
+          "git-tree-sha1": "4da0f88e9a39111c2fa3add390ab15f3a44f3ca3",
+          "version": "0.3.1"
+        }
+      ],
+      "InteractiveUtils": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "InverseFunctions": [
+        {
+          "git-tree-sha1": "5cc6ad3e2bfc75a11eed92632ee341d37f4a4536",
+          "version": "0.1.18"
+        }
+      ],
+      "IrrationalConstants": [
+        {
+          "git-tree-sha1": "d22e8bdb3f03c300a103ff23c0dd5a654c6701de",
+          "version": "0.2.7"
+        }
+      ],
+      "IteratorInterfaceExtensions": [
+        {
+          "git-tree-sha1": "a3f24677c21f5bbe9d2a714f95dcd58337fb2856",
+          "version": "1.0.0"
+        }
+      ],
+      "JLLWrappers": [
+        {
+          "git-tree-sha1": "7204148362dafe5fe6a273f855b8ccbe4df8173e",
+          "version": "1.8.0"
+        }
+      ],
+      "JSON": [
+        {
+          "git-tree-sha1": "06d90f699285d055e34f0b014636a75a17ff2252",
+          "version": "1.13.4"
+        }
+      ],
+      "JuliaSyntaxHighlighting": [
+        {
+          "version": "1.12.0"
+        }
+      ],
+      "KernelAbstractions": [
+        {
+          "git-tree-sha1": "e51d16f9dcff134c4ecf79e7cfa764c59d2d648e",
+          "version": "0.9.45"
+        }
+      ],
+      "LLVM": [
+        {
+          "git-tree-sha1": "3bcfa5cd59aecfc0680d8b5b8ea38237b009f112",
+          "version": "9.13.2"
+        }
+      ],
+      "LLVMExtra_jll": [
+        {
+          "git-tree-sha1": "d77aea19c9a71059a021acd99b0a4343e9661d94",
+          "version": "0.0.47+0"
+        }
+      ],
+      "LMDB": [
+        {
+          "git-tree-sha1": "84e5cba87693714bfd67f589a91f24a996ff3e69",
+          "version": "3.0.1"
+        }
+      ],
+      "LMDB_jll": [
+        {
+          "git-tree-sha1": "196c962b4d66b978b9be1e15e4e1d53441d5f028",
+          "version": "1.0.3+0"
+        }
+      ],
+      "LaTeXStrings": [
+        {
+          "git-tree-sha1": "f88f3ccef05a6a72a0cf0ed417c8fd68530f4ab2",
+          "version": "1.4.1"
+        }
+      ],
+      "LazyArtifacts": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "LibCURL": [
+        {
+          "version": "1.0.0"
+        }
+      ],
+      "LibCURL_jll": [
+        {
+          "version": "8.22.0+0"
+        }
+      ],
+      "LibGit2": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "LibGit2_jll": [
+        {
+          "version": "1.9.7+0"
+        }
+      ],
+      "LibSSH2_jll": [
+        {
+          "version": "1.11.104+0"
+        }
+      ],
+      "LibTracyClient_jll": [
+        {
+          "git-tree-sha1": "d4e20500d210247322901841d4eafc7a0c52642d",
+          "version": "0.13.1+0"
+        }
+      ],
+      "Libdl": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "LinearAlgebra": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "LogExpFunctions": [
+        {
+          "git-tree-sha1": "28d620bcdb37a3fb02de9f521928ee453690f414",
+          "version": "1.0.3"
+        }
+      ],
+      "Logging": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "LuxCore": [
+        {
+          "git-tree-sha1": "a2636fa690d539c3035d248f268ca39fa9900369",
+          "version": "1.5.4"
+        }
+      ],
+      "MacroTools": [
+        {
+          "git-tree-sha1": "1e0228a030642014fe5cfe68c2c0a818f9e3f522",
+          "version": "0.5.16"
+        }
+      ],
+      "Markdown": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "MicroCollections": [
+        {
+          "git-tree-sha1": "44d32db644e84c75dab479f1bc15ee76a1a3618f",
+          "version": "0.2.0"
+        }
+      ],
+      "MozillaCACerts_jll": [
+        {
+          "version": "2026.10.20"
+        }
+      ],
+      "NaNMath": [
+        {
+          "git-tree-sha1": "676c0f1c1c34224d6869675047a54b42fdc7b8c5",
+          "version": "1.1.5"
+        }
+      ],
+      "NeighbourLists": [
+        {
+          "git-tree-sha1": "a01bb1c1cfac969d1939824e9e13f8c7112a0c0a",
+          "version": "0.6.2"
+        }
+      ],
+      "NetworkOptions": [
+        {
+          "version": "1.3.0"
+        }
+      ],
+      "OpenBLAS_jll": [
+        {
+          "version": "0.3.30+0"
+        }
+      ],
+      "OpenLibm_jll": [
+        {
+          "version": "0.8.7+0"
+        }
+      ],
+      "OpenSSL_jll": [
+        {
+          "version": "3.5.8+0"
+        }
+      ],
+      "OpenSpecFun_jll": [
+        {
+          "git-tree-sha1": "1346c9208249809840c91b26703912dff463d335",
+          "version": "0.5.6+0"
+        }
+      ],
+      "OrderedCollections": [
+        {
+          "git-tree-sha1": "b079a6affebde167dad8ffe0d670b53917fbcb68",
+          "version": "2.0.3"
+        }
+      ],
+      "PCRE2_jll": [
+        {
+          "version": "10.47.0+0"
+        }
+      ],
+      "Parsers": [
+        {
+          "git-tree-sha1": "e5ae52d1f4f19a9591d615cb0f1ef8d415b40933",
+          "version": "3.0.6"
+        }
+      ],
+      "PeriodicTable": [
+        {
+          "git-tree-sha1": "238aa6298007565529f911b734e18addd56985e1",
+          "version": "1.2.1"
+        }
+      ],
+      "Pkg": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "PotentialFrameWork": [
+        {
+          "path": "/mnt/work/Coding/Potentials/dev/PotentialFrameWork",
+          "version": "0.1.0-DEV"
+        }
+      ],
+      "PrecompileTools": [
+        {
+          "git-tree-sha1": "edbeefc7a4889f528644251bdb5fc9ab5348bc2c",
+          "version": "1.3.4"
+        }
+      ],
+      "Preferences": [
+        {
+          "git-tree-sha1": "aef1987d90dcc2e2cbd919ad10b2d25bcce4f418",
+          "version": "1.6.1"
+        }
+      ],
+      "PrettyTables": [
+        {
+          "git-tree-sha1": "eeac4c9337f876c3c32b8da732141953567f57c9",
+          "version": "3.5.1"
+        }
+      ],
+      "Printf": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Profile": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Quaternions": [
+        {
+          "git-tree-sha1": "4d8c1b7c3329c1885b857abb50d08fa3f4d9e3c8",
+          "version": "0.7.7"
+        }
+      ],
+      "REPL": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "ROCmDeviceLibs_jll": [
+        {
+          "git-tree-sha1": "26ae7b27acf9bb6357dca3d90bc12ef5ba07f023",
+          "version": "7.0.2+0"
+        }
+      ],
+      "Random": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Random123": [
+        {
+          "git-tree-sha1": "dbe5fd0b334694e905cb9fda73cd8554333c46e2",
+          "version": "1.7.1"
+        }
+      ],
+      "RandomNumbers": [
+        {
+          "git-tree-sha1": "c6ec94d2aaba1ab2ff983052cf6a606ca5985902",
+          "version": "1.6.0"
+        }
+      ],
+      "RealDot": [
+        {
+          "git-tree-sha1": "9f0a1b71baaf7650f4fa8a1d168c7fb6ee41f0c9",
+          "version": "0.1.0"
+        }
+      ],
+      "Reexport": [
+        {
+          "git-tree-sha1": "45e428421666073eab6f2da5c9d310d99bb12f9b",
+          "version": "1.2.2"
+        }
+      ],
+      "Referenceables": [
+        {
+          "git-tree-sha1": "02d31ad62838181c1a3a5fd23a1ce5914a643601",
+          "version": "0.1.3"
+        }
+      ],
+      "Requires": [
+        {
+          "git-tree-sha1": "62389eeff14780bfe55195b7204c0d8738436d64",
+          "version": "1.3.1"
+        }
+      ],
+      "Rotations": [
+        {
+          "git-tree-sha1": "5680a9276685d392c87407df00d57c9924d9f11e",
+          "version": "1.7.1"
+        }
+      ],
+      "SHA": [
+        {
+          "version": "1.0.0"
+        }
+      ],
+      "SIMD": [
+        {
+          "git-tree-sha1": "0651e0ac84b2027c5f227c058d37f81b5be373bd",
+          "version": "3.8.2"
+        }
+      ],
+      "SciMLPublic": [
+        {
+          "git-tree-sha1": "74685afb51732a464fbce79a72708f7c4203ceb7",
+          "version": "1.3.0"
+        }
+      ],
+      "ScopedValues": [
+        {
+          "git-tree-sha1": "67a144433c4ce877ee6d1ada69a124d6b1ecf7be",
+          "version": "1.6.2"
+        }
+      ],
+      "Scratch": [
+        {
+          "git-tree-sha1": "9b81b8393e50b7d4e6d0a9f14e192294d3b7c109",
+          "version": "1.3.0"
+        }
+      ],
+      "Serialization": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Setfield": [
+        {
+          "git-tree-sha1": "89880a2cca5cabc68c9023f58e544beda1d2fc1f",
+          "version": "1.2.0"
+        }
+      ],
+      "Sockets": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "SparseArrays": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "SparseInverseSubset": [
+        {
+          "git-tree-sha1": "eec446511ab8c3293dd846c61c15128392fceed5",
+          "version": "0.1.3"
+        }
+      ],
+      "SpecialFunctions": [
+        {
+          "git-tree-sha1": "88ef0d98204515bc53dd4aaea5f7788882d1b66c",
+          "version": "2.9.1"
+        }
+      ],
+      "SpheriCart": [
+        {
+          "git-tree-sha1": "6afdb7696752e4612d09f399c062e66f5e9673cd",
+          "version": "0.2.4"
+        }
+      ],
+      "SplittablesBase": [
+        {
+          "git-tree-sha1": "e08a62abc517eb79667d0a29dc08a3b589516bb5",
+          "version": "0.1.15"
+        }
+      ],
+      "StaticArrays": [
+        {
+          "git-tree-sha1": "8a8a52f887f38d44014e24ee46b8a7311c625f6d",
+          "version": "1.9.24"
+        }
+      ],
+      "StaticArraysCore": [
+        {
+          "git-tree-sha1": "bf7e2d0d9ed9ac2a652fd598c0f784910cc759f2",
+          "version": "1.4.5"
+        }
+      ],
+      "Statistics": [
+        {
+          "git-tree-sha1": "e2b53ce13a53367e96601081e33d34746b571bad",
+          "version": "1.11.5"
+        }
+      ],
+      "StringManipulation": [
+        {
+          "git-tree-sha1": "9e3a02d73a8f0a9be04e677dbef758aab40f8bea",
+          "version": "0.6.1"
+        }
+      ],
+      "StructArrays": [
+        {
+          "git-tree-sha1": "4daaddbe37aa80b4551bf7c56adf53e7cfcdf35a",
+          "version": "0.7.4"
+        }
+      ],
+      "StructUtils": [
+        {
+          "git-tree-sha1": "b04bfab37484defe300b2f9ed64469abab2431ff",
+          "version": "2.12.0"
+        }
+      ],
+      "StyledStrings": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "SuiteSparse": [
+        {}
+      ],
+      "SuiteSparse_jll": [
+        {
+          "version": "7.10.1+0"
+        }
+      ],
+      "TOML": [
+        {
+          "version": "1.0.3"
+        }
+      ],
+      "TableTraits": [
+        {
+          "git-tree-sha1": "c06b2f539df1c6efa794486abfb6ed2022561a39",
+          "version": "1.0.1"
+        }
+      ],
+      "Tables": [
+        {
+          "git-tree-sha1": "a94d9bdda1b7bed0046cea645639ab3f62196fac",
+          "version": "1.14.0"
+        }
+      ],
+      "Tar": [
+        {
+          "version": "1.10.0"
+        }
+      ],
+      "Test": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "ThreadedScans": [
+        {
+          "git-tree-sha1": "ca1ba3000289eacba571aaa4efcefb642e7a1de6",
+          "version": "0.1.0"
+        }
+      ],
+      "Tracy": [
+        {
+          "git-tree-sha1": "73e3ff50fd3990874c59fef0f35d10644a1487bc",
+          "version": "0.1.6"
+        }
+      ],
+      "Transducers": [
+        {
+          "git-tree-sha1": "4aa1fdf6c1da74661f6f5d3edfd96648321dade9",
+          "version": "0.4.85"
+        }
+      ],
+      "UUIDs": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Unicode": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Unitful": [
+        {
+          "git-tree-sha1": "1f0f9f401753701a7e4113b5056ca38d33875b55",
+          "version": "1.29.0"
+        }
+      ],
+      "UnitfulAtomic": [
+        {
+          "git-tree-sha1": "903be579194534af1c4b4778d1ace676ca042238",
+          "version": "1.0.0"
+        }
+      ],
+      "UnsafeArrays": [
+        {
+          "git-tree-sha1": "c63023bd84f46f9df786c90180d4f79dbfdafa2a",
+          "version": "1.0.9"
+        }
+      ],
+      "UnsafeAtomics": [
+        {
+          "git-tree-sha1": "21b39bfb1fab6156b61fbcba4c86c57b6216d2c3",
+          "version": "0.3.2"
+        }
+      ],
+      "Zlib_jll": [
+        {
+          "version": "1.3.2+0"
+        }
+      ],
+      "Zstd_jll": [
+        {
+          "version": "1.5.7+1"
+        }
+      ],
+      "Zygote": [
+        {
+          "git-tree-sha1": "2da80a46522b8e4152deb4b6596d4f3eca0b0111",
+          "version": "0.7.16"
+        }
+      ],
+      "ZygoteRules": [
+        {
+          "git-tree-sha1": "c6a86c133861234450ab260dee01b42abd604095",
+          "version": "0.2.8"
+        }
+      ],
+      "libblastrampoline_jll": [
+        {
+          "version": "5.15.0+0"
+        }
+      ],
+      "nghttp2_jll": [
+        {
+          "version": "1.70.0+0"
+        }
+      ],
+      "p7zip_jll": [
+        {
+          "version": "17.8.3+0"
+        }
+      ],
+      "tree_sitter_gcn_jll": [
+        {
+          "git-tree-sha1": "7aea9f731552967bda93cb7cbf6925de65bc38d5",
+          "version": "0.1.0+0"
+        }
+      ],
+      "tree_sitter_llvm_jll": [
+        {
+          "git-tree-sha1": "2fb7d0e3a8abf532fa922766ca130bf814df1e70",
+          "version": "1.1.0+0"
+        }
+      ],
+      "tree_sitter_ptx_jll": [
+        {
+          "git-tree-sha1": "e6ad264eebe3e34f03bca6b5e811d80e0f4797a2",
+          "version": "0.1.0+0"
+        }
+      ],
+      "tree_sitter_spirv_jll": [
+        {
+          "git-tree-sha1": "7d8c03949bab84b23fe0500d89979e786d54a653",
+          "version": "0.1.0+0"
+        }
+      ]
+    }
+  },
+  "test110": {
+    "julia_version": "1.10.12",
+    "file_hashes": {
+      "Project.toml": "57f61a340fb2fd19e54eb422330ace0574a60137c36f59f427dc0f1ad41badc9",
+      "Manifest.toml": "6f3226b854fc4c58cbc8b81401b0cf4117428c2a18077a598216a17aeb7dfa6e"
+    },
+    "packages": {
+      "AbstractFFTs": [
+        {
+          "git-tree-sha1": "d92ad398961a3ed262d8bf04a1a2b8340f915fef",
+          "version": "1.5.0"
+        }
+      ],
+      "AcceleratedKernels": [
+        {
+          "git-tree-sha1": "6c32b2b30572dde2187280f68dcce3f389a454d0",
+          "version": "0.5.12"
+        }
+      ],
+      "Accessors": [
+        {
+          "git-tree-sha1": "8c0bc12397dabf5d2dfc4b5763ec463854cc44d3",
+          "version": "0.1.46"
+        }
+      ],
+      "Adapt": [
+        {
+          "git-tree-sha1": "eec8a0ad4e4b673afba213931504c360fffb8f97",
+          "version": "4.8.0"
+        }
+      ],
+      "ArgCheck": [
+        {
+          "git-tree-sha1": "f9e9a66c9b7be1ad7372bbd9b062d9230c30c5ce",
+          "version": "2.5.0"
+        }
+      ],
+      "Artifacts": [
+        {}
+      ],
+      "Atomix": [
+        {
+          "git-tree-sha1": "0aa371c875e24cf773c87b2f50ab03e4545748af",
+          "version": "1.7.0"
+        }
+      ],
+      "AtomsBase": [
+        {
+          "git-tree-sha1": "5e39d3a8a6ec33d2e59559fc6acb6c74a1067d40",
+          "version": "0.5.3"
+        }
+      ],
+      "AtomsCalculators": [
+        {
+          "git-tree-sha1": "99c477979252acdb189f3e4161970e42634e426a",
+          "version": "0.2.3"
+        }
+      ],
+      "AtomsCalculatorsUtilities": [
+        {
+          "git-tree-sha1": "56b7df19e6c5de86f297104a19e0cf019c81a0c4",
+          "version": "0.1.8"
+        }
+      ],
+      "AtomsSystems": [
+        {
+          "git-tree-sha1": "4188f37e2436beef7a8d653985a157640dc196e9",
+          "version": "0.1.2"
+        }
+      ],
+      "BangBang": [
+        {
+          "git-tree-sha1": "cceb62468025be98d42a5dc581b163c20896b040",
+          "version": "0.4.9"
+        }
+      ],
+      "Base64": [
+        {}
+      ],
+      "Baselet": [
+        {
+          "git-tree-sha1": "aebf55e6d7795e02ca500a689d326ac979aaf89e",
+          "version": "0.1.1"
+        }
+      ],
+      "BenchmarkTools": [
+        {
+          "git-tree-sha1": "9670d3febc2b6da60a0ae57846ba74670290653f",
+          "version": "1.8.0"
+        }
+      ],
+      "Bumper": [
+        {
+          "git-tree-sha1": "d8f7e73bde2cd6ea8a6273dc42af76c354bd5406",
+          "version": "0.7.2"
+        }
+      ],
+      "CEnum": [
+        {
+          "git-tree-sha1": "bcf137722d8a23a2e299ce86e3f43aa963d6a03a",
+          "version": "1.0.0"
+        }
+      ],
+      "ChainRules": [
+        {
+          "git-tree-sha1": "f3cdc9ecdea0c528f7d9e0b031b0d7ae0aa2bf3c",
+          "version": "1.74.13"
+        }
+      ],
+      "ChainRulesCore": [
+        {
+          "git-tree-sha1": "295fa9b898db109bc56df62c0fc20bd105cec00e",
+          "version": "1.26.8"
+        }
+      ],
+      "ChunkSplitters": [
+        {
+          "git-tree-sha1": "1c52c8e2673edc030191177ff1aee42d25149acb",
+          "version": "3.2.0"
+        }
+      ],
+      "CommonSubexpressions": [
+        {
+          "git-tree-sha1": "cda2cfaebb4be89c9084adaca7dd7333369715c5",
+          "version": "0.3.1"
+        }
+      ],
+      "Compat": [
+        {
+          "git-tree-sha1": "9d8a54ce4b17aa5bdce0ea5c34bc5e7c340d16ad",
+          "version": "4.18.1"
+        }
+      ],
+      "CompilerSupportLibraries_jll": [
+        {
+          "version": "1.1.2+1"
+        }
+      ],
+      "CompositionsBase": [
+        {
+          "git-tree-sha1": "802bb88cd69dfd1509f6670416bd4434015693ad",
+          "version": "0.1.2"
+        }
+      ],
+      "ConstructionBase": [
+        {
+          "git-tree-sha1": "b1bc10667320dd5367aff450a992c951ea38fbbc",
+          "version": "1.6.1"
+        }
+      ],
+      "DataAPI": [
+        {
+          "git-tree-sha1": "abe83f3a2f1b857aac70ef8b269080af17764bbe",
+          "version": "1.16.0"
+        }
+      ],
+      "DataValueInterfaces": [
+        {
+          "git-tree-sha1": "bfc1187b79289637fa0ef6d4436ebdfe6905cbd6",
+          "version": "1.0.0"
+        }
+      ],
+      "Dates": [
+        {}
+      ],
+      "DefineSingletons": [
+        {
+          "git-tree-sha1": "0fba8b706d0178b4dc7fd44a96a92382c9065c2c",
+          "version": "0.1.2"
+        }
+      ],
+      "DiffResults": [
+        {
+          "git-tree-sha1": "782dd5f4561f5d267313f23853baaaa4c52ea621",
+          "version": "1.1.0"
+        }
+      ],
+      "DiffRules": [
+        {
+          "git-tree-sha1": "79a2aca180a85c690c58a020d47b426954b590f8",
+          "version": "1.16.0"
+        }
+      ],
+      "DispatchDoctor": [
+        {
+          "git-tree-sha1": "278d0120d7c22ef36bd8d22f349868d6a782a949",
+          "version": "0.4.29"
+        }
+      ],
+      "Distributed": [
+        {}
+      ],
+      "DocStringExtensions": [
+        {
+          "git-tree-sha1": "38ef52f18cbdfa783ec6c25acc23fb1e8525ec16",
+          "version": "0.10.2"
+        }
+      ],
+      "EmpiricalPotentials": [
+        {
+          "git-tree-sha1": "5c4cb3b68aa3b621f1d86a94b544e0936ef25418",
+          "version": "0.2.6"
+        }
+      ],
+      "ExternalDocstrings": [
+        {
+          "git-tree-sha1": "1224740fc4d07c989949e1c1b508ebd49a65a5f6",
+          "version": "0.1.1"
+        }
+      ],
+      "FillArrays": [
+        {
+          "git-tree-sha1": "831f86fde78ab7f6470d6ba4d1161a11fb6b4ec0",
+          "version": "1.18.2"
+        }
+      ],
+      "Folds": [
+        {
+          "git-tree-sha1": "7eb4bc88d8295e387a667fd43d67c157ddee76cf",
+          "version": "0.2.10"
+        }
+      ],
+      "ForwardDiff": [
+        {
+          "git-tree-sha1": "a55669aa77ae8bbdc7310c4027112500ff5ec874",
+          "version": "1.4.7"
+        }
+      ],
+      "Future": [
+        {}
+      ],
+      "GPUArraysCore": [
+        {
+          "git-tree-sha1": "f60436514e6d73f8ee069ae4ee0ff038fe96b69d",
+          "version": "0.2.2"
+        }
+      ],
+      "HashArrayMappedTries": [
+        {
+          "git-tree-sha1": "2eaa69a7cab70a52b9687c8bf950a5a93ec895ae",
+          "version": "0.2.0"
+        }
+      ],
+      "IRTools": [
+        {
+          "git-tree-sha1": "eb7dbaba9b60b122c6526b369291695d25e4128a",
+          "version": "0.4.25"
+        }
+      ],
+      "InitialValues": [
+        {
+          "git-tree-sha1": "4da0f88e9a39111c2fa3add390ab15f3a44f3ca3",
+          "version": "0.3.1"
+        }
+      ],
+      "InteractiveUtils": [
+        {}
+      ],
+      "InverseFunctions": [
+        {
+          "git-tree-sha1": "5cc6ad3e2bfc75a11eed92632ee341d37f4a4536",
+          "version": "0.1.18"
+        }
+      ],
+      "IrrationalConstants": [
+        {
+          "git-tree-sha1": "d22e8bdb3f03c300a103ff23c0dd5a654c6701de",
+          "version": "0.2.7"
+        }
+      ],
+      "IteratorInterfaceExtensions": [
+        {
+          "git-tree-sha1": "a3f24677c21f5bbe9d2a714f95dcd58337fb2856",
+          "version": "1.0.0"
+        }
+      ],
+      "JLLWrappers": [
+        {
+          "git-tree-sha1": "7204148362dafe5fe6a273f855b8ccbe4df8173e",
+          "version": "1.8.0"
+        }
+      ],
+      "JSON": [
+        {
+          "git-tree-sha1": "06d90f699285d055e34f0b014636a75a17ff2252",
+          "version": "1.13.4"
+        }
+      ],
+      "KernelAbstractions": [
+        {
+          "git-tree-sha1": "e51d16f9dcff134c4ecf79e7cfa764c59d2d648e",
+          "version": "0.9.45"
+        }
+      ],
+      "LLVM": [
+        {
+          "git-tree-sha1": "41c2ce7ec5a14c89b93dc6a5853bf2a91d7a8583",
+          "version": "10.4.3"
+        }
+      ],
+      "LLVMExtra_jll": [
+        {
+          "git-tree-sha1": "39def0b4521e0ef2bf26960d8965729f496bb4ec",
+          "version": "0.0.56+0"
+        }
+      ],
+      "Libdl": [
+        {}
+      ],
+      "LinearAlgebra": [
+        {}
+      ],
+      "LogExpFunctions": [
+        {
+          "git-tree-sha1": "28d620bcdb37a3fb02de9f521928ee453690f414",
+          "version": "1.0.3"
+        }
+      ],
+      "Logging": [
+        {}
+      ],
+      "LuxCore": [
+        {
+          "git-tree-sha1": "a2636fa690d539c3035d248f268ca39fa9900369",
+          "version": "1.5.4"
+        }
+      ],
+      "MacroTools": [
+        {
+          "git-tree-sha1": "1e0228a030642014fe5cfe68c2c0a818f9e3f522",
+          "version": "0.5.16"
+        }
+      ],
+      "Markdown": [
+        {}
+      ],
+      "MicroCollections": [
+        {
+          "git-tree-sha1": "44d32db644e84c75dab479f1bc15ee76a1a3618f",
+          "version": "0.2.0"
+        }
+      ],
+      "NaNMath": [
+        {
+          "git-tree-sha1": "676c0f1c1c34224d6869675047a54b42fdc7b8c5",
+          "version": "1.1.5"
+        }
+      ],
+      "NeighbourLists": [
+        {
+          "git-tree-sha1": "acefbae381d91ddccf2e7ed887df7a9de415060d",
+          "version": "0.5.10"
+        }
+      ],
+      "OpenBLAS_jll": [
+        {
+          "version": "0.3.23+5"
+        }
+      ],
+      "OpenLibm_jll": [
+        {
+          "version": "0.8.5+0"
+        }
+      ],
+      "OpenSpecFun_jll": [
+        {
+          "git-tree-sha1": "1346c9208249809840c91b26703912dff463d335",
+          "version": "0.5.6+0"
+        }
+      ],
+      "OrderedCollections": [
+        {
+          "git-tree-sha1": "b079a6affebde167dad8ffe0d670b53917fbcb68",
+          "version": "2.0.3"
+        }
+      ],
+      "Parsers": [
+        {
+          "git-tree-sha1": "e5ae52d1f4f19a9591d615cb0f1ef8d415b40933",
+          "version": "3.0.6"
+        }
+      ],
+      "PeriodicTable": [
+        {
+          "git-tree-sha1": "238aa6298007565529f911b734e18addd56985e1",
+          "version": "1.2.1"
+        }
+      ],
+      "PotentialFrameWork": [
+        {
+          "path": "/mnt/work/Coding/Potentials/dev/PotentialFrameWork",
+          "version": "0.1.0-DEV"
+        }
+      ],
+      "PrecompileTools": [
+        {
+          "git-tree-sha1": "5aa36f7049a63a1528fe8f7c3f2113413ffd4e1f",
+          "version": "1.2.1"
+        }
+      ],
+      "Preferences": [
+        {
+          "git-tree-sha1": "aef1987d90dcc2e2cbd919ad10b2d25bcce4f418",
+          "version": "1.6.1"
+        }
+      ],
+      "Printf": [
+        {}
+      ],
+      "Profile": [
+        {}
+      ],
+      "Quaternions": [
+        {
+          "git-tree-sha1": "4d8c1b7c3329c1885b857abb50d08fa3f4d9e3c8",
+          "version": "0.7.7"
+        }
+      ],
+      "Random": [
+        {}
+      ],
+      "RealDot": [
+        {
+          "git-tree-sha1": "9f0a1b71baaf7650f4fa8a1d168c7fb6ee41f0c9",
+          "version": "0.1.0"
+        }
+      ],
+      "Reexport": [
+        {
+          "git-tree-sha1": "45e428421666073eab6f2da5c9d310d99bb12f9b",
+          "version": "1.2.2"
+        }
+      ],
+      "Referenceables": [
+        {
+          "git-tree-sha1": "02d31ad62838181c1a3a5fd23a1ce5914a643601",
+          "version": "0.1.3"
+        }
+      ],
+      "Requires": [
+        {
+          "git-tree-sha1": "62389eeff14780bfe55195b7204c0d8738436d64",
+          "version": "1.3.1"
+        }
+      ],
+      "Rotations": [
+        {
+          "git-tree-sha1": "5680a9276685d392c87407df00d57c9924d9f11e",
+          "version": "1.7.1"
+        }
+      ],
+      "SHA": [
+        {
+          "version": "0.7.0"
+        }
+      ],
+      "SIMD": [
+        {
+          "git-tree-sha1": "0651e0ac84b2027c5f227c058d37f81b5be373bd",
+          "version": "3.8.2"
+        }
+      ],
+      "SciMLPublic": [
+        {
+          "git-tree-sha1": "74685afb51732a464fbce79a72708f7c4203ceb7",
+          "version": "1.3.0"
+        }
+      ],
+      "ScopedValues": [
+        {
+          "git-tree-sha1": "67a144433c4ce877ee6d1ada69a124d6b1ecf7be",
+          "version": "1.6.2"
+        }
+      ],
+      "Serialization": [
+        {}
+      ],
+      "Setfield": [
+        {
+          "git-tree-sha1": "89880a2cca5cabc68c9023f58e544beda1d2fc1f",
+          "version": "1.2.0"
+        }
+      ],
+      "Sockets": [
+        {}
+      ],
+      "SparseArrays": [
+        {
+          "version": "1.10.0"
+        }
+      ],
+      "SparseInverseSubset": [
+        {
+          "git-tree-sha1": "eec446511ab8c3293dd846c61c15128392fceed5",
+          "version": "0.1.3"
+        }
+      ],
+      "SpecialFunctions": [
+        {
+          "git-tree-sha1": "88ef0d98204515bc53dd4aaea5f7788882d1b66c",
+          "version": "2.9.1"
+        }
+      ],
+      "SpheriCart": [
+        {
+          "git-tree-sha1": "6afdb7696752e4612d09f399c062e66f5e9673cd",
+          "version": "0.2.4"
+        }
+      ],
+      "SplittablesBase": [
+        {
+          "git-tree-sha1": "e08a62abc517eb79667d0a29dc08a3b589516bb5",
+          "version": "0.1.15"
+        }
+      ],
+      "StaticArrays": [
+        {
+          "git-tree-sha1": "8a8a52f887f38d44014e24ee46b8a7311c625f6d",
+          "version": "1.9.24"
+        }
+      ],
+      "StaticArraysCore": [
+        {
+          "git-tree-sha1": "bf7e2d0d9ed9ac2a652fd598c0f784910cc759f2",
+          "version": "1.4.5"
+        }
+      ],
+      "Statistics": [
+        {
+          "version": "1.10.0"
+        }
+      ],
+      "StructArrays": [
+        {
+          "git-tree-sha1": "4daaddbe37aa80b4551bf7c56adf53e7cfcdf35a",
+          "version": "0.7.4"
+        }
+      ],
+      "StructUtils": [
+        {
+          "git-tree-sha1": "b04bfab37484defe300b2f9ed64469abab2431ff",
+          "version": "2.12.0"
+        }
+      ],
+      "SuiteSparse": [
+        {}
+      ],
+      "SuiteSparse_jll": [
+        {
+          "version": "7.2.1+1"
+        }
+      ],
+      "TOML": [
+        {
+          "version": "1.0.3"
+        }
+      ],
+      "TableTraits": [
+        {
+          "git-tree-sha1": "c06b2f539df1c6efa794486abfb6ed2022561a39",
+          "version": "1.0.1"
+        }
+      ],
+      "Tables": [
+        {
+          "git-tree-sha1": "a94d9bdda1b7bed0046cea645639ab3f62196fac",
+          "version": "1.14.0"
+        }
+      ],
+      "Test": [
+        {}
+      ],
+      "ThreadedScans": [
+        {
+          "git-tree-sha1": "ca1ba3000289eacba571aaa4efcefb642e7a1de6",
+          "version": "0.1.0"
+        }
+      ],
+      "Transducers": [
+        {
+          "git-tree-sha1": "4aa1fdf6c1da74661f6f5d3edfd96648321dade9",
+          "version": "0.4.85"
+        }
+      ],
+      "UUIDs": [
+        {}
+      ],
+      "Unicode": [
+        {}
+      ],
+      "Unitful": [
+        {
+          "git-tree-sha1": "1f0f9f401753701a7e4113b5056ca38d33875b55",
+          "version": "1.29.0"
+        }
+      ],
+      "UnitfulAtomic": [
+        {
+          "git-tree-sha1": "903be579194534af1c4b4778d1ace676ca042238",
+          "version": "1.0.0"
+        }
+      ],
+      "UnsafeArrays": [
+        {
+          "git-tree-sha1": "c63023bd84f46f9df786c90180d4f79dbfdafa2a",
+          "version": "1.0.9"
+        }
+      ],
+      "UnsafeAtomics": [
+        {
+          "git-tree-sha1": "74ac5e0e702972da953ffc981094617070be582d",
+          "version": "0.4.0"
+        }
+      ],
+      "Zygote": [
+        {
+          "git-tree-sha1": "2da80a46522b8e4152deb4b6596d4f3eca0b0111",
+          "version": "0.7.16"
+        }
+      ],
+      "ZygoteRules": [
+        {
+          "git-tree-sha1": "c6a86c133861234450ab260dee01b42abd604095",
+          "version": "0.2.8"
+        }
+      ],
+      "libblastrampoline_jll": [
+        {
+          "version": "5.11.0+0"
+        }
+      ]
+    }
+  },
+  "cpu-only": {
+    "julia_version": "1.13.3",
+    "file_hashes": {
+      "Project.toml": "bf3a6c23161564bec84baacabfd95062edc3296e5931303ac38646368d154c01",
+      "Manifest.toml": "df26a0c7bdd2216b26c4ae7c24f714b34e3d8b6e2afda485b1f938154ce5d70b"
+    },
+    "packages": {
+      "AcceleratedKernels": [
+        {
+          "git-tree-sha1": "6c32b2b30572dde2187280f68dcce3f389a454d0",
+          "version": "0.5.12"
+        }
+      ],
+      "Accessors": [
+        {
+          "git-tree-sha1": "8c0bc12397dabf5d2dfc4b5763ec463854cc44d3",
+          "version": "0.1.46"
+        }
+      ],
+      "Adapt": [
+        {
+          "git-tree-sha1": "eec8a0ad4e4b673afba213931504c360fffb8f97",
+          "version": "4.8.0"
+        }
+      ],
+      "ArgCheck": [
+        {
+          "git-tree-sha1": "f9e9a66c9b7be1ad7372bbd9b062d9230c30c5ce",
+          "version": "2.5.0"
+        }
+      ],
+      "Artifacts": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Atomix": [
+        {
+          "git-tree-sha1": "0aa371c875e24cf773c87b2f50ab03e4545748af",
+          "version": "1.7.0"
+        }
+      ],
+      "AtomsBase": [
+        {
+          "git-tree-sha1": "5e39d3a8a6ec33d2e59559fc6acb6c74a1067d40",
+          "version": "0.5.3"
+        }
+      ],
+      "AtomsCalculators": [
+        {
+          "git-tree-sha1": "99c477979252acdb189f3e4161970e42634e426a",
+          "version": "0.2.3"
+        }
+      ],
+      "BangBang": [
+        {
+          "git-tree-sha1": "cceb62468025be98d42a5dc581b163c20896b040",
+          "version": "0.4.9"
+        }
+      ],
+      "Base64": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "CEnum": [
+        {
+          "git-tree-sha1": "389ad5c84de1ae7cf0e28e381131c98ea87d54fc",
+          "version": "0.5.0"
+        }
+      ],
+      "ChunkSplitters": [
+        {
+          "git-tree-sha1": "1c52c8e2673edc030191177ff1aee42d25149acb",
+          "version": "3.2.0"
+        }
+      ],
+      "Compat": [
+        {
+          "git-tree-sha1": "9d8a54ce4b17aa5bdce0ea5c34bc5e7c340d16ad",
+          "version": "4.18.1"
+        }
+      ],
+      "CompilerCaching": [
+        {
+          "git-tree-sha1": "1de3647e392372f1a77e41ae705ceaa12473bc08",
+          "version": "0.5.3"
+        }
+      ],
+      "CompilerSupportLibraries_jll": [
+        {
+          "version": "1.5.5+2"
+        }
+      ],
+      "CompositionsBase": [
+        {
+          "git-tree-sha1": "802bb88cd69dfd1509f6670416bd4434015693ad",
+          "version": "0.1.2"
+        }
+      ],
+      "ConstructionBase": [
+        {
+          "git-tree-sha1": "b1bc10667320dd5367aff450a992c951ea38fbbc",
+          "version": "1.6.1"
+        }
+      ],
+      "Dates": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "ExprTools": [
+        {
+          "git-tree-sha1": "d2e49e7efd29719d6f28b891b0e0e159daa9d2b4",
+          "version": "0.1.11"
+        }
+      ],
+      "FileWatching": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "GPUArraysCore": [
+        {
+          "git-tree-sha1": "f60436514e6d73f8ee069ae4ee0ff038fe96b69d",
+          "version": "0.2.2"
+        }
+      ],
+      "GPUCompiler": [
+        {
+          "git-tree-sha1": "2a66558ca5eddcdaa1a25ffb307c9e12f5df8028",
+          "version": "2.22.2"
+        }
+      ],
+      "GPUToolbox": [
+        {
+          "git-tree-sha1": "5d825bab8a72d96e350e47e30616cf6a4b02fb49",
+          "version": "3.6.0"
+        }
+      ],
+      "HashArrayMappedTries": [
+        {
+          "git-tree-sha1": "2eaa69a7cab70a52b9687c8bf950a5a93ec895ae",
+          "version": "0.2.0"
+        }
+      ],
+      "Hwloc_jll": [
+        {
+          "git-tree-sha1": "550c21420b96b46f2f0abe8fc4c9430cd55649e3",
+          "version": "2.15.0+3"
+        }
+      ],
+      "InitialValues": [
+        {
+          "git-tree-sha1": "4da0f88e9a39111c2fa3add390ab15f3a44f3ca3",
+          "version": "0.3.1"
+        }
+      ],
+      "InteractiveUtils": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "InverseFunctions": [
+        {
+          "git-tree-sha1": "5cc6ad3e2bfc75a11eed92632ee341d37f4a4536",
+          "version": "0.1.18"
+        }
+      ],
+      "JLLWrappers": [
+        {
+          "git-tree-sha1": "7204148362dafe5fe6a273f855b8ccbe4df8173e",
+          "version": "1.8.0"
+        }
+      ],
+      "JuliaSyntaxHighlighting": [
+        {
+          "version": "1.12.0"
+        }
+      ],
+      "KernelAbstractions": [
+        {
+          "git-tree-sha1": "08b081d7d69e3cc989babee2c74c1d16c0f6baa1",
+          "version": "0.10.7"
+        }
+      ],
+      "KernelInterface": [
+        {
+          "git-tree-sha1": "626abe5ae4c64c2e5600078962d67bbfab983ce3",
+          "version": "0.4.6"
+        }
+      ],
+      "LLVM": [
+        {
+          "git-tree-sha1": "41c2ce7ec5a14c89b93dc6a5853bf2a91d7a8583",
+          "version": "10.4.3"
+        }
+      ],
+      "LLVMExtra_jll": [
+        {
+          "git-tree-sha1": "39def0b4521e0ef2bf26960d8965729f496bb4ec",
+          "version": "0.0.56+0"
+        }
+      ],
+      "LLVMOpenMP_jll": [
+        {
+          "git-tree-sha1": "e5b100780d4d30d63b4618d7930d48af409c1772",
+          "version": "23.1.1+0"
+        }
+      ],
+      "LMDB": [
+        {
+          "git-tree-sha1": "84e5cba87693714bfd67f589a91f24a996ff3e69",
+          "version": "3.0.1"
+        }
+      ],
+      "LMDB_jll": [
+        {
+          "git-tree-sha1": "196c962b4d66b978b9be1e15e4e1d53441d5f028",
+          "version": "1.0.3+0"
+        }
+      ],
+      "LibTracyClient_jll": [
+        {
+          "git-tree-sha1": "d4e20500d210247322901841d4eafc7a0c52642d",
+          "version": "0.13.1+0"
+        }
+      ],
+      "Libdl": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Libiconv_jll": [
+        {
+          "git-tree-sha1": "be484f5c92fad0bd8acfef35fe017900b0b73809",
+          "version": "1.18.0+0"
+        }
+      ],
+      "LinearAlgebra": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "Logging": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "MacroTools": [
+        {
+          "git-tree-sha1": "1e0228a030642014fe5cfe68c2c0a818f9e3f522",
+          "version": "0.5.16"
+        }
+      ],
+      "Markdown": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "OhMyThreads": [
+        {
+          "git-tree-sha1": "a73a90d87e3f941f5084d34d56934c2fb59dd9b1",
+          "version": "0.8.9"
+        }
+      ],
+      "OpenBLAS_jll": [
+        {
+          "version": "0.3.30+0"
+        }
+      ],
+      "PeriodicTable": [
+        {
+          "git-tree-sha1": "238aa6298007565529f911b734e18addd56985e1",
+          "version": "1.2.1"
+        }
+      ],
+      "PotentialFrameWork": [
+        {
+          "path": "/mnt/work/Coding/Potentials/dev/PotentialFrameWork",
+          "version": "0.1.0-DEV"
+        }
+      ],
+      "PrecompileTools": [
+        {
+          "git-tree-sha1": "1e697ad6f68af89cd3651bbe9b4a7b5d800adf5a",
+          "version": "1.4.0"
+        }
+      ],
+      "Preferences": [
+        {
+          "git-tree-sha1": "aef1987d90dcc2e2cbd919ad10b2d25bcce4f418",
+          "version": "1.6.1"
+        }
+      ],
+      "Printf": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "REPL": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Random": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Random123": [
+        {
+          "git-tree-sha1": "dbe5fd0b334694e905cb9fda73cd8554333c46e2",
+          "version": "1.7.1"
+        }
+      ],
+      "RandomNumbers": [
+        {
+          "git-tree-sha1": "c6ec94d2aaba1ab2ff983052cf6a606ca5985902",
+          "version": "1.6.0"
+        }
+      ],
+      "Requires": [
+        {
+          "git-tree-sha1": "62389eeff14780bfe55195b7204c0d8738436d64",
+          "version": "1.3.1"
+        }
+      ],
+      "SHA": [
+        {
+          "version": "1.0.0"
+        }
+      ],
+      "SIMD": [
+        {
+          "git-tree-sha1": "0651e0ac84b2027c5f227c058d37f81b5be373bd",
+          "version": "3.8.2"
+        }
+      ],
+      "SLEEF_jll": [
+        {
+          "git-tree-sha1": "e917bfc9d0aabb490b94bce45c700781ce47c65e",
+          "version": "3.9.0+2"
+        }
+      ],
+      "SPIRVIntrinsics": [
+        {
+          "git-tree-sha1": "2ee2b6f667d53d1f03079ce7179f7de7ef5058b7",
+          "version": "1.6.0"
+        }
+      ],
+      "SPIRV_LLVM_Backend_jll": [
+        {
+          "git-tree-sha1": "b277c67df09ba43963be35adc4acf6b6262a9066",
+          "version": "23.1.4+5"
+        }
+      ],
+      "SPIRV_Tools_jll": [
+        {
+          "git-tree-sha1": "783c358eff59056d7e703a644f5179270c43226a",
+          "version": "2025.4.0+0"
+        }
+      ],
+      "ScopedValues": [
+        {
+          "git-tree-sha1": "67a144433c4ce877ee6d1ada69a124d6b1ecf7be",
+          "version": "1.6.2"
+        }
+      ],
+      "Scratch": [
+        {
+          "git-tree-sha1": "9b81b8393e50b7d4e6d0a9f14e192294d3b7c109",
+          "version": "1.3.0"
+        }
+      ],
+      "Serialization": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Sockets": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "SparseArrays": [
+        {
+          "version": "1.13.0"
+        }
+      ],
+      "StableTasks": [
+        {
+          "git-tree-sha1": "c4f6610f85cb965bee5bfafa64cbeeda55a4e0b2",
+          "version": "0.1.7"
+        }
+      ],
+      "StaticArrays": [
+        {
+          "git-tree-sha1": "8a8a52f887f38d44014e24ee46b8a7311c625f6d",
+          "version": "1.9.24"
+        }
+      ],
+      "StaticArraysCore": [
+        {
+          "git-tree-sha1": "bf7e2d0d9ed9ac2a652fd598c0f784910cc759f2",
+          "version": "1.4.5"
+        }
+      ],
+      "StyledStrings": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "SuiteSparse_jll": [
+        {
+          "version": "7.10.1+0"
+        }
+      ],
+      "TOML": [
+        {
+          "version": "1.0.3"
+        }
+      ],
+      "TaskLocalValues": [
+        {
+          "git-tree-sha1": "67e469338d9ce74fc578f7db1736a74d93a49eb8",
+          "version": "0.1.3"
+        }
+      ],
+      "Test": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "ThreadTeams": [
+        {
+          "git-tree-sha1": "15736830cfa2bc55b27769222cefb371800d4f25",
+          "version": "1.4.0"
+        }
+      ],
+      "Tracy": [
+        {
+          "git-tree-sha1": "73e3ff50fd3990874c59fef0f35d10644a1487bc",
+          "version": "0.1.6"
+        }
+      ],
+      "UUIDs": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Unicode": [
+        {
+          "version": "1.11.0"
+        }
+      ],
+      "Unitful": [
+        {
+          "git-tree-sha1": "1f0f9f401753701a7e4113b5056ca38d33875b55",
+          "version": "1.29.0"
+        }
+      ],
+      "UnitfulAtomic": [
+        {
+          "git-tree-sha1": "903be579194534af1c4b4778d1ace676ca042238",
+          "version": "1.0.0"
+        }
+      ],
+      "UnsafeAtomics": [
+        {
+          "git-tree-sha1": "74ac5e0e702972da953ffc981094617070be582d",
+          "version": "0.4.0"
+        }
+      ],
+      "XML2_jll": [
+        {
+          "git-tree-sha1": "b826aedca5fce2e3c91904e338c279e5c1a2da74",
+          "version": "2.15.4+0"
+        }
+      ],
+      "Xorg_libpciaccess_jll": [
+        {
+          "git-tree-sha1": "58972370b81423fc546c56a60ed1a009450177c3",
+          "version": "0.19.0+0"
+        }
+      ],
+      "Zlib_jll": [
+        {
+          "version": "1.3.2+0"
+        }
+      ],
+      "Zstd_jll": [
+        {
+          "version": "1.5.7+1"
+        }
+      ],
+      "libblastrampoline_jll": [
+        {
+          "version": "5.15.0+0"
+        }
+      ],
+      "pocl_standalone_jll": [
+        {
+          "git-tree-sha1": "305f3b390a68ab4297626cbe7eeaea88869e2cc0",
+          "version": "7.2.3+8"
+        }
+      ],
+      "tree_sitter_gcn_jll": [
+        {
+          "git-tree-sha1": "7aea9f731552967bda93cb7cbf6925de65bc38d5",
+          "version": "0.1.0+0"
+        }
+      ],
+      "tree_sitter_llvm_jll": [
+        {
+          "git-tree-sha1": "2fb7d0e3a8abf532fa922766ca130bf814df1e70",
+          "version": "1.1.0+0"
+        }
+      ],
+      "tree_sitter_ptx_jll": [
+        {
+          "git-tree-sha1": "e6ad264eebe3e34f03bca6b5e811d80e0f4797a2",
+          "version": "0.1.0+0"
+        }
+      ],
+      "tree_sitter_spirv_jll": [
+        {
+          "git-tree-sha1": "7d8c03949bab84b23fe0500d89979e786d54a653",
+          "version": "0.1.0+0"
+        }
+      ]
+    }
+  }
+}

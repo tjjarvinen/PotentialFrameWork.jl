@@ -1,6 +1,8 @@
 function angular_basis(args...)
     throw(ArgumentError("load SpheriCart to use the reference CPU angular backend"))
 end
+angular_basis(model::ResolvedModel,::Type{T}) where T=angular_basis(model.lmax,T,Val(model.angular_kind))
+angular_basis(lmax,T,::Val{:real_spherical})=angular_basis(lmax,T)
 function angular_values end
 function angular_ed end
 
@@ -26,17 +28,7 @@ function radial_ed(ch::RadialChannel,r::Real)
         -2t.a*du/((1+t.a*u)^2*(t.ycut-t.yin))
     end
     e=envelope(ch,r,x); ep=ch.envelope_parameters
-    de=if ch.envelope===:PolyEnvelope2sX
-        if ep[1]<x<ep[2]
-            p=Int(ep[3]); q=Int(ep[4])
-            ep[5]*(p*(x-ep[1])^(p-1)*(ep[2]-x)^q-q*(x-ep[1])^p*(ep[2]-x)^(q-1))*dx
-        else
-            zero(x)
-        end
-    else
-        rc,r0,p=ep; p=Int(p)
-        r>rc ? zero(r) : p/r0*((rc/r0)^(-p-1)-(r/r0)^(-p-1))
-    end
+    de=envelope_derivative(ch,r,x,dx)
     k=clamp(searchsortedlast(ch.nodes,x),1,length(ch.nodes)-1)
     step=ch.nodes[k+1]-ch.nodes[k]; u=(x-ch.nodes[k])/step; c=ch.coefficients
     values=Vector{typeof(e+u)}(undef,size(c,2)); derivatives=similar(values)
@@ -48,7 +40,7 @@ function radial_ed(ch::RadialChannel,r::Real)
     values,derivatives
 end
 
-function site_diagnostics_impl(X,model,ps,env,H,i;basis=angular_basis(model.lmax,eltype(model.reference)))
+function site_diagnostics_impl(X,model,ps,env,H,i;basis=angular_basis(model,eltype(model.reference)))
     iz=env.species[i]
     edges=[k for k=env.offsets[1,i]:env.offsets[end,i]-1 if env.active[k]]
     Rs=[edge_displacement(X,H,env,i,k) for k in edges]
@@ -56,7 +48,7 @@ function site_diagnostics_impl(X,model,ps,env,H,i;basis=angular_basis(model.lmax
     merge(site_data(model,ps,iz,zs,Rs;basis),(;edges))
 end
 
-function site_data(model,ps,iz,zs,Rs;basis=angular_basis(model.lmax,eltype(model.reference)))
+function site_data(model,ps,iz,zs,Rs;basis=angular_basis(model,eltype(model.reference)))
     rs=norm.(Rs)
     all(>(0),rs) || throw(DomainError(0,"coincident physical atoms have undefined imported harmonics/pair envelope"))
     T=typeof(zero(eltype(eltype(Rs)))+parameter_seed(ps))
@@ -144,7 +136,7 @@ function ace_evaluate_impl(X::AbstractMatrix,model::ResolvedModel,ps,env::FullEn
     size(ps.Wpair)==(length(model.pair_spec),length(model.atomic_numbers)) || throw(DimensionMismatch("Wpair shape"))
     T=typeof(zero(eltype(X))+parameter_seed(ps))
     energy=zero(T); forces=zeros(T,size(X)); virial=zeros(T,3,3)
-    basis=angular_basis(model.lmax,eltype(model.reference))
+    basis=angular_basis(model,eltype(model.reference))
     for i in center_indices(centers,length(env.species))
         data=site_diagnostics_impl(X,model,ps,env,H,i;basis)
         energy+=data.energy

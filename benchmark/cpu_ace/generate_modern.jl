@@ -4,9 +4,7 @@ using AtomsBase, AtomsCalculators, Unitful, StaticArrays
 const M=ACEpotentials.Models
 pkgversion(ACEpotentials)==v"0.10.2" || error("requires modern ACEpotentials 0.10.2")
 # Reuse the independently validated exact spline exporter, without its script body.
-exporter=joinpath(@__DIR__,"../../data/ace_ref/export_resolved_model.jl")
-src=read(exporter,String)
-include_string(@__MODULE__,split(split(src,"function plain_fields";limit=2)[2],"\npath=joinpath";limit=2)[1] |> s->"function plain_fields"*s,exporter)
+include(joinpath(@__DIR__,"../../data/ace_ref/resolved_export.jl"))
 include(joinpath(@__DIR__,"../gpu_ace/workloads.jl"))
 BLAS.set_num_threads(1)
 out=abspath(ARGS[1]); mkpath(out)

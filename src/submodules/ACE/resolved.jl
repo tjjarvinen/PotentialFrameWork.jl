@@ -30,7 +30,14 @@ struct ResolvedModel{T,R,Q,P}
     policy::P
     coordinate_kind::Symbol
     coefficient_precision::DataType # precision already lost cannot be recovered by promotion
+    angular_kind::Symbol
 end
+
+# Historical constructors default to spherical harmonics.
+ResolvedModel{T,R,Q,P}(args::Vararg{Any,14}) where {T,R,Q,P}=
+    ResolvedModel{T,R,Q,P}(args...,:real_spherical)
+ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy,kind,precision)=
+    ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy,kind,precision,:real_spherical)
 
 ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy,kind)=
     ResolvedModel(z,ref,radial,pair,rspec,pspec,lmax,density,products,C,sha,policy,kind,eltype(ref))
@@ -65,6 +72,8 @@ function read_radial(D,nz;allow_code=false,parameters=NamedTuple())
         kind=Symbol(ch["envelope_kind"]); e=ch["envelope"]
         ep=if kind===:PolyEnvelope2sX
             [e["x1"],e["x2"],e["p1"],e["p2"],e["s"]]
+        elseif kind===:PolyEnvelope1sR
+            [e["rcut"],e["p"]]
         elseif kind===:ACE1_PolyEnvelope1sR
             [e["rcut"],e["r0"],e["p"]]
         else
@@ -97,7 +106,7 @@ function read_resolved(D;allow_code=false,custom_parameters=NamedTuple())
     z=Int.(D["species_atomic_numbers"]); nz=length(z)
     length(unique(z))==nz && all(>(0),z) || throw(ArgumentError("invalid species channels"))
     angular=D["angular"]
-    angular["kind"]=="real_spherical" && angular["normalization"]=="L2" && angular["ordering"]=="l*l+l+m+1" ||
+    angular["kind"] in ("real_spherical","real_solid") && angular["normalization"]=="L2" && angular["ordering"]=="l*l+l+m+1" ||
         throw(ArgumentError("unsupported angular convention"))
     lmax=Int(angular["lmax"]); lmax>=0 || throw(ArgumentError("invalid lmax"))
     radial,rspec=read_radial(D["radial"],nz;allow_code,parameters=radial_parameters(custom_parameters,:custom_radial))
@@ -124,10 +133,11 @@ function read_resolved(D;allow_code=false,custom_parameters=NamedTuple())
     if get(get(D,"conversion",Dict()),"kind",nothing)=="exact_legacy_complex_PI_to_real" || get(D,"coordinate_kind",nothing)=="legacy_PI"
         model=ResolvedModel(model.atomic_numbers,model.reference,model.radial,model.pair_radial,model.radial_spec,model.pair_spec,model.lmax,model.density,model.products,model.coupling,model.source_sha256,model.policy,:legacy_PI)
     end
+    model=model_with(model;angular_kind=Symbol(angular["kind"]))
     haskey(D,"interface_policy") && (model=model_with(model;policy=read_policy(D["interface_policy"],model)))
     precision=get(D,"coefficient_precision","Float64")
     precision in ("Float32","Float64") || throw(ArgumentError("unsupported coefficient provenance precision"))
-    model=ResolvedModel(model.atomic_numbers,model.reference,model.radial,model.pair_radial,model.radial_spec,model.pair_spec,model.lmax,model.density,model.products,model.coupling,model.source_sha256,model.policy,model.coordinate_kind,precision=="Float32" ? Float32 : Float64)
+    model=ResolvedModel(model.atomic_numbers,model.reference,model.radial,model.pair_radial,model.radial_spec,model.pair_spec,model.lmax,model.density,model.products,model.coupling,model.source_sha256,model.policy,model.coordinate_kind,precision=="Float32" ? Float32 : Float64,model.angular_kind)
     model,(;WB,Wpair),NamedTuple()
 end
 
@@ -153,11 +163,18 @@ function envelope(ch,r,x)
     if ch.envelope===:PolyEnvelope2sX
         e[1]<x<e[2] || return zero(x)
         e[5]*(x-e[1])^Int(e[3])*(e[2]-x)^Int(e[4])
-    else
+    elseif ch.envelope===:PolyEnvelope1sR
+        r>=e[1] && return zero(r)
+        r>0 || throw(DomainError(r,"singular imported pair envelope at coincident atoms"))
+        s=r/e[1]; p=Int(e[2])
+        (s^(-p)-one(s))*(one(s)-s)
+    elseif ch.envelope===:ACE1_PolyEnvelope1sR
         r>e[1] && return zero(r)
         r>0 || throw(DomainError(r,"singular imported pair envelope at coincident atoms"))
         s=r/e[2]; sc=e[1]/e[2]; p=Int(e[3])
         s^(-p)-sc^(-p)+p*sc^(-p-1)*(s-sc)
+    else
+        throw(ArgumentError("unsupported radial envelope $(ch.envelope)"))
     end
 end
 
@@ -170,4 +187,23 @@ function radial_values(ch::RadialChannel,r::Real)
     t=(x-ch.nodes[k])/(ch.nodes[k+1]-ch.nodes[k])
     e=envelope(ch,r,x); c=ch.coefficients
     [(((c[4,n,k]*t+c[3,n,k])*t+c[2,n,k])*t+c[1,n,k])*e for n=1:size(c,2)]
+end
+
+# Shared scalar derivative for CPU scalar and SIMD lanes; legacy stays distinct.
+function envelope_derivative(ch,r,x,dx)
+    ep=ch.envelope_parameters
+    if ch.envelope===:PolyEnvelope2sX
+        p=Int(ep[3]); q=Int(ep[4])
+        return ep[1]<x<ep[2] ? ep[5]*(p*(x-ep[1])^(p-1)*(ep[2]-x)^q-q*(x-ep[1])^p*(ep[2]-x)^(q-1))*dx : zero(x)
+    elseif ch.envelope===:PolyEnvelope1sR
+        rc,p=ep; p=Int(p)
+        r>=rc && return zero(r)
+        r>0 || throw(DomainError(r,"singular imported pair envelope"))
+        s=r/rc
+        return (-p*s^(-p-1)*(1-s)-(s^(-p)-1))/rc
+    elseif ch.envelope===:ACE1_PolyEnvelope1sR
+        rc,r0,p=ep; p=Int(p)
+        return r>rc ? zero(r) : p/r0*((rc/r0)^(-p-1)-(r/r0)^(-p-1))
+    end
+    throw(ArgumentError("unsupported radial envelope $(ch.envelope)"))
 end

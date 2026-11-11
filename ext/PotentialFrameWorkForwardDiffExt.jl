@@ -63,7 +63,7 @@ ForwardDiff.:(≺)(::Type{<:ForwardDiff.Tag},::Type{ACEParameterDirection})=fals
 function ace_vjp_impl(X,model,ps,env,H,de,df,dw;centers=nothing)
     for family in (model.radial,model.pair_radial),ch in family; PotentialFrameWork.ACE.require_radial_ad(ch); end
     flat=parameter_flatten(ps); dp=zero(flat); dx=zeros(eltype(X),size(X))
-    basis=PotentialFrameWork.ACE.angular_basis(model.lmax,eltype(model.reference))
+    basis=PotentialFrameWork.ACE.angular_basis(model,eltype(model.reference))
     for i in PotentialFrameWork.ACE.center_indices(centers,length(env.species))
         iz=env.species[i]
         edges=[k for k=env.offsets[1,i]:env.offsets[end,i]-1 if env.active[k]]
