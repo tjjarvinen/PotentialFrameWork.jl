@@ -1,0 +1,5 @@
+commit = "4985499b6eb12421f512c3cb9d27671e5f76ec9b"
+tracked_dirty = false
+initial_untracked = ["docs/implementation/CPU-ACE-Product-DAG-Codex-Instructions.md"]
+archive_sha256 = "dc32268f71bd7a22454c146fd6f7fac74dfbe92265de97350510c4d6d9266d93"
+archive_reconstruction = "git archive 4985499b6eb12421f512c3cb9d27671e5f76ec9b -o /tmp/pfw-dag-stage1.tar"

@@ -55,12 +55,15 @@ function unrestricted_products!(P,dU,dV,U,V,products,weights,prefix)
     nothing
 end
 function check_product_algorithm(algorithm)
-    algorithm in (:auto,:reference,:optimized) ||
-        throw(ArgumentError("product_algorithm must be :auto, :reference or :optimized"))
+    algorithm in (:auto,:reference,:optimized,:dag) ||
+        throw(ArgumentError("product_algorithm must be :auto, :reference, :optimized or :dag"))
     algorithm
 end
-function prepared_products!(P,dU,dV,U,V,products,weights,orders,fwd,rev,algorithm)
-    if algorithm!==:reference && isnothing(orders)
+function prepared_products!(P,dU,dV,U,V,products,weights,orders,fwd,rev,algorithm,plan=nothing,values=nothing,adjoints=nothing)
+    if algorithm===:dag && isnothing(orders)
+        isnothing(plan) && throw(ArgumentError(":dag requires a prepared ProductDAG"))
+        dag_products!(P,dU,dV,U,V,weights,plan,values,adjoints)
+    elseif algorithm!==:reference && isnothing(orders)
         unrestricted_products!(P,dU,dV,U,V,products,weights,fwd)
     else
         product_projection!(P,dU,dV,U,V,products,weights,orders,fwd,rev)
@@ -76,3 +79,74 @@ function density_reverse(model,weights,U,V)
     product_projection!(P,dU,dV,U,V,model.products,weights,model.policy.orders,fwd,rev)
     (;P,dU,dV)
 end
+
+# Structural, parameter-independent prefix DAG. Leaves occupy 1:nleaves;
+# multiplication i occupies nleaves+i. Arrays are shared read-only by slots.
+# topology retains original ordering too: changing coordinates requires preparation.
+struct ProductDAG
+    nleaves::Int
+    left::Vector{Int}
+    right::Vector{Int}
+    terminals::Vector{Int}
+    topology::Vector{Vector{Int}}
+end
+function ProductDAG(products,nleaves::Integer)
+    nleaves>=0 || throw(ArgumentError("negative density count"))
+    left=Int[]; right=Int[]; terminals=Int[]
+    intern=Dict{Tuple{Int,Int},Int}()
+    for factors in products
+        isempty(factors) && throw(ArgumentError("empty ACE product factors are unsupported"))
+        all(a -> 1<=a<=nleaves,factors) || throw(ArgumentError("product density index out of bounds"))
+        indices=sort(collect(Int,factors))
+        node=first(indices)
+        for a in Iterators.drop(indices,1)
+            operands=minmax(node,a)
+            node=get!(intern,operands) do
+                push!(left,operands[1]); push!(right,operands[2])
+                Int(nleaves)+length(left)
+            end
+        end
+        push!(terminals,node)
+    end
+    ProductDAG(Int(nleaves),left,right,terminals,[collect(Int,p) for p in products])
+end
+function check_product_topology(plan::ProductDAG,model)
+    (plan.nleaves==length(model.density) && plan.topology==model.products) ||
+        throw(ArgumentError("ACE product topology changed; prepare a new potential/executor"))
+    nothing
+end
+# No division, fast-math, or bounds-check changes. Separate phases permit honest
+# diagnostics of the real production callees.
+function dag_forward!(P,U,V,plan::ProductDAG,values)
+    for a=1:plan.nleaves
+        values[a]=U[a]+V[a]
+    end
+    for i in eachindex(plan.left)
+        values[plan.nleaves+i]=values[plan.left[i]]*values[plan.right[i]]
+    end
+    for j in eachindex(plan.terminals)
+        P[j]=values[plan.terminals[j]]
+    end
+    nothing
+end
+function dag_reverse!(dU,dV,weights,plan::ProductDAG,values,adjoints)
+    fill!(adjoints,0)
+    for j in eachindex(plan.terminals)
+        adjoints[plan.terminals[j]]+=weights[j]
+    end
+    for i=length(plan.left):-1:1
+        l=plan.left[i]; r=plan.right[i]; g=adjoints[plan.nleaves+i]
+        adjoints[l]+=g*values[r]
+        adjoints[r]+=g*values[l]
+    end
+    for a=1:plan.nleaves
+        dU[a]=adjoints[a]; dV[a]=adjoints[a]
+    end
+    nothing
+end
+function dag_products!(P,dU,dV,U,V,weights,plan::ProductDAG,values,adjoints)
+    dag_forward!(P,U,V,plan,values)
+    dag_reverse!(dU,dV,weights,plan,values,adjoints)
+end
+# Report the path actually selected, including the restricted-policy fallback.
+effective_product_algorithm(algorithm,orders)=!isnothing(orders) || algorithm===:reference ? :reference : algorithm===:dag ? :dag : :optimized

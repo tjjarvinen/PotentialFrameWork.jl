@@ -1,0 +1,50 @@
+[
+  {
+    "file": "combined-Float32.llvm.txt",
+    "float_ops": 0,
+    "double_ops": 0,
+    "float_to_double": 0,
+    "direct_gc_allocator_calls": 0,
+    "bounds_error_calls": 0
+  },
+  {
+    "file": "combined-Float64.llvm.txt",
+    "float_ops": 0,
+    "double_ops": 0,
+    "float_to_double": 0,
+    "direct_gc_allocator_calls": 0,
+    "bounds_error_calls": 0
+  },
+  {
+    "file": "forward-Float32.llvm.txt",
+    "float_ops": 16,
+    "double_ops": 0,
+    "float_to_double": 0,
+    "direct_gc_allocator_calls": 0,
+    "bounds_error_calls": 11
+  },
+  {
+    "file": "forward-Float64.llvm.txt",
+    "float_ops": 0,
+    "double_ops": 16,
+    "float_to_double": 0,
+    "direct_gc_allocator_calls": 0,
+    "bounds_error_calls": 11
+  },
+  {
+    "file": "reverse-Float32.llvm.txt",
+    "float_ops": 6,
+    "double_ops": 0,
+    "float_to_double": 0,
+    "direct_gc_allocator_calls": 0,
+    "bounds_error_calls": 12
+  },
+  {
+    "file": "reverse-Float64.llvm.txt",
+    "float_ops": 0,
+    "double_ops": 6,
+    "float_to_double": 0,
+    "direct_gc_allocator_calls": 0,
+    "bounds_error_calls": 12
+  }
+]

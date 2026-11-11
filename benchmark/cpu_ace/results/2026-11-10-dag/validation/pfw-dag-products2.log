@@ -1,0 +1,8 @@
+Test Summary:                                                          | Pass  Total   Time
+prepared product algorithm: division-free values and weighted adjoints |  687    687  13.3s
+Test Summary:                                          | Pass  Total  Time
+optimized prepared force and strain finite differences |   88     88  1.3s
+Test Summary:                                                | Pass  Total  Time
+product DAG values, weighted reverse and structural lifetime |  741    741  0.5s
+Test Summary:                                                          | Pass  Total   Time
+DAG prepared integration: pruning, custom radials, growth and batching | 1184   1184  20.2s

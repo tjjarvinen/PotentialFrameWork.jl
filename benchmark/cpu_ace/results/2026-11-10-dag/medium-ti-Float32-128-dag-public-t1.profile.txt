@@ -1,0 +1,200 @@
+ Count  Overhead File                    Line Function
+ =====  ======== ====                    ==== ========
+     1         0 @PotentialFrameWork/…rList/environments.jl   45 prepare_full_environment!(env::Po…
+     1         1 @Base/int.jl             83 <
+     1         0 @Base/abstractarray.jl  684 checkbounds
+     1         1 @Base/abstractarray.jl  728 checkbounds_indices
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  151 scale_rows!(s::PotentialFrameWork…
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  109 radial_block!(R::Matrix{Float32},…
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  109 #radial_block!##0
+     1         0 @PotentialFrameWork/…dules/ACE/resolved.jl  148 transformed(t::PotentialFrameWork…
+     1         1 @Base/int.jl             86 -
+     1         0 @SpheriCart/…rc/batched_kernels.jl  301 solid_harmonics_with_grad!(Z::Sub…
+     1         0 @SpheriCart/…rc/batched_kernels.jl  311 macro expansion
+     1         0 @Base/operators.jl      653 *
+     1         0 @PotentialFrameWork/…rList/environments.jl   52 prepare_full_environment!(env::Po…
+     1         0 @Base/set.jl            473 unique!(itr::Vector{Int64})
+     1         0 @Base/sort.jl            88 issorted
+     1         0 @Base/sort.jl            93 issorted(itr::Vector{Int64}; lt::…
+     1         1 @Base/ordering.jl       157 ord(lt::Function, by::Function, r…
+     1         0 @PotentialFrameWork/…bourList/execution.jl  117 reduce_site!
+     1         0 @Base/reduce.jl          60 _foldl_impl
+     1         1 @Base/essentials.jl     975 getindex
+     1         0 @SpheriCart/…rc/batched_kernels.jl  266 solid_harmonics_with_grad!(Z::Sub…
+     1         0 @SpheriCart/…rc/batched_kernels.jl  281 macro expansion
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  135 radial_block!(R::Matrix{Float32},…
+     1         1 @Base/range.jl          924 iterate
+     1         0 @PotentialFrameWork/…hbourList/geometry.jl    6 displacement
+     1         0 @Base/floatfuncs.jl      52 round
+     1         1 @Base/float.jl          466 round
+     1         1 @PotentialFrameWork/…submodules/ACE/cpu.jl  143 radial_block!(R::Matrix{Float32},…
+     1         1 @PotentialFrameWork/…submodules/ACE/cpu.jl  156 scale_rows!(s::PotentialFrameWork…
+     1         0 @StaticArrays/src/linalg.jl  329 macro expansion
+     1         0 @LinearAlgebra/src/generic.jl  572 norm_sqr
+     1         0 @Base/number.jl         233 abs2
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  129 (::PotentialFrameWork.ACE.var"#ra…
+     1         0 @Base/special/pow.jl     85 ^
+     1         0 @Base/special/pow.jl    112 pow_body
+     1         0 @Base/intfuncs.jl       394 power_by_squaring
+     1         1 @Base/intfuncs.jl       432 power_by_squaring(x_::Float64, p:…
+     1         0 @PotentialFrameWork/…les/ACE/projection.jl  139 dag_reverse!(dU::Vector{Float32},…
+     1         1 @Base/float.jl          492 +
+     1         1 @Base/float.jl          637 isless
+     1         0 @PotentialFrameWork/…bourList/execution.jl  108 reduce_site!
+     1         0 @PotentialFrameWork/…bourList/execution.jl   66 active
+     1         0 @PotentialFrameWork/…bourList/execution.jl   63 edge_index
+     1         0 @PotentialFrameWork/…rList/environments.jl   62 prepare_full_environment!(env::Po…
+     1         0 @Base/bitset.jl         296 union!
+     1         0 @Base/bitset.jl         177 _matched_map!
+     1         0 @Base/bitset.jl          53 copy!
+     1         0 @Base/array.jl          318 copyto!
+     1         0 @Base/array.jl          311 _copyto2arg!
+     1         0 @Base/array.jl          291 copyto!
+     1         0 @Base/array.jl          300 _copyto_impl!
+     1         0 @Base/genericmemory.jl  139 unsafe_copyto!
+     1         1 @Base/cmem.jl            28 memmove
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  179 evaluate_site!(out::PotentialFram…
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  179 (::PotentialFrameWork.ACE.var"#40…
+     1         0 @Base/array.jl          963 getindex
+     1         0 @Base/abstractarray.jl 1398 _to_linear_index
+     1         0 @Base/abstractarray.jl 3074 _sub2ind
+     1         0 @Base/abstractarray.jl 3090 _sub2ind
+     1         0 @Base/abstractarray.jl 3106 _sub2ind_recurse
+     1         1 @Base/int.jl             88 *
+     1         0 @SpheriCart/src/spherical.jl  149 macro expansion
+     1         0 @SpheriCart/src/spherical.jl  113 _rescale_∇Z2∇Y!(∇Z::SubArray{Stat…
+     1         0 @SpheriCart/src/spherical.jl  116 macro expansion
+     1         0 @Base/subarray.jl       381 setindex!
+     1         0 @SpheriCart/src/spherical.jl  105 macro expansion
+     1         0 @UnsafeArrays/src/unsafe_array.jl   62 setindex!
+     1         1 @Base/pointer.jl        178 unsafe_store!
+     1         0 @PotentialFrameWork/…hbourList/geometry.jl   12 geometry
+     1         1 @PotentialFrameWork/…hbourList/geometry.jl   12 #geometry##2
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  128 (::PotentialFrameWork.ACE.var"#ra…
+     1         0 @Base/tuple.jl          164 indexed_iterate
+     1         0 @PotentialFrameWork/…les/ACE/projection.jl  140 dag_reverse!(dU::Vector{Float32},…
+     1         0 @Base/float.jl          639 isless
+     1         0 @Base/float.jl          631 _fpint
+     1         1 @Base/essentials.jl     788 reinterpret
+     1         1 @PotentialFrameWork/…rList/environments.jl   46 prepare_full_environment!(env::Po…
+     1         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  170 evaluate_site!(out::PotentialFram…
+     1         0 @Base/reduce.jl          56 _foldl_impl
+     1         0 @Base/promotion.jl      434 *
+     2         0 @StaticArrays/src/linalg.jl  331 macro expansion
+     2         0 @Base/float.jl          711 isfinite
+     2         2 @Base/float.jl          493 -
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  136 radial_block!(R::Matrix{Float32},…
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  136 #radial_block!##14
+     2         0 @SIMD/src/simdvec.jl      6 Vec
+     2         0 @Base/broadcast.jl      899 materialize
+     2         0 @Base/broadcast.jl     1131 copy
+     2         0 @Base/array.jl         1345 push!
+     2         0 @Base/array.jl         1348 _push!
+     2         1 @Base/array.jl         1204 _growend!
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  202 evaluate_site!(out::PotentialFram…
+     2         0 @SpheriCart/src/spherical.jl  148 macro expansion
+     2         0 @SpheriCart/src/api.jl  151 compute_with_gradients!(Z::SubArr…
+     2         0 @SpheriCart/src/api.jl  164 macro expansion
+     2         0 @PotentialFrameWork/…bourList/execution.jl  133 consume_batch!(slot::PotentialFra…
+     2         0 @PotentialFrameWork/…bourList/execution.jl   65 displacement
+     2         0 @PotentialFrameWork/…rList/environments.jl   78 edge_displacement
+     2         0 @PotentialFrameWork/…rList/environments.jl   78 (::PotentialFrameWork.NeighbourLi…
+     2         0 @Base/reduce.jl         564 sum
+     2         0 @Base/reduce.jl         564 #sum#279
+     2         0 @Base/reduce.jl         535 sum
+     2         0 @Base/reduce.jl         535 #sum#278
+     2         0 @Base/reduce.jl         306 mapreduce
+     2         0 @Base/reduce.jl         306 #mapreduce#275
+     2         0 @Base/reduce.jl         173 mapfoldl
+     2         0 @Base/reduce.jl         173 #mapfoldl#271
+     2         0 @Base/reduce.jl          42 mapfoldl_impl
+     2         0 @Base/reduce.jl          46 foldl_impl
+     2         0 @Base/reduce.jl          98 MappingRF
+     2         0 none                      ? #edge_displacement##2
+     2         0 @PotentialFrameWork/…hbourList/geometry.jl   16 geometry
+     2         0 @PotentialFrameWork/…hbourList/geometry.jl   16 #geometry##8
+     2         0 @PotentialFrameWork/…rList/environments.jl   44 prepare_full_environment!(env::Po…
+     2         2 @Base/essentials.jl     385 checkbounds
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  114 radial_block!(R::Matrix{Float32},…
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  224 evaluate_site!(out::PotentialFram…
+     2         0 @PotentialFrameWork/…les/ACE/projection.jl   65 prepared_products!
+     2         0 @PotentialFrameWork/…les/ACE/projection.jl  149 dag_products!
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  162 project_rows!(s::PotentialFrameWo…
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  110 radial_block!(R::Matrix{Float32},…
+     2         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  110 #radial_block!##2
+     2         0 @Base/sort.jl           310 searchsortedlast
+     2         0 @Base/sort.jl           310 #searchsortedlast#6
+     2         0 @Base/sort.jl           308 searchsortedlast
+     2         0 @Base/sort.jl           211 searchsortedlast
+     2         0 @Base/ordering.jl       118 lt
+     2         1 @PotentialFrameWork/…submodules/ACE/cpu.jl  141 radial_block!(R::Matrix{Float32},…
+     2         0 @Base/array.jl         1031 setindex!
+     2         2 @Base/array.jl         1037 _setindex!
+     3         0 @SpheriCart/src/spherical.jl  104 macro expansion
+     3         0 @StaticArrays/src/linalg.jl  319 _norm
+     3         0 @Base/array.jl          962 getindex
+     3         2 @Base/abstractarray.jl  702 checkbounds
+     3         0 @PotentialFrameWork/…rList/environments.jl   30 prepare_full_environment!(env::Po…
+     3         0 @PotentialFrameWork/…bourList/interface.jl   67 neighbour_list
+     3         0 @PotentialFrameWork/…bourList/interface.jl   77 neighbour_list(sys::PotentialFram…
+     3         0 @PotentialFrameWork/…bourList/interface.jl  107 materialize(w::Workspace{4, Float…
+     3         0 @PotentialFrameWork/…ghbourList/storage.jl   13 pack
+     3         0 @Base/essentials.jl     974 getindex
+     3         1 @Base/essentials.jl     389 checkbounds
+     4         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  142 radial_block!(R::Matrix{Float32},…
+     4         0 @SIMD/src/simdvec.jl    102 getindex
+     4         0 @SIMD/…rc/LLVM_intrinsics.jl  802 extractelement
+     4         4 @SIMD/…rc/LLVM_intrinsics.jl  809 macro expansion
+     4         0 @SpheriCart/src/spherical.jl  147 macro expansion
+     4         0 @SpheriCart/src/spherical.jl  103 _normalise_Rs!(rs::UnsafeArrays.U…
+     4         1 @StaticArrays/src/linalg.jl  318 norm
+     4         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  161 project_rows!(s::PotentialFrameWo…
+     4         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  234 evaluate_site!(out::PotentialFram…
+     4         0 @StaticArrays/src/linalg.jl   21 *
+     4         0 @StaticArrays/src/mapreduce.jl   33 map
+     4         0 @StaticArrays/src/mapreduce.jl   42 _map
+     4         0 @StaticArrays/src/mapreduce.jl   77 macro expansion
+     4         0 @StaticArrays/src/linalg.jl   21 #*##0
+     5         0 @Base/ntuple.jl          65 ntuple
+     5         2 @Base/ntuple.jl          68 macro expansion
+     6         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  214 evaluate_site!(out::PotentialFram…
+     6         0 @Base/array.jl         1020 setindex!
+     6         6 @Base/array.jl         1025 _setindex!
+     7         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  210 evaluate_site!(out::PotentialFram…
+     7         0 @PotentialFrameWork/…eWorkSpheriCartExt.jl   30 angular_ed!
+     7         0 @SpheriCart/src/spherical.jl  143 compute_with_gradients!(Y::SubArr…
+     7         0 @Bumper/src/internals.jl   76 macro expansion
+     7         0 @Base/simdloop.jl        77 macro expansion
+     7         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  182 evaluate_site!(out::PotentialFram…
+     7         6 @Base/float.jl          494 *
+     8         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  181 evaluate_site!(out::PotentialFram…
+     9         0 @PotentialFrameWork/…es/ACE/calculators.jl   41 calculator_result(sys::AtomsBase.…
+     9         0 @PotentialFrameWork/…s/ACE/environments.jl   22 ace_inputs
+     9         0 @PotentialFrameWork/…s/ACE/environments.jl   28 ace_inputs(sys::PotentialFrameWor…
+     9         0 @PotentialFrameWork/…s/ACE/environments.jl   12 prepare_environment!
+     9         0 @PotentialFrameWork/…s/ACE/environments.jl   16 prepare_environment!(env::Potenti…
+     9         0 @PotentialFrameWork/…rList/environments.jl   23 prepare_full_environment!
+    10         0 @Base/ntuple.jl          19 ntuple
+    38         0 @PotentialFrameWork/…bourList/execution.jl  126 consume_batch!(slot::PotentialFra…
+    40         0 @PotentialFrameWork/…es/ACE/calculators.jl   46 calculator_result(sys::AtomsBase.…
+    40         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  309 execute_prepared!
+    40         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  310 #execute_prepared!#415
+    40         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  256 execute_prepared_impl!
+    40         0 @PotentialFrameWork/…submodules/ACE/cpu.jl  275 execute_prepared_impl!(w::Potenti…
+    40         0 @PotentialFrameWork/…bourList/execution.jl  153 execute_sites!
+    40         0 @PotentialFrameWork/…bourList/execution.jl  164 execute_sites!(force::Matrix{Floa…
+    40         0 @PotentialFrameWork/…bourList/execution.jl  146 site_tasks!(slot::PotentialFrameW…
+    49         0 @Base/client.jl         577 _start()
+    49         0 @Base/client.jl         344 exec_options(opts::Base.JLOptions)
+    49         0 @Base/Base.jl           309 include(mod::Module, _path::Strin…
+    49         0 @Base/loading.jl       3124 _include(mapexpr::Function, mod::…
+    49         0 @Base/loading.jl       3064 include_string(mapexpr::typeof(id…
+    49         0 @Base/boot.jl           489 eval(m::Module, e::Any)
+    49         0 …chmark/cpu_ace/dag.jl   88 main()
+    49         0 @Profile/src/Profile.jl   60 macro expansion
+    49         0 …chmark/cpu_ace/dag.jl   88 macro expansion
+    49         0 …chmark/cpu_ace/dag.jl   69 (::var"#main##13#main##14"{Dict{S…
+    49         0 @PotentialFrameWork/…es/ACE/calculators.jl   58 energy_forces_virial
+    49         0 @PotentialFrameWork/…es/ACE/calculators.jl   58 #energy_forces_virial#268
+    49         0 @PotentialFrameWork/…es/ACE/calculators.jl   37 calculator_result
+Total snapshots: 49. Utilization: 100% across all threads and tasks. Use the `groupby` kwarg to break down by thread and/or task.

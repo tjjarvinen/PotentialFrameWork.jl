@@ -1,0 +1,5094 @@
+{
+  "comparisons": [
+    {
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "prepared_gain": 1.0557123035867506,
+      "public_gain": 1.0307813995646673,
+      "fresh_gain": 1.0142059581896532
+    },
+    {
+      "model": "small-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "prepared_gain": 1.0609792675045377,
+      "public_gain": 1.0499570163807483,
+      "fresh_gain": 1.0406076550738004
+    },
+    {
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "prepared_gain": 1.0541803772061706,
+      "public_gain": 1.0271892455087237,
+      "fresh_gain": 1.0268876741557231
+    },
+    {
+      "model": "small-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "prepared_gain": 1.0561440826111297,
+      "public_gain": 1.0538027982970546,
+      "fresh_gain": 1.0570925425794397
+    },
+    {
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "prepared_gain": 1.0678772512557806,
+      "public_gain": 1.0301067761746434,
+      "fresh_gain": 1.0345449663393589
+    },
+    {
+      "model": "medium-ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "prepared_gain": 1.063079044951465,
+      "public_gain": 1.0444920591198879,
+      "fresh_gain": 1.0424270147196173
+    },
+    {
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "prepared_gain": 1.0640820808551874,
+      "public_gain": 1.0358748393414343,
+      "fresh_gain": 1.0322126271536576
+    },
+    {
+      "model": "medium-ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "prepared_gain": 1.060319093927233,
+      "public_gain": 1.0625514358061026,
+      "fresh_gain": 1.0602208253729142
+    },
+    {
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float64",
+      "prepared_gain": 2.0530552044190493,
+      "public_gain": 1.8884600111705532,
+      "fresh_gain": 1.7104642890572659
+    },
+    {
+      "model": "large-tial",
+      "atoms": 128,
+      "precision": "Float32",
+      "prepared_gain": 2.227740537904717,
+      "public_gain": 2.1694665953141365,
+      "fresh_gain": 2.0244516549960783
+    },
+    {
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float64",
+      "prepared_gain": 2.043860734639739,
+      "public_gain": 1.8736162022292007,
+      "fresh_gain": 1.8704853106010182
+    },
+    {
+      "model": "large-tial",
+      "atoms": 1024,
+      "precision": "Float32",
+      "prepared_gain": 2.14704751441869,
+      "public_gain": 2.0801082337293835,
+      "fresh_gain": 2.060258664114519
+    },
+    {
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float64",
+      "prepared_gain": 1.563935800053106,
+      "public_gain": 1.4598332659545104,
+      "fresh_gain": 1.4415605089345642
+    },
+    {
+      "model": "ti",
+      "atoms": 128,
+      "precision": "Float32",
+      "prepared_gain": 1.6123391402967653,
+      "public_gain": 1.5860001929063632,
+      "fresh_gain": 1.5331283918506526
+    },
+    {
+      "model": "ti",
+      "atoms": 1024,
+      "precision": "Float64",
+      "prepared_gain": 1.5789564199892454,
+      "public_gain": 1.4836455785446276,
+      "fresh_gain": 1.4851216673965155
+    },
+    {
+      "model": "ti",
+      "atoms": 1024,
+      "precision": "Float32",
+      "prepared_gain": 1.6579919630677495,
+      "public_gain": 1.6336024527197128,
+      "fresh_gain": 1.6262191041043985
+    },
+    {
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float64",
+      "prepared_gain": 1.9408243698111292,
+      "public_gain": 1.8422909107423093,
+      "fresh_gain": 1.7035283300468083
+    },
+    {
+      "model": "tialv",
+      "atoms": 128,
+      "precision": "Float32",
+      "prepared_gain": 2.1437539378723365,
+      "public_gain": 2.0980791758012143,
+      "fresh_gain": 1.882228455979916
+    },
+    {
+      "model": "tialv",
+      "atoms": 1024,
+      "precision": "Float64",
+      "prepared_gain": 2.1569874251826975,
+      "public_gain": 2.018939976460996,
+      "fresh_gain": 1.9829928917125994
+    },
+    {
+      "model": "tialv",
+      "atoms": 1024,
+      "precision": "Float32",
+      "prepared_gain": 2.182572587844757,
+      "public_gain": 2.1601648495912436,
+      "fresh_gain": 2.050247921830935
+    },
+    {
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float64",
+      "prepared_gain": 1.0533166784791668,
+      "public_gain": 1.00001373867878,
+      "fresh_gain": 1.0310974584839994
+    },
+    {
+      "model": "small-tial",
+      "atoms": 11664,
+      "precision": "Float32",
+      "prepared_gain": 1.0621180550995832,
+      "public_gain": 1.0435252229709848,
+      "fresh_gain": 1.058693064747827
+    },
+    {
+      "model": "large-tial",
+      "atoms": 11664,
+      "precision": "Float64",
+      "prepared_gain": 2.1439591905307105,
+      "public_gain": 1.8923195636867098,
+      "fresh_gain": 1.8962186636191984
+    },
+    {
+      "model": "large-tial",
+      "atoms": 11664,
+      "precision": "Float32",
+      "prepared_gain": 2.1576122040481116,
+      "public_gain": 2.04674033539792,
+      "fresh_gain": 2.048598499144829
+    }
+  ],
+  "trials": [
+    {
+      "path": "serial.toml/cases/0/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00339076,
+      "max_s": 0.003832442,
+      "host_bytes": 1976024
+    },
+    {
+      "path": "serial.toml/cases/0/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.003466011,
+      "max_s": 0.003863852,
+      "host_bytes": 2497432
+    },
+    {
+      "path": "serial.toml/cases/0/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001769446,
+      "max_s": 0.0023207180000000003,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/0/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.0000000000000003e-07,
+      "max_s": 4.4e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/0/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0000000000000002e-06,
+      "max_s": 1.04e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/0/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0700000000000001e-06,
+      "max_s": 1.13e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/0/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.6e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/0/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.4e-07,
+      "max_s": 5.8960000000000005e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/0/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.180000000000001e-06,
+      "max_s": 4.31e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/0/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.83e-06,
+      "max_s": 1.9750000000000002e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/0/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0000000000000004e-08,
+      "max_s": 4e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/0/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.3e-07,
+      "max_s": 5.7e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/0/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.288e-05,
+      "max_s": 1.914e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.002998049,
+      "max_s": 0.003291051,
+      "host_bytes": 1976024
+    },
+    {
+      "path": "serial.toml/cases/1/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00305053,
+      "max_s": 0.0031977000000000004,
+      "host_bytes": 2497432
+    },
+    {
+      "path": "serial.toml/cases/1/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0013359840000000001,
+      "max_s": 0.001354105,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.8e-07,
+      "max_s": 4.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.800000000000001e-07,
+      "max_s": 1.02e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0500000000000001e-06,
+      "max_s": 1.0700000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 1.98e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/1/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.2e-07,
+      "max_s": 4.3700000000000005e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/1/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.400000000000001e-07,
+      "max_s": 9.600000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.8800000000000005e-06,
+      "max_s": 1.94e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/1/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0000000000000004e-08,
+      "max_s": 3.0000000000000004e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.2e-07,
+      "max_s": 5.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/1/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.49e-06,
+      "max_s": 9.551e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.002914809,
+      "max_s": 0.0030975900000000003,
+      "host_bytes": 1976024
+    },
+    {
+      "path": "serial.toml/cases/2/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00301168,
+      "max_s": 0.0030788200000000003,
+      "host_bytes": 2497432
+    },
+    {
+      "path": "serial.toml/cases/2/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.7420000000000003e-05,
+      "max_s": 8.688100000000001e-05,
+      "host_bytes": 134960
+    },
+    {
+      "path": "serial.toml/cases/2/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0130000000000001e-05,
+      "max_s": 6.354e-05,
+      "host_bytes": 67640
+    },
+    {
+      "path": "serial.toml/cases/2/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0012667940000000001,
+      "max_s": 0.001287694,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.8e-07,
+      "max_s": 4.1000000000000004e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.3e-07,
+      "max_s": 1.9e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.6e-07,
+      "max_s": 3.2e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.9e-07,
+      "max_s": 1.01e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0500000000000001e-06,
+      "max_s": 1.0700000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.15e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/2/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.3e-07,
+      "max_s": 5.66e-06,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/2/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.7e-07,
+      "max_s": 4.0000000000000003e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.92e-06,
+      "max_s": 2.0510000000000002e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/2/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0000000000000004e-08,
+      "max_s": 3.0000000000000004e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.2e-07,
+      "max_s": 5.4e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/2/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.95e-06,
+      "max_s": 9.090000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001951746,
+      "max_s": 0.0021672370000000002,
+      "host_bytes": 743744
+    },
+    {
+      "path": "serial.toml/cases/3/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001984636,
+      "max_s": 0.0022852980000000003,
+      "host_bytes": 1235288
+    },
+    {
+      "path": "serial.toml/cases/3/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0016480560000000002,
+      "max_s": 0.001679235,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.8e-07,
+      "max_s": 4.1000000000000004e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0000000000000002e-06,
+      "max_s": 1.03e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.9e-07,
+      "max_s": 1.06e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.1000000000000004e-07,
+      "max_s": 2.0000000000000003e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/3/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.5000000000000003e-07,
+      "max_s": 2.43e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/3/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.16e-06,
+      "max_s": 4.2900000000000004e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.3500000000000004e-06,
+      "max_s": 1.4580000000000001e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/3/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2e-08,
+      "max_s": 4e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.3e-07,
+      "max_s": 5.6e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/3/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.2070000000000001e-05,
+      "max_s": 1.336e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001504155,
+      "max_s": 0.0016480450000000001,
+      "host_bytes": 743744
+    },
+    {
+      "path": "serial.toml/cases/4/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0015535450000000001,
+      "max_s": 0.001702296,
+      "host_bytes": 1235288
+    },
+    {
+      "path": "serial.toml/cases/4/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0012246940000000001,
+      "max_s": 0.0012596640000000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.7e-07,
+      "max_s": 3.1e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.800000000000001e-07,
+      "max_s": 1.0000000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.800000000000001e-07,
+      "max_s": 1.0000000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.1000000000000004e-07,
+      "max_s": 1.8400000000000002e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/4/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.5000000000000003e-07,
+      "max_s": 2.04e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/4/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.400000000000001e-07,
+      "max_s": 9.800000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.36e-06,
+      "max_s": 1.7121e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/4/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2e-08,
+      "max_s": 3.0000000000000004e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.4e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/4/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.66e-06,
+      "max_s": 8.83e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0014396740000000002,
+      "max_s": 0.0016993450000000001,
+      "host_bytes": 743744
+    },
+    {
+      "path": "serial.toml/cases/5/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001482625,
+      "max_s": 0.001636075,
+      "host_bytes": 1235288
+    },
+    {
+      "path": "serial.toml/cases/5/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.598e-05,
+      "max_s": 0.00010434000000000001,
+      "host_bytes": 106296
+    },
+    {
+      "path": "serial.toml/cases/5/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0500000000000001e-05,
+      "max_s": 7.868e-05,
+      "host_bytes": 67640
+    },
+    {
+      "path": "serial.toml/cases/5/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001158223,
+      "max_s": 0.001202254,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.7e-07,
+      "max_s": 3.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.4e-07,
+      "max_s": 1.9e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.6e-07,
+      "max_s": 3.2e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.800000000000001e-07,
+      "max_s": 9.9e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.800000000000001e-07,
+      "max_s": 9.9e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 1.67e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/5/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.5000000000000003e-07,
+      "max_s": 2.42e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/5/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.7e-07,
+      "max_s": 4.0000000000000003e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.28e-06,
+      "max_s": 1.601e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/5/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2e-08,
+      "max_s": 3.0000000000000004e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/5/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.17e-06,
+      "max_s": 8.25e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/6/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.028855981000000003,
+      "max_s": 0.029140762,
+      "host_bytes": 18762904
+    },
+    {
+      "path": "serial.toml/cases/6/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.029042692000000002,
+      "max_s": 0.029488084,
+      "host_bytes": 22512128
+    },
+    {
+      "path": "serial.toml/cases/6/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.014238605000000001,
+      "max_s": 0.014605936000000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/7/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.02545628,
+      "max_s": 0.025757481000000002,
+      "host_bytes": 18762904
+    },
+    {
+      "path": "serial.toml/cases/7/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025621001,
+      "max_s": 0.025886042,
+      "host_bytes": 22512128
+    },
+    {
+      "path": "serial.toml/cases/7/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.010658824,
+      "max_s": 0.010725034000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/8/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.024754858,
+      "max_s": 0.02527663,
+      "host_bytes": 18762904
+    },
+    {
+      "path": "serial.toml/cases/8/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.024974689,
+      "max_s": 0.025155619,
+      "host_bytes": 22512128
+    },
+    {
+      "path": "serial.toml/cases/8/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.010114192000000001,
+      "max_s": 0.010156582,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/9/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.016107401,
+      "max_s": 0.016270501,
+      "host_bytes": 6065248
+    },
+    {
+      "path": "serial.toml/cases/9/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.016206031000000003,
+      "max_s": 0.016854474,
+      "host_bytes": 9737992
+    },
+    {
+      "path": "serial.toml/cases/9/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.013363602,
+      "max_s": 0.013416983,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/10/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.01266388,
+      "max_s": 0.013287502000000001,
+      "host_bytes": 6065248
+    },
+    {
+      "path": "serial.toml/cases/10/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.012834631,
+      "max_s": 0.013145682,
+      "host_bytes": 9737992
+    },
+    {
+      "path": "serial.toml/cases/10/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.009918622,
+      "max_s": 0.009950331,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/11/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.012104718,
+      "max_s": 0.012259519,
+      "host_bytes": 6065248
+    },
+    {
+      "path": "serial.toml/cases/11/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.012212739,
+      "max_s": 0.012366599,
+      "host_bytes": 9737992
+    },
+    {
+      "path": "serial.toml/cases/11/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.009367430000000001,
+      "max_s": 0.009456849,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.003745982,
+      "max_s": 0.004037393,
+      "host_bytes": 1871576
+    },
+    {
+      "path": "serial.toml/cases/12/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.003790672,
+      "max_s": 0.003975823,
+      "host_bytes": 2453872
+    },
+    {
+      "path": "serial.toml/cases/12/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0022481370000000003,
+      "max_s": 0.0032932900000000004,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.6e-07,
+      "max_s": 1.0500000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6900000000000001e-06,
+      "max_s": 1.76e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.5e-06,
+      "max_s": 1.5500000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.4100000000000002e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/12/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.800000000000001e-07,
+      "max_s": 5.5440000000000005e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/12/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.02e-06,
+      "max_s": 6.171000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.07e-06,
+      "max_s": 1.8820000000000003e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/12/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0000000000000004e-08,
+      "max_s": 4e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.3e-07,
+      "max_s": 5.6e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/12/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.656e-05,
+      "max_s": 1.787e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0031222700000000003,
+      "max_s": 0.003272491,
+      "host_bytes": 1871576
+    },
+    {
+      "path": "serial.toml/cases/13/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0031925300000000003,
+      "max_s": 0.0033544710000000004,
+      "host_bytes": 2453872
+    },
+    {
+      "path": "serial.toml/cases/13/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001634725,
+      "max_s": 0.0018133860000000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.4e-07,
+      "max_s": 9.000000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6600000000000002e-06,
+      "max_s": 1.7e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.4700000000000001e-06,
+      "max_s": 1.4900000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.2700000000000003e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/13/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.100000000000001e-07,
+      "max_s": 5.4810000000000005e-06,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/13/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.37e-06,
+      "max_s": 1.46e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.25e-06,
+      "max_s": 1.881e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/13/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0000000000000004e-08,
+      "max_s": 4e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.2e-07,
+      "max_s": 5.4e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/13/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1750000000000001e-05,
+      "max_s": 1.1871e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00302612,
+      "max_s": 0.0032832710000000004,
+      "host_bytes": 1871576
+    },
+    {
+      "path": "serial.toml/cases/14/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0030894200000000003,
+      "max_s": 0.0032626200000000004,
+      "host_bytes": 2453872
+    },
+    {
+      "path": "serial.toml/cases/14/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.372e-05,
+      "max_s": 0.0001156,
+      "host_bytes": 198008
+    },
+    {
+      "path": "serial.toml/cases/14/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.4151e-05,
+      "max_s": 0.00010559000000000001,
+      "host_bytes": 109272
+    },
+    {
+      "path": "serial.toml/cases/14/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001534795,
+      "max_s": 0.001548345,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.4e-07,
+      "max_s": 9.200000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.9e-07,
+      "max_s": 2.4000000000000003e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.5000000000000004e-07,
+      "max_s": 4.2e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6600000000000002e-06,
+      "max_s": 1.6900000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.4700000000000001e-06,
+      "max_s": 1.5e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.1400000000000003e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/14/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.7e-07,
+      "max_s": 1.485e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/14/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.07e-06,
+      "max_s": 1.986e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/14/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0000000000000004e-08,
+      "max_s": 4e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.2e-07,
+      "max_s": 5.6e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/14/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.094e-05,
+      "max_s": 1.1570000000000001e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.002357428,
+      "max_s": 0.002656429,
+      "host_bytes": 743744
+    },
+    {
+      "path": "serial.toml/cases/15/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.002447237,
+      "max_s": 0.002682438,
+      "host_bytes": 1285856
+    },
+    {
+      "path": "serial.toml/cases/15/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0021016470000000003,
+      "max_s": 0.0022460970000000003,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.5e-07,
+      "max_s": 7.900000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.68e-06,
+      "max_s": 1.72e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.39e-06,
+      "max_s": 1.4200000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.43e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/15/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.7000000000000005e-07,
+      "max_s": 3.0200000000000003e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/15/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.82e-06,
+      "max_s": 5.8800000000000005e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.600000000000001e-06,
+      "max_s": 1.774e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/15/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2e-08,
+      "max_s": 5.0000000000000004e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.6e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/15/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.5470000000000003e-05,
+      "max_s": 1.6380000000000002e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0017619360000000002,
+      "max_s": 0.0019796370000000002,
+      "host_bytes": 743744
+    },
+    {
+      "path": "serial.toml/cases/16/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001813755,
+      "max_s": 0.0019995160000000002,
+      "host_bytes": 1285856
+    },
+    {
+      "path": "serial.toml/cases/16/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0014942150000000001,
+      "max_s": 0.001550745,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.4e-07,
+      "max_s": 6.2e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6600000000000002e-06,
+      "max_s": 1.6600000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.4400000000000002e-06,
+      "max_s": 1.45e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.1000000000000004e-07,
+      "max_s": 1.87e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/16/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.7000000000000005e-07,
+      "max_s": 2.8500000000000002e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/16/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.3100000000000002e-06,
+      "max_s": 1.34e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.63e-06,
+      "max_s": 1.718e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/16/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2e-08,
+      "max_s": 3.0000000000000004e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.2e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/16/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0660000000000001e-05,
+      "max_s": 1.08e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0016758950000000002,
+      "max_s": 0.001970957,
+      "host_bytes": 743744
+    },
+    {
+      "path": "serial.toml/cases/17/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001724145,
+      "max_s": 0.0019023660000000002,
+      "host_bytes": 1285856
+    },
+    {
+      "path": "serial.toml/cases/17/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.165e-05,
+      "max_s": 0.00012159,
+      "host_bytes": 158464
+    },
+    {
+      "path": "serial.toml/cases/17/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.355e-05,
+      "max_s": 0.00010964,
+      "host_bytes": 109272
+    },
+    {
+      "path": "serial.toml/cases/17/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001397624,
+      "max_s": 0.001430784,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.5e-07,
+      "max_s": 6.000000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.9e-07,
+      "max_s": 2.7e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.5000000000000004e-07,
+      "max_s": 4.4e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.65e-06,
+      "max_s": 1.6600000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.3800000000000001e-06,
+      "max_s": 1.45e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.1000000000000004e-07,
+      "max_s": 2.3200000000000002e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/17/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.6000000000000004e-07,
+      "max_s": 2.61e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/17/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.2e-07,
+      "max_s": 5.5e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.600000000000001e-06,
+      "max_s": 1.728e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/17/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2e-08,
+      "max_s": 3.0000000000000004e-08,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.2e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/17/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.93e-06,
+      "max_s": 1.003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/18/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.031454079,
+      "max_s": 0.031725891,
+      "host_bytes": 17713912
+    },
+    {
+      "path": "serial.toml/cases/18/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.03161435,
+      "max_s": 0.031988112,
+      "host_bytes": 21516856
+    },
+    {
+      "path": "serial.toml/cases/18/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.018010037,
+      "max_s": 0.018051557000000003,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/19/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.026682535,
+      "max_s": 0.026957115,
+      "host_bytes": 17713912
+    },
+    {
+      "path": "serial.toml/cases/19/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.026862785,
+      "max_s": 0.027046426000000002,
+      "host_bytes": 21516856
+    },
+    {
+      "path": "serial.toml/cases/19/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.013127702000000002,
+      "max_s": 0.013152902000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/20/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025757872,
+      "max_s": 0.026539174000000002,
+      "host_bytes": 17713912
+    },
+    {
+      "path": "serial.toml/cases/20/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.026013742000000003,
+      "max_s": 0.026236773,
+      "host_bytes": 21516856
+    },
+    {
+      "path": "serial.toml/cases/20/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.012336449000000001,
+      "max_s": 0.012376039,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/21/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.019583492,
+      "max_s": 0.019639062000000002,
+      "host_bytes": 6065248
+    },
+    {
+      "path": "serial.toml/cases/21/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.019715892000000002,
+      "max_s": 0.020004513,
+      "host_bytes": 9781392
+    },
+    {
+      "path": "serial.toml/cases/21/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.016966014,
+      "max_s": 0.017053004,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/22/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.014749406000000001,
+      "max_s": 0.014901858,
+      "host_bytes": 6065248
+    },
+    {
+      "path": "serial.toml/cases/22/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.014928527,
+      "max_s": 0.015522869000000002,
+      "host_bytes": 9781392
+    },
+    {
+      "path": "serial.toml/cases/22/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.012092428,
+      "max_s": 0.012208209000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/23/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.013891654000000002,
+      "max_s": 0.014161885,
+      "host_bytes": 6065248
+    },
+    {
+      "path": "serial.toml/cases/23/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.014098264000000001,
+      "max_s": 0.019239541000000002,
+      "host_bytes": 9781392
+    },
+    {
+      "path": "serial.toml/cases/23/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.011398356,
+      "max_s": 0.011433057,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.07967220200000001,
+      "max_s": 0.080334474,
+      "host_bytes": 2456472
+    },
+    {
+      "path": "serial.toml/cases/24/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.076499922,
+      "max_s": 0.08657677400000001,
+      "host_bytes": 11440048
+    },
+    {
+      "path": "serial.toml/cases/24/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.07679058300000001,
+      "max_s": 0.076905663,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6000000000000001e-06,
+      "max_s": 1.7300000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.940000000000001e-06,
+      "max_s": 6.0600000000000004e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.29e-06,
+      "max_s": 5.3400000000000005e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.42e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/24/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.6e-07,
+      "max_s": 7.617000000000001e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/24/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000534301,
+      "max_s": 0.000544622,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1360000000000001e-05,
+      "max_s": 3.61e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/24/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 7.900000000000001e-07,
+      "max_s": 8.5e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.5e-07,
+      "max_s": 6.5e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/24/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0005788210000000001,
+      "max_s": 0.000585682,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.019414561,
+      "max_s": 0.019759763,
+      "host_bytes": 2456472
+    },
+    {
+      "path": "serial.toml/cases/25/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.020803816000000003,
+      "max_s": 0.021299408000000002,
+      "host_bytes": 11440048
+    },
+    {
+      "path": "serial.toml/cases/25/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.017716716,
+      "max_s": 0.02202666,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6000000000000001e-06,
+      "max_s": 1.65e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.850000000000001e-06,
+      "max_s": 5.89e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.2500000000000006e-06,
+      "max_s": 5.3e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.37e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/25/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.3e-07,
+      "max_s": 6.390000000000001e-06,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/25/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00010216000000000001,
+      "max_s": 0.00011517000000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.125e-05,
+      "max_s": 3.868e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/25/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 7.8e-07,
+      "max_s": 8.300000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.6e-07,
+      "max_s": 6.000000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/25/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00013343100000000002,
+      "max_s": 0.000140731,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.010313412000000001,
+      "max_s": 0.010739245000000001,
+      "host_bytes": 2456472
+    },
+    {
+      "path": "serial.toml/cases/26/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.011868458,
+      "max_s": 0.015890210000000002,
+      "host_bytes": 11440048
+    },
+    {
+      "path": "serial.toml/cases/26/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001234714,
+      "max_s": 0.001573065,
+      "host_bytes": 8531888
+    },
+    {
+      "path": "serial.toml/cases/26/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001084424,
+      "max_s": 0.0014710650000000001,
+      "host_bytes": 7333584
+    },
+    {
+      "path": "serial.toml/cases/26/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.008655718,
+      "max_s": 0.009378210000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.59e-06,
+      "max_s": 1.6600000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.75e-06,
+      "max_s": 9.87e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.2970000000000002e-05,
+      "max_s": 2.3230000000000003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.850000000000001e-06,
+      "max_s": 5.8800000000000005e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.240000000000001e-06,
+      "max_s": 5.28e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2e-07,
+      "max_s": 2.16e-06,
+      "host_bytes": 288
+    },
+    {
+      "path": "serial.toml/cases/26/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.900000000000001e-07,
+      "max_s": 8.77e-06,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/26/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.265e-05,
+      "max_s": 3.3140000000000005e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.124e-05,
+      "max_s": 3.8350000000000004e-05,
+      "host_bytes": 2016
+    },
+    {
+      "path": "serial.toml/cases/26/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.7e-07,
+      "max_s": 9.100000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.4e-07,
+      "max_s": 5.800000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/26/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.316e-05,
+      "max_s": 6.578000000000001e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.074331745,
+      "max_s": 0.075701459,
+      "host_bytes": 1216832
+    },
+    {
+      "path": "serial.toml/cases/27/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.074364996,
+      "max_s": 0.075972391,
+      "host_bytes": 9589600
+    },
+    {
+      "path": "serial.toml/cases/27/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.07288756,
+      "max_s": 0.073741423,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.600000000000001e-07,
+      "max_s": 1.19e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6e-06,
+      "max_s": 6.16e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.03e-06,
+      "max_s": 5.0800000000000005e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.0000000000000003e-07,
+      "max_s": 2.0900000000000003e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/27/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 2.47e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/27/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0005305220000000001,
+      "max_s": 0.000540132,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.06e-05,
+      "max_s": 2.059e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/27/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.0000000000000003e-07,
+      "max_s": 4.4e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.7e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/27/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000561332,
+      "max_s": 0.000573481,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.018630078,
+      "max_s": 0.018953690000000002,
+      "host_bytes": 1216832
+    },
+    {
+      "path": "serial.toml/cases/28/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.020005934,
+      "max_s": 0.021295678000000002,
+      "host_bytes": 9589600
+    },
+    {
+      "path": "serial.toml/cases/28/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.018214378,
+      "max_s": 0.018476648000000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.5e-07,
+      "max_s": 1.0500000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.89e-06,
+      "max_s": 5.940000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.05e-06,
+      "max_s": 5.070000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.0000000000000003e-07,
+      "max_s": 2.04e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/28/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.5000000000000003e-07,
+      "max_s": 2.92e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/28/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00010543000000000001,
+      "max_s": 0.00011153000000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.074e-05,
+      "max_s": 2.286e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/28/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.9e-07,
+      "max_s": 4.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.1e-07,
+      "max_s": 5.4e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/28/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00013646100000000002,
+      "max_s": 0.000142471,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.008582407,
+      "max_s": 0.008966418,
+      "host_bytes": 1216832
+    },
+    {
+      "path": "serial.toml/cases/29/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.009893641,
+      "max_s": 0.010715794,
+      "host_bytes": 9589600
+    },
+    {
+      "path": "serial.toml/cases/29/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001198164,
+      "max_s": 0.0017887860000000001,
+      "host_bytes": 7951208
+    },
+    {
+      "path": "serial.toml/cases/29/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001101114,
+      "max_s": 0.0015782550000000002,
+      "host_bytes": 7333584
+    },
+    {
+      "path": "serial.toml/cases/29/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.008217066,
+      "max_s": 0.008248877,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.400000000000001e-07,
+      "max_s": 1.06e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.65e-06,
+      "max_s": 9.760000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.2380000000000003e-05,
+      "max_s": 2.2630000000000002e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.8800000000000005e-06,
+      "max_s": 5.93e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.970000000000001e-06,
+      "max_s": 4.980000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.0000000000000003e-07,
+      "max_s": 2.4900000000000003e-06,
+      "host_bytes": 176
+    },
+    {
+      "path": "serial.toml/cases/29/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.6000000000000004e-07,
+      "max_s": 2.86e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/29/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.156e-05,
+      "max_s": 3.18e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.06e-05,
+      "max_s": 2.1110000000000003e-05,
+      "host_bytes": 1456
+    },
+    {
+      "path": "serial.toml/cases/29/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.0000000000000003e-07,
+      "max_s": 4.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.000000000000001e-07,
+      "max_s": 5.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/29/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.984e-05,
+      "max_s": 6.191000000000001e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/30/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.62861312,
+      "max_s": 0.629689963,
+      "host_bytes": 22554968
+    },
+    {
+      "path": "serial.toml/cases/30/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.601698525,
+      "max_s": 0.682899401,
+      "host_bytes": 34766360
+    },
+    {
+      "path": "serial.toml/cases/30/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.5939160400000001,
+      "max_s": 0.5948771230000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/31/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.155770343,
+      "max_s": 0.156492595,
+      "host_bytes": 22554968
+    },
+    {
+      "path": "serial.toml/cases/31/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.15691986600000002,
+      "max_s": 0.160073987,
+      "host_bytes": 34766360
+    },
+    {
+      "path": "serial.toml/cases/31/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.139703092,
+      "max_s": 0.140997716,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/32/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.082955312,
+      "max_s": 0.083601795,
+      "host_bytes": 22554968
+    },
+    {
+      "path": "serial.toml/cases/32/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.084198147,
+      "max_s": 0.085556831,
+      "host_bytes": 34766360
+    },
+    {
+      "path": "serial.toml/cases/32/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.06816272500000001,
+      "max_s": 0.06880562800000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/33/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.5813352900000001,
+      "max_s": 0.585085002,
+      "host_bytes": 9849952
+    },
+    {
+      "path": "serial.toml/cases/33/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.579431044,
+      "max_s": 0.6013395730000001,
+      "host_bytes": 21403920
+    },
+    {
+      "path": "serial.toml/cases/33/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.572691182,
+      "max_s": 0.573798927,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/34/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.141453997,
+      "max_s": 0.142489701,
+      "host_bytes": 9849952
+    },
+    {
+      "path": "serial.toml/cases/34/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.142592421,
+      "max_s": 0.144653948,
+      "host_bytes": 21403920
+    },
+    {
+      "path": "serial.toml/cases/34/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.13806685700000002,
+      "max_s": 0.1390305,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/35/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.067859365,
+      "max_s": 0.07492335700000001,
+      "host_bytes": 9849952
+    },
+    {
+      "path": "serial.toml/cases/35/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.069221699,
+      "max_s": 0.069715101,
+      "host_bytes": 21403920
+    },
+    {
+      "path": "serial.toml/cases/35/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.064424304,
+      "max_s": 0.072277698,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.07885386000000001,
+      "max_s": 0.084448347,
+      "host_bytes": 5790264
+    },
+    {
+      "path": "serial.toml/cases/36/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.079704722,
+      "max_s": 0.08453002700000001,
+      "host_bytes": 15676368
+    },
+    {
+      "path": "serial.toml/cases/36/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.075223258,
+      "max_s": 0.075510819,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.051e-06,
+      "max_s": 3.22e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.328e-05,
+      "max_s": 3.879e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.178e-05,
+      "max_s": 2.6900000000000003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.8e-07,
+      "max_s": 3.5100000000000003e-06,
+      "host_bytes": 576
+    },
+    {
+      "path": "serial.toml/cases/36/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.7e-07,
+      "max_s": 7.705e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/36/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0004981920000000001,
+      "max_s": 0.0005033220000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.095e-05,
+      "max_s": 2.0470000000000002e-05,
+      "host_bytes": 8160
+    },
+    {
+      "path": "serial.toml/cases/36/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.200000000000001e-07,
+      "max_s": 9.800000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.14e-06,
+      "max_s": 1.1800000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/36/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0005761410000000001,
+      "max_s": 0.000586042,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.028246610000000002,
+      "max_s": 0.02865662,
+      "host_bytes": 5790264
+    },
+    {
+      "path": "serial.toml/cases/37/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.029373163,
+      "max_s": 0.030386596000000002,
+      "host_bytes": 15676368
+    },
+    {
+      "path": "serial.toml/cases/37/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025072200000000003,
+      "max_s": 0.02542805,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.1000000000000004e-06,
+      "max_s": 3.17e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.283e-05,
+      "max_s": 3.308e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.184e-05,
+      "max_s": 2.2000000000000003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.900000000000001e-07,
+      "max_s": 2.9300000000000003e-06,
+      "host_bytes": 576
+    },
+    {
+      "path": "serial.toml/cases/37/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.4e-07,
+      "max_s": 1.8480000000000003e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/37/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000104821,
+      "max_s": 0.000113071,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0860000000000001e-05,
+      "max_s": 2.2440000000000002e-05,
+      "host_bytes": 8160
+    },
+    {
+      "path": "serial.toml/cases/37/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.200000000000001e-07,
+      "max_s": 1.0900000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1600000000000001e-06,
+      "max_s": 1.1800000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/37/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00018478100000000002,
+      "max_s": 0.000190891,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.019342321000000003,
+      "max_s": 0.019718083,
+      "host_bytes": 5790264
+    },
+    {
+      "path": "serial.toml/cases/38/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.020456615,
+      "max_s": 0.020855236000000003,
+      "host_bytes": 15676368
+    },
+    {
+      "path": "serial.toml/cases/38/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001346764,
+      "max_s": 0.0017440460000000002,
+      "host_bytes": 8945440
+    },
+    {
+      "path": "serial.toml/cases/38/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001153993,
+      "max_s": 0.0016252950000000001,
+      "host_bytes": 7527664
+    },
+    {
+      "path": "serial.toml/cases/38/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.016030020000000002,
+      "max_s": 0.016103121,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0300000000000002e-06,
+      "max_s": 3.17e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1720000000000001e-05,
+      "max_s": 1.185e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.5730000000000003e-05,
+      "max_s": 2.604e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.279e-05,
+      "max_s": 3.3350000000000004e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.466e-05,
+      "max_s": 2.468e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.8e-07,
+      "max_s": 2.79e-06,
+      "host_bytes": 576
+    },
+    {
+      "path": "serial.toml/cases/38/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.4e-07,
+      "max_s": 1.464e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/38/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.732e-05,
+      "max_s": 3.7980000000000006e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0870000000000001e-05,
+      "max_s": 1.908e-05,
+      "host_bytes": 8160
+    },
+    {
+      "path": "serial.toml/cases/38/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.600000000000001e-07,
+      "max_s": 1.0500000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.14e-06,
+      "max_s": 1.1600000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/38/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00011714100000000001,
+      "max_s": 0.000123871,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.07450843600000001,
+      "max_s": 0.075108558,
+      "host_bytes": 3243984
+    },
+    {
+      "path": "serial.toml/cases/39/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.075452949,
+      "max_s": 0.076476393,
+      "host_bytes": 12419984
+    },
+    {
+      "path": "serial.toml/cases/39/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.074039675,
+      "max_s": 0.074127964,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.7300000000000002e-06,
+      "max_s": 1.8900000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.328e-05,
+      "max_s": 3.353e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.0261e-05,
+      "max_s": 2.6070000000000003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.5e-07,
+      "max_s": 2.6600000000000004e-06,
+      "host_bytes": 304
+    },
+    {
+      "path": "serial.toml/cases/39/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.6000000000000004e-07,
+      "max_s": 2.9300000000000003e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/39/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0004930210000000001,
+      "max_s": 0.000511582,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.022e-05,
+      "max_s": 1.9350000000000003e-05,
+      "host_bytes": 6960
+    },
+    {
+      "path": "serial.toml/cases/39/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.6000000000000004e-07,
+      "max_s": 5.2e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1e-06,
+      "max_s": 1.15e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/39/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000597602,
+      "max_s": 0.000609672,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.024570958,
+      "max_s": 0.024942389000000002,
+      "host_bytes": 3243984
+    },
+    {
+      "path": "serial.toml/cases/40/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025868121,
+      "max_s": 0.026757254,
+      "host_bytes": 12419984
+    },
+    {
+      "path": "serial.toml/cases/40/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.024174746,
+      "max_s": 0.025076299000000003,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.7100000000000001e-06,
+      "max_s": 1.76e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.2800000000000004e-05,
+      "max_s": 3.2821e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.9960000000000002e-05,
+      "max_s": 2.349e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.5e-07,
+      "max_s": 3.05e-06,
+      "host_bytes": 304
+    },
+    {
+      "path": "serial.toml/cases/40/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.800000000000001e-07,
+      "max_s": 2.1000000000000002e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/40/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000105031,
+      "max_s": 0.000123161,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.018e-05,
+      "max_s": 1.8721000000000003e-05,
+      "host_bytes": 6960
+    },
+    {
+      "path": "serial.toml/cases/40/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.6000000000000004e-07,
+      "max_s": 5.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1e-06,
+      "max_s": 1.15e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/40/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00018132100000000002,
+      "max_s": 0.00019103000000000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.015484619000000002,
+      "max_s": 0.01581194,
+      "host_bytes": 3243984
+    },
+    {
+      "path": "serial.toml/cases/41/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.016729883,
+      "max_s": 0.017667246,
+      "host_bytes": 12419984
+    },
+    {
+      "path": "serial.toml/cases/41/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001288924,
+      "max_s": 0.0018306160000000002,
+      "host_bytes": 8285672
+    },
+    {
+      "path": "serial.toml/cases/41/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001132813,
+      "max_s": 0.001758416,
+      "host_bytes": 7527664
+    },
+    {
+      "path": "serial.toml/cases/41/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.015035138000000002,
+      "max_s": 0.015100268000000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.72e-06,
+      "max_s": 1.83e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.159e-05,
+      "max_s": 1.165e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.4940000000000002e-05,
+      "max_s": 2.5271000000000002e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.2760000000000005e-05,
+      "max_s": 3.298e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.9640000000000002e-05,
+      "max_s": 2.008e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.5e-07,
+      "max_s": 3.3810000000000003e-06,
+      "host_bytes": 304
+    },
+    {
+      "path": "serial.toml/cases/41/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.6000000000000004e-07,
+      "max_s": 3.1000000000000004e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/41/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.618e-05,
+      "max_s": 3.917e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.022e-05,
+      "max_s": 1.896e-05,
+      "host_bytes": 6960
+    },
+    {
+      "path": "serial.toml/cases/41/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.800000000000001e-07,
+      "max_s": 5.3e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0900000000000002e-06,
+      "max_s": 1.12e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/41/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00010713000000000001,
+      "max_s": 0.00011141,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/42/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.651757793,
+      "max_s": 0.665222925,
+      "host_bytes": 52139368
+    },
+    {
+      "path": "serial.toml/cases/42/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.625364319,
+      "max_s": 0.657404741,
+      "host_bytes": 68399544
+    },
+    {
+      "path": "serial.toml/cases/42/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.6250456090000001,
+      "max_s": 0.6348051290000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/43/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.22421803,
+      "max_s": 0.238251654,
+      "host_bytes": 52139368
+    },
+    {
+      "path": "serial.toml/cases/43/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.22482880100000002,
+      "max_s": 0.251339976,
+      "host_bytes": 68399544
+    },
+    {
+      "path": "serial.toml/cases/43/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.19320694100000002,
+      "max_s": 0.194528166,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/44/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.15126909900000002,
+      "max_s": 0.16441170100000002,
+      "host_bytes": 52139368
+    },
+    {
+      "path": "serial.toml/cases/44/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.152768583,
+      "max_s": 0.16598130500000002,
+      "host_bytes": 68399544
+    },
+    {
+      "path": "serial.toml/cases/44/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.12237763800000001,
+      "max_s": 0.12279318900000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/45/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.599476478,
+      "max_s": 0.606211669,
+      "host_bytes": 26164736
+    },
+    {
+      "path": "serial.toml/cases/45/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.594380641,
+      "max_s": 0.6027893080000001,
+      "host_bytes": 41668192
+    },
+    {
+      "path": "serial.toml/cases/45/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.586167475,
+      "max_s": 0.588032161,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/46/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.196763293,
+      "max_s": 0.20325105400000001,
+      "host_bytes": 26164736
+    },
+    {
+      "path": "serial.toml/cases/46/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.197814066,
+      "max_s": 0.21432478900000002,
+      "host_bytes": 41668192
+    },
+    {
+      "path": "serial.toml/cases/46/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.190907294,
+      "max_s": 0.19402807400000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/47/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.12041826100000001,
+      "max_s": 0.125651748,
+      "host_bytes": 26164736
+    },
+    {
+      "path": "serial.toml/cases/47/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.121832616,
+      "max_s": 0.13006320200000002,
+      "host_bytes": 41668192
+    },
+    {
+      "path": "serial.toml/cases/47/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.115166974,
+      "max_s": 0.11562947600000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.22427439000000002,
+      "max_s": 0.224981482,
+      "host_bytes": 4609880
+    },
+    {
+      "path": "serial.toml/cases/48/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.22872383400000001,
+      "max_s": 0.24038951100000003,
+      "host_bytes": 41689568
+    },
+    {
+      "path": "serial.toml/cases/48/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.21936991400000003,
+      "max_s": 0.222994026,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6400000000000002e-06,
+      "max_s": 1.74e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2720000000000004e-05,
+      "max_s": 4.389e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0010000000000002e-05,
+      "max_s": 3.6440000000000003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.900000000000001e-07,
+      "max_s": 3.5900000000000004e-06,
+      "host_bytes": 576
+    },
+    {
+      "path": "serial.toml/cases/48/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.900000000000001e-07,
+      "max_s": 6.343000000000001e-05,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/48/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001577375,
+      "max_s": 0.001629615,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.2240000000000001e-05,
+      "max_s": 2.29e-05,
+      "host_bytes": 8704
+    },
+    {
+      "path": "serial.toml/cases/48/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.09e-06,
+      "max_s": 3.74e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.14e-06,
+      "max_s": 1.2000000000000002e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/48/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0016888150000000002,
+      "max_s": 0.001820336,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.064880666,
+      "max_s": 0.06535737700000001,
+      "host_bytes": 4609880
+    },
+    {
+      "path": "serial.toml/cases/49/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.069839301,
+      "max_s": 0.08132151700000001,
+      "host_bytes": 41689568
+    },
+    {
+      "path": "serial.toml/cases/49/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.060506762000000006,
+      "max_s": 0.061072224,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6400000000000002e-06,
+      "max_s": 1.7e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.241e-05,
+      "max_s": 4.253e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.9780000000000003e-05,
+      "max_s": 3e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.900000000000001e-07,
+      "max_s": 3.6800000000000003e-06,
+      "host_bytes": 576
+    },
+    {
+      "path": "serial.toml/cases/49/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.6e-07,
+      "max_s": 5.75e-06,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/49/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000344321,
+      "max_s": 0.000354481,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.237e-05,
+      "max_s": 2.3140000000000002e-05,
+      "host_bytes": 8704
+    },
+    {
+      "path": "serial.toml/cases/49/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.9e-06,
+      "max_s": 3.39e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.15e-06,
+      "max_s": 1.19e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/49/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000459091,
+      "max_s": 0.00047977200000000005,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.035231531,
+      "max_s": 0.035496472,
+      "host_bytes": 4609880
+    },
+    {
+      "path": "serial.toml/cases/50/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.04095498,
+      "max_s": 0.050317599000000005,
+      "host_bytes": 41689568
+    },
+    {
+      "path": "serial.toml/cases/50/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.004814475,
+      "max_s": 0.013972284000000001,
+      "host_bytes": 33123568
+    },
+    {
+      "path": "serial.toml/cases/50/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.004186944000000001,
+      "max_s": 0.0061264100000000005,
+      "host_bytes": 25860176
+    },
+    {
+      "path": "serial.toml/cases/50/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.031237609000000003,
+      "max_s": 0.031360159,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6000000000000001e-06,
+      "max_s": 1.7100000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.5761000000000005e-05,
+      "max_s": 4.079e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.349e-05,
+      "max_s": 9.157e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.223e-05,
+      "max_s": 4.2460000000000003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.0220000000000002e-05,
+      "max_s": 3.0440000000000003e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.900000000000001e-07,
+      "max_s": 2.99e-06,
+      "host_bytes": 576
+    },
+    {
+      "path": "serial.toml/cases/50/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.800000000000001e-07,
+      "max_s": 5.240000000000001e-06,
+      "host_bytes": 3352
+    },
+    {
+      "path": "serial.toml/cases/50/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00011522100000000001,
+      "max_s": 0.00011857000000000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.217e-05,
+      "max_s": 2.3350000000000002e-05,
+      "host_bytes": 8704
+    },
+    {
+      "path": "serial.toml/cases/50/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.04e-06,
+      "max_s": 3.35e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.15e-06,
+      "max_s": 1.19e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/50/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000229191,
+      "max_s": 0.000237261,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.219833106,
+      "max_s": 0.22083943800000003,
+      "host_bytes": 1617888
+    },
+    {
+      "path": "serial.toml/cases/51/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.225179762,
+      "max_s": 0.268146209,
+      "host_bytes": 33500336
+    },
+    {
+      "path": "serial.toml/cases/51/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.22030865700000002,
+      "max_s": 0.22982505700000003,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.000000000000001e-07,
+      "max_s": 1.14e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.269e-05,
+      "max_s": 4.388e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.8840000000000002e-05,
+      "max_s": 2.89e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.5e-07,
+      "max_s": 3e-06,
+      "host_bytes": 320
+    },
+    {
+      "path": "serial.toml/cases/51/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.6000000000000004e-07,
+      "max_s": 2.17e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/51/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001631585,
+      "max_s": 0.0016737750000000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1271000000000001e-05,
+      "max_s": 2.04e-05,
+      "host_bytes": 7424
+    },
+    {
+      "path": "serial.toml/cases/51/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.4700000000000001e-06,
+      "max_s": 1.91e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1100000000000002e-06,
+      "max_s": 1.19e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/51/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0017126560000000001,
+      "max_s": 0.001895086,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.063610571,
+      "max_s": 0.064550674,
+      "host_bytes": 1617888
+    },
+    {
+      "path": "serial.toml/cases/52/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.068347146,
+      "max_s": 0.07795995700000001,
+      "host_bytes": 33500336
+    },
+    {
+      "path": "serial.toml/cases/52/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.06280273900000001,
+      "max_s": 0.064513454,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.000000000000001e-07,
+      "max_s": 9.7e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2291000000000006e-05,
+      "max_s": 4.237e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.8501e-05,
+      "max_s": 2.856e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.6e-07,
+      "max_s": 3e-06,
+      "host_bytes": 320
+    },
+    {
+      "path": "serial.toml/cases/52/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.5000000000000003e-07,
+      "max_s": 2.6700000000000003e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/52/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.000368771,
+      "max_s": 0.00038690100000000004,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.1580000000000001e-05,
+      "max_s": 1.999e-05,
+      "host_bytes": 7424
+    },
+    {
+      "path": "serial.toml/cases/52/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.32e-06,
+      "max_s": 1.9600000000000003e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.13e-06,
+      "max_s": 1.1600000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/52/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00047830200000000006,
+      "max_s": 0.000493002,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.030257865000000002,
+      "max_s": 0.030767377000000002,
+      "host_bytes": 1617888
+    },
+    {
+      "path": "serial.toml/cases/53/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.035654463000000004,
+      "max_s": 0.044383291000000005,
+      "host_bytes": 33500336
+    },
+    {
+      "path": "serial.toml/cases/53/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0051314970000000005,
+      "max_s": 0.015280448,
+      "host_bytes": 29496088
+    },
+    {
+      "path": "serial.toml/cases/53/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0048984250000000005,
+      "max_s": 0.00640836,
+      "host_bytes": 25860176
+    },
+    {
+      "path": "serial.toml/cases/53/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.029344402000000002,
+      "max_s": 0.029417973000000004,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/angular",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.900000000000001e-07,
+      "max_s": 9.800000000000001e-07,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/dag_forward",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.4460000000000005e-05,
+      "max_s": 3.468e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/dag_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 7.707e-05,
+      "max_s": 8.0111e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/density",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.2130000000000005e-05,
+      "max_s": 4.2170000000000005e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/force_back_contraction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.8490000000000003e-05,
+      "max_s": 3.04e-05,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/geometry_radii",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 8.5e-07,
+      "max_s": 2.96e-06,
+      "host_bytes": 320
+    },
+    {
+      "path": "serial.toml/cases/53/stages/owning_output",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 4.5000000000000003e-07,
+      "max_s": 1.93e-06,
+      "host_bytes": 1840
+    },
+    {
+      "path": "serial.toml/cases/53/stages/products_reverse",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00011164000000000001,
+      "max_s": 0.00011633,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/radial",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.133e-05,
+      "max_s": 2.08e-05,
+      "host_bytes": 7424
+    },
+    {
+      "path": "serial.toml/cases/53/stages/readout",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.45e-06,
+      "max_s": 1.5e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/reduction",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.12e-06,
+      "max_s": 1.1600000000000001e-06,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/53/stages/site_math",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00021826000000000001,
+      "max_s": 0.000221,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/54/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.8282582870000001,
+      "max_s": 1.850708328,
+      "host_bytes": 43825608
+    },
+    {
+      "path": "serial.toml/cases/54/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.834940478,
+      "max_s": 1.9135383870000002,
+      "host_bytes": 87293704
+    },
+    {
+      "path": "serial.toml/cases/54/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.792681235,
+      "max_s": 1.797102578,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/55/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.555167407,
+      "max_s": 0.57507606,
+      "host_bytes": 43825608
+    },
+    {
+      "path": "serial.toml/cases/55/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.558919389,
+      "max_s": 0.59692678,
+      "host_bytes": 87293704
+    },
+    {
+      "path": "serial.toml/cases/55/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.5200448160000001,
+      "max_s": 0.542790168,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/56/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.275250092,
+      "max_s": 0.29601624600000004,
+      "host_bytes": 43825608
+    },
+    {
+      "path": "serial.toml/cases/56/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.28422889900000003,
+      "max_s": 0.29841031900000003,
+      "host_bytes": 87293704
+    },
+    {
+      "path": "serial.toml/cases/56/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.24265165800000002,
+      "max_s": 0.24357792,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/57/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.736138433,
+      "max_s": 1.739467915,
+      "host_bytes": 13155856
+    },
+    {
+      "path": "serial.toml/cases/57/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.741492902,
+      "max_s": 1.7549908310000002,
+      "host_bytes": 51380096
+    },
+    {
+      "path": "serial.toml/cases/57/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.4544417370000002,
+      "max_s": 2.4619111840000003,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/58/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.508134141,
+      "max_s": 0.509775237,
+      "host_bytes": 13155856
+    },
+    {
+      "path": "serial.toml/cases/58/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.49322391800000004,
+      "max_s": 0.505367821,
+      "host_bytes": 51380096
+    },
+    {
+      "path": "serial.toml/cases/58/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.5005777840000001,
+      "max_s": 0.502093809,
+      "host_bytes": 0
+    },
+    {
+      "path": "serial.toml/cases/59/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.23510661200000002,
+      "max_s": 0.235859706,
+      "host_bytes": 13155856
+    },
+    {
+      "path": "serial.toml/cases/59/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.24023264100000002,
+      "max_s": 0.254463262,
+      "host_bytes": 51380096
+    },
+    {
+      "path": "serial.toml/cases/59/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.229300302,
+      "max_s": 0.23709015000000003,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/0/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.300603558,
+      "max_s": 0.367412587,
+      "host_bytes": 246013800
+    },
+    {
+      "path": "large.toml/cases/0/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.301651471,
+      "max_s": 0.35940684900000003,
+      "host_bytes": 286981296
+    },
+    {
+      "path": "large.toml/cases/0/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.12128153400000001,
+      "max_s": 0.121609406,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/1/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.295137678,
+      "max_s": 0.361720757,
+      "host_bytes": 246013800
+    },
+    {
+      "path": "large.toml/cases/1/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.29628380200000004,
+      "max_s": 0.354615391,
+      "host_bytes": 286981296
+    },
+    {
+      "path": "large.toml/cases/1/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 6.322000000000001e-05,
+      "max_s": 0.000187261,
+      "host_bytes": 1520648
+    },
+    {
+      "path": "large.toml/cases/1/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.84e-06,
+      "max_s": 5.9520000000000006e-05,
+      "host_bytes": 67640
+    },
+    {
+      "path": "large.toml/cases/1/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.11516047300000001,
+      "max_s": 0.11550950400000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/2/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.142521361,
+      "max_s": 0.160904557,
+      "host_bytes": 71488352
+    },
+    {
+      "path": "large.toml/cases/2/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.14418756700000002,
+      "max_s": 0.202248495,
+      "host_bytes": 111826088
+    },
+    {
+      "path": "large.toml/cases/2/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.11333238600000001,
+      "max_s": 0.11362980700000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/3/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.135755497,
+      "max_s": 0.15342243900000002,
+      "host_bytes": 71488352
+    },
+    {
+      "path": "large.toml/cases/3/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.138022934,
+      "max_s": 0.212930003,
+      "host_bytes": 111826088
+    },
+    {
+      "path": "large.toml/cases/3/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 5.0301000000000005e-05,
+      "max_s": 0.00018258,
+      "host_bytes": 892088
+    },
+    {
+      "path": "large.toml/cases/3/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0340000000000001e-05,
+      "max_s": 0.000129331,
+      "host_bytes": 67640
+    },
+    {
+      "path": "large.toml/cases/3/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.10655434200000001,
+      "max_s": 0.10718243400000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/4/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.8263826760000001,
+      "max_s": 1.9171938810000002,
+      "host_bytes": 289131304
+    },
+    {
+      "path": "large.toml/cases/4/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.821341008,
+      "max_s": 1.9177797140000001,
+      "host_bytes": 338560968
+    },
+    {
+      "path": "large.toml/cases/4/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.6615776450000002,
+      "max_s": 1.6656065400000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/5/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.9580018140000001,
+      "max_s": 1.055078812,
+      "host_bytes": 289131304
+    },
+    {
+      "path": "large.toml/cases/5/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.9655310410000001,
+      "max_s": 1.0494968020000002,
+      "host_bytes": 338560968
+    },
+    {
+      "path": "large.toml/cases/5/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001240524,
+      "max_s": 0.0017711760000000002,
+      "host_bytes": 9917576
+    },
+    {
+      "path": "large.toml/cases/5/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001125984,
+      "max_s": 0.001616126,
+      "host_bytes": 7333584
+    },
+    {
+      "path": "large.toml/cases/5/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.7747211270000001,
+      "max_s": 0.7868775610000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/6/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.5887709250000002,
+      "max_s": 1.664036035,
+      "host_bytes": 114598496
+    },
+    {
+      "path": "large.toml/cases/6/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.5993257120000002,
+      "max_s": 1.691826944,
+      "host_bytes": 162817456
+    },
+    {
+      "path": "large.toml/cases/6/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.5899926290000002,
+      "max_s": 1.5918737850000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "large.toml/cases/7/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.7728657800000001,
+      "max_s": 0.8543561220000001,
+      "host_bytes": 114598496
+    },
+    {
+      "path": "large.toml/cases/7/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.7762730320000001,
+      "max_s": 0.859462271,
+      "host_bytes": 162817456
+    },
+    {
+      "path": "large.toml/cases/7/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0012386440000000001,
+      "max_s": 0.0016898960000000002,
+      "host_bytes": 8737000
+    },
+    {
+      "path": "large.toml/cases/7/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001101254,
+      "max_s": 0.001365195,
+      "host_bytes": 7333584
+    },
+    {
+      "path": "large.toml/cases/7/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.7365269400000001,
+      "max_s": 0.7381614360000001,
+      "host_bytes": 0
+    },
+    {
+      "path": "immutable-stageone.toml/cases/0/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0029602110000000004,
+      "max_s": 0.0033823330000000004,
+      "host_bytes": 1976024
+    },
+    {
+      "path": "immutable-stageone.toml/cases/0/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.003004791,
+      "max_s": 0.003425552,
+      "host_bytes": 2423120
+    },
+    {
+      "path": "immutable-stageone.toml/cases/0/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001328434,
+      "max_s": 0.001411965,
+      "host_bytes": 0
+    },
+    {
+      "path": "immutable-stageone.toml/cases/1/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025412582000000003,
+      "max_s": 0.026008823,
+      "host_bytes": 18762904
+    },
+    {
+      "path": "immutable-stageone.toml/cases/1/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025653352,
+      "max_s": 0.026282734000000002,
+      "host_bytes": 22437816
+    },
+    {
+      "path": "immutable-stageone.toml/cases/1/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.010655258,
+      "max_s": 0.010736419,
+      "host_bytes": 0
+    },
+    {
+      "path": "immutable-stageone.toml/cases/2/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.019908311,
+      "max_s": 0.020548974,
+      "host_bytes": 2456472
+    },
+    {
+      "path": "immutable-stageone.toml/cases/2/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.020000361,
+      "max_s": 0.020527904,
+      "host_bytes": 3585184
+    },
+    {
+      "path": "immutable-stageone.toml/cases/2/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.018163645000000003,
+      "max_s": 0.018459676,
+      "host_bytes": 0
+    },
+    {
+      "path": "immutable-stageone.toml/cases/3/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.155474987,
+      "max_s": 0.15657595200000002,
+      "host_bytes": 22554968
+    },
+    {
+      "path": "immutable-stageone.toml/cases/3/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.154943655,
+      "max_s": 0.156940042,
+      "host_bytes": 26911496
+    },
+    {
+      "path": "immutable-stageone.toml/cases/3/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.140222793,
+      "max_s": 0.14125810700000002,
+      "host_bytes": 0
+    },
+    {
+      "path": "scaling-t1.toml/cases/0/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025684812,
+      "max_s": 0.026228274000000003,
+      "host_bytes": 18849768
+    },
+    {
+      "path": "scaling-t1.toml/cases/0/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025868483,
+      "max_s": 0.026201814,
+      "host_bytes": 22598992
+    },
+    {
+      "path": "scaling-t1.toml/cases/0/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.010940139000000002,
+      "max_s": 0.011143970000000001,
+      "host_bytes": 86864
+    },
+    {
+      "path": "scaling-t1.toml/cases/1/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.024872739,
+      "max_s": 0.025157130000000003,
+      "host_bytes": 18849768
+    },
+    {
+      "path": "scaling-t1.toml/cases/1/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.025212531000000003,
+      "max_s": 0.025863593,
+      "host_bytes": 22598992
+    },
+    {
+      "path": "scaling-t1.toml/cases/1/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 2.231e-05,
+      "max_s": 0.000148541,
+      "host_bytes": 242520
+    },
+    {
+      "path": "scaling-t1.toml/cases/1/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 9.080000000000001e-06,
+      "max_s": 0.0001269,
+      "host_bytes": 67640
+    },
+    {
+      "path": "scaling-t1.toml/cases/1/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.010141506,
+      "max_s": 0.010561227000000001,
+      "host_bytes": 86864
+    },
+    {
+      "path": "scaling-t1.toml/cases/2/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.155189607,
+      "max_s": 0.155856089,
+      "host_bytes": 22866312
+    },
+    {
+      "path": "scaling-t1.toml/cases/2/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.156852622,
+      "max_s": 0.16036170500000002,
+      "host_bytes": 35077704
+    },
+    {
+      "path": "scaling-t1.toml/cases/2/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.13944275,
+      "max_s": 0.14018681300000002,
+      "host_bytes": 311344
+    },
+    {
+      "path": "scaling-t1.toml/cases/3/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.08330849900000001,
+      "max_s": 0.08381720100000001,
+      "host_bytes": 22866312
+    },
+    {
+      "path": "scaling-t1.toml/cases/3/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.084879254,
+      "max_s": 0.08663603,
+      "host_bytes": 35077704
+    },
+    {
+      "path": "scaling-t1.toml/cases/3/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0012033740000000001,
+      "max_s": 0.001510356,
+      "host_bytes": 8639448
+    },
+    {
+      "path": "scaling-t1.toml/cases/3/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0010753140000000002,
+      "max_s": 0.001337035,
+      "host_bytes": 7333584
+    },
+    {
+      "path": "scaling-t1.toml/cases/3/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.068365515,
+      "max_s": 0.06870480600000001,
+      "host_bytes": 311344
+    },
+    {
+      "path": "scaling-t4.toml/cases/0/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.020558333,
+      "max_s": 0.026767136,
+      "host_bytes": 18999192
+    },
+    {
+      "path": "scaling-t4.toml/cases/0/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.021034956,
+      "max_s": 0.030489619000000003,
+      "host_bytes": 22876880
+    },
+    {
+      "path": "scaling-t4.toml/cases/0/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00558635,
+      "max_s": 0.007670657000000001,
+      "host_bytes": 236288
+    },
+    {
+      "path": "scaling-t4.toml/cases/1/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.020328203,
+      "max_s": 0.023939856000000002,
+      "host_bytes": 18999192
+    },
+    {
+      "path": "scaling-t4.toml/cases/1/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.020488594000000002,
+      "max_s": 0.025676032,
+      "host_bytes": 22876880
+    },
+    {
+      "path": "scaling-t4.toml/cases/1/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 3.3481e-05,
+      "max_s": 9.524e-05,
+      "host_bytes": 370984
+    },
+    {
+      "path": "scaling-t4.toml/cases/1/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0520000000000001e-05,
+      "max_s": 3.163e-05,
+      "host_bytes": 67640
+    },
+    {
+      "path": "scaling-t4.toml/cases/1/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.005348039000000001,
+      "max_s": 0.008315570000000001,
+      "host_bytes": 236288
+    },
+    {
+      "path": "scaling-t4.toml/cases/2/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.065546584,
+      "max_s": 0.077889739,
+      "host_bytes": 23015736
+    },
+    {
+      "path": "scaling-t4.toml/cases/2/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.07042490300000001,
+      "max_s": 0.08663125,
+      "host_bytes": 37833976
+    },
+    {
+      "path": "scaling-t4.toml/cases/2/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.051398604,
+      "max_s": 0.060897338,
+      "host_bytes": 460768
+    },
+    {
+      "path": "scaling-t4.toml/cases/3/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.048066783,
+      "max_s": 0.059847894000000006,
+      "host_bytes": 23015736
+    },
+    {
+      "path": "scaling-t4.toml/cases/3/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.051491555,
+      "max_s": 0.06383427900000001,
+      "host_bytes": 37833976
+    },
+    {
+      "path": "scaling-t4.toml/cases/3/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001378195,
+      "max_s": 0.002058668,
+      "host_bytes": 11246296
+    },
+    {
+      "path": "scaling-t4.toml/cases/3/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001092324,
+      "max_s": 0.001384335,
+      "host_bytes": 7333584
+    },
+    {
+      "path": "scaling-t4.toml/cases/3/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.034107083,
+      "max_s": 0.046323886,
+      "host_bytes": 460768
+    },
+    {
+      "path": "scaling-t16.toml/cases/0/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.017154283,
+      "max_s": 0.02122862,
+      "host_bytes": 19544360
+    },
+    {
+      "path": "scaling-t16.toml/cases/0/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.019628423000000002,
+      "max_s": 0.023578601,
+      "host_bytes": 23935840
+    },
+    {
+      "path": "scaling-t16.toml/cases/0/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.004187247,
+      "max_s": 0.008728697,
+      "host_bytes": 781456
+    },
+    {
+      "path": "scaling-t16.toml/cases/1/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.017249963,
+      "max_s": 0.020387657,
+      "host_bytes": 19544360
+    },
+    {
+      "path": "scaling-t16.toml/cases/1/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.017322344,
+      "max_s": 0.021318311000000003,
+      "host_bytes": 23935840
+    },
+    {
+      "path": "scaling-t16.toml/cases/1/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 7.680000000000001e-05,
+      "max_s": 0.00015309,
+      "host_bytes": 884776
+    },
+    {
+      "path": "scaling-t16.toml/cases/1/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 1.0691000000000001e-05,
+      "max_s": 3.7000000000000005e-05,
+      "host_bytes": 67640
+    },
+    {
+      "path": "scaling-t16.toml/cases/1/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.0020631390000000003,
+      "max_s": 0.006610408000000001,
+      "host_bytes": 781456
+    },
+    {
+      "path": "scaling-t16.toml/cases/2/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.053333777000000006,
+      "max_s": 0.062637406,
+      "host_bytes": 23560904
+    },
+    {
+      "path": "scaling-t16.toml/cases/2/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.055242295000000004,
+      "max_s": 0.06714940500000001,
+      "host_bytes": 48806472
+    },
+    {
+      "path": "scaling-t16.toml/cases/2/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.035753742000000005,
+      "max_s": 0.042708391000000005,
+      "host_bytes": 1005936
+    },
+    {
+      "path": "scaling-t16.toml/cases/3/complete_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.030387639,
+      "max_s": 0.044812711000000005,
+      "host_bytes": 23560904
+    },
+    {
+      "path": "scaling-t16.toml/cases/3/construct_and_public",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.036884587,
+      "max_s": 0.05456437200000001,
+      "host_bytes": 48806472
+    },
+    {
+      "path": "scaling-t16.toml/cases/3/executor_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.00223208,
+      "max_s": 0.00951885,
+      "host_bytes": 21673624
+    },
+    {
+      "path": "scaling-t16.toml/cases/3/plan_build",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.001086364,
+      "max_s": 0.001396766,
+      "host_bytes": 7333584
+    },
+    {
+      "path": "scaling-t16.toml/cases/3/prepared",
+      "samples": 10,
+      "undersampled": false,
+      "min_s": 0.019535724,
+      "max_s": 0.027048205000000002,
+      "host_bytes": 1005936
+    }
+  ]
+}

@@ -1,5 +1,85 @@
 # Implementation status
 
+## CPU ACE product DAG (2026-11-10)
+
+Completed the supplied `CPU-ACE-Product-DAG-Codex-Instructions.md` scope from
+`4985499b6eb12421f512c3cb9d27671e5f76ec9b`. Tracked starting source was clean;
+the supplied untracked instructions were preserved with the immutable source
+archive identity. Historical stage-one results, reference inputs, model/oracle
+caches and pinned manifests are unchanged. No agents were delegated.
+
+Prepared scalar CPU ACE now accepts `product_algorithm=:dag` alongside preserved
+`:reference`, `:optimized` and `:auto` behavior. A deterministic canonical-prefix
+plan shares scalar products and reverses weighted terminal seeds additively,
+preserving every original coordinate, repeated factors, zero factors and weights.
+One parameter-independent plan is shared read-only; numerical node values and
+adjoints belong to exclusive scratch slots. Coefficients/masks refresh weights
+without rebuilding the plan; structural snapshots reject stale product topology.
+CPUExecutor and generic NeighbourInterface preparation, growth and legacy
+constructors are covered. Restricted-order requests retain polynomial fallback;
+`ACE.effective_product_algorithm` reports the prepared effective path.
+
+Auto stays on prefix/reverse. Functional AD and equivariant features retain
+polynomial projection and their existing derivative rules; this mutation path
+adds no AD claim. Radial/SIMD defaults, neighborhoods, scheduler, one shared force
+array, units, model/checkpoint coordinates and GPU execution are unchanged.
+
+Validation: **56,658 assertions / 62 testsets pass per full process**, Julia
+**1.13.3 and 1.10.12**, four threads (2,065 added assertions). Focused DAG checks
+pass 2,700 assertions; optional ACEfit 0.3.1 passes four, and CPU-only loading
+passes with vendor/angular/plot extensions absent. Force/strain differences keep
+2e-7 tolerance at h=1e-5; product/weighted-adjoint tolerances are unchanged.
+Repeated inputs/weights/algorithms, zeros/repeats/shared descendants, nonzero U/V,
+pruning, custom radials, growth, constructor compatibility, center selection,
+generic batching and existing AD/geometry/lifetime/equivariance regressions pass.
+Direct full-model comparisons against immutable stage-one output pass **72 cases**
+across all fixtures, both precisions, 128/1,024 and selected 11,664-atom cases.
+Existing prefix outputs are identical. DAG maximum force/virial disagreement is
+2.504e-14 / 1.819e-11 in Float64 and 1.336e-5 / 0.00390625 in Float32, in eV/Å
+and eV respectively. Independent modern/legacy cached oracles pass where available;
+legacy independent caches cover 128 atoms only. Explicit arbitrary-order
+reassociation errors and Float32 application sensitivities are recorded.
+
+On Ryzen 9 9950X, Julia 1.13.3, pinned cores and BLAS=1, **612 sequential
+BenchmarkTools trials all reached ten warmed samples**. The grid covers all five
+fixtures at 128/1,024 atoms in both precisions, small/large modern 11,664-atom
+cases in both precisions, real-site product/forward/reverse/readout diagnostics,
+prepared/public/fresh-calculator calls, immutable stage-one comparisons and
+1/4/16-core scaling. Width 4, fusion off and SpheriCart are fixed.
+
+Large TiAl Float64 at 1,024 atoms improves prefix → DAG **139.909 → 68.453 ms
+prepared (2.04×)** and **155.992 → 83.257 ms public (1.87×)**; at 11,664,
+**1,663.012 → 775.673 ms prepared (2.14×)** and **1,845.275 → 975.139 ms public
+(1.89×)**. Small/medium prepared gains are about 5–7%; small TiAl Float64 public
+at 11,664 is effectively unchanged. Small-model parallel public medians slightly
+regress within observed variation. Large TiAl 1,024 prepared gains at 1/4/16 cores
+are 2.04× / 1.54× / 1.83×; small parallel cases are noisy. Shared integration raises
+fresh prefix-calculator costs versus immutable stage one; these are reported,
+not hidden in same-checkout speedups. No universal Float32/parallel gain is claimed.
+
+Serial warmed numerical execution allocates zero host bytes in every measured
+main/large case. Large TiAl has 16,229 multiply nodes / 13,919 output coordinates;
+plan-array payload is 771,656 bytes, Float64 DAG scratch 262,304 bytes per slot,
+retained polynomial tables 400 bytes and total slot scratch 484,368 bytes at
+128/1,024 atoms. Sixteen slots use 7,749,888 scratch bytes plus the single 24,576-byte
+shared force array at 1,024 atoms; parallel scheduling still allocates. Plan build
+is 1.149 ms / 7,333,584 allocated bytes. All model/type counts and constructor costs
+are retained separately from host allocation volume and allocator peaks.
+Concrete forward/reverse callees show no observed Float32 widening or direct
+allocator calls, and six warmed callee probes allocate zero bytes. Index checks
+remain. `perf` is absent; no cache/bandwidth saturation claim is made. Portable
+KA CPU regression tests pass; real GPUs and optional UnicodePlots were not rerun.
+
+Report and review recommendation: `benchmark/cpu_ace/DAG-REPORT.md` (linked from
+benchmark README). Exact commands, manifests, source/model/geometry hashes, raw
+TOML/JSON, immutable output comparisons, reassociation evidence, profiles and code
+inspection are under `benchmark/cpu_ace/results/2026-11-10-dag/`; reproduce with
+`commands.sh` then `complete-validation.sh`, and the two full-suite commands in
+`REPRODUCE.md`. The measured next review is large-model DAG reverse/indexing;
+small-model public preparation is a distinct issue. Scalar sharing does not
+establish MACE tensor, training AD or GPU speedups. No subsequent optimization
+stage was implemented.
+
 ## CPU ACE optimization stage 1 (2026-11-10)
 
 Completed the stage-one implementation from the supplied instructions on

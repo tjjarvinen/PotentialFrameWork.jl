@@ -1,0 +1,607 @@
+affinity = "pid 28's current affinity list: 0"
+blas_threads = 1
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_target = "znver5"
+julia = "1.13.3"
+llvm = "20.1.8"
+schema = "PFW.CPUACE.DAG.v1"
+threads = 1
+
+[[cases]]
+algorithm = "optimized"
+angular = "sphericart"
+atoms = 1024
+cell_sha256 = "c89ba399cd24a0013d9bf0cb5c7e50cea3f910daad1473887ec8006fd54f9035"
+effective_algorithm = "optimized"
+external_boundary = "modern ACEpotentials 0.10.2 public combined E/F/V; fresh neighbors; owning outputs; Float64"
+external_cached_raw_s = [0.019230813000000003, 0.01906886, 0.019144071000000002, 0.021792609, 0.022703955, 0.031873428, 0.019222063, 0.018962428, 0.024252262, 0.019142382000000003]
+external_version = "0.10.2"
+fusion = false
+g = 8
+geometry_sha256 = "8a2a81a4fb802b3676aa3e40d0dee7890d02e7dffe558204d7ac17c6a93bcf47"
+model = "small-tial"
+model_sha256 = "581c3e64965d6ada9fcf923671ac3ad602a4e93b1a9074560958fa27867d243c"
+oracle_file_sha256 = "25440d6ec03e8e8f6e92c0339c88b5b15c731dd1c0c8060ca1d600ece3a2bb4c"
+precision = "Float64"
+simd = true
+species_sha256 = "71f6706b937f0d6160f33b09679d97bb42e4978ad0d17e25ee2114a78fb7803c"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 528727
+    host_bytes = 18849768
+    max_s = 0.026228274000000003
+    median_s = 0.025923313000000003
+    min_s = 0.025684812
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.026101193, 0.025684812, 0.026228274000000003, 0.025858153000000002, 0.025792843000000003, 0.025740442000000002, 0.025690612, 0.025988473, 0.026019163, 0.026187674]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.026048653
+
+    [cases.construct_and_public]
+    host_allocations = 529985
+    host_bytes = 22598992
+    max_s = 0.026201814
+    median_s = 0.026015103500000004
+    min_s = 0.025868483
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.025931813, 0.025996713, 0.025868483, 0.025969083, 0.025998293000000002, 0.026034533000000002, 0.026031914000000003, 0.026119293000000002, 0.026201814, 0.026122884000000002]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.03065884
+
+    [cases.external_errors]
+    energy_abs_eV = 1.1641532182693481e-10
+    forces_max_eV_per_A = 3.287925487427401e-13
+    virial_max_eV = 3.069544618483633e-11
+
+    [cases.graph]
+    all_slot_bytes = 33328
+    dag_clear_elements = 194
+    dag_forward_multiplications = 167
+    dag_leaf_additions = 27
+    dag_per_slot_bytes = 3104
+    dag_reverse_additions = 334
+    dag_reverse_multiplications = 334
+    dag_seed_additions = 167
+    intermediate_only_nodes = 12
+    leaves = 27
+    max_depth = 2
+    multiplication_nodes = 167
+    original_factor_count = 414
+    plan_array_payload_bytes = 7320
+    prefix_clear_elements = 54
+    prefix_forward_multiplications = 414
+    prefix_leaf_additions = 828
+    prefix_reverse_additions = 828
+    prefix_reverse_multiplications = 828
+    retained_polynomial_per_slot_bytes = 256
+    sharing_ratio_vs_independent_nontrivial_products = 1.4790419161676647
+    single_shared_force_bytes = 24576
+    total_per_slot_bytes = 33328
+    unique_terminals = 167
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [167, 167]
+    active_readout_per_central_species = [123, 123]
+    coordinate_kind = "invariant"
+    coupling_nnz = 167
+    coupling_shape = [123, 167]
+    cutoff_A = 5.5
+    density_count = 27
+    harmonic_count = 9
+    lmax = 2
+    pair_radial_count = 12
+    products = 167
+    radial_count = 30
+    radial_representation = "PotentialFrameWork.ACE.RadialChannel{Float64}"
+    species = [22, 13]
+
+        [cases.metadata.product_orders]
+        1 = 12
+        2 = 63
+        3 = 92
+
+    [cases.prepared]
+    host_allocations = 854
+    host_bytes = 86864
+    max_s = 0.011143970000000001
+    median_s = 0.0109888795
+    min_s = 0.010940139000000002
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.011143970000000001, 0.010993449, 0.010970989, 0.011018360000000001, 0.010960469, 0.010958449, 0.01110419, 0.010940139000000002, 0.01098431, 0.011004659]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.01104605
+
+    [cases.public_prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 2.1788126858268697e-15
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+angular = "sphericart"
+atoms = 1024
+cell_sha256 = "c89ba399cd24a0013d9bf0cb5c7e50cea3f910daad1473887ec8006fd54f9035"
+effective_algorithm = "dag"
+external_boundary = "modern ACEpotentials 0.10.2 public combined E/F/V; fresh neighbors; owning outputs; Float64"
+external_cached_raw_s = [0.019230813000000003, 0.01906886, 0.019144071000000002, 0.021792609, 0.022703955, 0.031873428, 0.019222063, 0.018962428, 0.024252262, 0.019142382000000003]
+external_version = "0.10.2"
+fusion = false
+g = 8
+geometry_sha256 = "8a2a81a4fb802b3676aa3e40d0dee7890d02e7dffe558204d7ac17c6a93bcf47"
+model = "small-tial"
+model_sha256 = "581c3e64965d6ada9fcf923671ac3ad602a4e93b1a9074560958fa27867d243c"
+oracle_file_sha256 = "25440d6ec03e8e8f6e92c0339c88b5b15c731dd1c0c8060ca1d600ece3a2bb4c"
+precision = "Float64"
+simd = true
+species_sha256 = "71f6706b937f0d6160f33b09679d97bb42e4978ad0d17e25ee2114a78fb7803c"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 528727
+    host_bytes = 18849768
+    max_s = 0.025157130000000003
+    median_s = 0.024994299500000004
+    min_s = 0.024872739
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.024872739, 0.024890469000000002, 0.02497034, 0.024940179, 0.025015190000000003, 0.02503046, 0.025002469000000003, 0.024986130000000002, 0.025084730000000003, 0.025157130000000003]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.02515711
+
+    [cases.construct_and_public]
+    host_allocations = 529985
+    host_bytes = 22598992
+    max_s = 0.025863593
+    median_s = 0.025577046500000002
+    min_s = 0.025212531000000003
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.025212531000000003, 0.025273700000000003, 0.025428802, 0.025568281, 0.025503792, 0.025752092, 0.025730072000000003, 0.025724732, 0.025863593, 0.025585812000000003]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.026219184
+
+    [cases.executor_build]
+    host_allocations = 1173
+    host_bytes = 242520
+    max_s = 0.000148541
+    median_s = 2.3460000000000002e-5
+    min_s = 2.231e-5
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.000148541, 2.515e-5, 2.4220000000000002e-5, 2.3420000000000003e-5, 2.3120000000000002e-5, 2.338e-5, 2.2481e-5, 2.231e-5, 2.3500000000000002e-5, 2.379e-5]
+    samples = 10
+    undersampled = false
+    warmup_s = 8.84e-5
+
+    [cases.external_errors]
+    energy_abs_eV = 1.1641532182693481e-10
+    forces_max_eV_per_A = 3.321232178166156e-13
+    virial_max_eV = 2.97859514830634e-11
+
+    [cases.graph]
+    all_slot_bytes = 33328
+    dag_clear_elements = 194
+    dag_forward_multiplications = 167
+    dag_leaf_additions = 27
+    dag_per_slot_bytes = 3104
+    dag_reverse_additions = 334
+    dag_reverse_multiplications = 334
+    dag_seed_additions = 167
+    intermediate_only_nodes = 12
+    leaves = 27
+    max_depth = 2
+    multiplication_nodes = 167
+    original_factor_count = 414
+    plan_array_payload_bytes = 7320
+    prefix_clear_elements = 54
+    prefix_forward_multiplications = 414
+    prefix_leaf_additions = 828
+    prefix_reverse_additions = 828
+    prefix_reverse_multiplications = 828
+    retained_polynomial_per_slot_bytes = 256
+    sharing_ratio_vs_independent_nontrivial_products = 1.4790419161676647
+    single_shared_force_bytes = 24576
+    total_per_slot_bytes = 33328
+    unique_terminals = 167
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [167, 167]
+    active_readout_per_central_species = [123, 123]
+    coordinate_kind = "invariant"
+    coupling_nnz = 167
+    coupling_shape = [123, 167]
+    cutoff_A = 5.5
+    density_count = 27
+    harmonic_count = 9
+    lmax = 2
+    pair_radial_count = 12
+    products = 167
+    radial_count = 30
+    radial_representation = "PotentialFrameWork.ACE.RadialChannel{Float64}"
+    species = [22, 13]
+
+        [cases.metadata.product_orders]
+        1 = 12
+        2 = 63
+        3 = 92
+
+    [cases.plan_build]
+    host_allocations = 1037
+    host_bytes = 67640
+    max_s = 0.0001269
+    median_s = 1.0205000000000001e-5
+    min_s = 9.080000000000001e-6
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.0001269, 1.213e-5, 1.1170000000000001e-5, 9.080000000000001e-6, 9.71e-6, 9.67e-6, 9.73e-6, 1.0520000000000001e-5, 9.89e-6, 1.061e-5]
+    samples = 10
+    undersampled = false
+    warmup_s = 1.45e-5
+
+    [cases.prepared]
+    host_allocations = 854
+    host_bytes = 86864
+    max_s = 0.010561227000000001
+    median_s = 0.010205257
+    min_s = 0.010141506
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.010561227000000001, 0.010190847000000001, 0.010179457000000001, 0.010141506, 0.010159646000000001, 0.010198067, 0.010249637, 0.010215946, 0.010212447000000001, 0.010226197000000001]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.010248457
+
+    [cases.public_prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 5.440092820663267e-15
+    virial_max_eV = 1.3642420526593924e-12
+[[cases]]
+algorithm = "optimized"
+angular = "sphericart"
+atoms = 1024
+cell_sha256 = "c89ba399cd24a0013d9bf0cb5c7e50cea3f910daad1473887ec8006fd54f9035"
+effective_algorithm = "optimized"
+external_boundary = "modern ACEpotentials 0.10.2 public combined E/F/V; fresh neighbors; owning outputs; Float64"
+external_cached_raw_s = [0.13052127700000002, 0.124796445, 0.121491397, 0.124485649, 0.12266818800000001, 0.12247099400000001, 0.123123095, 0.12277264900000001, 0.12317894600000001, 0.12283251]
+external_version = "0.10.2"
+fusion = false
+g = 8
+geometry_sha256 = "8a2a81a4fb802b3676aa3e40d0dee7890d02e7dffe558204d7ac17c6a93bcf47"
+model = "large-tial"
+model_sha256 = "39b1f2b659c4e839c204b18db54e892f41da89130655c0e91361d5150bedff0c"
+oracle_file_sha256 = "6fd6bb0fc250bcd1c537cfbc168767d67fc31ec675535abb5c61fe9f45c5191d"
+precision = "Float64"
+simd = true
+species_sha256 = "71f6706b937f0d6160f33b09679d97bb42e4978ad0d17e25ee2114a78fb7803c"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 528727
+    host_bytes = 22866312
+    max_s = 0.155856089
+    median_s = 0.15557235800000002
+    min_s = 0.155189607
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.155856089, 0.15565462700000002, 0.15555743800000002, 0.155794028, 0.155708228, 0.15558727800000002, 0.15540751700000002, 0.155189607, 0.15528481600000002, 0.15525681700000002]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.155472518
+
+    [cases.construct_and_public]
+    host_allocations = 612637
+    host_bytes = 35077704
+    max_s = 0.16036170500000002
+    median_s = 0.15761297000000002
+    min_s = 0.156852622
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.157516085, 0.157511554, 0.156852622, 0.158655449, 0.157542605, 0.15807478600000002, 0.159613593, 0.157683335, 0.15723526300000001, 0.16036170500000002]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.159537071
+
+    [cases.external_errors]
+    energy_abs_eV = 4.973799150320701e-14
+    forces_max_eV_per_A = 2.7124136270373356e-14
+    virial_max_eV = 5.8548721426632255e-12
+
+    [cases.graph]
+    all_slot_bytes = 484368
+    dag_clear_elements = 16394
+    dag_forward_multiplications = 16229
+    dag_leaf_additions = 165
+    dag_per_slot_bytes = 262304
+    dag_reverse_additions = 32458
+    dag_reverse_multiplications = 32458
+    dag_seed_additions = 13919
+    intermediate_only_nodes = 2334
+    leaves = 165
+    max_depth = 3
+    multiplication_nodes = 16229
+    original_factor_count = 50080
+    plan_array_payload_bytes = 771656
+    prefix_clear_elements = 330
+    prefix_forward_multiplications = 50080
+    prefix_leaf_additions = 100160
+    prefix_reverse_additions = 100160
+    prefix_reverse_multiplications = 100160
+    retained_polynomial_per_slot_bytes = 400
+    sharing_ratio_vs_independent_nontrivial_products = 2.2281717912379073
+    single_shared_force_bytes = 24576
+    total_per_slot_bytes = 484368
+    unique_terminals = 13919
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [13919, 13919]
+    active_readout_per_central_species = [3727, 3727]
+    coordinate_kind = "invariant"
+    coupling_nnz = 14855
+    coupling_shape = [3727, 13919]
+    cutoff_A = 5.5
+    density_count = 165
+    harmonic_count = 49
+    lmax = 6
+    pair_radial_count = 24
+    products = 13919
+    radial_count = 108
+    radial_representation = "PotentialFrameWork.ACE.RadialChannel{Float64}"
+    species = [22, 13]
+
+        [cases.metadata.product_orders]
+        1 = 24
+        2 = 630
+        3 = 4264
+        4 = 9001
+
+    [cases.prepared]
+    host_allocations = 854
+    host_bytes = 311344
+    max_s = 0.14018681300000002
+    median_s = 0.13953676050000002
+    min_s = 0.13944275
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.13997684200000002, 0.13944275, 0.13947074, 0.1395676, 0.13953621000000002, 0.14018681300000002, 0.13947035900000002, 0.139537311, 0.13951929000000002, 0.13964743000000002]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.140220693
+
+    [cases.public_prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 1.457167719820518e-16
+    virial_max_eV = 0.0
+[[cases]]
+algorithm = "dag"
+angular = "sphericart"
+atoms = 1024
+cell_sha256 = "c89ba399cd24a0013d9bf0cb5c7e50cea3f910daad1473887ec8006fd54f9035"
+effective_algorithm = "dag"
+external_boundary = "modern ACEpotentials 0.10.2 public combined E/F/V; fresh neighbors; owning outputs; Float64"
+external_cached_raw_s = [0.13052127700000002, 0.124796445, 0.121491397, 0.124485649, 0.12266818800000001, 0.12247099400000001, 0.123123095, 0.12277264900000001, 0.12317894600000001, 0.12283251]
+external_version = "0.10.2"
+fusion = false
+g = 8
+geometry_sha256 = "8a2a81a4fb802b3676aa3e40d0dee7890d02e7dffe558204d7ac17c6a93bcf47"
+model = "large-tial"
+model_sha256 = "39b1f2b659c4e839c204b18db54e892f41da89130655c0e91361d5150bedff0c"
+oracle_file_sha256 = "6fd6bb0fc250bcd1c537cfbc168767d67fc31ec675535abb5c61fe9f45c5191d"
+precision = "Float64"
+simd = true
+species_sha256 = "71f6706b937f0d6160f33b09679d97bb42e4978ad0d17e25ee2114a78fb7803c"
+width = 4
+
+    [cases.complete_public]
+    host_allocations = 528727
+    host_bytes = 22866312
+    max_s = 0.08381720100000001
+    median_s = 0.083533429
+    min_s = 0.08330849900000001
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.08377815000000001, 0.08367306000000001, 0.08381720100000001, 0.08354639900000001, 0.08357254, 0.08333338800000001, 0.08330849900000001, 0.08337390900000001, 0.08335597900000001, 0.083520459]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.083867151
+
+    [cases.construct_and_public]
+    host_allocations = 612637
+    host_bytes = 35077704
+    max_s = 0.08663603
+    median_s = 0.08559728650000001
+    min_s = 0.084879254
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.085207695, 0.085388156, 0.084879254, 0.085756408, 0.085439636, 0.08663603, 0.085925339, 0.085754937, 0.085372416, 0.086032938]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.086164689
+
+    [cases.executor_build]
+    host_allocations = 83824
+    host_bytes = 8639448
+    max_s = 0.001510356
+    median_s = 0.0012432295000000002
+    min_s = 0.0012033740000000001
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.0014435650000000002, 0.0012033740000000001, 0.001410575, 0.0012371250000000002, 0.001231424, 0.001213775, 0.0012493340000000002, 0.001224794, 0.001456915, 0.001510356]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.001402155
+
+    [cases.external_errors]
+    energy_abs_eV = 4.973799150320701e-14
+    forces_max_eV_per_A = 2.7353119769202294e-14
+    virial_max_eV = 5.8832938520936295e-12
+
+    [cases.graph]
+    all_slot_bytes = 484368
+    dag_clear_elements = 16394
+    dag_forward_multiplications = 16229
+    dag_leaf_additions = 165
+    dag_per_slot_bytes = 262304
+    dag_reverse_additions = 32458
+    dag_reverse_multiplications = 32458
+    dag_seed_additions = 13919
+    intermediate_only_nodes = 2334
+    leaves = 165
+    max_depth = 3
+    multiplication_nodes = 16229
+    original_factor_count = 50080
+    plan_array_payload_bytes = 771656
+    prefix_clear_elements = 330
+    prefix_forward_multiplications = 50080
+    prefix_leaf_additions = 100160
+    prefix_reverse_additions = 100160
+    prefix_reverse_multiplications = 100160
+    retained_polynomial_per_slot_bytes = 400
+    sharing_ratio_vs_independent_nontrivial_products = 2.2281717912379073
+    single_shared_force_bytes = 24576
+    total_per_slot_bytes = 484368
+    unique_terminals = 13919
+
+    [cases.metadata]
+    active_product_weights_per_central_species = [13919, 13919]
+    active_readout_per_central_species = [3727, 3727]
+    coordinate_kind = "invariant"
+    coupling_nnz = 14855
+    coupling_shape = [3727, 13919]
+    cutoff_A = 5.5
+    density_count = 165
+    harmonic_count = 49
+    lmax = 6
+    pair_radial_count = 24
+    products = 13919
+    radial_count = 108
+    radial_representation = "PotentialFrameWork.ACE.RadialChannel{Float64}"
+    species = [22, 13]
+
+        [cases.metadata.product_orders]
+        1 = 24
+        2 = 630
+        3 = 4264
+        4 = 9001
+
+    [cases.plan_build]
+    host_allocations = 83603
+    host_bytes = 7333584
+    max_s = 0.001337035
+    median_s = 0.001113959
+    min_s = 0.0010753140000000002
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.001144574, 0.001077884, 0.0010753140000000002, 0.001100824, 0.001129164, 0.001082884, 0.001105604, 0.001127764, 0.001337035, 0.0011223140000000001]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.014165471
+
+    [cases.prepared]
+    host_allocations = 854
+    host_bytes = 311344
+    max_s = 0.06870480600000001
+    median_s = 0.06852333050000001
+    min_s = 0.068365515
+    raw_gc_ns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    raw_s = [0.068520625, 0.068365515, 0.068490286, 0.068451965, 0.068405885, 0.068539746, 0.06870480600000001, 0.06859646600000001, 0.068526036, 0.06856021600000001]
+    samples = 10
+    undersampled = false
+    warmup_s = 0.06994381
+
+    [cases.public_prepared_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 0.0
+    virial_max_eV = 0.0
+
+    [cases.reference_errors]
+    energy_abs_eV = 0.0
+    forces_max_eV_per_A = 8.881784197001252e-16
+    virial_max_eV = 4.263256414560601e-14
+
+[harness_sha256]
+"common.jl" = "59210723059da22d5e636fcebbc45056a435ef3a940fc2154ee6d993ceac0808"
+"dag.jl" = "208bcab2406dfeb256a44d36fa20201830b1e51eeb9101e3eca33af2920beed5"
+
+[options]
+algorithms = "optimized,dag"
+codegen = "false"
+diagnostics = "false"
+models = "small-tial,large-tial"
+output = "benchmark/cpu_ace/results/2026-11-10-dag/scaling-t1.toml"
+parallel = "true"
+precisions = "Float64"
+profile = "false"
+samples = "10"
+seconds = "120"
+sizes = "8"
+stageone = "false"
+
+[source_files_sha256]
+"Project.toml" = "33a6426b36e674445da502a3389bc8b13fdfc2cbcfea3f06b4b9b94afec2cea4"
+"benchmark/gpu_ace/audit.jl" = "843bb7ba4fbbff4a6b243bd68dac00e87973330d90794b130c04b000c2b95629"
+"benchmark/gpu_ace/run.jl" = "d7e8cef163e406c585e85795ace9348a4cabdaa4790ff5d2751f1063f3aff7ef"
+"benchmark/gpu_ace/suite.jl" = "3e0be5bf1d9ce2ec9684c9c63777d5570c734d2aa161e2ab5c753d92f652bacf"
+"benchmark/gpu_ace/workloads.jl" = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "796635c5d0bd81010bf00ff2b2c9d2285dbe1cd8cb96144607ec7f852c7d4950"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "87ba63c6cdf9c9c2bf5936277f4081129f3a499430e6529779ea5a99b1ad52e7"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "0c824742b9c91901b06e309a30f08694893f2c312614ac8567cffbe2038232e0"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "485461724ff67c4d2c994401eb447be818ac3bcf52fdba092f9fee27f73f5c3a"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "f380760ab5394ef6e0ef6c303013a04b155fbe00e5bc6c60a39487c67ca08a5f"
+"src/submodules/ACE/adaptation.jl" = "aec733e36b2c34fe3b729085f2ed3d8fa91f7486e8289b5614febc07cd869f80"
+"src/submodules/ACE/angular_blocks.jl" = "90dbee708364153a01433fba30c824cf1e3abf11d5da22debed3c1dabf80275b"
+"src/submodules/ACE/calculators.jl" = "4e2fbe75297e143dfeeda8aeaaaf0921a688ce55b5ea5056d096cc928d9cebc8"
+"src/submodules/ACE/cpu.jl" = "39b97b592e353f1bdfc94e47c4970ba6d55c9845c79e6bb68c67c76c1fc9cd1b"
+"src/submodules/ACE/environments.jl" = "647e6cbbfaf1016f6f6f7069d6f73c958a6b78c4c8cf786d429bb4f99f242ff3"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/features.jl" = "10f5fd604fb5bade29ea33aca88450bb0063bb5733e9a7ab358ad4f19b9093c0"
+"src/submodules/ACE/fitting.jl" = "c963538a24c56a0d1118ba0d07a0f1f4a740832b1b9a52683b6946f283c136fc"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "26cbb278ab48e68f5f47bc50241f99cb01bc85d62bbc2ad797aab5d5d897d9d6"
+"src/submodules/ACE/interface_persistence.jl" = "1bb98926435386695d0467a22efc9a7761fd37fda03857f00b29ff5083b15de4"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "88059d902b25cf0014a6b58253e301039f85dfababe9a4ff888601fed06895cf"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "85b6030cd4a0d31d333948b766b2b66c7d70a2e52d8dd545f1a93ab4d78a426a"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "479c23cf53244be1940b2c8a8d3ae7ab0c5bad9b42ebe4a83242fc9063597b84"
+"src/submodules/ACE/serial.jl" = "7e7b9c1616de672d40f308b46c36e9572cdd5655ffb6980fa57ad09328d85a44"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "ff2d999a047a766e1ebe60442d088080ad4ac72c856ad8b9091d3d94c302d0d8"
+"src/submodules/NeighbourList/NeighbourList.jl" = "9c2c264fcf017b913e959608d505b29acf2c86a95e7528f6524bada4284330ac"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AcceleratedKernels = "0.4.4"
+AtomsBase = "0.5.3"
+AtomsCalculators = "0.2.3"
+BenchmarkTools = "1.8.0"
+KernelAbstractions = "0.9.45"
+SIMD = "3.8.2"
+SpheriCart = "0.2.4"
+StaticArrays = "1.9.24"

@@ -1,6 +1,11 @@
-# CPU ACE optimization stage 1
+# CPU ACE benchmarks
 
-Measured results and limitations: [stage-one report](REPORT.md).
+Measured results and limitations: [stage-one report](REPORT.md) and
+[CPU product DAG report](DAG-REPORT.md).
+
+The DAG comparison uses `dag.jl`; its fixed settings, immutable stage-one
+baseline, exact sequential commands, raw observations and environment snapshots
+are in [DAG reproduction](results/2026-11-10-dag/REPRODUCE.md).
 
 `run.jl` is CPU only. It imports no vendor package and needs no GPU device.
 `quick` covers all model/precision combinations at 128 atoms plus small TiAl at
@@ -85,14 +90,24 @@ optimization does not imply faster AD or features.
 
 `CPUExecutor(...; product_algorithm=:auto)`, `ACECalculator(...; product_algorithm=...)`,
 `execute_prepared!(...; product_algorithm=...)`, public calculator combined calls
-and `NeighbourInterface.prepare_potential` accept `:reference`, `:optimized`, or
-`:auto`. `:reference` always uses the original polynomial algorithm. Both other
-choices use prefix/reverse products **only when `policy.orders === nothing`**;
+and `NeighbourInterface.prepare_potential` accept `:reference`, `:optimized`, `:dag`, or
+`:auto`. `:reference` always uses the original polynomial algorithm. `:optimized` and `:auto`
+use prefix/reverse products; `:dag` uses a deterministic shared product graph.
+These unrestricted algorithms apply **only when `policy.orders === nothing`**;
 restricted policies always fall back to polynomial projection, even when selected
 density happens to be zero. Nonempty unrestricted species partitions are valid.
 Weights refresh on every execution. Functional AD, energy-only calculator calls,
 and equivariant features keep their existing algorithms and lifetime semantics.
-The existing five-argument explicitly typed PreparedACE constructor remains valid.
+The existing five- and six-argument explicitly typed PreparedACE constructors
+remain valid. `ACE.effective_product_algorithm(requested, model.policy.orders)`
+reports the effective prepared product path. Auto stays on prefix/reverse.
+Graphs depend only on original product structure and density indices, never
+weights, and belong to preparation. Prepared model structure is immutable;
+changed topology requires a new prepared potential/executor. Each slot owns its
+DAG values and adjoints, with polynomial fallback scratch retained. Ordinary
+calculator reuse retains the graph; fresh calculator construction builds it.
+Functional AD and features continue to use polynomial projection; the mutable
+DAG inference reverse supplies density adjoints for forces/virial only.
 
 ## Legacy and PACE
 
