@@ -1,5 +1,76 @@
 # Implementation status
 
+## Fitted May30 ACEpotentials / ETACE CPU comparison (2026-11-11)
+
+Completed the supplied `ACEpotentials-ETACE-Comparison-Codex-Instructions.md`
+from `fbbe8c4efb96ad935d2c006b0b1971998b832748` (PR #16). Tracked source started
+clean; the local untracked `data/ref_model/` checkpoint/script and supplied
+instructions were authoritative and remain untouched. No agents were delegated.
+Package identity, root/reference environments and historical fixtures are
+preserved; no new core dependency or Julia compatibility increase was needed.
+
+Reloaded `may30_d10_n500.jls` using `load_may30_fit` in an isolated local
+ACEpotentials **0.10.3 / Julia 1.13.3** environment. Verified degree 10, order 3,
+500 training frames, QR, 6 Å cutoff and Ti/Al/V ordering. No fitting/data reload.
+The fitted model has 2,155 invariants per species, 156 density components,
+5,652 products, 114 radial / 10 pair channels, and lmax=6 solid harmonics.
+The polynomial ETACE conversion retains one-body, pair and ACE components.
+Model-level splinify uses **1,000 nodes**, retains fitted WB/Wpair/references,
+and initializes the correct spline state; the polynomial checkpoint is unchanged.
+
+A reusable producer helper preserves the original exporter route. PFW resolved
+imports now preserve real spherical versus real solid L2 angular conventions,
+component ordering and Cartesian derivatives. Modern PolyEnvelope1sR and its
+scalar/SIMD derivative are distinct from the unchanged legacy ACE1 envelope.
+CPU SpheriCart/generated/block, functional/VJP, precision conversion and native
+persistence retain the convention. Unsupported scalar-feature conversion and
+GPU packing reject it explicitly; no new device support is claimed. Historical
+constructors/checkpoints retain spherical defaults. No next optimization, product
+auto-selection change or force-storage/scheduling change was implemented.
+
+All five deterministic periodic, perturbed/sheared fixtures pass: bcc
+128/1,024/3,456, hcp 150 and ω-like 240 atoms. Face heights exceed 12 Å;
+nonzero forces/virials and an independently enumerated nearest V–V image are
+checked, including a nonzero periodic shift. Maximum E/atom, F-component and
+W-component errors (eV, eV/Å, eV) are independently:
+- Polynomial ACE -> polynomial ETACE: **1.36e-12 / 1.69e-14 / 8.73e-11**.
+- Polynomial ACE -> spline ACE approximation: **9.09e-13 / 1.14e-8 / 4.53e-7**.
+- Spline ACE -> PFW import: **9.09e-13 / 3.19e-12 / 1.13e-10**.
+Separate parity/approximation tolerances, per-fixture errors and source radial/
+angular samples are retained. The source spline Dual endpoint bounds limitation
+is documented; the exactly zero cutoff slope is checked analytically, while
+near-cutoff derivatives use the live source. No full E/F/V tolerance was relaxed.
+
+Fresh unchanged baseline: **56,658 assertions / 62 testsets**, Julia 1.13.3.
+Post-change full suites: **57,528 / 63**, both Julia **1.13.3 and 1.10.12**,
+four threads. Final focused import/derivative suites: **872 assertions** each,
+including two further force-loss VJP checks after the full runs. Checks include
+normal file import, prefix/DAG E/F/V, scalar/SIMD slopes, angular radius dependence,
+fixed-topology force and nonsymmetric strain differences, energy-position AD,
+force-position and force-WB/Wpair products, native persistence and legacy suites.
+Minimal CPU-only loading/block E/F/V also passes with no SpheriCart/vendor extension.
+
+Ryzen 9 9950X, one pinned physical core (CPU 0), Julia 1.13.3, BLAS=1,
+Float64, width 4/SIMD, SpheriCart, fusion/parallel off, one slot. **35 final
+trials all reached ten warmed samples**; the two initially under-sampled ETACE
+trials remain alongside their independently parity-checked replacements
+(37 executed trials / 357 measured observations, no pooling). At 1,024 atoms,
+public medians: polynomial ACE **155.783 ms**, polynomial ETACE **2,166.301 ms**,
+spline ACE **102.047 ms**, PFW prefix **134.144 ms**, PFW DAG **109.380 ms**.
+PFW prepared prefix/DAG: **98.355 / 74.629 ms** (1.32×). PFW DAG public is
+slower than the same-table spline ACE path here. Prepared wrappers report
+**32 bytes / one allocation**, not zero. Raw times/spread/GC/allocation counts,
+setup costs, exact boundaries, package/source/environment/geometry hashes and
+reproduction commands are preserved. Only serial CPU Float64 is benchmarked;
+multicore, spline ETACE and new-representation device execution are unmeasured.
+
+Report: `benchmark/cpu_ace/MAY30-REPORT.md`, linked from the benchmark README.
+Raw records: `benchmark/cpu_ace/results/2026-11-11-may30/`; reproduce with
+`commands.sh` and `REPRODUCE.md`. Cached standalone regression model/oracles:
+`data/may30/`; live producer/benchmark: `benchmark/cpu_ace/may30.jl`.
+Local producer Project/Manifest files remain outside the committed deliverables.
+This milestone stops at the validated comparison report.
+
 ## CPU ACE product DAG (2026-11-10)
 
 Completed the supplied `CPU-ACE-Product-DAG-Codex-Instructions.md` scope from

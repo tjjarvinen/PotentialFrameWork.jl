@@ -19,8 +19,10 @@ the immutable basis across exclusive executor slots is safe. No automatic choice
 struct BlockAngular{W,T}
     lmax::Int
     normalization::Matrix{T}
+    solid::Bool
 end
-function BlockAngular(lmax; width=4,precision=Float64)
+BlockAngular{W,T}(lmax,F) where {W,T}=BlockAngular{W,T}(lmax,F,false)
+function BlockAngular(lmax; width=4,precision=Float64,solid=false)
     lmax>=0 || throw(ArgumentError("lmax must be nonnegative"))
     width in (1,2,4,8,16) || throw(ArgumentError("unsupported angular width"))
     F=zeros(precision,lmax+1,lmax+1)
@@ -28,7 +30,7 @@ function BlockAngular(lmax; width=4,precision=Float64)
         F[l+1,1]=sqrt(precision((2l+1)/(2pi)))
         for m=1:l; F[l+1,m+1]=-F[l+1,m]/sqrt(precision((l+m)*(l+1-m))); end
     end
-    BlockAngular{width,precision}(lmax,F)
+    BlockAngular{width,precision}(lmax,F,solid)
 end
 
 function angular_block!(Y,dY,b::BlockAngular{W,T},Rs) where {W,T}
@@ -42,8 +44,8 @@ function angular_block!(Y,dY,b::BlockAngular{W,T},Rs) where {W,T}
         raw=ntuple(a -> Vec(ntuple(k -> first+k-1<=n ? T(Rs[first+k-1][a]) : T(a==1),W)),3)
         radius=sqrt(raw[1]^2+raw[2]^2+raw[3]^2)
         any(radius<=0) && throw(DomainError(0,"physical zero directions are unsupported"))
-        u=ntuple(a -> raw[a]/radius,3)
-        jets=ntuple(a -> AngularJet(u[a],ntuple(c -> ((a==c ? one_vec : zero_vec)-u[a]*u[c])/radius,3)),3)
+        u=b.solid ? raw : ntuple(a -> raw[a]/radius,3)
+        jets=ntuple(a -> AngularJet(u[a],ntuple(c -> b.solid ? (a==c ? one_vec : zero_vec) : ((a==c ? one_vec : zero_vec)-u[a]*u[c])/radius,3)),3)
         x,y,z=jets; r2=x*x+y*y+z*z
         cs[1]=jone; sn[1]=jzero; Q[1,1]=jone
         for m=1:L
@@ -80,8 +82,10 @@ end
 angular_ed!(Y,dY,b::BlockAngular,Rs)=angular_block!(Y,dY,b,Rs)
 function angular_basis_generated end
 function make_angular(model,T,backend,width)
-    backend===:sphericart && return angular_basis(model.lmax,T)
-    backend===:generated && return angular_basis_generated(model.lmax,T)
-    backend===:block && return BlockAngular(model.lmax;precision=T,width)
+    backend===:sphericart && return angular_basis(model,T)
+    backend===:generated && return angular_basis_generated(model.lmax,T,Val(model.angular_kind))
+    backend===:block && return BlockAngular(model.lmax;precision=T,width,solid=model.angular_kind===:real_solid)
     throw(ArgumentError("angular_backend must be :sphericart, :generated or :block"))
 end
+
+angular_basis_generated(lmax,T,::Val{:real_spherical})=angular_basis_generated(lmax,T)

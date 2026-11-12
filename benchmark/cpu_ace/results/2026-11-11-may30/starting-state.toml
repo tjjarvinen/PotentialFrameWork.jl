@@ -1,0 +1,5 @@
+commit = "fbbe8c4efb96ad935d2c006b0b1971998b832748"
+tracked_changes = []
+untracked = ["data/ref_model/", "docs/implementation/ACEpotentials-ETACE-Comparison-Codex-Instructions.md"]
+local_inputs_preserved = true
+subagents_used = false

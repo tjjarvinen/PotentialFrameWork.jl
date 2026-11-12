@@ -1,7 +1,12 @@
 # CPU ACE benchmarks
 
 Measured results and limitations: [stage-one report](REPORT.md) and
-[CPU product DAG report](DAG-REPORT.md).
+[CPU product DAG report](DAG-REPORT.md), and
+[fitted May30 ACEpotentials/ETACE/PFW comparison](MAY30-REPORT.md).
+
+The fitted comparison uses an isolated **ACEpotentials 0.10.3** producer and
+`data/ref_model` checkpoint; it does not use the synthetic stage-one models.
+See its [exact commands and raw records](results/2026-11-11-may30/REPRODUCE.md).
 
 The DAG comparison uses `dag.jl`; its fixed settings, immutable stage-one
 baseline, exact sequential commands, raw observations and environment snapshots

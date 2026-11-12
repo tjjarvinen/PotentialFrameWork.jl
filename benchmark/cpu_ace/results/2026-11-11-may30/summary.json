@@ -1,0 +1,79 @@
+{
+  "fixtures": 5,
+  "trials": 35,
+  "samples": 350,
+  "undersampled": [],
+  "maximum_errors": {
+    "ET_conversion": [
+      1.3642420526593924e-12,
+      1.687538997430238e-14,
+      8.731149137020111e-11
+    ],
+    "dag_prepared": [
+      9.094947017729282e-13,
+      3.194139397422191e-12,
+      1.127773430198431e-10
+    ],
+    "dag_public": [
+      9.094947017729282e-13,
+      3.194139397422191e-12,
+      1.127773430198431e-10
+    ],
+    "optimized_prepared": [
+      9.094947017729282e-13,
+      3.193084685548797e-12,
+      1.1186784831807017e-10
+    ],
+    "optimized_public": [
+      9.094947017729282e-13,
+      3.193084685548797e-12,
+      1.1186784831807017e-10
+    ],
+    "spline_approximation": [
+      9.094947017729282e-13,
+      1.1382883968735769e-08,
+      4.53152267709811e-07
+    ]
+  },
+  "tests": {
+    "focused113": {
+      "passed": 872,
+      "testsets": 1,
+      "failure_markers": false
+    },
+    "focused110": {
+      "passed": 872,
+      "testsets": 1,
+      "failure_markers": false
+    },
+    "baseline113": {
+      "passed": 56658,
+      "testsets": 62,
+      "failure_markers": false
+    },
+    "current113": {
+      "passed": 57528,
+      "testsets": 63,
+      "failure_markers": false
+    },
+    "current110": {
+      "passed": 57528,
+      "testsets": 63,
+      "failure_markers": false
+    }
+  },
+  "initial_undersampled": [
+    [
+      "bcc-1024",
+      "et_polynomial_public",
+      5
+    ],
+    [
+      "bcc-3456",
+      "et_polynomial_public",
+      2
+    ]
+  ],
+  "executed_trials": 37,
+  "all_measured_samples": 357
+}

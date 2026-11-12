@@ -1,0 +1,110 @@
+angular_passed = true
+
+[[radial]]
+centre = 1
+derivative_error = 1.2256862191861728e-13
+family = "radial"
+neighbour = 1
+value_error = 3.885780586188048e-16
+[[radial]]
+centre = 1
+derivative_error = 1.2256862191861728e-13
+family = "radial"
+neighbour = 2
+value_error = 3.885780586188048e-16
+[[radial]]
+centre = 1
+derivative_error = 3.055333763768431e-13
+family = "radial"
+neighbour = 3
+value_error = 1.1102230246251565e-16
+[[radial]]
+centre = 2
+derivative_error = 1.2256862191861728e-13
+family = "radial"
+neighbour = 1
+value_error = 3.885780586188048e-16
+[[radial]]
+centre = 2
+derivative_error = 1.2256862191861728e-13
+family = "radial"
+neighbour = 2
+value_error = 3.885780586188048e-16
+[[radial]]
+centre = 2
+derivative_error = 3.055333763768431e-13
+family = "radial"
+neighbour = 3
+value_error = 1.1102230246251565e-16
+[[radial]]
+centre = 3
+derivative_error = 3.055333763768431e-13
+family = "radial"
+neighbour = 1
+value_error = 1.1102230246251565e-16
+[[radial]]
+centre = 3
+derivative_error = 3.055333763768431e-13
+family = "radial"
+neighbour = 2
+value_error = 1.1102230246251565e-16
+[[radial]]
+centre = 3
+derivative_error = 1.7497114868092467e-13
+family = "radial"
+neighbour = 3
+value_error = 8.049116928532385e-16
+[[radial]]
+centre = 1
+derivative_error = 4.742872761198669e-13
+family = "pair"
+neighbour = 1
+value_error = 8.881784197001252e-16
+[[radial]]
+centre = 1
+derivative_error = 4.742872761198669e-13
+family = "pair"
+neighbour = 2
+value_error = 8.881784197001252e-16
+[[radial]]
+centre = 1
+derivative_error = 1.474376176702208e-13
+family = "pair"
+neighbour = 3
+value_error = 2.6645352591003757e-15
+[[radial]]
+centre = 2
+derivative_error = 4.742872761198669e-13
+family = "pair"
+neighbour = 1
+value_error = 8.881784197001252e-16
+[[radial]]
+centre = 2
+derivative_error = 4.742872761198669e-13
+family = "pair"
+neighbour = 2
+value_error = 8.881784197001252e-16
+[[radial]]
+centre = 2
+derivative_error = 1.474376176702208e-13
+family = "pair"
+neighbour = 3
+value_error = 2.6645352591003757e-15
+[[radial]]
+centre = 3
+derivative_error = 1.474376176702208e-13
+family = "pair"
+neighbour = 1
+value_error = 2.6645352591003757e-15
+[[radial]]
+centre = 3
+derivative_error = 1.474376176702208e-13
+family = "pair"
+neighbour = 2
+value_error = 2.6645352591003757e-15
+[[radial]]
+centre = 3
+derivative_error = 1.4011014570769476e-13
+family = "pair"
+neighbour = 3
+value_error = 1.7763568394002505e-15

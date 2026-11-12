@@ -22,9 +22,9 @@ function policy_with(p;origin=p.origin,rows=p.rows,products=p.products,density=p
     BasisPolicy(origin,rows,products,density,radial,mask,species,orders,pair,reference)
 end
 function model_with(m;radial=m.radial,pair_radial=m.pair_radial,radial_spec=m.radial_spec,
-                    density=m.density,products=m.products,coupling=m.coupling,policy=m.policy)
+                    density=m.density,products=m.products,coupling=m.coupling,policy=m.policy,angular_kind=m.angular_kind)
     ResolvedModel(copy(m.atomic_numbers),copy(m.reference),radial,pair_radial,radial_spec,
-        copy(m.pair_spec),m.lmax,density,products,coupling,m.source_sha256,policy,m.coordinate_kind,m.coefficient_precision)
+        copy(m.pair_spec),m.lmax,density,products,coupling,m.source_sha256,policy,m.coordinate_kind,m.coefficient_precision,angular_kind)
 end
 basis_identity(m)=bytes2hex(SHA.sha256(string(m.policy.origin,m.policy.rows)))
 

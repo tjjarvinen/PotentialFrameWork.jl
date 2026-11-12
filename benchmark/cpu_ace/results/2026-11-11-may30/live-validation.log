@@ -1,0 +1,6 @@
+Validating bcc-128
+bcc-128 passed; Tuple{String, Any}[]
+Validating hcp-150
+hcp-150 passed; Tuple{String, Any}[]
+Validating omega-240
+omega-240 passed; Tuple{String, Any}[]

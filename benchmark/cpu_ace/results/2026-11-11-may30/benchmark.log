@@ -1,0 +1,10 @@
+Validating bcc-128
+bcc-128 passed; [("optimized_prepared", 12.341), ("spline_public", 12.823), ("et_polynomial_public", 193.389), ("optimized_public", 16.308), ("polynomial_public", 20.026), ("dag_public", 13.363), ("dag_prepared", 9.314)]
+Validating bcc-1024
+bcc-1024 passed; [("optimized_prepared", 98.355), ("spline_public", 102.047), ("et_polynomial_public", 2291.257), ("optimized_public", 134.144), ("polynomial_public", 155.783), ("dag_public", 109.38), ("dag_prepared", 74.629)]
+Validating bcc-3456
+bcc-3456 passed; [("optimized_prepared", 328.064), ("spline_public", 339.737), ("et_polynomial_public", 7418.964), ("optimized_public", 461.506), ("polynomial_public", 520.796), ("dag_public", 378.957), ("dag_prepared", 248.25)]
+Validating hcp-150
+hcp-150 passed; [("optimized_prepared", 11.643), ("spline_public", 10.876), ("et_polynomial_public", 144.312), ("optimized_public", 14.934), ("polynomial_public", 18.011), ("dag_public", 11.406), ("dag_prepared", 8.118)]
+Validating omega-240
+omega-240 passed; [("optimized_prepared", 22.764), ("spline_public", 21.738), ("et_polynomial_public", 350.454), ("optimized_public", 30.221), ("polynomial_public", 38.809), ("dag_public", 24.494), ("dag_prepared", 17.132)]

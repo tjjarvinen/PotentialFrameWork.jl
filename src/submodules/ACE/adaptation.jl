@@ -41,7 +41,7 @@ function adapt_model(m::ResolvedModel,ps;array_type=Array,precision=eltype(m.ref
     validate_radial_layout(m)
     cpu=ResolvedModel(copy(m.atomic_numbers),T.(m.reference),map(ch->convert_channel(ch,T),m.radial),
         map(ch->convert_channel(ch,T),m.pair_radial),copy(m.radial_spec),copy(m.pair_spec),m.lmax,
-        copy(m.density),deepcopy(m.products),SparseMatrixCSC{T,Int}(m.coupling),m.source_sha256,deepcopy(m.policy),m.coordinate_kind,(T===Float32 || m.coefficient_precision===Float32 || parameter_precision(ps)===Float32) ? Float32 : Float64)
+        copy(m.density),deepcopy(m.products),SparseMatrixCSC{T,Int}(m.coupling),m.source_sha256,deepcopy(m.policy),m.coordinate_kind,(T===Float32 || m.coefficient_precision===Float32 || parameter_precision(ps)===Float32) ? Float32 : Float64,m.angular_kind)
     validate_radial_layout(cpu)
     pars=convert_data(ps,T,array_type)
     model=array_type===Array ? cpu : GPUACEModel(cpu,pack_model(cpu,array_type),T)
@@ -69,12 +69,14 @@ function pack_radials(channels,A,T)
         nodes[1:n,iz,jz]=ch.nodes; coeff[:,:,1:n-1,iz,jz]=ch.coefficients
         transform[:,iz,jz]=T[t.a,t.rin,t.r0,t.yin,t.ycut,t.rcut]
         powers[:,iz,jz]=[t.p,t.q]; lengths[iz,jz]=n
+        ch.envelope in (:PolyEnvelope2sX,:ACE1_PolyEnvelope1sR) || throw(ArgumentError("GPU packing does not support $(ch.envelope)"))
         kinds[iz,jz]=ch.envelope===:PolyEnvelope2sX ? 1 : 2
         envelope[1:length(ch.envelope_parameters),iz,jz]=ch.envelope_parameters
     end
     (;kind=Val(:spline),nodes=A(nodes),coeff=A(coeff),transform=A(transform),powers=A(powers),envelope=A(envelope),kinds=A(kinds),lengths=A(lengths),nr)
 end
 function pack_model(m,A)
+    m.angular_kind===:real_spherical || throw(ArgumentError("GPU ACE does not support solid harmonics"))
     T=eltype(m.reference); nu=maximum(length,m.products;init=0)
     products=zeros(Int,nu,length(m.products)); orders=length.(m.products)
     for j in eachindex(m.products); products[1:orders[j],j]=m.products[j]; end

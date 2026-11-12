@@ -22,7 +22,7 @@ function design_matrix_impl(X,model,ps,env,H;fit_pair=true,centers=nothing)
     A=zeros(promote_type(eltype(X),eltype(ps.WB)),1+3n+9,cols)
     baseline=zeros(eltype(A),size(A,1)); selected_centers=center_indices(centers,n)
     baseline[1]=sum((reference_value(model,env.species[i]) for i in selected_centers);init=zero(eltype(A)))
-    basis=angular_basis(model.lmax,eltype(model.reference))
+    basis=angular_basis(model,eltype(model.reference))
     for i in selected_centers
         iz=env.species[i]; data=site_diagnostics_impl(X,model,ps,env,H,i;basis)
         wb=(iz-1)*nb .+ (1:nb); wp=nb*nz+(iz-1)*nq .+ (1:nq)

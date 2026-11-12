@@ -10,6 +10,8 @@ struct GeneratedAngular{B}
     basis::B
 end
 angular_basis_generated(lmax,::Type{T}) where T = lmax==0 ? ConstantAngular(T(inv(sqrt(4pi)))) : GeneratedAngular(SpheriCart.SphericalHarmonics(lmax;normalisation=:L2,static=true,T))
+angular_basis(lmax,::Type{T},::Val{:real_solid}) where T = lmax==0 ? ConstantAngular(T(inv(sqrt(4pi)))) : SpheriCart.SolidHarmonics(lmax;normalisation=:L2,static=false,T)
+angular_basis_generated(lmax,::Type{T},::Val{:real_solid}) where T = lmax==0 ? ConstantAngular(T(inv(sqrt(4pi)))) : GeneratedAngular(SpheriCart.SolidHarmonics(lmax;normalisation=:L2,static=true,T))
 function angular_ed!(Y,dY,b::ConstantAngular,Rs)
     fill!(Y,b.value); fill!(dY,zero(eltype(dY)))
     Y,dY
@@ -25,7 +27,7 @@ function angular_ed!(Y,dY,b::GeneratedAngular,Rs)
     end
     Y,dY
 end
-angular_values(basis::SpheriCart.SphericalHarmonics,rs)=SpheriCart.compute(basis,rs)
-angular_ed(basis::SpheriCart.SphericalHarmonics,rs)=SpheriCart.compute_with_gradients(basis,rs)
-angular_ed!(Y,dY,basis::SpheriCart.SphericalHarmonics,rs)=SpheriCart.compute_with_gradients!(Y,dY,basis,rs)
+angular_values(basis::Union{SpheriCart.SphericalHarmonics,SpheriCart.SolidHarmonics},rs)=SpheriCart.compute(basis,rs)
+angular_ed(basis::Union{SpheriCart.SphericalHarmonics,SpheriCart.SolidHarmonics},rs)=SpheriCart.compute_with_gradients(basis,rs)
+angular_ed!(Y,dY,basis::Union{SpheriCart.SphericalHarmonics,SpheriCart.SolidHarmonics},rs)=SpheriCart.compute_with_gradients!(Y,dY,basis,rs)
 end

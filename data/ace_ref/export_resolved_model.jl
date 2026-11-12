@@ -5,42 +5,7 @@ const M = ACEpotentials.Models
 VERSION == v"1.13.2" || error("Use Julia 1.13.2")
 pkgversion(ACEpotentials) == v"0.10.2" || error("Unsupported producer version")
 
-function plain_fields(obj)
-    Dict(string(k)=>getproperty(obj,k) for k in propertynames(obj) if k != :meta)
-end
-
-function radial_export(basis)
-    basis isa M.SplineRnlrzzBasis || error("Only resolved spline radial bases are supported")
-    channels = map(CartesianIndices(basis.transforms)) do ij
-        t=basis.transforms[ij]; env=basis.envelopes[ij]; spl=basis.splines[ij]
-        t.trans isa M.GeneralizedAgnesiTransform || error("Unsupported radial transform")
-        (env isa M.PolyEnvelope2sX || env isa M.ACE1_PolyEnvelope1sR) || error("Unsupported radial envelope")
-        # The reconstructed object is a cubic spline, not the analytic polynomial
-        # from which it was sampled. Export its exact piecewise cubic space.
-        # Four evaluations determine each cubic; independent interior samples
-        # below bound the floating-point change of coordinates.
-        nodes=collect(spl.itp.ranges[1]); n=length(basis)
-        coeff=zeros(4,n,length(nodes)-1)
-        ts=[0.,1/3,2/3,1.]
-        V=[t^q for t in ts,q=0:3]
-        for k=1:length(nodes)-1
-            lo=nodes[k]; step=nodes[k+1]-lo
-            samples=permutedims(hcat([spl(lo+step*t) for t in ts]...))
-            coeff[:,:,k] .= V \ samples
-            for t in (0.137,0.513,0.927)
-                out=vec(transpose([1.,t,t^2,t^3])*coeff[:,:,k])
-                isapprox(out,spl(lo+step*t);atol=3e-13,rtol=3e-13) || error("Spline export failed")
-            end
-        end
-        Dict("centre"=>ij[1],"neighbour"=>ij[2],
-             "transform"=>merge(plain_fields(t.trans),Dict("yin"=>t.yin,"ycut"=>t.ycut,
-                 "rcut"=>t.rcut,"normalization_rin"=>t.rin)),
-             "envelope_kind"=>string(nameof(typeof(env))),"envelope"=>plain_fields(env),
-             "nodes"=>nodes,"coefficient_shape"=>collect(size(coeff)),"coefficients"=>vec(coeff))
-    end
-    Dict("kind"=>"piecewise_cubic_agnesi", "spec"=>[Dict(string(k)=>v for (k,v) in pairs(b)) for b in basis.spec],
-         "channels"=>vec(channels))
-end
+include(joinpath(@__DIR__,"resolved_export.jl"))
 
 path=joinpath(@__DIR__,"reference_model.json")
 hash=bytes2hex(sha256(read(path)))

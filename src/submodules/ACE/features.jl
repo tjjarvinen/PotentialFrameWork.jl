@@ -84,6 +84,7 @@ Species-order projections are not supported by this adapter. Masked basis rows
 remain zero. No reference or separate pair contribution enters features.
 """
 function ACEFeatureLayer(m::ResolvedModel;channels=1)
+    m.angular_kind===:real_spherical || throw(ArgumentError("resolved feature adapter requires spherical harmonics"))
     isempty(m.policy.species) && isnothing(m.policy.orders) || throw(ArgumentError("resolved feature adapter requires an unprojected basis"))
     irreps=feature_irreps(((L=0,parity=:even,channels=channels),))
     C=spdiagm(0=>collect(Float64,m.policy.mask))*m.coupling
