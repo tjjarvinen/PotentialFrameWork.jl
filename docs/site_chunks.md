@@ -113,11 +113,16 @@ retain their functional path, as do non-Float parameter values and the existing
 Lux/ChainRules APIs. An explicit `ACEEvaluationState` uses chunks for energy-only
 inference too. No new AD rule is claimed for this mutable executor. Indexing
 transpose tests cover per-site center gather and the force-gradient cotangent
-`force_bar[center] - force_bar[neighbor]` after permutation to cell order. Full
-ACE force-loss pullback wiring through chunks remains a follow-up.
+`force_bar[center] - force_bar[neighbor]` after permutation to cell order. The separate numerical
+chunk boundary now supplies full local-to-global pullbacks; see
+[site_pullbacks.md](site_pullbacks.md).
 
 The next milestone needs persistent Base tasks, buffered Channels carrying chunk
 assignments/completions, exclusive slots and a merge-before-reuse handshake, plus
 failure propagation and pass barriers. Cross-slot reductions and performance
 comparison with coloring need measured threaded validation. NUMA placement,
 cross-group boundary reduction and optional Dagger execution follow that work.
+
+The numerical derivative path is now described in [site_pullbacks.md](site_pullbacks.md).
+It adds an owning mathematical boundary around chunk execution; arbitrary mutable
+worker callbacks and existing inference states remain outside that AD boundary.

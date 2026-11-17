@@ -18,6 +18,8 @@ include("interface.jl")
 include("environments.jl")
 include("execution.jl")
 include("chunks.jl")
+include("pullbacks.jl")
+export site_evaluate, site_pullback
 include("benchmarks.jl")
 include("gpu.jl")
 end
