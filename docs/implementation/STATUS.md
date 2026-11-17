@@ -1,5 +1,110 @@
 # Implementation status
 
+## Serial CPU site chunks (2026-11-17)
+
+Implemented `CPU-Site-Chunk-Codex-Instructions.md` in the actual local checkout.
+The supplied untracked instruction file and all local reference inputs are
+preserved. No agents, new dependencies, core compatibility changes or reference
+regeneration were used.
+
+`NeighbourList` owns `prepare_neighbors`, `form_numa_workers`, `foreach_worker!`,
+`ChunkBuffers`, worker/site views, capacity splitting, cell-order destinations,
+contiguous-run merging, single-site/batch traversal, feature lifetime and owning
+original-order export. One occupied cell starts a chunk; the actual endpoint
+union determines splitting. Oversized individual sites fail before evaluation.
+Repeated image edges retain geometry and map to one atom destination. A single
+reusable slot owns bounded scatter buffers and scratch, with fresh pass totals.
+Named per-site outputs require an assignment at every center before publication;
+failed passes publish no partial results/fields. Completed fields remain in cell
+order for subsequent read-only center/neighbor inputs. Rebuilt environment
+versions invalidate fields and reject stale execution. Generic position/feature
+cotangents can use the same scatter mapping as forces.
+
+ACE supplies scratch and local callback adapters; its mathematics are reused,
+including the existing batch fallback and selected-center semantics. Explicit
+`AtomsCalculators.calculate(properties, system, calc, ps, state)` accepts
+`ACEEvaluationState(calc)` and returns that same state. Environment, angular
+provider, coefficient cache, scratch and executor storage belong to that state;
+read-only model and supplied parameters can be shared across distinct states.
+Convenience E/F/V calls use a calculator-owned default state. Legacy state values
+and functional energy-only/non-Float parameter paths remain compatible. The
+colored parity executor remains available with `executor=:colored`, including
+its existing `parallel=true` option and legacy threaded convenience default.
+An explicit chunk route/evaluation state is serial even when a parallel keyword
+is forwarded. Functional ACE/pair/Lux/ChainRules derivative
+paths remain separate; no new mutable-executor AD claim is made.
+
+Documentation: `docs/site_chunks.md`; runnable two-pass feature example:
+`examples/site_chunks.jl`. The ACE preparation overload
+`prepare_neighbors(system, calc)` supplies explicit model channel order, SIMD
+width and precision; generic cutoff-only preparation retains provider channels.
+This is the documented naming extension to the illustrative caller contract.
+
+Validation includes forced within-cell splitting and single-site overflow,
+nontrivial permutation, safe inactive lanes, duplicate periodic/self-image
+atom destinations, generic scatter fields, center gather/force scatter adjoint
+identities, fresh outputs and scratch ownership, incomplete/failed publication,
+two feature passes against an independently enumerated periodic reference,
+original-order owning exports, stale topology, empty input, parameter updates,
+selected centers, every E/F/V subset, Float32/64, widths 1/4 and batches 1/3.
+Two overlapping explicit-state calls with different geometries agree with serial
+references. All 33 repository oracle frames agree at existing Float64 tolerances
+(E 1e-8 eV absolute, F 1e-9 eV/Å absolute + 1e-10 relative, W 1e-8 eV absolute
++ 1e-10 relative) for batches 1/5, and with the colored executor. Focused suite:
+**731 assertions / 4 testsets** on both Julia **1.13.4 and 1.10.13 / 4 threads**,
+including the final permutation and legacy-threaded/typed-constructor checks.
+The earlier 703-assertion focused suite also passed on Julia 1.13.4 / 1 thread.
+Standalone CPU-only/block chunk E/F/V passes with SpheriCart absent; the two-pass example
+also runs successfully in the root environment.
+
+Storage diagnostic (`benchmark/cpu_chunks/memory.jl`), Julia 1.13.4 / 4 threads,
+Ryzen 9 9950X (16 cores/32 logical CPUs, `znver5`): four atoms, three occupied
+cells, four chunks after splitting, configured/observed capacity **3/3**;
+Float64 vector force final storage **96 bytes**, bounded reusable scatter storage
+**72 bytes** (observed from the actual reusable buffer parent), warmed complete
+pass **4,992 allocated bytes**, including buffer-size instrumentation. This includes
+fresh result/bookkeeping allocation, excludes preparation and public export, and is
+not a throughput comparison or a claim of zero allocation. Numerical scratch
+capacity depends on padded edge count, independently of destination count.
+Geometry/full-neighbor metadata and final/feature fields scale with system size.
+
+Test environments were resolved separately in `/tmp/pfw-chunks-env-113` and
+`/tmp/pfw-chunks-env-110`; repository/root/reference manifests remain unchanged.
+Both test environments use: AtomsBase 0.5.3, AtomsCalculators 0.2.3,
+StaticArrays 1.9.24, SIMD 3.8.2, SpheriCart 0.2.4, KernelAbstractions 0.9.46,
+AcceleratedKernels 0.5.12, ForwardDiff 1.4.7, ChainRulesCore 1.26.8,
+Zygote 0.7.16 and LuxCore 1.5.4. Writable cache depots under `/tmp` avoid
+modifying the read-only home depot. Resolving used locally cached packages;
+network registry checks were unavailable.
+
+Reproduction (an environment containing the package and test extras):
+```
+julia --project=<test-env> --threads=4 test/site_chunks_runtests.jl
+julia --project=<test-env> --threads=4 test/runtests.jl
+julia --project=<test-env> --threads=4 benchmark/cpu_chunks/memory.jl
+julia --project examples/site_chunks.jl
+git diff --check
+```
+Ordinary `Pkg.test()` prepares the test extras automatically. A Julia 1.10
+application/test environment must resolve its own compatible manifest rather
+than load the root Julia 1.13 manifest.
+
+Final full regression runs passed **58,261 assertions / 67 testsets on each of
+Julia 1.13.4 and Julia 1.10.13, four threads**. These include existing numerical,
+derivative/force-loss, scheduling, persistence, pair and portable KA/GPU
+CPU-backend checks, plus the final 731 chunk assertions. Final full logs:
+`/tmp/pfw-chunks-stable113.log`, `/tmp/pfw-chunks-stable110.log`; focused logs:
+`/tmp/pfw-chunks-final-focused113.log`, `/tmp/pfw-chunks-final-focused110.log`.
+Both processes exited successfully. `git diff --check` passes. Memory evidence
+is preserved in `benchmark/cpu_chunks/memory-2026-11-17.txt`.
+
+This milestone implements one serial group/worker. Persistent Base tasks,
+buffered Channels, completion/failure handshakes and pass barriers are the next
+milestone; measured threaded comparison with coloring precedes NUMA placement,
+cross-group boundary reduction and optional Dagger. Full chunk ACE force-loss
+pullback wiring is deferred; only indexing transpose identities are added here.
+No new pair/GPU execution behavior or device support is claimed.
+
 ## Fitted May30 ACEpotentials / ETACE CPU comparison (2026-11-11)
 
 Completed the supplied `ACEpotentials-ETACE-Comparison-Codex-Instructions.md`
