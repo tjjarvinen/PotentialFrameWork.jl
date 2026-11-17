@@ -1,0 +1,14 @@
+Julia=1.13.4 threads=4 CPU=znver5
+atoms=4 cells=3 chunks=4 max_destinations=3 configured_capacity=3
+Float64 force final bytes=96 bounded temporary bytes=72 warmed pass allocated bytes=4992
+AtomsBase=0.5.3
+AtomsCalculators=0.2.3
+StaticArrays=1.9.24
+SIMD=3.8.2
+SpheriCart=0.2.4
+KernelAbstractions=0.9.46
+AcceleratedKernels=0.5.12
+ForwardDiff=1.4.7
+ChainRulesCore=1.26.8
+Zygote=0.7.16
+LuxCore=1.5.4

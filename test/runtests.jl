@@ -263,6 +263,7 @@ include("ace_angular.jl")
 include("ace_may30.jl")
 include("ace_interface.jl")
 include("neighbour_evaluation.jl")
+include("site_chunks.jl")
 println("Validation process: Julia ",VERSION,", threads=",Threads.nthreads())
 
 # Portable CPU kernel checks; real-device checks require the standalone opt-in.

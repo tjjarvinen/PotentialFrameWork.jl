@@ -1,6 +1,7 @@
 """Convenient owning inference wrapper. `parameters` is authoritative; update it
 with `AtomsCalculators.set_parameters!`. Environment is rebuilt per public call.
-Do not share a calculator's mutable environment between concurrent calls.
+Convenience calls have one active call per calculator; concurrent explicit calls
+use distinct ACEEvaluationState instances.
 """
 mutable struct ACECalculator{M,P,S,W}
     model::M
@@ -8,7 +9,10 @@ mutable struct ACECalculator{M,P,S,W}
     state::S
     environment::FullEnvironment
     executor::W
+    evaluation_state::Any
 end
+ACECalculator(m,p,s,e,w)=ACECalculator(m,p,s,e,w,nothing)
+ACECalculator{M,P,S,W}(m,p,s,e,w) where {M,P,S,W}=ACECalculator{M,P,S,W}(m,p,s,e,w,nothing)
 function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads(),precision=Float64,angular_backend=:sphericart,batch_size=1,array_type=Array,product_algorithm=:auto)
     if array_type!==Array || model isa GPUACEModel
         b=adapt_model(model,ps;array_type,precision)
@@ -34,13 +38,20 @@ AC.length_unit(::ACECalculator)=u"Å"
 AC.promote_force_type(sys::AbstractSystem{3},c::ACECalculator)=SVector{3,typeof(zero(eltype(c.executor.force))*u"eV/Å")}
 AC.zero_energy(sys::AbstractSystem{3},c::ACECalculator)=zero(eltype(c.executor.force))*u"eV"
 AC.zero_virial(sys::AbstractSystem{3},c::ACECalculator)=zero(SMatrix{3,3,typeof(AC.zero_energy(sys,c)),9})
-function calculator_result(sys,c;parameters=c.parameters,energy_only=false,parallel=false,simd=true,fused=false,product_algorithm=c.executor.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),kwargs...)
+function calculator_result(sys,c;parameters=c.parameters,state=nothing,energy_only=false,parallel=false,executor=(parallel && !(state isa ACEEvaluationState) ? :colored : :chunks),simd=true,fused=false,product_algorithm=c.executor.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),kwargs...)
     parameters=(isnothing(parameters) || parameters===NamedTuple()) ? c.parameters : parameters
+    executor in (:chunks,:colored) || throw(ArgumentError("executor must be :chunks or :colored"))
+    if executor===:chunks && (!energy_only || state isa ACEEvaluationState)
+        evaluation_state=state isa ACEEvaluationState ? state :
+            isnothing(state) ? default_evaluation_state!(c) : ACEEvaluationState(c;state)
+        return chunk_calculator_result(sys,c,evaluation_state,parameters;energy_only,parallel,simd,fused,product_algorithm,centers,properties,kwargs...)
+    end
+    state isa ACEEvaluationState && throw(ArgumentError("explicit ACEEvaluationState requires executor=:chunks"))
     fast_parameters=parameter_seed(parameters) isa Union{Float32,Float64}
     boundary=fast_parameters && eltype(c.executor.force)===Float32 ? precision_geometry(sys,Float32) : sys
     input=fast_parameters ? ace_inputs(boundary,c.model;environment=c.environment,precision=eltype(c.executor.force)) : ace_inputs(sys,c.model;environment=c.environment)
     y=if energy_only || !fast_parameters
-        ace_evaluate(input.positions,c.model,parameters,input.environment,input.cell;state=c.state,energy_only,centers)
+        ace_evaluate(input.positions,c.model,parameters,input.environment,input.cell;state=isnothing(state) ? c.state : state,energy_only,centers)
     else
         prepare_executor!(c.executor,c.environment)
         execute_prepared!(c.executor,input.positions,input.cell,parameters;parallel,simd,fused,product_algorithm,centers,properties)
@@ -76,7 +87,7 @@ function calculate_ace(properties,sys::AbstractSystem{3},c::ACECalculator;
     normalized=NL.normalize_properties(props)
     all(p -> p isa Union{AC.Energy,AC.Forces,AC.Virial},props) || throw(ArgumentError("unsupported ACE property"))
     isempty(props) && return (;state)
-    r=calculator_result(sys,c;parameters,energy_only=all(p -> p isa AC.Energy,props),properties=normalized,kwargs...)
+    r=calculator_result(sys,c;parameters,state,energy_only=all(p -> p isa AC.Energy,props),properties=normalized,kwargs...)
     key(::AC.Energy)=:energy; key(::AC.Forces)=:forces; key(::AC.Virial)=:virial
     merge((NamedTuple{(key(p),)}((r[key(p)],)) for p in props)...,(;state))
 end
