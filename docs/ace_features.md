@@ -150,10 +150,10 @@ features, newstate = LuxCore.apply(lux, input, parameters, state)
 The Lux wrapper follows the existing scalar/pair adapters, retains explicit
 parameters and passes state through without putting scratch in state. The
 invariant head above is a composition example, not a new site-energy API.
-Only first derivatives through the feature boundary are claimed. Force-loss
-training and mixed derivatives through composed models need a separate validation
-milestone. Feature SIMD optimization, GPU execution, full MACE interactions and
-general equivariant training remain outside this phase. Scalar ACEfit is unchanged.
+The functional `ace_features` boundary claims first derivatives. The explicit
+nonlinear-head chunk boundary documented below supplies validated force-loss
+mixed products. Feature SIMD optimization, GPU AD and full MACE interactions
+remain deferred. Scalar ACEfit is unchanged.
 
 ## Reproduction
 
@@ -164,3 +164,67 @@ focused numerical/derivative checks, or `test/runtests.jl` for all regressions.
 allocations, output/saved-pullback storage and small-case timings. Topology
 preparation is outside these numerical measurements. These reference paths
 allocate; timings are diagnostics, not a performance claim or a regression gate.
+
+For explicit serial chunk training, use `ace_features_chunks(X,layer,ps,neighbors)`
+or `lux_layer(layer; parameters=ps, executor=:chunks)` with a `neighbors` input.
+Output axes match `ace_features`. See [site_pullbacks.md](site_pullbacks.md) for
+local callback, capability, geometry, snapshot and batch fallback contracts.
+
+## Nonlinear invariant heads and force-loss training
+
+```julia
+# A head is a generic numerical callable. It must be invariant if its scalar
+# output represents physical energy. All trainable head numbers are explicit.
+head(h, p) = p.amplitude * tanh(p.bias +
+    sum(p.weights[b] * sum(abs2,h[b]) for b in eachindex(h)))
+model = A.ACEFeatureEnergy(layer, head)
+parameters = (features=ps, head=(weights=ones(length(layer.irreps)),
+                               bias=0.2, amplitude=0.8))
+# neighbors must use layer.atomic_numbers ordering, e.g. channels=[1,2,1].
+r = A.feature_energy_evaluate(X, model, parameters, neighbors)
+g = Zygote.gradient(p -> sum(abs2,
+    A.feature_energy_evaluate(X,model,p,neighbors).forces), parameters)[1]
+```
+
+This explicit composed boundary supports E/F/W and combined losses into positions,
+all feature parameter subtrees, and head parameters. `outputs=NI.SiteOutputs(true,
+true,true)` optionally retains generic per-atom block tuples for direct feature
+losses in the same call. The feature-only public boundary retains 3D block axes.
+`lux_layer(model; parameters)` selects the chunk route and consumes `positions`
+and `neighbors`, with optional centers/batch_size/scatter_capacity. See
+[examples/ace_force_training.jl](../examples/ace_force_training.jl) for deterministic
+generated teacher targets and a small E/F optimization. It claims prediction
+improvement, not coefficient identification.
+
+`feature_jvp(X,layer,ps,environment,H,V; parameter_direction=nothing)` returns
+feature tangents in `(m,channel,atom)` block arrays. The optional parameter
+direction must have the same nested names/shapes as ps. The local product
+calculation differentiates the analytic feature reverse along a displacement
+direction, **including the change in the head feature cotangent**. Local
+ForwardDiff head differentiation computes first derivatives with respect to the
+small head's feature inputs/parameters; differentiating those operations along
+the saved displacement direction supplies the necessary head Hessian action.
+No full feature Jacobian, system Hessian or per-edge parameter Jacobian is formed.
+
+Supported composition is one reverse through `feature_energy_evaluate`/its Lux
+wrapper with local second-position/mixed products. This also supports chaining
+several numerical E/F calls in a short fixed-cell rollout. Arbitrary nested
+Zygote differentiation through the existing first-order `ace_features` pullback
+is still unsupported. To train on forces, use the explicit composed boundary;
+a first-order feature rule alone does not provide that contract. A head must be
+smooth generic real arithmetic compatible with ForwardDiff (including nested
+duals); arbitrary reverse-only head rules are not automatically supported.
+
+Custom radial force losses require `ad=true`, analytic derivative consistency,
+second distance derivatives and mixed distance/parameter arithmetic. Joint
+analytic and `derivative=:ad` values-only callables are checked with nested scalar
+and array parameter leaves. Fixed table knots can have discontinuous second
+derivatives; topology/cutoff/cell/species/model tables remain fixed. Feature and
+composed backward arithmetic is at least Float64. No GPU AD, incoming atom-feature
+AD, arbitrary higher reverse order or message passing is implied.
+
+`NL.prepare_neighbors(system, layer)` and `NL.prepare_neighbors(system, model)`
+for `ACEFeatureEnergy` supply the strict species channel order automatically.
+At the unitful calculator boundary, convert outputs to numeric eV and eV/Å before
+forming numerical training losses; the chunk rule preserves the unit declarations
+and the existing force-vector/virial output representations.

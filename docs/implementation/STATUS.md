@@ -1,5 +1,174 @@
 # Implementation status
 
+## Equivariant nonlinear-head force training — Part B (2026-11-17)
+
+Part B follows the Part A gate recorded below. `ACEFeatureEnergy(layer,head)`
+and `feature_energy_evaluate(X,model,(features=fp,head=hp),neighbors)` use the
+same model-independent chunk executor and `site_vjp!`. There is no second
+ACE-only system backward loop. `feature_jvp(X,layer,ps,env,H,V;
+parameter_direction=nothing)` exposes position/parameter directional feature
+products in the existing public block axes. Parameter directions validate field
+names/order and leaf shapes. `prepare_neighbors(system,layer_or_composed_model)`
+supplies strict element channel ordering automatically.
+
+Local reverse mathematics is shared with functional feature VJPs. A displacement
+directional pass differentiates both the analytic feature reverse and the
+changing nonlinear head feature cotangent. Local ForwardDiff on the small generic
+head includes all head-parameter sensitivities. No full feature Jacobian, system
+Hessian or per-edge parameter Jacobian is formed. Custom radial contributions
+are contracted across a site before local parameter AD. Ordinary/directional
+parameter-reverse trees are reused in a pass; scalar leaves and nested callable
+parameters retain their names and shapes. The global parameter accumulator is
+separate from this scratch. No full parameter gradient is allocated per site in
+the production chunk adapters, and no per-site parameter tapes are retained.
+
+Supported: one reverse through numeric/Lux composed E/F/W and optional feature
+losses, including positions, every mixing block, radial scales, nested callable
+parameters and head parameters; multiple such boundaries can be chained for a
+short fixed-cell rollout. Both analytic joint and values-only `derivative=:ad`
+radials are checked. Feature/composed arithmetic remains at least Float64;
+scalar numeric chunk forward/backward has focused Float32/Float64 parity checks.
+The existing functional first-order feature boundary remains first-order: this
+work does not make arbitrary nested Zygote calls through its mutable reverse
+supported. Heads must use smooth generic ForwardDiff-compatible real arithmetic.
+Topology/cell/species/cutoffs/tables are fixed. No GPU AD, threaded backward,
+MACE incoming-feature derivatives or arbitrary third/higher derivatives are claimed.
+
+The scalar explicit-parameter AtomsCalculators rule preserves units, output
+representations and returned state identity, validates the active-call guard and
+clears it on failure. The rule runs the existing public forward to preserve
+keyword validation, precision, state updates and output behavior, followed by a
+separate numerical forward/snapshot for the owning chunk pullback. This extra
+forward work is not included in numeric-only timings. It normalizes Unitful structural cotangents explicitly
+(including StaticArrays elements), then requests parameter-only numerical
+backward work. Form numerical losses after stripping outputs to declared eV and
+eV/Å. Arbitrary Unitful operations outside this boundary are not newly declared
+differentiable. Saved inputs contain only mathematical model/position/parameter/
+topology/cell/maps data; inference state scratch and executor caches are not tapes.
+
+Final full regressions: **58,496 assertions / 81 testsets passed on both
+Julia 1.13.4 and Julia 1.10.13 / four threads**, including all existing pair,
+scalar force-loss/rollout, persistence, interface and portable GPU regressions.
+The new suites contribute **150 site-protocol assertions / 10 testsets** and
+**85 composed-feature assertions / four testsets**. The final accumulator-reset
+and quantity-cotangent normalization adjustments were additionally checked by
+the 150-assertion focused suite on both versions. `git diff --check` passes.
+CPU-only root loading succeeds without optional AD/angular packages loaded. The tests cover independent nonlinear
+site derivatives, nonsymmetric virial bars, parameter-only/displacement-only
+requests, arbitrary/single-active/thunked feature blocks, empty/scalar parameter
+leaves, repeated/self images, nontrivial permutation, forced splitting/padding,
+selected centers, unsupported capabilities, zero bars, snapshot mutation/lifetime,
+Lux, unitful E/F/V losses, four/five-argument calculator paths and failure guards.
+Part B additionally checks individual mixing/radial/head parameter directions at
+two finite-difference steps, feature JVP/VJP adjoints, parameter JVPs, nested scalar
+radials, nonlinear force-position symmetry, rotations/inversion, composed rollout,
+zero density, isolated/empty systems, periodic images and combined feature losses.
+Scientific tolerances in prior tests are unchanged.
+
+Numerical diagnostic (`benchmark/site_pullbacks/derivative_checks.jl`, periodic
+three-atom composed model): central step h=1e-4/1e-5/2e-6 yielded combined-loss
+parameter directional absolute errors **3.31e-10 / 3.68e-12 / 3.68e-12** and position
+errors **3.04e-9 / 3.22e-11 / 3.92e-12**. Feature position JVP/VJP adjoint absolute
+error **2.78e-17**. These are measured directions, not universal error bounds.
+
+Deterministic `examples/ace_force_training.jl`: generated teacher targets,
+nontrivial mixing/head weights, 60 gradient-descent steps, eta=0.03, objective
+`(E-Etarget)^2 + 10*sum(abs2,F-Ftarget)`. All gradients finite; objective
+**0.0002651640194238842 -> 0.000249511325929518**; force squared-error sum
+**2.642142469730222e-5 -> 2.4951128141657162e-5**. No coefficient-recovery claim.
+The separate direct-feature example and its Part A loss reduction are below.
+
+Warmed diagnostics, Julia 1.13.4 / four threads, AMD Ryzen 9 9950X (16 cores,
+32 logical CPUs, `znver5`), three atoms, scatter capacity three. Measurements
+are one warmed sample including normal allocating local reference mathematics;
+no speedup or allocation-free-kernel claim:
+
+| Operation | Time (µs) | Allocated bytes |
+| --- | ---: | ---: |
+| Generated basis + geometry preparation | 289.0 | 440464 |
+| Geometry preparation only | 11.5 | 24000 |
+| Composed chunk forward | 68.8 | 105784 |
+| Forward + pullback construction/snapshot | 109.2 | 171856 |
+| Combined backward + owning export | 170.2 | 378424 |
+| Parameter-only backward + owning export | 107.2 | 282272 |
+| Backward from saved snapshot | 167.9 | 380232 |
+| Original-order export only | 2.4 | 432 |
+| Scalar functional forward | 42.1 | 61664 |
+| Scalar chunk forward | 45.9 | 68992 |
+| Scalar functional combined VJP | 152.8 | 437880 |
+| Scalar chunk combined VJP | 129.8 | 237752 |
+
+Saved composed mathematical inputs: **17,512 bytes** (`summarysize` of owned
+snapshot). Reusable ordinary/directional parameter-reverse trees: **4,096 bytes**;
+global parameter accumulator: **1,632 bytes**. Final position-gradient numerical
+storage and bounded scatter numerical storage are **72 bytes each** in this case.
+Snapshot/model/topology storage and final outputs scale with their own sizes;
+scatter is bounded by capacity and mathematical scratch by the largest site/batch
+plus parameter tree. Local angular/radial/product and head AD still allocate.
+
+Dependency versions in both isolated application environments: ForwardDiff 1.4.7,
+ChainRulesCore 1.26.8, Zygote 0.7.16, LuxCore 1.5.4, SpheriCart 0.2.4,
+StaticArrays 1.9.24, SIMD 3.8.2, AtomsBase 0.5.3, AtomsCalculators 0.2.3,
+KernelAbstractions 0.9.46, AcceleratedKernels 0.5.12. Core Julia compat remains
+1.10.10. Root/reference manifests and user model/instruction files are preserved.
+No agents, dependency changes, network installation, reference regeneration or
+unvalidated GPU changes were used. CPU-only root package loading is also checked.
+
+Reproduction in a test/application environment with this checkout developed:
+```
+julia --project=<env> -t4 test/site_pullbacks_runtests.jl
+julia --project=<env> -t4 test/feature_energy_runtests.jl
+julia --project=<env> -t4 test/runtests.jl
+julia --project=<env> examples/ace_feature_training.jl
+julia --project=<env> examples/ace_force_training.jl
+julia --project=<env> -t4 benchmark/site_pullbacks/diagnostics.jl
+julia --project=<env> benchmark/site_pullbacks/derivative_checks.jl
+git diff --check
+```
+Local environments: `/tmp/pfw-chunks-env-113`, `/tmp/pfw-chunks-env-110`;
+cache depots `/tmp/pfw-julia-depot`, `/tmp/pfw-julia-depot110` with the home depot
+read-only as fallback. Julia 1.10 was invoked by its installed binary under
+`/var/home/teemu/.julia/juliaup/julia-1.10.13+0.x64.linux.gnu/bin/julia`.
+Logs: `/tmp/pfw-site-final-reset113.log`, `/tmp/pfw-site-final-reset110.log`,
+`/tmp/pfw-release-check-113.log`, `/tmp/pfw-release-check-110.log`, `/tmp/pfw-vjp-final-diagnostics.log`,
+`/tmp/pfw-vjp-numerics.log`, `/tmp/pfw-force-training-final2.log`.
+
+## Generic site derivatives — Part A (2026-11-17)
+
+The authorized site-VJP work is on branch `pullback_updates`, building on the
+local checkout without replacing reference data or manifests. The untracked
+instruction document is preserved. Protocol signatures, accumulation, axes,
+capabilities, geometry, snapshots and model-author recipe are in
+`docs/site_pullbacks.md`. Generic execution lives in `NeighbourList/pullbacks.jl`;
+scalar/feature ACE adapters live in `ACE/site_pullbacks.jl`. The independent
+nonlinear test model has cross-neighbor coupling, scalar/nested parameters and
+arbitrary feature cotangents. Scalar mixed mathematics are shared with the
+functional reference; feature local reverse is shared as well.
+
+Part A gate before starting Part B: Julia 1.13.4, four threads, isolated existing
+`/tmp/pfw-chunks-env-113`, depot `/tmp/pfw-julia-depot` plus home read-only packages:
+`test/site_pullbacks_runtests.jl` **124 assertions**, existing `test/runtests.jl`
+**58,261 assertions / 67 testsets**, existing `test/ace_features_runtests.jl`
+**163 assertions** passed. Logs: `/tmp/pfw-site-vjp-A-final.log`,
+`/tmp/pfw-site-regressions.log`, `/tmp/pfw-feature-regressions.log`. The focused
+checks include nonsymmetric virial contractions, finite differences, scalar
+projection/custom-radial parameter directions, selected centers, empty systems,
+padded images/self images, batch fallback, explicit requests, thunk/zero bars,
+caller mutation, public chunk Lux and unitful explicit-parameter AC.calculate.
+
+`examples/ace_feature_training.jl`: deterministic generated feature targets,
+40 steps of gradient descent, eta=0.1, finite gradients, loss
+0.00040356355540473914 -> 0.0003222281575708208. This is direct first-order
+feature training; it does not constitute the Part B force-loss gate.
+
+The mutable inference executor and arbitrary worker closures remain outside AD.
+Numerical derivative snapshots own mathematical inputs/maps, not workgroups or
+worker scratch. Parameter-only requests explicitly skip displacement Hessian
+products. The default functional APIs remain available. New chunk numerical,
+chunk Lux (`executor=:chunks`) and explicit-parameter calculator derivative
+routes use generic site execution. Scientific tolerances were not loosened.
+Part B and final allocation/compatibility diagnostics follow in a separate record.
+
 ## Serial CPU site chunks (2026-11-17)
 
 Implemented `CPU-Site-Chunk-Codex-Instructions.md` in the actual local checkout.

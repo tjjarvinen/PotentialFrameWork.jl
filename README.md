@@ -434,7 +434,12 @@ GPU radial pair inference, device setup, ownership and limitations are documente
 in [docs/gpu_pairs.md](docs/gpu_pairs.md). The default CPU APIs are unchanged.
 
 CPU equivariant per-atom ACE features, explicit parameters, basis construction and
-first-order position/parameter derivatives are documented in [ACE features](docs/ace_features.md).
+first-order position/parameter derivatives, and nonlinear invariant-head force-loss
+training are documented in [ACE features](docs/ace_features.md). The generic
+[site pullback protocol](docs/site_pullbacks.md) supplies serial chunk backward
+execution independently of ACE. Runnable examples cover
+[direct feature targets](examples/ace_feature_training.jl) and
+[energy/force targets](examples/ace_force_training.jl) through Lux.
 
 Scalar GPU ACE inference, precision conversion and comparisons are documented in
 [docs/gpu_ace.md](docs/gpu_ace.md). Reproducible public-model acquisition, independent

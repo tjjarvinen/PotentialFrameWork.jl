@@ -141,7 +141,10 @@ function feature_site_data(X,l,ps,env,H,i,basis)
     edges=[k for k=env.offsets[1,i]:env.offsets[end,i]-1 if env.active[k]]
     Rs=[edge_displacement(X,H,env,i,k) for k in edges]
     zs=[env.species[env.neighbours[k]] for k in edges]; iz=env.species[i]
-    T=feature_numeric_type(X,ps,H); nr=length(l.radial_spec)
+    feature_local_data(l,ps,iz,zs,Rs,edges,basis)
+end
+function feature_local_data(l,ps,iz,zs,Rs,edges,basis)
+    T=typeof(zero(eltype(eltype(Rs)))+parameter_seed(ps)+0.0); nr=length(l.radial_spec)
     R=zeros(T,length(edges),nr); dR=similar(R); rawR=similar(R)
     for j in eachindex(edges)
         r=norm(Rs[j]); r>0 || throw(DomainError(r,"coincident physical atoms have undefined harmonics"))
@@ -195,8 +198,7 @@ feature_require_parameter_ad(ch::Union{RadialChannel,TabulatedRadial})=nothing
 feature_require_parameter_ad(ch::SubsetRadial)=feature_require_parameter_ad(ch.parent)
 feature_require_parameter_ad(ch::CallableRadial)=ch.metadata.ad ? nothing :
     throw(ArgumentError("custom radial feature parameter derivatives require ad=true and generic ForwardDiff-compatible values"))
-feature_radial_parameter_vjp(ch,rs,ps,adj)=isempty(parameter_flatten(ps)) ? ps :
-    throw(ArgumentError("load ForwardDiff for custom radial feature parameter derivatives"))
+
 
 """First-order serial CPU VJP; cotangents must be numerical blocks. No complete
 position/parameter Jacobian is formed. ChainRules handles zero/thunked blocks.
@@ -208,10 +210,29 @@ function feature_vjp(X,l,ps,env,H,cotangents)
     basis=angular_basis(l.lmax,Float64)
     for i in axes(X,2)
         iz=env.species[i]; data=feature_site_data(X,l,ps,env,H,i,basis)
+        localbars=map(c -> view(c,:,:,i),cotangents)
+        localg=feature_local_reverse(l,ps,iz,data,localbars)
+        gp=parameter_rebuild(ps,parameter_flatten(gp)+parameter_flatten(localg.parameters))
+        for (j,k) in enumerate(data.edges)
+            dest=env.neighbours[k]; g=localg.displacements[j]
+            for a=1:3; dx[a,i]-=g[a]; dx[a,dest]+=g[a]; end
+        end
+    end
+    (;positions=dx,parameters=gp)
+end
+
+
+# Analytic local feature reverse also accepts displacement-direction duals. This
+# boundary is shared by functional first derivatives and site mixed products.
+function feature_local_reverse(l,ps,iz,data,cotangents;request=NI.SiteInputs(),gradient=nothing)
+    T=promote_type(eltype(data.A),map(eltype,cotangents)...)
+    gp=request.parameters ? (isnothing(gradient) ? parameter_rebuild(ps,zeros(T,length(parameter_flatten(ps)))) : gradient) : nothing
+    request.parameters && zero_parameter_arrays!(gp)
+    dr=zeros(SVector{3,T},length(data.Rs))
         weights=zeros(T,length(l.products))
         for b in eachindex(l.irreps)
-            W=getproperty(ps.mixing,feature_key(b)); G=view(cotangents[b],:,:,i)
-            view(getproperty(gp.mixing,feature_key(b)),:,:,iz) .+= transpose(data.B[b])*G
+            W=getproperty(ps.mixing,feature_key(b)); G=cotangents[b]
+            request.parameters && (view(getproperty(gp.mixing,feature_key(b)),:,:,iz) .+= transpose(data.B[b])*G)
             dB=G*transpose(view(W,:,:,iz))
             weights .+= transpose(l.coupling[b])*vec(dB)
         end
@@ -222,21 +243,16 @@ function feature_vjp(X,l,ps,env,H,cotangents)
             for (a,(channel,n,m)) in enumerate(l.density)
                 (channel==0 || channel==z) || continue
                 adj=dA[a]
-                g+=adj*(data.dR[j,n]*data.Y[j,m]*direction+data.R[j,n]*data.dY[j,m])
-                gp.radial.scale[n,iz,z]+=adj*data.rawR[j,n]*data.Y[j,m]
+                request.displacements && (g+=adj*(data.dR[j,n]*data.Y[j,m]*direction+data.R[j,n]*data.dY[j,m]))
+                request.parameters && (gp.radial.scale[n,iz,z]+=adj*data.rawR[j,n]*data.Y[j,m])
                 radial_adj[j,n]+=adj*ps.radial.scale[n,iz,z]*data.Y[j,m]
             end
-            k=data.edges[j]; dest=env.neighbours[k]
-            for a=1:3; dx[a,i]-=g[a]; dx[a,dest]+=g[a]; end
+            dr[j]=g
         end
-        if !isempty(parameter_flatten(ps.custom_radial))
-            for j in eachindex(data.edges)
-                localgp=feature_radial_parameter_vjp(l.radial[iz,data.zs[j]],norm(data.Rs[j]),ps.custom_radial,view(radial_adj,j,:))
-                # Preserve arbitrary nested scalar/array parameter structures.
-                flat=parameter_flatten(gp.custom_radial)+parameter_flatten(localgp)
-                gp=merge(gp,(;custom_radial=parameter_rebuild(ps.custom_radial,flat)))
-            end
+        if request.parameters && !isempty(parameter_flatten(ps.custom_radial))
+            gp=merge(gp,(custom_radial=feature_radial_parameters_vjp(l,data,iz,ps.custom_radial,radial_adj),))
         end
-    end
-    (;positions=dx,parameters=gp)
+    (;displacements=dr,parameters=gp)
 end
+
+feature_radial_parameters_vjp(l,data,iz,ps,adj)=throw(ArgumentError("load ForwardDiff for custom radial feature parameter derivatives"))

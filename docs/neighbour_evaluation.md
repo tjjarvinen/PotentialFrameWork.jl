@@ -154,3 +154,14 @@ and widths 1/4: `test/neighbour_saved_reference.jl`. It validates source/geometr
 hashes and reads the supplied files without loading/refitting the reference model.
 Prepared timings/allocation and inference inspection can be reproduced with
 `benchmark/neighbour_evaluation.jl` and `benchmark/inspect_neighbour_evaluation.jl`.
+
+
+The separate [numerical site derivative boundary](site_pullbacks.md) declares
+`site_vjp!`, explicit output-to-input capabilities and parameter-buffer hooks.
+`NeighbourList.site_evaluate`/`site_pullback` own CPU chunk forward/backward
+execution, cotangent permutations and bounded endpoint scatter. Arbitrary mutable
+worker closures and prepared inference executors remain outside AD. Forward site
+callbacks alone do not advertise energy/feature VJPs or gradient-output mixed
+products; model authors must declare and implement each supported combination.
+Scalar ACE, equivariant feature targets and nonlinear invariant-head force training
+are supplied as adapters using this same generic executor.

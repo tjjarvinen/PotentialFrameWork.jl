@@ -4,7 +4,7 @@ import PotentialFrameWork: energy_parameter_gradient
 import PotentialFrameWork.PairPotentials: pair_vjp
 using PotentialFrameWork.PairPotentials: edge_result, parameter_seed
 using StaticArrays: SVector
-using LinearAlgebra: dot
+using LinearAlgebra: dot, norm
 using PotentialFrameWork.ACE: ResolvedModel, site_data, site_reverse, site_parameter_gradient, edge_displacement
 using PotentialFrameWork.PairPotentials: parameter_flatten, parameter_rebuild
 import PotentialFrameWork.ACE: ace_vjp, custom_parameter_gradient, radial_ad!, radial_ad_probe
@@ -60,41 +60,54 @@ struct ACEParameterDirection end
 ForwardDiff.:(≺)(::Type{ACEParameterDirection},::Type{<:ForwardDiff.Tag})=true
 ForwardDiff.:(≺)(::Type{<:ForwardDiff.Tag},::Type{ACEParameterDirection})=false
 
+function PotentialFrameWork.ACE.scalar_site_product(p,ps,iz,zs,Rs,de,dirs;request=PotentialFrameWork.NeighbourInterface.SiteInputs(),parameter_bar=nothing,scratch=nothing)
+    A=PotentialFrameWork.ACE
+    for family in (p.model.radial,p.model.pair_radial),ch in family; A.require_radial_ad(ch); end
+    directional=!isnothing(dirs) && any(v -> any(!iszero,v),dirs)
+    localrs=directional ? [SVector{3}(ntuple(a -> ForwardDiff.Dual{ACEParameterDirection}(Rs[j][a],dirs[j][a]),3)) for j in eachindex(Rs)] : Rs
+    data=site_data(p.model,ps,iz,zs,localrs;basis=p.basis)
+    # A parameter-only force pullback differentiates the parameter reverse; it
+    # never computes a displacement Hessian action.
+    rev=request.displacements ? site_reverse(p.model,ps,iz,data) : nothing
+    value(x)=directional ? ForwardDiff.value(x) : x
+    tangent(x)=directional ? ForwardDiff.partials(x)[1] : zero(x)
+    weight=isnothing(de) ? 0 : de
+    dr=request.displacements ? [map(x -> weight*value(x)+tangent(x),g) for g in rev.gradients] : nothing
+    gp=if request.parameters
+        buffer=isnothing(scratch) ? nothing : directional ? scratch.directional : scratch.plain
+        g=site_parameter_gradient(p.model,ps,iz,zs,data;reverse=rev,gradient=buffer)
+        if isnothing(parameter_bar)
+            parameter_rebuild(ps,map(x -> weight*value(x)+tangent(x),parameter_flatten(g)))
+        else
+            add_site_product!(parameter_bar,g,weight,directional)
+            nothing
+        end
+    else
+        nothing
+    end
+    (;displacements=dr,parameters=gp)
+end
 function ace_vjp_impl(X,model,ps,env,H,de,df,dw;centers=nothing)
-    for family in (model.radial,model.pair_radial),ch in family; PotentialFrameWork.ACE.require_radial_ad(ch); end
+    A=PotentialFrameWork.ACE
     flat=parameter_flatten(ps); dp=zero(flat); dx=zeros(eltype(X),size(X))
-    basis=PotentialFrameWork.ACE.angular_basis(model,eltype(model.reference))
-    for i in PotentialFrameWork.ACE.center_indices(centers,length(env.species))
-        iz=env.species[i]
+    p=A.ScalarSiteModel(model)
+    for i in A.center_indices(centers,length(env.species))
         edges=[k for k=env.offsets[1,i]:env.offsets[end,i]-1 if env.active[k]]
-        isempty(edges) && continue
         Rs=[edge_displacement(X,H,env,i,k) for k in edges]
         zs=[env.species[env.neighbours[k]] for k in edges]
-        bs=[SVector{3}(df[:,i]-df[:,env.neighbours[k]]) for k in edges]
-        # For v_j = B_i-B_j-C'R_j, the displacement adjoint is
-        # de*g + Hessian(E)*v - C*g. Hessian symmetry allows one directional
-        # differentiation of the analytic reverse, independent of neighbour or
-        # parameter count. The final term differentiates virial geometry.
-        dirs=[bs[j]-transpose(dw)*Rs[j] for j in eachindex(Rs)]
-        dualrs=[SVector{3}(ntuple(a -> ForwardDiff.Dual{ACEParameterDirection}(Rs[j][a],dirs[j][a]),3)) for j in eachindex(Rs)]
-        data=site_data(model,ps,iz,zs,dualrs;basis)
-        reverse=site_reverse(model,ps,iz,data)
+        dirs=[SVector{3}(df[:,i]-df[:,env.neighbours[k]])-transpose(dw)*Rs[j] for (j,k) in enumerate(edges)]
+        g=A.scalar_site_product(p,ps,env.species[i],zs,Rs,de,dirs)
+        data=site_data(model,ps,env.species[i],zs,Rs;basis=p.basis)
+        reverse=site_reverse(model,ps,env.species[i],data)
         for (j,k) in enumerate(edges)
-            gvalue=ForwardDiff.value.(reverse.gradients[j])
-            action=map(g -> ForwardDiff.partials(g)[1],reverse.gradients[j])
-            gd=de*gvalue+action-dw*gvalue
-            for a=1:3
-                dx[a,i]-=gd[a]; dx[a,env.neighbours[k]]+=gd[a]
-            end
+            gd=g.displacements[j]-dw*reverse.gradients[j]
+            for a=1:3; dx[a,i]-=gd[a]; dx[a,env.neighbours[k]]+=gd[a]; end
         end
-        # The same directional pass supplies the mixed parameter product.
-        g=parameter_flatten(site_parameter_gradient(model,ps,iz,zs,data;reverse))
-        for k in eachindex(dp)
-            dp[k]+=de*ForwardDiff.value(g[k])+ForwardDiff.partials(g[k])[1]
-        end
+        dp .+= parameter_flatten(g.parameters)
     end
     (;positions=dx,parameters=parameter_rebuild(ps,dp))
 end
+
 function ace_vjp(X,model,ps,env,H,de,df,dw;kwargs...)
     PotentialFrameWork.ACE.has_source(model) ? Base.invokelatest(ace_vjp_impl,X,model,ps,env,H,de,df,dw;kwargs...) : ace_vjp_impl(X,model,ps,env,H,de,df,dw;kwargs...)
 end
@@ -141,16 +154,8 @@ function radial_ad_probe(ch::PotentialFrameWork.ACE.CallableRadial,ps,r)
     end
 end
 
-function PotentialFrameWork.ACE.feature_radial_parameter_vjp(ch,r::Real,ps::NamedTuple,adj)
-    A=PotentialFrameWork.ACE
-    A.feature_require_parameter_ad(ch)
-    flat=parameter_flatten(ps)
-    isempty(flat) && return ps
-    g=ForwardDiff.gradient(flat) do theta
-        values=A.radial_values(ch,r,parameter_rebuild(ps,theta))
-        dot(adj,values)
-    end
-    parameter_rebuild(ps,g)
-end
+
+
+include("ace_feature_products.jl")
 
 end

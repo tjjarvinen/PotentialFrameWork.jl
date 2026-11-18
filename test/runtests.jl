@@ -264,6 +264,8 @@ include("ace_may30.jl")
 include("ace_interface.jl")
 include("neighbour_evaluation.jl")
 include("site_chunks.jl")
+include("site_pullbacks_runtests.jl")
+include("feature_energy_runtests.jl")
 println("Validation process: Julia ",VERSION,", threads=",Threads.nthreads())
 
 # Portable CPU kernel checks; real-device checks require the standalone opt-in.

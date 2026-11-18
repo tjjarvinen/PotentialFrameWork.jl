@@ -48,6 +48,10 @@ include("fitting.jl")
 include("angular_blocks.jl")
 include("cpu.jl")
 include("chunks.jl")
+include("site_pullbacks.jl")
+include("feature_energy.jl")
+export ACEFeatureEnergy, feature_energy_evaluate, feature_jvp
+export ace_evaluate_chunks, ace_features_chunks
 include("adaptation.jl")
 include("gpu.jl")
 include("precision.jl")

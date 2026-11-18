@@ -82,13 +82,13 @@ function site_data(model,ps,iz,zs,Rs;basis=angular_basis(model,eltype(model.refe
     (;energy,Rs,rs,R,dR,Q,dQ,rawR,rawQ,Y,dY,A,U,V,P,B,zs)
 end
 
-function site_reverse(model,ps,iz,data)
+function site_reverse(model,ps,iz,data;compute_gradients=true)
     T=eltype(data.A)
     weights=transpose(model.coupling)*(ps.WB[:,iz].*collect(Bool,model.policy.mask))
     projection=density_reverse(model,weights,data.U,data.V)
     dA=projection.dU; dV=projection.dV
     gradients=Vector{SVector{3,T}}(undef,length(data.Rs))
-    for j in eachindex(data.Rs)
+    for j in (compute_gradients ? eachindex(data.Rs) : 1:0)
         g=zero(SVector{3,T}); direction=data.Rs[j]/data.rs[j]
         adj=data.zs[j] in model.policy.species ? dV : dA
         for (a,(n,m)) in enumerate(model.density)
@@ -100,13 +100,14 @@ function site_reverse(model,ps,iz,data)
     (;density=dA,selected_density=dV,gradients)
 end
 
-function site_parameter_gradient(model,ps,iz,zs,data;reverse=nothing)
+function site_parameter_gradient(model,ps,iz,zs,data;reverse=nothing,gradient=nothing)
     T=eltype(data.A)
-    gradient=parameter_rebuild(ps,fill(zero(T),length(parameter_flatten(ps))))
+    gradient=isnothing(gradient) ? parameter_rebuild(ps,fill(zero(T),length(parameter_flatten(ps)))) : gradient
+    zero_parameter_arrays!(gradient)
     gradient.WB[:,iz] .= data.B
     gradient.Wpair[:,iz] .= vec(sum(data.Q;dims=1))
     if hasproperty(ps,:radial)
-        reverse=isnothing(reverse) ? site_reverse(model,ps,iz,data) : reverse
+        reverse=isnothing(reverse) ? site_reverse(model,ps,iz,data;compute_gradients=false) : reverse
         for j in eachindex(zs),(a,(n,m)) in enumerate(model.density)
             gradient.radial.scale[n,iz,zs[j]]+=(zs[j] in model.policy.species ? reverse.selected_density[a] : reverse.density[a])*data.rawR[j,n]*data.Y[j,m]
         end
