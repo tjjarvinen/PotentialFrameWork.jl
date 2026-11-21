@@ -27,6 +27,13 @@ function ACECalculator(model,ps,st=NamedTuple();width=4,slots=Threads.nthreads()
     executor=CPUExecutor(model,env;slots,precision,angular_backend,batch_size,product_algorithm)
     ACECalculator(model,deepcopy(ps),deepcopy(st),env,executor)
 end
+"""Join the calculator's default chunk workers. Explicit states close separately."""
+function Base.close(c::ACECalculator)
+    lock(ACE_STATE_INIT_LOCK) do
+        isnothing(c.evaluation_state) || close(c.evaluation_state)
+    end
+    nothing
+end
 AC.get_parameters(c::ACECalculator)=deepcopy(c.parameters)
 function AC.set_parameters!(c::ACECalculator,ps)
     size(ps.WB)==size(c.parameters.WB) && size(ps.Wpair)==size(c.parameters.Wpair) || throw(DimensionMismatch("ACE readout shapes"))
@@ -38,15 +45,26 @@ AC.length_unit(::ACECalculator)=u"Å"
 AC.promote_force_type(sys::AbstractSystem{3},c::ACECalculator)=SVector{3,typeof(zero(eltype(c.executor.force))*u"eV/Å")}
 AC.zero_energy(sys::AbstractSystem{3},c::ACECalculator)=zero(eltype(c.executor.force))*u"eV"
 AC.zero_virial(sys::AbstractSystem{3},c::ACECalculator)=zero(SMatrix{3,3,typeof(AC.zero_energy(sys,c)),9})
-function calculator_result(sys,c;parameters=c.parameters,state=nothing,energy_only=false,parallel=false,executor=(parallel && !(state isa ACEEvaluationState) ? :colored : :chunks),simd=true,fused=false,product_algorithm=c.executor.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),kwargs...)
+function calculator_result(sys,c;parameters=c.parameters,state=nothing,energy_only=false,parallel=false,executor=(parallel && !(state isa ACEEvaluationState) ? :colored : :chunks),simd=true,fused=false,product_algorithm=c.executor.prepared.product_algorithm,centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),
+                           workers=Threads.nthreads(:default),groups=1,reuse_topology=false,timings=nothing,kwargs...)
     parameters=(isnothing(parameters) || parameters===NamedTuple()) ? c.parameters : parameters
-    executor in (:chunks,:colored) || throw(ArgumentError("executor must be :chunks or :colored"))
-    if executor===:chunks && (!energy_only || state isa ACEEvaluationState)
-        evaluation_state=state isa ACEEvaluationState ? state :
-            isnothing(state) ? default_evaluation_state!(c) : ACEEvaluationState(c;state)
-        return chunk_calculator_result(sys,c,evaluation_state,parameters;energy_only,parallel,simd,fused,product_algorithm,centers,properties,kwargs...)
+    executor in (:chunks,:threaded,:colored) || throw(ArgumentError("executor must be :chunks, :threaded or :colored"))
+    if executor===:threaded || (executor===:chunks && (!energy_only || state isa ACEEvaluationState))
+        groups isa Integer && groups>0 || throw(ArgumentError("groups must be a positive integer"))
+        workers isa Integer && workers>0 || throw(ArgumentError("workers must be a positive integer"))
+        explicit=state isa ACEEvaluationState
+        shared=isnothing(state) || (executor===:threaded && state===c.state)
+        evaluation_state=explicit ? state : shared ? default_evaluation_state!(c) : ACEEvaluationState(c;state)
+        try
+            return chunk_calculator_result(sys,c,evaluation_state,parameters;energy_only,parallel,simd,fused,
+                product_algorithm,centers,properties,workers=executor===:threaded ? workers : 1,
+                groups,reuse_topology,timings,kwargs...)
+        finally
+            explicit || shared || close(evaluation_state)
+        end
     end
-    state isa ACEEvaluationState && throw(ArgumentError("explicit ACEEvaluationState requires executor=:chunks"))
+    reuse_topology && throw(ArgumentError("topology reuse requires a chunk executor and prepared evaluation state"))
+    state isa ACEEvaluationState && throw(ArgumentError("explicit ACEEvaluationState requires a chunk executor"))
     fast_parameters=parameter_seed(parameters) isa Union{Float32,Float64}
     boundary=fast_parameters && eltype(c.executor.force)===Float32 ? precision_geometry(sys,Float32) : sys
     input=fast_parameters ? ace_inputs(boundary,c.model;environment=c.environment,precision=eltype(c.executor.force)) : ace_inputs(sys,c.model;environment=c.environment)

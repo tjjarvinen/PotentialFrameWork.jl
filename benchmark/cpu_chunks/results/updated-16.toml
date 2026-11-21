@@ -1,0 +1,266 @@
+affinity = "pid 132's current affinity list: 0-15"
+baseline_commit = "90d726d08c21aa3e7bbd9b60dc0d17d31369c3f5"
+blas_threads = 1
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_target = "znver5"
+fixture_sha256 = "bf3ad85fb44b85e48a9581d42e6b4721f2a74d60e490936ee207dc8de83f72c5"
+grid = 12
+harness_sha256 = "e3ea874b7046d2f76297d8940e1d89662d0f428b1c7a635e9282cad1c087767a"
+interactive_threads = 0
+julia = "1.13.4"
+llvm = "20.1.8"
+mode = "updated"
+samples = 7
+threads = 16
+workloads_sha256 = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml"
+model_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+name = "Ti bcc"
+occupied_cells = 216
+packed_lanes = 207360
+phase_sizes = [34, 34, 35, 34, 34, 34, 33, 33, 34, 33, 35, 31, 34, 32, 31, 32, 32, 33, 31, 31, 31, 33, 32, 33, 31, 33, 30, 32, 30, 30, 32, 34, 32, 33, 34, 33, 31, 31, 32, 33, 31, 35, 31, 33, 32, 31, 31, 32, 31, 30, 31, 32, 31, 30, 32, 29, 31, 30, 31, 31, 29, 29, 31, 32, 34, 30, 32, 33, 32, 32, 29, 31, 31, 30, 31, 31, 31, 31, 28, 29, 28, 29, 29, 28, 28, 29, 28, 28, 28, 27, 27, 28, 25, 26, 26, 25, 24, 24, 25, 24, 23, 21, 20, 18, 16, 14, 15, 12, 12, 11, 10, 9, 8, 8, 7, 8, 9, 9, 9, 9, 9, 8, 8, 8, 10, 9, 9, 7, 8, 8, 9, 6, 6, 5, 5, 3, 3, 3, 3, 2, 1, 1]
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [cases.cell_order_rebuild]
+    bytes = [2028448, 2028448, 2028448, 2028448, 2028448, 2028448, 2028448]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 0.000627243
+    median_s = 0.000553772
+    min_s = 0.000476261
+    seconds = [0.000596572, 0.000506582, 0.000554722, 0.000482191, 0.000627243, 0.000553772, 0.000476261]
+
+    [cases.chunk_layout]
+    bytes = [46513760, 46513760, 46513760, 46513760, 46513760, 46513760, 46513760]
+    gc_s = [0.0, 0.003709434, 0.0, 0.003407243, 0.004459816, 0.001865817, 0.003316142]
+    max_s = 0.014394222
+    median_s = 0.012573486
+    min_s = 0.009681125
+    seconds = [0.010108067, 0.014394222, 0.009681125, 0.012972007, 0.013954501, 0.01124744, 0.012573486]
+
+    [cases.environment_rebuild]
+    bytes = [50152296, 50152296, 50152296, 50152296, 50152296, 50152296, 50152296]
+    gc_s = [0.0, 0.0, 0.004648657, 0.0, 0.004519376, 0.004185966, 0.008467421]
+    max_s = 0.025271792
+    median_s = 0.020087632
+    min_s = 0.015746338
+    seconds = [0.016233349, 0.015986228, 0.022500841, 0.015746338, 0.020894736, 0.020087632, 0.025271792]
+
+    [[cases.runs]]
+    bytes = [5582864, 5582864, 5582864, 5582864, 5582864, 5582864, 5582864]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.155111463
+    median_s = 0.121967912
+    method = "colored"
+    min_s = 0.095674697
+    policy = "prepared reuse"
+    request = "efv"
+    seconds = [0.155111463, 0.141254822, 0.121967912, 0.095674697, 0.116824683, 0.130741324, 0.105962675]
+    [[cases.runs]]
+    bytes = [108250552, 108250552, 108250552, 108250552, 108250552, 108250552, 108250552]
+    gc_s = [0.0, 0.006839505, 0.014048671, 0.010016046, 0.010221057, 0.009805346, 0.014796244]
+    groups = 1
+    max_s = 0.152331782
+    median_s = 0.144222493
+    method = "threaded"
+    min_s = 0.12705255
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.12705255, 0.134340697, 0.148232358, 0.152331782, 0.144222493, 0.141226802, 0.144684805]
+    [[cases.runs]]
+    bytes = [3017136, 3017136, 3017136, 3017136, 3017136, 3017136, 3017136]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.11312072
+    median_s = 0.095342226
+    method = "threaded"
+    min_s = 0.089777955
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.095342226, 0.1022209, 0.094731044, 0.093040697, 0.11312072, 0.095396886, 0.089777955]
+    [[cases.runs]]
+    bytes = [108361400, 108361400, 108361400, 108361400, 108361400, 108361400, 108361400]
+    gc_s = [0.0, 0.00531809, 0.003867244, 0.006516174, 0.006027413, 0.008819571, 0.005977582]
+    groups = 4
+    max_s = 0.146582831
+    median_s = 0.137747019
+    method = "threaded"
+    min_s = 0.130292242
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.137747019, 0.137271538, 0.130292242, 0.146582831, 0.13795331, 0.139579916, 0.133401193]
+    [[cases.runs]]
+    bytes = [3017136, 3017136, 3017136, 3017136, 3017136, 3017136, 3017136]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.110099909
+    median_s = 0.099494451
+    method = "threaded"
+    min_s = 0.092474665
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.096454159, 0.093402669, 0.102927733, 0.099494451, 0.092474665, 0.110099909, 0.102432371]
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/tialv-resolved.toml"
+model_sha256 = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"
+name = "Ti–Al–V bcc"
+occupied_cells = 216
+packed_lanes = 216760
+phase_sizes = [34, 34, 35, 34, 34, 34, 33, 33, 34, 33, 35, 31, 34, 32, 31, 32, 32, 33, 31, 31, 31, 33, 32, 33, 31, 33, 30, 32, 30, 30, 32, 34, 32, 33, 34, 33, 31, 31, 32, 33, 31, 35, 31, 33, 32, 31, 31, 32, 31, 30, 31, 32, 31, 30, 32, 29, 31, 30, 31, 31, 29, 29, 31, 32, 34, 30, 32, 33, 32, 32, 29, 31, 31, 30, 31, 31, 31, 31, 28, 29, 28, 29, 29, 28, 28, 29, 28, 28, 28, 27, 27, 28, 25, 26, 26, 25, 24, 24, 25, 24, 23, 21, 20, 18, 16, 14, 15, 12, 12, 11, 10, 9, 8, 8, 7, 8, 9, 9, 9, 9, 9, 8, 8, 8, 10, 9, 9, 7, 8, 8, 9, 6, 6, 5, 5, 3, 3, 3, 3, 2, 1, 1]
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [cases.cell_order_rebuild]
+    bytes = [2028448, 2028448, 2028448, 2028448, 2028448, 2028448, 2028448]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 0.000631532
+    median_s = 0.000502442
+    min_s = 0.000486562
+    seconds = [0.000631532, 0.000529152, 0.000502442, 0.000506182, 0.000497662, 0.000486791, 0.000486562]
+
+    [cases.chunk_layout]
+    bytes = [46513760, 46513760, 46513760, 46513760, 46513760, 46513760, 46513760]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.005106678, 0.0, 0.0]
+    max_s = 0.015166704
+    median_s = 0.009509365
+    min_s = 0.009387774
+    seconds = [0.009736285, 0.009441185, 0.009442804, 0.009546705, 0.015166704, 0.009509365, 0.009387774]
+
+    [cases.environment_rebuild]
+    bytes = [50152296, 50152296, 50152296, 50152296, 50152296, 50152296, 50152296]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.007441347, 0.0, 0.0]
+    max_s = 0.025925284
+    median_s = 0.016897781
+    min_s = 0.01650704
+    seconds = [0.016940211, 0.01650704, 0.016897781, 0.018829598, 0.025925284, 0.01658051, 0.016658021]
+
+    [[cases.runs]]
+    bytes = [3781168, 3781168, 3781168, 3781168, 3781168, 3781168, 3781168]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.32533908
+    median_s = 0.291893968
+    method = "colored"
+    min_s = 0.259750462
+    policy = "prepared reuse"
+    request = "efv"
+    seconds = [0.315840975, 0.29256392, 0.26754856, 0.259750462, 0.291893968, 0.32533908, 0.287964574]
+    [[cases.runs]]
+    bytes = [110719096, 110719096, 110719096, 110719096, 110719096, 110719096, 110719096]
+    gc_s = [0.0, 0.007341327, 0.006487713, 0.005767521, 0.010138496, 0.010355838, 0.015697506]
+    groups = 1
+    max_s = 0.254304942
+    median_s = 0.246419594
+    method = "threaded"
+    min_s = 0.228676219
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.228676219, 0.229415111, 0.246419594, 0.243794674, 0.246903255, 0.253030617, 0.254304942]
+    [[cases.runs]]
+    bytes = [5347984, 5347984, 5347984, 5347984, 5347984, 5347984, 5347984]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.21522025
+    median_s = 0.200289796
+    method = "threaded"
+    min_s = 0.195171988
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.195171988, 0.209473909, 0.21522025, 0.200289796, 0.196845314, 0.196690473, 0.202430324]
+    [[cases.runs]]
+    bytes = [110829944, 110829944, 110829944, 110829944, 110829944, 110829944, 110829944]
+    gc_s = [0.0, 0.004617377, 0.007025946, 0.005958731, 0.005885132, 0.014756353, 0.010814709]
+    groups = 4
+    max_s = 0.268124122
+    median_s = 0.255335385
+    method = "threaded"
+    min_s = 0.234976772
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.268124122, 0.265887394, 0.255335385, 0.234976772, 0.265869804, 0.239115747, 0.240898023]
+    [[cases.runs]]
+    bytes = [5347984, 5347984, 5347984, 5347984, 5347984, 5347984, 5347984]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.223384259
+    median_s = 0.21257531
+    method = "threaded"
+    min_s = 0.20697455
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.215839763, 0.223384259, 0.21222222, 0.20697455, 0.223161899, 0.211626387, 0.21257531]
+
+[source_sha256]
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "c288830459d8687840a27c58583f2cd0cbf9bdc908dfd5e33586f42f3a6e26ba"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "7c3e5148700b9d7dab7be76bb5c85ff21a2f5750932f0e0fe6ad9d5c20608b65"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "941c05f99c0d604fb2df8d3af6dd89b398929153c66879eed56f90c8bdd1d0cd"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "7f70af38b8773b33a643d4116830f51c61a580d8c91b8c14758d5de83c3a2d58"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"ext/ace_feature_products.jl" = "08508a18b305cdbb31b7d5ab4234ca52526523049888dadd1b0632097badd817"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "944f8be4276bb9475358686302643e1dc23479b7f03e48228d2d6a942c13ec2e"
+"src/submodules/ACE/adaptation.jl" = "437f2a8394088723e7fe32d09e527521c52d27b63a05b02701e7e26b688f7157"
+"src/submodules/ACE/angular_blocks.jl" = "c1b78378299960d712f06ee1407397593780975c626ec32263c1848512f60f6a"
+"src/submodules/ACE/calculators.jl" = "0f2e242bbeeb983f00879aa5c8d3b0c2704b6ff3241dd2bb48e33d87fb67192f"
+"src/submodules/ACE/chunks.jl" = "0d73acec6fd464bc801786706fc165cdb21b36fbe6b13c6a22dc1ef694656233"
+"src/submodules/ACE/cpu.jl" = "19835dd55c1b8f7a988b0f86fe82bc393ca5393e4ecfe77141a708d0aaea7807"
+"src/submodules/ACE/environments.jl" = "ee27e3dbe3161e02bcc15ab62f01b5d5575dffb3c50e5703878b4cdaf4d23b6d"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/feature_energy.jl" = "1869613d7d1c5dfd5594331b6e5615c7289828e4034642a4afee3e183cdf790d"
+"src/submodules/ACE/features.jl" = "22ce573ce92d82f06333d65ad7caa7d5511cc82c78b0d47f49cc8139b8d87ce3"
+"src/submodules/ACE/fitting.jl" = "0ff53a102561733228f7f739465405263e2ee0f50f9b2e4ad07cb969fbe1e80a"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "56deb06b51e6d58b4674b00c76358f386e2863a1669d66f939f8cd7b8873d919"
+"src/submodules/ACE/interface_persistence.jl" = "7a5c0cbf0715c4b5806d6d8ae697dadf4778f004d23cc521c8f03b2d3fa5b500"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "d62477a11daf4e587bb478c0223774b885984c1baf78368bc17b054e4927b753"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "85b6030cd4a0d31d333948b766b2b66c7d70a2e52d8dd545f1a93ab4d78a426a"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "c31ad3261e4050870c65fa54bf7c8affce56fff2f8af2247e1fe9eef7a96c110"
+"src/submodules/ACE/serial.jl" = "fd4e7bd4bc2e7ac4926eafde25b4e573e1e93b956bb5bab10e4fdbf23a6b79be"
+"src/submodules/ACE/site_pullbacks.jl" = "ac22d9435d97f0c0ddc951682d8836df5dcf89451ed85e13605f2afc5c0cee5d"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "4771e0d35b8027054f8226887f841207c98f060349b7565665d9901fb0c31356"
+"src/submodules/NeighbourList/NeighbourList.jl" = "94082feb205970bceb2a6f1d2a2df34834b868eb4a4ed7558c9c1021687c6694"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/chunk_threads.jl" = "1fae5302c0fa83d968961eaf0c7d4e3945f2950ef4538dfe54397a4e24b0bbdd"
+"src/submodules/NeighbourList/chunks.jl" = "66fbd69a5773e0a67b39008015c97188a2943a84259e0341ef96a80b76009c92"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/pullbacks.jl" = "2ae778438fbacf246def660cf2b15a5637b8c55e14bb1dd7ae03d7b6db3ad676"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AcceleratedKernels = "0.5.13"
+AtomsBase = "0.5.3"
+AtomsCalculators = "0.2.3"
+KernelAbstractions = "0.9.48"
+SIMD = "3.8.2"
+SpheriCart = "0.2.4"
+StaticArrays = "1.9.25"
+Unitful = "1.29.0"

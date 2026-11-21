@@ -1,0 +1,562 @@
+affinity = "pid 21's current affinity list: 0,1"
+baseline_commit = "90d726d08c21aa3e7bbd9b60dc0d17d31369c3f5"
+blas_threads = 1
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_target = "znver5"
+fixture_sha256 = "bf3ad85fb44b85e48a9581d42e6b4721f2a74d60e490936ee207dc8de83f72c5"
+grid = 12
+harness_sha256 = "e3ea874b7046d2f76297d8940e1d89662d0f428b1c7a635e9282cad1c087767a"
+interactive_threads = 0
+julia = "1.13.4"
+llvm = "20.1.8"
+mode = "updated"
+samples = 7
+threads = 2
+workloads_sha256 = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+
+[[cases]]
+active_edges = 2
+atoms = 2
+batch_size = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml"
+model_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+name = "Ti2 dimer"
+occupied_cells = 1
+packed_lanes = 8
+phase_sizes = [1, 1]
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [cases.cell_order_rebuild]
+    bytes = [6320, 6320, 6320, 6320, 6320, 6320, 6320]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 2.773e-5
+    median_s = 2.17e-6
+    min_s = 1.75e-6
+    seconds = [2.773e-5, 2.93e-6, 2.2e-6, 2.12e-6, 2.16e-6, 2.17e-6, 1.75e-6]
+
+    [cases.chunk_layout]
+    bytes = [1760, 1760, 1760, 1760, 1760, 1760, 1760]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 2.75e-6
+    median_s = 1.9e-7
+    min_s = 1.8e-7
+    seconds = [2.75e-6, 2.6e-7, 1.8e-7, 1.9e-7, 1.8e-7, 2.0e-7, 1.9e-7]
+
+    [cases.environment_rebuild]
+    bytes = [10784, 10784, 10784, 10784, 10784, 10784, 10784]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 3.64e-5
+    median_s = 3.39e-6
+    min_s = 3.12e-6
+    seconds = [3.64e-5, 4.71e-6, 3.55e-6, 3.34e-6, 3.39e-6, 3.16e-6, 3.12e-6]
+
+    [[cases.runs]]
+    bytes = [31072, 31072, 31072, 31072, 31072, 31072, 31072]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.001327774
+    median_s = 0.001092024
+    method = "colored"
+    min_s = 0.001079363
+    policy = "prepared reuse"
+    request = "energy"
+    seconds = [0.001327774, 0.001153724, 0.001110583, 0.001092024, 0.001086513, 0.001083494, 0.001079363]
+    [[cases.runs]]
+    bytes = [186272, 186272, 186272, 186272, 186272, 186272, 186272]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.000698653
+    median_s = 0.000355691
+    method = "threaded"
+    min_s = 0.000342251
+    policy = "rebuild"
+    request = "energy"
+    seconds = [0.000698653, 0.000556591, 0.000389382, 0.000355691, 0.000347701, 0.000342251, 0.000347851]
+    [[cases.runs]]
+    bytes = [156528, 156528, 156528, 156528, 156528, 156528, 156528]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.000607182
+    median_s = 0.000348571
+    method = "threaded"
+    min_s = 0.000322481
+    policy = "reuse"
+    request = "energy"
+    seconds = [0.000607182, 0.000506782, 0.000382151, 0.000348571, 0.000329061, 0.000322481, 0.000323091]
+    [[cases.runs]]
+    bytes = [186272, 186272, 186272, 186272, 186272, 186272, 186272]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.000652422
+    median_s = 0.000381141
+    method = "threaded"
+    min_s = 0.000342361
+    policy = "rebuild"
+    request = "energy"
+    seconds = [0.000652422, 0.000435871, 0.000409622, 0.000381141, 0.000355871, 0.000346931, 0.000342361]
+    [[cases.runs]]
+    bytes = [156528, 156528, 156528, 156528, 156528, 156528, 156528]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.000564432
+    median_s = 0.000341942
+    method = "threaded"
+    min_s = 0.000330811
+    policy = "reuse"
+    request = "energy"
+    seconds = [0.000564432, 0.000371511, 0.000342151, 0.000341942, 0.000330811, 0.000337131, 0.000337191]
+    [[cases.runs]]
+    bytes = [31072, 31072, 31072, 31072, 31072, 31072, 31072]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.001324234
+    median_s = 0.001090643
+    method = "colored"
+    min_s = 0.001074904
+    policy = "prepared reuse"
+    request = "forces"
+    seconds = [0.001324234, 0.001105764, 0.001090643, 0.001074904, 0.001102623, 0.001089724, 0.001075323]
+    [[cases.runs]]
+    bytes = [174200, 174200, 174200, 174200, 174200, 174200, 174200]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.000592562
+    median_s = 0.000360861
+    method = "threaded"
+    min_s = 0.000330921
+    policy = "rebuild"
+    request = "forces"
+    seconds = [0.000592562, 0.000513981, 0.000404252, 0.000360861, 0.000340431, 0.000333371, 0.000330921]
+    [[cases.runs]]
+    bytes = [144456, 144456, 144456, 144456, 144456, 144456, 144456]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.000604232
+    median_s = 0.000361671
+    method = "threaded"
+    min_s = 0.000346582
+    policy = "reuse"
+    request = "forces"
+    seconds = [0.000604232, 0.000494422, 0.000400281, 0.000361671, 0.000352951, 0.000349031, 0.000346582]
+    [[cases.runs]]
+    bytes = [174200, 174200, 174200, 174200, 174200, 174200, 174200]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.000607642
+    median_s = 0.000336051
+    method = "threaded"
+    min_s = 0.000331211
+    policy = "rebuild"
+    request = "forces"
+    seconds = [0.000607642, 0.000417302, 0.000359291, 0.000336051, 0.000331241, 0.000334331, 0.000331211]
+    [[cases.runs]]
+    bytes = [144456, 144456, 144456, 144456, 144456, 144456, 144456]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.000553432
+    median_s = 0.000338692
+    method = "threaded"
+    min_s = 0.000321781
+    policy = "reuse"
+    request = "forces"
+    seconds = [0.000553432, 0.000372061, 0.000345631, 0.000338692, 0.000325961, 0.000322501, 0.000321781]
+[[cases]]
+active_edges = 928
+atoms = 16
+batch_size = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml"
+model_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+name = "Ti 16-atom periodic"
+occupied_cells = 1
+packed_lanes = 960
+phase_sizes = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [cases.cell_order_rebuild]
+    bytes = [23624, 23624, 23624, 23624, 23624, 23624, 23624]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 3.75e-5
+    median_s = 8.53e-6
+    min_s = 7.68e-6
+    seconds = [3.75e-5, 8.92e-6, 8.53e-6, 7.68e-6, 7.92e-6, 8.7e-6, 7.93e-6]
+
+    [cases.chunk_layout]
+    bytes = [27424, 27424, 27424, 27424, 27424, 27424, 27424]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 9.21e-6
+    median_s = 4.71e-6
+    min_s = 3.8e-6
+    seconds = [9.21e-6, 4.25e-6, 4.71e-6, 4.79e-6, 4.43e-6, 6.8e-6, 3.8e-6]
+
+    [cases.environment_rebuild]
+    bytes = [195928, 195928, 195928, 195928, 195928, 195928, 195928]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 0.000102341
+    median_s = 4.557e-5
+    min_s = 4.499e-5
+    seconds = [0.000102341, 5.059e-5, 4.557e-5, 4.729e-5, 4.511e-5, 4.499e-5, 4.505e-5]
+
+    [[cases.runs]]
+    bytes = [239520, 239520, 239520, 239520, 239520, 239520, 239520]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.004054533
+    median_s = 0.003868062
+    method = "colored"
+    min_s = 0.003842243
+    policy = "prepared reuse"
+    request = "energy"
+    seconds = [0.004054533, 0.003852272, 0.003878532, 0.003855753, 0.003868062, 0.003842243, 0.003884422]
+    [[cases.runs]]
+    bytes = [414384, 414384, 414384, 414384, 414384, 414384, 414384]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.00322383
+    median_s = 0.00294588
+    method = "threaded"
+    min_s = 0.002906439
+    policy = "rebuild"
+    request = "energy"
+    seconds = [0.00322383, 0.002975249, 0.00294588, 0.002911789, 0.002909539, 0.00295442, 0.002906439]
+    [[cases.runs]]
+    bytes = [163728, 163728, 163728, 163728, 163728, 163728, 163728]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.00304751
+    median_s = 0.0028815
+    method = "threaded"
+    min_s = 0.00285341
+    policy = "reuse"
+    request = "energy"
+    seconds = [0.00304751, 0.002922689, 0.0028815, 0.002868619, 0.002887689, 0.002855339, 0.00285341]
+    [[cases.runs]]
+    bytes = [414384, 414384, 414384, 414384, 414384, 414384, 414384]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.003074
+    median_s = 0.002926389
+    method = "threaded"
+    min_s = 0.002894809
+    policy = "rebuild"
+    request = "energy"
+    seconds = [0.003074, 0.002993489, 0.0029291, 0.002904439, 0.002926389, 0.00290005, 0.002894809]
+    [[cases.runs]]
+    bytes = [163728, 163728, 163728, 163728, 163728, 163728, 163728]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.00317545
+    median_s = 0.002855959
+    method = "threaded"
+    min_s = 0.002836189
+    policy = "reuse"
+    request = "energy"
+    seconds = [0.00317545, 0.00287035, 0.002852549, 0.002855959, 0.002836189, 0.002857679, 0.002853129]
+    [[cases.runs]]
+    bytes = [239520, 239520, 239520, 239520, 239520, 239520, 239520]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.004351614
+    median_s = 0.004171783
+    method = "colored"
+    min_s = 0.004153233
+    policy = "prepared reuse"
+    request = "forces"
+    seconds = [0.004351614, 0.004217984, 0.004153233, 0.004171783, 0.004153294, 0.004180613, 0.004161803]
+    [[cases.runs]]
+    bytes = [403784, 403784, 403784, 403784, 403784, 403784, 403784]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.003394351
+    median_s = 0.0032797
+    method = "threaded"
+    min_s = 0.003250111
+    policy = "rebuild"
+    request = "forces"
+    seconds = [0.003394351, 0.003323381, 0.0032797, 0.003257851, 0.00327963, 0.003250111, 0.00328679]
+    [[cases.runs]]
+    bytes = [153128, 153128, 153128, 153128, 153128, 153128, 153128]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.003373931
+    median_s = 0.00321463
+    method = "threaded"
+    min_s = 0.00318142
+    policy = "reuse"
+    request = "forces"
+    seconds = [0.003373931, 0.003266291, 0.00321463, 0.00318142, 0.003213411, 0.00319688, 0.00326168]
+    [[cases.runs]]
+    bytes = [403784, 403784, 403784, 403784, 403784, 403784, 403784]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.003508721
+    median_s = 0.00329537
+    method = "threaded"
+    min_s = 0.003239151
+    policy = "rebuild"
+    request = "forces"
+    seconds = [0.003508721, 0.003297821, 0.00329537, 0.003239151, 0.00324787, 0.003302731, 0.00324778]
+    [[cases.runs]]
+    bytes = [153128, 153128, 153128, 153128, 153128, 153128, 153128]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.00332832
+    median_s = 0.00318861
+    method = "threaded"
+    min_s = 0.00317613
+    policy = "reuse"
+    request = "forces"
+    seconds = [0.00332832, 0.003205981, 0.00321687, 0.00317613, 0.00317986, 0.003184441, 0.00318861]
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml"
+model_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+name = "Ti bcc"
+occupied_cells = 216
+packed_lanes = 207360
+phase_sizes = [34, 34, 35, 34, 34, 34, 33, 33, 34, 33, 35, 31, 34, 32, 31, 32, 32, 33, 31, 31, 31, 33, 32, 33, 31, 33, 30, 32, 30, 30, 32, 34, 32, 33, 34, 33, 31, 31, 32, 33, 31, 35, 31, 33, 32, 31, 31, 32, 31, 30, 31, 32, 31, 30, 32, 29, 31, 30, 31, 31, 29, 29, 31, 32, 34, 30, 32, 33, 32, 32, 29, 31, 31, 30, 31, 31, 31, 31, 28, 29, 28, 29, 29, 28, 28, 29, 28, 28, 28, 27, 27, 28, 25, 26, 26, 25, 24, 24, 25, 24, 23, 21, 20, 18, 16, 14, 15, 12, 12, 11, 10, 9, 8, 8, 7, 8, 9, 9, 9, 9, 9, 8, 8, 8, 10, 9, 9, 7, 8, 8, 9, 6, 6, 5, 5, 3, 3, 3, 3, 2, 1, 1]
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [cases.cell_order_rebuild]
+    bytes = [2028448, 2028448, 2028448, 2028448, 2028448, 2028448, 2028448]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 0.000596882
+    median_s = 0.000490182
+    min_s = 0.000472231
+    seconds = [0.000596882, 0.000506262, 0.000497202, 0.000484931, 0.000490182, 0.000472231, 0.000473282]
+
+    [cases.chunk_layout]
+    bytes = [46513760, 46513760, 46513760, 46513760, 46513760, 46513760, 46513760]
+    gc_s = [0.0, 0.0, 0.003389721, 0.0, 0.002559678, 0.0, 0.002364868]
+    max_s = 0.012923552
+    median_s = 0.010012752
+    min_s = 0.009606161
+    seconds = [0.010012752, 0.009606161, 0.012923552, 0.009809291, 0.012132209, 0.009676961, 0.011850708]
+
+    [cases.environment_rebuild]
+    bytes = [50152296, 50152296, 50152296, 50152296, 50152296, 50152296, 50152296]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.006860272, 0.0, 0.0]
+    max_s = 0.02509442
+    median_s = 0.015969121
+    min_s = 0.015591161
+    seconds = [0.015969121, 0.015591161, 0.015994661, 0.017618877, 0.02509442, 0.01575694, 0.015644141]
+
+    [[cases.runs]]
+    bytes = [4088128, 4088128, 4088128, 4088128, 4088128, 4088128, 4088128]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.370961851
+    median_s = 0.363164686
+    method = "colored"
+    min_s = 0.362480743
+    policy = "prepared reuse"
+    request = "efv"
+    seconds = [0.362683825, 0.362480743, 0.363164686, 0.362745065, 0.363173035, 0.370961851, 0.367672421]
+    [[cases.runs]]
+    bytes = [107467648, 107467648, 107467648, 107467648, 107467648, 107467648, 107467648]
+    gc_s = [0.0, 0.005418338, 0.007340704, 0.005354877, 0.007334076, 0.007271182, 0.007054383]
+    groups = 1
+    max_s = 0.404311908
+    median_s = 0.403711376
+    method = "threaded"
+    min_s = 0.397161485
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.397161485, 0.402362521, 0.404179908, 0.402332752, 0.404271567, 0.403711376, 0.404311908]
+    [[cases.runs]]
+    bytes = [2278352, 2278352, 2278352, 2278352, 2278352, 2278352, 2278352]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.369736587
+    median_s = 0.368811554
+    method = "threaded"
+    min_s = 0.367986271
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.369736587, 0.368837124, 0.368467913, 0.368815264, 0.367986271, 0.368811554, 0.368521713]
+    [[cases.runs]]
+    bytes = [107579696, 107579696, 107579696, 107579696, 107579696, 107579696, 107579696]
+    gc_s = [0.0, 0.004115313, 0.00630169, 0.007475914, 0.006979774, 0.007124832, 0.007310153]
+    groups = 4
+    max_s = 0.405409681
+    median_s = 0.40485394
+    method = "threaded"
+    min_s = 0.401427289
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.40485147, 0.401427289, 0.403118924, 0.40506055, 0.40485394, 0.405409681, 0.4051016]
+    [[cases.runs]]
+    bytes = [2278352, 2278352, 2278352, 2278352, 2278352, 2278352, 2278352]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.381163444
+    median_s = 0.369736467
+    method = "threaded"
+    min_s = 0.368468322
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.381163444, 0.372229645, 0.369161415, 0.369736467, 0.368758364, 0.368468322, 0.371766614]
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/tialv-resolved.toml"
+model_sha256 = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"
+name = "Ti–Al–V bcc"
+occupied_cells = 216
+packed_lanes = 216760
+phase_sizes = [34, 34, 35, 34, 34, 34, 33, 33, 34, 33, 35, 31, 34, 32, 31, 32, 32, 33, 31, 31, 31, 33, 32, 33, 31, 33, 30, 32, 30, 30, 32, 34, 32, 33, 34, 33, 31, 31, 32, 33, 31, 35, 31, 33, 32, 31, 31, 32, 31, 30, 31, 32, 31, 30, 32, 29, 31, 30, 31, 31, 29, 29, 31, 32, 34, 30, 32, 33, 32, 32, 29, 31, 31, 30, 31, 31, 31, 31, 28, 29, 28, 29, 29, 28, 28, 29, 28, 28, 28, 27, 27, 28, 25, 26, 26, 25, 24, 24, 25, 24, 23, 21, 20, 18, 16, 14, 15, 12, 12, 11, 10, 9, 8, 8, 7, 8, 9, 9, 9, 9, 9, 8, 8, 8, 10, 9, 9, 7, 8, 8, 9, 6, 6, 5, 5, 3, 3, 3, 3, 2, 1, 1]
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [cases.cell_order_rebuild]
+    bytes = [2028448, 2028448, 2028448, 2028448, 2028448, 2028448, 2028448]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    max_s = 0.000709702
+    median_s = 0.000495302
+    min_s = 0.000477201
+    seconds = [0.000709702, 0.000535191, 0.000499592, 0.000495302, 0.000485711, 0.000490432, 0.000477201]
+
+    [cases.chunk_layout]
+    bytes = [46513760, 46513760, 46513760, 46513760, 46513760, 46513760, 46513760]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.005049887, 0.0, 0.0]
+    max_s = 0.0155178
+    median_s = 0.009702981
+    min_s = 0.0093693
+    seconds = [0.010090603, 0.009734191, 0.009464351, 0.0093693, 0.0155178, 0.009702981, 0.00944626]
+
+    [cases.environment_rebuild]
+    bytes = [50152296, 50152296, 50152296, 50152296, 50152296, 50152296, 50152296]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.007076893, 0.0, 0.0]
+    max_s = 0.025543892
+    median_s = 0.017076415
+    min_s = 0.016786244
+    seconds = [0.017076415, 0.016787314, 0.017132575, 0.018988071, 0.025543892, 0.016786244, 0.016995444]
+
+    [[cases.runs]]
+    bytes = [2286432, 2286432, 2286432, 2286432, 2286432, 2286432, 2286432]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.923246124
+    median_s = 0.922463832
+    method = "colored"
+    min_s = 0.920815496
+    policy = "prepared reuse"
+    request = "efv"
+    seconds = [0.922666202, 0.921268587, 0.92197534, 0.922869832, 0.920815496, 0.922463832, 0.923246124]
+    [[cases.runs]]
+    bytes = [110659904, 110659904, 110659904, 110659904, 110659904, 110659904, 110659904]
+    gc_s = [0.0, 0.004503694, 0.007018343, 0.007429763, 0.007927285, 0.007024731, 0.007278972]
+    groups = 1
+    max_s = 0.989126565
+    median_s = 0.983432927
+    method = "threaded"
+    min_s = 0.979488494
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.979488494, 0.983432927, 0.986075306, 0.982979875, 0.989126565, 0.986517407, 0.981329171]
+    [[cases.runs]]
+    bytes = [5332912, 5332912, 5332912, 5332912, 5332912, 5332912, 5332912]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 1
+    max_s = 0.948908406
+    median_s = 0.946378368
+    method = "threaded"
+    min_s = 0.941444472
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.948149414, 0.947810183, 0.946378368, 0.948908406, 0.941971534, 0.941444472, 0.942928687]
+    [[cases.runs]]
+    bytes = [110771952, 110771952, 110771952, 110771952, 110771952, 110771952, 110771952]
+    gc_s = [0.0, 0.007005443, 0.005468597, 0.009448831, 0.007170883, 0.007403024, 0.007218044]
+    groups = 4
+    max_s = 0.977463988
+    median_s = 0.968347589
+    method = "threaded"
+    min_s = 0.964739507
+    policy = "rebuild"
+    request = "efv"
+    seconds = [0.965147048, 0.970890337, 0.968347589, 0.977463988, 0.970661786, 0.966434732, 0.964739507]
+    [[cases.runs]]
+    bytes = [5332912, 5332912, 5332912, 5332912, 5332912, 5332912, 5332912]
+    gc_s = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    groups = 4
+    max_s = 0.93238596
+    median_s = 0.929896551
+    method = "threaded"
+    min_s = 0.926045747
+    policy = "reuse"
+    request = "efv"
+    seconds = [0.93059151, 0.930551674, 0.928700527, 0.929896551, 0.93238596, 0.927537853, 0.926045747]
+
+[source_sha256]
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "c288830459d8687840a27c58583f2cd0cbf9bdc908dfd5e33586f42f3a6e26ba"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "7c3e5148700b9d7dab7be76bb5c85ff21a2f5750932f0e0fe6ad9d5c20608b65"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "941c05f99c0d604fb2df8d3af6dd89b398929153c66879eed56f90c8bdd1d0cd"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "7f70af38b8773b33a643d4116830f51c61a580d8c91b8c14758d5de83c3a2d58"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"ext/ace_feature_products.jl" = "08508a18b305cdbb31b7d5ab4234ca52526523049888dadd1b0632097badd817"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "944f8be4276bb9475358686302643e1dc23479b7f03e48228d2d6a942c13ec2e"
+"src/submodules/ACE/adaptation.jl" = "437f2a8394088723e7fe32d09e527521c52d27b63a05b02701e7e26b688f7157"
+"src/submodules/ACE/angular_blocks.jl" = "c1b78378299960d712f06ee1407397593780975c626ec32263c1848512f60f6a"
+"src/submodules/ACE/calculators.jl" = "0f2e242bbeeb983f00879aa5c8d3b0c2704b6ff3241dd2bb48e33d87fb67192f"
+"src/submodules/ACE/chunks.jl" = "0d73acec6fd464bc801786706fc165cdb21b36fbe6b13c6a22dc1ef694656233"
+"src/submodules/ACE/cpu.jl" = "19835dd55c1b8f7a988b0f86fe82bc393ca5393e4ecfe77141a708d0aaea7807"
+"src/submodules/ACE/environments.jl" = "ee27e3dbe3161e02bcc15ab62f01b5d5575dffb3c50e5703878b4cdaf4d23b6d"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/feature_energy.jl" = "1869613d7d1c5dfd5594331b6e5615c7289828e4034642a4afee3e183cdf790d"
+"src/submodules/ACE/features.jl" = "22ce573ce92d82f06333d65ad7caa7d5511cc82c78b0d47f49cc8139b8d87ce3"
+"src/submodules/ACE/fitting.jl" = "0ff53a102561733228f7f739465405263e2ee0f50f9b2e4ad07cb969fbe1e80a"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "56deb06b51e6d58b4674b00c76358f386e2863a1669d66f939f8cd7b8873d919"
+"src/submodules/ACE/interface_persistence.jl" = "7a5c0cbf0715c4b5806d6d8ae697dadf4778f004d23cc521c8f03b2d3fa5b500"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "d62477a11daf4e587bb478c0223774b885984c1baf78368bc17b054e4927b753"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "85b6030cd4a0d31d333948b766b2b66c7d70a2e52d8dd545f1a93ab4d78a426a"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "c31ad3261e4050870c65fa54bf7c8affce56fff2f8af2247e1fe9eef7a96c110"
+"src/submodules/ACE/serial.jl" = "fd4e7bd4bc2e7ac4926eafde25b4e573e1e93b956bb5bab10e4fdbf23a6b79be"
+"src/submodules/ACE/site_pullbacks.jl" = "ac22d9435d97f0c0ddc951682d8836df5dcf89451ed85e13605f2afc5c0cee5d"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "4771e0d35b8027054f8226887f841207c98f060349b7565665d9901fb0c31356"
+"src/submodules/NeighbourList/NeighbourList.jl" = "94082feb205970bceb2a6f1d2a2df34834b868eb4a4ed7558c9c1021687c6694"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/chunk_threads.jl" = "1fae5302c0fa83d968961eaf0c7d4e3945f2950ef4538dfe54397a4e24b0bbdd"
+"src/submodules/NeighbourList/chunks.jl" = "66fbd69a5773e0a67b39008015c97188a2943a84259e0341ef96a80b76009c92"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/pullbacks.jl" = "2ae778438fbacf246def660cf2b15a5637b8c55e14bb1dd7ae03d7b6db3ad676"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AcceleratedKernels = "0.5.13"
+AtomsBase = "0.5.3"
+AtomsCalculators = "0.2.3"
+KernelAbstractions = "0.9.48"
+SIMD = "3.8.2"
+SpheriCart = "0.2.4"
+StaticArrays = "1.9.25"
+Unitful = "1.29.0"

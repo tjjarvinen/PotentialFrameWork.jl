@@ -16,14 +16,18 @@ function prepare_environment!(env::FullEnvironment,sys,model::ResolvedModel;kwar
     NL.prepare_full_environment!(env,sys,channels,length(model.atomic_numbers),NI.search_cutoff(model);kwargs...)
 end
 
-"""Owning AtomsBase extraction in numeric Å; H has cell vectors in columns.
-Open lattice generators are zeroed before numerical evaluation.
-"""
-function ace_inputs(sys,model;environment=FullEnvironment(),kwargs...)
-    start=time_ns()
+# Owning numeric Å coordinates. Open lattice generators do not enter ACE geometry.
+function ace_geometry(sys)
     n=length(sys); cv=AtomsBase.cell_vectors(sys); pb=AtomsBase.periodicity(sys)
     X=reshape([ustrip(u"Å",AtomsBase.position(sys,i)[a]) for a=1:3,i=1:n],3,n)
     H=[pb[j] ? ustrip(u"Å",cv[j][a]) : zero(ustrip(u"Å",cv[j][a])) for a=1:3,j=1:3]
+    X,H
+end
+
+"""Owning AtomsBase extraction and preparation of complete directed environments."""
+function ace_inputs(sys,model;environment=FullEnvironment(),kwargs...)
+    start=time_ns()
+    X,H=ace_geometry(sys)
     elapsed=(time_ns()-start)*1e-9
     prepare_environment!(environment,sys,model;kwargs...)
     environment.timings[:boundary_extraction]=elapsed
