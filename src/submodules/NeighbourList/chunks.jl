@@ -47,22 +47,28 @@ struct SiteChunk
     destinations::Vector{Int} # sorted cell-order atom indices
     runs::Vector{UnitRange{Int}} # contiguous runs in destinations (local indices)
 end
-mutable struct SerialWorkgroups{N}
+mutable struct ChunkWorkgroups{N}
     neighbours::N
     scatter_capacity::Int
     chunks::Vector{SiteChunk}
+    groups::Vector{UnitRange{Int}} # disjoint ranges of cell-order atoms
     fields::Dict{Symbol,Any}
     results::Any
     atom_outputs::Tuple
+    guard::ReentrantLock
     active::Bool
     observed_capacity::Int
+    pool::Union{Nothing,ChunkWorkerPool}
+    plan::Union{Nothing,ChunkThreadPlan}
 end
-"""One serial workgroup; the name reserves the subsequent NUMA executor boundary.
-No NUMA affinity or tasks are installed. Temporary scatter storage is bounded by
-`scatter_capacity`; an oversized single-site footprint is an explicit error.
+"""Build spatial ownership and site chunks from whole occupied cells in cell order.
+
+`groups` requests up to that many logical owners, independently of the worker
+count. `scatter_capacity` bounds each chunk footprint. An oversized single site
+fails before any callback can run.
 """
 function form_numa_workers(n::ChunkNeighbours,groups::Integer;scatter_capacity=4096)
-    groups==1 || throw(ArgumentError("serial milestone requires one workgroup"))
+    groups>0 || throw(ArgumentError("groups must be positive"))
     scatter_capacity isa Integer && scatter_capacity>0 || throw(ArgumentError("scatter_capacity must be positive"))
     chunks=SiteChunk[]
     for range in n.ranges
@@ -81,7 +87,20 @@ function form_numa_workers(n::ChunkNeighbours,groups::Integer;scatter_capacity=4
         end
         isempty(range) || push!(chunks,site_chunk(firstcenter:last(range),destinations))
     end
-    SerialWorkgroups(n,Int(scatter_capacity),chunks,Dict{Symbol,Any}(),nothing,(),false,0)
+    owners=UnitRange{Int}[]
+    cell_ends=last.(n.ranges)
+    ncells=length(cell_ends)
+    group_count=min(groups,ncells)
+    firstcell=1
+    for group in 1:group_count
+        remaining=group_count-group
+        target=cld(length(n.p)*group,group_count)
+        lastcell=clamp(searchsortedfirst(cell_ends,target),firstcell,ncells-remaining)
+        push!(owners,first(n.ranges[firstcell]):last(n.ranges[lastcell]))
+        firstcell=lastcell+1
+    end
+    ChunkWorkgroups(n,Int(scatter_capacity),chunks,owners,Dict{Symbol,Any}(),nothing,(),
+                    ReentrantLock(),false,0,nothing,nothing)
 end
 function site_chunk(centers,destinations)
     sort!(destinations)
@@ -163,79 +182,161 @@ function result_names(scatter,sums,sites)
     length(unique(names))==length(names) || throw(ArgumentError("ambiguous result names"))
     names
 end
-"""Run one completed serial pass. Each callback handles one cell chunk; one slot
-owns scratch and bounded scatter storage across callbacks. Results and newly
-written fields are published only after the entire pass succeeds. Site inputs
-are bound once and must be treated as read-only. Do not retain borrowed views.
+# The lock protects publication as well as pass/close operations. The active bit
+# rejects reentry by the owning task, since the lock itself is reentrant.
+function acquire_chunk_access!(guard,active,description)
+    trylock(guard) || throw(ArgumentError(description))
+    if active()
+        unlock(guard)
+        throw(ArgumentError(description))
+    end
+    nothing
+end
+
+"""Run a complete pass with exclusive scratch and bounded scatter buffers.
+
+One worker runs directly on the caller. Multiple workers use a persistent Base
+pool. `init_scratch()` supplies fresh exclusive scratch for each worker, once
+per pass. With `slot_scratch=true`, the initializer receives the 1-based slot
+index, which allows the caller to reuse its own scratch across passes. A callback
+handles one chunk. Borrowed buffers and inputs are valid only during that call.
 """
-function foreach_worker!(f,w::SerialWorkgroups,workers::Integer;
+function foreach_worker!(f::F,w::ChunkWorkgroups,workers::Integer;
                          scatter=NamedTuple(),sum_outputs=NamedTuple(),per_site=NamedTuple(),
-                         site_inputs=(),init_scratch=()->nothing)
-    workers==1 || throw(ArgumentError("serial milestone requires one worker"))
-    w.active && throw(ArgumentError("workgroup already has an active pass"))
-    check_chunk_topology!(w)
-    names=result_names(scatter,sum_outputs,per_site)
-    length(unique(site_inputs))==length(site_inputs) || throw(ArgumentError("duplicate site inputs"))
-    isempty(intersect(site_inputs,names)) || throw(ArgumentError("cannot read and write the same site field"))
-    all(k -> haskey(w.fields,k),site_inputs) || throw(ArgumentError("missing or incomplete site input"))
-    inputs=NamedTuple{Tuple(site_inputs)}(Tuple(w.fields[k] for k in site_inputs))
-    w.active=true; w.results=nothing; w.observed_capacity=0
+                         site_inputs=(),init_scratch=()->nothing,slot_scratch=false,timings=nothing) where F
+    workers>0 || throw(ArgumentError("workers must be positive"))
+    acquire_chunk_access!(w.guard,()->w.active,"workgroup already has an active pass")
+    w.active=true
     try
-        run_chunk_pass!(f,w,scatter,sum_outputs,per_site,inputs,init_scratch())
+        check_chunk_topology!(w)
+        names=result_names(scatter,sum_outputs,per_site)
+        length(unique(site_inputs))==length(site_inputs) || throw(ArgumentError("duplicate site inputs"))
+        isempty(intersect(site_inputs,names)) || throw(ArgumentError("cannot read and write the same site field"))
+        all(k -> haskey(w.fields,k),site_inputs) || throw(ArgumentError("missing or incomplete site input"))
+        inputs=NamedTuple{Tuple(site_inputs)}(Tuple(w.fields[k] for k in site_inputs))
+        w.results=nothing
+        w.observed_capacity=maximum((length(c.destinations) for c in w.chunks);init=0)
+        n=length(w.neighbours.p)
+        final_scatter=map(T -> zeros(T,n),scatter)
+        totals=map(T -> Ref(zero(T)),sum_outputs)
+        final_sites=map(T -> Vector{T}(undef,n),per_site)
+        # Chunks write disjoint elements. A BitVector would share words at
+        # chunk boundaries and could lose concurrent assignment flags.
+        assigned=map(_ -> zeros(Bool,n),per_site)
+        buffers=ChunkBuffers(final_scatter,totals,final_sites)
+        init=slot_scratch ? init_scratch : _ -> init_scratch()
+        start=chunk_clock(timings)
+        if workers==1 || length(w.chunks)==1
+            run_serial_chunks!(f,w,scatter,sum_outputs,buffers,assigned,inputs,init(1),timings)
+        elseif !isempty(w.chunks)
+            run_threaded_chunks!(f,w,Int(workers),scatter,sum_outputs,buffers,assigned,inputs,init,timings)
+        end
+        all(all,assigned) || throw(ArgumentError("incomplete per-site output; assign every center before publishing"))
+        check_chunk_topology!(w)
+        for name in keys(per_site); w.fields[name]=getproperty(final_sites,name); end
+        w.atom_outputs=(keys(scatter)...,keys(per_site)...)
+        w.results=merge(final_scatter,map(r -> r[],totals),final_sites)
+        record_chunk_pass!(timings,start)
     finally
         w.active=false
+        unlock(w.guard)
     end
     w
 end
-function run_chunk_pass!(f,w,scatter,sums,sites,inputs,scratch)
-    n=length(w.neighbours.p)
-    final_scatter=map(T -> zeros(T,n),scatter)
-    totals=map(T -> Ref(zero(T)),sums)
-    final_sites=map(T -> Vector{T}(undef,n),sites)
-    assigned=map(_ -> falses(n),sites)
-    capacity=maximum((length(c.destinations) for c in w.chunks);init=0)
-    storage=map(T -> zeros(T,capacity),scatter)
-    local_sums=map(T -> Ref(zero(T)),sums)
-    for chunk in w.chunks
-        count=length(chunk.destinations)
-        w.observed_capacity=max(w.observed_capacity,count)
-        active_scatter=map(storage) do array
-            v=view(array,1:count); fill!(v,zero(eltype(v))); v
-        end
-        for ref in local_sums; ref[]=zero(typeof(ref[])); end
-        active_sites=map(final_sites,assigned) do a,mask
-            AssignedSiteVector(view(a,chunk.centers),view(mask,chunk.centers))
-        end
-        buffers=ChunkBuffers(active_scatter,local_sums,active_sites)
-        f(ChunkWorker(w.neighbours,inputs,scratch,buffers,chunk))
-        for name in keys(scatter)
-            dest=getproperty(final_scatter,name); src=getproperty(active_scatter,name)
-            for run in chunk.runs
-                firstdest=chunk.destinations[first(run)]
-                for (offset,k) in enumerate(run); dest[firstdest+offset-1]+=src[k]; end
-            end
-        end
-        for name in keys(sums); getproperty(totals,name)[]+=getproperty(local_sums,name)[]; end
+
+@inline function evaluate_chunk!(f,n,chunk,inputs,scratch,storage,local_sums,final_sites,assigned)
+    active_scatter=map(storage) do array
+        v=view(array,1:length(chunk.destinations)); fill!(v,zero(eltype(v))); v
     end
-    all(all,assigned) || throw(ArgumentError("incomplete per-site output; assign every center before publishing"))
-    check_chunk_topology!(w)
-    for name in keys(sites); w.fields[name]=getproperty(final_sites,name); end
-    w.atom_outputs=(keys(scatter)...,keys(sites)...)
-    w.results=merge(final_scatter,map(r -> r[],totals),final_sites)
+    for ref in local_sums; ref[]=zero(typeof(ref[])); end
+    active_sites=map(final_sites,assigned) do a,mask
+        AssignedSiteVector(view(a,chunk.centers),view(mask,chunk.centers))
+    end
+    f(ChunkWorker(n,inputs,scratch,ChunkBuffers(active_scatter,local_sums,active_sites),chunk))
     nothing
 end
-"""Owning results; per-atom fields are exported in original atom order."""
-function get_results(w::SerialWorkgroups)
-    check_chunk_topology!(w)
-    w.active && throw(ArgumentError("pass has not completed"))
-    isnothing(w.results) && throw(ArgumentError("no completed pass"))
-    NamedTuple{keys(w.results)}(Tuple(k in w.atom_outputs ? w.results[k][w.neighbours.inverse] : w.results[k] for k in keys(w.results)))
+
+@inline function merge_scatter_run!(destinations,storage,local_range,offset)
+    for name in keys(destinations)
+        dest=getproperty(destinations,name); src=getproperty(storage,name)
+        for k in local_range; dest[k+offset]+=src[k]; end
+    end
 end
-function export_field(w::SerialWorkgroups,name::Symbol)
-    check_chunk_topology!(w)
-    w.active && throw(ArgumentError("pass has not completed"))
-    haskey(w.fields,name) || throw(ArgumentError("missing or incomplete site field $name"))
-    w.fields[name][w.neighbours.inverse]
+@inline function merge_chunk_sums!(totals,local_sums)
+    for name in keys(totals); getproperty(totals,name)[]+=getproperty(local_sums,name)[]; end
+end
+
+function run_serial_chunks!(f::F,w,scatter,sums,buffers,assigned,inputs,scratch,timings) where F
+    set_chunk_storage_stats!(timings,1,w.observed_capacity,isempty(w.chunks) ? 0 : 1)
+    storage=map(T -> zeros(T,w.observed_capacity),scatter)
+    local_sums=map(T -> Ref(zero(T)),sums)
+    for chunk in w.chunks
+        start=chunk_clock(timings)
+        evaluate_chunk!(f,w.neighbours,chunk,inputs,scratch,storage,local_sums,buffers.per_site,assigned)
+        record_chunk_stage!(timings,:site,1,start)
+        start=chunk_clock(timings)
+        for run in chunk.runs
+            merge_scatter_run!(buffers.scatter,storage,run,chunk.destinations[first(run)]-first(run))
+        end
+        merge_chunk_sums!(buffers.sum_outputs,local_sums)
+        record_chunk_stage!(timings,:merge,1,start)
+    end
+end
+
+"""Owning results; per-atom fields are exported in original atom order."""
+function get_results(w::ChunkWorkgroups)
+    acquire_chunk_access!(w.guard,()->w.active,"pass has not completed")
+    try
+        check_chunk_topology!(w)
+        isnothing(w.results) && throw(ArgumentError("no completed pass"))
+        NamedTuple{keys(w.results)}(Tuple(k in w.atom_outputs ? w.results[k][w.neighbours.inverse] : w.results[k] for k in keys(w.results)))
+    finally
+        unlock(w.guard)
+    end
+end
+function export_field(w::ChunkWorkgroups,name::Symbol)
+    acquire_chunk_access!(w.guard,()->w.active,"pass has not completed")
+    try
+        check_chunk_topology!(w)
+        haskey(w.fields,name) || throw(ArgumentError("missing or incomplete site field $name"))
+        w.fields[name][w.neighbours.inverse]
+    finally
+        unlock(w.guard)
+    end
+end
+
+"""Refresh original-order positions for a graph whose topology is still valid.
+
+The caller guarantees unchanged atom identities, cell mapping and complete
+periodic image graph. Existing cell-ordered fields remain available. Rebuild
+neighbors and workgroups if the graph or mapping changes.
+"""
+function refresh_positions!(w::ChunkWorkgroups,positions::AbstractMatrix)
+    acquire_chunk_access!(w.guard,()->w.active,"pass has not completed")
+    try
+        check_chunk_topology!(w)
+        X=w.neighbours.positions
+        axes(positions)==axes(X) || throw(DimensionMismatch("chunk positions"))
+        converted=eltype(positions)===eltype(X) ? positions : Matrix{eltype(X)}(positions)
+        all(isfinite,converted) || throw(ArgumentError("nonfinite chunk positions"))
+        copyto!(X,converted)
+        w.results=nothing
+    finally
+        unlock(w.guard)
+    end
+    w
+end
+
+"""Wake and join the idle workers; the next pass can start a new pool."""
+function Base.close(w::ChunkWorkgroups)
+    acquire_chunk_access!(w.guard,()->w.active,"cannot close a workgroup during an active pass")
+    try
+        isnothing(w.pool) || close(w.pool)
+        w.pool=nothing
+    finally
+        unlock(w.guard)
+    end
+    nothing
 end
 
 """Route a local site callback output using the shared destination map and the
@@ -258,7 +359,7 @@ function scatter_site_output!(buffers,site,out,props)
     nothing
 end
 
-# Generic direct/batch callback adoption for the serial chunk executor.
+# Generic direct/batch callback adoption for the chunk executor.
 function evaluate_chunk_sites!(worker,prepared,ps,scratch,outputs,ordinals,centers,props,selected)
     count=0
     # Existing batch callbacks remain usable; only a bounded batch of local

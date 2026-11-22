@@ -7,9 +7,9 @@ CPU pair and ACE potentials for AtomsBase-compatible 3D systems, with explicit
 CPU SIMD blocks and phase-scheduled cell tasks writing into one sorted force
 array. Julia 1.10.10 or later and AtomsBase 0.5.3 or later are required.
 
-The experimental [serial CPU site-chunk interface](docs/site_chunks.md) provides
-bounded scatter buffers, named reductions, two-pass site features and explicit
-ACE evaluation states. See [the runnable example](examples/site_chunks.jl).
+The experimental [CPU site-chunk interface](docs/site_chunks.md) provides
+bounded scatter buffers, named reductions, two-pass site features and opt-in
+threaded scalar ACE evaluation. See [the runnable example](examples/site_chunks.jl).
 
 Source is grouped into three functional submodules:
 

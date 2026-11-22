@@ -1,5 +1,58 @@
 # Implementation status
 
+## Threaded scalar CPU ACE forward evaluation (2026-11-21)
+
+Implemented opt-in `executor=:threaded` through the scalar ACE
+AtomsCalculators methods. Logical ownership follows whole occupied cells.
+Persistent Julia tasks use exclusive numerical scratch and bounded scatter
+buffers. Parallel merges have one writer per destination. A one-worker or
+single-chunk pass runs directly on the caller. The workgroup and explicit
+ACE state support shutdown with `close`. The geometry refresh path takes
+a caller-validated fixed topology and reuses its ownership and routing plan.
+
+The regression suites exercise Float32/Float64, single and batch site
+callbacks, selected centers, property subsets, forced splitting, cross-group
+and periodic-image writes, field publication, state overlap, injected worker
+and merge failures, retry and shutdown. Explicit-parameter ChainRules still
+uses the owning numerical snapshot and serial pullback. The test compares
+the pullback of a threaded E/F/V forward call against the serial route.
+
+Local full suites passed 59,045 assertions on Julia 1.13.4 and Julia 1.10.13,
+each with four default compute threads. Final focused reruns passed 1,278
+site-chunk and 152 site-pullback assertions per Julia version, including a
+pullback invoked after closing the threaded forward pool. The portable
+KernelAbstractions GPU coverage used the CPU backend. The test environment
+used ChainRulesCore 1.26.8, ForwardDiff 1.5.0, Zygote 0.7.18, LuxCore 1.5.5
+and NeighbourLists 0.5.10 on both Julia versions. Use an isolated application
+environment with the test extras and the working package source.
+
+```sh
+julia --startup-file=no --threads=4 --project="$RUN_ENV" -e \
+    'using Test; @testset "PotentialFrameWork" begin include("test/runtests.jl"); end'
+julia --startup-file=no --threads=4 --project="$RUN_ENV" test/site_chunks_runtests.jl
+julia --startup-file=no --threads=4 --project="$RUN_ENV" test/site_pullbacks_runtests.jl
+```
+
+Full test logs are `/tmp/pfw-thread-full113.log` and
+`/tmp/pfw-thread-full110.log`. Focused log prefixes are `/tmp/pfw-chunk-final`
+and `/tmp/pfw-pullback-final`, with `113.log` and `110.log` suffixes.
+Public configuration, output and scratch
+lifetimes are documented in [CPU site chunks](../site_chunks.md). The
+[workstation report](../../benchmark/cpu_chunks/THREADING-REPORT.md)
+includes raw observations, commands and timing boundaries.
+
+The Ryzen 9 9950X physical-core sweep covered 1, 2, 4, 8 and 16 cores.
+At 16 cores, 3,456-atom Ti and Ti–Al–V with one logical group and graph
+reuse took 95.3 and 200.3 ms per owning E/F/V evaluation, respectively
+7.55× and 8.57× faster than their corresponding one-core runs. Prepared
+coloring took 122.0 and 291.9 ms. With a fresh rebuild the new Ti route
+was slower than public coloring and the Ti–Al–V route was faster. The
+13× stretch target was missed. Instrumented frozen-topology runs show site
+work and wave waits dominating, with a measurable 16-core merge coordination
+cost. Multiple logical owners were exercised on the single NUMA node.
+The matched 16-atom supplied fit agreed with ACEpotentials 0.10.2 on all
+three replay frames.
+
 ## Equivariant nonlinear-head force training — Part B (2026-11-17)
 
 Part B follows the Part A gate recorded below. `ACEFeatureEnergy(layer,head)`

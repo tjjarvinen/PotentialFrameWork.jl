@@ -199,22 +199,26 @@ function rrule(config::RuleConfig{>:HasReverseMode},::typeof(AC.calculate),props
     A=PotentialFrameWork.ACE; NL=PotentialFrameWork.NeighbourList; NI=PotentialFrameWork.NeighbourInterface
     normalized=NL.normalize_properties(props)
     if state isa A.ACEEvaluationState
-        state.active && throw(ArgumentError("ACE evaluation state already has an active call"))
         state.prepared.model===c.model || throw(ArgumentError("evaluation state belongs to a different model"))
+        A.acquire_ace_state!(state)
     end
-    # Preserve inference keyword validation, state updates, precision and public
-    # units exactly. The separately owned numerical rule supplies the backward.
-    y=AC.calculate(props,sys,c,ps,state;kwargs...)
-    state isa A.ACEEvaluationState && (state.active=true)
-    r,back=try
+    # Retain exclusivity through forward and snapshot construction. The
+    # separately owned numerical rule supplies the serial backward.
+    y,back=try
+        y=AC.calculate(props,sys,c,ps,state;kwargs...)
+        state isa A.ACEEvaluationState && (state.active=true)
         n=NL.prepare_neighbors(sys,c)
         options=(;kwargs...)
         centers=get(options,:centers,nothing)
         outputs=NI.SiteOutputs(NL.wants(AC.Energy,normalized),NL.wants(AC.Forces,normalized)||NL.wants(AC.Virial,normalized),false)
-        rrule(NL.site_evaluate,n.positions,A.ScalarSiteModel(c.model),ps,n;outputs,centers,
+        _,back=rrule(NL.site_evaluate,n.positions,A.ScalarSiteModel(c.model),ps,n;outputs,centers,
             input_derivatives=NI.SiteInputs(false,true),batch_size=c.executor.batch_size,scatter_capacity=state isa A.ACEEvaluationState ? state.scatter_capacity : 4096)
+        y,back
     finally
-        state isa A.ACEEvaluationState && (state.active=false)
+        if state isa A.ACEEvaluationState
+            state.active=false
+            unlock(state.guard)
+        end
     end
     N=length(sys)
     function pullback(d)

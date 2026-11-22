@@ -198,6 +198,23 @@ end
     @test PP.parameter_flatten(ug)≈PP.parameter_flatten(ng) rtol=1e-10
     fourarg=Zygote.gradient(p -> ustrip(u"eV",AC.calculate(AC.Energy(),sys,c,p).energy),ps)[1]
     @test PP.parameter_flatten(fourarg)≈PP.parameter_flatten(reference)
+    threaded_sys=TestSystem([0.1 1.6 6.2;0.2 0.4 0.1;0.3 0.7 0.5],
+                            Matrix(18.0I,3,3),(false,false,false),[:Ti,:Al,:Ti])
+    thread_state=A.ACEEvaluationState(c)
+    try
+        function force_loss(p,executor)
+            r=AC.calculate((AC.Energy(),AC.Forces(),AC.Virial()),threaded_sys,c,p,thread_state;executor,workers=2)
+            ustrip(u"eV",r.energy)*0.2+sum(sum(abs2,ustrip.(u"eV/Å",f)) for f in r.forces)+sum(abs2,ustrip.(u"eV",r.virial))*0.01
+        end
+        _,back=Zygote.pullback(p -> force_loss(p,:threaded),ps)
+        @test length(thread_state.chunks.pool.tasks)==2
+        close(thread_state)
+        serial=Zygote.gradient(p -> force_loss(p,:chunks),ps)[1]
+        threaded=first(back(1.0))
+        @test PP.parameter_flatten(threaded)≈PP.parameter_flatten(serial) rtol=1e-10
+    finally
+        close(thread_state)
+    end
     state.active=true
     @test_throws ArgumentError Zygote.gradient(objective,ps)
     state.active=false; state.scatter_capacity=1

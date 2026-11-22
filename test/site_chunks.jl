@@ -15,8 +15,8 @@ chunk_numeric(x::Number)=ustrip(x)
     @test length(w.chunks)>length(n.ranges)
     @test n.p!=collect(1:4)
     @test_throws ArgumentError ChunkNL.form_numa_workers(n,1;scatter_capacity=2)
-    @test_throws ArgumentError ChunkNL.form_numa_workers(n,2)
-    @test_throws ArgumentError ChunkNL.foreach_worker!(identity,w,2)
+    @test_throws ArgumentError ChunkNL.form_numa_workers(n,0)
+    @test_throws ArgumentError ChunkNL.foreach_worker!(identity,w,0)
     gbar=[SVector(sin(i),cos(i),0.2i) for i=1:4]
     sorted_bar=gbar[n.p]
     lhs=Ref(0.0); rhs=Ref(0.0); site_lhs=Ref(0.0); site_rhs=Ref(0.0)

@@ -139,8 +139,10 @@ term prevents an edge-independent derivative implementation from passing.
 
 Explicit-parameter `AtomsCalculators.calculate(properties,sys,calc,ps[,state])`
 uses the same numerical rule for scalar ACE parameter training, with a fresh
-mathematical geometry snapshot. It preserves state identity and its active-call
-and failure guard; it does not save or borrow that state's inference scratch.
+mathematical geometry snapshot. It preserves state identity and guards an explicit state through forward
+evaluation and snapshot construction. With `executor=:threaded` its public
+primal uses the threaded executor. Snapshot construction and the backward
+remain serial and independent of inference scratch and worker lifetime.
 Input-system differentiation stays at the explicit numerical X boundary. Existing
 inference state methods, colored execution, checkpoint formats and default
 functional numerical/Lux paths remain available.
