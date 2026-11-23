@@ -65,6 +65,45 @@ function dispatch_chunk_workers!(job,pool::ChunkWorkerPool,workers)
     nothing
 end
 
+# Diagnostic timestamps share the coordinator's time origin. Each worker writes
+# only its own entry, and the coordinator reads them after acknowledgment.
+function dispatch_measured_merge!(job,pool,workers,t0)
+    submitted=zeros(Int,workers)
+    entered=similar(submitted)
+    finished=similar(submitted)
+    receipt_started=similar(submitted)
+    received=similar(submitted)
+    elapsed()=Int(time_ns()-t0)
+    wrapped=slot -> begin
+        entered[slot]=elapsed()
+        job(slot)
+        finished[slot]=elapsed()
+    end
+    dispatched=0
+    failure=nothing
+    dispatch_start=elapsed()
+    dispatch_end=0
+    try
+        for slot in 1:workers
+            submitted[slot]=elapsed()
+            put!(pool.inboxes[slot],wrapped)
+            dispatched=slot
+        end
+    finally
+        dispatch_end=elapsed()
+        for slot in 1:dispatched
+            receipt_started[slot]=elapsed()
+            result=take!(pool.completed[slot])
+            received[slot]=elapsed()
+            isnothing(failure) && (failure=result)
+        end
+    end
+    isnothing(failure) || throw(failure.ex)
+    Dict{String,Any}("dispatch_start_ns"=>dispatch_start,"dispatch_end_ns"=>dispatch_end,
+        "submitted_ns"=>submitted,"entered_ns"=>entered,"finished_ns"=>finished,
+        "receipt_started_ns"=>receipt_started,"received_ns"=>received)
+end
+
 struct ChunkScatterRun
     source_slot::Int
     source_buffer::Int
@@ -92,12 +131,11 @@ const CHUNKS_PER_WAVE=8
 function chunk_thread_plan(w,workers)
     neighbours=w.neighbours
     env=neighbours.environment
-    # Track active rather than padded edges.
-    edge_prefix=cumsum([0; env.active])
+    # Track active rather than padded edges without an edge-sized prefix array.
     weights=map(w.chunks) do chunk
         length(chunk.centers)+sum(chunk.centers) do ordinal
             i=neighbours.p[ordinal]
-            edge_prefix[env.offsets[end,i]]-edge_prefix[env.offsets[1,i]]
+            count(view(env.active,env.offsets[1,i]:env.offsets[end,i]-1))
         end
     end
     cumulative=cumsum(weights)
@@ -142,10 +180,18 @@ function chunk_thread_plan(w,workers)
     ChunkThreadPlan(workers,batches,mergers,waves)
 end
 
-function run_threaded_chunks!(f::F,w,requested,scatter,sums,buffers,assigned,inputs,init,timings) where F
+compatible_chunk_storage(::Nothing,scatter,sums,workers,batches,capacity,limit)=false
+function compatible_chunk_storage(storage,scatter,sums,workers,batches,capacity,limit)
+    fields,totals,slots,wavesize,slotsize=storage[1]
+    fields==scatter && totals==sums && slots>=workers && wavesize>=batches && capacity<=slotsize<=limit
+end
+
+function run_threaded_chunks!(f::F,w,requested,scatter,sums,buffers,assigned,inputs,init,timings,inline_merge) where F
     workers=min(requested,length(w.chunks))
     if isnothing(w.plan) || w.plan.workers != workers
+        start=chunk_clock(timings)
         w.plan=chunk_thread_plan(w,workers)
+        record_chunk_rebuild!(timings,:route_plan,start)
     end
     plan=w.plan::ChunkThreadPlan
     if isnothing(w.pool) || length(w.pool.tasks)<workers
@@ -153,20 +199,21 @@ function run_threaded_chunks!(f::F,w,requested,scatter,sums,buffers,assigned,inp
         w.pool=ChunkWorkerPool(workers)
     end
     pool=w.pool::ChunkWorkerPool
-    key=(scatter,sums,workers,plan.batches,w.observed_capacity)
-    if isnothing(pool.storage) || pool.storage[1] != key
+    if !compatible_chunk_storage(pool.storage,scatter,sums,workers,plan.batches,
+                                 w.observed_capacity,w.scatter_capacity)
+        key=(scatter,sums,workers,plan.batches,w.observed_capacity)
         pool.storage=(key,[(map(T -> zeros(T,w.observed_capacity),scatter),map(T -> Ref(zero(T)),sums))
                            for _ in 1:plan.batches, _ in 1:workers])
     end
     scratch=[init(slot) for slot in 1:workers]
     if !isnothing(timings)
         peak=maximum(wave -> sum(length,wave.work),plan.waves)
-        set_chunk_storage_stats!(timings,workers,w.observed_capacity,peak)
+        set_chunk_storage_stats!(timings,workers,pool.storage[1][5],peak)
     end
-    run_chunk_waves!(f,w.neighbours,w.chunks,plan,pool,pool.storage[2],scratch,buffers,assigned,inputs,timings)
+    run_chunk_waves!(f,w.neighbours,w.chunks,plan,pool,pool.storage[2],scratch,buffers,assigned,inputs,timings,inline_merge)
 end
 
-function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assigned,inputs,timings) where F
+function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assigned,inputs,timings,inline_merge) where F
     for wave in plan.waves
         site_start=chunk_clock(timings)
         dispatch_chunk_workers!(pool,plan.workers) do slot
@@ -180,8 +227,9 @@ function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assign
         end
         record_chunk_barrier!(timings,:site,site_start)
         merge_start=chunk_clock(timings)
+        trace=nothing
         if !isempty(buffers.scatter)
-            dispatch_chunk_workers!(pool,plan.mergers) do slot
+            merge_routes=slot -> begin
                 start=chunk_clock(timings)
                 for run in wave.routes[slot]
                     src=storage[run.source_buffer,run.source_slot][1]
@@ -189,11 +237,21 @@ function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assign
                 end
                 record_chunk_stage!(timings,:merge,slot,start)
             end
+            if inline_merge
+                for slot in 1:plan.mergers
+                    merge_routes(slot)
+                end
+            elseif isnothing(timings)
+                dispatch_chunk_workers!(merge_routes,pool,plan.mergers)
+            else
+                trace=dispatch_measured_merge!(merge_routes,pool,plan.mergers,merge_start)
+            end
         end
+        sums_start=chunk_clock(timings)
         for (slot,assignment) in enumerate(wave.work), buffer in 1:length(assignment)
             merge_chunk_sums!(buffers.sum_outputs,storage[buffer,slot][2])
         end
-        record_chunk_barrier!(timings,:merge,merge_start)
+        record_merge_wave!(timings,trace,merge_start,sums_start)
         # Every consumer has acknowledged before any of this storage is reused.
         record_chunk_slot_wait!(timings)
     end
@@ -212,8 +270,10 @@ mutable struct ChunkTimings
     export_time::UInt64
     capacity::Int
     peak_slots::Int
+    merge_waves::Vector{Dict{String,Any}}
+    rebuild::Dict{String,Float64}
 end
-ChunkTimings()=ChunkTimings(UInt64[],UInt64[],UInt64[],UInt64[],0,0,0,0,0,0)
+ChunkTimings()=ChunkTimings(UInt64[],UInt64[],UInt64[],UInt64[],0,0,0,0,0,0,Dict{String,Any}[],Dict{String,Float64}())
 @inline chunk_clock(::Nothing)=UInt64(0)
 @inline chunk_clock(::ChunkTimings)=time_ns()
 @inline record_chunk_stage!(::Nothing,stage,slot,start)=nothing
@@ -245,3 +305,18 @@ function set_chunk_storage_stats!(t::ChunkTimings,workers,capacity,peak)
     t.capacity=capacity
     t.peak_slots=peak
 end
+
+@inline record_merge_wave!(::Nothing,trace,start,sums_start)=nothing
+function record_merge_wave!(t::ChunkTimings,trace,start,sums_start)
+    stop=time_ns()
+    t.merge_barrier+=stop-start
+    wave=isnothing(trace) ? Dict{String,Any}() : trace
+    wave["wall_ns"]=Int(stop-start)
+    wave["sums_start_ns"]=Int(sums_start-start)
+    wave["sums_ns"]=Int(stop-sums_start)
+    push!(t.merge_waves,wave)
+    nothing
+end
+
+@inline record_chunk_rebuild!(::Nothing,stage,start)=nothing
+@inline record_chunk_rebuild!(t::ChunkTimings,stage,start)=(t.rebuild[string(stage)]=(time_ns()-start)*1e-9)

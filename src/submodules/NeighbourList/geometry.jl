@@ -6,7 +6,7 @@
     periodic ? d-round(d/L)*L : d
 end
 
-@inline function geometry(w::Workspace{W,T}, i, firstj, lastj, image=nothing) where {W,T}
+@inline function geometry_lanes(w::Workspace{W,T}, i, firstj, lastj, image) where {W,T}
     js=ntuple(k -> min(firstj+k-1,lastj),Val(W)) # every index valid, including padding
     self = image !== nothing && image.self
     structural=pack(Val(W),k -> firstj+k-1<=lastj && (js[k]>i || (self && js[k]==i)))
@@ -15,6 +15,11 @@ end
     dy=pack(Val(W), k -> (w.minimum_image ? displacement(w.y[js[k]]-w.y[i],w.lengths[2],w.periodic[2]) : w.y[js[k]]-w.y[i]+shift[2]))
     dz=pack(Val(W), k -> (w.minimum_image ? displacement(w.z[js[k]]-w.z[i],w.lengths[3],w.periodic[3]) : w.z[js[k]]-w.z[i]+shift[3]))
     active=structural & (dx*dx+dy*dy+dz*dz < w.cutoff*w.cutoff)
+    js,dx,dy,dz,structural,active
+end
+
+@inline function geometry(w::Workspace{W},i,firstj,lastj,image=nothing) where W
+    js,dx,dy,dz,structural,active=geometry_lanes(w,i,firstj,lastj,image)
     # Safe geometry BEFORE callbacks (including divisions/logs), not NaN*0 after.
     dx=select(active,dx,one(dx)); dy=select(active,dy,zero(dy)); dz=select(active,dz,zero(dz))
     block=PairBlock(w.species[i],ntuple(k -> w.species[js[k]],Val(W)),dx,dy,dz,structural,active)

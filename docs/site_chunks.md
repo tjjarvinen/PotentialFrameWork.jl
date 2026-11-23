@@ -84,13 +84,51 @@ Inactive edges have no feature. Multiple images read the same atom feature.
 A pass cannot read and write the same field. Completed fields remain in cell
 order across passes; `export_field(workgroups, :layer2)` makes an original-order
 copy. Only a fully successful pass publishes new fields. Failed passes leave
-previously completed fields intact and expose no partial result. Rebuilding
-requires new neighbors/workgroups. Stale environment versions invalidate fields
-and reject execution/export. Use `refresh_positions!(workgroups, X)` for new
+previously completed fields intact and expose no partial result. A fresh build
+can refill the existing neighbor object and workgroup. Stale generations
+reject execution/export. Use `refresh_positions!(workgroups, X)` for new
 numeric Å positions in original order with the same atom identities, cell
 mapping, neighbor graph and periodic image labels. The caller guarantees those
 conditions. Refresh invalidates the latest result and preserves completed
 site fields. Owning exports from previous passes remain valid.
+
+## Rebuilding with owned storage
+
+```julia
+prepare_neighbors!(nlist, moved_system, calc; coloring=false)
+workgroups = form_numa_workers!(workgroups, nlist, 1; scatter_capacity=4096)
+```
+
+The generic signature is
+`prepare_neighbors!(neighbors, system, cutoff; channels=nothing, species_count=nothing, coloring=true)`.
+The ACE overload takes the calculator in place of the cutoff and supplies its
+element channels. The neighbor object owns the build workspace, original-order
+numeric coordinates and cell, packed graph, write footprints and cell
+permutations. Precision and SIMD width are fixed when the object is first
+allocated with `prepare_neighbors`. Even when the graph changes, a fresh build
+can retain compatible buffers. Use the default `coloring=true` when accessing
+the full site coloring. Chunk-only calculator preparation skips it. The
+colored executor still prepares complete phases. Switching a retained
+`ACEEvaluationState` to `executor=:colored` uses a temporary colored workspace.
+The next chunk call must do a fresh rebuild before it can refresh positions.
+
+`form_numa_workers!(workgroups, neighbors, groups; scatter_capacity=workgroups.scatter_capacity)`
+refills the layout for the new generation. It retains compatible chunk vectors,
+layout scratch and the idle pool. It allocates a new workgroup if given a
+different neighbor object. Keep the returned workgroup and close the old one
+when retiring it. Every refill clears completed fields, the latest result and
+the scatter routing plan. The next threaded pass builds routes for the new
+generation even when the chunk and worker counts match.
+
+Neighbor mutation and position refresh require exclusive access to the
+neighbor object. Active passes borrow it read-only. If a failed rebuild has
+begun replacing neighbor storage, a successful fresh build and workgroup
+refill are required before execution. After a failed workgroup refill, retry
+against a valid neighbor generation. Every successful build expires earlier borrowed
+data and invalidates attached workgroups until they are refilled. Workgroup
+refills expire the prior layout. Calls using separate workgroups may read the
+same generation concurrently. Owning `get_results`, `export_field`, and
+`neighbour_list` outputs stay valid across later geometry changes.
 
 ## Worker ownership and reduction
 
@@ -150,7 +188,8 @@ end
 `executor=:threaded` defaults to `workers=Threads.nthreads(:default)` and
 `groups=1`. One requested worker or a single chunk takes the direct serial path.
 The pool starts
-lazily and is reused across calls, including fresh layout rebuilds. The number
+lazily and is reused across calls, including fresh layout rebuilds. Compatible
+scatter storage is retained by the pool. The number
 of workers handling a pass is capped by its chunk count. The evaluation state
 owns exclusive slot-local angular and numerical scratch, a preparation cache
 populated from the explicit parameters, and the worker pool. Keep parameters and

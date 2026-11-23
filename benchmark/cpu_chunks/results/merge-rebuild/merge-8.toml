@@ -1,0 +1,2519 @@
+affinity = "pid 29's current affinity list: 0-7"
+blas_threads = 1
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_topology = """# The following is the parsable format, which can be fed to other\n# programs. Each different item in every column has an unique ID\n# starting usually from zero.\n# CPU,Core,Socket,L1d:L1i:L2:L3\n0,0,0,0:0:0:0\n1,1,0,1:1:1:0\n2,2,0,2:2:2:0\n3,3,0,3:3:3:0\n4,4,0,4:4:4:0\n5,5,0,5:5:5:0\n6,6,0,6:6:6:0\n7,7,0,7:7:7:0\n8,8,0,8:8:8:1\n9,9,0,9:9:9:1\n10,10,0,10:10:10:1\n11,11,0,11:11:11:1\n12,12,0,12:12:12:1\n13,13,0,13:13:13:1\n14,14,0,14:14:14:1\n15,15,0,15:15:15:1\n16,0,0,0:0:0:0\n17,1,0,1:1:1:0\n18,2,0,2:2:2:0\n19,3,0,3:3:3:0\n20,4,0,4:4:4:0\n21,5,0,5:5:5:0\n22,6,0,6:6:6:0\n23,7,0,7:7:7:0\n24,8,0,8:8:8:1\n25,9,0,9:9:9:1\n26,10,0,10:10:10:1\n27,11,0,11:11:11:1\n28,12,0,12:12:12:1\n29,13,0,13:13:13:1\n30,14,0,14:14:14:1\n31,15,0,15:15:15:1\n"""
+fixture_sha256 = "bf3ad85fb44b85e48a9581d42e6b4721f2a74d60e490936ee207dc8de83f72c5"
+grid = 12
+harness_sha256 = "d63c1c5d2a2a7bfee61ded3372ef9bc047d46da6360606f89c300b4a3aa025ee"
+julia = "1.13.4"
+mode = "merge"
+samples = 10
+starting_revision = "3ddd74c8fb90177d31414915ddff285e81c228ae"
+threading_harness_sha256 = "83c520c0f1dfae4b3b4a4cc2e1d316cdb831788562e55871517b6135f53301a5"
+threads = 8
+workloads_sha256 = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+groups = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml"
+model_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+name = "Ti bcc"
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.131462329
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.131534339
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.130986438
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.13171377
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.130711007
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.132219741
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.133411234
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.132299991
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.134292096
+    [[cases.inline]]
+    bytes = 2585168
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.1319467
+
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.4321000000000004e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00016923
+    merge_slot_s = [2.6620000000000003e-5, 1.857e-5, 1.9180000000000003e-5, 1.669e-5, 1.8480000000000003e-5, 1.72e-5, 1.774e-5, 1.732e-5]
+    pass_wall_s = 0.14080192
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.141465593
+    site_barriers_s = 0.14060372000000002
+    site_slot_noncompute_s = [0.02931076, 0.031564144, 0.025169709000000002, 0.027825265000000002, 0.023418736000000002, 0.02989015, 0.024424287000000003, 0.028804148]
+    site_slot_s = [0.11129296000000001, 0.10903957600000001, 0.115434011, 0.11277845500000001, 0.117184984, 0.11071357000000001, 0.11617943300000001, 0.11179957200000001]
+    slot_ack_wait_s = [0.02942242, 0.031681744000000005, 0.025280189, 0.027933225000000002, 0.020709679, 0.030006230000000002, 0.022380442, 0.028902488]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3320
+        sums_start_ns = 37340
+        wall_ns = 40660
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5160
+        sums_start_ns = 52700
+        wall_ns = 57860
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4050
+        sums_start_ns = 36770
+        wall_ns = 40820
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3500
+        sums_start_ns = 26390
+        wall_ns = 29890
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.8030000000000006e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000176311
+    merge_slot_s = [2.375e-5, 1.997e-5, 1.931e-5, 1.847e-5, 1.8990000000000003e-5, 1.9450000000000002e-5, 1.967e-5, 2.0240000000000003e-5]
+    pass_wall_s = 0.131536089
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.132294411
+    site_barriers_s = 0.131334208
+    site_slot_noncompute_s = [0.018235584000000003, 0.023084286000000002, 0.020781819, 0.019105205, 0.022025062, 0.019416745000000003, 0.020457619, 0.022862574]
+    site_slot_s = [0.11309862400000001, 0.10824992200000001, 0.110552389, 0.11222900300000001, 0.10930914600000001, 0.11191746300000001, 0.11087658900000001, 0.10847163400000001]
+    slot_ack_wait_s = [0.018380415, 0.023225377000000002, 0.02091273, 0.019234046, 0.022144903, 0.019553626, 0.020582660000000003, 0.022985745000000002]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3320
+        sums_start_ns = 38890
+        wall_ns = 42210
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6151
+        sums_start_ns = 61720
+        wall_ns = 67871
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3010
+        sums_start_ns = 35190
+        wall_ns = 38200
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 2700
+        sums_start_ns = 25330
+        wall_ns = 28030
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.8740000000000005e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000138651
+    merge_slot_s = [1.849e-5, 1.65e-5, 1.5300000000000003e-5, 1.4220000000000001e-5, 1.609e-5, 1.5300000000000003e-5, 1.4691e-5, 1.5210000000000002e-5]
+    pass_wall_s = 0.13039182700000002
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.131144268
+    site_barriers_s = 0.130229546
+    site_slot_noncompute_s = [0.018957695, 0.02078933, 0.021368791, 0.016853559, 0.02122111, 0.018557693, 0.019357046000000003, 0.02168238]
+    site_slot_s = [0.111271851, 0.109440216, 0.108860755, 0.11337598700000001, 0.109008436, 0.111671853, 0.11087250000000001, 0.108547166]
+    slot_ack_wait_s = [0.019067306000000003, 0.020892041, 0.021470022000000002, 0.01693091, 0.021318591, 0.018637474, 0.019441247000000002, 0.021770731]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3150
+        sums_start_ns = 37740
+        wall_ns = 40890
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3220
+        sums_start_ns = 35370
+        wall_ns = 38590
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3640
+        sums_start_ns = 38321
+        wall_ns = 41961
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 1800
+        sums_start_ns = 15410
+        wall_ns = 17210
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.394e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00019245000000000002
+    merge_slot_s = [2.661e-5, 2.1470000000000003e-5, 2.0640000000000002e-5, 2.044e-5, 2.135e-5, 2.0320000000000002e-5, 2.1210000000000002e-5, 2.057e-5]
+    pass_wall_s = 0.13354516400000002
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.134069425
+    site_barriers_s = 0.133328613
+    site_slot_noncompute_s = [0.020019087, 0.024240887000000003, 0.018760934, 0.019745055, 0.023409315, 0.019875506, 0.022244661000000002, 0.022722382000000003]
+    site_slot_s = [0.11330952600000001, 0.10908772600000001, 0.114567679, 0.113583558, 0.10991929800000001, 0.11345310700000001, 0.11108395200000001, 0.11060623100000001]
+    slot_ack_wait_s = [0.020180858000000003, 0.024389618000000002, 0.018912225, 0.019884836000000003, 0.023558596, 0.020021717, 0.022390022000000002, 0.022562863000000002]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3100
+        sums_start_ns = 35180
+        wall_ns = 38280
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5720
+        sums_start_ns = 60750
+        wall_ns = 66470
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6570
+        sums_start_ns = 58140
+        wall_ns = 64710
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3120
+        sums_start_ns = 19870
+        wall_ns = 22990
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.208e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00022600000000000002
+    merge_slot_s = [3.917e-5, 2.5750000000000002e-5, 2.4860000000000003e-5, 2.285e-5, 2.648e-5, 2.0940000000000003e-5, 2.0070000000000003e-5, 2.162e-5]
+    pass_wall_s = 0.151919817
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.152480168
+    site_barriers_s = 0.15166183700000002
+    site_slot_noncompute_s = [0.028287747000000002, 0.026314622000000003, 0.033121479, 0.030838965000000003, 0.036983168000000004, 0.028019668, 0.028196417, 0.024482657]
+    site_slot_s = [0.12337409, 0.125347215, 0.11854035800000001, 0.12082287200000001, 0.11467866900000001, 0.12364216900000001, 0.12346542, 0.12717918]
+    slot_ack_wait_s = [0.028464016, 0.026491471000000003, 0.033283488, 0.031002344, 0.037144237000000004, 0.028183027000000003, 0.028356276000000003, 0.020337387000000002]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5040
+        sums_start_ns = 51040
+        wall_ns = 56080
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4510
+        sums_start_ns = 53600
+        wall_ns = 58110
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7480
+        sums_start_ns = 66300
+        wall_ns = 73780
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5190
+        sums_start_ns = 32840
+        wall_ns = 38030
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.9160000000000005e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00016975
+    merge_slot_s = [2.5300000000000002e-5, 1.804e-5, 1.9050000000000002e-5, 1.773e-5, 1.9370000000000003e-5, 1.7140000000000002e-5, 1.743e-5, 1.774e-5]
+    pass_wall_s = 0.13320130300000002
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.133738255
+    site_barriers_s = 0.13300657300000002
+    site_slot_noncompute_s = [0.019915477, 0.023361505, 0.02113906, 0.019186725, 0.018547823, 0.014860805000000001, 0.022599274000000003, 0.02086243]
+    site_slot_s = [0.113091096, 0.10964506800000001, 0.111867513, 0.113819848, 0.11445875000000001, 0.11814576800000001, 0.110407299, 0.112144143]
+    slot_ack_wait_s = [0.020050217000000002, 0.023491255000000003, 0.02126727, 0.019316155, 0.015853457, 0.014986515, 0.022712894, 0.018980806000000003]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3390
+        sums_start_ns = 39290
+        wall_ns = 42680
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6640
+        sums_start_ns = 60390
+        wall_ns = 67030
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4500
+        sums_start_ns = 37180
+        wall_ns = 41680
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 1970
+        sums_start_ns = 16390
+        wall_ns = 18360
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.182e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000209931
+    merge_slot_s = [2.525e-5, 2.3350000000000002e-5, 2.313e-5, 2.2561000000000003e-5, 2.356e-5, 2.258e-5, 2.4860000000000003e-5, 2.3e-5]
+    pass_wall_s = 0.131258439
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.13181824
+    site_barriers_s = 0.131021418
+    site_slot_noncompute_s = [0.017721011000000002, 0.022402782000000003, 0.020550878, 0.018864043, 0.022490752000000003, 0.018786514, 0.019848976, 0.021581450000000002]
+    site_slot_s = [0.113300407, 0.108618636, 0.11047054, 0.112157375, 0.10853066600000001, 0.11223490400000001, 0.11117244200000001, 0.10943996800000001]
+    slot_ack_wait_s = [0.017898382, 0.022569003, 0.020723359, 0.019024464, 0.022659093, 0.018954555, 0.020010737, 0.021736331]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5770
+        sums_start_ns = 60590
+        wall_ns = 66360
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5940
+        sums_start_ns = 62120
+        wall_ns = 68060
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3090
+        sums_start_ns = 36651
+        wall_ns = 39741
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5150
+        sums_start_ns = 30620
+        wall_ns = 35770
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.7470000000000005e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.0001431
+    merge_slot_s = [1.946e-5, 1.635e-5, 1.5250000000000001e-5, 1.5490000000000002e-5, 1.595e-5, 1.6270000000000002e-5, 1.594e-5, 1.5090000000000001e-5]
+    pass_wall_s = 0.130780837
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.131372448
+    site_barriers_s = 0.130615067
+    site_slot_noncompute_s = [0.018497294, 0.021543081000000002, 0.020857449, 0.017319630000000003, 0.021972792, 0.017572771, 0.019362885, 0.020337698]
+    site_slot_s = [0.112117773, 0.10907198600000001, 0.109757618, 0.11329543700000001, 0.10864227500000001, 0.113042296, 0.111252182, 0.110277369]
+    slot_ack_wait_s = [0.018601084, 0.021643071, 0.020967929, 0.017422990000000003, 0.022076562, 0.017664451, 0.019460385, 0.020006747000000002]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3140
+        sums_start_ns = 38330
+        wall_ns = 41470
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3040
+        sums_start_ns = 36860
+        wall_ns = 39900
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3970
+        sums_start_ns = 37520
+        wall_ns = 41490
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 2060
+        sums_start_ns = 18180
+        wall_ns = 20240
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.194e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00016599
+    merge_slot_s = [2.2290000000000002e-5, 1.7860000000000002e-5, 1.7460000000000002e-5, 1.6890000000000003e-5, 1.8730000000000002e-5, 1.9390000000000002e-5, 1.8650000000000003e-5, 1.858e-5]
+    pass_wall_s = 0.130934918
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.131496469
+    site_barriers_s = 0.130741138
+    site_slot_noncompute_s = [0.018854344000000002, 0.021736162, 0.021394671, 0.016379249000000002, 0.019320467, 0.018757404000000002, 0.019148855000000003, 0.021058701000000003]
+    site_slot_s = [0.11188679400000001, 0.109004976, 0.109346467, 0.11436188900000001, 0.11142067100000001, 0.111983734, 0.111592283, 0.10968243700000001]
+    slot_ack_wait_s = [0.018981994000000002, 0.021858542, 0.021517671000000002, 0.016507759, 0.019438087, 0.018875624, 0.019253725000000003, 0.021177831]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3160
+        sums_start_ns = 40160
+        wall_ns = 43320
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4120
+        sums_start_ns = 39840
+        wall_ns = 43960
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4030
+        sums_start_ns = 44510
+        wall_ns = 48540
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3550
+        sums_start_ns = 26620
+        wall_ns = 30170
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.782e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000193381
+    merge_slot_s = [2.192e-5, 2.129e-5, 2.1051000000000002e-5, 2.1230000000000002e-5, 2.322e-5, 2.137e-5, 2.1280000000000003e-5, 2.222e-5]
+    pass_wall_s = 0.132600072
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.138344235
+    site_barriers_s = 0.13238321
+    site_slot_noncompute_s = [0.019855136000000002, 0.023315825000000002, 0.021781781, 0.018548833, 0.022343192, 0.019170325000000002, 0.02153454, 0.022124861000000003]
+    site_slot_s = [0.112528074, 0.109067385, 0.110601429, 0.113834377, 0.110040018, 0.11321288500000001, 0.11084867000000001, 0.110258349]
+    slot_ack_wait_s = [0.020006907, 0.023464556, 0.021925062000000002, 0.018691384000000002, 0.022485913, 0.019304376, 0.021665811, 0.022257712000000002]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 5580
+        sums_start_ns = 62640
+        wall_ns = 68220
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3840
+        sums_start_ns = 36421
+        wall_ns = 40261
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6910
+        sums_start_ns = 59740
+        wall_ns = 66650
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 2100
+        sums_start_ns = 16150
+        wall_ns = 18250
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.8060000000000004e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00020148100000000002
+    merge_slot_s = [2.4520000000000002e-5, 2.108e-5, 2.182e-5, 2.9310000000000002e-5, 2.073e-5, 2.101e-5, 2.1110000000000003e-5, 2.1101e-5]
+    pass_wall_s = 0.13136825900000001
+    peak_active_slots = 64
+    public_allocated_bytes = 2588192
+    public_wall_s = 0.13198466
+    site_barriers_s = 0.131143428
+    site_slot_noncompute_s = [0.018647954, 0.022906934, 0.021441131000000002, 0.018799055000000002, 0.02118367, 0.019313515, 0.02162273, 0.021692491]
+    site_slot_s = [0.11249547400000001, 0.108236494, 0.109702297, 0.11234437300000001, 0.109959758, 0.111829913, 0.10952069800000001, 0.10945093700000001]
+    slot_ack_wait_s = [0.018812795, 0.023058735, 0.021612012, 0.018956926000000002, 0.021337721, 0.019456676000000003, 0.021770221000000003, 0.021835382]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3520
+        sums_start_ns = 36440
+        wall_ns = 39960
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 9390
+        sums_start_ns = 85291
+        wall_ns = 94681
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3760
+        sums_start_ns = 35500
+        wall_ns = 39260
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 2480
+        sums_start_ns = 25100
+        wall_ns = 27580
+
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.135694599
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.131142168
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.13180832
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.13199021
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.131138648
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.13187364
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.130559337
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.130637717
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.137887774
+    [[cases.workers]]
+    bytes = 2589504
+    frame = 1
+    gc_s = 0.00430947
+    seconds = 0.137262612
+
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.84e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000182881
+    merge_slot_s = [1.9960000000000002e-5, 2.3950000000000003e-5, 2.3740000000000003e-5, 2.693e-5, 2.231e-5, 2.241e-5, 2.125e-5, 2.161e-5]
+    pass_wall_s = 0.131028018
+    peak_active_slots = 64
+    public_allocated_bytes = 2601456
+    public_wall_s = 0.13175196
+    site_barriers_s = 0.13082121700000002
+    site_slot_noncompute_s = [0.019060995, 0.023819556000000002, 0.022103833, 0.017690221000000002, 0.021164599000000003, 0.020752819000000002, 0.022046112, 0.022959663]
+    site_slot_s = [0.111760222, 0.10700166100000001, 0.108717384, 0.11313099600000001, 0.10965661800000001, 0.11006839800000001, 0.10877510500000001, 0.10786155400000001]
+    slot_ack_wait_s = [0.019221246, 0.023978337000000002, 0.022255414, 0.017844692000000002, 0.021304720000000003, 0.02089859, 0.022187963, 0.023100374]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9740
+        dispatch_start_ns = 480
+        entered_ns = [9880, 13250, 14580, 15040, 18730, 10890, 11670, 14900]
+        finished_ns = [15890, 18300, 23090, 24390, 27990, 16410, 17330, 19730]
+        receipt_started_ns = [9760, 17960, 23080, 28100, 28240, 29160, 29290, 29390]
+        received_ns = [17920, 23050, 28050, 28220, 29140, 29270, 29370, 29440]
+        submitted_ns = [590, 2730, 4360, 4920, 6060, 8410, 9180, 9440]
+        sums_ns = 3490
+        sums_start_ns = 37070
+        wall_ns = 40560
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9180
+        dispatch_start_ns = 550
+        entered_ns = [8810, 11670, 12310, 13180, 13840, 12910, 10910, 14190]
+        finished_ns = [14060, 20440, 17570, 22120, 19150, 17910, 16350, 19340]
+        receipt_started_ns = [9200, 20160, 21330, 21430, 27860, 27950, 28050, 28130]
+        received_ns = [20120, 21310, 21410, 27810, 27930, 28030, 28110, 28190]
+        submitted_ns = [650, 2710, 3790, 4920, 6070, 7490, 8750, 8960]
+        sums_ns = 3540
+        sums_start_ns = 33710
+        wall_ns = 37250
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8050
+        dispatch_start_ns = 480
+        entered_ns = [10350, 9870, 7320, 9290, 13480, 16440, 12040, 24690]
+        finished_ns = [17030, 16510, 13790, 15480, 19820, 25360, 18570, 33980]
+        receipt_started_ns = [8070, 17820, 17920, 18010, 18080, 22680, 29780, 29890]
+        received_ns = [17790, 17900, 17990, 18060, 22660, 29740, 29880, 39450]
+        submitted_ns = [590, 2940, 3720, 4470, 5900, 6760, 7620, 7910]
+        sums_ns = 3560
+        sums_start_ns = 46480
+        wall_ns = 50040
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12100
+        dispatch_start_ns = 610
+        entered_ns = [5110, 31280, 11670, 17170, 12980, 19310, 13490, 27860]
+        finished_ns = [7440, 35181, 15560, 20020, 14790, 22660, 17440, 30530]
+        receipt_started_ns = [12130, 12300, 42681, 42921, 43071, 43221, 43351, 43481]
+        received_ns = [12260, 42601, 42881, 43041, 43181, 43321, 43441, 43571]
+        submitted_ns = [730, 4240, 6200, 7500, 9210, 10690, 11190, 11620]
+        sums_ns = 3350
+        sums_start_ns = 51681
+        wall_ns = 55031
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.8731000000000005e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00014385
+    merge_slot_s = [1.6930000000000002e-5, 2.413e-5, 2.095e-5, 1.9880000000000003e-5, 1.704e-5, 2.025e-5, 2.056e-5, 2.063e-5]
+    pass_wall_s = 0.12995499500000002
+    peak_active_slots = 64
+    public_allocated_bytes = 2601456
+    public_wall_s = 0.130766528
+    site_barriers_s = 0.12979046500000002
+    site_slot_noncompute_s = [0.018408544000000002, 0.022117232, 0.020561978, 0.017875082, 0.02163928, 0.018298203000000002, 0.02102041, 0.021723532]
+    site_slot_s = [0.11138192100000001, 0.10767323300000001, 0.10922848700000001, 0.11191538300000001, 0.10815118500000001, 0.11149226200000001, 0.108770055, 0.108066933]
+    slot_ack_wait_s = [0.018544454000000002, 0.022236052000000003, 0.020690298000000003, 0.017996302000000002, 0.021767460000000002, 0.018416473000000003, 0.02114148, 0.021847872]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7040
+        dispatch_start_ns = 650
+        entered_ns = [6260, 7430, 6830, 12550, 11040, 8890, 7890, 14580]
+        finished_ns = [11020, 12290, 11460, 17610, 16180, 13910, 12840, 19000]
+        receipt_started_ns = [7060, 14520, 14610, 14680, 21850, 21980, 22080, 22140]
+        received_ns = [14490, 14590, 14660, 21810, 21970, 22060, 22130, 22200]
+        submitted_ns = [760, 2460, 3160, 4150, 5620, 6310, 6560, 6820]
+        sums_ns = 3120
+        sums_start_ns = 26810
+        wall_ns = 29930
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7410
+        dispatch_start_ns = 320
+        entered_ns = [7550, 12030, 12490, 17940, 9340, 12880, 15480, 20470]
+        finished_ns = [12490, 20540, 20640, 26410, 13600, 21190, 24100, 28870]
+        receipt_started_ns = [7430, 14140, 25930, 26080, 31410, 31530, 31630, 31710]
+        received_ns = [14120, 25880, 26060, 31380, 31510, 31610, 31690, 31770]
+        submitted_ns = [360, 1970, 2670, 3340, 4560, 6050, 7070, 7240]
+        sums_ns = 3020
+        sums_start_ns = 35370
+        wall_ns = 38390
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8450
+        dispatch_start_ns = 480
+        entered_ns = [6610, 13570, 7840, 13980, 11080, 12860, 13070, 11470]
+        finished_ns = [11410, 20880, 12550, 19050, 16220, 18090, 18270, 16900]
+        receipt_started_ns = [8470, 17900, 25400, 25530, 25640, 25740, 25810, 25880]
+        received_ns = [17870, 25360, 25510, 25620, 25720, 25790, 25860, 25920]
+        submitted_ns = [540, 2630, 3790, 5740, 7050, 8010, 8130, 8230]
+        sums_ns = 3190
+        sums_start_ns = 30830
+        wall_ns = 34020
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11920
+        dispatch_start_ns = 880
+        entered_ns = [6520, 18520, 11430, 10730, 15480, 13140, 14850, 13680]
+        finished_ns = [9210, 22440, 15260, 12350, 18290, 15140, 17000, 16460]
+        receipt_started_ns = [11960, 12120, 29990, 30210, 30410, 30580, 30700, 30820]
+        received_ns = [12070, 29890, 30180, 30380, 30540, 30660, 30790, 30940]
+        submitted_ns = [990, 5330, 7680, 9630, 10110, 10590, 11210, 11500]
+        sums_ns = 3240
+        sums_start_ns = 38270
+        wall_ns = 41510
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.457e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00019825000000000002
+    merge_slot_s = [1.934e-5, 2.6530000000000002e-5, 2.258e-5, 2.457e-5, 1.927e-5, 1.734e-5, 2.761e-5, 1.893e-5]
+    pass_wall_s = 0.129775035
+    peak_active_slots = 64
+    public_allocated_bytes = 2601456
+    public_wall_s = 0.130326546
+    site_barriers_s = 0.129557905
+    site_slot_noncompute_s = [0.01784225, 0.021451559000000002, 0.020850699, 0.01733952, 0.020491068, 0.019429145000000002, 0.019107404, 0.020986979000000003]
+    site_slot_s = [0.11171565500000001, 0.108106346, 0.108707206, 0.112218385, 0.10906683700000001, 0.11012876, 0.110450501, 0.10857092600000001]
+    slot_ack_wait_s = [0.01802844, 0.021632059000000002, 0.021032929000000002, 0.0175218, 0.020668248, 0.019609475, 0.019282674, 0.021163919]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7880
+        dispatch_start_ns = 490
+        entered_ns = [8050, 8380, 11600, 10830, 10920, 9170, 18970, 9550]
+        finished_ns = [13120, 13690, 16200, 15770, 16270, 14310, 27850, 13610]
+        receipt_started_ns = [7900, 16930, 17030, 17120, 17190, 17250, 17320, 33290]
+        received_ns = [16890, 17010, 17100, 17180, 17240, 17300, 33250, 33390]
+        submitted_ns = [810, 2380, 3670, 4380, 5180, 5860, 7440, 7710]
+        sums_ns = 3090
+        sums_start_ns = 37980
+        wall_ns = 41070
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13810
+        dispatch_start_ns = 670
+        entered_ns = [14480, 12500, 17410, 17460, 12930, 18270, 15360, 26450]
+        finished_ns = [22190, 22450, 26520, 26310, 18880, 23480, 21940, 34480]
+        receipt_started_ns = [13850, 27390, 27570, 27720, 27840, 27970, 28080, 28190]
+        received_ns = [27340, 27540, 27690, 27810, 27940, 28050, 28150, 41370]
+        submitted_ns = [820, 4460, 5560, 7280, 9620, 10660, 12870, 13290]
+        sums_ns = 6340
+        sums_start_ns = 50640
+        wall_ns = 56980
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8110
+        dispatch_start_ns = 470
+        entered_ns = [7940, 13970, 6200, 18950, 9950, 11310, 16370, 9270]
+        finished_ns = [12570, 21500, 11130, 27490, 15580, 16670, 25270, 14140]
+        receipt_started_ns = [8130, 17530, 25070, 25180, 32840, 32930, 32990, 33070]
+        received_ns = [17500, 25040, 25160, 32800, 32910, 32970, 33060, 33130]
+        submitted_ns = [850, 2580, 3300, 4820, 6410, 7470, 7720, 7900]
+        sums_ns = 3620
+        sums_start_ns = 38730
+        wall_ns = 42350
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12180
+        dispatch_start_ns = 700
+        entered_ns = [6070, 14190, 15210, 35640, 17260, 12180, 14790, 13200]
+        finished_ns = [8340, 18350, 19530, 38340, 19940, 14090, 18500, 15490]
+        receipt_started_ns = [12220, 12370, 19870, 20080, 46180, 46380, 46550, 46690]
+        received_ns = [12330, 19810, 20010, 46120, 46350, 46520, 46660, 46800]
+        submitted_ns = [850, 4810, 5840, 6680, 9980, 10510, 10820, 11640]
+        sums_ns = 3470
+        sums_start_ns = 54380
+        wall_ns = 57850
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.51e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00015227
+    merge_slot_s = [2.054e-5, 1.847e-5, 2.286e-5, 2.1400000000000002e-5, 1.7500000000000002e-5, 2.088e-5, 2.4990000000000003e-5, 2.173e-5]
+    pass_wall_s = 0.130068516
+    peak_active_slots = 64
+    public_allocated_bytes = 2601440
+    public_wall_s = 0.130740137
+    site_barriers_s = 0.129900326
+    site_slot_noncompute_s = [0.018039194, 0.021832062000000003, 0.021065779, 0.017885683, 0.020014268, 0.018885785000000002, 0.019631637, 0.021522781]
+    site_slot_s = [0.111861132, 0.10806826400000001, 0.108834547, 0.11201464300000001, 0.10988605800000001, 0.11101454100000001, 0.110268689, 0.108377545]
+    slot_ack_wait_s = [0.018181914, 0.021975822000000002, 0.021205229000000003, 0.018016803, 0.020152748, 0.019021575000000002, 0.019766187, 0.021655261000000002]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8520
+        dispatch_start_ns = 480
+        entered_ns = [8380, 9100, 8230, 10390, 13250, 8700, 19020, 13440]
+        finished_ns = [13530, 14400, 13800, 15570, 18740, 13870, 27700, 18310]
+        receipt_started_ns = [8540, 16170, 16270, 16350, 16400, 25070, 25180, 33230]
+        received_ns = [16140, 16250, 16330, 16380, 25030, 25160, 33190, 33310]
+        submitted_ns = [570, 2540, 3180, 3690, 4890, 5960, 7190, 8190]
+        sums_ns = 3100
+        sums_start_ns = 37660
+        wall_ns = 40760
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7100
+        dispatch_start_ns = 720
+        entered_ns = [18790, 8330, 13710, 10320, 9400, 15740, 15630, 9250]
+        finished_ns = [27670, 13850, 22610, 15530, 14340, 20790, 21010, 14260]
+        receipt_started_ns = [7120, 33420, 33550, 33680, 33760, 33830, 33900, 33960]
+        received_ns = [33380, 33530, 33660, 33740, 33810, 33880, 33950, 34010]
+        submitted_ns = [820, 2480, 3100, 3890, 5310, 6420, 6700, 6900]
+        sums_ns = 3100
+        sums_start_ns = 39280
+        wall_ns = 42380
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 6740
+        dispatch_start_ns = 470
+        entered_ns = [10820, 7170, 6810, 14510, 15830, 13220, 12280, 15850]
+        finished_ns = [15220, 11360, 11310, 23050, 21360, 22250, 20940, 25150]
+        receipt_started_ns = [6760, 16420, 16540, 16620, 27090, 27210, 27350, 27430]
+        received_ns = [16390, 16520, 16600, 27060, 27190, 27330, 27410, 27490]
+        submitted_ns = [530, 2650, 3250, 4580, 5580, 6220, 6400, 6530]
+        sums_ns = 2960
+        sums_start_ns = 32400
+        wall_ns = 35360
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 5320
+        dispatch_start_ns = 300
+        entered_ns = [3880, 13250, 10520, 20460, 8870, 14340, 10150, 6940]
+        finished_ns = [6360, 17060, 14830, 23210, 10700, 16350, 12890, 9790]
+        receipt_started_ns = [5340, 10350, 18490, 18610, 27050, 27160, 27260, 27330]
+        received_ns = [10320, 18470, 18590, 27020, 27140, 27240, 27320, 27380]
+        submitted_ns = [360, 1760, 2470, 3040, 3730, 4740, 4950, 5110]
+        sums_ns = 2030
+        sums_start_ns = 31740
+        wall_ns = 33770
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.7031000000000004e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.002997477
+    merge_slot_s = [2.6260000000000003e-5, 2.5330000000000003e-5, 2.5030000000000003e-5, 2.2440000000000002e-5, 2.5980000000000002e-5, 2.3e-5, 2.5710000000000003e-5, 2.3780000000000003e-5]
+    pass_wall_s = 0.13404037400000002
+    peak_active_slots = 64
+    public_allocated_bytes = 2601456
+    public_wall_s = 0.134564987
+    site_barriers_s = 0.13102480700000002
+    site_slot_noncompute_s = [0.019139385000000002, 0.021988601, 0.021595200000000002, 0.018435192, 0.021732411, 0.019570226, 0.020358687, 0.022556962]
+    site_slot_s = [0.11188542200000001, 0.10903620600000001, 0.10942960700000001, 0.112589615, 0.109292396, 0.11145458100000001, 0.11066612, 0.10846784500000001]
+    slot_ack_wait_s = [0.022125692000000002, 0.024973098000000003, 0.024576057000000002, 0.021403529, 0.024714648000000002, 0.022549553, 0.023336904000000002, 0.025535839]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8100
+        dispatch_start_ns = 350
+        entered_ns = [8200, 8220, 12160, 8660, 18290, 8700, 15930, 10560]
+        finished_ns = [14060, 13710, 20310, 14250, 27560, 13580, 24460, 15100]
+        receipt_started_ns = [8120, 16000, 16120, 24280, 24370, 32300, 32390, 32490]
+        received_ns = [15970, 16110, 24240, 24360, 32260, 32370, 32470, 32540]
+        submitted_ns = [640, 2520, 3260, 4020, 4630, 5830, 7550, 7880]
+        sums_ns = 3180
+        sums_start_ns = 37710
+        wall_ns = 40890
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13660
+        dispatch_start_ns = 810
+        entered_ns = [16410, 14350, 16700, 17200, 14370, 25160, 24750, 15780]
+        finished_ns = [26690, 26010, 25470, 26370, 19710, 33820, 33520, 24420]
+        receipt_started_ns = [13700, 28270, 28460, 28610, 28720, 28840, 40740, 40980]
+        received_ns = [28210, 28420, 28580, 28680, 28800, 40670, 40950, 41120]
+        submitted_ns = [960, 3670, 4550, 7470, 8380, 11160, 12940, 13180]
+        sums_ns = 6530
+        sums_start_ns = 49060
+        wall_ns = 55590
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 6160
+        dispatch_start_ns = 450
+        entered_ns = [12910, 8890, 6760, 8990, 22230, 2830196, 9000, 7190]
+        finished_ns = [20770, 13730, 11360, 14400, 31440, 2838286, 13860, 13090]
+        receipt_started_ns = [6180, 22100, 22170, 22250, 22310, 33540, 2844667, 2844867]
+        received_ns = [22070, 22150, 22230, 22290, 33520, 2844567, 2844847, 2844987]
+        submitted_ns = [510, 2480, 3220, 3940, 5200, 5520, 5760, 5960]
+        sums_ns = 3000
+        sums_start_ns = 2848887
+        wall_ns = 2851887
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12080
+        dispatch_start_ns = 560
+        entered_ns = [6080, 15610, 14770, 26140, 28680, 25450, 18820, 14050]
+        finished_ns = [8750, 19350, 18640, 28800, 31440, 27110, 22740, 19080]
+        receipt_started_ns = [12120, 12270, 22650, 22840, 35930, 36140, 36310, 36450]
+        received_ns = [12230, 22610, 22810, 35860, 36100, 36270, 36410, 36550]
+        submitted_ns = [660, 4330, 5550, 6350, 8600, 10630, 10970, 11420]
+        sums_ns = 3080
+        sums_start_ns = 46030
+        wall_ns = 49110
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.4370000000000004e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00016559000000000002
+    merge_slot_s = [2.8970000000000002e-5, 1.984e-5, 1.8350000000000002e-5, 2.0770000000000003e-5, 2.4180000000000002e-5, 1.806e-5, 2.1550000000000002e-5, 2.0870000000000002e-5]
+    pass_wall_s = 0.130701847
+    peak_active_slots = 64
+    public_allocated_bytes = 2601472
+    public_wall_s = 0.131504249
+    site_barriers_s = 0.130515767
+    site_slot_noncompute_s = [0.016907161, 0.022678815, 0.021190491000000002, 0.017885234, 0.020734109, 0.020478529000000002, 0.020788309, 0.021638082000000003]
+    site_slot_s = [0.113608606, 0.107836952, 0.10932527600000001, 0.112630533, 0.109781658, 0.11003723800000001, 0.109727458, 0.108877685]
+    slot_ack_wait_s = [0.017058231, 0.022825625000000002, 0.021341611, 0.018032914, 0.020881819000000003, 0.020626419, 0.020933739, 0.021779142]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7120
+        dispatch_start_ns = 380
+        entered_ns = [14130, 11780, 9450, 11640, 11240, 8950, 14520, 9160]
+        finished_ns = [23100, 16820, 14530, 16810, 16600, 14380, 23910, 14120]
+        receipt_started_ns = [7140, 27960, 28080, 28170, 28260, 28320, 28390, 28460]
+        received_ns = [27930, 28060, 28150, 28240, 28300, 28370, 28450, 28520]
+        submitted_ns = [480, 2020, 3160, 4170, 4660, 5320, 6750, 6900]
+        sums_ns = 3150
+        sums_start_ns = 32800
+        wall_ns = 35950
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9170
+        dispatch_start_ns = 540
+        entered_ns = [14170, 12080, 9190, 17580, 11890, 17480, 13190, 11070]
+        finished_ns = [23370, 20930, 14210, 26070, 19480, 22320, 18110, 15950]
+        receipt_started_ns = [9200, 29930, 30110, 30260, 30390, 30520, 30640, 30780]
+        received_ns = [29860, 30070, 30220, 30360, 30490, 30610, 30740, 30880]
+        submitted_ns = [690, 3010, 4030, 4860, 6940, 8070, 8480, 8780]
+        sums_ns = 5730
+        sums_start_ns = 36340
+        wall_ns = 42070
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11170
+        dispatch_start_ns = 600
+        entered_ns = [12570, 9860, 9740, 10840, 15320, 15620, 12300, 15190]
+        finished_ns = [21210, 13980, 14410, 15790, 24210, 21210, 17610, 24050]
+        receipt_started_ns = [11210, 25310, 25510, 25670, 25780, 25900, 26010, 26150]
+        received_ns = [25260, 25480, 25630, 25750, 25860, 25980, 26120, 26240]
+        submitted_ns = [720, 3690, 4620, 7810, 9650, 10090, 10400, 10710]
+        sums_ns = 6120
+        sums_start_ns = 34080
+        wall_ns = 40200
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11270
+        dispatch_start_ns = 630
+        entered_ns = [4660, 9400, 14220, 26830, 25300, 12050, 20990, 11870]
+        finished_ns = [7270, 11520, 18150, 29440, 28050, 14560, 23280, 14320]
+        receipt_started_ns = [11310, 11470, 12610, 20020, 36480, 36700, 36860, 36990]
+        received_ns = [11430, 12570, 19960, 36400, 36660, 36820, 36960, 37110]
+        submitted_ns = [770, 3770, 4840, 8070, 9720, 10040, 10530, 10840]
+        sums_ns = 3080
+        sums_start_ns = 44290
+        wall_ns = 47370
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.15e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.002730216
+    merge_slot_s = [2.712e-5, 2.627e-5, 2.061e-5, 2.389e-5, 2.6410000000000003e-5, 2.116e-5, 2.349e-5, 2.417e-5]
+    pass_wall_s = 0.134564376
+    peak_active_slots = 64
+    public_allocated_bytes = 2601472
+    public_wall_s = 0.135080527
+    site_barriers_s = 0.13181871
+    site_slot_noncompute_s = [0.018833064, 0.023465266000000002, 0.022398332, 0.020197318000000002, 0.022193572, 0.020036968000000002, 0.021392630000000003, 0.022267203000000003]
+    site_slot_s = [0.11298564600000001, 0.10835344400000001, 0.10942037800000001, 0.11162139200000001, 0.10962513800000001, 0.111781742, 0.11042608000000001, 0.109551507]
+    slot_ack_wait_s = [0.021548, 0.026178832000000003, 0.025115218, 0.022911764, 0.024897358, 0.022750574000000003, 0.024104556000000003, 0.024976959]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 6770
+        dispatch_start_ns = 370
+        entered_ns = [10740, 12560, 8050, 5230, 15340, 7850, 22800, 14190]
+        finished_ns = [15500, 21150, 13040, 10640, 20520, 12890, 31780, 21790]
+        receipt_started_ns = [6790, 16340, 26180, 26320, 26420, 26520, 26580, 37010]
+        received_ns = [16310, 26140, 26310, 26400, 26500, 26570, 36980, 37100]
+        submitted_ns = [420, 1910, 2720, 3280, 3850, 5430, 6330, 6550]
+        sums_ns = 3030
+        sums_start_ns = 41690
+        wall_ns = 44720
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 10860
+        dispatch_start_ns = 620
+        entered_ns = [20290, 8410, 14260, 13470, 12760, 21320, 16380, 19130]
+        finished_ns = [29480, 13970, 23030, 22190, 21020, 29770, 25050, 27350]
+        receipt_started_ns = [10910, 36800, 37020, 37170, 37310, 37430, 37560, 37720]
+        received_ns = [36720, 36990, 37140, 37270, 37400, 37530, 37680, 37820]
+        submitted_ns = [750, 3370, 4700, 5570, 8860, 9980, 10390, 10580]
+        sums_ns = 6420
+        sums_start_ns = 46470
+        wall_ns = 52890
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8280
+        dispatch_start_ns = 570
+        entered_ns = [18610, 13760, 6830, 16900, 16250, 10710, 9710, 16710]
+        finished_ns = [30070, 24150, 11590, 24470, 27820, 15410, 14110, 22900]
+        receipt_started_ns = [8300, 39990, 40120, 40220, 40290, 40360, 40430, 40500]
+        received_ns = [39950, 40110, 40200, 40270, 40350, 40420, 40480, 40560]
+        submitted_ns = [630, 2480, 3820, 5320, 6180, 7550, 7850, 8060]
+        sums_ns = 3110
+        sums_start_ns = 45340
+        wall_ns = 48450
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12100
+        dispatch_start_ns = 680
+        entered_ns = [5740, 10390, 12350, 17990, 12840, 23900, 12250, 2572956]
+        finished_ns = [7910, 12480, 14740, 20570, 14610, 27340, 14100, 2575486]
+        receipt_started_ns = [12140, 12300, 15180, 15330, 21860, 22020, 30560, 30690]
+        received_ns = [12250, 15120, 15300, 21820, 21980, 30530, 30650, 2578176]
+        submitted_ns = [800, 4890, 6600, 10010, 10530, 11120, 11390, 11810]
+        sums_ns = 1700
+        sums_start_ns = 2582456
+        wall_ns = 2584156
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.291e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000140041
+    merge_slot_s = [2.345e-5, 1.609e-5, 1.961e-5, 1.656e-5, 1.8390000000000002e-5, 2.343e-5, 2.076e-5, 2.4651e-5]
+    pass_wall_s = 0.130843217
+    peak_active_slots = 64
+    public_allocated_bytes = 2601456
+    public_wall_s = 0.131342208
+    site_barriers_s = 0.13068849600000002
+    site_slot_noncompute_s = [0.018277633, 0.022936884, 0.020593098, 0.018538033000000002, 0.022910244, 0.019074955, 0.019856497, 0.023263065000000003]
+    site_slot_s = [0.11241086300000001, 0.10775161200000001, 0.11009539800000001, 0.112150463, 0.107778252, 0.11161354100000001, 0.110831999, 0.107425431]
+    slot_ack_wait_s = [0.018402324, 0.023061565000000003, 0.020716069, 0.018661464000000003, 0.023032115000000002, 0.019195876, 0.019973918, 0.023383056000000003]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 6530
+        dispatch_start_ns = 550
+        entered_ns = [15360, 8770, 10160, 11630, 9000, 10600, 15550, 15240]
+        finished_ns = [23840, 13750, 15090, 16740, 16190, 15370, 20900, 22940]
+        receipt_started_ns = [6550, 27960, 28060, 28150, 28210, 28280, 28340, 28410]
+        received_ns = [27930, 28050, 28140, 28200, 28260, 28330, 28390, 28460]
+        submitted_ns = [670, 2030, 3000, 3790, 4480, 5970, 6120, 6290]
+        sums_ns = 3390
+        sums_start_ns = 32080
+        wall_ns = 35470
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 5570
+        dispatch_start_ns = 280
+        entered_ns = [9280, 6220, 11480, 8510, 7360, 12740, 13220, 7040]
+        finished_ns = [14220, 11030, 19460, 13580, 11780, 21060, 18030, 11760]
+        receipt_started_ns = [5590, 18300, 18420, 23300, 23400, 23490, 23590, 23660]
+        received_ns = [18260, 18400, 23260, 23380, 23470, 23570, 23640, 23700]
+        submitted_ns = [400, 1840, 2400, 2980, 3570, 5020, 5210, 5380]
+        sums_ns = 3060
+        sums_start_ns = 27650
+        wall_ns = 30710
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9970
+        dispatch_start_ns = 410
+        entered_ns = [16240, 7580, 7900, 11320, 13370, 11180, 12270, 21750]
+        finished_ns = [24130, 11950, 12710, 16130, 18730, 19590, 20740, 31321]
+        receipt_started_ns = [10010, 31411, 31621, 31771, 31891, 32021, 32151, 32251]
+        received_ns = [31321, 31591, 31741, 31861, 31981, 32111, 32221, 32361]
+        submitted_ns = [550, 2130, 2910, 5060, 6890, 8630, 9020, 9410]
+        sums_ns = 7940
+        sums_start_ns = 37791
+        wall_ns = 45731
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7710
+        dispatch_start_ns = 640
+        entered_ns = [3120, 11060, 15340, 7730, 15590, 9820, 12260, 8500]
+        finished_ns = [5750, 13260, 17580, 9590, 17280, 12130, 14750, 11530]
+        receipt_started_ns = [7730, 7820, 16150, 21310, 21410, 21490, 21580, 21650]
+        received_ns = [7790, 16120, 21270, 21390, 21480, 21560, 21630, 21710]
+        submitted_ns = [710, 2530, 4010, 5050, 6270, 7010, 7260, 7540]
+        sums_ns = 1740
+        sums_start_ns = 26390
+        wall_ns = 28130
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.292e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00016972000000000002
+    merge_slot_s = [1.885e-5, 2.186e-5, 1.972e-5, 2.069e-5, 2.133e-5, 2.5140000000000003e-5, 2.621e-5, 1.737e-5]
+    pass_wall_s = 0.130233226
+    peak_active_slots = 64
+    public_allocated_bytes = 2601472
+    public_wall_s = 0.130760587
+    site_barriers_s = 0.130046606
+    site_slot_noncompute_s = [0.017490391, 0.022402433000000003, 0.020538579, 0.016836859000000003, 0.020973150000000003, 0.018739095, 0.018869255, 0.022069651000000003]
+    site_slot_s = [0.112556215, 0.10764417300000001, 0.10950802700000001, 0.11320974700000001, 0.10907345600000001, 0.11130751100000001, 0.11117735100000001, 0.10797695500000001]
+    slot_ack_wait_s = [0.017651311, 0.022558953000000003, 0.020692999, 0.016991739000000002, 0.02112733, 0.018888685000000002, 0.019018315, 0.022218091000000002]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8960
+        dispatch_start_ns = 530
+        entered_ns = [6090, 8080, 19690, 10840, 12390, 12850, 16690, 10650]
+        finished_ns = [12260, 13100, 27810, 16640, 18080, 18450, 26000, 15220]
+        receipt_started_ns = [8980, 19360, 19490, 32100, 32200, 32270, 32330, 32410]
+        received_ns = [19330, 19470, 32060, 32180, 32250, 32310, 32390, 32480]
+        submitted_ns = [640, 2390, 3750, 4870, 5680, 6850, 8350, 8710]
+        sums_ns = 3490
+        sums_start_ns = 37550
+        wall_ns = 41040
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11920
+        dispatch_start_ns = 760
+        entered_ns = [7320, 14490, 9980, 17530, 14350, 23670, 20030, 19860]
+        finished_ns = [12690, 23230, 15040, 26230, 22550, 32300, 28470, 25080]
+        receipt_started_ns = [11970, 23480, 23670, 23810, 32720, 32930, 33110, 33240]
+        received_ns = [23430, 23640, 23770, 32640, 32900, 33080, 33210, 33340]
+        submitted_ns = [880, 3830, 5050, 6280, 8770, 10940, 11290, 11580]
+        sums_ns = 6070
+        sums_start_ns = 41450
+        wall_ns = 47520
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7380
+        dispatch_start_ns = 590
+        entered_ns = [5510, 7740, 7080, 11910, 11400, 17300, 11580, 9120]
+        finished_ns = [10570, 12310, 11870, 17030, 16580, 26400, 16730, 14650]
+        receipt_started_ns = [7400, 15240, 15330, 15390, 20530, 20660, 32030, 32120]
+        received_ns = [15200, 15310, 15380, 20500, 20640, 31990, 32110, 32190]
+        submitted_ns = [720, 1850, 2540, 4200, 5460, 6640, 6820, 7020]
+        sums_ns = 2820
+        sums_start_ns = 35410
+        wall_ns = 38230
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7960
+        dispatch_start_ns = 420
+        entered_ns = [4360, 23700, 7340, 11240, 12220, 9490, 23700, 8590]
+        finished_ns = [6900, 27770, 9410, 12700, 14840, 11790, 27680, 10870]
+        receipt_started_ns = [8060, 8260, 34800, 35020, 35210, 35380, 35510, 35640]
+        received_ns = [8190, 34720, 34980, 35170, 35350, 35480, 35610, 35790]
+        submitted_ns = [500, 1930, 3510, 4320, 5150, 6830, 7180, 7570]
+        sums_ns = 2800
+        sums_start_ns = 40130
+        wall_ns = 42930
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.337e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00015963000000000001
+    merge_slot_s = [2.6530000000000002e-5, 1.65e-5, 1.866e-5, 2.2000000000000003e-5, 1.828e-5, 2.328e-5, 2.585e-5, 2.254e-5]
+    pass_wall_s = 0.12969988500000001
+    peak_active_slots = 64
+    public_allocated_bytes = 2601456
+    public_wall_s = 0.130423337
+    site_barriers_s = 0.129521625
+    site_slot_noncompute_s = [0.016667699, 0.020997881000000003, 0.020417439000000003, 0.017008141, 0.020829419000000002, 0.017532751000000003, 0.017822532000000002, 0.020364258]
+    site_slot_s = [0.11285392600000001, 0.108523744, 0.109104186, 0.11251348400000001, 0.10869220600000001, 0.111988874, 0.11169909300000001, 0.109157367]
+    slot_ack_wait_s = [0.016815629000000002, 0.021149031000000002, 0.020564789, 0.017151631, 0.020973979, 0.017675821, 0.017964142000000002, 0.020504548]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7140
+        dispatch_start_ns = 570
+        entered_ns = [7620, 7620, 10690, 14460, 7210, 9510, 11600, 14760]
+        finished_ns = [13320, 13100, 15260, 20050, 13790, 14520, 17300, 19560]
+        receipt_started_ns = [7160, 15030, 15150, 15800, 23740, 23830, 23910, 24000]
+        received_ns = [15010, 15130, 15780, 23700, 23810, 23890, 23980, 24060]
+        submitted_ns = [670, 2110, 2710, 4020, 4790, 5620, 6840, 7020]
+        sums_ns = 2910
+        sums_start_ns = 28940
+        wall_ns = 31850
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8540
+        dispatch_start_ns = 440
+        entered_ns = [8850, 7590, 5790, 19710, 9060, 10740, 21130, 19700]
+        finished_ns = [17910, 12280, 11350, 28320, 13310, 19040, 29570, 27900]
+        receipt_started_ns = [8640, 20070, 20240, 20400, 35220, 35390, 35520, 35670]
+        received_ns = [20020, 20210, 20360, 35150, 35360, 35480, 35640, 35770]
+        submitted_ns = [530, 1890, 2720, 3630, 6140, 7700, 7970, 8180]
+        sums_ns = 8660
+        sums_start_ns = 40420
+        wall_ns = 49080
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7470
+        dispatch_start_ns = 400
+        entered_ns = [10160, 11020, 11580, 8810, 10360, 16340, 19590, 8820]
+        finished_ns = [18490, 15410, 16410, 14240, 15610, 24620, 29520, 14150]
+        receipt_started_ns = [7490, 22250, 22380, 22440, 22540, 22610, 29100, 34850]
+        received_ns = [22220, 22360, 22420, 22520, 22590, 29060, 34810, 34930]
+        submitted_ns = [470, 2240, 2900, 3680, 5060, 6070, 7060, 7280]
+        sums_ns = 3460
+        sums_start_ns = 39820
+        wall_ns = 43280
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9230
+        dispatch_start_ns = 560
+        entered_ns = [13460, 12690, 15100, 19970, 9510, 18350, 16910, 16800]
+        finished_ns = [17370, 14880, 19140, 22870, 12280, 20360, 19120, 21460]
+        receipt_started_ns = [9250, 22160, 22270, 22350, 28700, 28790, 28890, 28970]
+        received_ns = [22140, 22250, 22340, 28650, 28770, 28870, 28960, 29030]
+        submitted_ns = [630, 2660, 3210, 3730, 5540, 6660, 7680, 9000]
+        sums_ns = 1650
+        sums_start_ns = 33770
+        wall_ns = 35420
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.459e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.0057721230000000005
+    merge_slot_s = [2.703e-5, 1.902e-5, 1.936e-5, 2.3120000000000002e-5, 2.9900000000000002e-5, 2.364e-5, 2.354e-5, 2.392e-5]
+    pass_wall_s = 0.13694689200000001
+    peak_active_slots = 64
+    public_allocated_bytes = 2601472
+    public_wall_s = 0.137457613
+    site_barriers_s = 0.131160159
+    site_slot_noncompute_s = [0.018770835, 0.022528214, 0.021483111000000003, 0.018313852000000002, 0.022188952, 0.018951075, 0.020247327000000002, 0.022106542]
+    site_slot_s = [0.11238932400000001, 0.10863194500000001, 0.10967704800000001, 0.112846307, 0.108971207, 0.112209084, 0.110912832, 0.109053617]
+    slot_ack_wait_s = [0.024527468, 0.028284447, 0.027236494, 0.021280639, 0.027942455, 0.024704898000000003, 0.02600335, 0.025072879000000003]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8770
+        dispatch_start_ns = 610
+        entered_ns = [8510, 9020, 10050, 14670, 21150, 11160, 10610, 15630]
+        finished_ns = [15090, 14500, 15830, 23180, 30380, 16930, 16890, 23330]
+        receipt_started_ns = [8790, 17620, 17730, 17820, 27430, 35490, 35570, 35640]
+        received_ns = [17600, 17720, 17800, 27400, 35470, 35550, 35630, 35700]
+        submitted_ns = [710, 2800, 4230, 4720, 6250, 7300, 8260, 8460]
+        sums_ns = 3640
+        sums_start_ns = 41540
+        wall_ns = 45180
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12180
+        dispatch_start_ns = 670
+        entered_ns = [13290, 11780, 12090, 21010, 16320, 17810, 16600, 20800]
+        finished_ns = [23410, 18200, 18630, 29540, 25340, 23910, 25590, 29170]
+        receipt_started_ns = [12220, 27390, 27530, 27690, 36550, 36700, 36850, 37000]
+        received_ns = [27330, 27500, 27650, 36470, 36670, 36810, 36960, 37120]
+        submitted_ns = [830, 5280, 6720, 9080, 10850, 11180, 11520, 11810]
+        sums_ns = 5840
+        sums_start_ns = 45780
+        wall_ns = 51620
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 7310
+        dispatch_start_ns = 390
+        entered_ns = [12760, 8590, 7150, 11590, 16240, 23350, 2827117, 10350]
+        finished_ns = [20930, 13640, 12170, 16410, 25500, 32040, 2831677, 15480]
+        receipt_started_ns = [7330, 21770, 21880, 21970, 22040, 26990, 33920, 2839127]
+        received_ns = [21740, 21860, 21950, 22020, 26970, 33900, 2838817, 2839297]
+        submitted_ns = [500, 2200, 3460, 4800, 6000, 6790, 6950, 7120]
+        sums_ns = 3070
+        sums_start_ns = 2845097
+        wall_ns = 2848167
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 6600
+        dispatch_start_ns = 570
+        entered_ns = [3950, 2814486, 7970, 8920, 17890, 19000, 22300, 8420]
+        finished_ns = [6570, 2816826, 10280, 10600, 20980, 22570, 26380, 11600]
+        receipt_started_ns = [6620, 6880, 2820336, 2820446, 2820536, 2820596, 2820656, 2820726]
+        received_ns = [6850, 2820296, 2820426, 2820516, 2820576, 2820646, 2820706, 2820776]
+        submitted_ns = [650, 2240, 2950, 3930, 4530, 5930, 6130, 6360]
+        sums_ns = 1810
+        sums_start_ns = 2825346
+        wall_ns = 2827156
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+groups = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/tialv-resolved.toml"
+model_sha256 = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"
+name = "Ti–Al–V bcc"
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.298268111
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 2
+    gc_s = 0.003876459
+    seconds = 0.297082708
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.296485687
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.294484472
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 2
+    gc_s = 0.00410895
+    seconds = 0.297066659
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.291945776
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.294282392
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.291569415
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.299858035
+    [[cases.inline]]
+    bytes = 5335120
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.292924329
+
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.47e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00026656200000000003
+    merge_slot_s = [3.911e-5, 2.9761000000000002e-5, 2.958e-5, 2.8511000000000002e-5, 2.9950000000000003e-5, 2.625e-5, 2.8700000000000003e-5, 2.75e-5]
+    pass_wall_s = 0.291395275
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.292961409
+    site_barriers_s = 0.291097673
+    site_slot_noncompute_s = [0.039443832000000005, 0.049551896000000005, 0.045871159, 0.037677849, 0.048927635000000004, 0.045439537, 0.042651730000000006, 0.048652714]
+    site_slot_s = [0.251653841, 0.24154577700000002, 0.245226514, 0.253419824, 0.242170038, 0.24565813600000003, 0.248445943, 0.24244495900000002]
+    slot_ack_wait_s = [0.039626044, 0.049733108000000005, 0.046080621, 0.037846661000000004, 0.049124647, 0.045647489, 0.042826302000000004, 0.048818836000000004]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7540
+        sums_start_ns = 72781
+        wall_ns = 80321
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7180
+        sums_start_ns = 68850
+        wall_ns = 76030
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6080
+        sums_start_ns = 70801
+        wall_ns = 76881
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4220
+        sums_start_ns = 29110
+        wall_ns = 33330
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.71e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000244341
+    merge_slot_s = [3.5890000000000004e-5, 2.724e-5, 2.7680000000000003e-5, 2.51e-5, 2.8190000000000003e-5, 2.4391e-5, 2.5960000000000002e-5, 2.5110000000000002e-5]
+    pass_wall_s = 0.29055605300000004
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.292183117
+    site_barriers_s = 0.290278892
+    site_slot_noncompute_s = [0.039844345, 0.048442685000000006, 0.047092571, 0.040411475, 0.048278104, 0.039305343, 0.040996567000000005, 0.049724877]
+    site_slot_s = [0.250434547, 0.24183620700000003, 0.243186321, 0.249867417, 0.24200078800000002, 0.250973549, 0.24928232500000003, 0.240554015]
+    slot_ack_wait_s = [0.040053636000000004, 0.048634506, 0.047275592000000005, 0.040569996000000004, 0.048461035000000006, 0.039470994, 0.041164528000000006, 0.049882288000000004]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6870
+        sums_start_ns = 74511
+        wall_ns = 81381
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3890
+        sums_start_ns = 44700
+        wall_ns = 48590
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7400
+        sums_start_ns = 73300
+        wall_ns = 80700
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4430
+        sums_start_ns = 29240
+        wall_ns = 33670
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.147e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00019033
+    merge_slot_s = [3.07e-5, 2.08e-5, 2.199e-5, 1.845e-5, 2.1930000000000002e-5, 1.768e-5, 1.862e-5, 2.039e-5]
+    pass_wall_s = 0.294660602
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.299777414
+    site_barriers_s = 0.29444169200000003
+    site_slot_noncompute_s = [0.047035849000000005, 0.049464665000000005, 0.048910265, 0.043924283, 0.047909312, 0.043568772000000006, 0.046224459, 0.052999775000000006]
+    site_slot_s = [0.24740584300000001, 0.244977027, 0.24553142700000002, 0.250517409, 0.24653238000000002, 0.25087292, 0.248217233, 0.241441917]
+    slot_ack_wait_s = [0.047176179000000006, 0.049609955000000004, 0.049044425, 0.044055403, 0.048031382000000004, 0.043686842000000004, 0.046348119, 0.053113965000000006]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4750
+        sums_start_ns = 48690
+        wall_ns = 53440
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4710
+        sums_start_ns = 49560
+        wall_ns = 54270
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4320
+        sums_start_ns = 44210
+        wall_ns = 48530
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3870
+        sums_start_ns = 30220
+        wall_ns = 34090
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.0190000000000006e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000226471
+    merge_slot_s = [3.2391e-5, 2.7640000000000003e-5, 2.402e-5, 2.105e-5, 2.6940000000000003e-5, 2.8420000000000002e-5, 2.1300000000000003e-5, 2.2420000000000002e-5]
+    pass_wall_s = 0.29188231600000003
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.2933573
+    site_barriers_s = 0.291625155
+    site_slot_noncompute_s = [0.043494252000000004, 0.049194455000000005, 0.046436869000000006, 0.038998722, 0.048185653, 0.04250687, 0.041942648000000006, 0.052344113000000005]
+    site_slot_s = [0.248130903, 0.24243070000000003, 0.245188286, 0.25262643300000004, 0.243439502, 0.24911828500000002, 0.24968250700000003, 0.23928104200000003]
+    slot_ack_wait_s = [0.043666983, 0.049347286000000004, 0.04660322, 0.039166023, 0.048339654, 0.042666391000000005, 0.042075569, 0.052485174]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4410
+        sums_start_ns = 46980
+        wall_ns = 51390
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6860
+        sums_start_ns = 75781
+        wall_ns = 82641
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4560
+        sums_start_ns = 54500
+        wall_ns = 59060
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4330
+        sums_start_ns = 29050
+        wall_ns = 33380
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 6.0280000000000006e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000215691
+    merge_slot_s = [3.1191e-5, 2.36e-5, 2.396e-5, 2.207e-5, 2.5260000000000002e-5, 2.133e-5, 2.258e-5, 2.2040000000000002e-5]
+    pass_wall_s = 0.291821587
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.29340032
+    site_barriers_s = 0.291563355
+    site_slot_noncompute_s = [0.039574254, 0.049188796, 0.045562537, 0.0386052, 0.048353195, 0.043241722, 0.04251319, 0.049939038000000005]
+    site_slot_s = [0.251989101, 0.24237455900000002, 0.246000818, 0.252958155, 0.24321016, 0.248321633, 0.24905016500000002, 0.241624317]
+    slot_ack_wait_s = [0.039752584, 0.049354496000000005, 0.045716637000000004, 0.03874714, 0.048498285, 0.043395662, 0.04265597, 0.050090308]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7100
+        sums_start_ns = 69840
+        wall_ns = 76940
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4120
+        sums_start_ns = 48530
+        wall_ns = 52650
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4400
+        sums_start_ns = 45461
+        wall_ns = 49861
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6390
+        sums_start_ns = 29850
+        wall_ns = 36240
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.487e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00018180100000000002
+    merge_slot_s = [2.9480000000000002e-5, 2.025e-5, 2.0130000000000002e-5, 1.8670000000000003e-5, 2.08e-5, 1.7541e-5, 1.802e-5, 1.8560000000000002e-5]
+    pass_wall_s = 0.292384908
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.294157232
+    site_barriers_s = 0.29217595700000004
+    site_slot_noncompute_s = [0.03865421, 0.049222236, 0.045652907, 0.038408429, 0.047293060000000005, 0.042354059, 0.041629007, 0.048461503]
+    site_slot_s = [0.253521747, 0.242953721, 0.24652305000000002, 0.253767528, 0.24488289700000002, 0.24982189800000001, 0.25054695, 0.24371445400000002]
+    slot_ack_wait_s = [0.038790241, 0.049355527, 0.045780628000000004, 0.038520580000000006, 0.047413471000000006, 0.04247679, 0.041715148, 0.048581084000000004]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4570
+        sums_start_ns = 46440
+        wall_ns = 51010
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4250
+        sums_start_ns = 47390
+        wall_ns = 51640
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4400
+        sums_start_ns = 46890
+        wall_ns = 51290
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3560
+        sums_start_ns = 24301
+        wall_ns = 27861
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.479e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000265751
+    merge_slot_s = [3.956e-5, 2.9400000000000003e-5, 2.8490000000000003e-5, 2.8041e-5, 2.9840000000000002e-5, 2.6370000000000003e-5, 2.8310000000000002e-5, 2.7300000000000003e-5]
+    pass_wall_s = 0.290600493
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.292014636
+    site_barriers_s = 0.29029657200000003
+    site_slot_noncompute_s = [0.040057044, 0.0473068, 0.045155856, 0.03834545, 0.041509397, 0.040280224, 0.041570437, 0.04225397]
+    site_slot_s = [0.250239528, 0.24298977200000002, 0.245140716, 0.251951122, 0.24878717500000003, 0.250016348, 0.24872613500000001, 0.24804260200000003]
+    slot_ack_wait_s = [0.040277295000000005, 0.047517661, 0.045370357, 0.038526501000000005, 0.041710018, 0.040458455000000004, 0.041770598000000006, 0.039615104000000005]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7360
+        sums_start_ns = 70770
+        wall_ns = 78130
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6800
+        sums_start_ns = 69320
+        wall_ns = 76120
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7270
+        sums_start_ns = 69551
+        wall_ns = 76821
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4730
+        sums_start_ns = 29950
+        wall_ns = 34680
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.6150000000000004e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00024113000000000002
+    merge_slot_s = [3.5850000000000004e-5, 2.68e-5, 2.7450000000000003e-5, 2.5710000000000003e-5, 2.684e-5, 2.347e-5, 2.546e-5, 2.555e-5]
+    pass_wall_s = 0.292938309
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.294592712
+    site_barriers_s = 0.29266482800000004
+    site_slot_noncompute_s = [0.042357461000000006, 0.051380572000000006, 0.048148343, 0.033343299, 0.050930511000000005, 0.043224442, 0.045213527, 0.041998209]
+    site_slot_s = [0.250307367, 0.241284256, 0.244516485, 0.259321529, 0.241734317, 0.24944038600000001, 0.247451301, 0.25066661900000003]
+    slot_ack_wait_s = [0.042542491, 0.051572292000000006, 0.048327833, 0.033513099000000005, 0.051112791000000005, 0.043394592, 0.045352377000000006, 0.039337233]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6580
+        sums_start_ns = 73240
+        wall_ns = 79820
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6980
+        sums_start_ns = 71140
+        wall_ns = 78120
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4270
+        sums_start_ns = 45240
+        wall_ns = 49510
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4280
+        sums_start_ns = 29400
+        wall_ns = 33680
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.8140000000000004e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00020377
+    merge_slot_s = [3.37e-5, 2.1980000000000003e-5, 2.203e-5, 2.099e-5, 2.3160000000000002e-5, 1.9810000000000002e-5, 2.027e-5, 2.118e-5]
+    pass_wall_s = 0.289960131
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.295815195
+    site_barriers_s = 0.289730191
+    site_slot_noncompute_s = [0.040480494000000006, 0.048597074000000004, 0.047766152000000006, 0.038915391, 0.04725556, 0.039014532000000005, 0.038910360000000005, 0.049789757000000004]
+    site_slot_s = [0.24924969700000002, 0.241133117, 0.24196403900000002, 0.2508148, 0.24247463100000002, 0.25071565900000004, 0.250819831, 0.239940434]
+    slot_ack_wait_s = [0.040636534, 0.048764344, 0.047910172, 0.039067751000000005, 0.047396310000000004, 0.036354225000000004, 0.03903857, 0.049920327]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4330
+        sums_start_ns = 47890
+        wall_ns = 52220
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7050
+        sums_start_ns = 69390
+        wall_ns = 76440
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3960
+        sums_start_ns = 47140
+        wall_ns = 51100
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 3520
+        sums_start_ns = 20490
+        wall_ns = 24010
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.1370000000000005e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000222181
+    merge_slot_s = [3.5041000000000006e-5, 2.44e-5, 2.5390000000000003e-5, 2.139e-5, 2.5260000000000002e-5, 2.2360000000000003e-5, 2.311e-5, 2.264e-5]
+    pass_wall_s = 0.313766147
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.31515567
+    site_barriers_s = 0.31351431500000004
+    site_slot_noncompute_s = [0.06009370000000001, 0.067626528, 0.063081547, 0.053511304, 0.04301967, 0.045455927, 0.054244097000000005, 0.05595986100000001]
+    site_slot_s = [0.253420615, 0.24588778700000002, 0.25043276800000003, 0.260003011, 0.27049464500000003, 0.26805838800000004, 0.259270218, 0.25755445400000004]
+    slot_ack_wait_s = [0.060266532000000005, 0.06778623, 0.063230359, 0.05085788, 0.043161882000000006, 0.045582979, 0.054377949, 0.056104093]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7280
+        sums_start_ns = 74510
+        wall_ns = 81790
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4910
+        sums_start_ns = 47120
+        wall_ns = 52030
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4470
+        sums_start_ns = 49741
+        wall_ns = 54211
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4000
+        sums_start_ns = 30150
+        wall_ns = 34150
+    [[cases.inline_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 6.0190000000000005e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00024265000000000002
+    merge_slot_s = [3.5890000000000004e-5, 2.72e-5, 2.7060000000000002e-5, 2.449e-5, 2.744e-5, 2.419e-5, 2.521e-5, 2.578e-5]
+    pass_wall_s = 0.290842734
+    peak_active_slots = 64
+    public_allocated_bytes = 5338144
+    public_wall_s = 0.292379737
+    site_barriers_s = 0.29057076400000004
+    site_slot_noncompute_s = [0.040431385, 0.048287373, 0.045193217, 0.038750562, 0.047491072, 0.041386108000000005, 0.042598941, 0.04670693]
+    site_slot_s = [0.250139379, 0.24228339100000001, 0.245377547, 0.251820202, 0.243079692, 0.249184656, 0.247971823, 0.243863834]
+    slot_ack_wait_s = [0.040628355000000005, 0.048480503, 0.045363446, 0.038938642, 0.047656271, 0.041554608, 0.04275028, 0.046874490000000005]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 7150
+        sums_start_ns = 71900
+        wall_ns = 79050
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 6790
+        sums_start_ns = 73620
+        wall_ns = 80410
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4470
+        sums_start_ns = 48230
+        wall_ns = 52700
+        [[cases.inline_diagnostics.merge_waves]]
+        sums_ns = 4890
+        sums_start_ns = 25600
+        wall_ns = 30490
+
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.293045729
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.292944009
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.292565668
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.294386352
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.298953102
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.29377856
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.294667623
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.292852038
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 3
+    gc_s = 0.002790436
+    seconds = 0.296877427
+    [[cases.workers]]
+    bytes = 5339456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.293189429
+
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 5.865e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.000212971
+    merge_slot_s = [3.4660000000000004e-5, 3.147e-5, 3.417e-5, 2.8720000000000003e-5, 3.2711e-5, 3.3e-5, 2.843e-5, 2.8381e-5]
+    pass_wall_s = 0.29096310400000003
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.292684078
+    site_barriers_s = 0.29072509300000005
+    site_slot_noncompute_s = [0.039054041000000005, 0.048515194000000005, 0.046041958, 0.038629141000000006, 0.048670715, 0.039642504, 0.041487548000000006, 0.053027136]
+    site_slot_s = [0.251671052, 0.242209899, 0.24468313500000002, 0.252095952, 0.24205437800000001, 0.251082589, 0.249237545, 0.23769795700000002]
+    slot_ack_wait_s = [0.039235412000000004, 0.048700055000000006, 0.046217659, 0.038802092, 0.048835876, 0.039812325, 0.041653559, 0.053189927000000005]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12470
+        dispatch_start_ns = 1200
+        entered_ns = [12440, 12390, 13110, 16670, 17060, 15930, 18610, 20270]
+        finished_ns = [21480, 20720, 21840, 24110, 28561, 24240, 24760, 28171]
+        receipt_started_ns = [12510, 29771, 29941, 30081, 30201, 30311, 30421, 30531]
+        received_ns = [29721, 29911, 30041, 30171, 30271, 30381, 30501, 30621]
+        submitted_ns = [1550, 4700, 7740, 9290, 11260, 11500, 11870, 12100]
+        sums_ns = 6690
+        sums_start_ns = 40651
+        wall_ns = 47341
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9910
+        dispatch_start_ns = 670
+        entered_ns = [20090, 15320, 15230, 25520, 15160, 15240, 32970, 15250]
+        finished_ns = [31240, 26520, 27190, 35230, 23190, 24240, 41850, 23740]
+        receipt_started_ns = [9940, 37060, 37190, 37290, 37390, 37460, 37530, 46760]
+        received_ns = [37020, 37170, 37270, 37370, 37440, 37520, 46720, 46830]
+        submitted_ns = [780, 2920, 3860, 4790, 6470, 7990, 9350, 9550]
+        sums_ns = 3900
+        sums_start_ns = 54630
+        wall_ns = 58530
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9390
+        dispatch_start_ns = 830
+        entered_ns = [18000, 10860, 10580, 21280, 16950, 16380, 13130, 15030]
+        finished_ns = [29270, 19860, 19900, 31480, 26790, 28850, 22800, 23180]
+        receipt_started_ns = [9410, 35250, 35360, 35450, 35550, 35630, 35700, 35760]
+        received_ns = [35200, 35350, 35440, 35530, 35610, 35690, 35740, 35810]
+        submitted_ns = [940, 3670, 4300, 5480, 7280, 8590, 8920, 9160]
+        sums_ns = 4290
+        sums_start_ns = 43560
+        wall_ns = 47850
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 14460
+        dispatch_start_ns = 1200
+        entered_ns = [10570, 13610, 16400, 20810, 17590, 34360, 26040, 15550]
+        finished_ns = [14330, 16930, 21140, 22740, 21320, 38040, 30250, 19790]
+        receipt_started_ns = [14500, 14670, 23780, 23950, 24080, 24220, 44670, 44860]
+        received_ns = [14610, 23720, 23910, 24050, 24180, 44590, 44830, 44970]
+        submitted_ns = [1340, 5160, 6490, 7480, 10230, 13270, 13800, 14050]
+        sums_ns = 4020
+        sums_start_ns = 55230
+        wall_ns = 59250
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.941e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00018782
+    merge_slot_s = [2.9100000000000003e-5, 2.498e-5, 3.1570000000000004e-5, 3.147e-5, 3.1950000000000004e-5, 2.898e-5, 3.247e-5, 3.266e-5]
+    pass_wall_s = 0.290905124
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.292421537
+    site_barriers_s = 0.29069617400000003
+    site_slot_noncompute_s = [0.040567746, 0.046791901000000004, 0.044360074, 0.038546710000000005, 0.046948831, 0.041342837, 0.043181532, 0.047524043]
+    site_slot_s = [0.250128428, 0.243904273, 0.2463361, 0.252149464, 0.243747343, 0.249353337, 0.247514642, 0.243172131]
+    slot_ack_wait_s = [0.040741656, 0.046964291000000005, 0.044529164, 0.03871555, 0.047115081, 0.041491727000000006, 0.043334442, 0.047681173]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12030
+        dispatch_start_ns = 1020
+        entered_ns = [11210, 11530, 17720, 11330, 20060, 14010, 19670, 20690]
+        finished_ns = [19910, 19450, 27010, 20470, 29950, 22180, 29640, 30380]
+        receipt_started_ns = [12060, 31440, 31620, 31760, 31920, 32040, 32150, 32270]
+        received_ns = [31380, 31580, 31730, 31890, 32000, 32120, 32230, 32350]
+        submitted_ns = [1160, 4540, 5760, 7080, 8920, 11020, 11540, 11760]
+        sums_ns = 6980
+        sums_start_ns = 43430
+        wall_ns = 50410
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8960
+        dispatch_start_ns = 1030
+        entered_ns = [9640, 11250, 15510, 18400, 12410, 15030, 10750, 17100]
+        finished_ns = [19180, 18250, 26180, 28050, 21360, 22220, 18930, 26500]
+        receipt_started_ns = [8980, 22360, 22460, 30370, 30510, 30600, 30690, 30760]
+        received_ns = [22330, 22440, 30330, 30490, 30580, 30670, 30740, 30810]
+        submitted_ns = [1150, 3360, 4330, 5920, 6480, 8210, 8530, 8710]
+        sums_ns = 4030
+        sums_start_ns = 38520
+        wall_ns = 42550
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 10000
+        dispatch_start_ns = 800
+        entered_ns = [9450, 11670, 9540, 15020, 19130, 20020, 18110, 19160]
+        finished_ns = [17140, 17610, 17920, 25130, 30080, 30820, 29300, 27540]
+        receipt_started_ns = [10020, 28190, 28300, 28370, 28440, 34480, 34610, 34710]
+        received_ns = [28170, 28280, 28350, 28420, 34440, 34590, 34690, 34800]
+        submitted_ns = [910, 3610, 4340, 6110, 8310, 9320, 9470, 9730]
+        sums_ns = 4000
+        sums_start_ns = 42540
+        wall_ns = 46540
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13460
+        dispatch_start_ns = 1190
+        entered_ns = [9470, 19550, 12290, 26360, 17830, 16880, 14390, 19050]
+        finished_ns = [13080, 24090, 15900, 29410, 20410, 20010, 17890, 24670]
+        receipt_started_ns = [13500, 13660, 26050, 26210, 34400, 34540, 34690, 34810]
+        received_ns = [13610, 25980, 26180, 34340, 34500, 34660, 34770, 34890]
+        submitted_ns = [1310, 5980, 7230, 10100, 11680, 12220, 12770, 13100]
+        sums_ns = 4000
+        sums_start_ns = 44320
+        wall_ns = 48320
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.7560000000000005e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00022158
+    merge_slot_s = [3.956e-5, 2.9780000000000003e-5, 3.088e-5, 2.7260000000000003e-5, 3.468e-5, 3.828e-5, 3.604e-5, 3.6830000000000005e-5]
+    pass_wall_s = 0.29122077500000004
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.297250588
+    site_barriers_s = 0.290975625
+    site_slot_noncompute_s = [0.039199743, 0.048568315, 0.045524098000000006, 0.038308251, 0.047239712, 0.041522558, 0.042509061, 0.049510558]
+    site_slot_s = [0.251775882, 0.24240731000000001, 0.245451527, 0.252667374, 0.24373591300000003, 0.24945306700000003, 0.24846656400000003, 0.241465067]
+    slot_ack_wait_s = [0.039401972, 0.048765424, 0.045724487, 0.03850721, 0.047430961, 0.041714697, 0.042701380000000004, 0.049706457]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11450
+        dispatch_start_ns = 640
+        entered_ns = [15860, 11570, 11450, 20980, 22530, 15630, 21200, 20260]
+        finished_ns = [27110, 19150, 20110, 28120, 33340, 26970, 31340, 30260]
+        receipt_started_ns = [11470, 28880, 28980, 29050, 29100, 39620, 39730, 39810]
+        received_ns = [28860, 28960, 29030, 29090, 39580, 39710, 39790, 39890]
+        submitted_ns = [730, 3650, 4370, 5200, 6740, 8760, 9840, 11100]
+        sums_ns = 4110
+        sums_start_ns = 47820
+        wall_ns = 51930
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 15080
+        dispatch_start_ns = 1380
+        entered_ns = [15320, 24290, 16720, 18590, 20050, 24050, 16830, 24070]
+        finished_ns = [26790, 34120, 28210, 29250, 30890, 34190, 25600, 33650]
+        receipt_started_ns = [15140, 32690, 41480, 41670, 41830, 41950, 42090, 42220]
+        received_ns = [32630, 41410, 41640, 41790, 41910, 42050, 42180, 42320]
+        submitted_ns = [1520, 4670, 6190, 7370, 10110, 12410, 14340, 14660]
+        sums_ns = 6900
+        sums_start_ns = 52890
+        wall_ns = 59790
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 14420
+        dispatch_start_ns = 1090
+        entered_ns = [19890, 17140, 14540, 15810, 15750, 21010, 19020, 18830]
+        finished_ns = [33070, 26830, 21170, 22670, 25400, 33950, 31870, 32720]
+        receipt_started_ns = [14460, 35410, 35600, 35750, 35870, 35990, 36110, 36230]
+        received_ns = [35360, 35570, 35710, 35830, 35950, 36080, 36200, 36310]
+        submitted_ns = [1230, 6160, 7170, 9980, 12680, 13170, 13590, 13980]
+        sums_ns = 6380
+        sums_start_ns = 46120
+        wall_ns = 52500
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 14470
+        dispatch_start_ns = 970
+        entered_ns = [7730, 9860, 29730, 31950, 30270, 30780, 31080, 15070]
+        finished_ns = [11880, 13000, 34350, 34950, 34080, 35230, 35850, 18890]
+        receipt_started_ns = [14510, 14680, 14790, 42470, 42690, 42860, 43010, 43160]
+        received_ns = [14630, 14760, 42390, 42660, 42820, 42970, 43120, 43240]
+        submitted_ns = [1110, 5180, 6380, 8970, 11500, 13130, 13690, 14040]
+        sums_ns = 4230
+        sums_start_ns = 53130
+        wall_ns = 57360
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.801e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.0030239980000000004
+    merge_slot_s = [3.431e-5, 2.7821e-5, 2.8531000000000002e-5, 2.7731000000000003e-5, 2.883e-5, 2.7720000000000002e-5, 3.0050000000000002e-5, 3.0411e-5]
+    pass_wall_s = 0.292429337
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.29378251
+    site_barriers_s = 0.289383679
+    site_slot_noncompute_s = [0.038898871, 0.048143422000000005, 0.044709534, 0.039114381000000004, 0.039876753, 0.042002289000000005, 0.041667947000000004, 0.043616091]
+    site_slot_s = [0.250484808, 0.241240257, 0.244674145, 0.25026929800000003, 0.24950692600000002, 0.24738139, 0.24771573200000002, 0.245767588]
+    slot_ack_wait_s = [0.041905469, 0.05115, 0.047718652, 0.042120739000000004, 0.042862801000000006, 0.044990217000000006, 0.044667785, 0.043842443]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 16290
+        dispatch_start_ns = 880
+        entered_ns = [13850, 16920, 18330, 23800, 26351, 17460, 27091, 22410]
+        finished_ns = [25171, 27171, 28521, 33471, 36921, 24560, 36581, 31271]
+        receipt_started_ns = [16330, 32351, 32541, 32701, 41151, 41331, 41461, 41621]
+        received_ns = [32301, 32501, 32671, 41061, 41291, 41431, 41581, 41701]
+        submitted_ns = [1020, 5210, 6270, 9050, 11240, 13060, 15300, 15790]
+        sums_ns = 7240
+        sums_start_ns = 51561
+        wall_ns = 58801
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11750
+        dispatch_start_ns = 600
+        entered_ns = [7610, 9930, 15630, 16790, 12670, 14650, 21340, 16730]
+        finished_ns = [17640, 16940, 22760, 23650, 21730, 24540, 30560, 27250]
+        receipt_started_ns = [11780, 25580, 25760, 25900, 26030, 26140, 26240, 37270]
+        received_ns = [25530, 25730, 25870, 26000, 26110, 26210, 37190, 37430]
+        submitted_ns = [750, 3240, 4340, 6950, 8370, 10450, 10950, 11300]
+        sums_ns = 6190
+        sums_start_ns = 45840
+        wall_ns = 52030
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 10760
+        dispatch_start_ns = 790
+        entered_ns = [25180, 14010, 12440, 13230, 2829557, 17470, 13110, 19250]
+        finished_ns = [35130, 21780, 20960, 21760, 2835747, 25950, 22040, 25770]
+        receipt_started_ns = [10780, 36860, 36990, 37060, 37130, 2842017, 2842167, 2842287]
+        received_ns = [36820, 36980, 37040, 37110, 2841947, 2842147, 2842267, 2842367]
+        submitted_ns = [890, 5050, 6380, 7840, 9030, 10270, 10430, 10550]
+        sums_ns = 4280
+        sums_start_ns = 2849737
+        wall_ns = 2854017
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13690
+        dispatch_start_ns = 850
+        entered_ns = [7250, 12870, 10160, 34460, 26980, 21090, 14050, 19690]
+        finished_ns = [10800, 16010, 13340, 37560, 30490, 23690, 16860, 24710]
+        receipt_started_ns = [13720, 13890, 17990, 18110, 44360, 44610, 44790, 44950]
+        received_ns = [13840, 17930, 18070, 44270, 44580, 44750, 44910, 45040]
+        submitted_ns = [970, 4710, 5910, 8400, 9390, 12350, 12740, 13120]
+        sums_ns = 3930
+        sums_start_ns = 55220
+        wall_ns = 59150
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.788e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00021874
+    merge_slot_s = [4.376e-5, 3.9930000000000006e-5, 3.688e-5, 3.625e-5, 4.004e-5, 3.409e-5, 2.9880000000000002e-5, 3.363e-5]
+    pass_wall_s = 0.31332866600000003
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.314736149
+    site_barriers_s = 0.313090126
+    site_slot_noncompute_s = [0.047352141, 0.061999675000000004, 0.051364440000000004, 0.053501136000000005, 0.042305969000000006, 0.053961467000000006, 0.057796735, 0.065401164]
+    site_slot_s = [0.265737985, 0.251090451, 0.261725686, 0.25958899, 0.270784157, 0.25912865900000004, 0.25529339100000004, 0.247688962]
+    slot_ack_wait_s = [0.047558331, 0.062203685, 0.051569960000000005, 0.053684766, 0.042503349, 0.054162527, 0.057995055000000004, 0.06557953400000001]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13140
+        dispatch_start_ns = 1030
+        entered_ns = [16130, 15280, 18840, 23380, 15470, 18790, 21750, 24050]
+        finished_ns = [30320, 28380, 31140, 35870, 27740, 30110, 30560, 34570]
+        receipt_started_ns = [13160, 32320, 32440, 32500, 41350, 41480, 41590, 41700]
+        received_ns = [32290, 32430, 32480, 41330, 41450, 41570, 41680, 41750]
+        submitted_ns = [1160, 4500, 5410, 6970, 9640, 12380, 12710, 12860]
+        sums_ns = 6140
+        sums_start_ns = 50540
+        wall_ns = 56680
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 17470
+        dispatch_start_ns = 1260
+        entered_ns = [18730, 18600, 25840, 25310, 20280, 24770, 28920, 27610]
+        finished_ns = [33230, 31930, 36940, 36430, 33980, 34800, 36640, 38790]
+        receipt_started_ns = [17490, 38390, 38510, 38560, 38660, 38730, 38810, 38880]
+        received_ns = [38350, 38490, 38550, 38650, 38710, 38790, 38860, 40640]
+        submitted_ns = [1450, 6370, 9420, 11710, 13790, 15950, 16480, 17020]
+        sums_ns = 6970
+        sums_start_ns = 49820
+        wall_ns = 56790
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 15110
+        dispatch_start_ns = 970
+        entered_ns = [16060, 16060, 21530, 19110, 17650, 26730, 23610, 24580]
+        finished_ns = [26850, 26900, 30830, 29230, 29760, 36930, 32840, 32900]
+        receipt_started_ns = [15130, 30410, 30500, 35810, 35910, 35980, 41280, 41370]
+        received_ns = [30370, 30480, 35800, 35900, 35960, 41260, 41350, 41420]
+        submitted_ns = [1050, 5060, 5900, 7570, 9290, 11580, 12900, 14790]
+        sums_ns = 4350
+        sums_start_ns = 49180
+        wall_ns = 53530
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12140
+        dispatch_start_ns = 1090
+        entered_ns = [8330, 12920, 29810, 13620, 20610, 14880, 35370, 14350]
+        finished_ns = [13120, 16250, 34440, 16620, 22840, 17860, 39950, 18430]
+        receipt_started_ns = [12170, 15170, 18160, 40150, 40250, 40340, 40410, 41270]
+        received_ns = [15150, 18130, 40130, 40230, 40320, 40390, 41250, 41330]
+        submitted_ns = [1200, 4410, 6560, 8690, 10030, 11180, 11510, 11860]
+        sums_ns = 2720
+        sums_start_ns = 49020
+        wall_ns = 51740
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.309e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00023417200000000002
+    merge_slot_s = [3.3111e-5, 3.1961e-5, 3.2431e-5, 2.9081e-5, 2.6450000000000003e-5, 3.3131000000000005e-5, 3.1561000000000005e-5, 2.9291e-5]
+    pass_wall_s = 0.29680490800000003
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.298279641
+    site_barriers_s = 0.296548456
+    site_slot_noncompute_s = [0.042910531, 0.053244765000000006, 0.050142779000000005, 0.042765330000000004, 0.05154628, 0.031910425, 0.046269259, 0.054308138000000006]
+    site_slot_s = [0.25363792500000004, 0.24330369100000002, 0.24640567700000002, 0.253783126, 0.24500217600000002, 0.264638031, 0.250279197, 0.242240318]
+    slot_ack_wait_s = [0.043128363, 0.053459337, 0.050345271000000004, 0.042979492, 0.051760672, 0.032123987, 0.046465071000000004, 0.05450349]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 18950
+        dispatch_start_ns = 920
+        entered_ns = [12790, 12020, 14230, 30500, 21490, 15190, 20610, 23030]
+        finished_ns = [23280, 23250, 23680, 40160, 29620, 26160, 28650, 32090]
+        receipt_started_ns = [19010, 33820, 34000, 34140, 47361, 47561, 47701, 47831]
+        received_ns = [33760, 33960, 34110, 47291, 47531, 47661, 47801, 47911]
+        submitted_ns = [1060, 5340, 7850, 10600, 12110, 13470, 14020, 18310]
+        sums_ns = 6580
+        sums_start_ns = 58771
+        wall_ns = 65351
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11690
+        dispatch_start_ns = 830
+        entered_ns = [13880, 13860, 16990, 13970, 17420, 13750, 42640, 39810]
+        finished_ns = [24410, 23270, 28470, 23580, 26200, 24360, 51600, 45620]
+        receipt_started_ns = [11710, 25370, 25490, 29750, 29850, 29940, 30010, 56660]
+        received_ns = [25330, 25470, 29730, 29830, 29920, 29990, 56630, 56750]
+        submitted_ns = [940, 3550, 4650, 5630, 7150, 8120, 10960, 11340]
+        sums_ns = 4090
+        sums_start_ns = 64860
+        wall_ns = 68950
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8710
+        dispatch_start_ns = 900
+        entered_ns = [13260, 13300, 11310, 14050, 19211, 15690, 17360, 12370]
+        finished_ns = [21431, 21461, 20271, 22141, 26851, 24901, 28191, 21971]
+        receipt_started_ns = [8730, 22821, 22931, 23031, 23091, 31401, 31501, 31611]
+        received_ns = [22801, 22911, 23011, 23081, 31361, 31481, 31591, 31671]
+        submitted_ns = [1000, 3910, 5440, 7630, 7820, 8010, 8310, 8450]
+        sums_ns = 4430
+        sums_start_ns = 39641
+        wall_ns = 44071
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13170
+        dispatch_start_ns = 950
+        entered_ns = [9360, 12990, 14690, 14110, 21760, 14770, 30340, 26420]
+        finished_ns = [13650, 16510, 17650, 16320, 24060, 17450, 34570, 31520]
+        receipt_started_ns = [13210, 17600, 17750, 19860, 20000, 25340, 25480, 41590]
+        received_ns = [17550, 17710, 19820, 19960, 25310, 25440, 41530, 41720]
+        submitted_ns = [1080, 6300, 9820, 11230, 11580, 12040, 12510, 12890]
+        sums_ns = 4920
+        sums_start_ns = 50880
+        wall_ns = 55800
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.8900000000000004e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00023152100000000002
+    merge_slot_s = [3.68e-5, 3.647e-5, 3.1440000000000004e-5, 3.1490000000000005e-5, 2.8970000000000002e-5, 3.2710000000000004e-5, 3.1870000000000005e-5, 3.4450000000000004e-5]
+    pass_wall_s = 0.294884574
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.296658857
+    site_barriers_s = 0.294631393
+    site_slot_noncompute_s = [0.042706523, 0.048691115, 0.046609300000000006, 0.040604776, 0.049639057, 0.041307107, 0.041902190000000006, 0.051097421000000004]
+    site_slot_s = [0.25192487, 0.245940278, 0.24802209300000003, 0.254026617, 0.244992336, 0.253324286, 0.252729203, 0.24353397200000002]
+    slot_ack_wait_s = [0.042924763000000005, 0.048899585, 0.046825370000000005, 0.040813946000000004, 0.049843637, 0.041518377, 0.042089690000000006, 0.051284031]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 14600
+        dispatch_start_ns = 890
+        entered_ns = [12890, 12830, 16310, 21430, 22350, 16760, 20910, 18940]
+        finished_ns = [22130, 22110, 23670, 31080, 30140, 25120, 30940, 28660]
+        receipt_started_ns = [14630, 29930, 30110, 30240, 34760, 34920, 35050, 35170]
+        received_ns = [29870, 30070, 30200, 34730, 34880, 35010, 35140, 35240]
+        submitted_ns = [1030, 4280, 7030, 10010, 11490, 13430, 13880, 14130]
+        sums_ns = 6940
+        sums_start_ns = 45440
+        wall_ns = 52380
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 10480
+        dispatch_start_ns = 790
+        entered_ns = [13780, 13910, 15830, 20590, 13480, 18020, 34330, 15090]
+        finished_ns = [27270, 24230, 26360, 30390, 23500, 27780, 43850, 23450]
+        receipt_started_ns = [10490, 29370, 29530, 29610, 38790, 38890, 38970, 50430]
+        received_ns = [29330, 29510, 29590, 38770, 38870, 38950, 50380, 50530]
+        submitted_ns = [910, 3680, 4430, 6410, 7980, 9470, 10130, 10270]
+        sums_ns = 4000
+        sums_start_ns = 58850
+        wall_ns = 62850
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13000
+        dispatch_start_ns = 720
+        entered_ns = [14890, 9910, 11940, 14240, 22230, 17470, 28150, 22620]
+        finished_ns = [24380, 22430, 21120, 24110, 29630, 28310, 35930, 34330]
+        receipt_started_ns = [13020, 29350, 29460, 29520, 29590, 30940, 31020, 40760]
+        received_ns = [29320, 29440, 29500, 29570, 30920, 31000, 40720, 40850]
+        submitted_ns = [830, 4770, 7070, 9350, 11000, 12180, 12490, 12590]
+        sums_ns = 4560
+        sums_start_ns = 48450
+        wall_ns = 53010
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 16841
+        dispatch_start_ns = 1010
+        entered_ns = [10071, 24601, 37301, 28521, 18331, 27301, 27761, 23071]
+        finished_ns = [15141, 29531, 42081, 31191, 22471, 31471, 32771, 28201]
+        receipt_started_ns = [16871, 16971, 34101, 48501, 48641, 48741, 48851, 48921]
+        received_ns = [16941, 34071, 48461, 48621, 48721, 48831, 48901, 48971]
+        submitted_ns = [1120, 5711, 8771, 11761, 14721, 15291, 15791, 16461]
+        sums_ns = 5390
+        sums_start_ns = 57891
+        wall_ns = 63281
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 4.415e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00022480000000000002
+    merge_slot_s = [3.5900000000000005e-5, 3.122e-5, 3.7040000000000005e-5, 3.364e-5, 3.469e-5, 3.4710000000000005e-5, 3.109e-5, 2.981e-5]
+    pass_wall_s = 0.29990904500000004
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.30192189
+    site_barriers_s = 0.299660755
+    site_slot_noncompute_s = [0.047644382000000006, 0.053977098, 0.055339360000000004, 0.034434781000000005, 0.048925256, 0.048718125, 0.047645063, 0.05460778]
+    site_slot_s = [0.252016373, 0.24568365700000003, 0.24432139500000002, 0.26522597400000003, 0.25073549900000003, 0.25094263, 0.252015692, 0.245052975]
+    slot_ack_wait_s = [0.047856452, 0.054185308, 0.05552866, 0.034624531, 0.049127926, 0.048919505, 0.047848993000000006, 0.05480579]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13590
+        dispatch_start_ns = 800
+        entered_ns = [15090, 15240, 15530, 15060, 17790, 20510, 19600, 25330]
+        finished_ns = [25490, 23800, 25990, 25990, 27520, 30670, 28920, 31260]
+        receipt_started_ns = [13610, 29660, 29740, 29810, 29880, 29940, 36520, 36620]
+        received_ns = [29630, 29730, 29790, 29860, 29920, 36500, 36600, 36680]
+        submitted_ns = [890, 4560, 5650, 7610, 8310, 9620, 10930, 13120]
+        sums_ns = 4460
+        sums_start_ns = 44510
+        wall_ns = 48970
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13120
+        dispatch_start_ns = 970
+        entered_ns = [13320, 13310, 17930, 23070, 16060, 23850, 18430, 20230]
+        finished_ns = [23370, 21920, 28810, 32570, 24910, 32920, 29960, 27890]
+        receipt_started_ns = [13150, 31430, 31640, 31790, 40460, 40630, 40810, 40930]
+        received_ns = [31380, 31600, 31750, 40380, 40590, 40770, 40900, 41030]
+        submitted_ns = [1120, 4530, 5690, 6930, 10090, 11930, 12380, 12730]
+        sums_ns = 6530
+        sums_start_ns = 51190
+        wall_ns = 57720
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 10230
+        dispatch_start_ns = 920
+        entered_ns = [13740, 13660, 13640, 15420, 13650, 15780, 24490, 14990]
+        finished_ns = [25150, 24870, 24660, 26580, 27070, 28320, 31660, 27740]
+        receipt_started_ns = [10250, 27830, 27960, 28020, 28080, 28140, 31420, 36870]
+        received_ns = [27810, 27940, 28010, 28060, 28130, 31400, 36830, 36940]
+        submitted_ns = [1100, 4670, 5950, 9150, 9350, 9580, 9860, 10000]
+        sums_ns = 4580
+        sums_start_ns = 45260
+        wall_ns = 49840
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 17090
+        dispatch_start_ns = 1140
+        entered_ns = [10670, 13450, 30350, 23210, 17960, 41680, 18940, 25860]
+        finished_ns = [15260, 16630, 35440, 25820, 20950, 45210, 22390, 29710]
+        receipt_started_ns = [17130, 17290, 17410, 37060, 37220, 37340, 52360, 52560]
+        received_ns = [17240, 17380, 37010, 37190, 37310, 52290, 52520, 52650]
+        submitted_ns = [1280, 5150, 8290, 10390, 13700, 15540, 16120, 16430]
+        sums_ns = 4880
+        sums_start_ns = 63390
+        wall_ns = 68270
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.794e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00021424100000000002
+    merge_slot_s = [3.519e-5, 3.252e-5, 3.218e-5, 3.392e-5, 3.159e-5, 3.283e-5, 3.249e-5, 3.357e-5]
+    pass_wall_s = 0.29305868900000004
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.298941342
+    site_barriers_s = 0.292824028
+    site_slot_noncompute_s = [0.039043452, 0.047521791, 0.046634859, 0.037377177000000004, 0.048597184, 0.041404367000000004, 0.042448159, 0.048426494]
+    site_slot_s = [0.25378057600000004, 0.245302237, 0.246189169, 0.25544685100000003, 0.24422684400000003, 0.251419661, 0.25037586900000003, 0.24439753400000003]
+    slot_ack_wait_s = [0.039236703000000005, 0.047716782000000006, 0.046813030000000005, 0.037568188, 0.048789735, 0.041593088, 0.04263403, 0.048610855]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 10580
+        dispatch_start_ns = 670
+        entered_ns = [13760, 13700, 14150, 20520, 18420, 18770, 19300, 13650]
+        finished_ns = [24580, 23460, 25160, 32580, 29060, 28520, 28440, 24010]
+        receipt_started_ns = [10600, 29560, 29670, 29750, 37340, 37460, 37530, 37600]
+        received_ns = [29530, 29650, 29730, 37300, 37440, 37510, 37580, 37660]
+        submitted_ns = [780, 3760, 5080, 5980, 7370, 8650, 10010, 10230]
+        sums_ns = 4090
+        sums_start_ns = 45821
+        wall_ns = 49911
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 15140
+        dispatch_start_ns = 850
+        entered_ns = [13520, 12800, 20680, 22940, 15560, 25030, 19360, 26710]
+        finished_ns = [22280, 21440, 30930, 32720, 24980, 31090, 30570, 36100]
+        receipt_started_ns = [15170, 32460, 32640, 32780, 37190, 37350, 37460, 37590]
+        received_ns = [32400, 32600, 32740, 37150, 37310, 37430, 37560, 37670]
+        submitted_ns = [990, 5870, 7750, 9040, 11090, 13710, 14190, 14410]
+        sums_ns = 6180
+        sums_start_ns = 48240
+        wall_ns = 54420
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13640
+        dispatch_start_ns = 1020
+        entered_ns = [18740, 11260, 26200, 18340, 26930, 19980, 26760, 33700]
+        finished_ns = [30370, 22030, 32870, 28790, 35130, 33980, 35170, 43890]
+        receipt_started_ns = [13660, 33780, 33880, 33940, 34020, 39960, 40040, 40110]
+        received_ns = [33740, 33860, 33920, 34000, 39940, 40020, 40090, 49540]
+        submitted_ns = [1110, 4250, 4970, 7110, 8110, 9560, 11550, 13270]
+        sums_ns = 4310
+        sums_start_ns = 57850
+        wall_ns = 62160
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11860
+        dispatch_start_ns = 980
+        entered_ns = [8950, 12280, 16150, 19480, 13430, 14330, 26310, 15070]
+        finished_ns = [13480, 15990, 20820, 21670, 17110, 17760, 30550, 19180]
+        receipt_started_ns = [11880, 13910, 17190, 22280, 22380, 22460, 22540, 35570]
+        received_ns = [13870, 17170, 22260, 22360, 22440, 22520, 35520, 35640]
+        submitted_ns = [1190, 4270, 5540, 7650, 9330, 11090, 11380, 11570]
+        sums_ns = 3290
+        sums_start_ns = 44460
+        wall_ns = 47750
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 3.951e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00018751100000000001
+    merge_slot_s = [3.8561000000000006e-5, 3.5331000000000004e-5, 3.2031e-5, 2.9781e-5, 3.2371e-5, 2.7671000000000003e-5, 2.9350000000000002e-5, 3.2751000000000005e-5]
+    pass_wall_s = 0.29295548800000004
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.294401981
+    site_barriers_s = 0.292748297
+    site_slot_noncompute_s = [0.039001892, 0.049896607, 0.045648236, 0.03799045, 0.047085961, 0.041981638, 0.043225501, 0.047937872000000006]
+    site_slot_s = [0.253746405, 0.24285169, 0.247100061, 0.25475784700000004, 0.245662336, 0.250766659, 0.24952279600000002, 0.24481042500000003]
+    slot_ack_wait_s = [0.039173733, 0.050067788, 0.045819037, 0.038160471, 0.047256572000000004, 0.042149989000000006, 0.043395242, 0.048102483]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 13590
+        dispatch_start_ns = 950
+        entered_ns = [18480, 10110, 10160, 18700, 13930, 15000, 19580, 21680]
+        finished_ns = [29780, 18110, 18960, 28170, 22920, 23850, 26190, 30500]
+        receipt_started_ns = [13630, 34030, 34210, 34360, 34460, 34600, 34710, 34820]
+        received_ns = [33980, 34180, 34320, 34430, 34560, 34680, 34790, 34910]
+        submitted_ns = [1090, 4500, 5420, 6700, 7810, 10310, 12890, 13190]
+        sums_ns = 6720
+        sums_start_ns = 45920
+        wall_ns = 52640
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9470
+        dispatch_start_ns = 700
+        entered_ns = [16310, 14270, 14310, 20670, 14340, 21520, 23771, 14420]
+        finished_ns = [28631, 26791, 24101, 30141, 23661, 30751, 33461, 23551]
+        receipt_started_ns = [9490, 33541, 33661, 33761, 33871, 33931, 34011, 34211]
+        received_ns = [33501, 33651, 33751, 33851, 33921, 33991, 34191, 34271]
+        submitted_ns = [810, 3680, 4460, 5580, 7400, 8800, 9120, 9260]
+        sums_ns = 4510
+        sums_start_ns = 41821
+        wall_ns = 46331
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 11870
+        dispatch_start_ns = 1080
+        entered_ns = [14600, 13200, 12330, 15400, 16310, 23340, 17710, 17400]
+        finished_ns = [25220, 24830, 22780, 24980, 28230, 29690, 28050, 28330]
+        receipt_started_ns = [11890, 29320, 29440, 29530, 29590, 29660, 35550, 35640]
+        received_ns = [29280, 29430, 29510, 29580, 29640, 35510, 35620, 35680]
+        submitted_ns = [1250, 5050, 5980, 7400, 9310, 11000, 11330, 11540]
+        sums_ns = 4280
+        sums_start_ns = 43410
+        wall_ns = 47690
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12790
+        dispatch_start_ns = 1110
+        entered_ns = [9310, 15760, 18370, 21060, 22680, 14850, 16590, 15520]
+        finished_ns = [14070, 19410, 21790, 22740, 25170, 18590, 19710, 19800]
+        receipt_started_ns = [12810, 16360, 20860, 24480, 24590, 29910, 30010, 30110]
+        received_ns = [16320, 20850, 24460, 24570, 29870, 29990, 30090, 30160]
+        submitted_ns = [1270, 4410, 6730, 8830, 10210, 11970, 12320, 12590]
+        sums_ns = 3280
+        sums_start_ns = 37570
+        wall_ns = 40850
+    [[cases.workers_diagnostics]]
+    allocated_slots = 64
+    chunks = 216
+    export_s = 6.236100000000001e-5
+    force_scatter_bytes = 373248
+    group_active_edges = [200448]
+    group_sites = [3456]
+    merge_barriers_s = 0.00022724000000000003
+    merge_slot_s = [3.5170000000000004e-5, 3.1650000000000004e-5, 3.158e-5, 3.082e-5, 3.5380000000000003e-5, 3.741e-5, 3.838e-5, 3.506e-5]
+    pass_wall_s = 0.289942021
+    peak_active_slots = 64
+    public_allocated_bytes = 5351440
+    public_wall_s = 0.291367045
+    site_barriers_s = 0.289692241
+    site_slot_noncompute_s = [0.038757251, 0.046653019000000004, 0.042627021, 0.035486853, 0.048090633, 0.039857853000000006, 0.038939962, 0.047048909]
+    site_slot_s = [0.25093499, 0.24303922200000003, 0.24706522, 0.25420538800000003, 0.24160160800000002, 0.24983438800000002, 0.250752279, 0.24264333200000002]
+    slot_ack_wait_s = [0.038964441, 0.046862979000000006, 0.042833481, 0.035695563, 0.048291083000000005, 0.040065823, 0.039143122, 0.047249979000000004]
+    slot_capacity = 243
+    wave_count = 4
+
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 14850
+        dispatch_start_ns = 1140
+        entered_ns = [16860, 16780, 16670, 23120, 17690, 16600, 24730, 23050]
+        finished_ns = [29200, 25630, 26750, 33400, 26460, 26890, 35090, 33080]
+        receipt_started_ns = [14880, 34870, 35040, 35180, 35310, 35450, 35560, 35740]
+        received_ns = [34810, 35010, 35140, 35280, 35410, 35530, 35700, 35820]
+        submitted_ns = [1550, 5070, 7340, 8490, 11000, 12020, 13960, 14410]
+        sums_ns = 7360
+        sums_start_ns = 54060
+        wall_ns = 61420
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 8020
+        dispatch_start_ns = 760
+        entered_ns = [16850, 12590, 12940, 15070, 12600, 22420, 20520, 12590]
+        finished_ns = [28560, 22460, 23240, 25040, 21860, 32100, 31000, 23600]
+        receipt_started_ns = [8050, 34370, 34480, 34560, 34640, 34740, 34820, 34890]
+        received_ns = [34330, 34460, 34540, 34620, 34720, 34800, 34870, 34940]
+        submitted_ns = [870, 3300, 4360, 5100, 5790, 7320, 7630, 7800]
+        sums_ns = 3810
+        sums_start_ns = 42720
+        wall_ns = 46530
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 9140
+        dispatch_start_ns = 690
+        entered_ns = [10480, 14070, 10110, 12300, 22620, 15830, 15950, 11570]
+        finished_ns = [17980, 23040, 18580, 19900, 37580, 30190, 29750, 19860]
+        receipt_started_ns = [9160, 20500, 26640, 26750, 26830, 43090, 43220, 43340]
+        received_ns = [20480, 26590, 26730, 26810, 43050, 43200, 43330, 43440]
+        submitted_ns = [790, 3710, 4650, 5730, 6520, 8470, 8660, 8880]
+        sums_ns = 4290
+        sums_start_ns = 51060
+        wall_ns = 55350
+        [[cases.workers_diagnostics.merge_waves]]
+        dispatch_end_ns = 12990
+        dispatch_start_ns = 1090
+        entered_ns = [8780, 16130, 13870, 34950, 15860, 35900, 24670, 16920]
+        finished_ns = [12880, 20530, 17020, 38540, 18620, 39580, 29010, 23050]
+        receipt_started_ns = [13040, 13210, 22990, 23140, 47420, 47630, 47830, 48010]
+        received_ns = [13160, 22930, 23100, 47320, 47600, 47790, 47970, 48110]
+        submitted_ns = [1210, 6050, 7380, 8460, 11280, 11730, 12060, 12310]
+        sums_ns = 3760
+        sums_start_ns = 60180
+        wall_ns = 63940
+
+[governors]
+0 = "powersave"
+1 = "powersave"
+2 = "powersave"
+3 = "powersave"
+4 = "powersave"
+5 = "powersave"
+6 = "powersave"
+7 = "powersave"
+
+[source_sha256]
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "c288830459d8687840a27c58583f2cd0cbf9bdc908dfd5e33586f42f3a6e26ba"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "7c3e5148700b9d7dab7be76bb5c85ff21a2f5750932f0e0fe6ad9d5c20608b65"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "941c05f99c0d604fb2df8d3af6dd89b398929153c66879eed56f90c8bdd1d0cd"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "7f70af38b8773b33a643d4116830f51c61a580d8c91b8c14758d5de83c3a2d58"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"ext/ace_feature_products.jl" = "08508a18b305cdbb31b7d5ab4234ca52526523049888dadd1b0632097badd817"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "944f8be4276bb9475358686302643e1dc23479b7f03e48228d2d6a942c13ec2e"
+"src/submodules/ACE/adaptation.jl" = "437f2a8394088723e7fe32d09e527521c52d27b63a05b02701e7e26b688f7157"
+"src/submodules/ACE/angular_blocks.jl" = "c1b78378299960d712f06ee1407397593780975c626ec32263c1848512f60f6a"
+"src/submodules/ACE/calculators.jl" = "0f2e242bbeeb983f00879aa5c8d3b0c2704b6ff3241dd2bb48e33d87fb67192f"
+"src/submodules/ACE/chunks.jl" = "78e5cd462d32c8f20d6568036587eca3e7663bee34a6e06bf729ba8bd0489367"
+"src/submodules/ACE/cpu.jl" = "19835dd55c1b8f7a988b0f86fe82bc393ca5393e4ecfe77141a708d0aaea7807"
+"src/submodules/ACE/environments.jl" = "ee27e3dbe3161e02bcc15ab62f01b5d5575dffb3c50e5703878b4cdaf4d23b6d"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/feature_energy.jl" = "1869613d7d1c5dfd5594331b6e5615c7289828e4034642a4afee3e183cdf790d"
+"src/submodules/ACE/features.jl" = "22ce573ce92d82f06333d65ad7caa7d5511cc82c78b0d47f49cc8139b8d87ce3"
+"src/submodules/ACE/fitting.jl" = "0ff53a102561733228f7f739465405263e2ee0f50f9b2e4ad07cb969fbe1e80a"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "56deb06b51e6d58b4674b00c76358f386e2863a1669d66f939f8cd7b8873d919"
+"src/submodules/ACE/interface_persistence.jl" = "7a5c0cbf0715c4b5806d6d8ae697dadf4778f004d23cc521c8f03b2d3fa5b500"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "d62477a11daf4e587bb478c0223774b885984c1baf78368bc17b054e4927b753"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "85b6030cd4a0d31d333948b766b2b66c7d70a2e52d8dd545f1a93ab4d78a426a"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "c31ad3261e4050870c65fa54bf7c8affce56fff2f8af2247e1fe9eef7a96c110"
+"src/submodules/ACE/serial.jl" = "fd4e7bd4bc2e7ac4926eafde25b4e573e1e93b956bb5bab10e4fdbf23a6b79be"
+"src/submodules/ACE/site_pullbacks.jl" = "ac22d9435d97f0c0ddc951682d8836df5dcf89451ed85e13605f2afc5c0cee5d"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "4771e0d35b8027054f8226887f841207c98f060349b7565665d9901fb0c31356"
+"src/submodules/NeighbourList/NeighbourList.jl" = "94082feb205970bceb2a6f1d2a2df34834b868eb4a4ed7558c9c1021687c6694"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/chunk_threads.jl" = "c31c02c3fdd71ec1a97d871eb36243c6e9701af6d103da498e9cd2de7884e33c"
+"src/submodules/NeighbourList/chunks.jl" = "b35b3af9cc347072d48dde25170520d6657a17ea9f504705459035c3b9277ebd"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/pullbacks.jl" = "2ae778438fbacf246def660cf2b15a5637b8c55e14bb1dd7ae03d7b6db3ad676"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AcceleratedKernels = "0.5.13"
+AtomsBase = "0.5.3"
+AtomsCalculators = "0.2.3"
+KernelAbstractions = "0.9.48"
+SIMD = "3.8.2"
+SpheriCart = "0.2.4"
+StaticArrays = "1.9.25"
+Unitful = "1.29.0"

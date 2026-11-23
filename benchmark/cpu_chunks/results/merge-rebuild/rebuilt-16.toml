@@ -1,0 +1,651 @@
+affinity = "pid 28's current affinity list: 0-15"
+blas_threads = 1
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_topology = """# The following is the parsable format, which can be fed to other\n# programs. Each different item in every column has an unique ID\n# starting usually from zero.\n# CPU,Core,Socket,L1d:L1i:L2:L3\n0,0,0,0:0:0:0\n1,1,0,1:1:1:0\n2,2,0,2:2:2:0\n3,3,0,3:3:3:0\n4,4,0,4:4:4:0\n5,5,0,5:5:5:0\n6,6,0,6:6:6:0\n7,7,0,7:7:7:0\n8,8,0,8:8:8:1\n9,9,0,9:9:9:1\n10,10,0,10:10:10:1\n11,11,0,11:11:11:1\n12,12,0,12:12:12:1\n13,13,0,13:13:13:1\n14,14,0,14:14:14:1\n15,15,0,15:15:15:1\n16,0,0,0:0:0:0\n17,1,0,1:1:1:0\n18,2,0,2:2:2:0\n19,3,0,3:3:3:0\n20,4,0,4:4:4:0\n21,5,0,5:5:5:0\n22,6,0,6:6:6:0\n23,7,0,7:7:7:0\n24,8,0,8:8:8:1\n25,9,0,9:9:9:1\n26,10,0,10:10:10:1\n27,11,0,11:11:11:1\n28,12,0,12:12:12:1\n29,13,0,13:13:13:1\n30,14,0,14:14:14:1\n31,15,0,15:15:15:1\n"""
+fixture_sha256 = "bf3ad85fb44b85e48a9581d42e6b4721f2a74d60e490936ee207dc8de83f72c5"
+grid = 12
+harness_sha256 = "d63c1c5d2a2a7bfee61ded3372ef9bc047d46da6360606f89c300b4a3aa025ee"
+julia = "1.13.4"
+mode = "rebuild"
+samples = 10
+starting_revision = "3ddd74c8fb90177d31414915ddff285e81c228ae"
+threading_harness_sha256 = "83c520c0f1dfae4b3b4a4cc2e1d316cdb831788562e55871517b6135f53301a5"
+threads = 16
+workloads_sha256 = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+changed_graph_verified = true
+groups = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml"
+model_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+name = "Ti bcc"
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.096640598
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.105874141
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 3
+    gc_s = 0.005856522
+    seconds = 0.113626971
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.108497701
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.102321909
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.106613735
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.105254099
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.128034273
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.114464173
+    [[cases.fresh]]
+    bytes = 12608928
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.105918611
+
+    [[cases.probes]]
+    instrumented_public_s = 0.116671261
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00015461
+        cell_permutation = 6.8500000000000005e-6
+        channels = 2.8400000000000003e-6
+        directed_traversal = 0.004464596
+        extraction = 2.6940000000000003e-5
+        sorting_packing = 0.000502872
+        species_packing = 0.00809057
+        topology = 0.000438712
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007695130000000001
+        element_channels = 2.417e-5
+        neighbors = 0.013695730000000001
+        route_plan = 0.00261882
+    [[cases.probes]]
+    instrumented_public_s = 0.100383181
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00017198000000000002
+        cell_permutation = 5.850000000000001e-6
+        channels = 2.96e-6
+        directed_traversal = 0.004499716
+        extraction = 2.7291e-5
+        sorting_packing = 0.0005764020000000001
+        species_packing = 0.00257899
+        topology = 0.000515822
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007587230000000001
+        element_channels = 2.7620000000000003e-5
+        neighbors = 0.008387511
+        route_plan = 0.002611609
+    [[cases.probes]]
+    instrumented_public_s = 0.103894714
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000174031
+        cell_permutation = 5.71e-6
+        channels = 2.38e-6
+        directed_traversal = 0.0045098560000000005
+        extraction = 2.7150000000000003e-5
+        sorting_packing = 0.000546062
+        species_packing = 0.0026683
+        topology = 0.0005065320000000001
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.000764173
+        element_channels = 2.574e-5
+        neighbors = 0.008445171000000001
+        route_plan = 0.0026321300000000003
+    [[cases.probes]]
+    instrumented_public_s = 0.093537566
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000168311
+        cell_permutation = 5.21e-6
+        channels = 2.28e-6
+        directed_traversal = 0.004493637
+        extraction = 2.7230000000000002e-5
+        sorting_packing = 0.0005613020000000001
+        species_packing = 0.002616929
+        topology = 0.000504442
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0008007530000000001
+        element_channels = 3.474e-5
+        neighbors = 0.008383971
+        route_plan = 0.002820101
+    [[cases.probes]]
+    instrumented_public_s = 0.107736588
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000169001
+        cell_permutation = 6.290000000000001e-6
+        channels = 2.56e-6
+        directed_traversal = 0.004446216
+        extraction = 2.6750000000000003e-5
+        sorting_packing = 0.000520192
+        species_packing = 0.007180337
+        topology = 0.0005011820000000001
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0008436030000000001
+        element_channels = 3.612e-5
+        neighbors = 0.012858308
+        route_plan = 0.00275951
+    [[cases.probes]]
+    instrumented_public_s = 0.099470208
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00017908100000000002
+        cell_permutation = 5.58e-6
+        channels = 2.2200000000000003e-6
+        directed_traversal = 0.004485677
+        extraction = 2.9420000000000003e-5
+        sorting_packing = 0.0005054920000000001
+        species_packing = 0.00263985
+        topology = 0.000534332
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007242220000000001
+        element_channels = 3.9840000000000005e-5
+        neighbors = 0.008388052
+        route_plan = 0.0026885200000000002
+    [[cases.probes]]
+    instrumented_public_s = 0.107009756
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00016604100000000002
+        cell_permutation = 5.58e-6
+        channels = 2.11e-6
+        directed_traversal = 0.004684257000000001
+        extraction = 2.6810000000000003e-5
+        sorting_packing = 0.000499312
+        species_packing = 0.00262371
+        topology = 0.000532662
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.000854523
+        element_channels = 2.472e-5
+        neighbors = 0.008545052000000001
+        route_plan = 0.00264939
+    [[cases.probes]]
+    instrumented_public_s = 0.11892382
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000176681
+        cell_permutation = 5.71e-6
+        channels = 2.6e-6
+        directed_traversal = 0.0045429170000000005
+        extraction = 2.708e-5
+        sorting_packing = 0.000516012
+        species_packing = 0.002578809
+        topology = 0.0005669620000000001
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007208430000000001
+        element_channels = 2.6530000000000002e-5
+        neighbors = 0.008420721
+        route_plan = 0.00274443
+    [[cases.probes]]
+    instrumented_public_s = 0.116979842
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00017864
+        cell_permutation = 4.93e-6
+        channels = 2.5400000000000002e-6
+        directed_traversal = 0.004492147
+        extraction = 2.7161000000000003e-5
+        sorting_packing = 0.000513111
+        species_packing = 0.002481079
+        topology = 0.000496982
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007489630000000001
+        element_channels = 3.0200000000000002e-5
+        neighbors = 0.00820098
+        route_plan = 0.0025885590000000003
+
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.088629537
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.086150149
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.093193514
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.097144089
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.095052161
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.090165683
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 1
+    gc_s = 0.004600957
+    seconds = 0.107987449
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.112734587
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.087924146
+    [[cases.refresh]]
+    bytes = 3000720
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.090970356
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+changed_graph_verified = true
+groups = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/tialv-resolved.toml"
+model_sha256 = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"
+name = "Ti–Al–V bcc"
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.196207795
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.222277822
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.197061479
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.229687579
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.212456065
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 3
+    gc_s = 0.004861138
+    seconds = 0.234999958
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.233992595
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.220740826
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 3
+    gc_s = 0.004941839
+    seconds = 0.225129402
+    [[cases.fresh]]
+    bytes = 16224544
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.226947459
+
+    [[cases.probes]]
+    instrumented_public_s = 0.230560192
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00014482
+        cell_permutation = 4.96e-6
+        channels = 2.5e-6
+        directed_traversal = 0.004400496
+        extraction = 2.6640000000000002e-5
+        sorting_packing = 0.000512932
+        species_packing = 0.003207442
+        topology = 0.0005061320000000001
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0006815230000000001
+        element_channels = 4.1620000000000005e-5
+        neighbors = 0.008813432000000001
+        route_plan = 0.0033537130000000004
+    [[cases.probes]]
+    instrumented_public_s = 0.212241645
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00021689000000000002
+        cell_permutation = 5.57e-6
+        channels = 2.6700000000000003e-6
+        directed_traversal = 0.0044205270000000005
+        extraction = 2.708e-5
+        sorting_packing = 0.0008096440000000001
+        species_packing = 0.003468973
+        topology = 0.000501831
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0006780320000000001
+        element_channels = 2.9471000000000003e-5
+        neighbors = 0.009458735000000001
+        route_plan = 0.00263238
+    [[cases.probes]]
+    instrumented_public_s = 0.234169366
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00016441100000000002
+        cell_permutation = 5.600000000000001e-6
+        channels = 2.6700000000000003e-6
+        directed_traversal = 0.004416267000000001
+        extraction = 2.7470000000000003e-5
+        sorting_packing = 0.000528562
+        species_packing = 0.003233001
+        topology = 0.000547032
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007024430000000001
+        element_channels = 2.9540000000000002e-5
+        neighbors = 0.008929313000000001
+        route_plan = 0.0026506800000000003
+    [[cases.probes]]
+    instrumented_public_s = 0.200273091
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000165751
+        cell_permutation = 5.2600000000000005e-6
+        channels = 2.87e-6
+        directed_traversal = 0.0044665370000000005
+        extraction = 2.739e-5
+        sorting_packing = 0.0005504920000000001
+        species_packing = 0.0034485820000000004
+        topology = 0.000516522
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007007830000000001
+        element_channels = 2.909e-5
+        neighbors = 0.009187824
+        route_plan = 0.0026819300000000003
+    [[cases.probes]]
+    instrumented_public_s = 0.224163619
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00015121
+        cell_permutation = 6.8e-6
+        channels = 2.9800000000000003e-6
+        directed_traversal = 0.0044022060000000005
+        extraction = 2.7241000000000002e-5
+        sorting_packing = 0.000514132
+        species_packing = 0.0034723130000000003
+        topology = 0.000546922
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0007357920000000001
+        element_channels = 3.0030000000000002e-5
+        neighbors = 0.009129764
+        route_plan = 0.0026831900000000002
+    [[cases.probes]]
+    instrumented_public_s = 0.240551869
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000152
+        cell_permutation = 5.13e-6
+        channels = 2.6e-6
+        directed_traversal = 0.004418467000000001
+        extraction = 2.7161000000000003e-5
+        sorting_packing = 0.000525321
+        species_packing = 0.003515283
+        topology = 0.0005636220000000001
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.000672982
+        element_channels = 4.513e-5
+        neighbors = 0.009214644000000001
+        route_plan = 0.008717022000000001
+    [[cases.probes]]
+    instrumented_public_s = 0.224216699
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00016395100000000002
+        cell_permutation = 5.39e-6
+        channels = 2.81e-6
+        directed_traversal = 0.004760187
+        extraction = 2.8550000000000003e-5
+        sorting_packing = 0.0005558620000000001
+        species_packing = 0.003293612
+        topology = 0.000700283
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.000682513
+        element_channels = 3.482e-5
+        neighbors = 0.009516205
+        route_plan = 0.003589984
+    [[cases.probes]]
+    instrumented_public_s = 0.204173545
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00022199100000000002
+        cell_permutation = 5.7800000000000006e-6
+        channels = 2.5800000000000003e-6
+        directed_traversal = 0.004600297000000001
+        extraction = 2.737e-5
+        sorting_packing = 0.000818103
+        species_packing = 0.003241592
+        topology = 0.000538362
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0006671730000000001
+        element_channels = 2.958e-5
+        neighbors = 0.009460205000000001
+        route_plan = 0.0033693620000000003
+    [[cases.probes]]
+    instrumented_public_s = 0.209950206
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000189401
+        cell_permutation = 5.2500000000000006e-6
+        channels = 2.79e-6
+        directed_traversal = 0.0049411590000000005
+        extraction = 4.0310000000000005e-5
+        sorting_packing = 0.000622872
+        species_packing = 0.0030742210000000002
+        topology = 0.000574622
+
+        [cases.probes.rebuild]
+        chunk_layout = 0.0006591920000000001
+        element_channels = 4.3070000000000006e-5
+        neighbors = 0.009455645
+        route_plan = 0.00271689
+
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.198448274
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.191635918
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 3
+    gc_s = 0.006129052
+    seconds = 0.189512311
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.210102367
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.197683521
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.196993489
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.231094295
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.217714005
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.210413078
+    [[cases.refresh]]
+    bytes = 6616336
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.21102617
+
+[governors]
+0 = "powersave"
+1 = "powersave"
+10 = "powersave"
+11 = "powersave"
+12 = "powersave"
+13 = "powersave"
+14 = "powersave"
+15 = "powersave"
+2 = "powersave"
+3 = "powersave"
+4 = "powersave"
+5 = "powersave"
+6 = "powersave"
+7 = "powersave"
+8 = "powersave"
+9 = "powersave"
+
+[source_sha256]
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "c288830459d8687840a27c58583f2cd0cbf9bdc908dfd5e33586f42f3a6e26ba"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "7c3e5148700b9d7dab7be76bb5c85ff21a2f5750932f0e0fe6ad9d5c20608b65"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "941c05f99c0d604fb2df8d3af6dd89b398929153c66879eed56f90c8bdd1d0cd"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "7f70af38b8773b33a643d4116830f51c61a580d8c91b8c14758d5de83c3a2d58"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"ext/ace_feature_products.jl" = "08508a18b305cdbb31b7d5ab4234ca52526523049888dadd1b0632097badd817"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "944f8be4276bb9475358686302643e1dc23479b7f03e48228d2d6a942c13ec2e"
+"src/submodules/ACE/adaptation.jl" = "437f2a8394088723e7fe32d09e527521c52d27b63a05b02701e7e26b688f7157"
+"src/submodules/ACE/angular_blocks.jl" = "c1b78378299960d712f06ee1407397593780975c626ec32263c1848512f60f6a"
+"src/submodules/ACE/calculators.jl" = "74dd7231b955bdc894f24aa217aa7297d4143eaafcd67afa76ad7e43d87febf3"
+"src/submodules/ACE/chunks.jl" = "eeee12dac25ec0c0ae47689f4eb4fc71efc579aeae87210b3781e6d3227b160d"
+"src/submodules/ACE/cpu.jl" = "705959772afc6de2c8044307718918280a2a7da9f286d805502797c6a316fdfc"
+"src/submodules/ACE/environments.jl" = "ee27e3dbe3161e02bcc15ab62f01b5d5575dffb3c50e5703878b4cdaf4d23b6d"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/feature_energy.jl" = "1869613d7d1c5dfd5594331b6e5615c7289828e4034642a4afee3e183cdf790d"
+"src/submodules/ACE/features.jl" = "22ce573ce92d82f06333d65ad7caa7d5511cc82c78b0d47f49cc8139b8d87ce3"
+"src/submodules/ACE/fitting.jl" = "0ff53a102561733228f7f739465405263e2ee0f50f9b2e4ad07cb969fbe1e80a"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "56deb06b51e6d58b4674b00c76358f386e2863a1669d66f939f8cd7b8873d919"
+"src/submodules/ACE/interface_persistence.jl" = "7a5c0cbf0715c4b5806d6d8ae697dadf4778f004d23cc521c8f03b2d3fa5b500"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "d62477a11daf4e587bb478c0223774b885984c1baf78368bc17b054e4927b753"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "85b6030cd4a0d31d333948b766b2b66c7d70a2e52d8dd545f1a93ab4d78a426a"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "c31ad3261e4050870c65fa54bf7c8affce56fff2f8af2247e1fe9eef7a96c110"
+"src/submodules/ACE/serial.jl" = "fd4e7bd4bc2e7ac4926eafde25b4e573e1e93b956bb5bab10e4fdbf23a6b79be"
+"src/submodules/ACE/site_pullbacks.jl" = "ac22d9435d97f0c0ddc951682d8836df5dcf89451ed85e13605f2afc5c0cee5d"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "4771e0d35b8027054f8226887f841207c98f060349b7565665d9901fb0c31356"
+"src/submodules/NeighbourList/NeighbourList.jl" = "941ee6d02a1c7d7954f6b3dd054099d12418d3be2b43b51f2c5c8aa41b42b573"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/chunk_threads.jl" = "5935094bb55482be787780c08b36cf24dfd8900977668ab9c3d2a532e8ba5293"
+"src/submodules/NeighbourList/chunks.jl" = "13bf459cba785b2a9067451667a62d618ea61277e4fe07cac1569b624a967f89"
+"src/submodules/NeighbourList/environments.jl" = "a7a4e219cd32366aee5aa6e50590460a7fffc62b682f99ae5ac950ea3118cad2"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "da50fcad0bb9f7aede71bde4e6cc6857642c9187a7866a8314adb3692506f75f"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "56cb791adca2af5a299ba6f9a8e1673bab64b1f7dc2244451908264d8b5c6513"
+"src/submodules/NeighbourList/pullbacks.jl" = "2ae778438fbacf246def660cf2b15a5637b8c55e14bb1dd7ae03d7b6db3ad676"
+"src/submodules/NeighbourList/storage.jl" = "58b7838fd5146962a5a6002fc851bd21ac99a2dfe90737c2ed9938063efbcc3a"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AcceleratedKernels = "0.5.13"
+AtomsBase = "0.5.3"
+AtomsCalculators = "0.2.3"
+KernelAbstractions = "0.9.48"
+SIMD = "3.8.2"
+SpheriCart = "0.2.4"
+StaticArrays = "1.9.25"
+Unitful = "1.29.0"

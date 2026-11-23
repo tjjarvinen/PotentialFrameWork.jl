@@ -64,19 +64,28 @@ function calculator_result(sys,c;parameters=c.parameters,state=nothing,energy_on
         end
     end
     reuse_topology && throw(ArgumentError("topology reuse requires a chunk executor and prepared evaluation state"))
-    state isa ACEEvaluationState && throw(ArgumentError("explicit ACEEvaluationState requires a chunk executor"))
+    options=(;energy_only,parallel,simd,fused,product_algorithm,centers,properties)
+    if state isa ACEEvaluationState
+        return colored_state_result(sys,c,parameters,state;options...)
+    end
+    model_state=isnothing(state) ? c.state : state
+    colored_calculator_result(sys,c.model,parameters,model_state,c.environment,c.executor;options...)
+end
+
+function colored_calculator_result(sys,model,parameters,state,env,w;
+                                   energy_only,parallel,simd,fused,product_algorithm,centers,properties)
     fast_parameters=parameter_seed(parameters) isa Union{Float32,Float64}
-    boundary=fast_parameters && eltype(c.executor.force)===Float32 ? precision_geometry(sys,Float32) : sys
-    input=fast_parameters ? ace_inputs(boundary,c.model;environment=c.environment,precision=eltype(c.executor.force)) : ace_inputs(sys,c.model;environment=c.environment)
+    boundary=fast_parameters && eltype(w.force)===Float32 ? precision_geometry(sys,Float32) : sys
+    input=fast_parameters ? ace_inputs(boundary,model;environment=env,precision=eltype(w.force)) : ace_inputs(sys,model;environment=env)
     y=if energy_only || !fast_parameters
-        ace_evaluate(input.positions,c.model,parameters,input.environment,input.cell;state=isnothing(state) ? c.state : state,energy_only,centers)
+        ace_evaluate(input.positions,model,parameters,input.environment,input.cell;state,energy_only,centers)
     else
-        prepare_executor!(c.executor,c.environment)
-        execute_prepared!(c.executor,input.positions,input.cell,parameters;parallel,simd,fused,product_algorithm,centers,properties)
-        prepared_result(c.executor)
+        prepare_executor!(w,env)
+        execute_prepared!(w,input.positions,input.cell,parameters;parallel,simd,fused,product_algorithm,centers,properties)
+        prepared_result(w)
     end
     if energy_only
-        e=fast_parameters ? eltype(c.executor.force)(y.energy) : y.energy
+        e=fast_parameters ? eltype(w.force)(y.energy) : y.energy
         return (;energy=e*u"eV")
     end
     (;energy=y.energy*u"eV",forces=force_vectors(y.forces*u"eV/Å"),virial=static_virial(y.virial*u"eV"))

@@ -1,5 +1,54 @@
 # Implementation status
 
+## CPU ACE force-merge benchmark and fresh rebuild reuse (2026-11-23)
+
+Starting revision `3ddd74c8fb90177d31414915ddff285e81c228ae`, with the supplied
+handoff document untracked. The matched merge benchmark uses worker-dispatched
+and inline routes on the same graph, layout and waves. E/F/V agree exactly
+between the two policies on all replay frames. Worker dispatch remains the
+default. At 16 cores median merge wall time fell from 11.91 to 0.19 ms for Ti
+and from 10.46 to 0.21 ms for Ti–Al–V with inline merging. The 8-core public
+latency differences were within run-to-run spread. The 16-core alloy also had
+overlapping public latency ranges.
+
+Fresh scalar chunk calculations refill the neighbor graph and workgroups in
+the retained evaluation state. They share cell preparation between traversal
+and cell order, pack directed indices and image labels, and skip unused site
+coloring. The colored executor still builds its schedule. A fresh generation
+rebuilds routes and invalidates the old fields and result. Fixed-topology
+position refresh keeps the routes. The neighbor and workgroup mutation APIs
+and their lifetime rules are documented in [CPU site chunks](../site_chunks.md).
+
+On the two 3,456-atom fixtures at 8 and 16 cores, median public fresh latency
+fell by 27–34 ms and allocated bytes fell from 108–111 MB to 12–16 MB.
+The median paired fresh-minus-refresh cost fell from 37–41 ms to 9–15 ms.
+The standalone layout probe fell from 13–16 ms to under 1 ms. Baseline
+layout and updated layout use independent and nested probe boundaries,
+respectively, as documented in the report.
+
+The full suite passed **59,109 assertions** on Julia 1.13.4 with four compute
+threads. The focused chunk suite passed **1,342 assertions** on Julia 1.10.14
+with four compute threads. The standalone chunk pullback suite passed **152
+assertions** on Julia 1.13.4. The full suite exercised the portable
+KernelAbstractions CPU backend. These environments used ChainRulesCore 1.26.8,
+ForwardDiff 1.5.0, NeighbourLists 0.5.10, SpheriCart 0.2.4 and LuxCore 1.5.5.
+Logs are `/tmp/pfw-rebuild-full113.log`, `/tmp/pfw-rebuild-focused110.log`
+and `/tmp/pfw-rebuild-pullbacks113.log`.
+
+```bash
+julia --startup-file=no --threads=4,0 --project="$RUN_ENV" -e \
+    'using Test; @testset "PotentialFrameWork" begin include("test/runtests.jl"); end'
+julia --startup-file=no --threads=4,0 --project="$RUN_ENV" test/site_pullbacks_runtests.jl
+julia +1.10 --startup-file=no --threads=4 --project="$RUN_ENV_110" test/site_chunks_runtests.jl
+```
+
+The [workstation report](../../benchmark/cpu_chunks/MERGE-REBUILD-REPORT.md)
+includes the paired latency and allocation results, scoped stage probes,
+hardware and package versions, and the exact reproduction commands. The
+[raw benchmark records](../../benchmark/cpu_chunks/results/merge-rebuild/)
+include every sample, merge dispatch and receipt timestamps, and the source
+and harness hashes.
+
 ## Threaded scalar CPU ACE forward evaluation (2026-11-21)
 
 Implemented opt-in `executor=:threaded` through the scalar ACE
