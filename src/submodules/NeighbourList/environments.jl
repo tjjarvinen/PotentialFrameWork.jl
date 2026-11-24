@@ -20,44 +20,68 @@ function FullEnvironment(;width=1)
     FullEnvironment(Int[],zeros(Int,0,0),Int[],SVector{3,Int}[],BitVector(),Vector{Int}[],Vector{Int}[],width,0.,UInt(0),Dict{Symbol,Float64}())
 end
 
-function prepare_full_environment!(env::FullEnvironment,sys,channels,nz,cutoff;kwargs...)
-    start=time_ns()
-    n=length(sys)
-    env.species=collect(Int,channels)
-    length(env.species)==n || throw(DimensionMismatch("species mapping"))
-    all(z -> 1<=z<=nz,env.species) || throw(ArgumentError("invalid species channel"))
+function set_environment_species!(env,channels,n,nz,cutoff)
+    length(channels)==n || throw(DimensionMismatch("species mapping"))
+    resize!(env.species,n)
+    for (i,z) in enumerate(channels)
+        1<=z<=nz || throw(ArgumentError("invalid species channel"))
+        env.species[i]=z
+    end
     env.cutoff=Float64(cutoff)
+end
+
+function prepare_full_environment!(env::FullEnvironment,sys,channels,nz,cutoff;kwargs...)
+    env.version+=UInt(1)
+    set_environment_species!(env,channels,length(sys),nz,cutoff)
     snapshot=neighbour_list(sys,env.cutoff;timings=env.timings,kwargs...)
+    pack_environment!(env,snapshot.indices,snapshot.shifts,nz,Int[])
+    color_environment!(env)
+    env
+end
+
+function pack_environment!(env,indices,shifts,nz,marks)
     start=time_ns()
-    size(env.offsets)==(nz+1,n) || (env.offsets=zeros(Int,nz+1,n))
-    empty!(env.neighbours); empty!(env.shifts); empty!(env.active); empty!(env.footprints)
-    # Counting/bucketing by species; no per-centre general sort. This baseline
-    # reads the snapshot arrays directly, never the copying query API.
+    n=length(env.species)
+    size(env.offsets)==(nz+1,n) || (env.offsets=Matrix{Int}(undef,nz+1,n))
+    empty!(env.neighbours); empty!(env.shifts); empty!(env.active)
+    refill_vectors!(env.footprints,n)
+    resize!(marks,n); fill!(marks,0)
+    # Preserve the traversal order within each species bucket.
     for i=1:n
-        js=snapshot.indices[i]; ss=snapshot.shifts[i]
-        fp=Int[i]
+        js=indices[i]; ss=shifts[i]
+        fp=env.footprints[i]
+        push!(fp,i); marks[i]=i
         for z=1:nz
             env.offsets[z,i]=length(env.neighbours)+1
             count=0
             for k in eachindex(js)
-                env.species[js[k]]==z || continue
-                push!(env.neighbours,Int(js[k])); push!(env.shifts,SVector{3,Int}(ss[k])); push!(env.active,true)
-                push!(fp,Int(js[k])); count+=1
+                j=js[k]
+                env.species[j]==z || continue
+                push!(env.neighbours,j); push!(env.shifts,ss[k]); push!(env.active,true)
+                if marks[j]!=i
+                    marks[j]=i
+                    push!(fp,j)
+                end
+                count+=1
             end
             for _=1:mod(-count,env.width)
                 push!(env.neighbours,i); push!(env.shifts,SVector(0,0,0)); push!(env.active,false)
             end
         end
         env.offsets[nz+1,i]=length(env.neighbours)+1
-        push!(env.footprints,sort!(unique!(fp)))
+        sort!(fp)
     end
     env.timings[:species_packing]=(time_ns()-start)*1e-9
+    env
+end
+
+function color_environment!(env)
     start=time_ns()
     # Full site writes touch centre AND every directed neighbour endpoint.
     # Pair lower-cell footprints are deliberately not reused.
     empty!(env.phases)
-    incidence=[BitSet() for _=1:n]
-    for i=1:n
+    incidence=[BitSet() for _ in env.species]
+    for i in eachindex(env.species)
         forbidden=BitSet()
         for j in env.footprints[i]; union!(forbidden,incidence[j]); end
         c=1
@@ -66,7 +90,6 @@ function prepare_full_environment!(env::FullEnvironment,sys,channels,nz,cutoff;k
         push!(env.phases[c],i)
         for j in env.footprints[i]; push!(incidence[j],c); end
     end
-    env.version+=UInt(1)
     env.timings[:full_environment_schedule]=(time_ns()-start)*1e-9
     env
 end

@@ -107,7 +107,28 @@ function periodic_basis(H,pb,::Type{T}) where T
     SMatrix{3,3,T}(B)
 end
 
-function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) where {W,T}
+# Query builds only need the forward cell images. Pair execution additionally
+# needs its force buffers, adjacency, write footprints and coloring.
+struct CellBuildScratch{T}
+    coords::NTuple{3,Vector{T}}
+    fractional::NTuple{3,Vector{T}}
+    species::Vector{ChemicalSpecies}
+    keys::Vector{NTuple{3,Int}}
+    lookup::Dict{NTuple{3,Int},Int}
+end
+CellBuildScratch(::Type{T}) where T = CellBuildScratch(ntuple(_ -> T[],3),ntuple(_ -> T[],3),
+    ChemicalSpecies[],NTuple{3,Int}[],Dict{NTuple{3,Int},Int}())
+
+function refill_vectors!(vectors,n)
+    old=length(vectors)
+    resize!(vectors,n)
+    for i in 1:min(old,n); empty!(vectors[i]); end
+    for i in old+1:n; vectors[i]=eltype(vectors)(); end
+    vectors
+end
+
+function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff;
+                  build=CellBuildScratch(T), query_only=false) where {W,T}
     start = time_ns()
     c = T(cutoff)
     isfinite(c) && c > 0 || throw(ArgumentError("cutoff must be finite and positive (Å)"))
@@ -129,8 +150,10 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
     end
     n = length(sys)
     # Extraction is outside all callback and accumulation loops.
-    coords = ntuple(_ -> Vector{T}(undef,n),3)
-    species = Vector{ChemicalSpecies}(undef,n)
+    coords = build.coords
+    foreach(v -> resize!(v,n),coords)
+    species = build.species
+    query_only || resize!(species,n)
     empty!(w.species_map)
     for i=1:n
         r = AtomsBase.position(sys,i)
@@ -139,12 +162,15 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
             isfinite(v) || throw(ArgumentError("positions must be finite"))
             coords[a][i] = minimum_image && pb[a] ? mod(v,L[a]) : v
         end
-        sp = ChemicalSpecies(AtomsBase.species(sys,i))
-        any(s -> isequal(s,sp),w.species_map) || push!(w.species_map,sp)
-        species[i] = sp
+        if !query_only
+            sp = ChemicalSpecies(AtomsBase.species(sys,i))
+            any(s -> isequal(s,sp),w.species_map) || push!(w.species_map,sp)
+            species[i] = sp
+        end
     end
-    fractional = minimum_image ? coords : ntuple(_ -> Vector{T}(undef,n),3)
+    fractional = minimum_image ? coords : build.fractional
     if !minimum_image
+        foreach(v -> resize!(v,n),fractional)
         for i=1:n
             f = reciprocal*SVector(coords[1][i],coords[2][i],coords[3][i])
             f = SVector(ntuple(a -> pb[a] ? mod(f[a],one(T)) : f[a],3))
@@ -165,15 +191,20 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
     origin = ntuple(a -> pb[a] || n==0 ? zero(T) : minimum(bincoords[a]),3)
     dims = ntuple(a -> pb[a] ? max(1,floor(Int,extent[a]/reach[a])) : 1,3)
     sizecell = ntuple(a -> pb[a] ? extent[a]/dims[a] : reach[a],3)
-    atomkeys = [brute ? (0,0,0) : ntuple(a -> pb[a] ? clamp(floor(Int,bincoords[a][i]/sizecell[a]),0,dims[a]-1) :
-        floor(Int,(bincoords[a][i]-origin[a])/sizecell[a]),3) for i=1:n]
+    atomkeys = resize!(build.keys,n)
+    for i=1:n
+        atomkeys[i] = brute ? (0,0,0) : ntuple(a -> pb[a] ? clamp(floor(Int,bincoords[a][i]/sizecell[a]),0,dims[a]-1) :
+            floor(Int,(bincoords[a][i]-origin[a])/sizecell[a]),3)
+    end
     resize!(w.p,n); sortperm!(w.p,atomkeys)
     resize!(w.inverse,n)
-    for v in (w.x,w.y,w.z,w.species); resize!(v,n); end
+    for v in (w.x,w.y,w.z); resize!(v,n); end
+    query_only || resize!(w.species,n)
     empty!(w.keys); empty!(w.ranges)
     for k=1:n
         i=w.p[k]; w.inverse[i]=k
-        w.x[k]=coords[1][i]; w.y[k]=coords[2][i]; w.z[k]=coords[3][i]; w.species[k]=species[i]
+        w.x[k]=coords[1][i]; w.y[k]=coords[2][i]; w.z[k]=coords[3][i]
+        query_only || (w.species[k]=species[i])
         key=atomkeys[i]
         if isempty(w.keys) || key != w.keys[end]
             push!(w.keys,key); push!(w.ranges,k:k)
@@ -183,14 +214,23 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
     end
     w.timings[:sorting_packing]=(time_ns()-start)*1e-9
     start=time_ns()
-    empty!(w.adjacency); empty!(w.footprints); empty!(w.images)
+    empty!(w.adjacency); empty!(w.footprints)
+    refill_vectors!(w.images,length(w.keys))
+    lookup=build.lookup
+    empty!(lookup)
+    for (i,key) in enumerate(w.keys); lookup[key]=i; end
     if minimum_image
-        minimum_topology!(w, dims, brute)
+        minimum_topology!(w,dims,brute,lookup,query_only)
     else
-        image_topology!(w, basis, reach, sizecell, dims, brute)
+        image_topology!(w,basis,reach,sizecell,dims,brute,lookup,query_only)
     end
     w.version += UInt(1)
     w.timings[:topology]=(time_ns()-start)*1e-9
+    if query_only
+        empty!(w.phases)
+        delete!(w.timings,:schedule)
+        return w
+    end
     start=time_ns()
     schedule!(w)
     w.timings[:schedule]=(time_ns()-start)*1e-9
@@ -201,37 +241,34 @@ function prepare!(w::Workspace{W,T}, sys::AtomsBase.AbstractSystem{3}, cutoff) w
 end
 
 # The existing orthorhombic minimum-image path avoids explicit image enumeration.
-function minimum_topology!(w::Workspace{W,T}, dims, brute) where {W,T}
-    lookup=Dict(key=>i for (i,key) in enumerate(w.keys))
+function minimum_topology!(w::Workspace{W,T},dims,brute,lookup,query_only) where {W,T}
     for (i,key) in enumerate(w.keys)
-        neighbours=Int[]
+        entries=w.images[i]
+        origin=(zero(T),zero(T),zero(T))
         if brute
-            push!(neighbours,i)
+            push!(entries,CellImage(i,origin,false,(0,0,0)))
         else
             for dz=-1:1, dy=-1:1, dx=-1:1
                 off=(dx,dy,dz)
                 other=ntuple(a -> w.periodic[a] ? mod(key[a]+off[a],dims[a]) : key[a]+off[a],3)
                 j=get(lookup,other,0)
-                j>=i && push!(neighbours,j)
+                j>=i && push!(entries,CellImage(j,origin,false,(0,0,0)))
             end
         end
-        sort!(unique!(neighbours))
-        push!(w.adjacency,neighbours)
-        push!(w.images,[CellImage(j,(zero(T),zero(T),zero(T)),false,(0,0,0)) for j in neighbours])
-        push!(w.footprints,sort!(unique!([i; neighbours])))
+        unique!(sort!(entries;by=e -> e.cell))
+        query_only || pair_footprint!(w,i,entries)
     end
 end
 
 # Own all shifts for i<j, and only s>0 (lexicographically) for i==j.
 # Wrapped cell aliases with DIFFERENT image shifts must never be deduplicated.
-function image_topology!(w::Workspace{W,T}, H, reach, sizecell, dims, brute) where {W,T}
-    lookup=Dict(key=>i for (i,key) in enumerate(w.keys))
+function image_topology!(w::Workspace{W,T},H,reach,sizecell,dims,brute,lookup,query_only) where {W,T}
     # Wrapped fractional differences lie strictly between -1 and 1; hence
     # |s_a| < reach_a+1 and ceil(reach_a) is a sufficient integer bound.
     radius=ntuple(a -> brute ? (w.periodic[a] ? ceil(Int,reach[a]) : 0) :
         max(1,ceil(Int,reach[a]/sizecell[a])),3)
     for (i,key) in enumerate(w.keys)
-        entries=CellImage{T}[]
+        entries=w.images[i]
         for z=-radius[3]:radius[3], y=-radius[2]:radius[2], x=-radius[1]:radius[1]
             off=(x,y,z)
             other=ntuple(a -> w.periodic[a] ? mod(key[a]+off[a],dims[a]) : key[a]+off[a],3)
@@ -241,10 +278,14 @@ function image_topology!(w::Workspace{W,T}, H, reach, sizecell, dims, brute) whe
             d=H*SVector(shift)
             push!(entries,CellImage(j,Tuple(d),shift>(0,0,0),shift))
         end
-        neighbours=sort!(unique!([e.cell for e in entries]))
-        push!(w.images,entries); push!(w.adjacency,neighbours)
-        push!(w.footprints,sort!(unique!([i;neighbours])))
+        query_only || pair_footprint!(w,i,entries)
     end
+end
+
+function pair_footprint!(w,i,entries)
+    neighbours=sort!(unique!([e.cell for e in entries]))
+    push!(w.adjacency,neighbours)
+    push!(w.footprints,sort!(unique!([i;neighbours])))
 end
 
 function schedule!(w)

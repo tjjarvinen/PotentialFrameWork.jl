@@ -106,7 +106,26 @@ function Base.close(state::ACEEvaluationState)
     nothing
 end
 
-function chunk_geometry!(state,sys,model,T,groups,reuse_topology)
+# Keep the colored phases and numerical storage separate from a retained
+# chunk generation. The temporary executor borrows only exclusive angular scratch.
+function colored_state_result(sys,c,parameters,state;options...)
+    state.prepared.model===c.model || throw(ArgumentError("evaluation state belongs to a different model"))
+    acquire_ace_state!(state)
+    state.active=true
+    try
+        state.layout_valid=false
+        p=state.prepared
+        env=FullEnvironment(;width=state.environment.width)
+        executor=cpu_executor(c.model,env,p.basis,eltype(p.weights),length(c.executor.slots),
+                              state.batch_size,p.product_algorithm)
+        colored_calculator_result(sys,c.model,parameters,state.model_state,env,executor;options...)
+    finally
+        state.active=false
+        unlock(state.guard)
+    end
+end
+
+function chunk_geometry!(state,sys,model,T,groups,reuse_topology,timings)
     old=state.chunks
     periodic=Tuple(Bool.(AtomsBase.periodicity(sys)))
     if reuse_topology
@@ -122,26 +141,35 @@ function chunk_geometry!(state,sys,model,T,groups,reuse_topology)
         return old
     end
     state.layout_valid=false
-    if !isnothing(old)
-        empty!(old.fields)
-        old.results=nothing
+    start=NL.chunk_clock(timings)
+    channels=[element_channel(model,AtomsBase.species(sys,i)) for i in 1:length(sys)]
+    NL.record_chunk_rebuild!(timings,:element_channels,start)
+    options=(;channels,species_count=length(model.atomic_numbers),coloring=false)
+    cutoff=NI.search_cutoff(model)
+    start=NL.chunk_clock(timings)
+    n=if isnothing(old)
+        NL.prepare_neighbors(sys,cutoff;width=state.environment.width,precision=T,options...)
+    else
+        NL.prepare_neighbors!(old.neighbours,sys,cutoff;options...)
     end
-    input=ace_inputs(sys,model;environment=state.environment,precision=T)
-    n=NL.chunk_neighbours(sys,state.environment,input.positions,input.cell;precision=T)
-    fresh=NL.form_numa_workers(n,groups;scatter_capacity=state.scatter_capacity)
-    if !isnothing(old)
-        fresh.pool=old.pool
-        old.pool=nothing
+    NL.record_chunk_rebuild!(timings,:neighbors,start)
+    state.environment=n.environment
+    start=NL.chunk_clock(timings)
+    fresh=if isnothing(old)
+        NL.form_numa_workers(n,groups;scatter_capacity=state.scatter_capacity)
+    else
+        NL.form_numa_workers!(old,n,groups;scatter_capacity=state.scatter_capacity)
     end
+    NL.record_chunk_rebuild!(timings,:chunk_layout,start)
     state.chunks=fresh
     state.periodic=periodic
     state.layout_valid=true
     fresh
 end
 
-function run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings)
+function run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings,inline_merge)
     NL.foreach_worker!(w,workers;scatter,sum_outputs=sums,slot_scratch=true,
-                       init_scratch=slot -> scratch[slot],timings) do worker
+                       init_scratch=slot -> scratch[slot],timings,_inline_merge=inline_merge) do worker
         s=NL.get_scratch(worker)
         NL.evaluate_chunk_sites!(worker,s.prepared,s.parameters,s.numerical,s.outputs,s.ordinals,s.centers,s.properties,selected)
     end
@@ -150,7 +178,7 @@ end
 function chunk_calculator_result(sys,c,state::ACEEvaluationState,parameters;
                                  energy_only=false,simd=true,fused=false,product_algorithm=state.prepared.product_algorithm,
                                  centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),parallel=false,
-                                 workers=1,groups=1,reuse_topology=false,timings=nothing,kwargs...)
+                                 workers=1,groups=1,reuse_topology=false,timings=nothing,_inline_merge=false,kwargs...)
     state.prepared.model===c.model || throw(ArgumentError("evaluation state belongs to a different model"))
     acquire_ace_state!(state)
     state.active=true
@@ -161,13 +189,14 @@ function chunk_calculator_result(sys,c,state::ACEEvaluationState,parameters;
         if !fast
             reuse_topology && throw(ArgumentError("topology reuse requires numerical ACE parameters"))
             state.layout_valid=false
-            input=ace_inputs(boundary,c.model;environment=state.environment,precision=T)
+            env=FullEnvironment(;width=state.environment.width)
+            input=ace_inputs(boundary,c.model;environment=env,precision=T)
             y=ace_evaluate(input.positions,c.model,parameters,input.environment,input.cell;state=state.model_state,energy_only,centers)
         else
             fused && !simd && throw(ArgumentError("tiled fusion requires SIMD radial blocks"))
             p=state.prepared
             state.prepared=typeof(p)(p.model,p.basis,p.weights,simd,fused,check_product_algorithm(product_algorithm),p.product_plan)
-            w=chunk_geometry!(state,boundary,c.model,T,groups,reuse_topology)
+            w=chunk_geometry!(state,boundary,c.model,T,groups,reuse_topology,timings)
             props=energy_only ? (AC.Energy(),) : NL.normalize_properties(properties)
             selected=falses(length(sys))
             selected[NL.selected_centers(centers,length(sys))].=true
@@ -194,9 +223,9 @@ function chunk_calculator_result(sys,c,state::ACEEvaluationState,parameters;
                 end
             end
             if has_source(c.model)
-                Base.invokelatest(run_ace_chunks!,w,scratch,selected,workers,scatter,sums,timings)
+                Base.invokelatest(run_ace_chunks!,w,scratch,selected,workers,scatter,sums,timings,_inline_merge)
             else
-                run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings)
+                run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings,_inline_merge)
             end
             export_start=NL.chunk_clock(timings)
             r=NL.get_results(w)
@@ -225,4 +254,10 @@ channel order (provider-native species IDs must not be used as ACE channels)."""
 function NL.prepare_neighbors(sys,c::ACECalculator;precision=eltype(c.executor.force),width=c.environment.width,kwargs...)
     channels=[element_channel(c.model,AtomsBase.species(sys,i)) for i=1:length(sys)]
     NL.prepare_neighbors(sys,NI.search_cutoff(c.model);precision,width,channels,species_count=length(c.model.atomic_numbers),kwargs...)
+end
+
+function NL.prepare_neighbors!(n::NL.ChunkNeighbours,sys,c::ACECalculator;kwargs...)
+    channels=[element_channel(c.model,AtomsBase.species(sys,i)) for i in 1:length(sys)]
+    NL.prepare_neighbors!(n,sys,NI.search_cutoff(c.model);channels,
+                          species_count=length(c.model.atomic_numbers),kwargs...)
 end

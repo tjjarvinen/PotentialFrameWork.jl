@@ -87,28 +87,42 @@ function materialize(w::Workspace{W,T},sys,::Type{TI}) where {W,T,TI}
     indices=[TI[] for _=1:n]
     displacements=[SVector{3,T}[] for _=1:n]
     shifts=[SVector{3,TI}[] for _=1:n]
-    # Undo the canonical wrapping performed by prepare!, retaining exact image
-    # labels relative to caller positions even several cells outside the box.
+    winding=Vector{SVector{3,Int}}(undef,n)
+    image_windings!(winding,w,sys)
+    visit_directed_images!(w,winding,TI) do a,b,R,S
+        push!(indices[a],b); push!(displacements[a],R); push!(shifts[a],S)
+    end
+    NeighbourSnapshot(indices,displacements,shifts)
+end
+
+# Undo the canonical wrapping performed by prepare!, retaining exact image
+# labels relative to the original coordinates.
+function image_windings!(winding,w::Workspace{W,T},sys) where {W,T}
     pb=w.periodic
     cv=AtomsBase.cell_vectors(sys)
     H=SMatrix{3,3,T}([numeric_length(T,cv[j][a]) for a=1:3,j=1:3])
     reciprocal=w.minimum_image ? nothing : inv(periodic_basis(H,pb,T))
-    winding=Vector{SVector{3,Int}}(undef,n)
-    for i=1:n
+    resize!(winding,length(sys))
+    for i in eachindex(winding)
         position=AtomsBase.position(sys,i)
         r=SVector{3,T}(ntuple(a -> numeric_length(T,position[a]),3))
         frac=w.minimum_image ? r : reciprocal*r
         winding[i]=SVector{3,Int}(ntuple(a -> !pb[a] ? 0 :
             floor(Int,w.minimum_image ? frac[a]/w.lengths[a] : frac[a]),3))
     end
+    winding
+end
+
+function visit_directed_images!(emit,w::Workspace{W},winding,::Type{TI}) where {W,TI}
+    pb=w.periodic
     for task in eachindex(w.ranges), i in w.ranges[task], image in w.images[task]
         r=w.ranges[image.cell]
         for j=max(first(r),i+(image.self ? 0 : 1)):W:last(r)
-            js,b=geometry(w,i,j,last(r),image)
+            js,dx,dy,dz,_,active=geometry_lanes(w,i,j,last(r),image)
             for k=1:W
-                lane(b.active,k) || continue
+                lane(active,k) || continue
                 dest=js[k]; a=w.p[i]; bb=w.p[dest]
-                R=SVector(lane(b.dx,k),lane(b.dy,k),lane(b.dz,k))
+                R=SVector(lane(dx,k),lane(dy,k),lane(dz,k))
                 lattice=if w.minimum_image
                     d=(w.x[dest]-w.x[i],w.y[dest]-w.y[i],w.z[dest]-w.z[i])
                     SVector{3,Int}(ntuple(axis -> pb[axis] ? -round(Int,d[axis]/w.lengths[axis]) : 0,3))
@@ -120,12 +134,12 @@ function materialize(w::Workspace{W,T},sys,::Type{TI}) where {W,T,TI}
                 shift=SVector{3,TI}(S) # checked conversion; no silent narrowing
                 opposite=SVector{3,TI}(ntuple(axis ->
                     Base.Checked.checked_sub(zero(TI),shift[axis]),3))
-                push!(indices[a],TI(bb)); push!(displacements[a],R); push!(shifts[a],shift)
-                push!(indices[bb],TI(a)); push!(displacements[bb],-R); push!(shifts[bb],opposite)
+                emit(a,TI(bb),R,shift)
+                emit(bb,TI(a),-R,opposite)
             end
         end
     end
-    NeighbourSnapshot(indices,displacements,shifts)
+    nothing
 end
 
 """Return `(js,Rs,Ss)` for original atom `i`, as independent arrays.

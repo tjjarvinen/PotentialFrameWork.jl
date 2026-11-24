@@ -67,7 +67,10 @@ function CPUExecutor(model,env;precision=Float64,slots=Threads.nthreads(),angula
     batch_size isa Integer && batch_size>0 || throw(ArgumentError("batch_size must be positive"))
     NL.check_units(model)
     basis=make_angular(model,precision,angular_backend,env.width)
-    T=precision
+    cpu_executor(model,env,basis,precision,slots,batch_size,product_algorithm)
+end
+
+function cpu_executor(model,env,basis,::Type{T},slots,batch_size,product_algorithm) where T
     weights=zeros(T,length(model.products),length(model.atomic_numbers))
     prepared=PreparedACE{typeof(model),typeof(basis),typeof(weights),env.width}(model,basis,weights,true,false,product_algorithm)
     scratch=[NI.make_scratch(prepared,0,T) for _=1:slots]

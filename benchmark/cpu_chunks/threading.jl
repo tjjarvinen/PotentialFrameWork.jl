@@ -7,8 +7,8 @@ include("../gpu_ace/workloads.jl")
 const A = PotentialFrameWork.ACE
 const NL = PotentialFrameWork.NeighbourList
 const ROOT = normpath(joinpath(@__DIR__, "../.."))
-const MODE, OUTPUT = ARGS[1:2]
-const SAMPLES = length(ARGS) >= 3 ? parse(Int, ARGS[3]) : 7
+const MODE, OUTPUT = length(ARGS) >= 2 ? ARGS[1:2] : ("", "")
+const SAMPLES = length(ARGS) >= 3 ? parse(Int, ARGS[3]) : (MODE in ("merge","rebuild") ? 10 : 7)
 const GRID = length(ARGS) >= 4 ? parse(Int, ARGS[4]) : 12
 const NTHREADS = Threads.nthreads(:default)
 const EFV = (AC.Energy(), AC.Forces(), AC.Virial())
@@ -188,4 +188,4 @@ function main()
     run_case!(report,"Ti bcc",ti,bcc_geometry(GRID,[22]),(true,true,true),false)
     run_case!(report,"Ti–Al–V bcc",alloy,bcc_geometry(GRID,[13,22,23]),(true,true,true),false)
 end
-main()
+abspath(PROGRAM_FILE) == (@__FILE__) && main()

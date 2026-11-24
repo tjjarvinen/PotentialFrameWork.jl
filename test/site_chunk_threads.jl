@@ -93,6 +93,9 @@ Base.:+(::RejectChunkMerge,::RejectChunkMerge)=error("deliberate merge failure")
             @test_throws ArgumentError ChunkNL.foreach_worker!(identity,w,2)
             @test_throws ArgumentError ChunkNL.get_results(w)
             @test_throws ArgumentError close(w)
+            @test_throws ArgumentError ChunkNL.prepare_neighbors!(n,sys,1.)
+            @test_throws ArgumentError ChunkNL.form_numa_workers!(w,n,3)
+            @test_throws ArgumentError ChunkNL.refresh_positions!(w,sys.xyz)
         finally
             put!(release,nothing)
         end
@@ -202,11 +205,14 @@ end
             agrees_threaded(r,AC.calculate(props,images,c;executor=:colored,centers=[2,3]),tol)
             before=AC.calculate(props,sys,c,c.parameters,state;executor=:threaded,workers=2)
             layout=state.chunks
+            pool=layout.pool
+            plan=layout.plan
+            generation=layout.version
             original=copy(before.forces)
             moved=TestSystem(sys.xyz .+ [0.0 0.01 0.02 0.03;0 0 0 0;0 0 0 0],sys.H,sys.pbc,sys.labels)
             changed=merge(c.parameters,(WB=c.parameters.WB.*T(1.1),))
             r=AC.calculate(props,moved,c,changed,state;executor=:threaded,workers=2,reuse_topology=true)
-            @test state.chunks===layout
+            @test state.chunks===layout && layout.plan===plan && layout.version==generation
             @test before.forces==original && r.forces!=original
             agrees_threaded(r,AC.calculate(props,moved,c,changed;executor=:colored),tol)
             @test_throws ArgumentError AC.calculate(props,isolated,c,c.parameters,state;
@@ -217,7 +223,9 @@ end
             p=reverse(1:length(sys))
             permuted=TestSystem(sys.xyz[:,p],sys.H,sys.pbc,sys.labels[p])
             r=AC.calculate(props,permuted,c,c.parameters,state;executor=:threaded,workers=2)
-            @test state.chunks!==layout
+            @test state.chunks===layout && layout.pool===pool
+            @test layout.plan!==plan && layout.version>generation
+            @test before.forces==original
             agrees_threaded(r,AC.calculate(props,permuted,c;executor=:colored),tol)
             @test AC.potential_energy(sys,c;executor=:threaded,workers=2)≈before.energy atol=tol*u"eV" rtol=tol
             close(state)
@@ -250,5 +258,117 @@ end
             close(a)
             close(b)
         end
+    end
+end
+
+@testset "Fresh chunk neighbor and workgroup generations" begin
+    # Force a change in the actual cutoff graph with equal atom and chunk counts.
+    H=20.0Matrix(I,3,3)
+    cell=(true,false,true)
+    sys=TestSystem([0.15 0.95 1.75 8.5; 0.2 0.2 0.2 0.2; 0.3 0.3 0.3 0.3],H,cell,[:Ti,:Al,:Ti,:Al])
+    moved=TestSystem([19.9 0.5 0.85 8.5; 0.2 0.2 0.2 0.2; 0.3 0.3 0.3 0.3],H,cell,sys.labels)
+    small_cell=TestSystem([4.1 0.8; 0.1 0.2; 0.3 0.4],diagm([0.9,0.8,20.]),(true,true,false),[:Al,:Ti])
+    n=ChunkNL.prepare_neighbors(sys,1.;width=4)
+    w=ChunkNL.form_numa_workers(n,1;scatter_capacity=3)
+    run!(layout,workers) = ChunkNL.foreach_worker!(layout,workers;
+                scatter=(forces=SVector{3,Float64},),per_site=(degree=Int,)) do worker
+        for site in worker
+            ChunkNL.get_buffers(worker).per_site.degree[ChunkNL.site_ordinal(site)]=
+                count(k -> ChunkNI.active(site,k),1:ChunkNI.neighbour_count(site))
+        end
+    end
+    function images(n,i)
+        env=n.environment
+        sort!([(env.neighbours[k],Tuple(env.shifts[k])) for k in env.offsets[1,i]:env.offsets[end,i]-1 if env.active[k]])
+    end
+    initial=images(n,1)
+    run!(w,2)
+    outputs=ChunkNL.get_results(w)
+    original=copy(outputs.degree)
+    pool=w.pool
+    plan=w.plan
+    layout_size=length(w.chunks)
+    destinations=first(w.chunks).destinations
+    runs=first(w.chunks).runs
+    env_storage=(n.environment.neighbours,n.environment.shifts,n.environment.active,n.p,n.inverse)
+    try
+        @test ChunkNL.prepare_neighbors!(n,moved,1.)===n
+        @test images(n,1)!=initial
+        @test_throws ArgumentError ChunkNL.export_field(w,:degree)
+        @test_throws ArgumentError ChunkNL.foreach_worker!(identity,w,2)
+        @test ChunkNL.form_numa_workers!(w,n,1)===w
+        @test length(w.chunks)==layout_size
+        @test first(w.chunks).destinations===destinations && first(w.chunks).runs===runs
+        @test isnothing(w.plan)
+        run!(w,2)
+        @test w.pool===pool && w.plan!==plan
+        @test ChunkNL.get_results(w).degree!=original
+        @test maximum(length(buffers[1].forces) for buffers in pool.storage[2])==3
+        sparse=TestSystem([0.15 0.60 3.75 8.5; 0.2 0.2 0.2 0.2; 0.3 0.3 0.3 0.3],H,cell,sys.labels)
+        ChunkNL.prepare_neighbors!(n,sparse,1.)
+        ChunkNL.form_numa_workers!(w,n,1;scatter_capacity=2)
+        run!(w,2)
+        @test w.pool===pool
+        @test maximum(length(buffers[1].forces) for buffers in pool.storage[2])==2
+        ChunkNL.form_numa_workers!(w,n,1;scatter_capacity=3)
+
+        invalid=TestSystem(fill(NaN,3,length(sys)),H,cell,sys.labels)
+        @test_throws ArgumentError ChunkNL.prepare_neighbors!(n,invalid,1.)
+        @test_throws ArgumentError ChunkNL.form_numa_workers!(w,n,1)
+        @test_throws ArgumentError ChunkNL.get_results(w)
+        for frame in (small_cell,sys,moved)
+            @test ChunkNL.prepare_neighbors!(n,frame,1.)===n
+            snapshot=ChunkNL.neighbour_list(frame,1.;bruteforce_threshold=32)
+            for i in 1:length(frame)
+                js,_,ss=ChunkNL.neighbours(snapshot,i)
+                @test images(n,i)==sort!([(Int(j),Tuple(Int.(s))) for (j,s) in zip(js,ss)])
+            end
+            @test !isempty(n.environment.phases)
+            ChunkNL.form_numa_workers!(w,n,1)
+            run!(w,2)
+        end
+        @test all(a===b for (a,b) in zip(env_storage,
+            (n.environment.neighbours,n.environment.shifts,n.environment.active,n.p,n.inverse)))
+        @test_throws ArgumentError ChunkNL.form_numa_workers!(w,n,1;scatter_capacity=1)
+        @test_throws ArgumentError ChunkNL.get_results(w)
+        ChunkNL.form_numa_workers!(w,n,1;scatter_capacity=3)
+        run!(w,2)
+        @test outputs.degree==original
+    finally
+        close(w)
+    end
+end
+
+@testset "ACE fresh rebuild failure and colored executor switch" begin
+    model,ps,st=ChunkACE.load_resolved(joinpath(@__DIR__,"../data/ace_ref/resolved_model_v1.toml"))
+    H=20.0Matrix(I,3,3)
+    sys=TestSystem([0.25 3.1 8.3; 0.1 0.2 0.3; 0.5 0.7 0.6],H,(true,false,true),[:Ti,:Al,:Ti])
+    moved=TestSystem([19.8 3.1 7.9; 0.1 0.2 0.3; 0.5 0.7 0.6],H,sys.pbc,[:Al,:Ti,:Ti])
+    c=ChunkACE.ACECalculator(model,ps,st;angular_backend=:block,slots=2)
+    state=ChunkACE.ACEEvaluationState(c)
+    props=(AC.Energy(),AC.Forces(),AC.Virial())
+    try
+        previous=AC.calculate(props,sys,c,ps,state;executor=:threaded,workers=2)
+        original=copy(previous.forces)
+        @test isempty(state.environment.phases)
+        state.scatter_capacity=1
+        @test_throws ArgumentError AC.calculate(props,moved,c,ps,state;executor=:chunks)
+        @test_throws ArgumentError AC.calculate(props,sys,c,ps,state;executor=:threaded,reuse_topology=true)
+        @test_throws ArgumentError ChunkNL.get_results(state.chunks)
+        state.scatter_capacity=4096
+        serial=AC.calculate(props,moved,c,ps,state;executor=:chunks)
+        reference=AC.calculate(props,moved,c,ps;executor=:colored,parallel=true)
+        @test !isempty(c.environment.phases)
+        colored=AC.calculate(props,moved,c,ps,state;executor=:colored,parallel=true)
+        @test colored.state===state
+        @test_throws ArgumentError AC.calculate(props,moved,c,ps,state;executor=:threaded,reuse_topology=true)
+        threaded=AC.calculate(props,moved,c,ps,state;executor=:threaded,workers=2,_inline_merge=true)
+        for name in (:energy,:forces,:virial), result in (serial,threaded,colored)
+            @test chunk_numeric(result[name])≈chunk_numeric(reference[name]) atol=2e-11 rtol=2e-11
+        end
+        @test previous.forces==original
+    finally
+        close(state)
+        close(c)
     end
 end

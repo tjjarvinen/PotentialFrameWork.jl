@@ -1,0 +1,192 @@
+diff --git a/src/submodules/ACE/chunks.jl b/src/submodules/ACE/chunks.jl
+index fa651e5..58a8496 100644
+--- a/src/submodules/ACE/chunks.jl
++++ b/src/submodules/ACE/chunks.jl
+@@ -139,9 +139,9 @@ function chunk_geometry!(state,sys,model,T,groups,reuse_topology)
+     fresh
+ end
+ 
+-function run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings)
++function run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings,inline_merge)
+     NL.foreach_worker!(w,workers;scatter,sum_outputs=sums,slot_scratch=true,
+-                       init_scratch=slot -> scratch[slot],timings) do worker
++                       init_scratch=slot -> scratch[slot],timings,_inline_merge=inline_merge) do worker
+         s=NL.get_scratch(worker)
+         NL.evaluate_chunk_sites!(worker,s.prepared,s.parameters,s.numerical,s.outputs,s.ordinals,s.centers,s.properties,selected)
+     end
+@@ -150,7 +150,7 @@ end
+ function chunk_calculator_result(sys,c,state::ACEEvaluationState,parameters;
+                                  energy_only=false,simd=true,fused=false,product_algorithm=state.prepared.product_algorithm,
+                                  centers=nothing,properties=(AC.Energy(),AC.Forces(),AC.Virial()),parallel=false,
+-                                 workers=1,groups=1,reuse_topology=false,timings=nothing,kwargs...)
++                                 workers=1,groups=1,reuse_topology=false,timings=nothing,_inline_merge=false,kwargs...)
+     state.prepared.model===c.model || throw(ArgumentError("evaluation state belongs to a different model"))
+     acquire_ace_state!(state)
+     state.active=true
+@@ -194,9 +194,9 @@ function chunk_calculator_result(sys,c,state::ACEEvaluationState,parameters;
+                 end
+             end
+             if has_source(c.model)
+-                Base.invokelatest(run_ace_chunks!,w,scratch,selected,workers,scatter,sums,timings)
++                Base.invokelatest(run_ace_chunks!,w,scratch,selected,workers,scatter,sums,timings,_inline_merge)
+             else
+-                run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings)
++                run_ace_chunks!(w,scratch,selected,workers,scatter,sums,timings,_inline_merge)
+             end
+             export_start=NL.chunk_clock(timings)
+             r=NL.get_results(w)
+diff --git a/src/submodules/NeighbourList/chunk_threads.jl b/src/submodules/NeighbourList/chunk_threads.jl
+index ce1bfab..50e2785 100644
+--- a/src/submodules/NeighbourList/chunk_threads.jl
++++ b/src/submodules/NeighbourList/chunk_threads.jl
+@@ -65,6 +65,45 @@ function dispatch_chunk_workers!(job,pool::ChunkWorkerPool,workers)
+     nothing
+ end
+ 
++# Diagnostic timestamps share the coordinator's time origin. Each worker writes
++# only its own entry, and the coordinator reads them after acknowledgment.
++function dispatch_measured_merge!(job,pool,workers,t0)
++    submitted=zeros(Int,workers)
++    entered=similar(submitted)
++    finished=similar(submitted)
++    receipt_started=similar(submitted)
++    received=similar(submitted)
++    elapsed()=Int(time_ns()-t0)
++    wrapped=slot -> begin
++        entered[slot]=elapsed()
++        job(slot)
++        finished[slot]=elapsed()
++    end
++    dispatched=0
++    failure=nothing
++    dispatch_start=elapsed()
++    dispatch_end=0
++    try
++        for slot in 1:workers
++            submitted[slot]=elapsed()
++            put!(pool.inboxes[slot],wrapped)
++            dispatched=slot
++        end
++    finally
++        dispatch_end=elapsed()
++        for slot in 1:dispatched
++            receipt_started[slot]=elapsed()
++            result=take!(pool.completed[slot])
++            received[slot]=elapsed()
++            isnothing(failure) && (failure=result)
++        end
++    end
++    isnothing(failure) || throw(failure.ex)
++    Dict{String,Any}("dispatch_start_ns"=>dispatch_start,"dispatch_end_ns"=>dispatch_end,
++        "submitted_ns"=>submitted,"entered_ns"=>entered,"finished_ns"=>finished,
++        "receipt_started_ns"=>receipt_started,"received_ns"=>received)
++end
++
+ struct ChunkScatterRun
+     source_slot::Int
+     source_buffer::Int
+@@ -142,7 +181,7 @@ function chunk_thread_plan(w,workers)
+     ChunkThreadPlan(workers,batches,mergers,waves)
+ end
+ 
+-function run_threaded_chunks!(f::F,w,requested,scatter,sums,buffers,assigned,inputs,init,timings) where F
++function run_threaded_chunks!(f::F,w,requested,scatter,sums,buffers,assigned,inputs,init,timings,inline_merge) where F
+     workers=min(requested,length(w.chunks))
+     if isnothing(w.plan) || w.plan.workers != workers
+         w.plan=chunk_thread_plan(w,workers)
+@@ -163,10 +202,10 @@ function run_threaded_chunks!(f::F,w,requested,scatter,sums,buffers,assigned,inp
+         peak=maximum(wave -> sum(length,wave.work),plan.waves)
+         set_chunk_storage_stats!(timings,workers,w.observed_capacity,peak)
+     end
+-    run_chunk_waves!(f,w.neighbours,w.chunks,plan,pool,pool.storage[2],scratch,buffers,assigned,inputs,timings)
++    run_chunk_waves!(f,w.neighbours,w.chunks,plan,pool,pool.storage[2],scratch,buffers,assigned,inputs,timings,inline_merge)
+ end
+ 
+-function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assigned,inputs,timings) where F
++function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assigned,inputs,timings,inline_merge) where F
+     for wave in plan.waves
+         site_start=chunk_clock(timings)
+         dispatch_chunk_workers!(pool,plan.workers) do slot
+@@ -180,8 +219,9 @@ function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assign
+         end
+         record_chunk_barrier!(timings,:site,site_start)
+         merge_start=chunk_clock(timings)
++        trace=nothing
+         if !isempty(buffers.scatter)
+-            dispatch_chunk_workers!(pool,plan.mergers) do slot
++            merge_routes=slot -> begin
+                 start=chunk_clock(timings)
+                 for run in wave.routes[slot]
+                     src=storage[run.source_buffer,run.source_slot][1]
+@@ -189,11 +229,21 @@ function run_chunk_waves!(f::F,n,chunks,plan,pool,storage,scratch,buffers,assign
+                 end
+                 record_chunk_stage!(timings,:merge,slot,start)
+             end
++            if inline_merge
++                for slot in 1:plan.mergers
++                    merge_routes(slot)
++                end
++            elseif isnothing(timings)
++                dispatch_chunk_workers!(merge_routes,pool,plan.mergers)
++            else
++                trace=dispatch_measured_merge!(merge_routes,pool,plan.mergers,merge_start)
++            end
+         end
++        sums_start=chunk_clock(timings)
+         for (slot,assignment) in enumerate(wave.work), buffer in 1:length(assignment)
+             merge_chunk_sums!(buffers.sum_outputs,storage[buffer,slot][2])
+         end
+-        record_chunk_barrier!(timings,:merge,merge_start)
++        record_merge_wave!(timings,trace,merge_start,sums_start)
+         # Every consumer has acknowledged before any of this storage is reused.
+         record_chunk_slot_wait!(timings)
+     end
+@@ -212,8 +262,9 @@ mutable struct ChunkTimings
+     export_time::UInt64
+     capacity::Int
+     peak_slots::Int
++    merge_waves::Vector{Dict{String,Any}}
+ end
+-ChunkTimings()=ChunkTimings(UInt64[],UInt64[],UInt64[],UInt64[],0,0,0,0,0,0)
++ChunkTimings()=ChunkTimings(UInt64[],UInt64[],UInt64[],UInt64[],0,0,0,0,0,0,Dict{String,Any}[])
+ @inline chunk_clock(::Nothing)=UInt64(0)
+ @inline chunk_clock(::ChunkTimings)=time_ns()
+ @inline record_chunk_stage!(::Nothing,stage,slot,start)=nothing
+@@ -245,3 +296,15 @@ function set_chunk_storage_stats!(t::ChunkTimings,workers,capacity,peak)
+     t.capacity=capacity
+     t.peak_slots=peak
+ end
++
++@inline record_merge_wave!(::Nothing,trace,start,sums_start)=nothing
++function record_merge_wave!(t::ChunkTimings,trace,start,sums_start)
++    stop=time_ns()
++    t.merge_barrier+=stop-start
++    wave=isnothing(trace) ? Dict{String,Any}() : trace
++    wave["wall_ns"]=Int(stop-start)
++    wave["sums_start_ns"]=Int(sums_start-start)
++    wave["sums_ns"]=Int(stop-sums_start)
++    push!(t.merge_waves,wave)
++    nothing
++end
+diff --git a/src/submodules/NeighbourList/chunks.jl b/src/submodules/NeighbourList/chunks.jl
+index 4837d3b..e1e3a6a 100644
+--- a/src/submodules/NeighbourList/chunks.jl
++++ b/src/submodules/NeighbourList/chunks.jl
+@@ -203,7 +203,7 @@ handles one chunk. Borrowed buffers and inputs are valid only during that call.
+ """
+ function foreach_worker!(f::F,w::ChunkWorkgroups,workers::Integer;
+                          scatter=NamedTuple(),sum_outputs=NamedTuple(),per_site=NamedTuple(),
+-                         site_inputs=(),init_scratch=()->nothing,slot_scratch=false,timings=nothing) where F
++                         site_inputs=(),init_scratch=()->nothing,slot_scratch=false,timings=nothing,_inline_merge=false) where F
+     workers>0 || throw(ArgumentError("workers must be positive"))
+     acquire_chunk_access!(w.guard,()->w.active,"workgroup already has an active pass")
+     w.active=true
+@@ -229,7 +229,7 @@ function foreach_worker!(f::F,w::ChunkWorkgroups,workers::Integer;
+         if workers==1 || length(w.chunks)==1
+             run_serial_chunks!(f,w,scatter,sum_outputs,buffers,assigned,inputs,init(1),timings)
+         elseif !isempty(w.chunks)
+-            run_threaded_chunks!(f,w,Int(workers),scatter,sum_outputs,buffers,assigned,inputs,init,timings)
++            run_threaded_chunks!(f,w,Int(workers),scatter,sum_outputs,buffers,assigned,inputs,init,timings,_inline_merge)
+         end
+         all(all,assigned) || throw(ArgumentError("incomplete per-site output; assign every center before publishing"))
+         check_chunk_topology!(w)

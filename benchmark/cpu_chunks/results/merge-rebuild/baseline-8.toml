@@ -1,0 +1,823 @@
+affinity = "pid 5's current affinity list: 0-7"
+blas_threads = 1
+cpu = "AMD Ryzen 9 9950X 16-Core Processor"
+cpu_topology = """# The following is the parsable format, which can be fed to other\n# programs. Each different item in every column has an unique ID\n# starting usually from zero.\n# CPU,Core,Socket,L1d:L1i:L2:L3\n0,0,0,0:0:0:0\n1,1,0,1:1:1:0\n2,2,0,2:2:2:0\n3,3,0,3:3:3:0\n4,4,0,4:4:4:0\n5,5,0,5:5:5:0\n6,6,0,6:6:6:0\n7,7,0,7:7:7:0\n8,8,0,8:8:8:1\n9,9,0,9:9:9:1\n10,10,0,10:10:10:1\n11,11,0,11:11:11:1\n12,12,0,12:12:12:1\n13,13,0,13:13:13:1\n14,14,0,14:14:14:1\n15,15,0,15:15:15:1\n16,0,0,0:0:0:0\n17,1,0,1:1:1:0\n18,2,0,2:2:2:0\n19,3,0,3:3:3:0\n20,4,0,4:4:4:0\n21,5,0,5:5:5:0\n22,6,0,6:6:6:0\n23,7,0,7:7:7:0\n24,8,0,8:8:8:1\n25,9,0,9:9:9:1\n26,10,0,10:10:10:1\n27,11,0,11:11:11:1\n28,12,0,12:12:12:1\n29,13,0,13:13:13:1\n30,14,0,14:14:14:1\n31,15,0,15:15:15:1\n"""
+fixture_sha256 = "bf3ad85fb44b85e48a9581d42e6b4721f2a74d60e490936ee207dc8de83f72c5"
+grid = 12
+harness_sha256 = "d63c1c5d2a2a7bfee61ded3372ef9bc047d46da6360606f89c300b4a3aa025ee"
+julia = "1.13.4"
+mode = "rebuild"
+samples = 10
+starting_revision = "3ddd74c8fb90177d31414915ddff285e81c228ae"
+threading_harness_sha256 = "83c520c0f1dfae4b3b4a4cc2e1d316cdb831788562e55871517b6135f53301a5"
+threads = 8
+workloads_sha256 = "21e1ca1e1b11871bcb604d012a7f0f387ce026463550e6ba0cd21f1b40ea5b25"
+
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+changed_graph_verified = true
+groups = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/ti-resolved.toml"
+model_sha256 = "7a6ba831d45cd1305c7dae485948ee3ad379a65f2745790edb499eb2ebb9ee3c"
+name = "Ti bcc"
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 1
+    gc_s = 0.006672236
+    seconds = 0.149754382
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 2
+    gc_s = 0.009897723
+    seconds = 0.151914007
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 3
+    gc_s = 0.009518342
+    seconds = 0.150548674
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 1
+    gc_s = 0.009159061
+    seconds = 0.151639146
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 2
+    gc_s = 0.009641913
+    seconds = 0.151319246
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 3
+    gc_s = 0.009990194
+    seconds = 0.152886509
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 1
+    gc_s = 0.031060394
+    seconds = 0.173965959
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 2
+    gc_s = 0.003788569
+    seconds = 0.146977206
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 3
+    gc_s = 0.007168607
+    seconds = 0.155244205
+    [[cases.fresh]]
+    bytes = 107957080
+    frame = 1
+    gc_s = 0.009682492
+    seconds = 0.152645509
+
+    [[cases.probes]]
+    instrumented_public_s = 0.153576551
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000353871
+        element_channels = 5.1420000000000006e-5
+        extraction = 0.000192441
+        full_environment_schedule = 0.001714234
+        schedule = 3.066e-5
+        snapshot_materialization = 0.007844149
+        sorting_packing = 0.00028557
+        species_packing = 0.010508604000000001
+        topology = 0.00018938100000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000610452
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003462858
+        seconds = 0.01308732
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002568136
+    [[cases.probes]]
+    instrumented_public_s = 0.156802118
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000207271
+        element_channels = 2.563e-5
+        extraction = 0.00011126
+        full_environment_schedule = 0.001691334
+        schedule = 3.1361e-5
+        snapshot_materialization = 0.030279251000000004
+        sorting_packing = 0.00027100100000000004
+        species_packing = 0.008109389
+        topology = 0.00019160000000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000621311
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.0
+        seconds = 0.009571162
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002927188
+    [[cases.probes]]
+    instrumented_public_s = 0.1490544
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000269101
+        element_channels = 2.625e-5
+        extraction = 0.00014436
+        full_environment_schedule = 0.001772754
+        schedule = 3.0500000000000003e-5
+        snapshot_materialization = 0.007615108000000001
+        sorting_packing = 0.000272501
+        species_packing = 0.010996906
+        topology = 0.00020412000000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000633862
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003512849
+        seconds = 0.013737222
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002658936
+    [[cases.probes]]
+    instrumented_public_s = 0.148083058
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000354081
+        element_channels = 4.948e-5
+        extraction = 0.000250001
+        full_environment_schedule = 0.0017448840000000001
+        schedule = 2.9270000000000003e-5
+        snapshot_materialization = 0.010881996000000001
+        sorting_packing = 0.000350031
+        species_packing = 0.010167474000000001
+        topology = 0.00019035000000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000649951
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003224358
+        seconds = 0.01287257
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002566507
+    [[cases.probes]]
+    instrumented_public_s = 0.151708936
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00021544100000000003
+        element_channels = 2.546e-5
+        extraction = 0.00012505
+        full_environment_schedule = 0.0016855940000000001
+        schedule = 3.0430000000000002e-5
+        snapshot_materialization = 0.017506332
+        sorting_packing = 0.00027103100000000003
+        species_packing = 0.007638517
+        topology = 0.00019423000000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000613472
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.02136345
+        seconds = 0.031132973
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002564226
+    [[cases.probes]]
+    instrumented_public_s = 0.148205199
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00020324
+        element_channels = 2.512e-5
+        extraction = 9.993e-5
+        full_environment_schedule = 0.001748224
+        schedule = 2.9820000000000002e-5
+        snapshot_materialization = 0.008156369
+        sorting_packing = 0.000272501
+        species_packing = 0.010277365
+        topology = 0.00019478
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000617021
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.0
+        seconds = 0.009612523
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002809116
+    [[cases.probes]]
+    instrumented_public_s = 0.151094346
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00020512000000000001
+        element_channels = 2.8480000000000002e-5
+        extraction = 0.00014369100000000002
+        full_environment_schedule = 0.001736373
+        schedule = 4.0520000000000005e-5
+        snapshot_materialization = 0.007719588
+        sorting_packing = 0.00028529
+        species_packing = 0.009975824000000001
+        topology = 0.00022708100000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000630522
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003522678
+        seconds = 0.013252991
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002627706
+    [[cases.probes]]
+    instrumented_public_s = 0.148003868
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00044135100000000004
+        element_channels = 4.869e-5
+        extraction = 0.00385634
+        full_environment_schedule = 0.001698384
+        schedule = 3.1100000000000004e-5
+        snapshot_materialization = 0.0077890880000000004
+        sorting_packing = 0.00028818
+        species_packing = 0.009652583000000001
+        topology = 0.000182661
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000594981
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003542808
+        seconds = 0.013343872
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002599876
+    [[cases.probes]]
+    instrumented_public_s = 0.156700328
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00037080100000000003
+        element_channels = 4.9260000000000006e-5
+        extraction = 0.00010392000000000001
+        full_environment_schedule = 0.001714184
+        schedule = 3.0220000000000002e-5
+        snapshot_materialization = 0.029289279
+        sorting_packing = 0.000273441
+        species_packing = 0.0075960770000000006
+        topology = 0.00019306100000000001
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000624682
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.0
+        seconds = 0.009611002
+
+        [cases.probes.independent.routes]
+        bytes = 8430704
+        gc_s = 0.0
+        seconds = 0.002962357
+
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.114759209
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.115947543
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.125304165
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.112319564
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.115328241
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.113523407
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.115905593
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.113955687
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.117147165
+    [[cases.refresh]]
+    bytes = 2589456
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.113665457
+[[cases]]
+active_edges = 200448
+atoms = 3456
+batch_size = 1
+changed_graph_verified = true
+groups = 1
+model = "benchmark/cpu_ace/results/2026-11-10/models/tialv-resolved.toml"
+model_sha256 = "c41366f1b39c28181cafa14f27a8e4534ef0c80ac72af6926d75e6080d0fcdf7"
+name = "Ti–Al–V bcc"
+precision = "Float64"
+scatter_capacity = 4096
+width = 4
+
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 1
+    gc_s = 0.009328462
+    seconds = 0.321112905
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 2
+    gc_s = 0.009549182
+    seconds = 0.31877282
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 3
+    gc_s = 0.009567513
+    seconds = 0.321871506
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 1
+    gc_s = 0.009211622
+    seconds = 0.322152717
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 2
+    gc_s = 0.009663293
+    seconds = 0.320067283
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 3
+    gc_s = 0.024220797
+    seconds = 0.336704312
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 1
+    gc_s = 0.007536308
+    seconds = 0.321140054
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 2
+    gc_s = 0.009520753
+    seconds = 0.321882457
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 3
+    gc_s = 0.009286683
+    seconds = 0.321412765
+    [[cases.fresh]]
+    bytes = 110844728
+    frame = 1
+    gc_s = 0.009504883
+    seconds = 0.31886459
+
+    [[cases.probes]]
+    instrumented_public_s = 0.326062376
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000219921
+        element_channels = 3.1020000000000005e-5
+        extraction = 0.00010761000000000001
+        full_environment_schedule = 0.001673004
+        schedule = 2.9461e-5
+        snapshot_materialization = 0.032607946
+        sorting_packing = 0.000310021
+        species_packing = 0.00824482
+        topology = 0.00019789000000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000647491
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003593908
+        seconds = 0.013718642
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.0
+        seconds = 0.002594537
+    [[cases.probes]]
+    instrumented_public_s = 0.31524349
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000205631
+        element_channels = 3.07e-5
+        extraction = 0.00010923000000000001
+        full_environment_schedule = 0.001820014
+        schedule = 2.8950000000000002e-5
+        snapshot_materialization = 0.01248376
+        sorting_packing = 0.00027980100000000004
+        species_packing = 0.008480030000000001
+        topology = 0.00019973000000000001
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000639622
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.006571635
+        seconds = 0.016428578
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.0
+        seconds = 0.002545706
+    [[cases.probes]]
+    instrumented_public_s = 0.316477264
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00023942100000000002
+        element_channels = 3.533e-5
+        extraction = 0.00010416
+        full_environment_schedule = 0.001723544
+        schedule = 2.966e-5
+        snapshot_materialization = 0.011541787000000001
+        sorting_packing = 0.00030914100000000003
+        species_packing = 0.011653288000000001
+        topology = 0.00019852000000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000626681
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003452158
+        seconds = 0.013209782
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.002915406
+        seconds = 0.005565873
+    [[cases.probes]]
+    instrumented_public_s = 0.317099575
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00021601000000000001
+        element_channels = 3.0140000000000003e-5
+        extraction = 0.000106111
+        full_environment_schedule = 0.0017143940000000002
+        schedule = 2.8310000000000002e-5
+        snapshot_materialization = 0.011311267
+        sorting_packing = 0.00029223000000000004
+        species_packing = 0.011685767000000001
+        topology = 0.00019494100000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000659962
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.009822483
+        seconds = 0.019807466
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.0
+        seconds = 0.002551336
+    [[cases.probes]]
+    instrumented_public_s = 0.334267026
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00025348
+        element_channels = 3.0551e-5
+        extraction = 0.00010225
+        full_environment_schedule = 0.0018825340000000002
+        schedule = 2.911e-5
+        snapshot_materialization = 0.011887098
+        sorting_packing = 0.000279681
+        species_packing = 0.008390980000000001
+        topology = 0.00019728
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000638962
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003759989
+        seconds = 0.013521501
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.0
+        seconds = 0.002665657
+    [[cases.probes]]
+    instrumented_public_s = 0.317561146
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00039413100000000004
+        element_channels = 6.6e-5
+        extraction = 0.00016870100000000002
+        full_environment_schedule = 0.001689044
+        schedule = 3.066e-5
+        snapshot_materialization = 0.007815738000000001
+        sorting_packing = 0.00031257
+        species_packing = 0.011620078
+        topology = 0.000200621
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000650931
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003401198
+        seconds = 0.013200701
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.0
+        seconds = 0.002681066
+    [[cases.probes]]
+    instrumented_public_s = 0.322175148
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000362651
+        element_channels = 6.451e-5
+        extraction = 0.00016183000000000001
+        full_environment_schedule = 0.001750234
+        schedule = 2.9890000000000004e-5
+        snapshot_materialization = 0.007814139000000001
+        sorting_packing = 0.00028838100000000004
+        species_packing = 0.012311849000000001
+        topology = 0.00019675
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000657292
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.003586298
+        seconds = 0.013223401
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.0
+        seconds = 0.002930906
+    [[cases.probes]]
+    instrumented_public_s = 0.318082118
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.000340261
+        element_channels = 3.743e-5
+        extraction = 0.00010704
+        full_environment_schedule = 0.001722914
+        schedule = 2.9361000000000002e-5
+        snapshot_materialization = 0.011184116000000001
+        sorting_packing = 0.000309171
+        species_packing = 0.012515559
+        topology = 0.00019542000000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000633602
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.0
+        seconds = 0.009560532
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.009676162
+        seconds = 0.0124588
+    [[cases.probes]]
+    instrumented_public_s = 0.369336868
+
+        [cases.probes.environment_s]
+        boundary_extraction = 0.00020847000000000001
+        element_channels = 2.9400000000000003e-5
+        extraction = 0.00010384100000000001
+        full_environment_schedule = 0.001711094
+        schedule = 2.9210000000000003e-5
+        snapshot_materialization = 0.0075860780000000004
+        sorting_packing = 0.00028635
+        species_packing = 0.012675739
+        topology = 0.00019980100000000002
+
+        [cases.probes.independent.cell_order]
+        bytes = 2028448
+        gc_s = 0.0
+        seconds = 0.000646192
+
+        [cases.probes.independent.layout]
+        bytes = 46513760
+        gc_s = 0.0
+        seconds = 0.009992183
+
+        [cases.probes.independent.routes]
+        bytes = 8581104
+        gc_s = 0.0
+        seconds = 0.002693757
+
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.281969262
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 2
+    gc_s = 0.003012177
+    seconds = 0.283305126
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.282009603
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.284726829
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 2
+    gc_s = 0.009364462
+    seconds = 0.290621863
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.279935878
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 1
+    gc_s = 0.0
+    seconds = 0.280376509
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 2
+    gc_s = 0.0
+    seconds = 0.280230929
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 3
+    gc_s = 0.0
+    seconds = 0.28064183
+    [[cases.refresh]]
+    bytes = 5339408
+    frame = 1
+    gc_s = 0.003044307
+    seconds = 0.283458276
+
+[governors]
+0 = "powersave"
+1 = "powersave"
+2 = "powersave"
+3 = "powersave"
+4 = "powersave"
+5 = "powersave"
+6 = "powersave"
+7 = "powersave"
+
+[source_sha256]
+"ext/PotentialFrameWorkACEfitExt.jl" = "17763e04a45766a2f0cb4c4dfc651b76e88325c36cab81ffa6b7987dd0182ad1"
+"ext/PotentialFrameWorkAMDGPUExt.jl" = "17a604e74c714b1c79496b823348729416f8497c94c9c4cd60591087e6543176"
+"ext/PotentialFrameWorkChainRulesCoreExt.jl" = "c288830459d8687840a27c58583f2cd0cbf9bdc908dfd5e33586f42f3a6e26ba"
+"ext/PotentialFrameWorkForwardDiffExt.jl" = "7c3e5148700b9d7dab7be76bb5c85ff21a2f5750932f0e0fe6ad9d5c20608b65"
+"ext/PotentialFrameWorkLuxCoreExt.jl" = "941c05f99c0d604fb2df8d3af6dd89b398929153c66879eed56f90c8bdd1d0cd"
+"ext/PotentialFrameWorkNeighbourListsExt.jl" = "80480cb9b26a6c90c3412d5c1aa380e27d6ac4ddfb56d8456bc7364dba4c37c0"
+"ext/PotentialFrameWorkSpheriCartExt.jl" = "7f70af38b8773b33a643d4116830f51c61a580d8c91b8c14758d5de83c3a2d58"
+"ext/PotentialFrameWorkUnicodePlotsExt.jl" = "18b44d753fdc02c23a749a3cfb8219770a1f436845ff6d9460c25a72880d16a5"
+"ext/ace_feature_products.jl" = "08508a18b305cdbb31b7d5ab4234ca52526523049888dadd1b0632097badd817"
+"src/PotentialFrameWork.jl" = "6640180f9de4494321f33305869aa0edde18f8efd0198a89ee608f3993cc8b28"
+"src/submodules/ACE/ACE.jl" = "944f8be4276bb9475358686302643e1dc23479b7f03e48228d2d6a942c13ec2e"
+"src/submodules/ACE/adaptation.jl" = "437f2a8394088723e7fe32d09e527521c52d27b63a05b02701e7e26b688f7157"
+"src/submodules/ACE/angular_blocks.jl" = "c1b78378299960d712f06ee1407397593780975c626ec32263c1848512f60f6a"
+"src/submodules/ACE/calculators.jl" = "0f2e242bbeeb983f00879aa5c8d3b0c2704b6ff3241dd2bb48e33d87fb67192f"
+"src/submodules/ACE/chunks.jl" = "0d73acec6fd464bc801786706fc165cdb21b36fbe6b13c6a22dc1ef694656233"
+"src/submodules/ACE/cpu.jl" = "19835dd55c1b8f7a988b0f86fe82bc393ca5393e4ecfe77141a708d0aaea7807"
+"src/submodules/ACE/environments.jl" = "ee27e3dbe3161e02bcc15ab62f01b5d5575dffb3c50e5703878b4cdaf4d23b6d"
+"src/submodules/ACE/feature_coupling.jl" = "3e4e9cba5683f6624341ff3ea7b3269ad27aca82d42778f8c4c4fdfa61a0146c"
+"src/submodules/ACE/feature_energy.jl" = "1869613d7d1c5dfd5594331b6e5615c7289828e4034642a4afee3e183cdf790d"
+"src/submodules/ACE/features.jl" = "22ce573ce92d82f06333d65ad7caa7d5511cc82c78b0d47f49cc8139b8d87ce3"
+"src/submodules/ACE/fitting.jl" = "0ff53a102561733228f7f739465405263e2ee0f50f9b2e4ad07cb969fbe1e80a"
+"src/submodules/ACE/gpu.jl" = "23beacb93e5439e5e69871f5cc9e4b772caab5710e8f317f35a65a0ef6851163"
+"src/submodules/ACE/interface.jl" = "56deb06b51e6d58b4674b00c76358f386e2863a1669d66f939f8cd7b8873d919"
+"src/submodules/ACE/interface_persistence.jl" = "7a5c0cbf0715c4b5806d6d8ae697dadf4778f004d23cc521c8f03b2d3fa5b500"
+"src/submodules/ACE/legacy_radial.jl" = "284159fe76b610795fff199f17799e69d8315d1146c85c090e2c88780b7530fa"
+"src/submodules/ACE/persistence.jl" = "d62477a11daf4e587bb478c0223774b885984c1baf78368bc17b054e4927b753"
+"src/submodules/ACE/precision.jl" = "3a6c238a2175199e2880b4adda0b0b28c5bfe83441aebd6c00a16eead0bfac86"
+"src/submodules/ACE/projection.jl" = "85b6030cd4a0d31d333948b766b2b66c7d70a2e52d8dd545f1a93ab4d78a426a"
+"src/submodules/ACE/radials.jl" = "81e7b74f2dc6462a61a3676f9253c9deb47f07ac5d16a1c70c99a35187c11361"
+"src/submodules/ACE/resolved.jl" = "c31ad3261e4050870c65fa54bf7c8affce56fff2f8af2247e1fe9eef7a96c110"
+"src/submodules/ACE/serial.jl" = "fd4e7bd4bc2e7ac4926eafde25b4e573e1e93b956bb5bab10e4fdbf23a6b79be"
+"src/submodules/ACE/site_pullbacks.jl" = "ac22d9435d97f0c0ddc951682d8836df5dcf89451ed85e13605f2afc5c0cee5d"
+"src/submodules/NeighbourInterface/NeighbourInterface.jl" = "4771e0d35b8027054f8226887f841207c98f060349b7565665d9901fb0c31356"
+"src/submodules/NeighbourList/NeighbourList.jl" = "94082feb205970bceb2a6f1d2a2df34834b868eb4a4ed7558c9c1021687c6694"
+"src/submodules/NeighbourList/benchmarks.jl" = "ac66ae155cc09620be8a764cf953807b860604c19bc0c636db8e4d3df633244b"
+"src/submodules/NeighbourList/chunk_threads.jl" = "1fae5302c0fa83d968961eaf0c7d4e3945f2950ef4538dfe54397a4e24b0bbdd"
+"src/submodules/NeighbourList/chunks.jl" = "66fbd69a5773e0a67b39008015c97188a2943a84259e0341ef96a80b76009c92"
+"src/submodules/NeighbourList/environments.jl" = "47cac3c7a5da67b2fd9324f95d5382499b480fcb38468928744db1daa1c2320f"
+"src/submodules/NeighbourList/execution.jl" = "83788ccdcacce75c60affb0b72141bcd33634a3aaef6845f204075a0848e87f2"
+"src/submodules/NeighbourList/geometry.jl" = "00716f9c370d916b518036acd911fd2b724ce812ea23025f0acc610c50a63840"
+"src/submodules/NeighbourList/gpu.jl" = "7d04940f070b2ee89a823b5a2e46e3ab507ffbb19870d9968d137c91af924ac6"
+"src/submodules/NeighbourList/interface.jl" = "fe09948365a8bd9af3af0611ed127959d1a8c3213c2cc64a4209dea22d15d665"
+"src/submodules/NeighbourList/pullbacks.jl" = "2ae778438fbacf246def660cf2b15a5637b8c55e14bb1dd7ae03d7b6db3ad676"
+"src/submodules/NeighbourList/storage.jl" = "0e3313650d6c2d36f11fe949bae64cd60173520364813a71ba73cbd9a334841c"
+"src/submodules/PairPotentials/PairPotentials.jl" = "aad6c185c13b6aba4ec4c5af91a4ecf3d74bbd4846d22e065e396c53c9dd90e7"
+"src/submodules/PairPotentials/calculators.jl" = "9f2f0406af1b68ed327505ceb3ce5568b9a3c59351f5f25f3e5ea0d73d12bf46"
+"src/submodules/PairPotentials/evaluation.jl" = "ec2713fcc7d7be724aa47584088bd5305186f0a9a9759f225a5bf2c3719545ca"
+"src/submodules/PairPotentials/gpu.jl" = "a2cef7a13ff616c1c17971af8e0889130426d1d394f787c3b723e6a1d0e02ea6"
+"src/submodules/PairPotentials/lennard_jones.jl" = "98e68d864ae61b1af523d11f9dd328050439d10a7cb8a705cbc905d2264ba916"
+"src/submodules/PairPotentials/models.jl" = "e6f04b79b0299c7c336793b1ebfacb3abf0f4736d89eaa485b85a8733e3e7ed9"
+"src/submodules/PairPotentials/numerical.jl" = "b7882e7a8e689e035f2ada6c7d7d56cc76ce849dfa92aaa6f2db7a34016f10e7"
+"src/submodules/PairPotentials/parameters.jl" = "8724fa7617928ca70b8453376636944be1ce970ac349ba9ab78a33941e423174"
+
+[versions]
+AcceleratedKernels = "0.5.13"
+AtomsBase = "0.5.3"
+AtomsCalculators = "0.2.3"
+KernelAbstractions = "0.9.48"
+SIMD = "3.8.2"
+SpheriCart = "0.2.4"
+StaticArrays = "1.9.25"
+Unitful = "1.29.0"
